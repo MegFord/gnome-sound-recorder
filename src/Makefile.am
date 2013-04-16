@@ -6,15 +6,15 @@ jsdir = $(pkgdatadir)
 dist_js_DATA = \
 	main.js \
 	util.js	\
-	window.js
+	application.js
 
-nodist_bin_SCRIPTS = my-js-app
+nodist_bin_SCRIPTS = gnome-sound-recorder
 
-EXTRA_DIST = my-js-app.in
+EXTRA_DIST = gnome-sound-recorder.in
 
 uninstall-local:
 	-rm -r $(jsdir)
 
-DISTCLEANFILES = my-js-app
+DISTCLEANFILES = gnome-sound-recorder
 
 include $(top_srcdir)/git.mk

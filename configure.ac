@@ -1,4 +1,4 @@
-AC_INIT([my-js-app], [0.1])
+AC_INIT([gnome-sound-recorder], [0.1])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
@@ -19,9 +19,9 @@ AC_PATH_PROG(GJS, [gjs])
 AC_OUTPUT([
 Makefile
 data/Makefile
-data/my-js-app.desktop.in
+data/gnome-sound-recorder.desktop.in
 libgd/Makefile
 src/Makefile
-src/my-js-app
+src/gnome-sound-recorder
 po/Makefile.in
 ])

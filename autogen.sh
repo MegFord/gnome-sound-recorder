@@ -9,7 +9,7 @@ ACLOCAL_FLAGS="-I libgd $ACLOCAL_FLAGS"
 
 test -f $srcdir/configure.ac || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
-    echo " top-level my-js-app directory"
+    echo " top-level gnome-sound-recorder directory"
     exit 1
 }
 

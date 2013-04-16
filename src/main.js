@@ -35,26 +35,26 @@ pkg.require({ 'Gd': '1.0',
               'Params': '1.0' });
 
 const Util = imports.util;
-const Window = imports.window;
+const Application = imports.application;
 
 const MyApplication = new Lang.Class({
     Name: 'MyApplication',
     Extends: Gtk.Application,
 
     _init: function() {
-        this.parent({ application_id: 'org.example.MyJSApp' });
-        GLib.set_application_name(_("My JS Application"));
+        this.parent({ application_id: 'org.gnome.sound-recorder' });
+        GLib.set_application_name(_("Sound Recorder"));
     },
 
     vfunc_startup: function() {
         this.parent();
 
         Util.loadStyleSheet();
-        log(_("My JS Application started"));
+        log(_("Sound Recorder started"));
     },
 
     vfunc_activate: function() {
-        (new Window.MainWindow({ application: this })).show();
+        (new Application.Application({ application: this })).show();
     },
 });
 

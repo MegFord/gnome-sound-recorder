@@ -7,11 +7,11 @@ cssdir = $(pkgdatadir)
 css_DATA = application.css
 
 appsdir = $(datadir)/applications
-apps_DATA = my-js-app.desktop
+apps_DATA = gnome-sound-recorder.desktop
 
 @INTLTOOL_DESKTOP_RULE@
 
-CLEANFILES = my-js-app.desktop
-DISTCLEANFILES = my-js-app.desktop.in
+CLEANFILES = gnome-sound-recorder.desktop
+DISTCLEANFILES = gnome-sound-recorder.desktop.in
 
 include $(top_srcdir)/git.mk
