@@ -19,7 +19,8 @@
  *
  *
  */
-imports.gi.versions.Gst = '0.10';
+ 
+imports.gi.versions.Gst = '1.0';
 const Gst = imports.gi.Gst;
 const Mainloop = imports.mainloop;
 
@@ -57,11 +58,12 @@ const record = new Lang.Class({
     },
     
     _pauseRecording: function() {
+        
 
     },
     
     _stopRecording: function() {
-        this.pipeline.set_state(Gst.State.PAUSED);
+        this.pipeline.set_state(Gst.State.NULL);
     }
 });
 
