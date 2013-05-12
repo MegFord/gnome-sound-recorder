@@ -20,7 +20,7 @@
  *
  */
  
-imports.gi.versions.Gst = '1.0';
+imports.gi.versions.Gst = '0.10';
 const Gst = imports.gi.Gst;
 const Mainloop = imports.mainloop;
 
@@ -35,10 +35,15 @@ const record = new Lang.Class({
     _recordPipeline: function() {
         Gst.init(null, 0);        
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-        let source = Gst.ElementFactory.make("alsasrc", "source");
+        let source = Gst.ElementFactory.make("gconfaudiosrc", "source"); //ask desrt if there is a dconf version of this.
+        if(source == null) {
+          let sourceError = "Your audio capture settings are invalid. Please correct them"; //replace with link to system settings 
+           }
         this.pipeline.add(source);
-        let converter = Gst.ElementFactory.make('audioconvert', 'converter');
+        let converter = Gst.ElementFactory.make('audioresample', 'converter');
         this.pipeline.add(converter);
+        let sampler = Gst.ElementFactory.make('audioconvert', 'sampler');
+        this.pipeline.add(sampler);
         let encoder = Gst.ElementFactory.make('vorbisenc', 'encoder');
         this.pipeline.add(encoder);
         let ogg = Gst.ElementFactory.make('oggmux', 'ogg');
@@ -47,7 +52,8 @@ const record = new Lang.Class({
         filesink.set_property("location", "sample.ogg");
         this.pipeline.add(filesink);
         source.link(converter);
-        converter.link(encoder);
+        converter.link(sampler);
+        sampler.link(encoder);
         encoder.link(ogg);
         ogg.link(filesink);        
     },
@@ -58,8 +64,7 @@ const record = new Lang.Class({
     },
     
     _pauseRecording: function() {
-        
-
+     this.pipeline.set_state(Gst.State.PAUSED);   
     },
     
     _stopRecording: function() {
