@@ -20,25 +20,32 @@
  *
  */
  
+ //GST_DEBUG=4 ./src/gnome-sound-recorder
+ 
 imports.gi.versions.Gst = '0.10';
+
 const Gst = imports.gi.Gst;
 const Mainloop = imports.mainloop;
 
+const BuildFileName = imports.buildFileName;
+
 const PipelineStates = {
     PLAYING: 0,
-    PAUSED: 1
+    PAUSED: 1,
+    STOPPED: 2
 };
 
 const record = new Lang.Class({
     Name: "Record",
     
     _recordPipeline: function() {
+        this._buildFileName = new BuildFileName.buildFileName();
         Gst.init(null, 0);        
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-        let source = Gst.ElementFactory.make("gconfaudiosrc", "source"); //ask desrt if there is a dconf version of this.
+        let source = Gst.ElementFactory.make("gconfaudiosrc", "source"); //ask desrt if there is a dconf version of this.gconfaudiosrc
         if(source == null) {
           let sourceError = "Your audio capture settings are invalid. Please correct them"; //replace with link to system settings 
-           }
+        }
         this.pipeline.add(source);
         let converter = Gst.ElementFactory.make('audioresample', 'converter');
         this.pipeline.add(converter);
@@ -51,6 +58,10 @@ const record = new Lang.Class({
         let filesink = Gst.ElementFactory.make("filesink", "filesink");
         filesink.set_property("location", "sample.ogg");
         this.pipeline.add(filesink);
+        if (!this.pipeline || !converter || !sampler || !encoder || !ogg || !filesink) { //test this
+        log ("Not all elements could be created.\n");
+        }
+        
         source.link(converter);
         converter.link(sampler);
         sampler.link(encoder);
@@ -60,7 +71,10 @@ const record = new Lang.Class({
     
      _startRecording: function() {
         this._recordPipeline();
-        this.pipeline.set_state(Gst.State.PLAYING);       
+        let ret = this.pipeline.set_state(Gst.State.PLAYING); 
+        if (ret == Gst.StateChangeReturn.FAILURE) {
+            log("Unable to set the pipeline to the playing state.\n"); //create return string?
+        } 
     },
     
     _pauseRecording: function() {
@@ -69,6 +83,13 @@ const record = new Lang.Class({
     
     _stopRecording: function() {
         this.pipeline.set_state(Gst.State.NULL);
+        this.pipeline.set_locked_state(true);
+        this._buildDefaultFilename();
+    },
+    
+    _buildDefaultFilename: function() {
+    // need to create directory /Recordings during build
+        this._buildFileName._expandInitialTilde();//_buildDefaultFilename();
     }
 });
 
