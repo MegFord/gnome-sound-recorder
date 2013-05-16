@@ -23,19 +23,26 @@
 imports.gi.versions.Gst = '0.10';
 
 const Gst = imports.gi.Gst;
+const GLib = imports.gi.GLib;
 
 const Record = imports.record;
 
 const buildFileName = new Lang.Class({
     Name: 'BuildFileName',
 
-    _expandInitialTilde: function() {
-        //if (path[1] == "/" || path[1] == "\\0") {
-       // }
-    },
-
-    _buildDefaultFilename: function() {
-        
-    
+      _buildDefaultFilename: function() {
+        let path = ["/"]; // Ask about this, are there any other prefixes I need to take into account?
+        let homeDirName = GLib.get_home_dir();
+        let tilde = path[0];
+        let defaultDir = "Recordings";
+        let DateTimeString = GLib.DateTime.new_now_local()
+        let origin = DateTimeString.format("%Y-%m-%d %H:%M:%S");
+        let extension = ".ogg";
+        let editedOrigin = origin + extension;        
+        let defaultFileName = [homeDirName, tilde, defaultDir, tilde, editedOrigin];
+        // Use GLib.build_filenamev to work around missing vararg functions.
+        let name = GLib.build_filenamev(defaultFileName);
+        log(name);
+        return name;                       
     }
 });

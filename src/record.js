@@ -40,9 +40,10 @@ const record = new Lang.Class({
     
     _recordPipeline: function() {
         this._buildFileName = new BuildFileName.buildFileName();
+        this.defaultFileName = this._buildFileName._buildDefaultFilename();
         Gst.init(null, 0);        
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-        let source = Gst.ElementFactory.make("gconfaudiosrc", "source"); //ask desrt if there is a dconf version of this.gconfaudiosrc
+        let source = Gst.ElementFactory.make("gconfaudiosrc", "source"); 
         if(source == null) {
           let sourceError = "Your audio capture settings are invalid. Please correct them"; //replace with link to system settings 
         }
@@ -56,7 +57,7 @@ const record = new Lang.Class({
         let ogg = Gst.ElementFactory.make('oggmux', 'ogg');
         this.pipeline.add(ogg);
         let filesink = Gst.ElementFactory.make("filesink", "filesink");
-        filesink.set_property("location", "sample.ogg");
+        filesink.set_property("location", this.defaultFileName);
         this.pipeline.add(filesink);
         if (!this.pipeline || !converter || !sampler || !encoder || !ogg || !filesink) { //test this
         log ("Not all elements could be created.\n");
@@ -73,7 +74,7 @@ const record = new Lang.Class({
         this._recordPipeline();
         let ret = this.pipeline.set_state(Gst.State.PLAYING); 
         if (ret == Gst.StateChangeReturn.FAILURE) {
-            log("Unable to set the pipeline to the playing state.\n"); //create return string?
+            log("Unable to set the pipeline to the recording state.\n"); //create return string?
         } 
     },
     
@@ -83,13 +84,10 @@ const record = new Lang.Class({
     
     _stopRecording: function() {
         this.pipeline.set_state(Gst.State.NULL);
-        this.pipeline.set_locked_state(true);
-        this._buildDefaultFilename();
+        //this.pipeline.set_locked_state(true);
     },
     
-    _buildDefaultFilename: function() {
     // need to create directory /Recordings during build
-        this._buildFileName._expandInitialTilde();//_buildDefaultFilename();
-    }
+
 });
 
