@@ -40,16 +40,16 @@ const record = new Lang.Class({
     
     _recordPipeline: function() {
         this._buildFileName = new BuildFileName.buildFileName();
-        this.defaultFileName = this._buildFileName._buildDefaultFilename();
+        this.defaultFileName = this._buildFileName.buildDefaultFilename();
         Gst.init(null, 0);        
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
         let source = Gst.ElementFactory.make("gconfaudiosrc", "source"); 
+        
         if(source == null) {
           let sourceError = "Your audio capture settings are invalid. Please correct them"; //replace with link to system settings 
         }
+        
         this.pipeline.add(source);
-        let converter = Gst.ElementFactory.make('audioresample', 'converter');
-        this.pipeline.add(converter);
         let sampler = Gst.ElementFactory.make('audioconvert', 'sampler');
         this.pipeline.add(sampler);
         let encoder = Gst.ElementFactory.make('vorbisenc', 'encoder');
@@ -59,35 +59,41 @@ const record = new Lang.Class({
         let filesink = Gst.ElementFactory.make("filesink", "filesink");
         filesink.set_property("location", this.defaultFileName);
         this.pipeline.add(filesink);
-        if (!this.pipeline || !converter || !sampler || !encoder || !ogg || !filesink) { //test this
-        log ("Not all elements could be created.\n");
-        }
         
-        source.link(converter);
-        converter.link(sampler);
+        if (!this.pipeline || !sampler || !encoder || !ogg || !filesink) //test this
+            log ("Not all elements could be created.\n");
+        
+        source.link(sampler);
         sampler.link(encoder);
         encoder.link(ogg);
-        ogg.link(filesink);        
+        ogg.link(filesink);
+        //pipeline.merge_tags
     },
     
-     _startRecording: function() {
-        this._recordPipeline();
-        let ret = this.pipeline.set_state(Gst.State.PLAYING); 
+    startRecording: function() {
+        if (!this.pipeline || this.pipeState == PipelineStates.STOPPED ) {
+            this._recordPipeline();
+        }
+        
+        let ret = this.pipeline.set_state(Gst.State.PLAYING);
+         
         if (ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the pipeline to the recording state.\n"); //create return string?
         } 
     },
     
-    _pauseRecording: function() {
-     this.pipeline.set_state(Gst.State.PAUSED);   
+    pauseRecording: function() {
+     this.pipeline.set_state(Gst.State.PAUSED);
+     PipelineStates.PAUSED;   
     },
     
-    _stopRecording: function() {
+    stopRecording: function() {
         this.pipeline.set_state(Gst.State.NULL);
-        //this.pipeline.set_locked_state(true);
-    },
+        log("called stop");
+        PipelineStates.STOPPED;
+        this.pipeline.set_locked_state(true);
+    }
     
     // need to create directory /Recordings during build
-
 });
 

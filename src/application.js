@@ -26,6 +26,11 @@ const Gst = imports.gi.Gst;
 
 const Record = imports.record;
 
+const ButtonID = {
+    RECORDBUTTON: 0,
+    PLAYBUTTON: 1
+};
+
 const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.ApplicationWindow,
@@ -41,22 +46,21 @@ const Application = new Lang.Class({
         let header = new Gd.HeaderBar({ title: _(""),
                                         hexpand: true });
 
-
-        this._recorderButton = new Gtk.Button({ label: "Recorder",
-                                                hexpand: true });
-        //this._recorderButton.get_style_context().add_class("button");
-        header.pack_start(this._recorderButton);
-        this._playerButton = new Gtk.Button({ label: "Player",
-                                              hexpand: true });
-        //this._playerButton.get_style_context().add_class("button");
-        header.pack_start(this._playerButton);
+        this._recordPageButton = new Gtk.Button({ label: "Recorder",
+                                                  hexpand: true });
+        header.pack_start(this._recordPageButton);
+        this._playPageButton = new Gtk.Button({ label: "Player",
+                                                  hexpand: true });
+        header.pack_start(this._playPageButton);
         grid.attach(header, 0, 0, 2, 2);
 
         this._view = new MainView();
-        this._view.visible_child_name = (Math.random() <= 0.5) ? 'one' : 'two';
+        this._view.visible_child_name = (Math.random() <= 0.5) ? 'one' : 'recorderPage';
         grid.add(this._view);
-        this._recorderButton.connect('clicked', Lang.bind(this, function(){
-            this._view.visible_child_name = 'two';}));
+        this._recordPageButton.connect('clicked', Lang.bind(this, function(){
+            this._view.visible_child_name = 'recorderPage';}));
+        this._playPageButton.connect('clicked', Lang.bind(this, function(){
+            this._view.visible_child_name = 'playerPage';}));
             
         this._defineThemes();
 
@@ -80,74 +84,121 @@ const MainView = new Lang.Class({
         this.parent(params);
 
         let one = this._addPage('one');
-            this.visible_child_name = 'two';
+            this.visible_child_name = 'recorderPage';
 
-        let two = this._addPageTwo('two');
+        let recorderPage = this._addRecorderPage('recorderPage');
             this.visible_child_name = 'one';
+            
+       // let three = this._addPlayerPage('three');
+           // this.visible_child_name = 'one';
     },
 
     _addPage: function(name) {
-        let recorder = Gtk.Image.new_from_icon_name("audio-input-microphone-symbolic", Gtk.IconSize.DIALOG);
+        let initialPage = Gtk.Image.new_from_icon_name("audio-input-microphone-symbolic", Gtk.IconSize.DIALOG);
 
         let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                   halign: Gtk.Align.CENTER,
                                   valign: Gtk.Align.CENTER,
                                   column_homogeneous: true });            
-        grid.add(recorder);
+        grid.add(initialPage);
         this.add_named(grid, name);
     },
 
-    _addPageTwo: function(name) {
+    _addRecorderPage: function(name) {
         this._record = new Record.record();
-        this.eventbox = new Gtk.EventBox();
-        //this.eventbox.get_style_context().add_class ("recorder-player");
-        let grid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
+        this.recordBox = new Gtk.EventBox();
+        let recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                   halign: Gtk.Align.CENTER,
                                   valign: Gtk.Align.CENTER,
                                   column_homogeneous: true,
                                   column_spacing: 15 });
-        this.eventbox.add(grid);        
+        this.recordBox.add(recordGrid);        
 
         let toolbarStart = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
         toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        grid.attach(toolbarStart, 20, 0, 2, 1);
+        recordGrid.attach(toolbarStart, 20, 0, 2, 1);
         
-        this.stopButton = new Gtk.Button();
-        this.stopButton.set_image(Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON));
-        this.stopButton.connect("clicked", Lang.bind(this, this._onStopClicked));
-        toolbarStart.pack_end(this.stopButton, true, true, 0);
+        let recordButton = new RecordPauseButton(this._record);       
+        toolbarStart.pack_end(recordButton, false, true, 0);
         
-        this.recordButton = new RecordPauseButton();
-        this.recordButton.connect("clicked", Lang.bind(this, this._onRecordPauseToggled));
-        toolbarStart.pack_end(this.recordButton, false, true, 0);
+        let buttonID = ButtonID.RECORDBUTTON;
+                
+        this.stop = new StopButton(this._record, recordButton, buttonID);
+        toolbarStart.pack_end(this.stop, true, true, 0);
 
-        this.add_named(this.eventbox, name);
+        this.add_named(this.recordBox, name);
     },
     
-    _onRecordPauseToggled: function() {
-        if (this.recordButton.get_active()) {
-            this.recordButton.set_image(this.recordButton.pauseImage);
-            this._record._startRecording(); 
-        }
-        else {
-            this.recordButton.set_image(this.recordButton.recordImage);
-            this._record._pauseRecording();            
-        }
+      _addPlayerPage: function(name) {
+        this._play = new Play.play();
+        this.playBox = new Gtk.EventBox();
+        let playGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
+                                  halign: Gtk.Align.CENTER,
+                                  valign: Gtk.Align.CENTER,
+                                  column_homogeneous: true,
+                                  column_spacing: 15 });
+        this.playBox.add(playGrid);        
+
+        let playToolbar = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
+        playToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
+        grid.attach(toolbarStart, 20, 0, 2, 1);        
+        
+        playToolbar.pack_end(this.stopButton, true, true, 0);
+        
+        this.playButton = new Gtk.Button();
+        this.playButton.set_image(Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON));
+        playToolbar.pack_end(this.playButton, false, true, 0);
+
+        this.add_named(this.playBox, name);
     },
-    
-    _onStopClicked: function() {
-        this.recordButton.set_active(false);
-        this._record._stopRecording();
-    }     
+
 });
-    const RecordPauseButton = new Lang.Class({
+
+const RecordPauseButton = new Lang.Class({
     Name: "RecordPauseButton",
     Extends: Gtk.ToggleButton,
     
-    _init: function() {
+    _init: function(record) {
+        this._record = record;
         this.recordImage = Gtk.Image.new_from_icon_name("media-record-symbolic", Gtk.IconSize.BUTTON);
         this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);              
         this.parent();
         this.set_image(this.recordImage);
-    }
+        this.connect("clicked", Lang.bind(this, this._onRecordPauseToggled));
+    },
+    
+    _onRecordPauseToggled: function() {
+        if (this.get_active()) {
+            this.set_image(this.pauseImage);
+            this._record.startRecording(); 
+        } else {
+            this.set_image(this.recordImage);
+            this._record.pauseRecording();            
+        }
+    },
 });
+
+const StopButton = new Lang.Class({
+    Name: "StopButton",
+    Extends: Gtk.Button,
+       
+    _init: function(action, activeButton, id) {
+        this._action = action;
+        this._id = id;
+        this._activeButton = activeButton;
+        this.stopImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
+        this.parent();
+        this.set_image(this.stopImage);
+        this.connect("clicked", Lang.bind(this, this._onStopClicked));
+    }, 
+            
+    _onStopClicked: function() {
+        this._activeButton.set_active(false);
+        if (this._id == ButtonID.RECORDBUTTON) {
+            this._action.stopRecording();
+        } else if (ButtonID.PLAYBUTTON) {
+           // this.player.stopPlaying(); 
+        }
+    } 
+});        
+    

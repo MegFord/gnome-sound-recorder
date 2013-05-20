@@ -30,12 +30,13 @@ const Record = imports.record;
 const buildFileName = new Lang.Class({
     Name: 'BuildFileName',
 
-      _buildDefaultFilename: function() {
-        let path = ["/"]; // Ask about this, are there any other prefixes I need to take into account?
+      buildDefaultFilename: function() {
+        let path = ["/"]; 
         let homeDirName = GLib.get_home_dir();
         let tilde = path[0];
         let defaultDir = "Recordings";
-        let DateTimeString = GLib.DateTime.new_now_local()
+        //GLib.mkdir_with_parents(homeDirName + tilde + defaultDir, 775);
+        let DateTimeString = GLib.DateTime.new_now_local();
         let origin = DateTimeString.format("%Y-%m-%d %H:%M:%S");
         let extension = ".ogg";
         let editedOrigin = origin + extension;        
