@@ -24,6 +24,7 @@ imports.gi.versions.Gst = '0.10';
 
 const Gst = imports.gi.Gst;
 
+const Play = imports.play;
 const Record = imports.record;
 
 const ButtonID = {
@@ -52,10 +53,11 @@ const Application = new Lang.Class({
         this._playPageButton = new Gtk.Button({ label: "Player",
                                                   hexpand: true });
         header.pack_start(this._playPageButton);
+        
         grid.attach(header, 0, 0, 2, 2);
 
         this._view = new MainView();
-        this._view.visible_child_name = (Math.random() <= 0.5) ? 'one' : 'recorderPage';
+        this._view.visible_child_name = (Math.random() <= 0.5) ? 'recorderPage' : 'playerPage';
         grid.add(this._view);
         this._recordPageButton.connect('clicked', Lang.bind(this, function(){
             this._view.visible_child_name = 'recorderPage';}));
@@ -83,14 +85,11 @@ const MainView = new Lang.Class({
                                        vexpand: true });
         this.parent(params);
 
-        let one = this._addPage('one');
-            this.visible_child_name = 'recorderPage';
-
         let recorderPage = this._addRecorderPage('recorderPage');
-            this.visible_child_name = 'one';
+            this.visible_child_name = 'playerPage';
             
-       // let three = this._addPlayerPage('three');
-           // this.visible_child_name = 'one';
+        let playerPage = this._addPlayerPage('playerPage');
+            this.visible_child_name = 'recorderPage';
     },
 
     _addPage: function(name) {
@@ -141,13 +140,16 @@ const MainView = new Lang.Class({
 
         let playToolbar = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
         playToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        grid.attach(toolbarStart, 20, 0, 2, 1);        
+        playGrid.attach(playToolbar, 20, 0, 2, 1);        
+               
+        let playButton = new Gtk.Button();
+        playButton.set_image(Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON));
+        playToolbar.pack_end(playButton, false, true, 0);
         
-        playToolbar.pack_end(this.stopButton, true, true, 0);
+        let buttonID = ButtonID.PLAY_BUTTON;
         
-        this.playButton = new Gtk.Button();
-        this.playButton.set_image(Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON));
-        playToolbar.pack_end(this.playButton, false, true, 0);
+        this.stopPlay = new StopButton(this._play, playButton, buttonID);
+        playToolbar.pack_end(this.stopPlay, true, true, 0);
 
         this.add_named(this.playBox, name);
     },
@@ -197,7 +199,7 @@ const StopButton = new Lang.Class({
         if (this._id == ButtonID.RECORD_BUTTON) {
             this._action.stopRecording();
         } else if (ButtonID.PLAY_BUTTON) {
-           // this.player.stopPlaying(); 
+            this.player.stopPlaying(); 
         }
     } 
 });        

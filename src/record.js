@@ -83,8 +83,8 @@ const record = new Lang.Class({
     },
     
     pauseRecording: function() {
-     this.pipeline.set_state(Gst.State.PAUSED);
-     this.pipeState = PipelineStates.PAUSED;   
+        this.pipeline.set_state(Gst.State.PAUSED);
+        this.pipeState = PipelineStates.PAUSED;   
     },
     
     stopRecording: function() {
