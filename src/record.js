@@ -76,7 +76,7 @@ const record = new Lang.Class({
         }
         
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
-         
+        this.pipeState = PipelineStates.PLAYING;
         if (ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the pipeline to the recording state.\n"); //create return string?
         } 
@@ -84,13 +84,13 @@ const record = new Lang.Class({
     
     pauseRecording: function() {
      this.pipeline.set_state(Gst.State.PAUSED);
-     PipelineStates.PAUSED;   
+     this.pipeState = PipelineStates.PAUSED;   
     },
     
     stopRecording: function() {
         this.pipeline.set_state(Gst.State.NULL);
         log("called stop");
-        PipelineStates.STOPPED;
+        this.pipeState = PipelineStates.STOPPED;
         this.pipeline.set_locked_state(true);
     }
     

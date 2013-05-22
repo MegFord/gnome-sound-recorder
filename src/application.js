@@ -27,8 +27,8 @@ const Gst = imports.gi.Gst;
 const Record = imports.record;
 
 const ButtonID = {
-    RECORDBUTTON: 0,
-    PLAYBUTTON: 1
+    RECORD_BUTTON: 0,
+    PLAY_BUTTON: 1
 };
 
 const Application = new Lang.Class({
@@ -121,7 +121,7 @@ const MainView = new Lang.Class({
         let recordButton = new RecordPauseButton(this._record);       
         toolbarStart.pack_end(recordButton, false, true, 0);
         
-        let buttonID = ButtonID.RECORDBUTTON;
+        let buttonID = ButtonID.RECORD_BUTTON;
                 
         this.stop = new StopButton(this._record, recordButton, buttonID);
         toolbarStart.pack_end(this.stop, true, true, 0);
@@ -194,9 +194,9 @@ const StopButton = new Lang.Class({
             
     _onStopClicked: function() {
         this._activeButton.set_active(false);
-        if (this._id == ButtonID.RECORDBUTTON) {
+        if (this._id == ButtonID.RECORD_BUTTON) {
             this._action.stopRecording();
-        } else if (ButtonID.PLAYBUTTON) {
+        } else if (ButtonID.PLAY_BUTTON) {
            // this.player.stopPlaying(); 
         }
     } 

@@ -20,7 +20,7 @@
  *
  */
  
-imports.gi.versions.Gst = '0.10';
+imports.gi.versions.Gst = '0.1';
 
 const Gst = imports.gi.Gst;
 const GLib = imports.gi.GLib;
