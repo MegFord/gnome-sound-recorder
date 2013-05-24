@@ -60,9 +60,9 @@ const Application = new Lang.Class({
         this._view.visible_child_name = (Math.random() <= 0.5) ? 'recorderPage' : 'playerPage';
         grid.add(this._view);
         this._recordPageButton.connect('clicked', Lang.bind(this, function(){
-            this._view.visible_child_name = 'recorderPage';}));
+            this._view.visible_child_name = 'recorderPage'; }));
         this._playPageButton.connect('clicked', Lang.bind(this, function(){
-            this._view.visible_child_name = 'playerPage';}));
+            this._view.visible_child_name = 'playerPage'; }));
             
         this._defineThemes();
 

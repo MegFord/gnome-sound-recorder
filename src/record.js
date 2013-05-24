@@ -26,8 +26,7 @@ imports.gi.versions.Gst = '0.10';
 
 const Gst = imports.gi.Gst;
 const Mainloop = imports.mainloop;
-
-const BuildFileName = imports.buildFileName;
+const _ = imports.gettext.gettext;
 
 const PipelineStates = {
     PLAYING: 0,
@@ -35,11 +34,17 @@ const PipelineStates = {
     STOPPED: 2
 };
 
+const DefaultFileName = {
+    HOME_DIR_NAME: 0,
+    DEFAULT_DIR: 1,
+    EDITED_ORIGIN: 2
+};   
+
 const record = new Lang.Class({
     Name: "Record",
     
     _recordPipeline: function() {
-        this._buildFileName = new BuildFileName.buildFileName();
+        this._buildFileName = new buildFileName();
         this.defaultFileName = this._buildFileName.buildDefaultFilename();
         Gst.init(null, 0);        
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
@@ -95,5 +100,26 @@ const record = new Lang.Class({
     }
     
     // need to create directory /Recordings during build
+});
+
+const buildFileName = new Lang.Class({
+    Name: 'BuildFileName',
+
+      buildDefaultFilename: function() {
+        let defaultFileName = [];
+        defaultFileName.push(GLib.get_home_dir());
+        defaultFileName.push(_("Recordings"));
+        let dirName = GLib.build_filenamev(defaultFileName);
+        let namedDir = GLib.mkdir_with_parents(dirName, 0775);
+        let dateTimeString = GLib.DateTime.new_now_local();
+        let origin = dateTimeString.format("%Y-%m-%d %H:%M:%S");
+        let extension = _(".ogg");
+        defaultFileName.push(origin + extension);                
+        log(namedDir);        
+        // Use GLib.build_filenamev to work around missing vararg functions.
+        let name = GLib.build_filenamev(defaultFileName);
+        log(name);
+        return name;                       
+    }
 });
 
