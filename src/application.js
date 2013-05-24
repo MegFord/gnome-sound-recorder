@@ -51,7 +51,7 @@ const Application = new Lang.Class({
                                                   hexpand: true });
         header.pack_start(this._recordPageButton);
         this._playPageButton = new Gtk.Button({ label: "Player",
-                                                  hexpand: true });
+                                                hexpand: true });
         header.pack_start(this._playPageButton);
         
         grid.attach(header, 0, 0, 2, 2);
@@ -59,10 +59,14 @@ const Application = new Lang.Class({
         this._view = new MainView();
         this._view.visible_child_name = (Math.random() <= 0.5) ? 'recorderPage' : 'playerPage';
         grid.add(this._view);
-        this._recordPageButton.connect('clicked', Lang.bind(this, function(){
-            this._view.visible_child_name = 'recorderPage'; }));
-        this._playPageButton.connect('clicked', Lang.bind(this, function(){
-            this._view.visible_child_name = 'playerPage'; }));
+        this._recordPageButton.connect('clicked', Lang.bind(this, 
+            function() {
+                this._view.visible_child_name = 'recorderPage'; 
+            }));
+        this._playPageButton.connect('clicked', Lang.bind(this, 
+            function(){
+                this._view.visible_child_name = 'playerPage'; 
+            }));
             
         this._defineThemes();
 
@@ -107,10 +111,10 @@ const MainView = new Lang.Class({
         this._record = new Record.record();
         this.recordBox = new Gtk.EventBox();
         let recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
-                                  halign: Gtk.Align.CENTER,
-                                  valign: Gtk.Align.CENTER,
-                                  column_homogeneous: true,
-                                  column_spacing: 15 });
+                                        halign: Gtk.Align.CENTER,
+                                        valign: Gtk.Align.CENTER,
+                                        column_homogeneous: true,
+                                        column_spacing: 15 });
         this.recordBox.add(recordGrid);        
 
         let toolbarStart = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
@@ -132,10 +136,10 @@ const MainView = new Lang.Class({
         this._play = new Play.play();
         this.playBox = new Gtk.EventBox();
         let playGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
-                                  halign: Gtk.Align.CENTER,
-                                  valign: Gtk.Align.CENTER,
-                                  column_homogeneous: true,
-                                  column_spacing: 15 });
+                                      halign: Gtk.Align.CENTER,
+                                      valign: Gtk.Align.CENTER,
+                                      column_homogeneous: true,
+                                      column_spacing: 15 });
         this.playBox.add(playGrid);        
 
         let playToolbar = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
