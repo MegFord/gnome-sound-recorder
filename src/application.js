@@ -47,10 +47,10 @@ const Application = new Lang.Class({
         let header = new Gd.HeaderBar({ title: _(""),
                                         hexpand: true });
 
-        this._recordPageButton = new Gtk.Button({ label: "Recorder",
+        this._recordPageButton = new Gtk.Button({ label: _("Recorder"),
                                                   hexpand: true });
         header.pack_start(this._recordPageButton);
-        this._playPageButton = new Gtk.Button({ label: "Player",
+        this._playPageButton = new Gtk.Button({ label: _("Player"),
                                                 hexpand: true });
         header.pack_start(this._playPageButton);
         

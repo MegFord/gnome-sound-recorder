@@ -22,33 +22,33 @@
  
  //GST_DEBUG=4 ./src/gnome-sound-recorder
  
-imports.gi.versions.Gst = '0.10';
+imports.gi.versions.Gst = '1.0';
 
 const Gst = imports.gi.Gst;
 const Mainloop = imports.mainloop;
 const _ = imports.gettext.gettext;
+const Gio = imports.gi.Gio;
 
 const PipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
     STOPPED: 2
 };
-
-const DefaultFileName = {
-    HOME_DIR_NAME: 0,
-    DEFAULT_DIR: 1,
-    EDITED_ORIGIN: 2
-};   
-
+   
 const record = new Lang.Class({
     Name: "Record",
     
     _recordPipeline: function() {
         this._buildFileName = new buildFileName();
-        this.defaultFileName = this._buildFileName.buildDefaultFilename();
+        this.initialFileName = this._buildFileName.buildInitialFilename();
+        if (this.initialFileName == -1) {
+            log('Unable to create Recordings directory');
+            return
+        }
+            
         Gst.init(null, 0);        
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-        let source = Gst.ElementFactory.make("gconfaudiosrc", "source"); 
+        let source = Gst.ElementFactory.make("pulsesrc", "source"); 
         
         if(source == null) {
           let sourceError = "Your audio capture settings are invalid. Please correct them"; //replace with link to system settings 
@@ -61,8 +61,8 @@ const record = new Lang.Class({
         this.pipeline.add(encoder);
         let ogg = Gst.ElementFactory.make('oggmux', 'ogg');
         this.pipeline.add(ogg);
-        let filesink = Gst.ElementFactory.make("filesink", "filesink");
-        filesink.set_property("location", this.defaultFileName);
+        let filesink = Gst.ElementFactory.make("giosink", "filesink");
+        filesink.set_property("file", this.initialFileName);
         this.pipeline.add(filesink);
         
         if (!this.pipeline || !sampler || !encoder || !ogg || !filesink) //test this
@@ -105,21 +105,26 @@ const record = new Lang.Class({
 const buildFileName = new Lang.Class({
     Name: 'BuildFileName',
 
-      buildDefaultFilename: function() {
-        let defaultFileName = [];
-        defaultFileName.push(GLib.get_home_dir());
-        defaultFileName.push(_("Recordings"));
-        let dirName = GLib.build_filenamev(defaultFileName);
+      buildInitialFilename: function() {
+        let initialFileName = [];
+        initialFileName.push(GLib.get_home_dir());
+        initialFileName.push(_("Recordings"));
+        let dirName = GLib.build_filenamev(initialFileName);
         let namedDir = GLib.mkdir_with_parents(dirName, 0775);
+        log(namedDir);
+        log("direct create val");
+        if (namedDir == null)
+            return -1;
         let dateTimeString = GLib.DateTime.new_now_local();
-        let origin = dateTimeString.format("%Y-%m-%d %H:%M:%S");
-        let extension = _(".ogg");
-        defaultFileName.push(origin + extension);                
+        let origin = dateTimeString.format(_("%Y-%m-%d %H:%M:%S"));
+        let extension = ".ogg";
+        initialFileName.push(origin + extension);                
         log(namedDir);        
         // Use GLib.build_filenamev to work around missing vararg functions.
-        let name = GLib.build_filenamev(defaultFileName);
-        log(name);
-        return name;                       
+        let name = GLib.build_filenamev(initialFileName);
+        let file = Gio.file_new_for_path(name);
+        log(file);
+        return file;                      
     }
 });
 
