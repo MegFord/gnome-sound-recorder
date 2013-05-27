@@ -113,8 +113,8 @@ const buildFileName = new Lang.Class({
         let namedDir = GLib.mkdir_with_parents(dirName, 0775);
         log(namedDir);
         log("direct create val");
-        if (namedDir == null)
-            return -1;
+        if (namedDir == -1)
+            return namedDir;
         let dateTimeString = GLib.DateTime.new_now_local();
         let origin = dateTimeString.format(_("%Y-%m-%d %H:%M:%S"));
         let extension = ".ogg";
