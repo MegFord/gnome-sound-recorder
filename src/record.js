@@ -24,10 +24,13 @@
  
 imports.gi.versions.Gst = '1.0';
 
-const Gst = imports.gi.Gst;
-const Mainloop = imports.mainloop;
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
+const Gst = imports.gi.Gst;
+const GstPbutils = imports.gi.GstPbutils;
+const Mainloop = imports.mainloop;
+
+const AudioProfile = imports.audioProfile;
 
 const PipelineStates = {
     PLAYING: 0,
@@ -39,40 +42,54 @@ const record = new Lang.Class({
     Name: "Record",
     
     _recordPipeline: function() {
+        Gst.init(null, 0);
+        this._audioProfile = new AudioProfile.AudioProfile();
+        this._mediaProfile = this._audioProfile.mediaProfile();
         this._buildFileName = new buildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         if (this.initialFileName == -1) {
             log('Unable to create Recordings directory');
             return
-        }
-            
-        Gst.init(null, 0);        
+        } 
+                      
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-        let source = Gst.ElementFactory.make("pulsesrc", "source"); 
+        this.recordBus = this.pipeline.get_bus();
+        this.recordBus.add_signal_watch();
+        this.recordBus.connect("message::error",(this, 
+            function(bus, message) {
+                log("Error:" + message.parse_error());
+            }));
+        this.src = Gst.ElementFactory.make("pulsesrc", "src"); 
         
-        if(source == null) {
+        if(this.src == null) {
           let sourceError = "Your audio capture settings are invalid. Please correct them"; //replace with link to system settings 
         }
         
-        this.pipeline.add(source);
+        this.pipeline.add(this.src);
         let sampler = Gst.ElementFactory.make('audioconvert', 'sampler');
         this.pipeline.add(sampler);
-        let encoder = Gst.ElementFactory.make('vorbisenc', 'encoder');
-        this.pipeline.add(encoder);
+        this.encoder = Gst.ElementFactory.make('vorbisenc', "encoder");
+        this.pipeline.add(this.encoder);
         let ogg = Gst.ElementFactory.make('oggmux', 'ogg');
         this.pipeline.add(ogg);
+        /*let emptyStruct = Gst.Structure.new_empty("emptyStruct");
+        emptyStruct.set_value("format", "application/ogg");
+        let structure = new Gst.Caps(emptyStruct);
+        let containerProfile = new GstPbutils.EncodingContainerProfile("ogg", null, structure, 0);*/
         let filesink = Gst.ElementFactory.make("giosink", "filesink");
         filesink.set_property("file", this.initialFileName);
         this.pipeline.add(filesink);
         
-        if (!this.pipeline || !sampler || !encoder || !ogg || !filesink) //test this
+       if (!this.pipeline || !sampler || !this.encoder || !ogg || !filesink) //test this
             log ("Not all elements could be created.\n");
         
-        source.link(sampler);
-        sampler.link(encoder);
-        encoder.link(ogg);
+        this.src.link(sampler);
+        sampler.link(this.encoder);
+        this.encoder.link(ogg);
         ogg.link(filesink);
         //pipeline.merge_tags
+        this._tagWriter = new tagWriter();
+        this._setTags = this._tagWriter.tagWriter(this.encoder);
     },
     
     startRecording: function() {
@@ -93,19 +110,38 @@ const record = new Lang.Class({
     },
     
     stopRecording: function() {
+        this.src.send_event(Gst.Event.new_eos());
+        this.busTimeout = this.recordBus.timed_pop_filtered(Gst.CLOCK_TIME_NONE, Gst.MessageType.EOS | Gst.MessageType.ERROR);
+        this.src.set_state(Gst.State.NULL); 
+        this.src.get_state(null, null, -1);
+        this.src.set_locked_state(true); 
         this.pipeline.set_state(Gst.State.NULL);
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
-        this.pipeline.set_locked_state(true);
-    }
+        //this.pipeline.set_locked_state(true);
+    },
     
-    // need to create directory /Recordings during build
+    // need to create directory /Recordings during build?
+});
+
+const tagWriter = new Lang.Class({
+    Name: 'TagWriter',
+    
+    tagWriter: function(encoder) {
+        let factory = encoder.get_factory(); // Who is the element?
+        let tagWriter = factory.has_interface("GstTagSetter");
+           if (tagWriter == true) {
+               let taglist = Gst.TagList.new_empty();
+               taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
+               encoder.merge_tags(taglist, Gst.TagMergeMode.REPLACE);
+        }
+    }
 });
 
 const buildFileName = new Lang.Class({
     Name: 'BuildFileName',
 
-      buildInitialFilename: function() {
+    buildInitialFilename: function() {
         let initialFileName = [];
         initialFileName.push(GLib.get_home_dir());
         initialFileName.push(_("Recordings"));
