@@ -176,7 +176,7 @@ const RecordPauseButton = new Lang.Class({
     _onRecordPauseToggled: function() {
         if (this.get_active()) {
             this.set_image(this.pauseImage);
-            this._record.startRecording(); 
+            this._record._recordPipeline();//startRecording(); 
         } else {
             this.set_image(this.recordImage);
             this._record.pauseRecording();            

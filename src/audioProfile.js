@@ -32,22 +32,27 @@ const Mainloop = imports.mainloop;
 
 const audioContainerProfileMap = {
     'ogg': "application/ogg",
-    //There is no container for wav?'wav': 
     'mp3': "application/x-id3"
-    // There is no container for flac (?)
 };
 
-const audioSuffixMap = {
-    'FLAC': ".flac",
-    'MP3': ".mp3", 
-    'OGG': ".ogg",      
-    'WAV': ".wav"    
+const audioSuffixMap = { 
+    'OGG': ".ogg", 
+    'Opus' : ".opus",     
+    'MPEG4' : ".mp4"       
  };
+ 
+const noContainerSuffixMap = {
+         'audio/mpeg, mpegversion=(int)1, layer=(int)3' : ".mp3", 
+         'audio/mpeg, mpegversion=(int)4, stream-format=(string)adts' : ".aac", 
+         'audio/x-flac' : ".flac" 
+};
 
 const audioCodecMap = { 
+    'AAC' : "audio/mpeg,mpegversion=4",
     'FLAC': "audio/x-flac",      
-    'MP3': "audio/mpeg, mpegversion=(int)1, layer=(int)3", 
-    'Vorbis': "audio/gst-elementx-vorbis",
+    'MP3': "audio/mpeg, mpegversion=(int)1, layer=(int)3",
+    'Opus'  :  "audio/x-opus", 
+    'Vorbis': "audio/x-vorbis",
     'WAV': "audio/x-wav"
 };
 
@@ -55,12 +60,16 @@ const AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
 
     mediaProfile: function(){ 
-        let emptyStruct = Gst.Structure.new_empty("emptyStruct");
-        emptyStruct.set_value("format", "application/ogg");
-        let emptyCaps = Gst.Caps.new_empty_simple("emptyCaps");
-        emptyCaps.merge_structure(emptyStruct);
-        let containerProfile = new GstPbutils.EncodingContainerProfile("ogg", null, emptyCaps, null);
-        this.encodingProfile = new GstPbutils.EncodingAudioProfile(Gst.Caps("audio/gst-elementx-vorbis"), null, Gst.Caps.new_any(), 0);
-       // let extension = rb_gst_media_type_to_extension(mediaType);    
+        let struct = Gst.Structure.new_empty("application/ogg");
+        let caps = Gst.Caps.new_empty();
+        caps.append_structure(struct);
+        let containerProfile = GstPbutils.EncodingContainerProfile.new("ogg", null, caps, null);
+        let audioStruct = Gst.Structure.new_empty("audio/x-vorbis");
+        let audioCaps = Gst.Caps.new_empty();
+        audioCaps.append_structure(audioStruct);
+        let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
+        containerProfile.add_profile(encodingProfile);
+        
+        return containerProfile;    
     }
 });

@@ -20,7 +20,7 @@
  *
  */
  
- //GST_DEBUG=4 ./src/gnome-sound-recorder
+ //GST_DEBUG=5 ./src/gnome-sound-recorder
  
 imports.gi.versions.Gst = '1.0';
 
@@ -53,45 +53,44 @@ const record = new Lang.Class({
         } 
                       
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
+
+        this.srcElement = Gst.ElementFactory.make("pulsesrc", "src"); 
+        
+        if(this.srcElement == null) {
+          let sourceError = "Your audio capture settings are invalid. Please correct them"; //replace with link to system settings 
+        }
+        
+        this.pipeline.add(this.srcElement);
+        
+        this._audioProfile = new AudioProfile.AudioProfile();
+        this._mediaProfile = this._audioProfile.mediaProfile();
+ 
+        this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
+        this.ebin.set_property("profile", this._mediaProfile);
+        this.pipeline.add(this.ebin);
+        let srcpad = this.ebin.get_static_pad ("src");
+        if (srcpad == null) 
+            log("srcpad is null");
+            
+        let filesink = Gst.ElementFactory.make("giosink", "filesink");
+        filesink.set_property("file", this.initialFileName);
+        this.pipeline.add(filesink);
+        
+        if (!this.pipeline || !this.srcElement ||!this.ebin || !filesink) 
+            log ("Not all elements could be created.\n");
+        this.srcElement.link(this.ebin);
+        this.ebin.link(filesink);      
+        this.pipeline.set_state(Gst.State.PLAYING);
         this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();
         this.recordBus.connect("message::error",(this, 
             function(bus, message) {
                 log("Error:" + message.parse_error());
             }));
-        this.src = Gst.ElementFactory.make("pulsesrc", "src"); 
-        
-        if(this.src == null) {
-          let sourceError = "Your audio capture settings are invalid. Please correct them"; //replace with link to system settings 
-        }
-        
-        this.pipeline.add(this.src);
-        let sampler = Gst.ElementFactory.make('audioconvert', 'sampler');
-        this.pipeline.add(sampler);
-        this.encoder = Gst.ElementFactory.make('vorbisenc', "encoder");
-        this.pipeline.add(this.encoder);
-        let ogg = Gst.ElementFactory.make('oggmux', 'ogg');
-        this.pipeline.add(ogg);
-        /*let emptyStruct = Gst.Structure.new_empty("emptyStruct");
-        emptyStruct.set_value("format", "application/ogg");
-        let structure = new Gst.Caps(emptyStruct);
-        let containerProfile = new GstPbutils.EncodingContainerProfile("ogg", null, structure, 0);*/
-        let filesink = Gst.ElementFactory.make("giosink", "filesink");
-        filesink.set_property("file", this.initialFileName);
-        this.pipeline.add(filesink);
-        
-       if (!this.pipeline || !sampler || !this.encoder || !ogg || !filesink) //test this
-            log ("Not all elements could be created.\n");
-        
-        this.src.link(sampler);
-        sampler.link(this.encoder);
-        this.encoder.link(ogg);
-        ogg.link(filesink);
-        //pipeline.merge_tags
         this._tagWriter = new tagWriter();
-        this._setTags = this._tagWriter.tagWriter(this.encoder);
+        this._setTags = this._tagWriter.tagWriter(this.ebin);
     },
-    
+       
     startRecording: function() {
         if (!this.pipeline || this.pipeState == PipelineStates.STOPPED ) {
             this._recordPipeline();
@@ -110,16 +109,16 @@ const record = new Lang.Class({
     },
     
     stopRecording: function() {
-        this.src.send_event(Gst.Event.new_eos());
+        this.srcElement.send_event(Gst.Event.new_eos());
         this.busTimeout = this.recordBus.timed_pop_filtered(Gst.CLOCK_TIME_NONE, Gst.MessageType.EOS | Gst.MessageType.ERROR);
-        this.src.set_state(Gst.State.NULL); 
-        this.src.get_state(null, null, -1);
-        this.src.set_locked_state(true); 
+        this.srcElement.set_state(Gst.State.NULL); 
+        this.srcElement.get_state(null, null, -1);
+        this.srcElement.set_locked_state(true); 
         this.pipeline.set_state(Gst.State.NULL);
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
         //this.pipeline.set_locked_state(true);
-    },
+    }
     
     // need to create directory /Recordings during build?
 });
