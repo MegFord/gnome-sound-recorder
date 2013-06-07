@@ -22,8 +22,10 @@
  
 imports.gi.versions.Gst = '1.0';
 
+const _ = imports.gettext.gettext;
 const Gst = imports.gi.Gst;
 
+const AudioProfile = imports.audioProfile;
 const Play = imports.play;
 const Record = imports.record;
 
@@ -108,7 +110,7 @@ const MainView = new Lang.Class({
     },
 
     _addRecorderPage: function(name) {
-        this._record = new Record.record();
+        this._record = new Record.Record();
         this.recordBox = new Gtk.EventBox();
         let recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                         halign: Gtk.Align.CENTER,
@@ -128,6 +130,9 @@ const MainView = new Lang.Class({
                 
         this.stop = new StopButton(this._record, recordButton, buttonID);
         toolbarStart.pack_end(this.stop, true, true, 0);
+        
+        this._comboBoxText = new EncoderComboBox();
+        recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
 
         this.add_named(this.recordBox, name);
     },
@@ -206,5 +211,30 @@ const StopButton = new Lang.Class({
             this.player.stopPlaying(); 
         }
     } 
-});        
+});
+
+const EncoderComboBox = new Lang.Class({ 
+    Name: "encoderComboBox",
+    Extends: Gtk.ComboBoxText, 
+       
+    // encoding setting labels in combobox
+    _init: function() {
+        this.parent();
+        let combo = [_("Ogg Vorbis"), _("Ogg Opus"),  _("Flac"), _("Mp3"), _("Mp4")];
+        for (let i = 0; i < combo.length; i++)
+            this.append_text(combo[i]);
+
+        //this.set_active(0);
+        this.set_sensitive(true);
+        this.connect("changed", Lang.bind(this, this._onComboBoxTextChanged)); 
+    },
+    
+    _onComboBoxTextChanged: function() {
+        this.activeProfile = this.get_active();
+        this._audioProfile = new AudioProfile.AudioProfile();
+        //this._audioProfile.mediaProfile(this.activeProfile);
+        log(this.activeProfile);
+    }
+    
+});       
     

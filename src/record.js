@@ -30,6 +30,7 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 
+const Application = imports.application;
 const AudioProfile = imports.audioProfile;
 
 const PipelineStates = {
@@ -38,14 +39,14 @@ const PipelineStates = {
     STOPPED: 2
 };
    
-const record = new Lang.Class({
+const Record = new Lang.Class({
     Name: "Record",
     
     _recordPipeline: function() {
         Gst.init(null, 0);
         this._audioProfile = new AudioProfile.AudioProfile();
         this._mediaProfile = this._audioProfile.mediaProfile();
-        this._buildFileName = new buildFileName();
+        this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         if (this.initialFileName == -1) {
             log('Unable to create Recordings directory');
@@ -78,8 +79,11 @@ const record = new Lang.Class({
         
         if (!this.pipeline || !this.srcElement ||!this.ebin || !filesink) 
             log ("Not all elements could be created.\n");
-        this.srcElement.link(this.ebin);
-        this.ebin.link(filesink);      
+            
+        let srcLink = this.srcElement.link(this.ebin);
+        let ebinLink = this.ebin.link(filesink);
+        if (!srcLink || !ebinLink)
+            log("not all of the elements were linked");      
         this.pipeline.set_state(Gst.State.PLAYING);
         this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();
@@ -123,7 +127,7 @@ const record = new Lang.Class({
     // need to create directory /Recordings during build?
 });
 
-const tagWriter = new Lang.Class({
+const TagWriter = new Lang.Class({
     Name: 'TagWriter',
     
     tagWriter: function(encoder) {
@@ -137,7 +141,7 @@ const tagWriter = new Lang.Class({
     }
 });
 
-const buildFileName = new Lang.Class({
+const BuildFileName = new Lang.Class({
     Name: 'BuildFileName',
 
     buildInitialFilename: function() {

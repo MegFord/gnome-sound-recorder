@@ -30,36 +30,39 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 
+const Application = imports.application;
+
 const audioContainerProfileMap = {
-    'ogg': "application/ogg",
-    'mp3': "application/x-id3"
+    "application/ogg": 0, // 'ogg'
+    "application/x-id3": 1 // 'mp3'
 };
 
 const audioSuffixMap = { 
-    'OGG': ".ogg", 
-    'Opus' : ".opus",     
-    'MPEG4' : ".mp4"       
+    ".ogg": 0, 
+    ".opus": 1      
  };
  
 const noContainerSuffixMap = {
-         'audio/mpeg, mpegversion=(int)1, layer=(int)3' : ".mp3", 
-         'audio/mpeg, mpegversion=(int)4, stream-format=(string)adts' : ".aac", 
-         'audio/x-flac' : ".flac" 
+         ".mp3": 0, 
+         ".aac": 1, // mp4
+         ".flac": 2 
 };
 
 const audioCodecMap = { 
-    'AAC' : "audio/mpeg,mpegversion=4",
-    'FLAC': "audio/x-flac",      
-    'MP3': "audio/mpeg, mpegversion=(int)1, layer=(int)3",
-    'Opus'  :  "audio/x-opus", 
-    'Vorbis': "audio/x-vorbis",
-    'WAV': "audio/x-wav"
+    "audio/mpeg,mpegversion=4": 0, // AAC
+    "audio/x-flac": 1,      
+    "audio/mpeg, mpegversion=(int)1, layer=(int)3": 2,
+    "audio/x-opus": 3, 
+    "audio/x-vorbis": 4
 };
 
 const AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
 
-    mediaProfile: function(){ 
+    mediaProfile: function(codecProfile){
+        let codecArr = [];
+        this.codecProfile = codecProfile; 
+        codecArr = this._assignProfile(this.codecProfile);
         let struct = Gst.Structure.new_empty("application/ogg");
         let caps = Gst.Caps.new_empty();
         caps.append_structure(struct);
@@ -71,5 +74,18 @@ const AudioProfile = new Lang.Class({
         containerProfile.add_profile(encodingProfile);
         
         return containerProfile;    
+    },
+    
+    _assignProfile: function(profileName){
+        this.profileName = profileName;
+        let values = [];
+        
+        if (profileName == null) {
+           log("Failed to get output format"); //set error for user
+        } else {
+            //switch (this.profileName) {
+            //case 
+            //values.push({ name: value, role: this._getUserRoleString(role) });
+        }
     }
 });
