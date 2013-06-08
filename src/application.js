@@ -211,14 +211,16 @@ const StopButton = new Lang.Class({
             this.player.stopPlaying(); 
         }
     } 
+
 });
 
 const EncoderComboBox = new Lang.Class({ 
-    Name: "encoderComboBox",
+    Name: "EncoderComboBox",
     Extends: Gtk.ComboBoxText, 
        
     // encoding setting labels in combobox
     _init: function() {
+
         this.parent();
         let combo = [_("Ogg Vorbis"), _("Ogg Opus"),  _("Flac"), _("Mp3"), _("Mp4")];
         for (let i = 0; i < combo.length; i++)
@@ -230,11 +232,9 @@ const EncoderComboBox = new Lang.Class({
     },
     
     _onComboBoxTextChanged: function() {
-        this.activeProfile = this.get_active();
+        let activeProfile = this.get_active();
         this._audioProfile = new AudioProfile.AudioProfile();
-        //this._audioProfile.mediaProfile(this.activeProfile);
-        log(this.activeProfile);
-    }
-    
+        this._audioProfile.assignProfile(activeProfile);
+    }   
 });       
     

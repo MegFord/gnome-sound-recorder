@@ -32,37 +32,44 @@ const Mainloop = imports.mainloop;
 
 const Application = imports.application;
 
-const audioContainerProfileMap = {
-    "application/ogg": 0, // 'ogg'
-    "application/x-id3": 1 // 'mp3'
-};
-
-const audioSuffixMap = { 
-    ".ogg": 0, 
-    ".opus": 1      
- };
- 
-const noContainerSuffixMap = {
-         ".mp3": 0, 
-         ".aac": 1, // mp4
-         ".flac": 2 
+const containerProfileMap = {
+    OGG: "application/ogg", 
+    MP3: "application/x-id3" 
 };
 
 const audioCodecMap = { 
-    "audio/mpeg,mpegversion=4": 0, // AAC
-    "audio/x-flac": 1,      
-    "audio/mpeg, mpegversion=(int)1, layer=(int)3": 2,
-    "audio/x-opus": 3, 
-    "audio/x-vorbis": 4
+    MP4: "audio/mpeg,mpegversion=4", // AAC
+    FLAC: "audio/x-flac",      
+    MP3: "audio/mpeg, mpegversion=(int)1, layer=(int)3",
+    OGG_OPUS: "audio/x-opus", 
+    OGG_VORBIS: "audio/x-vorbis"
+};
+
+const audioSuffixMap = { 
+    OGG_VORBIS: ".ogg", 
+    OGG_OPUS: ".opus"      
+ };
+ 
+const noContainerSuffixMap = {
+    FLAC: ".flac"
+    MP3: ".mp3", 
+    MP4: ".aac", // mp4 
+};
+
+const comboBoxMap = {
+    OGG_VORBIS: 0,
+    OGG_OPUS: 1,
+    FLAC: 2,
+    MP3: 3,
+    MP4: 4
 };
 
 const AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
 
-    mediaProfile: function(codecProfile){
+    mediaProfile: function(){
         let codecArr = [];
         this.codecProfile = codecProfile; 
-        codecArr = this._assignProfile(this.codecProfile);
         let struct = Gst.Structure.new_empty("application/ogg");
         let caps = Gst.Caps.new_empty();
         caps.append_structure(struct);
@@ -72,20 +79,35 @@ const AudioProfile = new Lang.Class({
         audioCaps.append_structure(audioStruct);
         let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
         containerProfile.add_profile(encodingProfile);
-        
         return containerProfile;    
     },
     
-    _assignProfile: function(profileName){
+    assignProfile: function(profileName){
         this.profileName = profileName;
-        let values = [];
+        this.values = [];
         
         if (profileName == null) {
            log("Failed to get output format"); //set error for user
         } else {
-            //switch (this.profileName) {
-            //case 
-            //values.push({ name: value, role: this._getUserRoleString(role) });
+            switch(this.profileName) {
+                case comboBoxMap.OGG_VORBIS:
+                    this.values.push({ containerProfileMap.OGG, audioCodecMap.OGG_VORBIS, audioSuffixMap.OGG_VORBIS });
+                    break;
+                case comboBoxMap.OGG_OPUS:
+                    this.values.push({ containerProfileMap.OGG, audioCodecMap.OGG_OPUS, audioSuffixMap.OGG_OPUS });
+                    break;
+                case comboBoxMap.FLAC:
+                    this.values.push({ audioCodecMap.FLAC, audioSuffixMap.FLAC });
+                    break;
+                case comboBoxMap.MP3:
+                    this.values.push({ audioCodecMap.MP3, audioCodecMap.MP3, audioSuffixMap.MP3 });
+                    break;
+                case comboBoxMap.MP4:
+                    this.values.push({ audioCodecMap.MP4, audioSuffixMap.MP4 });
+                    break;
+                default:
+                    break;
+            }
         }
     }
 });

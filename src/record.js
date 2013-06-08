@@ -44,8 +44,8 @@ const Record = new Lang.Class({
     
     _recordPipeline: function() {
         Gst.init(null, 0);
-        this._audioProfile = new AudioProfile.AudioProfile();
-        this._mediaProfile = this._audioProfile.mediaProfile();
+        //this._audioProfile = new AudioProfile.AudioProfile();
+        //this._mediaProfile = this._audioProfile.mediaProfile();
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         if (this.initialFileName == -1) {
@@ -63,8 +63,8 @@ const Record = new Lang.Class({
         
         this.pipeline.add(this.srcElement);
         
-        this._audioProfile = new AudioProfile.AudioProfile();
-        this._mediaProfile = this._audioProfile.mediaProfile();
+        //this._audioProfile = new AudioProfile.AudioProfile();
+        //this._mediaProfile = this._audioProfile.mediaProfile();
  
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         this.ebin.set_property("profile", this._mediaProfile);
