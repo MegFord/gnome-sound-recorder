@@ -29,6 +29,8 @@ const AudioProfile = imports.audioProfile;
 const Play = imports.play;
 const Record = imports.record;
 
+let audioProfile = null;
+
 const ButtonID = {
     RECORD_BUTTON: 0,
     PLAY_BUTTON: 1
@@ -71,7 +73,8 @@ const Application = new Lang.Class({
             }));
             
         this._defineThemes();
-
+        audioProfile = new AudioProfile.AudioProfile();
+        
         this.add(grid);
         grid.show_all();
     },
@@ -110,7 +113,7 @@ const MainView = new Lang.Class({
     },
 
     _addRecorderPage: function(name) {
-        this._record = new Record.Record();
+        this._record = new Record.Record(audioProfile);
         this.recordBox = new Gtk.EventBox();
         let recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                         halign: Gtk.Align.CENTER,
@@ -181,7 +184,7 @@ const RecordPauseButton = new Lang.Class({
     _onRecordPauseToggled: function() {
         if (this.get_active()) {
             this.set_image(this.pauseImage);
-            this._record._recordPipeline();//startRecording(); 
+            this._record.startRecording(); 
         } else {
             this.set_image(this.recordImage);
             this._record.pauseRecording();            
@@ -233,8 +236,7 @@ const EncoderComboBox = new Lang.Class({
     
     _onComboBoxTextChanged: function() {
         let activeProfile = this.get_active();
-        this._audioProfile = new AudioProfile.AudioProfile();
-        this._audioProfile.assignProfile(activeProfile);
+        audioProfile.assignProfile(activeProfile);
     }   
 });       
     

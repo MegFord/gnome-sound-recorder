@@ -30,30 +30,30 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 
-const Application = imports.application;
+//const Application = imports.application;
 
 const containerProfileMap = {
     OGG: "application/ogg", 
     MP3: "application/x-id3" 
 };
 
-const audioCodecMap = { 
-    MP4: "audio/mpeg,mpegversion=4", // AAC
+const audioCodecMap = {  // AAC
     FLAC: "audio/x-flac",      
     MP3: "audio/mpeg, mpegversion=(int)1, layer=(int)3",
+    MP4: "audio/mpeg,mpegversion=4",
     OGG_OPUS: "audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
 };
 
 const audioSuffixMap = { 
+    MP3: ".mp3",
     OGG_VORBIS: ".ogg", 
     OGG_OPUS: ".opus"      
  };
  
 const noContainerSuffixMap = {
-    FLAC: ".flac"
-    MP3: ".mp3", 
-    MP4: ".aac", // mp4 
+    FLAC: ".flac", 
+    MP4: ".aac" // mp4 
 };
 
 const comboBoxMap = {
@@ -64,50 +64,72 @@ const comboBoxMap = {
     MP4: 4
 };
 
+
 const AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
-
-    mediaProfile: function(){
-        let codecArr = [];
-        this.codecProfile = codecProfile; 
-        let struct = Gst.Structure.new_empty("application/ogg");
-        let caps = Gst.Caps.new_empty();
-        caps.append_structure(struct);
-        let containerProfile = GstPbutils.EncodingContainerProfile.new("ogg", null, caps, null);
-        let audioStruct = Gst.Structure.new_empty("audio/x-vorbis");
-        let audioCaps = Gst.Caps.new_empty();
-        audioCaps.append_structure(audioStruct);
-        let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
-        containerProfile.add_profile(encodingProfile);
-        return containerProfile;    
-    },
-    
+   
     assignProfile: function(profileName){
         this.profileName = profileName;
-        this.values = [];
-        
-        if (profileName == null) {
-           log("Failed to get output format"); //set error for user
-        } else {
+        this._values = [];
             switch(this.profileName) {
+                             
                 case comboBoxMap.OGG_VORBIS:
-                    this.values.push({ containerProfileMap.OGG, audioCodecMap.OGG_VORBIS, audioSuffixMap.OGG_VORBIS });
+                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS, suffix: audioSuffixMap.OGG_VORBIS });
                     break;
                 case comboBoxMap.OGG_OPUS:
-                    this.values.push({ containerProfileMap.OGG, audioCodecMap.OGG_OPUS, audioSuffixMap.OGG_OPUS });
+                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_OPUS, suffix: audioSuffixMap.OGG_OPUS }); 
                     break;
                 case comboBoxMap.FLAC:
-                    this.values.push({ audioCodecMap.FLAC, audioSuffixMap.FLAC });
+                    this._values.push({ container: null, audio: audioCodecMap.FLAC, suffix: noContainerSuffixMap.FLAC });
                     break;
                 case comboBoxMap.MP3:
-                    this.values.push({ audioCodecMap.MP3, audioCodecMap.MP3, audioSuffixMap.MP3 });
+                    this._values.push({ container: containerProfileMap.MP3, audio: audioCodecMap.MP3, suffix: audioSuffixMap.MP3 });
                     break;
                 case comboBoxMap.MP4:
-                    this.values.push({ audioCodecMap.MP4, audioSuffixMap.MP4 });
+                    this._values.push({ container: null, audio: audioCodecMap.MP4, suffix: noContainerSuffixMap.MP4 });
+                    //error
                     break;
                 default:
                     break;
             }
-        }
+    },
+    
+    
+    mediaProfile: function(){
+        let idx = 0;
+        log(this._values[idx].container);
+        if (this._values[idx].container) {
+            let struct = Gst.Structure.new_empty(this._values[idx].container);
+            let caps = Gst.Caps.new_empty();
+            caps.append_structure(struct);
+            let containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
+            let audioStruct = Gst.Structure.new_empty(this._values[idx].audio);
+            let audioCaps = Gst.Caps.new_empty();
+            audioCaps.append_structure(audioStruct);
+            let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
+            containerProfile.add_profile(encodingProfile);
+            log("this one");
+            return encodingProfile;
+        } else if (!this._values[idx].container && this._values[idx].audio) {
+            let audioStruct = Gst.Structure.new_empty(this._values[idx].audio);
+            let audioCaps = Gst.Caps.new_empty();
+            audioCaps.append_structure(audioStruct);
+            let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
+            log("that one");
+            return encodingProfile;
+        } else {
+            return -1;
+        }     
+    },
+    
+    fileExtensionReturner: function() {
+        let idx = 0;
+        log(this._values[idx].suffix);
+        if (this._values[idx].suffix != null) {
+            return this._values[idx].suffix;
+        } else {
+            log("Please choose an Audio Profile");
+            return audioSuffixMap.OGG_VORBIS;
+        }    
     }
 });

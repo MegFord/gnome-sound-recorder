@@ -42,11 +42,12 @@ const PipelineStates = {
 const Record = new Lang.Class({
     Name: "Record",
     
-    _recordPipeline: function() {
+    recordPipeline: function(audio) {
         Gst.init(null, 0);
-        //this._audioProfile = new AudioProfile.AudioProfile();
-        //this._mediaProfile = this._audioProfile.mediaProfile();
+        this._audioProfile = Application.audioProfile;
+        this._mediaProfile = this._audioProfile.mediaProfile();
         this._buildFileName = new BuildFileName();
+        log(this._mediaProfile);
         this.initialFileName = this._buildFileName.buildInitialFilename();
         if (this.initialFileName == -1) {
             log('Unable to create Recordings directory');
@@ -62,9 +63,6 @@ const Record = new Lang.Class({
         }
         
         this.pipeline.add(this.srcElement);
-        
-        //this._audioProfile = new AudioProfile.AudioProfile();
-        //this._mediaProfile = this._audioProfile.mediaProfile();
  
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         this.ebin.set_property("profile", this._mediaProfile);
@@ -91,13 +89,13 @@ const Record = new Lang.Class({
             function(bus, message) {
                 log("Error:" + message.parse_error());
             }));
-        this._tagWriter = new tagWriter();
+        this._tagWriter = new TagWriter();
         this._setTags = this._tagWriter.tagWriter(this.ebin);
     },
        
     startRecording: function() {
         if (!this.pipeline || this.pipeState == PipelineStates.STOPPED ) {
-            this._recordPipeline();
+            this.recordPipeline();
         }
         
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
@@ -145,6 +143,8 @@ const BuildFileName = new Lang.Class({
     Name: 'BuildFileName',
 
     buildInitialFilename: function() {
+        let fileExtensionName =      
+        Application.audioProfile.fileExtensionReturner();
         let initialFileName = [];
         initialFileName.push(GLib.get_home_dir());
         initialFileName.push(_("Recordings"));
@@ -156,7 +156,7 @@ const BuildFileName = new Lang.Class({
             return namedDir;
         let dateTimeString = GLib.DateTime.new_now_local();
         let origin = dateTimeString.format(_("%Y-%m-%d %H:%M:%S"));
-        let extension = ".ogg";
+        let extension = fileExtensionName;
         initialFileName.push(origin + extension);                
         log(namedDir);        
         // Use GLib.build_filenamev to work around missing vararg functions.
