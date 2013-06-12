@@ -26,6 +26,7 @@ const _ = imports.gettext.gettext;
 const Gst = imports.gi.Gst;
 
 const AudioProfile = imports.audioProfile;
+const Listview = imports.listview;
 const Play = imports.play;
 const Record = imports.record;
 
@@ -141,7 +142,9 @@ const MainView = new Lang.Class({
     },
     
       _addPlayerPage: function(name) {
-        this._play = new Play.play();
+        this._play = new Play.Play();
+        this.list = new Listview.Listview();
+        this.list.enumerateDirectory();
         this.playBox = new Gtk.EventBox();
         let playGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                       halign: Gtk.Align.CENTER,
