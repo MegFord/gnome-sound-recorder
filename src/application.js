@@ -236,6 +236,7 @@ const StopButton = new Lang.Class({
             
     _onStopClicked: function() {
         this._activeButton.set_active(false);
+        
         if (this._id == ButtonID.RECORD_BUTTON) {
             this._action.stopRecording();
         } else if (ButtonID.PLAY_BUTTON) {

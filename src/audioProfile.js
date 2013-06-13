@@ -93,6 +93,7 @@ const AudioProfile = new Lang.Class({
        
     mediaProfile: function(){
         let idx = 0;
+        
         if (this._values[idx].container) {
             let struct = Gst.Structure.new_empty(this._values[idx].container);
             let caps = Gst.Caps.new_empty();
@@ -105,6 +106,7 @@ const AudioProfile = new Lang.Class({
                 audioStruct.set_value("mpegversion", 1);
                 audioStruct.set_value("layer", 3);
             }
+            
             if (this._values[idx].suffix == audioSuffixMap.MP4) {
                  audioStruct.set_value("mpegversion", 4);
             }
@@ -122,13 +124,13 @@ const AudioProfile = new Lang.Class({
             let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             return encodingProfile;
         } else {
-            return -1;
+            return -1; 
         }     
     },
     
     fileExtensionReturner: function() {
         let idx = 0;
-        log(this._values[idx].suffix);
+        
         if (this._values[idx].suffix != null) {
             return this._values[idx].suffix;
         } else {

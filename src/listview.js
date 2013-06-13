@@ -33,12 +33,13 @@ const Listview = new Lang.Class({
         initialFileName.push(_("Recordings"));
         let dirName = GLib.build_filenamev(initialFileName);
         let dir = Gio.file_new_for_path(dirName);
-        dir.enumerate_children_async('standard::name,standard::type',
+        dir.enumerate_children_async('standard::namhttps://github.com/MegFord/gnome-sound-recorder/tree/githube,standard::type',
                                   Gio.FileQueryInfoFlags.NONE,
                                   GLib.PRIORITY_LOW, null, function (obj, res) {
         let enumerator = obj.enumerate_children_finish(res);
         function onNextFileComplete(obj, res) {
                 let files = obj.next_files_finish(res);
+                
                 if (files.length) {
                     _allFiles = _allFiles.concat(files);                
                     enumerator.next_files_async(50, GLib.PRIORITY_LOW, null, onNextFileComplete);
