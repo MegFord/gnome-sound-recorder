@@ -144,8 +144,8 @@ const MainView = new Lang.Class({
     
       _addPlayerPage: function(name) {
         this._play = new Play.Play();
-        this.list = new Listview.Listview();
-        this.list.enumerateDirectory();
+        this._list = new Listview.Listview();
+        this._list.enumerateDirectory();
         this.playBox = new Gtk.EventBox();
         let playGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                       halign: Gtk.Align.CENTER,
