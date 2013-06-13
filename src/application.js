@@ -102,6 +102,7 @@ const MainView = new Lang.Class({
             this.visible_child_name = 'recorderPage';
     },
 
+
     _addPage: function(name) {
         let initialPage = Gtk.Image.new_from_icon_name("audio-input-microphone-symbolic", Gtk.IconSize.DIALOG);
 
@@ -157,8 +158,8 @@ const MainView = new Lang.Class({
         playToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
         playGrid.attach(playToolbar, 20, 0, 2, 1);        
                
-        let playButton = new Gtk.Button();
-        playButton.set_image(Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON));
+        let playButton = new PlayPauseButton(this._play);
+        //playButton.set_image(Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON));
         playToolbar.pack_end(playButton, false, true, 0);
         
         let buttonID = ButtonID.PLAY_BUTTON;
@@ -195,6 +196,30 @@ const RecordPauseButton = new Lang.Class({
     },
 });
 
+const PlayPauseButton = new Lang.Class({
+    Name: "PlayPauseButton",
+    Extends: Gtk.ToggleButton,
+    
+    _init: function(play) {
+        this._play = play;
+        this.playImage = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
+        this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);              
+        this.parent();
+        this.set_image(this.playImage);
+        this.connect("clicked", Lang.bind(this, this._onPlayPauseToggled));
+    },
+    
+    _onPlayPauseToggled: function() {
+        if (this.get_active()) {
+            this.set_image(this.pauseImage);
+            this._play.startPlaying(); 
+        } else {
+            this.set_image(this.playImage);
+            this._play.pausePlaying();            
+        }
+    },
+});
+
 const StopButton = new Lang.Class({
     Name: "StopButton",
     Extends: Gtk.Button,
@@ -214,7 +239,7 @@ const StopButton = new Lang.Class({
         if (this._id == ButtonID.RECORD_BUTTON) {
             this._action.stopRecording();
         } else if (ButtonID.PLAY_BUTTON) {
-            this.player.stopPlaying(); 
+            this._play.stopPlaying(); 
         }
     } 
 

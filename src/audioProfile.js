@@ -35,13 +35,13 @@ const Mainloop = imports.mainloop;
 const containerProfileMap = {
     OGG: "application/ogg", 
     MP3: "application/x-id3",
-    MP4: "video/quicktime,variant=iso"
+    MP4: "video/mpeg"
 };
 
 const audioCodecMap = {
     FLAC: "audio/x-flac",      
-    MP3: "audio/mpeg, mpegversion=(int)1, layer=(int)3",
-    MP4: "audio/mpeg,mpegversion=4",
+    MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
+    MP4: "audio/mpeg mpegversion=4",
     OGG_OPUS: "audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
 };
@@ -49,7 +49,7 @@ const audioCodecMap = {
 const audioSuffixMap = { 
     MP3: ".mp3",
     OGG_VORBIS: ".ogg", 
-    OGG_OPUS: ".ogg"      
+    OGG_OPUS: ".opus"      
 };
  
 const noContainerSuffixMap = {
@@ -84,7 +84,7 @@ const AudioProfile = new Lang.Class({
                     this._values.push({ container: null, audio: audioCodecMap.FLAC, suffix: noContainerSuffixMap.FLAC });
                     break;
                 case comboBoxMap.MP3:
-                    this._values.push({ container: containerProfileMap.MP3, audio: audioCodecMap.MP3, suffix: audioSuffixMap.MP3 });
+                    this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP3, suffix: audioSuffixMap.MP3 });
                     break;
                 case comboBoxMap.MP4:
                     this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP4, suffix: noContainerSuffixMap.MP4 });
