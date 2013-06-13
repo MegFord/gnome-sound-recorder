@@ -30,31 +30,28 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 
-//const Application = imports.application;
-
 const containerProfileMap = {
     OGG: "application/ogg", 
-    MP3: "application/x-id3",
-    MP4: "video/mpeg"
+    MPEG: "video/mpeg"
 };
 
 const audioCodecMap = {
     FLAC: "audio/x-flac",      
-    MP3: "audio/mpeg",//"audio/mpeg,mpegversion=(int)1,layer=(int)3",
-    MP4: "audio/mpeg",// mpegversion=4",
+    MP3: "audio/mpeg",
+    MP4: "audio/mpeg",
     OGG_OPUS: "audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
 };
 
 const audioSuffixMap = { 
     MP3: ".mp3",
+    MP4: ".aac",
     OGG_VORBIS: ".ogg", 
     OGG_OPUS: ".opus"      
 };
 
 const noContainerSuffixMap = {
-    FLAC: ".flac", 
-    MP4: ".aac" 
+    FLAC: ".flac"
 };
 
 const comboBoxMap = {
@@ -84,10 +81,10 @@ const AudioProfile = new Lang.Class({
                     this._values.push({ container: null, audio: audioCodecMap.FLAC, suffix: noContainerSuffixMap.FLAC });
                     break;
                 case comboBoxMap.MP3:
-                    this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP3, suffix: audioSuffixMap.MP3 });
+                    this._values.push({ container: containerProfileMap.MPEG, audio: audioCodecMap.MP3, suffix: audioSuffixMap.MP3 });
                     break;
                 case comboBoxMap.MP4:
-                    this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP4, suffix: noContainerSuffixMap.MP4 });
+                    this._values.push({ container: containerProfileMap.MPEG, audio: audioCodecMap.MP4, suffix: audioSuffixMap.MP4 });
                     break;
                 default:
                     break;
@@ -96,8 +93,6 @@ const AudioProfile = new Lang.Class({
        
     mediaProfile: function(){
         let idx = 0;
-        log(this._values[idx].container);
-        log(this._values[idx].audio);
         if (this._values[idx].container) {
             let struct = Gst.Structure.new_empty(this._values[idx].container);
             let caps = Gst.Caps.new_empty();
@@ -122,7 +117,6 @@ const AudioProfile = new Lang.Class({
         } else if (!this._values[idx].container && this._values[idx].audio) {
             let audioStruct = Gst.Structure.new_empty(this._values[idx].audio);
             
-
             let audioCaps = Gst.Caps.new_empty();
             audioCaps.append_structure(audioStruct);
             let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
