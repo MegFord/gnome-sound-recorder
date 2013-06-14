@@ -37,8 +37,8 @@ const containerProfileMap = {
 
 const audioCodecMap = {
     FLAC: "audio/x-flac",      
-    MP3: "audio/mpeg",
-    MP4: "audio/mpeg",
+    MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3 ",
+    MP4: "audio/mpeg,mpegversion=(int)4",
     OGG_OPUS: "audio/x-celt",//"audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
 };
@@ -95,32 +95,14 @@ const AudioProfile = new Lang.Class({
         let idx = 0;
         
         if (this._values[idx].container) {
-            let struct = Gst.Structure.new_empty(this._values[idx].container);
-            let caps = Gst.Caps.new_empty();
-            caps.append_structure(struct);
+            let caps = Gst.Caps.from_string(this._values[idx].container);
             let containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
-            let audioStruct = Gst.Structure.new_empty(this._values[idx].audio);
-
-            // Special case MPEG formats here for the sake of brevity
-            if (this._values[idx].suffix == audioSuffixMap.MP3) {
-                audioStruct.set_value("mpegversion", 1);
-                audioStruct.set_value("layer", 3);
-            }
-            
-            if (this._values[idx].suffix == audioSuffixMap.MP4) {
-                 audioStruct.set_value("mpegversion", 4);
-            }
-            
-            let audioCaps = Gst.Caps.new_empty();
-            audioCaps.append_structure(audioStruct);
+            let audioCaps = Gst.Caps.from_string(this._values[idx].audio);
             let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             containerProfile.add_profile(encodingProfile);
             return encodingProfile;
         } else if (!this._values[idx].container && this._values[idx].audio) {
-            let audioStruct = Gst.Structure.new_empty(this._values[idx].audio);
-            
-            let audioCaps = Gst.Caps.new_empty();
-            audioCaps.append_structure(audioStruct);
+            let audioCaps = Gst.Caps.from_string(this._values[idx].audio);
             let encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             return encodingProfile;
         } else {
