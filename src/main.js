@@ -33,9 +33,12 @@ pkg.require({ 'Gd': '1.0',
               'Lang': '1.0',
               'Mainloop': '1.0',
               'Params': '1.0' });
+              
+imports.gi.versions.Gst = '1.0';
 
 const Util = imports.util;
 const Application = imports.application;
+const Gst = imports.gi.Gst;
 
 const MyApplication = new Lang.Class({
     Name: 'MyApplication',
@@ -51,6 +54,7 @@ const MyApplication = new Lang.Class({
 
         Util.loadStyleSheet();
         log(_("Sound Recorder started"));
+        Gst.init(null, 0);
     },
 
     vfunc_activate: function() {

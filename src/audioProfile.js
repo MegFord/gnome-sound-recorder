@@ -71,9 +71,9 @@ const AudioProfile = new Lang.Class({
         this._values = [];
             switch(this.profileName) {
                              
-                case comboBoxMap.OGG_VORBIS:
+                /*case comboBoxMap.OGG_VORBIS:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS, suffix: audioSuffixMap.OGG_VORBIS });
-                    break;
+                    break;*/
                 case comboBoxMap.OGG_OPUS:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_OPUS, suffix: audioSuffixMap.OGG_OPUS }); 
                     break;
@@ -87,6 +87,7 @@ const AudioProfile = new Lang.Class({
                     this._values.push({ container: containerProfileMap.MPEG, audio: audioCodecMap.MP4, suffix: audioSuffixMap.MP4 });
                     break;
                 default:
+                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS, suffix: audioSuffixMap.OGG_VORBIS });
                     break;
             }
     },
@@ -116,7 +117,6 @@ const AudioProfile = new Lang.Class({
         if (this._values[idx].suffix != null) {
             return this._values[idx].suffix;
         } else {
-            log("Please choose an Audio Profile");
             return audioSuffixMap.OGG_VORBIS;
         }    
     }

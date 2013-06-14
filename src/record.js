@@ -43,14 +43,7 @@ const PipelineStates = {
 const Record = new Lang.Class({
     Name: "Record",
     
-    recordPipeline: function(audio) {
-        Gst.init(null, 0);
-        this._audioProfile = Application.audioProfile;
-        this._mediaProfile = this._audioProfile.mediaProfile();
-        if (this._mediaProfile == -1) {
-            log("No Media Profile was set."); 
-        }
-        
+    recordPipeline: function() {        
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         
@@ -90,8 +83,7 @@ const Record = new Lang.Class({
                         let description = GstPbutils.missing_plugin_message_get_description(message);
                     
                         if (description != null)
-                            log(description);
-                    
+                            log(description);                   
                     }  
             }
         }));
@@ -115,7 +107,14 @@ const Record = new Lang.Class({
         this._setTags = this._tagWriter.tagWriter(this.ebin);
     },
        
-    startRecording: function() {
+    startRecording: function(activeProfile) {
+        this._activeProfile = activeProfile;
+        this._audioProfile = Application.audioProfile;
+        this._audioProfile.assignProfile(this._activeProfile);
+        this._mediaProfile = this._audioProfile.mediaProfile();
+        if (this._mediaProfile == -1) {
+            log("No Media Profile was set."); 
+        }
         if (!this.pipeline || this.pipeState == PipelineStates.STOPPED ) 
             this.recordPipeline();
         

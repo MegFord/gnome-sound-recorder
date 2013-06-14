@@ -42,6 +42,8 @@ const Application = new Lang.Class({
     Extends: Gtk.ApplicationWindow,
 
     _init: function(params) {
+        audioProfile = new AudioProfile.AudioProfile();
+        let view = new MainView();
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        default_width: 640,
                                        default_height: 480 });
@@ -61,21 +63,19 @@ const Application = new Lang.Class({
         
         grid.attach(header, 0, 0, 2, 2);
 
-        this._view = new MainView();
-        this._view.visible_child_name = (Math.random() <= 0.5) ? 'recorderPage' : 'playerPage';
-        grid.add(this._view);
+        view.visible_child_name = (Math.random() <= 0.5) ? 'recorderPage' : 'playerPage';
+        grid.add(view);
         this._recordPageButton.connect('clicked', Lang.bind(this, 
             function() {
-                this._view.visible_child_name = 'recorderPage'; 
+                view.visible_child_name = 'recorderPage'; 
             }));
         this._playPageButton.connect('clicked', Lang.bind(this, 
             function(){
-                this._view.visible_child_name = 'playerPage'; 
+                view.visible_child_name = 'playerPage'; 
             }));
             
         this._defineThemes();
-        audioProfile = new AudioProfile.AudioProfile();
-        
+                
         this.add(grid);
         grid.show_all();
     },
@@ -126,23 +126,23 @@ const MainView = new Lang.Class({
 
         let toolbarStart = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
         toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        recordGrid.attach(toolbarStart, 20, 0, 2, 1);
-        
-        let recordButton = new RecordPauseButton(this._record);       
+        recordGrid.attach(toolbarStart, 20, 0, 2, 1);        
+                
+        this._comboBoxText = new EncoderComboBox();
+        recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
+        this._activeProfile = this._comboBoxText.get_active();
+        let recordButton = new RecordPauseButton(this._record, this._activeProfile);       
         toolbarStart.pack_end(recordButton, false, true, 0);
         
         let buttonID = ButtonID.RECORD_BUTTON;
                 
         this.stop = new StopButton(this._record, recordButton, buttonID);
         toolbarStart.pack_end(this.stop, true, true, 0);
-        
-        this._comboBoxText = new EncoderComboBox();
-        recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
 
         this.add_named(this.recordBox, name);
     },
     
-      _addPlayerPage: function(name) {
+    _addPlayerPage: function(name) {
         this._play = new Play.Play();
         this._list = new Listview.Listview();
         this._list.enumerateDirectory();
@@ -159,7 +159,6 @@ const MainView = new Lang.Class({
         playGrid.attach(playToolbar, 20, 0, 2, 1);        
                
         let playButton = new PlayPauseButton(this._play);
-        //playButton.set_image(Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON));
         playToolbar.pack_end(playButton, false, true, 0);
         
         let buttonID = ButtonID.PLAY_BUTTON;
@@ -168,7 +167,7 @@ const MainView = new Lang.Class({
         playToolbar.pack_end(this.stopPlay, true, true, 0);
 
         this.add_named(this.playBox, name);
-    },
+    }
 
 });
 
@@ -176,8 +175,9 @@ const RecordPauseButton = new Lang.Class({
     Name: "RecordPauseButton",
     Extends: Gtk.ToggleButton,
     
-    _init: function(record) {
+    _init: function(record, activeProfile) {
         this._record = record;
+        this._activeProfile = activeProfile;
         this.recordImage = Gtk.Image.new_from_icon_name("media-record-symbolic", Gtk.IconSize.BUTTON);
         this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);              
         this.parent();
@@ -188,12 +188,12 @@ const RecordPauseButton = new Lang.Class({
     _onRecordPauseToggled: function() {
         if (this.get_active()) {
             this.set_image(this.pauseImage);
-            this._record.startRecording(); 
+            this._record.startRecording(this._activeProfile); 
         } else {
             this.set_image(this.recordImage);
             this._record.pauseRecording();            
         }
-    },
+    }
 });
 
 const PlayPauseButton = new Lang.Class({
@@ -217,7 +217,7 @@ const PlayPauseButton = new Lang.Class({
             this.set_image(this.playImage);
             this._play.pausePlaying();            
         }
-    },
+    }
 });
 
 const StopButton = new Lang.Class({
@@ -243,7 +243,6 @@ const StopButton = new Lang.Class({
             this._play.stopPlaying(); 
         }
     } 
-
 });
 
 const EncoderComboBox = new Lang.Class({ 
@@ -258,14 +257,8 @@ const EncoderComboBox = new Lang.Class({
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
 
-        //this.set_active(0);
+        this.set_active(0);
         this.set_sensitive(true);
-        this.connect("changed", Lang.bind(this, this._onComboBoxTextChanged)); 
-    },
-    
-    _onComboBoxTextChanged: function() {
-        let activeProfile = this.get_active();
-        audioProfile.assignProfile(activeProfile);
-    }   
+    } 
 });       
     
