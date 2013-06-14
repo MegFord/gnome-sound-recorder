@@ -29,6 +29,7 @@ const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
+const Signals = imports.signals;
 
 const Application = imports.application;
 const AudioProfile = imports.audioProfile;
@@ -58,8 +59,7 @@ const Record = new Lang.Class({
         } 
                       
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-        this.recordBus = this.pipeline.get_bus();
-        this.recordBus.add_signal_watch();
+       
         this.srcElement = Gst.ElementFactory.make("pulsesrc", "srcElement"); 
         
         if(this.srcElement == null) {
@@ -68,34 +68,40 @@ const Record = new Lang.Class({
         }
         
         this.pipeline.add(this.srcElement);
- 
-        this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         
+        this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
+        this.recordBus = new Gst.Bus();
+        this.ebin.set_bus(this.recordBus);
+        this.recordBus.add_signal_watch();
         if (this.ebin == null) 
             log("Unable to create encodebin");
         let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
+        this.recordBus.connect("message::element", (this, 
+            function(recordBus, message) {
+            
+                if(message != null) {
+                
+                    if (GstPbutils.is_missing_plugin_message(message)) { 
+                        let detail = GstPbutils.missing_plugin_message_get_installer_detail(message);
+                        
+                        if (detail != null)
+                            log(detail); 
+                                                   
+                        let description = GstPbutils.missing_plugin_message_get_description(message);
+                    
+                        if (description != null)
+                            log(description);
+                    
+                   // this.pipeline.set_state(Gst.State.NULL);
+                    }   
+            }
+        }));
         this.pipeline.add(this.ebin);
         let srcpad = this.ebin.get_static_pad("src");
         
         if (ebinProfile == null) {
         log("ebinprofile null");}
-        this.recordBus.connect("message::any",(this, 
-            function(bus, message) {
-            
-                if (GstPbutils.is_missing_plugin_message(message)) {                   
-                    let detail = GstPbutils.missing_plugin_message_get_installer_detail(message);
-                    
-                    if (detail != null)
-                        log(detail);
-                        
-                    let description = GstPbutils.missing_plugin_message_get_description(message);
-                    
-                    if (description != null)
-                        log(description);
-                    
-                    this.pipeline.set_state(Gst.State.NULL);
-                }
-        }));
+
         let giosink = Gst.ElementFactory.make("giosink", "giosink");
         giosink.set_property("file", this.initialFileName);
         this.pipeline.add(giosink);
@@ -110,10 +116,6 @@ const Record = new Lang.Class({
             log("Not all of the elements were linked"); 
                  
         this.pipeline.set_state(Gst.State.PLAYING);
-        this.recordBus.connect("message::error",(this, 
-            function(bus, message) {
-                log("Error:" + message.parse_error());
-            }));
         this._tagWriter = new TagWriter();
         this._setTags = this._tagWriter.tagWriter(this.ebin);
     },
@@ -137,7 +139,7 @@ const Record = new Lang.Class({
     
     stopRecording: function() {
         this.srcElement.send_event(Gst.Event.new_eos());
-        this.busTimeout = this.recordBus.timed_pop_filtered(Gst.CLOCK_TIME_NONE, Gst.MessageType.EOS | Gst.MessageType.ERROR);
+       // this.busTimeout = this.recordBus.timed_pop_filtered(Gst.CLOCK_TIME_NONE, Gst.MessageType.EOS | Gst.MessageType.ERROR);
         this.srcElement.set_state(Gst.State.NULL); 
         this.srcElement.get_state(null, null, -1);
         this.srcElement.set_locked_state(true); 
