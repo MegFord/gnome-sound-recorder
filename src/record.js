@@ -46,7 +46,6 @@ const Record = new Lang.Class({
         Gst.init(null, 0);
         this._audioProfile = Application.audioProfile;
         this._mediaProfile = this._audioProfile.mediaProfile();
-        
         if (this._mediaProfile == -1) {
             log("No Media Profile was set."); 
         }
@@ -59,6 +58,8 @@ const Record = new Lang.Class({
         } 
                       
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
+        this.recordBus = this.pipeline.get_bus();
+        this.recordBus.add_signal_watch();
         this.srcElement = Gst.ElementFactory.make("pulsesrc", "srcElement"); 
         
         if(this.srcElement == null) {
@@ -72,18 +73,14 @@ const Record = new Lang.Class({
         
         if (this.ebin == null) 
             log("Unable to create encodebin");
-        
-        this.ebinBus = new Gst.Bus();
-        this.ebin.set_bus(this.ebinBus);
-        this.ebinBus.set_flushing(false);   
         let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
         this.pipeline.add(this.ebin);
         let srcpad = this.ebin.get_static_pad("src");
         
         if (ebinProfile == null) {
-            let message = this.ebinBus.pop();
-            
-            while (message != null) {
+        log("ebinprofile null");}
+        this.recordBus.connect("message::any",(this, 
+            function(bus, message) {
             
                 if (GstPbutils.is_missing_plugin_message(message)) {                   
                     let detail = GstPbutils.missing_plugin_message_get_installer_detail(message);
@@ -95,10 +92,10 @@ const Record = new Lang.Class({
                     
                     if (description != null)
                         log(description);
+                    
+                    this.pipeline.set_state(Gst.State.NULL);
                 }
-                message = this.ebinBus.pop();
-            }
-        }
+        }));
         let giosink = Gst.ElementFactory.make("giosink", "giosink");
         giosink.set_property("file", this.initialFileName);
         this.pipeline.add(giosink);
@@ -113,8 +110,6 @@ const Record = new Lang.Class({
             log("Not all of the elements were linked"); 
                  
         this.pipeline.set_state(Gst.State.PLAYING);
-        this.recordBus = this.pipeline.get_bus();
-        this.recordBus.add_signal_watch();
         this.recordBus.connect("message::error",(this, 
             function(bus, message) {
                 log("Error:" + message.parse_error());

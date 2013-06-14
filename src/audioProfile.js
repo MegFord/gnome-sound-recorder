@@ -39,7 +39,7 @@ const audioCodecMap = {
     FLAC: "audio/x-flac",      
     MP3: "audio/mpeg",
     MP4: "audio/mpeg",
-    OGG_OPUS: "audio/x-opus", 
+    OGG_OPUS: "audio/x-celt",//"audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
 };
 
@@ -100,7 +100,7 @@ const AudioProfile = new Lang.Class({
             caps.append_structure(struct);
             let containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
             let audioStruct = Gst.Structure.new_empty(this._values[idx].audio);
-            
+
             // Special case MPEG formats here for the sake of brevity
             if (this._values[idx].suffix == audioSuffixMap.MP3) {
                 audioStruct.set_value("mpegversion", 1);
