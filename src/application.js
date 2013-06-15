@@ -130,7 +130,6 @@ const MainView = new Lang.Class({
                 
         this._comboBoxText = new EncoderComboBox();
         recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
-        this._activeProfile = this._comboBoxText.get_active();
         let recordButton = new RecordPauseButton(this._record, this._activeProfile);       
         toolbarStart.pack_end(recordButton, false, true, 0);
         
@@ -188,7 +187,7 @@ const RecordPauseButton = new Lang.Class({
     _onRecordPauseToggled: function() {
         if (this.get_active()) {
             this.set_image(this.pauseImage);
-            this._record.startRecording(this._activeProfile); 
+            this._record.startRecording(); 
         } else {
             this.set_image(this.recordImage);
             this._record.pauseRecording();            
@@ -251,14 +250,19 @@ const EncoderComboBox = new Lang.Class({
        
     // encoding setting labels in combobox
     _init: function() {
-
         this.parent();
         let combo = [_("Ogg Vorbis"), _("Ogg Opus"),  _("Flac"), _("Mp3"), _("Mp4")];
+        
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
 
-        this.set_active(0);
         this.set_sensitive(true);
-    } 
+        this.connect("changed", Lang.bind(this, this._onComboBoxTextChanged)); 
+    },
+   
+    _onComboBoxTextChanged: function() {        
+        let activeProfile = this.get_active();
+        audioProfile.assignProfile(activeProfile);
+    }        
 });       
     

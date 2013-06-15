@@ -71,9 +71,10 @@ const AudioProfile = new Lang.Class({
         this._values = [];
             switch(this.profileName) {
                              
-                /*case comboBoxMap.OGG_VORBIS:
+                case comboBoxMap.OGG_VORBIS:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS, suffix: audioSuffixMap.OGG_VORBIS });
-                    break;*/
+                    log("ogg");
+                    break;
                 case comboBoxMap.OGG_OPUS:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_OPUS, suffix: audioSuffixMap.OGG_OPUS }); 
                     break;
@@ -87,15 +88,16 @@ const AudioProfile = new Lang.Class({
                     this._values.push({ container: containerProfileMap.MPEG, audio: audioCodecMap.MP4, suffix: audioSuffixMap.MP4 });
                     break;
                 default:
-                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS, suffix: audioSuffixMap.OGG_VORBIS });
                     break;
             }
     },
        
     mediaProfile: function(){
         let idx = 0;
-        
+                
         if (this._values[idx].container) {
+            log(this._values[idx].container);
+            log(this._values[idx].audio);
             let caps = Gst.Caps.from_string(this._values[idx].container);
             let containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
             let audioCaps = Gst.Caps.from_string(this._values[idx].audio);

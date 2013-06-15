@@ -26,9 +26,10 @@ imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib; 
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
-const Mainloop = imports.mainloop;
+//const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 
 const Application = imports.application;
@@ -43,7 +44,7 @@ const PipelineStates = {
 const Record = new Lang.Class({
     Name: "Record",
     
-    recordPipeline: function() {        
+    recordPipeline: function() {  
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         
@@ -52,7 +53,6 @@ const Record = new Lang.Class({
         } 
                       
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-
         this.srcElement = Gst.ElementFactory.make("pulsesrc", "srcElement"); 
         
         if(this.srcElement == null) {
@@ -63,30 +63,9 @@ const Record = new Lang.Class({
         this.pipeline.add(this.srcElement);
         
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
-        this.recordBus = new Gst.Bus();
-        this.ebin.set_bus(this.recordBus);
-        this.recordBus.add_signal_watch();
-        if (this.ebin == null) 
-            log("Unable to create encodebin");
+        
         let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
-        this.recordBus.connect("message", (this, 
-            function(recordBus, message) {
-            
-                if (message != null) {
-                
-                    if (GstPbutils.is_missing_plugin_message(message)) { 
-                        let detail = GstPbutils.missing_plugin_message_get_installer_detail(message);
-                        
-                        if (detail != null)
-                            log(detail); 
-                                                   
-                        let description = GstPbutils.missing_plugin_message_get_description(message);
-                    
-                        if (description != null)
-                            log(description);                   
-                    }  
-            }
-        }));
+
         this.pipeline.add(this.ebin);
         let srcpad = this.ebin.get_static_pad("src");
         let giosink = Gst.ElementFactory.make("giosink", "giosink");
@@ -101,8 +80,7 @@ const Record = new Lang.Class({
         
         if (!srcLink || !ebinLink)
             log("Not all of the elements were linked"); 
-                 
-        this.pipeline.set_state(Gst.State.PLAYING);
+            
         this._tagWriter = new TagWriter();
         this._setTags = this._tagWriter.tagWriter(this.ebin);
     },
@@ -110,11 +88,12 @@ const Record = new Lang.Class({
     startRecording: function(activeProfile) {
         this._activeProfile = activeProfile;
         this._audioProfile = Application.audioProfile;
-        this._audioProfile.assignProfile(this._activeProfile);
         this._mediaProfile = this._audioProfile.mediaProfile();
+        
         if (this._mediaProfile == -1) {
             log("No Media Profile was set."); 
         }
+        
         if (!this.pipeline || this.pipeState == PipelineStates.STOPPED ) 
             this.recordPipeline();
         
@@ -122,8 +101,32 @@ const Record = new Lang.Class({
         this.pipeState = PipelineStates.PLAYING;
         
         if (ret == Gst.StateChangeReturn.FAILURE) 
-            log("Unable to set the pipeline to the recording state.\n"); //create return string?
+            log("Unable to set the pipeline to the recording state.\n"); //create return string? 
+             
+        this.recordBus =this.pipeline.get_bus(); 
+        this.recordBus.add_signal_watch();
         
+        if (this.ebin == null) 
+            log("Unable to create encodebin");
+            
+        this.recordBus.connect("message", (this, 
+            function(recordBus, message) {
+            
+                if (message != null) {
+                    if (GstPbutils.is_missing_plugin_message(message)) { 
+                        let detail = GstPbutils.missing_plugin_message_get_installer_detail(message);
+                        
+                        if (detail != null)
+                            log(detail); 
+                                                   
+                        let description = GstPbutils.missing_plugin_message_get_description(message);
+                    
+                        if (description != null)
+                            log(description);
+                        recordBus.remove_signal_watch();                   
+                    }  
+                }
+            }));     
     },
     
     pauseRecording: function() {
@@ -133,7 +136,6 @@ const Record = new Lang.Class({
     
     stopRecording: function() {
         this.srcElement.send_event(Gst.Event.new_eos());
-        this.busTimeout = this.recordBus.timed_pop_filtered(Gst.CLOCK_TIME_NONE, Gst.MessageType.EOS | Gst.MessageType.ERROR);
         this.srcElement.set_state(Gst.State.NULL); 
         this.srcElement.get_state(null, null, -1);
         this.srcElement.set_locked_state(true); 
