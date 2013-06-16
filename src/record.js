@@ -26,7 +26,8 @@ imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib; 
+const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject; 
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 //const Mainloop = imports.mainloop;
@@ -80,9 +81,6 @@ const Record = new Lang.Class({
         
         if (!srcLink || !ebinLink)
             log("Not all of the elements were linked"); 
-            
-        this._tagWriter = new TagWriter();
-        this._setTags = this._tagWriter.tagWriter(this.ebin);
     },
        
     startRecording: function(activeProfile) {
@@ -113,6 +111,7 @@ const Record = new Lang.Class({
             function(recordBus, message) {
             
                 if (message != null) {
+                
                     if (GstPbutils.is_missing_plugin_message(message)) { 
                         let detail = GstPbutils.missing_plugin_message_get_installer_detail(message);
                         
@@ -124,9 +123,16 @@ const Record = new Lang.Class({
                         if (description != null)
                             log(description);
                         recordBus.remove_signal_watch();                   
-                    }  
+                    } 
+                    
+                    // Deal with the other messages here 
                 }
-            }));     
+            }));
+     
+
+    //log(encoderName);                      
+    this._tagWriter = new TagWriter();
+    this._setTags = this._tagWriter.tagWriter(this.ebin);    
     },
     
     pauseRecording: function() {
@@ -152,14 +158,16 @@ const TagWriter = new Lang.Class({
     Name: 'TagWriter',
     
     tagWriter: function(encoder) {
-        let factory = encoder.get_factory(); 
-        let tagWriter = factory.has_interface("GstTagSetter");
-        
-           if (tagWriter == true) {
+        let tagSetter = GObject.type_from_name("GstTagSetter");
+        log(tagSetter);
+        let tagWriter = encoder.get_by_interface(tagSetter);
+        log(tagSetter);
+          // if (tagWriter == true) {
+           log("well, true");
                let taglist = Gst.TagList.new_empty();
                taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
                encoder.merge_tags(taglist, Gst.TagMergeMode.REPLACE);
-        }        
+        //}        
     }
 });
 
@@ -167,8 +175,7 @@ const BuildFileName = new Lang.Class({
     Name: 'BuildFileName',
 
     buildInitialFilename: function() {
-        let fileExtensionName =      
-        Application.audioProfile.fileExtensionReturner();
+        let fileExtensionName = Application.audioProfile.fileExtensionReturner();
         let initialFileName = [];
         initialFileName.push(GLib.get_home_dir());
         initialFileName.push(_("Recordings"));
