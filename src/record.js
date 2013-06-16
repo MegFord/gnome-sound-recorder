@@ -64,9 +64,27 @@ const Record = new Lang.Class({
         this.pipeline.add(this.srcElement);
         
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
-        
-        let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
-
+        this.ebin.connect("element-added", (this, 
+            function(ebin, element) {
+                let factory = element.get_factory();
+                log("hit");
+                
+                if(factory != null) {
+                
+                    if (factory.list_is_type(1125899906842626)) {
+                        this.hasTagSetter = factory.has_interface("GstTagSetter")
+                        log("hit innerloop");
+                        
+                        if (this.hasTagSetter == true) {
+                            log("next");
+                            this.taglist = Gst.TagList.new_empty();
+                            this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
+                            element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
+                        }
+                    } 
+                }   
+            }));
+        let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);       
         this.pipeline.add(this.ebin);
         let srcpad = this.ebin.get_static_pad("src");
         let giosink = Gst.ElementFactory.make("giosink", "giosink");
@@ -127,12 +145,7 @@ const Record = new Lang.Class({
                     
                     // Deal with the other messages here 
                 }
-            }));
-     
-
-    //log(encoderName);                      
-    this._tagWriter = new TagWriter();
-    this._setTags = this._tagWriter.tagWriter(this.ebin);    
+            }));                        
     },
     
     pauseRecording: function() {
@@ -149,24 +162,18 @@ const Record = new Lang.Class({
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
         //this.pipeline.set_locked_state(true);
-    }
-    
-    // need to create directory /Recordings during build?
+    },
 });
 
 const TagWriter = new Lang.Class({
     Name: 'TagWriter',
     
     tagWriter: function(encoder) {
-        let tagSetter = GObject.type_from_name("GstTagSetter");
-        log(tagSetter);
-        let tagWriter = encoder.get_by_interface(tagSetter);
-        log(tagSetter);
+        let tagWriter = encoder.get_by_interface();
+        log(tagWriter );
           // if (tagWriter == true) {
            log("well, true");
-               let taglist = Gst.TagList.new_empty();
-               taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
-               encoder.merge_tags(taglist, Gst.TagMergeMode.REPLACE);
+              
         //}        
     }
 });
