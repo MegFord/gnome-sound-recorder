@@ -20,7 +20,7 @@
  *
  */
  
- //GST_DEBUG=4 ./src/gnome-sound-recorder
+ //GST_DEBUG=2 ./src/gnome-sound-recorder
  
 imports.gi.versions.Gst = '1.0';
 
@@ -32,12 +32,13 @@ const Mainloop = imports.mainloop;
 
 const containerProfileMap = {
     OGG: "application/ogg", 
-    MPEG: "video/mpeg"
+    MP3: "application/x-id3",
+    MP4: "video/quicktime,variant=(string)iso"
 };
 
 const audioCodecMap = {
     FLAC: "audio/x-flac",      
-    MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3 ",
+    MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
     MP4: "audio/mpeg,mpegversion=(int)4",
     OGG_OPUS: "audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
@@ -67,13 +68,13 @@ const AudioProfile = new Lang.Class({
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_OPUS }); 
                     break;
                 case comboBoxMap.FLAC:
-                    this._values.push({ container: null, audio: audioCodecMap.FLAC });
+                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.FLAC });
                     break;
                 case comboBoxMap.MP3:
-                    this._values.push({ container: null, audio: audioCodecMap.MP3 });
+                    this._values.push({ container: containerProfileMap.MP3, audio: audioCodecMap.MP3 });
                     break;
                 case comboBoxMap.MP4:
-                    this._values.push({ container: null, audio: audioCodecMap.MP4 });
+                    this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP4 });
                     break;
                 default:
                     break;
@@ -104,13 +105,14 @@ const AudioProfile = new Lang.Class({
     fileExtensionReturner: function() {
         let idx = 0;
         
-        if (this._values[idx].container) {
-            this.suffixName = this.containerProfile.get_file_extension();
-        } else if (!this._values[idx].container && this._values[idx].audio) {
+        if (this._values[idx].audio) {
             this.suffixName = this.encodingProfile.get_file_extension();
-        } else {
+            if (this.suffixName == null) 
+                this.suffixName = this.containerProfile.get_file_extension();
+        }  else {
             this.suffixName = "ogg";
         }
+        
         this.audioSuffix = ("." + this.suffixName);
         return this.audioSuffix;   
     }

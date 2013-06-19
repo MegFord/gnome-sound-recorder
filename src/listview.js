@@ -20,47 +20,73 @@
  *
  */
  
+imports.gi.versions.Gst = '1.0';
+
+const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib; 
+const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject; 
+const Gst = imports.gi.Gst;
+const GstPbutils = imports.gi.GstPbutils;
+const Signals = imports.signals;
+
+const tagItems = {
+    Title: 0,
+    DateCreated: 1
+}; 
 
 const Listview = new Lang.Class({
     Name: "Listview",
     
     enumerateDirectory: function() {
-        let _allFiles = [];
+        let discoverer = new GstPbutils.Discoverer();
+        discoverer.start();
+        let tagList = Gst.TagList.new_empty();
+        let _uris = [];
         let initialFileName = [];
         initialFileName.push(GLib.get_home_dir());
         initialFileName.push(_("Recordings"));
         let dirName = GLib.build_filenamev(initialFileName);
         let dir = Gio.file_new_for_path(dirName);
-        dir.enumerate_children_async('standard::target_uri,standard::type',
-                                  Gio.FileQueryInfoFlags.NONE,
-                                  GLib.PRIORITY_LOW, null, function (obj, res) {
-        let enumerator = obj.enumerate_children_finish(res);
-        function onNextFileComplete(obj, res) {
-                let files = obj.next_files_finish(res);
+        
+        dir.enumerate_children_async('standard::name',
+                                     Gio.FileQueryInfoFlags.NONE,
+                                     GLib.PRIORITY_LOW, null,
+                                     function (obj, res) {            
+                let enumerator = obj.enumerate_children_finish(res);
+                function onNextFileComplete(obj, res) { 
+                    let files = obj.next_files_finish(res);
+                
                 if (files.length) {
-                    log(files);
-                    _allFiles = _allFiles.concat(files);               
-                    enumerator.next_files_async(50, GLib.PRIORITY_LOW, null, onNextFileComplete);
+                    files.forEach(Lang.bind(this, 
+                        function(file) { 
+                            let initialFileName = [];
+                            initialFileName.push(GLib.get_home_dir());
+                            initialFileName.push(_("Recordings"));
+                            let returnedName = file.get_name().toString();
+                            initialFileName.push(returnedName);
+                            let finalFileName = GLib.build_filenamev(initialFileName);
+                            let uri = GLib.filename_to_uri(finalFileName, null);
+                            discoverer.discover_uri_async(uri);
+                            discoverer.connect('discovered', Lang.bind(this, 
+                                function(discoverer, info, error) {
+                                    this.finished = info.get_result(); 
+                                               
+                                    if (this.finished != GstPbutils.DiscovererResult.ERROR) {
+                                        this.i = info.get_tags(info); 
+                                        this.appName = this.i.get_string(Gst.TAG_APPLICATION_NAME);
+                                        log(this.appName);
+                                    }
+                                }));
+                        }));                     
+                                   
+                    enumerator.next_files_async(2, GLib.PRIORITY_LOW, null, onNextFileComplete);
                 } else {
-                    enumerator.close(null); 
-                    return; 
-                 }
-        }
-        enumerator.next_files_async(50, GLib.PRIORITY_LOW, null, onNextFileComplete);
+                    enumerator.close(null);
+                    return;
+            } }
+            enumerator.next_files_async(2, GLib.PRIORITY_LOW, null, onNextFileComplete);
+        
         });
-    },
-    
-    _retrieveFileInformation: function(fileList) {
-        this._fileList = fileList;
-        this._filelist.forEach(Lang.bind(this,
-            function(file) { 
-                let displayName = file.get_display_name();
-                log(displayName);
-                let contentType = file.get_content_type();
-                log(contentType);
-                let uri = file.get_uri();
-            }));   
-    }
+        } 
 });

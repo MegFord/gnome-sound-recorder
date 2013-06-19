@@ -20,7 +20,7 @@
  *
  */
  
- //GST_DEBUG=5 ./src/gnome-sound-recorder
+ //GST_DEBUG=2 ./src/gnome-sound-recorder
  
 imports.gi.versions.Gst = '1.0';
 
@@ -67,20 +67,14 @@ const Record = new Lang.Class({
         this.ebin.connect("element-added", (this, 
             function(ebin, element) {
                 let factory = element.get_factory();
-                log("hit");
                 
-                if(factory != null) {
-                
-                    if (factory.list_is_type(1125899906842626)) {
-                        this.hasTagSetter = factory.has_interface("GstTagSetter")
-                        log("hit innerloop");
+                if (factory != null) {                
+                        this.hasTagSetter = factory.has_interface("GstTagSetter");
                         
                         if (this.hasTagSetter == true) {
-                            log("next");
                             this.taglist = Gst.TagList.new_empty();
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                        }
                     } 
                 }   
             }));
@@ -162,20 +156,7 @@ const Record = new Lang.Class({
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
         //this.pipeline.set_locked_state(true);
-    },
-});
-
-const TagWriter = new Lang.Class({
-    Name: 'TagWriter',
-    
-    tagWriter: function(encoder) {
-        let tagWriter = encoder.get_by_interface();
-        log(tagWriter );
-          // if (tagWriter == true) {
-           log("well, true");
-              
-        //}        
-    }
+    }    
 });
 
 const BuildFileName = new Lang.Class({
