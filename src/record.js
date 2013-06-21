@@ -20,17 +20,17 @@
  *
  */
  
- //GST_DEBUG=2 ./src/gnome-sound-recorder
- 
+ //GST_DEBUG=3 ./src/gnome-sound-recorder
+
 imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject; 
+const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
-//const Mainloop = imports.mainloop;
+const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 
 const Application = imports.application;
@@ -45,54 +45,54 @@ const PipelineStates = {
 const Record = new Lang.Class({
     Name: "Record",
     
-    recordPipeline: function() {  
+    recordPipeline: function() {
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         
         if (this.initialFileName == -1) {
             log('Unable to create Recordings directory');
-        } 
+        }
                       
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
-        this.srcElement = Gst.ElementFactory.make("pulsesrc", "srcElement"); 
+        this.srcElement = Gst.ElementFactory.make("pulsesrc", "srcElement");
         
         if(this.srcElement == null) {
-          let sourceError = "Your audio capture settings are invalid. Please correct them";
-          log(sourceError); 
+          let sourceError = "Your audio capture settings are invalid.";
+          log(sourceError);
         }
         
         this.pipeline.add(this.srcElement);
         
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
-        this.ebin.connect("element-added", (this, 
+        this.ebin.connect("element-added", Lang.bind(this,
             function(ebin, element) {
                 let factory = element.get_factory();
                 
-                if (factory != null) {                
+                if (factory != null) {
                         this.hasTagSetter = factory.has_interface("GstTagSetter");
-                        
+                        log("has interface");
                         if (this.hasTagSetter == true) {
                             this.taglist = Gst.TagList.new_empty();
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                    } 
-                }   
+                    }
+                }
             }));
-        let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);       
+        let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
         this.pipeline.add(this.ebin);
         let srcpad = this.ebin.get_static_pad("src");
-        let giosink = Gst.ElementFactory.make("giosink", "giosink");
-        giosink.set_property("file", this.initialFileName);
-        this.pipeline.add(giosink);
+        this.giosink = Gst.ElementFactory.make("giosink", "giosink");
+        this.giosink.set_property("file", this.initialFileName);
+        this.pipeline.add(this.giosink);
         
-        if (!this.pipeline || !giosink) 
+        if (!this.pipeline || !this.giosink)
             log ("Not all elements could be created.\n");
             
         let srcLink = this.srcElement.link(this.ebin);
-        let ebinLink = this.ebin.link(giosink);
+        let ebinLink = this.ebin.link(this.giosink);
         
         if (!srcLink || !ebinLink)
-            log("Not all of the elements were linked"); 
+            log("Not all of the elements were linked");
     },
        
     startRecording: function(activeProfile) {
@@ -101,54 +101,46 @@ const Record = new Lang.Class({
         this._mediaProfile = this._audioProfile.mediaProfile();
         
         if (this._mediaProfile == -1) {
-            log("No Media Profile was set."); 
+            log("No Media Profile was set.");
         }
         
-        if (!this.pipeline || this.pipeState == PipelineStates.STOPPED ) 
+        if (!this.pipeline || this.pipeState == PipelineStates.STOPPED )
             this.recordPipeline();
-        
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
         
-        if (ret == Gst.StateChangeReturn.FAILURE) 
-            log("Unable to set the pipeline to the recording state.\n"); //create return string? 
+        if (ret == Gst.StateChangeReturn.FAILURE)
+            log("Unable to set the pipeline to the recording state.\n"); //create return string?
              
-        this.recordBus =this.pipeline.get_bus(); 
+        this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();
-        
-        if (this.ebin == null) 
-            log("Unable to create encodebin");
-            
-        this.recordBus.connect("message", (this, 
+        this.recordBus.connect("message", Lang.bind(this,
             function(recordBus, message) {
             
                 if (message != null) {
-                
-                    if (GstPbutils.is_missing_plugin_message(message)) { 
-                        let detail = GstPbutils.missing_plugin_message_get_installer_detail(message);
-                        
-                        if (detail != null)
-                            log(detail); 
-                                                   
-                        let description = GstPbutils.missing_plugin_message_get_description(message);
-                    
-                        if (description != null)
-                            log(description);
-                        recordBus.remove_signal_watch();                   
-                    } 
-                    
-                    // Deal with the other messages here 
+                    this._onMessageReceived(message);
                 }
-            }));                        
+            } ));
     },
     
     pauseRecording: function() {
         this.pipeline.set_state(Gst.State.PAUSED);
-        this.pipeState = PipelineStates.PAUSED;   
+        this.pipeState = PipelineStates.PAUSED;
     },
     
     stopRecording: function() {
-        this.srcElement.send_event(Gst.Event.new_eos());
+        let sent = this.pipeline.send_event(Gst.Event.new_eos());
+        log(sent);
+       /*this.srcElement.set_state(Gst.State.NULL);
+        this.srcElement.get_state(null, null, -1);
+        this.srcElement.set_locked_state(true);
+        this.pipeline.set_state(Gst.State.NULL);
+        log("called stop");
+        this.pipeState = PipelineStates.STOPPED;
+        //this.pipeline.set_locked_state(true);*/
+    },
+    
+    onEndOfStream: function() {
         this.srcElement.set_state(Gst.State.NULL); 
         this.srcElement.get_state(null, null, -1);
         this.srcElement.set_locked_state(true); 
@@ -156,7 +148,47 @@ const Record = new Lang.Class({
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
         //this.pipeline.set_locked_state(true);
-    }    
+        //recordBus.remove_signal_watch(); 
+    },
+        
+    _onMessageReceived: function(message) {
+        this.localMsg = message;
+        let msg = message.type;
+        log(msg);
+        switch(msg) {
+            
+            case Gst.MessageType.ELEMENT:
+                log("elem");
+                if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
+                    let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
+                       
+                        if (detail != null)
+                            log(detail);
+                                                   
+                    let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
+                   
+                        if (description != null)
+                            log(description);
+                }
+                this.stopRecording();
+                break;
+                    
+            case Gst.MessageType.EOS:                  
+                log("eos");
+                this.onEndOfStream(); 
+                break;
+                      
+            case Gst.MessageType.ASYNC_DONE: 
+                log("async");
+                break;
+                                        
+            case Gst.MessageType.ERROR:
+                log("error");
+                let errorMessage = msg.parse_error();
+                log(errorMessage);                  
+                break;
+        }
+    } 
 });
 
 const BuildFileName = new Lang.Class({
@@ -178,13 +210,14 @@ const BuildFileName = new Lang.Class({
         let dateTimeString = GLib.DateTime.new_now_local();
         let origin = dateTimeString.format(_("%Y-%m-%d %H:%M:%S"));
         let extension = fileExtensionName;
-        initialFileName.push(origin + extension);                
-        log(namedDir);        
+        initialFileName.push(origin + extension);
+        log(namedDir);
         // Use GLib.build_filenamev to work around missing vararg functions.
         let name = GLib.build_filenamev(initialFileName);
         let file = Gio.file_new_for_path(name);
         log(file);
-        return file;                      
+        return file;
     }
 });
+
 

@@ -19,6 +19,7 @@
  *
  *
  */
+// ./src/gnome-sound-recorder
  
 imports.gi.versions.Gst = '1.0';
 
@@ -35,58 +36,70 @@ const tagItems = {
     DateCreated: 1
 }; 
 
+const enumerator = null;
+
 const Listview = new Lang.Class({
     Name: "Listview",
     
     enumerateDirectory: function() {
-        let discoverer = new GstPbutils.Discoverer();
-        discoverer.start();
-        let tagList = Gst.TagList.new_empty();
-        let _uris = [];
+
         let initialFileName = [];
+        
         initialFileName.push(GLib.get_home_dir());
         initialFileName.push(_("Recordings"));
         let dirName = GLib.build_filenamev(initialFileName);
         let dir = Gio.file_new_for_path(dirName);
         
-        dir.enumerate_children_async('standard::name',
+        try{
+            dir.enumerate_children_async('standard::name',
                                      Gio.FileQueryInfoFlags.NONE,
-                                     GLib.PRIORITY_LOW, null,
+                                     GLib.PRIORITY_LOW, null, 
                                      function (obj, res) {            
-                let enumerator = obj.enumerate_children_finish(res);
-                function onNextFileComplete(obj, res) { 
-                    let files = obj.next_files_finish(res);
+                this.enumerator = obj.enumerate_children_finish(res);
+            });
+         } catch(e) {
+            log("The contents of the Recordings directory were not indexed.");
+         } 
+        // this.onNextFileComplete(); 
+    },
+       
+    onNextFileComplete: function () {
+        let discoverer = new GstPbutils.Discoverer();
+        discoverer.start();
+        let tagList = Gst.TagList.new_empty();
+        let _uris = [];
+        this.enumerator.next_files_async(2, GLib.PRIORITY_LOW);  
+        let files = obj.next_files_finish(res);
                 
-                if (files.length) {
-                    files.forEach(Lang.bind(this, 
-                        function(file) { 
-                            let initialFileName = [];
-                            initialFileName.push(GLib.get_home_dir());
-                            initialFileName.push(_("Recordings"));
-                            let returnedName = file.get_name().toString();
-                            initialFileName.push(returnedName);
-                            let finalFileName = GLib.build_filenamev(initialFileName);
-                            let uri = GLib.filename_to_uri(finalFileName, null);
-                            discoverer.discover_uri_async(uri);
-                            discoverer.connect('discovered', Lang.bind(this, 
+        if (files.length) {
+            files.forEach(Lang.bind(this, 
+                function(file) { 
+                    let initialFileName = [];
+                    initialFileName.push(GLib.get_home_dir());
+                    initialFileName.push(_("Recordings"));
+                    let returnedName = file.get_name().toString();
+                    initialFileName.push(returnedName);
+                    let finalFileName = GLib.build_filenamev(initialFileName);
+                    let uri = GLib.filename_to_uri(finalFileName, null);
+                    discoverer.discover_uri_async(uri);
+                    discoverer.connect('discovered', Lang.bind(this, 
                                 function(discoverer, info, error) {
                                     this.finished = info.get_result(); 
                                                
                                     if (this.finished != GstPbutils.DiscovererResult.ERROR) {
                                         this.i = info.get_tags(info); 
-                                        this.appName = this.i.get_string(Gst.TAG_APPLICATION_NAME);
+                                        this.appName = this.i.get_string(GST_TAG_APPLICATION_NAME);
                                         log(this.appName);
+                                        this.dateTime = this.i.get_string(Gst.TAG_DATE_TIME);
+                                        this.title = this.i.get_string(Gst.TAG_SHOW_NAME);
                                     }
                                 }));
                         }));                     
                                    
-                    enumerator.next_files_async(2, GLib.PRIORITY_LOW, null, onNextFileComplete);
+                    enumerator.next_files_async(2, GLib.PRIORITY_LOW);
                 } else {
                     enumerator.close(null);
                     return;
-            } }
-            enumerator.next_files_async(2, GLib.PRIORITY_LOW, null, onNextFileComplete);
-        
-        });
-        } 
+                } 
+            }    
 });

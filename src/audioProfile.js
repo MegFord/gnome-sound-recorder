@@ -20,7 +20,7 @@
  *
  */
  
- //GST_DEBUG=2 ./src/gnome-sound-recorder
+ //GST_DEBUG=6 ./src/gnome-sound-recorder
  
 imports.gi.versions.Gst = '1.0';
 
@@ -40,7 +40,7 @@ const audioCodecMap = {
     FLAC: "audio/x-flac",      
     MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
     MP4: "audio/mpeg,mpegversion=(int)4",
-    OGG_OPUS: "audio/x-opus", 
+    OGG_OPUS: "audio/x-celt",//"audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
 };
 

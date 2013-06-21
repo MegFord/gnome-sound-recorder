@@ -130,7 +130,7 @@ const MainView = new Lang.Class({
                 
         this._comboBoxText = new EncoderComboBox();
         recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
-        let recordButton = new RecordPauseButton(this._record, this._activeProfile);       
+        let recordButton = new RecordPauseButton(this._record);       
         toolbarStart.pack_end(recordButton, false, true, 0);
         
         let buttonID = ButtonID.RECORD_BUTTON;
@@ -190,7 +190,7 @@ const RecordPauseButton = new Lang.Class({
             this._record.startRecording(); 
         } else {
             this.set_image(this.recordImage);
-            this._record.pauseRecording();            
+           // this._record.pauseRecording();            
         }
     }
 });
@@ -239,7 +239,7 @@ const StopButton = new Lang.Class({
         if (this._id == ButtonID.RECORD_BUTTON) {
             this._action.stopRecording();
         } else if (ButtonID.PLAY_BUTTON) {
-            this._play.stopPlaying(); 
+            log("stop");//this._play.stopPlaying(); 
         }
     } 
 });
