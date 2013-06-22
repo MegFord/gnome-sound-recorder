@@ -100,11 +100,14 @@ const Listview = new Lang.Class({
                                         }
                                     })); 
                         }));
-                    }  
+                    } else {
+                        log("done");
+                        this._enumerator.close(null);
+                   }
+                    
                 }));
         } catch(e) {
             log(e);
         } 
-        this._enumerator.set_pending //does glib file enumerator have a .hasNext?
     },   
 });

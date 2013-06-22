@@ -19,7 +19,8 @@
  *
  *
  */
- 
+
+//note to self: use  list._onNextFileComplete(); to load more when you add the loadMore button to the listview. 
 imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
