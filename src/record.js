@@ -194,26 +194,32 @@ const Record = new Lang.Class({
 const BuildFileName = new Lang.Class({
     Name: 'BuildFileName',
 
-    buildInitialFilename: function() {
-        let fileExtensionName = Application.audioProfile.fileExtensionReturner();
+    buildPath: function() {
         let initialFileName = [];
         initialFileName.push(GLib.get_home_dir());
         initialFileName.push(_("Recordings"));
-        let dirName = GLib.build_filenamev(initialFileName);
+        
+        return initialFileName;
+    },
+    
+    ensureDirectory: function(name) {
+        log(name);
+        this._name = name;
+        log(this._name);       
+        let dirName = GLib.build_filenamev(this._name);
         let namedDir = GLib.mkdir_with_parents(dirName, 0775);
         log(namedDir);
-        log("direct create val");
-        
-        if (namedDir == -1)
-            return namedDir;
-            
+    },
+    
+    buildInitialFilename: function() {
+        let fileExtensionName = Application.audioProfile.fileExtensionReturner();
+        let dir = this.buildPath();   
         let dateTimeString = GLib.DateTime.new_now_local();
         let origin = dateTimeString.format(_("%Y-%m-%d %H:%M:%S"));
         let extension = fileExtensionName;
-        initialFileName.push(origin + extension);
-        log(namedDir);
+        dir.push(origin + extension);
         // Use GLib.build_filenamev to work around missing vararg functions.
-        let name = GLib.build_filenamev(initialFileName);
+        let name = GLib.build_filenamev(dir);
         let file = Gio.file_new_for_path(name);
         log(file);
         return file;

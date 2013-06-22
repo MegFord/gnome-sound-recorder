@@ -29,8 +29,10 @@ const AudioProfile = imports.audioProfile;
 const Listview = imports.listview;
 const Play = imports.play;
 const Record = imports.record;
+//const BuildFileName = imports.BuildFileName;
 
 let audioProfile = null;
+let list = null;
 
 const ButtonID = {
     RECORD_BUTTON: 0,
@@ -43,6 +45,12 @@ const Application = new Lang.Class({
 
     _init: function(params) {
         audioProfile = new AudioProfile.AudioProfile();
+        this._buildFileName = new Record.BuildFileName()
+        let path = this._buildFileName.buildPath();
+        log(path);
+        this._buildFileName.ensureDirectory(path);
+        list = new Listview.Listview();
+        list.enumerateDirectory();
         let view = new MainView();
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        default_width: 640,
@@ -143,8 +151,6 @@ const MainView = new Lang.Class({
     
     _addPlayerPage: function(name) {
         this._play = new Play.Play();
-        this._list = new Listview.Listview();
-        this._list.enumerateDirectory();
         this.playBox = new Gtk.EventBox();
         let playGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                       halign: Gtk.Align.CENTER,
@@ -211,10 +217,10 @@ const PlayPauseButton = new Lang.Class({
     _onPlayPauseToggled: function() {
         if (this.get_active()) {
             this.set_image(this.pauseImage);
-            this._play.startPlaying(); 
+            this._play.startPlaying();
         } else {
             this.set_image(this.playImage);
-            this._play.pausePlaying();            
+            //this._play.pausePlaying();            
         }
     }
 });

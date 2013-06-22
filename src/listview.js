@@ -19,7 +19,7 @@
  *
  *
  */
-// ./src/gnome-sound-recorder
+//./src/gnome-sound-recorder
  
 imports.gi.versions.Gst = '1.0';
 
@@ -37,69 +37,74 @@ const tagItems = {
 }; 
 
 const enumerator = null;
-
 const Listview = new Lang.Class({
     Name: "Listview",
-    
+
+    _init: function() {
+        this._uris = [];
+        this._enumeratorFlag = true;
+        this._createdUrn = null;
+    },
+            
     enumerateDirectory: function() {
 
         let initialFileName = [];
-        
         initialFileName.push(GLib.get_home_dir());
         initialFileName.push(_("Recordings"));
         let dirName = GLib.build_filenamev(initialFileName);
-        let dir = Gio.file_new_for_path(dirName);
-        
-        try{
-            dir.enumerate_children_async('standard::name',
+        let dir = Gio.file_new_for_path(dirName);    
+      
+        dir.enumerate_children_async('standard::name',
                                      Gio.FileQueryInfoFlags.NONE,
-                                     GLib.PRIORITY_LOW, null, 
-                                     function (obj, res) {            
-                this.enumerator = obj.enumerate_children_finish(res);
-            });
-         } catch(e) {
+                                     GLib.PRIORITY_LOW, 
+                                     null, Lang.bind(this, 
+                                     this._onEnumerator)); 
+    },  
+           
+    _onEnumerator: function(obj, res) {     
+        this._enumerator = obj.enumerate_children_finish(res);
+        
+        if (this._enumerator == null)
             log("The contents of the Recordings directory were not indexed.");
-         } 
-        // this.onNextFileComplete(); 
+        this._onNextFileComplete();        
     },
        
-    onNextFileComplete: function () {
-        let discoverer = new GstPbutils.Discoverer();
-        discoverer.start();
-        let tagList = Gst.TagList.new_empty();
-        let _uris = [];
-        this.enumerator.next_files_async(2, GLib.PRIORITY_LOW);  
-        let files = obj.next_files_finish(res);
-                
-        if (files.length) {
-            files.forEach(Lang.bind(this, 
-                function(file) { 
-                    let initialFileName = [];
-                    initialFileName.push(GLib.get_home_dir());
-                    initialFileName.push(_("Recordings"));
-                    let returnedName = file.get_name().toString();
-                    initialFileName.push(returnedName);
-                    let finalFileName = GLib.build_filenamev(initialFileName);
-                    let uri = GLib.filename_to_uri(finalFileName, null);
-                    discoverer.discover_uri_async(uri);
-                    discoverer.connect('discovered', Lang.bind(this, 
-                                function(discoverer, info, error) {
-                                    this.finished = info.get_result(); 
-                                               
-                                    if (this.finished != GstPbutils.DiscovererResult.ERROR) {
-                                        this.i = info.get_tags(info); 
-                                        this.appName = this.i.get_string(GST_TAG_APPLICATION_NAME);
-                                        log(this.appName);
-                                        this.dateTime = this.i.get_string(Gst.TAG_DATE_TIME);
-                                        this.title = this.i.get_string(Gst.TAG_SHOW_NAME);
-                                    }
-                                }));
-                        }));                     
-                                   
-                    enumerator.next_files_async(2, GLib.PRIORITY_LOW);
-                } else {
-                    enumerator.close(null);
-                    return;
-                } 
-            }    
+    _onNextFileComplete: function () {
+        try{ 
+            this._enumerator.next_files_async(1, GLib.PRIORITY_LOW, null, Lang.bind(this,  
+                function(obj, res) {
+                    this._discoverer = new GstPbutils.Discoverer();
+                    this._discoverer.start(); 
+                    let files = obj.next_files_finish(res);     
+                    if (files.length) {
+                        files.forEach(Lang.bind(this, 
+                            function(file) { 
+                                let returnedName = file.get_name().toString();
+                                log(returnedName);
+                                let initialFileName = [];
+                                initialFileName.push(GLib.get_home_dir());
+                                initialFileName.push(_("Recordings"));
+                                let returnedName = file.get_name().toString();
+                                initialFileName.push(returnedName);
+                                let finalFileName = GLib.build_filenamev(initialFileName);
+                                let uri = GLib.filename_to_uri(finalFileName, null);
+                                this._discoverer.discover_uri_async(uri);
+                                this._discoverer.connect('discovered', Lang.bind(this, 
+                                    function(_discoverer, info, error) {
+                                        this.finished = info.get_result(); 
+
+                                        if (this.finished != GstPbutils.DiscovererResult.ERROR) {
+                                            this.i = info.get_tags(info); 
+                                            this.appName = this.i.get_string(Gst.TAG_APPLICATION_NAME);
+                                            log(this.appName);
+                                        }
+                                    })); 
+                        }));
+                    }  
+                }));
+        } catch(e) {
+            log(e);
+        } 
+        this._enumerator.set_pending //does glib file enumerator have a .hasNext?
+    },   
 });
