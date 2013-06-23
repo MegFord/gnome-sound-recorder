@@ -148,7 +148,7 @@ const Record = new Lang.Class({
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
         //this.pipeline.set_locked_state(true);
-        //recordBus.remove_signal_watch(); 
+        recordBus.remove_signal_watch(); 
     },
         
     _onMessageReceived: function(message) {
