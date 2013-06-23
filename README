@@ -1,6 +1,8 @@
 About 
 =======================
-Built using My JS Application as a base.
+Built using gtk-js-app as a base. It depends on the wip/package branch of gjs. Git clone in your jhbuild checkout, then run $ make. The app is run with $ jhbuild shell, then $ ./src/gnome-sound-recorder.
+
 License
+
 =======
 
