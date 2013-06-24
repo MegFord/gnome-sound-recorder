@@ -258,7 +258,7 @@ const EncoderComboBox = new Lang.Class({
     // encoding setting labels in combobox
     _init: function() {
         this.parent();
-        let combo = [_("Ogg Vorbis"), _("Ogg Opus"),  _("Flac"), _("Mp3"), _("Mp4")];
+        let combo = [_("Ogg Vorbis"), _("Ogg Opus"),  _("Flac"), _("Mp3"), _("AAC")];
         
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);

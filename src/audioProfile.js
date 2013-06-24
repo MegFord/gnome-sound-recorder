@@ -33,13 +33,13 @@ const Mainloop = imports.mainloop;
 const containerProfileMap = {
     OGG: "application/ogg", 
     MP3: "application/x-id3",
-    MP4: "video/quicktime,variant=(string)iso"
+    AAC: "video/quicktime,variant=(string)iso"
 };
 
 const audioCodecMap = {
     FLAC: "audio/x-flac",      
     MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
-    MP4: "audio/mpeg,mpegversion=(int)4",
+    AAC: "audio/mpeg,mpegversion=(int)4",
     OGG_OPUS: "audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
 };
@@ -49,7 +49,7 @@ const comboBoxMap = {
     OGG_OPUS: 1,
     FLAC: 2,
     MP3: 3,
-    MP4: 4
+    AAC: 4
 };
 
 
@@ -73,8 +73,8 @@ const AudioProfile = new Lang.Class({
                 case comboBoxMap.MP3:
                     this._values.push({ container: containerProfileMap.MP3, audio: audioCodecMap.MP3 });
                     break;
-                case comboBoxMap.MP4:
-                    this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP4 });
+                case comboBoxMap.AAC:
+                    this._values.push({ container: containerProfileMap.AAC, audio: audioCodecMap.AAC });
                     break;
                 default:
                     break;
