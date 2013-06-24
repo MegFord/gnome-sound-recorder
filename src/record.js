@@ -62,7 +62,15 @@ const Record = new Lang.Class({
         }
         
         this.pipeline.add(this.srcElement);
-        
+        this.recordBus = this.pipeline.get_bus();
+        this.recordBus.add_signal_watch();
+        this.recordBus.connect("message", Lang.bind(this,
+            function(recordBus, message) {
+            
+                if (message != null) {
+                    this._onMessageReceived(message);
+                }
+            }));       
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         this.ebin.connect("element-added", Lang.bind(this,
             function(ebin, element) {
@@ -112,15 +120,7 @@ const Record = new Lang.Class({
         if (ret == Gst.StateChangeReturn.FAILURE)
             log("Unable to set the pipeline to the recording state.\n"); //create return string?
              
-        this.recordBus = this.pipeline.get_bus();
-        this.recordBus.add_signal_watch();
-        this.recordBus.connect("message", Lang.bind(this,
-            function(recordBus, message) {
-            
-                if (message != null) {
-                    this._onMessageReceived(message);
-                }
-            } ));
+
     },
     
     pauseRecording: function() {
@@ -148,7 +148,7 @@ const Record = new Lang.Class({
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
         //this.pipeline.set_locked_state(true);
-        recordBus.remove_signal_watch(); 
+        this.recordBus.remove_signal_watch(); 
     },
         
     _onMessageReceived: function(message) {
@@ -176,10 +176,6 @@ const Record = new Lang.Class({
             case Gst.MessageType.EOS:                  
                 log("eos");
                 this.onEndOfStream(); 
-                break;
-                      
-            case Gst.MessageType.ASYNC_DONE: 
-                log("async");
                 break;
                                         
             case Gst.MessageType.ERROR:

@@ -69,7 +69,7 @@ const Application = imports.application;
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
         //this.pipeline.set_locked_state(true);
-        playBus.remove_signal_watch(); 
+        this.playBus.remove_signal_watch(); 
     },
         
     _onMessageReceived: function(message) {
