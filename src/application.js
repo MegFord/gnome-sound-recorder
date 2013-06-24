@@ -179,7 +179,7 @@ const MainView = new Lang.Class({
 
 const RecordPauseButton = new Lang.Class({
     Name: "RecordPauseButton",
-    Extends: Gtk.ToggleButton,
+    Extends: Gtk.Button,
     
     _init: function(record, activeProfile) {
         this._record = record;
@@ -188,17 +188,11 @@ const RecordPauseButton = new Lang.Class({
         this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);              
         this.parent();
         this.set_image(this.recordImage);
-        this.connect("clicked", Lang.bind(this, this._onRecordPauseToggled));
+        this.connect("clicked", Lang.bind(this, this._onRecord));
     },
     
-    _onRecordPauseToggled: function() {
-        if (this.get_active()) {
-            this.set_image(this.pauseImage);
+    _onRecord: function() {
             this._record.startRecording(); 
-        } else {
-            this.set_image(this.recordImage);
-           // this._record.pauseRecording();            
-        }
     }
 });
 
