@@ -38,11 +38,8 @@ const Application = imports.application;
         this.play.set_property("uri", "file:///2013-06-2018:59:13.mp3");
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
-        let ret = this.play.set_state(Gst.State.PLAYING);         
-        if (ret == Gst.StateChangeReturn.FAILURE)
-            log("Unable to set the pipeline to the recording state.\n"); //create return string?
              
-        this.playBus = this.pipeline.get_bus();
+        this.playBus = this.play.get_bus();
         this.playBus.add_signal_watch();
         this.playBus.connect("message", Lang.bind(this,
             function(playBus, message) {
@@ -50,25 +47,32 @@ const Application = imports.application;
                 if (message != null) {
                     this._onMessageReceived(message);
                 }
-            } ));
+            }));
+    },
+    
+    startPlaying: function() {
+        this._playPipeline();
+        let ret = this.play.set_state(Gst.State.PLAYING); 
+                
+        if (ret == Gst.StateChangeReturn.FAILURE)
+            log("Unable to set the playbin to the playing state.\n"); //create return string?
     },
     
     pausePlaying: function() {
-        this.pipeline.set_state(Gst.State.PAUSED);
-        this.pipeState = PipelineStates.PAUSED;
+        this.play.set_state(Gst.State.PAUSED);
+        //this.pipeState = PipelineStates.PAUSED;
     },
     
     stopPlaying: function() {
-        let sent = this.pipeline.send_event(Gst.Event.new_eos());
+        let sent = this.play.send_event(Gst.Event.new_eos());
         log(sent);
 
     },
     
     onEndOfStream: function() { 
-        this.pipeline.set_state(Gst.State.NULL);
+        this.play.set_state(Gst.State.NULL);
         log("called stop");
-        this.pipeState = PipelineStates.STOPPED;
-        //this.pipeline.set_locked_state(true);
+        //this.pipeState = PipelineStates.STOPPED;
         this.playBus.remove_signal_watch(); 
     },
         
@@ -84,9 +88,8 @@ const Application = imports.application;
                 break;
                 
             case Gst.MessageType.ERROR:
-                log("error");
-                let errorMessage = msg.parse_error();
-                log(errorMessage);                  
+                log("Error :");
+                log(this.localMsg.parse_error());                
                 break;
         }
     } 

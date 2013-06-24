@@ -139,7 +139,7 @@ const MainView = new Lang.Class({
                 
         this._comboBoxText = new EncoderComboBox();
         recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
-        let recordButton = new RecordPauseButton(this._record);       
+        let recordButton = new RecordButton(this._record);       
         toolbarStart.pack_end(recordButton, false, true, 0);
         
         let buttonID = ButtonID.RECORD_BUTTON;
@@ -177,8 +177,8 @@ const MainView = new Lang.Class({
 
 });
 
-const RecordPauseButton = new Lang.Class({
-    Name: "RecordPauseButton",
+const RecordButton = new Lang.Class({
+    Name: "RecordButton",
     Extends: Gtk.Button,
     
     _init: function(record, activeProfile) {
@@ -235,11 +235,11 @@ const StopButton = new Lang.Class({
     }, 
             
     _onStopClicked: function() {
-        this._activeButton.set_active(false);
         
         if (this._id == ButtonID.RECORD_BUTTON) {
             this._action.stopRecording();
         } else if (ButtonID.PLAY_BUTTON) {
+            this._activeButton.set_active(false);
             log("stop");//this._play.stopPlaying(); 
         }
     } 
