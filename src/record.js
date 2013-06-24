@@ -114,6 +114,7 @@ const Record = new Lang.Class({
         
         if (!this.pipeline || this.pipeState == PipelineStates.STOPPED )
             this.recordPipeline();
+            
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
         
@@ -122,22 +123,10 @@ const Record = new Lang.Class({
              
 
     },
-    
-    pauseRecording: function() {
-        this.pipeline.set_state(Gst.State.PAUSED);
-        this.pipeState = PipelineStates.PAUSED;
-    },
-    
+
     stopRecording: function() {
         let sent = this.pipeline.send_event(Gst.Event.new_eos());
         log(sent);
-       /*this.srcElement.set_state(Gst.State.NULL);
-        this.srcElement.get_state(null, null, -1);
-        this.srcElement.set_locked_state(true);
-        this.pipeline.set_state(Gst.State.NULL);
-        log("called stop");
-        this.pipeState = PipelineStates.STOPPED;
-        //this.pipeline.set_locked_state(true);*/
     },
     
     onEndOfStream: function() {
@@ -147,7 +136,6 @@ const Record = new Lang.Class({
         this.pipeline.set_state(Gst.State.NULL);
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
-        //this.pipeline.set_locked_state(true);
         this.recordBus.remove_signal_watch(); 
     },
         
