@@ -53,12 +53,12 @@ const Application = imports.application;
             } ));
     },
     
-    pauseRecording: function() {
+    pausePlaying: function() {
         this.pipeline.set_state(Gst.State.PAUSED);
         this.pipeState = PipelineStates.PAUSED;
     },
     
-    stopRecording: function() {
+    stopPlaying: function() {
         let sent = this.pipeline.send_event(Gst.Event.new_eos());
         log(sent);
 
@@ -91,4 +91,4 @@ const Application = imports.application;
         }
     } 
 });
-});   
+   
