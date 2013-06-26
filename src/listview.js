@@ -1,5 +1,4 @@
 /*
- *  Author: Meg Ford <megford@gnome.org>
  *
  * Copyright 2013 Meg Ford
  * This library is free software; you can redistribute it and/or
@@ -17,6 +16,7 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  *
+ * Author: Meg Ford <megford@gnome.org>
  *
  */
 //./src/gnome-sound-recorder
@@ -107,8 +107,7 @@ const Listview = new Lang.Class({
         }
     }, 
     
-    _set: function(fileArr) {
-        
+    _set: function(fileArr) {       
         this._fileArr = fileArr;
         this._allFilesInfo = this._allFilesInfo.concat(this._fileArr);
         log(this._allFilesInfo);
@@ -150,5 +149,5 @@ const Listview = new Lang.Class({
                         }
                     }));
             }));
-    }  
+    }, 
 });

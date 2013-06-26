@@ -1,5 +1,4 @@
  /*
- *  Author: Meg Ford <megford@gnome.org>
  *
  * Copyright 2013 Meg Ford
  * This library is free software; you can redistribute it and/or
@@ -17,6 +16,7 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  *
+ * Author: Meg Ford <megford@gnome.org>
  *
  */
 
