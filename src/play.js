@@ -49,13 +49,14 @@ const Application = imports.application;
                 }
             }));
     },
+
     
     startPlaying: function() {
         this._playPipeline();
         let ret = this.play.set_state(Gst.State.PLAYING); 
                 
         if (ret == Gst.StateChangeReturn.FAILURE)
-            log("Unable to set the playbin to the playing state.\n"); //create return string?
+            log("Unable to set the playbin to the playing state.\n"); //create return string?*
     },
     
     pausePlaying: function() {

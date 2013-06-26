@@ -212,7 +212,7 @@ const PlayPauseButton = new Lang.Class({
     _onPlayPauseToggled: function() {
         if (this.get_active()) {
             this.set_image(this.pauseImage);
-            this._play.startPlaying();
+                this._play.startPlaying();
         } else {
             this.set_image(this.playImage);
             //this._play.pausePlaying();            
