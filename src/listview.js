@@ -46,11 +46,8 @@ const Listview = new Lang.Class({
     },
             
     enumerateDirectory: function() {
-
-        let initialFileName = [];
-        initialFileName.push(GLib.get_home_dir());
-        initialFileName.push(_("Recordings"));
-        let dirName = GLib.build_filenamev(initialFileName);
+        let path = Application.path;
+        let dirName = GLib.build_filenamev(path);
         let dir = Gio.file_new_for_path(dirName);    
       
         dir.enumerate_children_async('standard::name,standard::sort-order,time::modified',
@@ -84,10 +81,11 @@ const Listview = new Lang.Class({
                                 let date = GLib.DateTime.new_from_timeval_local(timeVal); // will this be buggy?
                                 let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
                                 let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S"));                               
-                                this._fileInfo = this._fileInfo.concat({ fileName: returnedName, 
-                                                                         dateForSort: dateModifiedSortString, 
-                                                                         appName: null, 
-                                                                         dateModified: dateModifiedDisplayString });
+                                this._fileInfo = 
+                                    this._fileInfo.concat({ fileName: returnedName, 
+                                                            dateForSort: dateModifiedSortString, 
+                                                            appName: null, 
+                                                            dateModified: dateModifiedDisplayString });
                             }));
                         this._sortItems(this._fileInfo);
                     } else {
@@ -140,11 +138,9 @@ const Listview = new Lang.Class({
      
      _runDiscover: function() {
         this.file = this._allFilesInfo[this.idx]; // this is repetitive, find all the places where this is done and consolidate
-        let initialFileName = [];
-        initialFileName.push(GLib.get_home_dir());
-        initialFileName.push(_("Recordings"));
-        initialFileName.push(this.file.fileName);
-        let finalFileName = GLib.build_filenamev(initialFileName);
+        let discoverPath = Application.path;
+        discoverPath.push(this.file.fileName);
+        let finalFileName = GLib.build_filenamev(discoverPath);
         let uri = GLib.filename_to_uri(finalFileName, null);
                                 
         this._discoverer.discover_uri_async(uri);

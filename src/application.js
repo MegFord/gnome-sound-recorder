@@ -36,6 +36,7 @@ let audioProfile = null;
 let fileManager = null; // do I use this?
 let list = null;
 let offsetController = null;
+let path = null;
 
 const ButtonID = {
     RECORD_BUTTON: 0,
@@ -49,12 +50,14 @@ const Application = new Lang.Class({
     _init: function(params) {
         audioProfile = new AudioProfile.AudioProfile();
         this._buildFileName = new Record.BuildFileName()
-        let path = this._buildFileName.buildPath();
+        path = this._buildFileName.buildPath();
         log(path);
         this._buildFileName.ensureDirectory(path);
         list = new Listview.Listview();
         list.enumerateDirectory();
         offsetController = new FileUtil.OffsetController;
+        let fileUtil = new FileUtil.FileUtil();
+        //fileUtil.buildPath();
         let view = new MainView();
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        default_width: 640,
@@ -309,7 +312,7 @@ const LoadMoreButton = new Lang.Class({
         let visible = !(remainingFiles <= 0)
         
         if (!visible) {
-            // Translators: "more" refers to documents in this context
+            // Translators: "more" refers to recordings in this context
             this._label.label = _("Load More");
         }
     }

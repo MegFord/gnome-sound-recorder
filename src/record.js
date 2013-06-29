@@ -69,7 +69,9 @@ const Record = new Lang.Class({
                 if (message != null) {
                     this._onMessageReceived(message);
                 }
-            }));       
+            }));
+        this.volume = Gst.ElementFactory.make("volume", "volume"); 
+        this.pipeline.add(this.volume);    
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         this.ebin.connect("element-added", Lang.bind(this,
             function(ebin, element) {
@@ -95,7 +97,8 @@ const Record = new Lang.Class({
         if (!this.pipeline || !this.giosink)
             log ("Not all elements could be created.\n");
             
-        let srcLink = this.srcElement.link(this.ebin);
+        let srcLink = this.srcElement.link(this.volume);
+        let volLink = this.volume.link(this.ebin);
         let ebinLink = this.ebin.link(this.giosink);
         
         if (!srcLink || !ebinLink)
