@@ -30,6 +30,8 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Signals = imports.signals;
 
+const Application = imports.application;
+
 const EnumeratorState = { 
     ACTIVE: 0,
     CLOSED: 1
@@ -65,7 +67,6 @@ const Listview = new Lang.Class({
             log("The contents of the Recordings directory were not indexed.");
         else   
             this._onNextFileComplete(); 
-            log("nextFComp"); 
     },
     
     _onNextFileComplete: function () {
@@ -79,24 +80,21 @@ const Listview = new Lang.Class({
                         files.forEach(Lang.bind(this,
                             function(file) {
                                 let returnedName = file.get_attribute_as_string("standard::name");
-                                let s = file.get_modification_time();
-                                let date = GLib.DateTime.new_from_timeval_local(s);
+                                let timeVal = file.get_modification_time();
+                                let date = GLib.DateTime.new_from_timeval_local(timeVal); // will this be buggy?
                                 let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
-                                let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S"));
-                                log(s);
-                                log(dateModifiedSortString);
-                                log(returnedName);                                
+                                let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S"));                               
                                 this._fileInfo = this._fileInfo.concat({ fileName: returnedName, 
                                                                          dateForSort: dateModifiedSortString, 
                                                                          appName: null, 
                                                                          dateModified: dateModifiedDisplayString });
                             }));
-                        this._set(this._fileInfo);
+                        this._sortItems(this._fileInfo);
                     } else {
                         log("done");
                         this._stopVal = EnumeratorState.CLOSED;
                         this._enumerator.close(null);
-                        this._runDiscover(); 
+                        this._setDiscover(); 
                         
                         return;
                    }                    
@@ -106,47 +104,77 @@ const Listview = new Lang.Class({
         }
     }, 
     
-    _set: function(fileArr) {       
+    _sortItems: function(fileArr) {       
         this._fileArr = fileArr;
         this._allFilesInfo = this._allFilesInfo.concat(this._fileArr);
-        log(this._allFilesInfo);
         this._allFilesInfo.sort(function(a, b) {
             return a.dateForSort - b.dateForSort;
         }); 
-        this._allFilesInfo.forEach(Lang.bind(this, 
-            function(file) { log(file.fileName)
-            log(file.dateModified)}));
-        log(this._stopVal);
-        log("stval");
         
         if (this._stopVal == EnumeratorState.ACTIVE)
             this._onNextFileComplete();  
     }, 
-        
-    _runDiscover: function() {
+    
+    getItemCount: function() {
+        log(this._allFilesInfo.length);
+        return this._allFilesInfo.length;
+    },
+       
+    _setDiscover: function() {
         this._discoverer = new GstPbutils.Discoverer();
-        this._discoverer.start();     
-        this._allFilesInfo.forEach(Lang.bind(this, 
-            function(file) { 
-                let initialFileName = [];
-                initialFileName.push(GLib.get_home_dir());
-                initialFileName.push(_("Recordings"));
-                initialFileName.push(file.fileName);
-                log(file.fileName);
-                log(file.dateModified);
-                let finalFileName = GLib.build_filenamev(initialFileName);
-                let uri = GLib.filename_to_uri(finalFileName, null);
-                this._discoverer.discover_uri_async(uri);
-                this._discoverer.connect('discovered', Lang.bind(this, 
-                    function(_discoverer, info, error) {
-                        this.finished = info.get_result(); 
+        this._discoverer.start();
+        this._controller = Application.offsetController;
+        this.totItems = this.getItemCount();
+        let startIdx = this._controller.getOffset();
+        log(startIdx);
+        this.ensureCount = startIdx + this._controller.getOffsetStep() - 1;
+        
+        if (this.ensureCount < this.totItems)
+            this.endIdx = this.ensureCount;
+        else
+            this.endIdx = this.totItems - 1;
+        log(this.endIdx);
+        this.idx = startIdx;   
+        this._runDiscover();
+     },
+     
+     _runDiscover: function() {
+        this.file = this._allFilesInfo[this.idx]; // this is repetitive, find all the places where this is done and consolidate
+        let initialFileName = [];
+        initialFileName.push(GLib.get_home_dir());
+        initialFileName.push(_("Recordings"));
+        initialFileName.push(this.file.fileName);
+        let finalFileName = GLib.build_filenamev(initialFileName);
+        let uri = GLib.filename_to_uri(finalFileName, null);
+                                
+        this._discoverer.discover_uri_async(uri);
+        this._discoverer.connect('discovered', Lang.bind(this, 
+            function(_discoverer, info, error) {
+                let result = info.get_result(); 
+                this._onDiscovererFinished(result, info, error); 
+             }));
+    },
+                        
+    _onDiscovererFinished: function(res, info, err) {
+        this.result = res;
+        
+        if (this.result != GstPbutils.DiscovererResult.ERROR) { // How do I recover from the error?
+            this.tagInfo = info.get_tags(info);
+            let appString = ""; 
+            appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
+                            
+            if(appString == GLib.get_application_name()) {
+                this.file.appName = appString;
+            }
+        } 
 
-                        if (this.finished != GstPbutils.DiscovererResult.ERROR) {
-                            this.i = info.get_tags(info); 
-                            file.appName = this.i.get_string(Gst.TAG_APPLICATION_NAME);
-                                 log(file.appName);
-                        }
-                    }));
-            }));
-    }, 
+        if (this.idx < this.totItems && this.idx < this.endIdx) { // Some of this logic is probably unnecessary
+            this.idx++;
+            this._runDiscover();
+        } else { 
+            this._discoverer.stop();
+        } 
+    }         
 });
+
+

@@ -23,15 +23,19 @@ imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
 const Gst = imports.gi.Gst;
+const Signals = imports.signals;
 
 const AudioProfile = imports.audioProfile;
+const FileUtil = imports.fileUtil;
 const Listview = imports.listview;
 const Play = imports.play;
 const Record = imports.record;
 //const BuildFileName = imports.BuildFileName;
 
 let audioProfile = null;
+let fileManager = null; // do I use this?
 let list = null;
+let offsetController = null;
 
 const ButtonID = {
     RECORD_BUTTON: 0,
@@ -50,6 +54,7 @@ const Application = new Lang.Class({
         this._buildFileName.ensureDirectory(path);
         list = new Listview.Listview();
         list.enumerateDirectory();
+        offsetController = new FileUtil.OffsetController;
         let view = new MainView();
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        default_width: 640,
@@ -160,7 +165,8 @@ const MainView = new Lang.Class({
 
         let playToolbar = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
         playToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        playGrid.attach(playToolbar, 20, 0, 2, 1);        
+        playGrid.attach(playToolbar, 20, 0, 2, 1);
+        let loadButton = new LoadMoreButton(playGrid);        
                
         let playButton = new PlayPauseButton(this._play);
         playToolbar.pack_end(playButton, false, true, 0);
@@ -263,5 +269,49 @@ const EncoderComboBox = new Lang.Class({
         let activeProfile = this.get_active();
         audioProfile.assignProfile(activeProfile);
     }        
-});       
+}); 
+
+const LoadMoreButton = new Lang.Class({
+    Name: 'LoadMoreButton',
+
+    _init: function(playgr) {
+        this._block = false;
+
+        this._controller = offsetController;
+        /*this._controllerId =
+            this._controller.connect('item-count-changed',
+                                     Lang.bind(this, this._onItemCountChanged));*/
+
+        // Translators: "more" refers to recordings in this context
+        this._label = new Gtk.Label({ label: _("Load More"),
+                                      visible: true });
+        playgr.add(this._label);
+
+        this.widget = new Gtk.Button();
+                                       
+        this.widget.get_style_context().add_class('documents-load-more');
+        playgr.add(this.widget);
+        
+        this.widget.connect('clicked', Lang.bind(this,
+            function() {
+                this._label.label = _("Loading…");
+
+                this._controller.increaseOffset();
+                list._setDiscover();
+            }));
+        this._onItemCountChanged(); 
+    },
+
+    _onItemCountChanged: function() {
+        let remainingFiles = this._controller.getRemainingFiles();
+        log(remainingFiles);
+        log("ALL FILES");
+        let visible = !(remainingFiles <= 0)
+        
+        if (!visible) {
+            // Translators: "more" refers to documents in this context
+            this._label.label = _("Load More");
+        }
+    }
+});      
     
