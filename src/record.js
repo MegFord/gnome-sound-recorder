@@ -69,9 +69,7 @@ const Record = new Lang.Class({
                 if (message != null) {
                     this._onMessageReceived(message);
                 }
-            }));
-        this.volume = Gst.ElementFactory.make("volume", "volume"); 
-        this.pipeline.add(this.volume);    
+            }));  
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         this.ebin.connect("element-added", Lang.bind(this,
             function(ebin, element) {
@@ -97,12 +95,27 @@ const Record = new Lang.Class({
         if (!this.pipeline || !this.giosink)
             log ("Not all elements could be created.\n");
             
-        let srcLink = this.srcElement.link(this.volume);
-        let volLink = this.volume.link(this.ebin);
+        let srcLink = this.srcElement.link(this.ebin);
         let ebinLink = this.ebin.link(this.giosink);
         
         if (!srcLink || !ebinLink)
             log("Not all of the elements were linked");
+
+    },
+                   
+    _updateTime: function() {          
+        let time = this.pipeline.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
+        
+        if (time >= 0) {
+            let seconds = Math.ceil(time);
+            log(seconds);
+            let minuteString = parseInt( seconds / 60 ) % 60;
+            let secondString = seconds % 60;
+
+            log(minuteString + ":" + (secondString  < 10 ? "0" + secondString : secondString));            
+        }
+        
+        return true;
     },
        
     startRecording: function(activeProfile) {
@@ -120,15 +133,23 @@ const Record = new Lang.Class({
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
         
-        if (ret == Gst.StateChangeReturn.FAILURE)
+        if (ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the pipeline to the recording state.\n"); //create return string?
-             
-
+        }
+            
+        if (!this.timeout) {
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, Lang.bind(this, this._updateTime));    
+        }
     },
 
     stopRecording: function() {
         let sent = this.pipeline.send_event(Gst.Event.new_eos());
         log(sent);
+        
+         if (this.timeout) {
+            GLib.source_remove(this.timeout);
+            this.timeout = 0;
+        }
     },
     
     onEndOfStream: function() {
@@ -146,6 +167,10 @@ const Record = new Lang.Class({
         let msg = message.type;
         log(msg);
         switch(msg) {
+        
+            case Gst.MessageType.STATE_CHANGED:
+                //this._queryTime();
+                break;
             
             case Gst.MessageType.ELEMENT:
                 log("elem");

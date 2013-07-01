@@ -141,7 +141,7 @@ const MainView = new Lang.Class({
 
         let toolbarStart = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
         toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        recordGrid.attach(toolbarStart, 20, 0, 2, 1);        
+        recordGrid.attach(toolbarStart, 20, 0, 2, 1);     
                 
         this._comboBoxText = new EncoderComboBox();
         recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
