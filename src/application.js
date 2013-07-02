@@ -37,6 +37,8 @@ let fileManager = null; // do I use this?
 let list = null;
 let offsetController = null;
 let path = null;
+let view = null;
+
 
 const ButtonID = {
     RECORD_BUTTON: 0,
@@ -58,7 +60,7 @@ const Application = new Lang.Class({
         offsetController = new FileUtil.OffsetController;
         let fileUtil = new FileUtil.FileUtil();
         //fileUtil.buildPath();
-        let view = new MainView();
+        view = new MainView();
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        default_width: 640,
                                        default_height: 480 });
@@ -141,10 +143,14 @@ const MainView = new Lang.Class({
 
         let toolbarStart = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
         toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        recordGrid.attach(toolbarStart, 20, 0, 2, 1);     
+        recordGrid.attach(toolbarStart, 20, 0, 2, 1);
                 
         this._comboBoxText = new EncoderComboBox();
         recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
+        
+        this.timeLabel =  new Gtk.Label();
+        recordGrid.attach(this.timeLabel, 20, 2, 3, 1); 
+        
         let recordButton = new RecordButton(this._record);       
         toolbarStart.pack_end(recordButton, false, true, 0);
         
@@ -180,6 +186,16 @@ const MainView = new Lang.Class({
         playToolbar.pack_end(this.stopPlay, true, true, 0);
 
         this.add_named(this.playBox, name);
+    },
+    
+    setLabel:function(time) {
+        this.time = time
+        let seconds = Math.ceil(this.time);
+        log(seconds);
+        let minuteString = parseInt( seconds / 60 ) % 60;
+        let secondString = seconds % 60;
+        let timeString = minuteString + ":" + (secondString  < 10 ? "0" + secondString : secondString);
+        this.timeLabel.label = timeString;
     }
 
 });
@@ -316,5 +332,7 @@ const LoadMoreButton = new Lang.Class({
             this._label.label = _("Load More");
         }
     }
-});      
+}); 
+
+            
     

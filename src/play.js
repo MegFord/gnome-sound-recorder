@@ -32,7 +32,8 @@ const Application = imports.application;
  const Play = new Lang.Class({
     Name: "Play",
            
-    _playPipeline: function() {        
+    _playPipeline: function() { 
+        this.label = Application.view;       
         this.play = Gst.ElementFactory.make("playbin", "play");
         this.play.set_property("uri", "file:///2013-06-2018:59:13.mp3");
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
@@ -48,32 +49,54 @@ const Application = imports.application;
                 }
             }));
     },
-
-    
+                   
+    _updateTime: function() {          
+        let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
+        
+        if (time >= 0) {
+            this.label.setLabel(time);            
+        }
+        
+        return true;
+    },
+        
     startPlaying: function() {
         this._playPipeline();
         let ret = this.play.set_state(Gst.State.PLAYING); 
                 
         if (ret == Gst.StateChangeReturn.FAILURE)
             log("Unable to set the playbin to the playing state.\n"); //create return string?*
+       
+        if (!this.timeout) {
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, Lang.bind(this, this._updateTime));    
+        }
     },
     
     pausePlaying: function() {
         this.play.set_state(Gst.State.PAUSED);
-        //this.pipeState = PipelineStates.PAUSED;
+        this.pipeState = PipelineStates.PAUSED;
+        
+        if (this.timeout) {
+            GLib.source_remove(this.timeout);
+            this.timeout = 0;
+        }
     },
     
     stopPlaying: function() {
         let sent = this.play.send_event(Gst.Event.new_eos());
         log(sent);
-
     },
     
     onEndOfStream: function() { 
         this.play.set_state(Gst.State.NULL);
         log("called stop");
-        //this.pipeState = PipelineStates.STOPPED;
-        this.playBus.remove_signal_watch(); 
+        this.pipeState = PipelineStates.STOPPED;
+        this.playBus.remove_signal_watch();
+        
+        if (this.timeout) {
+            GLib.source_remove(this.timeout);
+            this.timeout = 0;
+        } 
     },
         
     _onMessageReceived: function(message) {
