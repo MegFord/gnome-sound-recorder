@@ -45,6 +45,17 @@ const ButtonID = {
     PLAY_BUTTON: 1
 };
 
+const TimeLabelID = {
+    RECORD_LABEL: 0,
+    PLAY_LABEL: 1
+};
+
+const PipelineStates = {
+    PLAYING: 0,
+    PAUSED: 1,
+    STOPPED: 2
+}; 
+
 const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.ApplicationWindow,
@@ -53,7 +64,6 @@ const Application = new Lang.Class({
         audioProfile = new AudioProfile.AudioProfile();
         this._buildFileName = new Record.BuildFileName()
         path = this._buildFileName.buildPath();
-        log(path);
         this._buildFileName.ensureDirectory(path);
         list = new Listview.Listview();
         list.enumerateDirectory();
@@ -61,6 +71,7 @@ const Application = new Lang.Class({
         let fileUtil = new FileUtil.FileUtil();
         //fileUtil.buildPath();
         view = new MainView();
+        
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        default_width: 640,
                                        default_height: 480 });
@@ -117,6 +128,8 @@ const MainView = new Lang.Class({
             
         let playerPage = this._addPlayerPage('playerPage');
             this.visible_child_name = 'recorderPage';
+            
+        this.labelID = null;
     },
 
 
@@ -148,16 +161,19 @@ const MainView = new Lang.Class({
         this._comboBoxText = new EncoderComboBox();
         recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
         
-        this.timeLabel =  new Gtk.Label();
-        recordGrid.attach(this.timeLabel, 20, 2, 3, 1); 
+        this.recordTimeLabel =  new Gtk.Label();
+        recordGrid.attach(this.recordTimeLabel, 20, 2, 3, 1); 
         
         let recordButton = new RecordButton(this._record);       
         toolbarStart.pack_end(recordButton, false, true, 0);
         
         let buttonID = ButtonID.RECORD_BUTTON;
                 
-        this.stop = new StopButton(this._record, recordButton, buttonID);
-        toolbarStart.pack_end(this.stop, true, true, 0);
+        let stopRecord = new Gtk.Button();
+        this.stopRecImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
+        stopRecord.set_image(this.stopRecImage);
+        stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
+        toolbarStart.pack_end(stopRecord, true, true, 0);
 
         this.add_named(this.recordBox, name);
     },
@@ -175,29 +191,53 @@ const MainView = new Lang.Class({
         let playToolbar = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
         playToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
         playGrid.attach(playToolbar, 20, 0, 2, 1);
-        let loadButton = new LoadMoreButton(playGrid);        
+        let loadButton = new LoadMoreButton(playGrid); 
+        this.playTimeLabel =  new Gtk.Label();
+        playGrid.attach(this.playTimeLabel, 20, 1, 3, 1);       
                
-        let playButton = new PlayPauseButton(this._play);
-        playToolbar.pack_end(playButton, false, true, 0);
+        this.playButton = new PlayPauseButton(this._play);
+        playToolbar.pack_end(this.playButton, false, true, 0);
         
         let buttonID = ButtonID.PLAY_BUTTON;
         
-        this.stopPlay = new StopButton(this._play, playButton, buttonID);
-        playToolbar.pack_end(this.stopPlay, true, true, 0);
+        let stopPlay = new Gtk.Button();
+        this.stopImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
+        stopPlay.set_image(this.stopImage);
+        stopPlay.connect("clicked", Lang.bind(this, this.onPlayStopClicked));
+        playToolbar.pack_end(stopPlay, true, true, 0);
 
         this.add_named(this.playBox, name);
     },
     
-    setLabel:function(time) {
+    onPlayStopClicked: function() {
+        this.playButton.set_active(false);
+        this._play.stopPlaying();        
+    },
+    
+    onRecordStopClicked: function() {
+        this._record.stopRecording();
+    },
+    
+    setLabelID: function(labelid) {
+        this.labelID = labelid;
+    },
+    
+    setLabel: function(time) {
         this.time = time
-        let seconds = Math.ceil(this.time);
+        let seconds = Math.round(this.time);
         log(seconds);
         let minuteString = parseInt( seconds / 60 ) % 60;
         let secondString = seconds % 60;
         let timeString = minuteString + ":" + (secondString  < 10 ? "0" + secondString : secondString);
-        this.timeLabel.label = timeString;
+        
+        if (this.labelID == TimeLabelID.RECORD_LABEL) {
+            this.recordTimeLabel.label = timeString;
+        }
+        
+        else if (this.labelID == TimeLabelID.PLAY_LABEL) {
+            this.playTimeLabel.label = timeString;  
+        }
     }
-
 });
 
 const RecordButton = new Lang.Class({
@@ -229,43 +269,20 @@ const PlayPauseButton = new Lang.Class({
         this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);              
         this.parent();
         this.set_image(this.playImage);
-        this.connect("clicked", Lang.bind(this, this._onPlayPauseToggled));
+        this.connect("toggled", Lang.bind(this, this._onPlayPauseToggled));
     },
     
     _onPlayPauseToggled: function() {
-        if (this.get_active()) {
-            this.set_image(this.pauseImage);
-                this._play.startPlaying();
-        } else {
-            this.set_image(this.playImage);
-            //this._play.pausePlaying();            
-        }
-    }
-});
+        let activeState = this._play.getPipeStates();
 
-const StopButton = new Lang.Class({
-    Name: "StopButton",
-    Extends: Gtk.Button,
-       
-    _init: function(action, activeButton, id) {
-        this._action = action;
-        this._id = id;
-        this._activeButton = activeButton;
-        this.stopImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
-        this.parent();
-        this.set_image(this.stopImage);
-        this.connect("clicked", Lang.bind(this, this._onStopClicked));
-    }, 
-            
-    _onStopClicked: function() {
-        
-        if (this._id == ButtonID.RECORD_BUTTON) {
-            this._action.stopRecording();
-        } else if (ButtonID.PLAY_BUTTON) {
-            this._activeButton.set_active(false);
-            log("stop");//this._play.stopPlaying(); 
-        }
-    } 
+        if (activeState != PipelineStates.PLAYING) {
+            this.set_image(this.pauseImage);
+            this._play.startPlaying();
+        } else if (activeState == PipelineStates.PLAYING) {
+            this.set_image(this.playImage);
+            this._play.pausePlaying();         
+        }  
+    }
 });
 
 const EncoderComboBox = new Lang.Class({ 

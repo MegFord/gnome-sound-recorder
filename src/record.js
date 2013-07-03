@@ -46,6 +46,7 @@ const Record = new Lang.Class({
     
     recordPipeline: function() {
         this.label = Application.view;
+        this.label.labelID = Application.TimeLabelID.RECORD_LABEL; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         
@@ -144,18 +145,18 @@ const Record = new Lang.Class({
         
          if (this.timeout) {
             GLib.source_remove(this.timeout);
-            this.timeout = 0;
+            this.timeout = null;
         }
     },
     
     onEndOfStream: function() {
         this.srcElement.set_state(Gst.State.NULL); 
-        this.srcElement.get_state(null, null, -1);
-        this.srcElement.set_locked_state(true); 
+        this.srcElement.get_state(null, null, -1); 
         this.pipeline.set_state(Gst.State.NULL);
         log("called stop");
         this.pipeState = PipelineStates.STOPPED;
-        this.recordBus.remove_signal_watch(); 
+        this.recordBus.remove_signal_watch();
+        this._updateTime(); 
     },
         
     _onMessageReceived: function(message) {
@@ -163,10 +164,6 @@ const Record = new Lang.Class({
         let msg = message.type;
         log(msg);
         switch(msg) {
-        
-            case Gst.MessageType.STATE_CHANGED:
-                //this._queryTime();
-                break;
             
             case Gst.MessageType.ELEMENT:
                 log("elem");

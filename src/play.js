@@ -27,15 +27,23 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 
-const Application = imports.application; 
+const Application = imports.application;
+
+const PipelineStates = {
+    PLAYING: 0,
+    PAUSED: 1,
+    STOPPED: 2,
+    NULL: 3
+}; 
  
  const Play = new Lang.Class({
     Name: "Play",
            
     _playPipeline: function() { 
-        this.label = Application.view;       
+        this.label = Application.view;
+        this.label.labelID = Application.TimeLabelID.PLAY_LABEL;       
         this.play = Gst.ElementFactory.make("playbin", "play");
-        this.play.set_property("uri", "file:///2013-06-2018:59:13.mp3");
+        this.play.set_property("uri", "file:///home/meg/Recordings/2013-06-22 15:29:23.ogg");
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
              
@@ -61,11 +69,14 @@ const Application = imports.application;
     },
         
     startPlaying: function() {
-        this._playPipeline();
-        let ret = this.play.set_state(Gst.State.PLAYING); 
+        if (!this.play || this.playState == PipelineStates.STOPPED )
+            this._playPipeline();
+            
+        let ret = this.play.set_state(Gst.State.PLAYING);
+        this.playState = PipelineStates.PLAYING; 
                 
         if (ret == Gst.StateChangeReturn.FAILURE)
-            log("Unable to set the playbin to the playing state.\n"); //create return string?*
+            log("Unable to set the playbin to the playing state.\n"); //create return string?
        
         if (!this.timeout) {
             this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, Lang.bind(this, this._updateTime));    
@@ -74,7 +85,7 @@ const Application = imports.application;
     
     pausePlaying: function() {
         this.play.set_state(Gst.State.PAUSED);
-        this.pipeState = PipelineStates.PAUSED;
+        this.playState = PipelineStates.PAUSED;
         
         if (this.timeout) {
             GLib.source_remove(this.timeout);
@@ -83,20 +94,26 @@ const Application = imports.application;
     },
     
     stopPlaying: function() {
-        let sent = this.play.send_event(Gst.Event.new_eos());
-        log(sent);
+        if (this.playState != PipelineStates.STOPPED) {
+            this.onEnd();
+        }
     },
     
-    onEndOfStream: function() { 
+    onEnd: function() { 
         this.play.set_state(Gst.State.NULL);
         log("called stop");
-        this.pipeState = PipelineStates.STOPPED;
+        this.playState = PipelineStates.STOPPED;
         this.playBus.remove_signal_watch();
-        
-        if (this.timeout) {
-            GLib.source_remove(this.timeout);
-            this.timeout = 0;
-        } 
+        this._updateTime();
+                                    
+            if (this.timeout) {
+                GLib.source_remove(this.timeout);
+                this.timeout = 0;
+            }
+    },
+    
+    onEndOfStream: function() {
+        this.label.onPlayStopClicked();
     },
         
     _onMessageReceived: function(message) {
@@ -106,7 +123,6 @@ const Application = imports.application;
         switch(msg) {
                     
             case Gst.MessageType.EOS:                  
-                log("eos");
                 this.onEndOfStream(); 
                 break;
                 
@@ -115,6 +131,10 @@ const Application = imports.application;
                 log(this.localMsg.parse_error());                
                 break;
         }
-    } 
+    }, 
+    
+    getPipeStates: function() {
+        return this.playState;
+    }
 });
    
