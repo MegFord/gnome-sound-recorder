@@ -31,6 +31,7 @@ const GstPbutils = imports.gi.GstPbutils;
 const Signals = imports.signals;
 
 const Application = imports.application;
+const Record = imports.record;
 
 const EnumeratorState = { 
     ACTIVE: 0,
@@ -119,36 +120,43 @@ const Listview = new Lang.Class({
     },
        
     _setDiscover: function() {
+    log("set");
         this._discoverer = new GstPbutils.Discoverer();
         this._discoverer.start();
         this._controller = Application.offsetController;
         this.totItems = this.getItemCount();
         let startIdx = this._controller.getOffset();
         log(startIdx);
-        this.ensureCount = startIdx + this._controller.getOffsetStep() - 1;
+        this.ensureCount = startIdx + this._controller.getOffsetStep() - 1; 
         
         if (this.ensureCount < this.totItems)
             this.endIdx = this.ensureCount;
         else
             this.endIdx = this.totItems - 1;
-        log(this.endIdx);
+
         this.idx = startIdx;   
         this._runDiscover();
      },
      
      _runDiscover: function() {
+        if (this.dx == -1)
+        return;
         this.file = this._allFilesInfo[this.idx]; // this is repetitive, find all the places where this is done and consolidate
-        let discoverPath = Application.path;
-        discoverPath.push(this.file.fileName);
-        let finalFileName = GLib.build_filenamev(discoverPath);
-        let uri = GLib.filename_to_uri(finalFileName, null);
-                                
-        this._discoverer.discover_uri_async(uri);
+        this._buildFileName = new Record.BuildFileName()
+        let initialFileName = this._buildFileName.buildPath();
+        initialFileName.push(this.file.fileName);
+        log(this.file.fileName);
+        let finalFileName = GLib.build_filenamev(initialFileName);
+        this.uri = GLib.filename_to_uri(finalFileName, null);
+         //log(this.uri);                      
+        this._discoverer.discover_uri_async(this.uri);
         this._discoverer.connect('discovered', Lang.bind(this, 
             function(_discoverer, info, error) {
-                let result = info.get_result(); 
+                let result = info.get_result();
+                log(result);
+                log("result");
                 this._onDiscovererFinished(result, info, error); 
-             }));
+             })); 
     },
                         
     _onDiscovererFinished: function(res, info, err) {
@@ -158,19 +166,23 @@ const Listview = new Lang.Class({
             this.tagInfo = info.get_tags(info);
             let appString = ""; 
             appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
-                            
-            if(appString == GLib.get_application_name()) {
-                this.file.appName = appString;
-            }
+            let time = this.tagInfo.get_uint64(Gst.TAG_DURATION);
+            log(time);
+            
+            if(appString == GLib.get_application_name()) 
+            this.file.appName = appString;
+            log(this.uri);
+            log(this.file.appName);
         } 
-
-        if (this.idx < this.totItems && this.idx < this.endIdx) { // Some of this logic is probably unnecessary
+        if (this.idx < this.endIdx) { // buggy
             this.idx++;
             this._runDiscover();
         } else { 
-            this._discoverer.stop();
-        } 
-    }         
+            this._discoverer.stop(); 
+            return;
+        }
+    }
+             
 });
 
 

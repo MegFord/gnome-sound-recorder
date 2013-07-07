@@ -18,12 +18,15 @@
  * Author: Meg Ford <megford@gnome.org>
  *
  */
+ 
+ //./src/gnome-sound-recorder
 
 imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
+const GstAudio = imports.gi.GstAudio;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 
@@ -40,10 +43,9 @@ const PipelineStates = {
     Name: "Play",
            
     _playPipeline: function() { 
-        this.label = Application.view;
-        this.label.labelID = Application.TimeLabelID.PLAY_LABEL;       
+        this.label = Application.view; //needs to be re-named      
         this.play = Gst.ElementFactory.make("playbin", "play");
-        this.play.set_property("uri", "file:///home/meg/Recordings/2013-06-22 15:29:23.ogg");
+        this.play.set_property("uri", "file:///home/meg/Recordings/2013-07-0615:48:29.mp3");
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
              
@@ -60,9 +62,11 @@ const PipelineStates = {
                    
     _updateTime: function() {          
         let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
+        this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
+        this.trackDurationSecs = this.trackDuration/Gst.SECOND;
         
         if (time >= 0) {
-            this.label.setLabel(time);            
+            this.label.setLabel(time, this.trackDurationSecs);           
         }
         
         return true;
@@ -72,15 +76,12 @@ const PipelineStates = {
         if (!this.play || this.playState == PipelineStates.STOPPED )
             this._playPipeline();
             
-        let ret = this.play.set_state(Gst.State.PLAYING);
+        this.ret = this.play.set_state(Gst.State.PLAYING);
         this.playState = PipelineStates.PLAYING; 
                 
-        if (ret == Gst.StateChangeReturn.FAILURE)
+        if (this.ret == Gst.StateChangeReturn.FAILURE)
             log("Unable to set the playbin to the playing state.\n"); //create return string?
-       
-        if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, Lang.bind(this, this._updateTime));    
-        }
+   
     },
     
     pausePlaying: function() {
@@ -119,7 +120,7 @@ const PipelineStates = {
     _onMessageReceived: function(message) {
         this.localMsg = message;
         let msg = message.type;
-        log(msg);
+        //log(msg);
         switch(msg) {
                     
             case Gst.MessageType.EOS:                  
@@ -130,11 +131,67 @@ const PipelineStates = {
                 log("Error :");
                 log(this.localMsg.parse_error());                
                 break;
+                
+            case Gst.MessageType.DURATION: 
+                log("duration changed");
+                break;
+            
+            case Gst.MessageType.ASYNC_DONE:
+                log("duration");
+                //log(msg);    
+                this.updatePosition();
         }
     }, 
     
     getPipeStates: function() {
         return this.playState;
+    },
+    
+    progressScaleValueChanged: function(seconds) {
+        this.duration = Math.round(this.trackDurationSecs);
+        if (seconds != this.duration) {
+            this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, seconds * Gst.SECOND);
+        } else {
+            
+            if (this.duration) {
+                // Rewind a second back before the track end
+                this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, duration[1]- Gst.SECOND);
+            }
+        }
+    },
+    
+    updatePosition: function() {
+        this.label.labelID = Application.TimeLabelID.PLAY_LABEL; 
+         
+        if (!this.timeout) {
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, Lang.bind(this, this._updateTime));    
+        }
+    },
+    
+    getVolume: function() {
+        /*this.volumeValueLinear = this.play.get_volume(1.0);
+        log(this.volumeValueLinear);
+        let streamVolume = GstAudio.StreamVolume.new({
+            mute: false,
+            volume: 1.0,
+        });*/
+        
+        
+        
+    },
+    
+    setVolume: function() {
+    
+    // let value = Application.view.getVolume()/10;
+     //log(value);
+         //let v = this.setVolume();
+         // if(this.play) {
+        //this.play.set_volume(GstAudio.StreamVolumeFormat.LINEAR, value);
+       
+          //let level = this.play.convert_volume(GSt.Audio.StreamVolumeFormat.LINEAR, GstAudio.StreamVolumeFormat.CUBIC, value);
+ // log("Value:");
+  //log(level); }
+    //return value;
     }
 });
    

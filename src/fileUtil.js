@@ -91,6 +91,6 @@ const OffsetController = new Lang.Class({
         return this._offset;
     }
 });
-Signals.addSignalMethods(OffsetController.prototype);
+Signals.addSignalMethods(OffsetController.prototype); 
 
 

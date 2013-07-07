@@ -19,7 +19,7 @@
  *
  */
  
- //GST_DEBUG=6 ./src/gnome-sound-recorder
+ //GST_DEBUG=3 ./src/gnome-sound-recorder
  
 imports.gi.versions.Gst = '1.0';
 

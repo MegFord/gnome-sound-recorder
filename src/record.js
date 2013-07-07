@@ -19,7 +19,7 @@
  *
  */
  
- //GST_DEBUG=3 ./src/gnome-sound-recorder
+ //GST_DEBUG=4 ./src/gnome-sound-recorder
 
 imports.gi.versions.Gst = '1.0';
 
@@ -132,10 +132,11 @@ const Record = new Lang.Class({
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the pipeline to the recording state.\n"); //create return string?
+            
         }
             
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, Lang.bind(this, this._updateTime));    
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, Lang.bind(this, this._updateTime)); // use _SEC_TIMEOUT   
         }
     },
 
@@ -162,12 +163,12 @@ const Record = new Lang.Class({
     _onMessageReceived: function(message) {
         this.localMsg = message;
         let msg = message.type;
-        log(msg);
+        //log(msg);
         switch(msg) {
             
             case Gst.MessageType.ELEMENT:
                 log("elem");
-                if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
+                if (GstPbutils.is_missing_plugin_message(this.localMsg)) { //buggy
                     let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
                        
                         if (detail != null)
@@ -195,7 +196,7 @@ const Record = new Lang.Class({
     } 
 });
 
-const BuildFileName = new Lang.Class({
+const BuildFileName = new Lang.Class({ // move this to fileUtil.js
     Name: 'BuildFileName',
 
     buildPath: function() {

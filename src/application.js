@@ -30,7 +30,6 @@ const FileUtil = imports.fileUtil;
 const Listview = imports.listview;
 const Play = imports.play;
 const Record = imports.record;
-//const BuildFileName = imports.BuildFileName;
 
 let audioProfile = null;
 let fileManager = null; // do I use this?
@@ -47,7 +46,8 @@ const ButtonID = {
 
 const TimeLabelID = {
     RECORD_LABEL: 0,
-    PLAY_LABEL: 1
+    PLAY_LABEL: 1,
+    DURATION_LABEL: 2
 };
 
 const PipelineStates = {
@@ -55,6 +55,9 @@ const PipelineStates = {
     PAUSED: 1,
     STOPPED: 2
 }; 
+
+const _TIME_DIVISOR = 60;
+const _SEC_TIMEOUT = 200;
 
 const Application = new Lang.Class({
     Name: 'Application',
@@ -191,13 +194,44 @@ const MainView = new Lang.Class({
         let playToolbar = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
         playToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
         playGrid.attach(playToolbar, 20, 0, 2, 1);
-        let loadButton = new LoadMoreButton(playGrid); 
-        this.playTimeLabel =  new Gtk.Label();
-        playGrid.attach(this.playTimeLabel, 20, 1, 3, 1);       
-               
-        this.playButton = new PlayPauseButton(this._play);
-        playToolbar.pack_end(this.playButton, false, true, 0);
         
+        let loadButton = new LoadMoreButton(playGrid); 
+        
+        this.playTimeLabel =  new Gtk.Label();
+        this.playTimeLabel.label = "0:00";
+        playGrid.attach(this.playTimeLabel, 20, 1, 3, 1);
+        
+        this.playDurationLabel =  new Gtk.Label();
+        this.playDurationLabel.label = "0:00";
+        playGrid.attach(this.playDurationLabel, 20, 2, 3, 1);
+        
+        this.progressScale = new Gtk.Scale();
+        this.progressScale.sensitive = false;
+        /*this.progressScale.connect("value-changed", Lang.bind(this,
+            function() {
+                let seconds = Math.floor(this.progressScale.get_value() / _TIME_DIVISOR);
+                this.setLabel(seconds);
+                this._play.updatePosition();
+                return false;
+            })); 
+       this.progressScale.connect("button-release-event", Lang.bind(this,
+            function() {
+                this.onProgressScaleChangeValue(this.progressScale);
+                this._updatePositionCallback();
+                //this.player.set_state(this._lastState);
+                //this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, _SEC_TIMEOUT, Lang.bind(this, this._updatePositionCallback));
+                return false;
+            }));  */
+        playGrid.attach(this.progressScale, 20, 3, 3, 1);
+        
+        //this.playVolume = new Gtk.VolumeButton();
+       // this.range = Gtk.Adjustment.new(1.0, 0.0, 10.0, 0.2, 0.0, 0.0);
+        //this.playVolume.set_adjustment(this.range);
+        //this.playVolume.connect ("value-changed", Lang.bind(this, this._play.setVolume));
+        //playGrid.attach(this.playVolume, 20, 4, 3, 1); 
+              
+        this.playButton = new PlayPauseButton(this._play);
+        playToolbar.pack_end(this.playButton, false, true, 0);        
         let buttonID = ButtonID.PLAY_BUTTON;
         
         let stopPlay = new Gtk.Button();
@@ -218,25 +252,75 @@ const MainView = new Lang.Class({
         this._record.stopRecording();
     },
     
-    setLabelID: function(labelid) {
+   setLabelID: function(labelid) {
         this.labelID = labelid;
     },
     
-    setLabel: function(time) {
+    setLabel: function(time, duration) {
         this.time = time
-        let seconds = Math.round(this.time);
-        log(seconds);
-        let minuteString = parseInt( seconds / 60 ) % 60;
-        let secondString = seconds % 60;
-        let timeString = minuteString + ":" + (secondString  < 10 ? "0" + secondString : secondString);
+        this.duration = duration; 
+        this.playPipeState = this._play.getPipeStates();
+        
+        if (this.playPipeState != 2) {
+            if (this.playDurationLabel.label == "0:00" && duration != 0)
+            this.durationString = this._formatTime(duration);
+        } else {
+            this.durationString = this._formatTime(duration);
+        }  
+        
+        this.timeLabelString = this._formatTime(time);
+        log(this.timeLabelString);
+        
         
         if (this.labelID == TimeLabelID.RECORD_LABEL) {
-            this.recordTimeLabel.label = timeString;
+            this.recordTimeLabel.label = this.timeString;
         }
         
         else if (this.labelID == TimeLabelID.PLAY_LABEL) {
-            this.playTimeLabel.label = timeString;  
+            this.playTimeLabel.label = this.timeLabelString;
+            if (this.playDurationLabel.label == "0:00" || this.playPipeState == 2) {
+            this.playDurationLabel.label = this.durationString;
+            this.setProgressScaleSensitive();
+            this.progressScale.set_range(0.0, duration); 
+            }      
+            this.progressScale.set_value(this.time);  
         }
+    },
+    
+    setProgressScaleSensitive: function() {
+        this.progressScale.sensitive = true;
+    },
+    
+    onProgressScaleChangeValue: function(scroll) {
+        let seconds = scroll.get_value() / _TIME_DIVISOR;
+        this._play.progressScaleValueChanged(seconds);
+        
+        return true;
+     },
+     
+     _formatTime: function(timeL) {
+        this.timeL = timeL;
+        log(this.timeL);
+        let seconds = Math.round(this.timeL);
+        //log(seconds);
+        let minuteString = parseInt( seconds / _TIME_DIVISOR ) % _TIME_DIVISOR;
+        let secondString = seconds % _TIME_DIVISOR;
+        let timeString = minuteString + ":" + (secondString  < 10 ? "0" + secondString : secondString);
+        return timeString;
+    },
+
+    _updatePositionCallback: function() {
+        let position = this._play.updatePosition();
+        if (position >= 0) {
+            this.progressScale.set_value(position * _TIME_DIVISOR);
+        }
+        return true;
+    },
+    
+    getVolume: function() {
+        let volumeValue = this.range.get_value();
+        
+        return volumeValue;
     }
 });
 
@@ -280,7 +364,7 @@ const PlayPauseButton = new Lang.Class({
             this._play.startPlaying();
         } else if (activeState == PipelineStates.PLAYING) {
             this.set_image(this.playImage);
-            this._play.pausePlaying();         
+            //this._play.pausePlaying();         
         }  
     }
 });
@@ -314,9 +398,6 @@ const LoadMoreButton = new Lang.Class({
         this._block = false;
 
         this._controller = offsetController;
-        /*this._controllerId =
-            this._controller.connect('item-count-changed',
-                                     Lang.bind(this, this._onItemCountChanged));*/
 
         // Translators: "more" refers to recordings in this context
         this._label = new Gtk.Label({ label: _("Load More"),
@@ -335,19 +416,6 @@ const LoadMoreButton = new Lang.Class({
                 this._controller.increaseOffset();
                 list._setDiscover();
             }));
-        this._onItemCountChanged(); 
-    },
-
-    _onItemCountChanged: function() {
-        let remainingFiles = this._controller.getRemainingFiles();
-        log(remainingFiles);
-        log("ALL FILES");
-        let visible = !(remainingFiles <= 0)
-        
-        if (!visible) {
-            // Translators: "more" refers to recordings in this context
-            this._label.label = _("Load More");
-        }
     }
 }); 
 
