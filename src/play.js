@@ -204,13 +204,13 @@ const PipelineStates = {
         });*/       
     },
     
-    setVolume: function() {
+    setVolume: function(value) {
     
-    // let value = Application.view.getVolume()/10;
+    //let value = Application.view.getVolume();
      //log(value);
          //let v = this.setVolume();
          // if(this.play) {
-        //this.play.set_volume(GstAudio.StreamVolumeFormat.LINEAR, value);
+        this.play.set_volume(GstAudio.StreamVolumeFormat.LINEAR, value);
        
           //let level = this.play.convert_volume(GSt.Audio.StreamVolumeFormat.LINEAR, GstAudio.StreamVolumeFormat.CUBIC, value);
  // log("Value:");

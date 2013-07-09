@@ -226,11 +226,11 @@ const MainView = new Lang.Class({
               
         playGrid.attach(this.progressScale, 20, 3, 3, 1);
         
-        /*this.playVolume = new Gtk.VolumeButton();
-        this.range = Gtk.Adjustment.new(1.0, 0.0, 10.0, 0.2, 0.0, 0.0);
-        this.playVolume.set_adjustment(this.range);
-        this.playVolume.connect ("value-changed", Lang.bind(this, this._play.setVolume));
-        playGrid.attach(this.playVolume, 20, 4, 3, 1); */
+        this.playVolume = new Gtk.VolumeButton();
+        //this.range = Gtk.Adjustment.new(1.0, 0.0, 10.0, 0.2, 0.0, 0.0);
+        //this.playVolume.set_adjustment(this.range);
+        this.playVolume.connect ("value-changed", Lang.bind(this, this.setVolume));
+        playGrid.attach(this.playVolume, 20, 4, 3, 1); 
               
         this.playButton = new PlayPauseButton(this._play);
         playToolbar.pack_end(this.playButton, false, true, 0);        
@@ -323,8 +323,13 @@ const MainView = new Lang.Class({
         return true;
     },
     
+    setVolume: function() {
+        let volumeValue = this.playVolume.get_value();
+        this._play.setVolume(volumeValue);
+    },
+    
     getVolume: function() {
-        let volumeValue = this.range.get_value();
+        let volumeValue = this.playVolume.get_value();
         
         return volumeValue;
     }
