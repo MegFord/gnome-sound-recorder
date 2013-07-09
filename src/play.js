@@ -194,28 +194,10 @@ const PipelineStates = {
                     this.timeout = null;
         }
     },
-  
-    getVolume: function() {
-        /*this.volumeValueLinear = this.play.get_volume(1.0);
-        log(this.volumeValueLinear);
-        let streamVolume = GstAudio.StreamVolume.new({
-            mute: false,
-            volume: 1.0,
-        });*/       
-    },
     
     setVolume: function(value) {
-    
-    //let value = Application.view.getVolume();
-     //log(value);
-         //let v = this.setVolume();
-         // if(this.play) {
-        this.play.set_volume(GstAudio.StreamVolumeFormat.LINEAR, value);
-       
-          //let level = this.play.convert_volume(GSt.Audio.StreamVolumeFormat.LINEAR, GstAudio.StreamVolumeFormat.CUBIC, value);
- // log("Value:");
-  //log(level); }
-    //return value;
+        let level = this.play.convert_volume(GstAudio.StreamVolumeFormat.LINEAR, GstAudio.StreamVolumeFormat.CUBIC, value);
+        this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, level);
     }
 });
    

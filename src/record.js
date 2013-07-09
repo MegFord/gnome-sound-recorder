@@ -136,7 +136,7 @@ const Record = new Lang.Class({
         }
             
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, Lang.bind(this, this._updateTime)); // use _SEC_TIMEOUT   
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, this._updateTime)); // use _SEC_TIMEOUT   
         }
     },
 

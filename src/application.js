@@ -165,7 +165,13 @@ const MainView = new Lang.Class({
         recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
         
         this.recordTimeLabel =  new Gtk.Label();
-        recordGrid.attach(this.recordTimeLabel, 20, 2, 3, 1); 
+        recordGrid.attach(this.recordTimeLabel, 20, 2, 3, 1);
+        
+        this.recordVolume = new Gtk.VolumeButton();
+        this.recordRange = Gtk.Adjustment.new(0.5, 0, 3.375, 0.15, 0.0, 0.0);
+        this.recordVolume.set_adjustment(this.recordRange);
+        this.recordVolume.connect ("value-changed", Lang.bind(this, this.setVolume));
+        recordGrid.attach(this.recordVolume, 20, 4, 3, 1); 
         
         let recordButton = new RecordButton(this._record);       
         toolbarStart.pack_end(recordButton, false, true, 0);
@@ -227,8 +233,8 @@ const MainView = new Lang.Class({
         playGrid.attach(this.progressScale, 20, 3, 3, 1);
         
         this.playVolume = new Gtk.VolumeButton();
-        //this.range = Gtk.Adjustment.new(1.0, 0.0, 10.0, 0.2, 0.0, 0.0);
-        //this.playVolume.set_adjustment(this.range);
+        this.range = Gtk.Adjustment.new(0.5, 0, 3.375, 0.15, 0.0, 0.0);
+        this.playVolume.set_adjustment(this.range);
         this.playVolume.connect ("value-changed", Lang.bind(this, this.setVolume));
         playGrid.attach(this.playVolume, 20, 4, 3, 1); 
               
