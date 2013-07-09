@@ -109,7 +109,7 @@ const Record = new Lang.Class({
         let time = this.pipeline.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
         
         if (time >= 0) {
-            this.label.setLabel(time);            
+            this.label.setLabel(time, 0);            
         }
         
         return true;

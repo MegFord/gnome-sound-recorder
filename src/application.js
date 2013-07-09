@@ -207,28 +207,30 @@ const MainView = new Lang.Class({
         
         this.progressScale = new Gtk.Scale();
         this.progressScale.sensitive = false;
-        /*this.progressScale.connect("value-changed", Lang.bind(this,
-            function() {
-                let seconds = Math.floor(this.progressScale.get_value() / _TIME_DIVISOR);
-                this.setLabel(seconds);
-                this._play.updatePosition();
+        
+        this.progressScale.connect("button-press-event", Lang.bind(this,
+            function() { 
+                this._play.onProgressScaleConnect(); 
+                             
                 return false;
-            })); 
-       this.progressScale.connect("button-release-event", Lang.bind(this,
+            }));
+            
+        this.progressScale.connect("button-release-event", Lang.bind(this,
             function() {
-                this.onProgressScaleChangeValue(this.progressScale);
+                this.setProgressScaleInsensitive(); 
+                this.onProgressScaleChangeValue();
                 this._updatePositionCallback();
-                //this.player.set_state(this._lastState);
-                //this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, _SEC_TIMEOUT, Lang.bind(this, this._updatePositionCallback));
+                
                 return false;
-            }));  */
+            }));
+              
         playGrid.attach(this.progressScale, 20, 3, 3, 1);
         
-        //this.playVolume = new Gtk.VolumeButton();
-       // this.range = Gtk.Adjustment.new(1.0, 0.0, 10.0, 0.2, 0.0, 0.0);
-        //this.playVolume.set_adjustment(this.range);
-        //this.playVolume.connect ("value-changed", Lang.bind(this, this._play.setVolume));
-        //playGrid.attach(this.playVolume, 20, 4, 3, 1); 
+        /*this.playVolume = new Gtk.VolumeButton();
+        this.range = Gtk.Adjustment.new(1.0, 0.0, 10.0, 0.2, 0.0, 0.0);
+        this.playVolume.set_adjustment(this.range);
+        this.playVolume.connect ("value-changed", Lang.bind(this, this._play.setVolume));
+        playGrid.attach(this.playVolume, 20, 4, 3, 1); */
               
         this.playButton = new PlayPauseButton(this._play);
         playToolbar.pack_end(this.playButton, false, true, 0);        
@@ -252,7 +254,7 @@ const MainView = new Lang.Class({
         this._record.stopRecording();
     },
     
-   setLabelID: function(labelid) {
+    setLabelID: function(labelid) {
         this.labelID = labelid;
     },
     
@@ -262,27 +264,24 @@ const MainView = new Lang.Class({
         this.playPipeState = this._play.getPipeStates();
         
         if (this.playPipeState != 2) {
-            if (this.playDurationLabel.label == "0:00" && duration != 0)
+            if (this.playDurationLabel.label == "0:00" && duration != 0) 
             this.durationString = this._formatTime(duration);
         } else {
             this.durationString = this._formatTime(duration);
-        }  
+        } 
         
-        this.timeLabelString = this._formatTime(time);
-        log(this.timeLabelString);
-        
+        this.timeLabelString = this._formatTime(time);       
         
         if (this.labelID == TimeLabelID.RECORD_LABEL) {
-            this.recordTimeLabel.label = this.timeString;
-        }
-        
-        else if (this.labelID == TimeLabelID.PLAY_LABEL) {
+            this.recordTimeLabel.label = this.timeLabelString;
+        } else if (this.labelID == TimeLabelID.PLAY_LABEL) {
             this.playTimeLabel.label = this.timeLabelString;
+            
             if (this.playDurationLabel.label == "0:00" || this.playPipeState == 2) {
-            this.playDurationLabel.label = this.durationString;
-            this.setProgressScaleSensitive();
-            this.progressScale.set_range(0.0, duration); 
-            }      
+                this.playDurationLabel.label = this.durationString;
+                this.setProgressScaleSensitive();
+                this.progressScale.set_range(0.0, duration); 
+            }                  
             this.progressScale.set_value(this.time);  
         }
     },
@@ -291,28 +290,35 @@ const MainView = new Lang.Class({
         this.progressScale.sensitive = true;
     },
     
-    onProgressScaleChangeValue: function(scroll) {
-        let seconds = scroll.get_value() / _TIME_DIVISOR;
+    setProgressScaleInsensitive: function() {
+        this.progressScale.sensitive = false;
+    },
+    
+    onProgressScaleChangeValue: function() {
+        let seconds = Math.ceil(this.progressScale.get_value());
+        
         this._play.progressScaleValueChanged(seconds);
         
         return true;
-     },
+    },
      
-     _formatTime: function(timeL) {
-        this.timeL = timeL;
-        log(this.timeL);
-        let seconds = Math.round(this.timeL);
-        //log(seconds);
+    _formatTime: function(unformattedTime) {
+        this.unformattedTime = unformattedTime;
+        let seconds = Math.round(this.unformattedTime);
         let minuteString = parseInt( seconds / _TIME_DIVISOR ) % _TIME_DIVISOR;
         let secondString = seconds % _TIME_DIVISOR;
         let timeString = minuteString + ":" + (secondString  < 10 ? "0" + secondString : secondString);
+        
         return timeString;
     },
 
     _updatePositionCallback: function() {
-        let position = this._play.updatePosition();
+        let position = this._play.queryPosition();
+        log(position);
+        log("position");
+        
         if (position >= 0) {
-            this.progressScale.set_value(position * _TIME_DIVISOR);
+            this.progressScale.set_value(position);
         }
         return true;
     },
@@ -364,7 +370,7 @@ const PlayPauseButton = new Lang.Class({
             this._play.startPlaying();
         } else if (activeState == PipelineStates.PLAYING) {
             this.set_image(this.playImage);
-            //this._play.pausePlaying();         
+            this._play.pausePlaying();         
         }  
     }
 });

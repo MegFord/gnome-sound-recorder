@@ -59,19 +59,7 @@ const PipelineStates = {
                 }
             }));
     },
-                   
-    _updateTime: function() {          
-        let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
-        this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
-        this.trackDurationSecs = this.trackDuration/Gst.SECOND;
-        
-        if (time >= 0) {
-            this.label.setLabel(time, this.trackDurationSecs);           
-        }
-        
-        return true;
-    },
-        
+            
     startPlaying: function() {
         if (!this.play || this.playState == PipelineStates.STOPPED )
             this._playPipeline();
@@ -89,7 +77,6 @@ const PipelineStates = {
         this.playState = PipelineStates.PAUSED;
         
         if (this.timeout) {
-            GLib.source_remove(this.timeout);
             this.timeout = 0;
         }
     },
@@ -137,27 +124,42 @@ const PipelineStates = {
                 break;
             
             case Gst.MessageType.ASYNC_DONE:
-                log("duration");
-                //log(msg);    
-                this.updatePosition();
+                  log("asyncdone");
+                   log(this.sought);
+                   if (this.sought)
+                   this.play.set_state(this._lastState);
+                //log(msg);
+                   Application.view.setProgressScaleSensitive();    
+                   this.updatePosition();
         }
     }, 
     
     getPipeStates: function() {
         return this.playState;
+    },    
+                       
+    _updateTime: function() {          
+        let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
+        log(time);
+        this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
+        this.trackDurationSecs = this.trackDuration/Gst.SECOND;
+        
+        log(this.trackDurationSecs);
+        
+        if (time >= 0) {
+            this.label.setLabel(time, this.trackDurationSecs);           
+        }
+        
+        return true;
     },
     
-    progressScaleValueChanged: function(seconds) {
-        this.duration = Math.round(this.trackDurationSecs);
-        if (seconds != this.duration) {
-            this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, seconds * Gst.SECOND);
-        } else {
-            
-            if (this.duration) {
-                // Rewind a second back before the track end
-                this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, duration[1]- Gst.SECOND);
-            }
+    queryPosition: function() {
+        let position = 0;
+        while (position == 0) {
+            position = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
         }
+        
+        return position;
     },
     
     updatePosition: function() {
@@ -168,16 +170,38 @@ const PipelineStates = {
         }
     },
     
+    progressScaleValueChanged: function(seconds) {
+        let duration = this.trackDurationSecs;
+        
+        if (seconds < duration) {
+            this.sought = this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, seconds * Gst.SECOND);
+         
+        } else {
+            // Rewind a second back before the track end
+            this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, duration - Gst.SECOND);
+
+        }
+    },
+    
+    onProgressScaleConnect: function() {
+        this._lastState = this.play.get_state(1)[1];
+        
+        if (this._lastState == Gst.State.PLAYING)
+            this.play.set_state(Gst.State.PAUSED);
+        
+        if (this.timeout) {
+            GLib.source_remove(this.timeout);
+                    this.timeout = null;
+        }
+    },
+  
     getVolume: function() {
         /*this.volumeValueLinear = this.play.get_volume(1.0);
         log(this.volumeValueLinear);
         let streamVolume = GstAudio.StreamVolume.new({
             mute: false,
             volume: 1.0,
-        });*/
-        
-        
-        
+        });*/       
     },
     
     setVolume: function() {
