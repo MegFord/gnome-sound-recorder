@@ -38,7 +38,7 @@ let offsetController = null;
 let path = null;
 let view = null;
 
-
+//Honestly I think I can replace all the record v play stuff with this.get_visible_child_name().
 const ButtonID = {
     RECORD_BUTTON: 0,
     PLAY_BUTTON: 1
@@ -175,8 +175,8 @@ const MainView = new Lang.Class({
         
         let recordButton = new RecordButton(this._record);       
         toolbarStart.pack_end(recordButton, false, true, 0);
-        
         let buttonID = ButtonID.RECORD_BUTTON;
+        
                 
         let stopRecord = new Gtk.Button();
         this.stopRecImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
@@ -330,8 +330,15 @@ const MainView = new Lang.Class({
     },
     
     setVolume: function() {
-        let volumeValue = this.playVolume.get_value();
-        this._play.setVolume(volumeValue);
+        let visiblePage = this.get_visible_child_name(); 
+        let volumeValue;
+        if (visiblePage == 'playerPage') {
+            volumeValue = this.playVolume.get_value();
+            this._play.setVolume(volumeValue);
+        } else if (visiblePage == 'recorderPage') {
+            volumeValue = this.recordVolume.get_value();
+            this._record.setVolume(volumeValue);
+        } 
     },
     
     getVolume: function() {

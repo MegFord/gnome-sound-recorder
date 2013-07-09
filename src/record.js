@@ -28,6 +28,7 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
+const GstAudio = imports.gi.GstAudio;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
@@ -193,6 +194,12 @@ const Record = new Lang.Class({
                 log(errorMessage);                  
                 break;
         }
+    },
+    
+    setVolume: function(value) {
+        let level = this.srcElement.convert_volume(GstAudio.StreamVolumeFormat.LINEAR, GstAudio.StreamVolumeFormat.CUBIC, value);
+        log(level);
+        this.srcElement.set_volume(GstAudio.StreamVolumeFormat.CUBIC, level);
     } 
 });
 

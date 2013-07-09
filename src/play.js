@@ -124,13 +124,13 @@ const PipelineStates = {
                 break;
             
             case Gst.MessageType.ASYNC_DONE:
-                  log("asyncdone");
-                   log(this.sought);
-                   if (this.sought)
-                   this.play.set_state(this._lastState);
-                //log(msg);
-                   Application.view.setProgressScaleSensitive();    
-                   this.updatePosition();
+                log("asyncdone");
+                log(this.sought);
+                if (this.sought) {
+                    this.play.set_state(this._lastState);                    
+                    Application.view.setProgressScaleSensitive();
+                }    
+                this.updatePosition();
         }
     }, 
     
