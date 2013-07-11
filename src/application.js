@@ -310,7 +310,7 @@ const MainView = new Lang.Class({
      
     _formatTime: function(unformattedTime) {
         this.unformattedTime = unformattedTime;
-        let seconds = Math.round(this.unformattedTime);
+        let seconds = Math.floor(this.unformattedTime);
         let minuteString = parseInt( seconds / _TIME_DIVISOR ) % _TIME_DIVISOR;
         let secondString = seconds % _TIME_DIVISOR;
         let timeString = minuteString + ":" + (secondString  < 10 ? "0" + secondString : secondString);

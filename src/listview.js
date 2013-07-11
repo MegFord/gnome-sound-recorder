@@ -44,6 +44,9 @@ const Listview = new Lang.Class({
     _init: function() {
         this._stopVal = EnumeratorState.ACTIVE;
         this._allFilesInfo = [];
+        this.mp3Caps = Gst.Caps.from_string("audio/mpeg");
+        this.oggCaps = Gst.Caps.from_string("audio/ogg");
+        this.aacCaps = Gst.Caps.from_string("video/quicktime, variant=(string)iso");
     },
             
     enumerateDirectory: function() {
@@ -51,7 +54,7 @@ const Listview = new Lang.Class({
         let dirName = GLib.build_filenamev(path);
         let dir = Gio.file_new_for_path(dirName);    
       
-        dir.enumerate_children_async('standard::name,standard::sort-order,time::modified',
+        dir.enumerate_children_async('standard::name,time::created,time::modified',
                                      Gio.FileQueryInfoFlags.NONE,
                                      GLib.PRIORITY_LOW, 
                                      null, Lang.bind(this, 
@@ -81,12 +84,14 @@ const Listview = new Lang.Class({
                                 let timeVal = file.get_modification_time();
                                 let date = GLib.DateTime.new_from_timeval_local(timeVal); // will this be buggy?
                                 let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
-                                let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S"));                               
+                                let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S"));                             
                                 this._fileInfo = 
-                                    this._fileInfo.concat({ fileName: returnedName, 
-                                                            dateForSort: dateModifiedSortString, 
-                                                            appName: null, 
-                                                            dateModified: dateModifiedDisplayString });
+                                    this._fileInfo.concat({ appName: null,
+                                                            dateCreated: null, 
+                                                            dateForSort: dateModifiedSortString,                
+                                                            dateModified: dateModifiedDisplayString,
+                                                            fileName: returnedName,
+                                                            title: null });
                             }));
                         this._sortItems(this._fileInfo);
                     } else {
@@ -141,14 +146,13 @@ const Listview = new Lang.Class({
      _runDiscover: function() {
         if (this.dx == -1)
         return;
-        this.file = this._allFilesInfo[this.idx]; // this is repetitive, find all the places where this is done and consolidate
+        this.file = this._allFilesInfo[this.idx]; 
         this._buildFileName = new Record.BuildFileName()
         let initialFileName = this._buildFileName.buildPath();
         initialFileName.push(this.file.fileName);
-        log(this.file.fileName);
         let finalFileName = GLib.build_filenamev(initialFileName);
         this.uri = GLib.filename_to_uri(finalFileName, null);
-         //log(this.uri);                      
+        log(this.uri);                      
         this._discoverer.discover_uri_async(this.uri);
         this._discoverer.connect('discovered', Lang.bind(this, 
             function(_discoverer, info, error) {
@@ -162,25 +166,67 @@ const Listview = new Lang.Class({
     _onDiscovererFinished: function(res, info, err) {
         this.result = res;
         
-        if (this.result != GstPbutils.DiscovererResult.ERROR) { // How do I recover from the error?
+        if (this.result == GstPbutils.DiscovererResult.OK) { // How do I recover from the error?
             this.tagInfo = info.get_tags(info);
-            let appString = ""; 
+            let appString = "";
+            let dateTimeCreatedString = "";
+            let caps = null; 
+            log("caps");
+            log(caps);
             appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
-            let time = this.tagInfo.get_uint64(Gst.TAG_DURATION);
-            log(time);
+            let dateTimeTag = this.tagInfo.get_date_time('datetime')[1]; 
+            let title = this.tagInfo.get_string('title')[1];
+            log(appString);
             
-            if(appString == GLib.get_application_name()) 
-            this.file.appName = appString;
-            log(this.uri);
-            log(this.file.appName);
-        } 
+            if (title != null) {
+                this.file.title = title;
+                // add code to show title and date created below title
+            } 
+
+            if (dateTimeTag != null) {
+                dateTimeCreatedString = dateTimeTag.to_g_date_time();
+                this.file.dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
+            } else {
+                // we can fall back on gfileinfo  
+                
+            }                
+            
+            if (appString == GLib.get_application_name()) {
+                this.file.appName = appString;
+                log(this.file.appName);
+            }
+            
+            let discovererStreamInfo = info.get_stream_info();
+            let s = discovererStreamInfo.get_stream_type_nick();
+            caps = discovererStreamInfo.get_caps();
+                     
+            if (caps.is_subset(this.mp3Caps)) {           
+            log(caps.to_string());
+                let mp3 = GstPbutils.pb_utils_get_codec_description(caps);
+                log(mp3);
+            } else if (caps.is_equal(this.aacCaps)) {
+                let aac = GstPbutils.pb_utils_get_codec_description(caps);
+                log(aac);
+            } else if (caps.is_equal(this.oggCaps)) {
+                let ogg = GstPbutils.pb_utils_get_codec_description(caps);
+                log(ogg);
+            }else {
+                let none = GstPbutils.pb_utils_get_codec_description(caps);
+                log(none);
+                log("No caps found");
+            }
+        } else {
+        // don't index files we can't play
+            log("File cannot be played"); 
+        }
+        
         if (this.idx < this.endIdx) { // buggy
             this.idx++;
             this._runDiscover();
         } else { 
             this._discoverer.stop(); 
             return;
-        }
+        } 
     }
              
 });

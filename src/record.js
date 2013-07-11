@@ -19,7 +19,7 @@
  *
  */
  
- //GST_DEBUG=4 ./src/gnome-sound-recorder
+ //GST_DEBUG=2 ./src/gnome-sound-recorder
 
 imports.gi.versions.Gst = '1.0';
 
@@ -50,6 +50,8 @@ const Record = new Lang.Class({
         this.label.labelID = Application.TimeLabelID.RECORD_LABEL; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
+        this.dateTime = this._buildFileName.getOrigin();
+        this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(this.dateTime);
         
         if (this.initialFileName == -1) {
             log('Unable to create Recordings directory');
@@ -84,6 +86,11 @@ const Record = new Lang.Class({
                         if (this.hasTagSetter == true) {
                             this.taglist = Gst.TagList.new_empty();
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
+                            element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
+                            // set title only when the user renames the file
+                            //this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, this.initialFileName.get_basename());
+                            //element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
+                            this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, this.gstreamerDateTime);
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
                     }
                 }
@@ -226,16 +233,25 @@ const BuildFileName = new Lang.Class({ // move this to fileUtil.js
     buildInitialFilename: function() {
         let fileExtensionName = Application.audioProfile.fileExtensionReturner();
         let dir = this.buildPath();   
-        let dateTimeString = GLib.DateTime.new_now_local();
-        let origin = dateTimeString.format(_("%Y-%m-%d %H:%M:%S"));
+        this.dateTimeString = GLib.DateTime.new_now_local();
+        let origin = this.dateTimeString.format(_("%Y-%m-%d %H:%M:%S"));
+        //log(origin);
         let extension = fileExtensionName;
         dir.push(origin + extension);
         // Use GLib.build_filenamev to work around missing vararg functions.
-        let name = GLib.build_filenamev(dir);
-        let file = Gio.file_new_for_path(name);
+        this.title = GLib.build_filenamev(dir);
+        let file = Gio.file_new_for_path(this.title);
         log(file);
         return file;
-    }
+    },
+    
+    getTitle: function() {
+        return this.title;
+    },
+    
+    getOrigin: function() {
+        return this.dateTimeString;
+    }    
 });
 
 
