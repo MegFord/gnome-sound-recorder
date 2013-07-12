@@ -165,7 +165,7 @@ const PipelineStates = {
     updatePosition: function() {
          
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, Lang.bind(this, this._updateTime));    
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, this._updateTime));    
         }
     },
     

@@ -91,10 +91,12 @@ const AudioProfile = new Lang.Class({
             this.audioCaps = Gst.Caps.from_string(this._values[idx].audio);
             this.encodingProfile = GstPbutils.EncodingAudioProfile.new(this.audioCaps, null, null, 1);
             this.containerProfile.add_profile(this.encodingProfile);
+            log(this.containerProfile);
             return this.containerProfile;
         } else if (!this._values[idx].container && this._values[idx].audio) {
             this.audioCaps = Gst.Caps.from_string(this._values[idx].audio);
             this.encodingProfile = GstPbutils.EncodingAudioProfile.new(this.audioCaps, null, null, 1);
+            log(this.encodingProfile);
             return this.encodingProfile;
         } else {
             return -1; 

@@ -32,12 +32,21 @@ const GstPbutils = imports.gi.GstPbutils;
 const Signals = imports.signals;
 
 const Application = imports.application;
+const AudioProfile = imports.audioProfile;
 const Record = imports.record;
 
 const EnumeratorState = { 
     ACTIVE: 0,
     CLOSED: 1
-};    
+}; 
+
+const mediaTypeMap = {
+    OGG_VORBIS: "Ogg Vorbis",
+    OGG_OPUS: "Ogg Opus",
+    FLAC: "Flac",
+    MP3: "MP3",
+    AAC: "AAC"
+};   
 
 const Listview = new Lang.Class({
     Name: "Listview",
@@ -45,9 +54,10 @@ const Listview = new Lang.Class({
     _init: function() {
         this._stopVal = EnumeratorState.ACTIVE;
         this._allFilesInfo = [];
-        this.mp3Caps = Gst.Caps.from_string("audio/mpeg");
+        this.mp3Caps = Gst.Caps.from_string("audio/mpeg, mpegversion=(int)1");
         this.oggCaps = Gst.Caps.from_string("audio/ogg");
         this.aacCaps = Gst.Caps.from_string("video/quicktime, variant=(string)iso");
+        this.flacCaps = Gst.Caps.from_string("audio/x-flac");
     },
             
     enumerateDirectory: function() {
@@ -99,8 +109,8 @@ const Listview = new Lang.Class({
                         log("done");
                         this._stopVal = EnumeratorState.CLOSED;
                         this._enumerator.close(null);
-                        this._setDiscover(); 
-                        
+                        this._setDiscover();
+                                                 
                         return;
                    }                    
                 }));
@@ -126,9 +136,6 @@ const Listview = new Lang.Class({
     },
        
     _setDiscover: function() {
-    log("set");
-        this._discoverer = new GstPbutils.Discoverer();
-        this._discoverer.start();
         this._controller = Application.offsetController;
         this.totItems = this.getItemCount();
         let startIdx = this._controller.getOffset();
@@ -140,45 +147,41 @@ const Listview = new Lang.Class({
         else
             this.endIdx = this.totItems - 1;
 
-        this.idx = startIdx;   
+        this.idx = startIdx; 
         this._runDiscover();
+        return false;
      },
      
      _runDiscover: function() {
-        if (this.dx == -1)
-        return;
-        
-        this.file = this._allFilesInfo[this.idx]; 
+        this.file = this._allFilesInfo[this.idx];
         this._buildFileName = new Record.BuildFileName()
         let initialFileName = this._buildFileName.buildPath();
         initialFileName.push(this.file.fileName);
         let finalFileName = GLib.build_filenamev(initialFileName);
-        this.uri = GLib.filename_to_uri(finalFileName, null);
-        log(this.uri);                      
-        this._discoverer.discover_uri_async(this.uri);
+        let uri = GLib.filename_to_uri(finalFileName, null);
+        log(uri);
+        this._discoverer = new GstPbutils.Discoverer();
+        this._discoverer.start();                      
+        this._discoverer.discover_uri_async(uri);
         this._discoverer.connect('discovered', Lang.bind(this, 
             function(_discoverer, info, error) {
                 let result = info.get_result();
-                log(result);
-                log("result");
                 this._onDiscovererFinished(result, info, error); 
              })); 
     },
                         
     _onDiscovererFinished: function(res, info, err) {
         this.result = res;
-        
-        if (this.result == GstPbutils.DiscovererResult.OK) { // How do I recover from the error?
+        log(res);
+        log(err);
+        if (res == GstPbutils.DiscovererResult.OK) { // How do I recover from the error?
             this.tagInfo = info.get_tags(info);
             let appString = "";
-            let dateTimeCreatedString = "";
-            let caps = null; 
-            log("caps");
-            log(caps);
+            let dateTimeCreatedString = ""; 
             appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
             let dateTimeTag = this.tagInfo.get_date_time('datetime')[1]; 
             let title = this.tagInfo.get_string('title')[1];
-            log(appString);
+            //log(appString);
             
             if (title != null) {
                 this.file.title = title;
@@ -188,8 +191,9 @@ const Listview = new Lang.Class({
             if (dateTimeTag != null) {
                 dateTimeCreatedString = dateTimeTag.to_g_date_time();
                 this.file.dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
+                log(this.file.dateCreated);
             } else {
-                // we can fall back on gfileinfo  
+                // we can fall back on gfileinfo, but we might need to set it at record time. idk, i think it's not default.  
                 
             }                
             
@@ -198,41 +202,59 @@ const Listview = new Lang.Class({
                 log(this.file.appName);
             }
             
-            let discovererStreamInfo = info.get_stream_info();
-            let s = discovererStreamInfo.get_stream_type_nick();
+            let caps = null;
+            let f = null;
+            let lp = null;
+            let k = null;
+            let s = null;
+            let discovererStreamInfo = null;
+            discovererStreamInfo = info.get_stream_info();
+            s = discovererStreamInfo.get_stream_type_nick();
             caps = discovererStreamInfo.get_caps();
-                     
-            if (caps.is_subset(this.mp3Caps)) {           
             log(caps.to_string());
-                let mp3 = GstPbutils.pb_utils_get_codec_description(caps);
-                log(mp3);
-            } else if (caps.is_subset(this.aacCaps)) {
-                let aac = GstPbutils.pb_utils_get_codec_description(caps);
-                log(aac);
-            } else if (caps.is_subset(this.oggCaps)) {
-                let ogg = GstPbutils.pb_utils_get_codec_description(caps);
-                log(ogg);
-            }else {
-                let none = GstPbutils.pb_utils_get_codec_description(caps);
-                log(none);
-                log("No caps found");
+            lp = info.get_container_streams();
+            log(lp);
+            k = info.get_audio_streams()[0];
+            log(k);
+            f = k.get_caps();
+            log(f.to_string()); 
+            log(this.file.fileName);         
+                     
+            if (caps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.OGG))) {           
+                if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_VORBIS)))
+                    log(mediaTypeMap.OGG_VORBIS);
+                else if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_OPUS)))
+                    log(mediaTypeMap.OGG_OPUS);
+            } else if (caps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP3))) {
+                if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
+                    log(mediaTypeMap.MP3);
+            } else if (caps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.AAC))) {
+                if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.AAC)))
+                    log(mediaTypeMap.AAC);
+            } else if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.FLAC))) {
+                log(mediaTypeMap.FLAC);
+            } else if (caps) { // you'd think !GstPbutils.DiscovererResult.OK would filter these out
+                let notKnownContainerCaps = GstPbutils.pb_utils_get_codec_description(caps);
+                log(notKnownContainerCaps);
+            } else {
+                let notKnownAudioCaps = GstPbutils.pb_utils_get_codec_description(f);
             }
-        } else {
+        
+        if (this.idx < this.endIdx && this.idx >= 0) {
+            this.idx++;
+            log(this.idx); 
+            this._runDiscover();
+        } else { 
+            this._discoverer.stop();
+            return this.idx = -1000;
+        } 
+        
+                } else {
         // don't index files we can't play
             log("File cannot be played"); 
         }
-        
-        if (this.idx < this.endIdx) { // buggy
-            this.idx++;
-            log(this.idx)
-            log(this.endidx);
-            this._runDiscover();
-        } else { 
-            this._discoverer.stop(); 
-            return;
-        } 
-    }
-             
+    },
+                 
 });
 
 

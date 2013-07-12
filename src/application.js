@@ -50,7 +50,7 @@ const PipelineStates = {
 }; 
 
 const _TIME_DIVISOR = 60;
-const _SEC_TIMEOUT = 200;
+const _SEC_TIMEOUT = 100;
 
 const Application = new Lang.Class({
     Name: 'Application',
@@ -63,6 +63,7 @@ const Application = new Lang.Class({
         this._buildFileName.ensureDirectory(path);
         list = new Listview.Listview();
         list.enumerateDirectory();
+        //list._runDiscover();
         offsetController = new FileUtil.OffsetController;
         let fileUtil = new FileUtil.FileUtil();
         //fileUtil.buildPath();
@@ -167,9 +168,7 @@ const MainView = new Lang.Class({
         recordGrid.attach(this.recordVolume, 20, 4, 3, 1); 
         
         let recordButton = new RecordButton(this._record);       
-        toolbarStart.pack_end(recordButton, false, true, 0);
-        //let buttonID = ButtonID.RECORD_BUTTON;
-        
+        toolbarStart.pack_end(recordButton, false, true, 0);        
                 
         let stopRecord = new Gtk.Button();
         this.stopRecImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);

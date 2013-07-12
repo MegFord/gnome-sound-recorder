@@ -49,6 +49,7 @@ const Record = new Lang.Class({
         this._view = Application.view; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
+        log(this.initialFileName);
         this.dateTime = this._buildFileName.getOrigin();
         this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(this.dateTime);
         
