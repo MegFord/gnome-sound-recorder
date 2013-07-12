@@ -15,6 +15,7 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  *
+ *
  * Author: Meg Ford <megford@gnome.org>
  *
  */
@@ -146,6 +147,7 @@ const Listview = new Lang.Class({
      _runDiscover: function() {
         if (this.dx == -1)
         return;
+        
         this.file = this._allFilesInfo[this.idx]; 
         this._buildFileName = new Record.BuildFileName()
         let initialFileName = this._buildFileName.buildPath();
@@ -204,10 +206,10 @@ const Listview = new Lang.Class({
             log(caps.to_string());
                 let mp3 = GstPbutils.pb_utils_get_codec_description(caps);
                 log(mp3);
-            } else if (caps.is_equal(this.aacCaps)) {
+            } else if (caps.is_subset(this.aacCaps)) {
                 let aac = GstPbutils.pb_utils_get_codec_description(caps);
                 log(aac);
-            } else if (caps.is_equal(this.oggCaps)) {
+            } else if (caps.is_subset(this.oggCaps)) {
                 let ogg = GstPbutils.pb_utils_get_codec_description(caps);
                 log(ogg);
             }else {

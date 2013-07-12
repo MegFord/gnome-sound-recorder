@@ -38,17 +38,10 @@ let offsetController = null;
 let path = null;
 let view = null;
 
-//Honestly I think I can replace all the record v play stuff with this.get_visible_child_name().
-const ButtonID = {
-    RECORD_BUTTON: 0,
-    PLAY_BUTTON: 1
-};
-
-const TimeLabelID = {
-    RECORD_LABEL: 0,
-    PLAY_LABEL: 1,
-    DURATION_LABEL: 2
-};
+const ActivePage = {
+    RECORD: 'recorderPage',
+    PLAY: 'playerPage'
+}
 
 const PipelineStates = {
     PLAYING: 0,
@@ -260,8 +253,9 @@ const MainView = new Lang.Class({
         this._record.stopRecording();
     },
     
-    setLabelID: function(labelid) {
-        this.labelID = labelid;
+    setVisibleID: function() {
+        let activePage = this.get_visible_child_name();
+        return activePage;
     },
     
     setLabel: function(time, duration) {
@@ -278,9 +272,10 @@ const MainView = new Lang.Class({
         
         this.timeLabelString = this._formatTime(time);       
         
-        if (this.labelID == TimeLabelID.RECORD_LABEL) {
+        
+        if (this.setVisibleID() == ActivePage.RECORD ) {
             this.recordTimeLabel.label = this.timeLabelString;
-        } else if (this.labelID == TimeLabelID.PLAY_LABEL) {
+        } else if (this.setVisibleID() == ActivePage.PLAY) {
             this.playTimeLabel.label = this.timeLabelString;
             
             if (this.playDurationLabel.label == "0:00" || this.playPipeState == 2) {
@@ -329,13 +324,12 @@ const MainView = new Lang.Class({
         return true;
     },
     
-    setVolume: function() {
-        let visiblePage = this.get_visible_child_name(); 
+    setVolume: function() { 
         let volumeValue;
-        if (visiblePage == 'playerPage') {
+        if (this.setVisibleID() == ActivePage.PLAY) {
             volumeValue = this.playVolume.get_value();
             this._play.setVolume(volumeValue);
-        } else if (visiblePage == 'recorderPage') {
+        } else if (this.setVisibleID() == ActivePage.RECORD) {
             volumeValue = this.recordVolume.get_value();
             this._record.setVolume(volumeValue);
         } 

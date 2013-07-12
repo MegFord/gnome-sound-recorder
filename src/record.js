@@ -55,6 +55,7 @@ const Record = new Lang.Class({
         
         if (this.initialFileName == -1) {
             log('Unable to create Recordings directory');
+            this.onEndOfStream();
         }
                       
         this.pipeline = new Gst.Pipeline({ name: 'pipe' });
@@ -63,6 +64,7 @@ const Record = new Lang.Class({
         if(this.srcElement == null) {
           let sourceError = "Your audio capture settings are invalid.";
           log(sourceError);
+          this.onEndOfStream();
         }
         
         this.pipeline.add(this.srcElement);
@@ -102,15 +104,18 @@ const Record = new Lang.Class({
         this.giosink.set_property("file", this.initialFileName);
         this.pipeline.add(this.giosink);
         
-        if (!this.pipeline || !this.giosink)
+        if (!this.pipeline || !this.giosink) {
             log ("Not all elements could be created.\n");
+            this.onEndOfStream();
+        }
             
         let srcLink = this.srcElement.link(this.ebin);
         let ebinLink = this.ebin.link(this.giosink);
         
-        if (!srcLink || !ebinLink)
+        if (!srcLink || !ebinLink) {
             log("Not all of the elements were linked");
-
+            this.onEndOfStream();
+        }
     },
                    
     _updateTime: function() {          
@@ -140,7 +145,7 @@ const Record = new Lang.Class({
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the pipeline to the recording state.\n"); //create return string?
-            
+            this.onEndOfStream();  
         }
             
         if (!this.timeout) {

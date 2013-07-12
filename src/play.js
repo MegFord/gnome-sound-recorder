@@ -45,7 +45,7 @@ const PipelineStates = {
     _playPipeline: function() { 
         this.label = Application.view; //needs to be re-named      
         this.play = Gst.ElementFactory.make("playbin", "play");
-        this.play.set_property("uri", "file:///home/meg/Recordings/2013-07-0615:48:29.mp3");
+        this.play.set_property("uri", "file:///home/meg/Recordings/2013-07-11 02:36:58.flac");
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
              
