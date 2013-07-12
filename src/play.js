@@ -35,15 +35,14 @@ const Application = imports.application;
 const PipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
-    STOPPED: 2,
-    NULL: 3
+    STOPPED: 2
 }; 
  
  const Play = new Lang.Class({
     Name: "Play",
            
     _playPipeline: function() { 
-        this.label = Application.view; //needs to be re-named      
+        this._view = Application.view; //needs to be re-named      
         this.play = Gst.ElementFactory.make("playbin", "play");
         this.play.set_property("uri", "file:///home/meg/Recordings/2013-07-11 02:36:58.flac");
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
@@ -67,9 +66,10 @@ const PipelineStates = {
         this.ret = this.play.set_state(Gst.State.PLAYING);
         this.playState = PipelineStates.PLAYING; 
                 
-        if (this.ret == Gst.StateChangeReturn.FAILURE)
+        if (this.ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the playbin to the playing state.\n"); //create return string?
-   
+            this.onEndOfStream();
+        }   
     },
     
     pausePlaying: function() {
@@ -101,7 +101,7 @@ const PipelineStates = {
     },
     
     onEndOfStream: function() {
-        this.label.onPlayStopClicked();
+        this._view.onPlayStopClicked();
     },
         
     _onMessageReceived: function(message) {
@@ -131,6 +131,7 @@ const PipelineStates = {
                     Application.view.setProgressScaleSensitive();
                 }    
                 this.updatePosition();
+                break;
         }
     }, 
     
@@ -142,12 +143,11 @@ const PipelineStates = {
         let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
         log(time);
         this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
-        this.trackDurationSecs = this.trackDuration/Gst.SECOND;
-        
+        this.trackDurationSecs = this.trackDuration/Gst.SECOND;        
         log(this.trackDurationSecs);
         
         if (time >= 0) {
-            this.label.setLabel(time, this.trackDurationSecs);           
+            this._view.setLabel(time, this.trackDurationSecs);           
         }
         
         return true;
@@ -163,7 +163,6 @@ const PipelineStates = {
     },
     
     updatePosition: function() {
-        this.label.labelID = Application.TimeLabelID.PLAY_LABEL; 
          
         if (!this.timeout) {
             this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, Lang.bind(this, this._updateTime));    

@@ -224,6 +224,8 @@ const Listview = new Lang.Class({
         
         if (this.idx < this.endIdx) { // buggy
             this.idx++;
+            log(this.idx)
+            log(this.endidx);
             this._runDiscover();
         } else { 
             this._discoverer.stop(); 

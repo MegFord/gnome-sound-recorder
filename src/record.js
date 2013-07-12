@@ -46,8 +46,7 @@ const Record = new Lang.Class({
     Name: "Record",
     
     recordPipeline: function() {
-        this.label = Application.view;
-        this.label.labelID = Application.TimeLabelID.RECORD_LABEL; 
+        this._view = Application.view; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         this.dateTime = this._buildFileName.getOrigin();
@@ -122,7 +121,7 @@ const Record = new Lang.Class({
         let time = this.pipeline.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
         
         if (time >= 0) {
-            this.label.setLabel(time, 0);            
+            this._view.setLabel(time, 0);            
         }
         
         return true;

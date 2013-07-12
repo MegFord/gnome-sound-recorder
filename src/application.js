@@ -41,7 +41,7 @@ let view = null;
 const ActivePage = {
     RECORD: 'recorderPage',
     PLAY: 'playerPage'
-}
+};
 
 const PipelineStates = {
     PLAYING: 0,
@@ -161,14 +161,14 @@ const MainView = new Lang.Class({
         recordGrid.attach(this.recordTimeLabel, 20, 2, 3, 1);
         
         this.recordVolume = new Gtk.VolumeButton();
-        this.recordRange = Gtk.Adjustment.new(0.5, 0, 3.375, 0.15, 0.0, 0.0);
+        this.recordRange = Gtk.Adjustment.new(0.2, 0, 3.375, 0.05, 0.0, 0.0);
         this.recordVolume.set_adjustment(this.recordRange);
         this.recordVolume.connect ("value-changed", Lang.bind(this, this.setVolume));
         recordGrid.attach(this.recordVolume, 20, 4, 3, 1); 
         
         let recordButton = new RecordButton(this._record);       
         toolbarStart.pack_end(recordButton, false, true, 0);
-        let buttonID = ButtonID.RECORD_BUTTON;
+        //let buttonID = ButtonID.RECORD_BUTTON;
         
                 
         let stopRecord = new Gtk.Button();
@@ -233,7 +233,7 @@ const MainView = new Lang.Class({
               
         this.playButton = new PlayPauseButton(this._play);
         playToolbar.pack_end(this.playButton, false, true, 0);        
-        let buttonID = ButtonID.PLAY_BUTTON;
+       // let buttonID = ButtonID.PLAY_BUTTON;
         
         let stopPlay = new Gtk.Button();
         this.stopImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
