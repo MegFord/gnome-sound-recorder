@@ -34,17 +34,17 @@ const Application = imports.application;
 const FileUtil = new Lang.Class({
     Name: "FileUtil",
         
-    rename: function() { 
-       /*
+   /* rename: function() { 
+       let ff = Gio.file_new_for_path(GLib.get_home_dir());
        let s = ff.get_child("Recordings");
        let l = Gio.file_new_for_path("/home/meg/Recordings/newName.mp3");
-        l.set_display_name("lettuce", null);*/
-    },
+        l.set_display_name_async("lettuce", GLib.PRIORITY_DEFAULT, null, null);
+    },*/
     
     loadFile: function() {
         let path = Application.path;
         // Write the loadfile when eggslistbox is finished
-    }    
+    }
 });
     
 const _OFFSET_STEP = 10;

@@ -238,15 +238,16 @@ const BuildFileName = new Lang.Class({ // move this to fileUtil.js
     buildInitialFilename: function() {
         let fileExtensionName = Application.audioProfile.fileExtensionReturner();
         let dir = this.buildPath();   
-        this.dateTimeString = GLib.DateTime.new_now_local();
-        let origin = this.dateTimeString.format(_("%Y-%m-%d %H:%M:%S"));
+        this.dateTime = GLib.DateTime.new_now_local();
+        let dateTimeString = this.dateTime.format(_("%Y-%m-%d %H:%M:%S")); //rename origin
         //log(origin);
         let extension = fileExtensionName;
-        dir.push(origin + extension);
+        dir.push(dateTimeString + extension);
         // Use GLib.build_filenamev to work around missing vararg functions.
         this.title = GLib.build_filenamev(dir);
         let file = Gio.file_new_for_path(this.title);
         log(file);
+        Application.fileUtil.setFileTimeCreated(file, this.dateTime);
         return file;
     },
     
@@ -255,7 +256,7 @@ const BuildFileName = new Lang.Class({ // move this to fileUtil.js
     },
     
     getOrigin: function() {
-        return this.dateTimeString;
+        return this.dateTime;
     }    
 });
 

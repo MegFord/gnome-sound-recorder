@@ -84,7 +84,7 @@ const Listview = new Lang.Class({
     _onNextFileComplete: function () {
         this._fileInfo = [];
         try{
-            this._enumerator.next_files_async(10, GLib.PRIORITY_LOW, null, Lang.bind(this,
+            this._enumerator.next_files_async(10, GLib.PRIORITY_DEFAULT, null, Lang.bind(this,
                 function(obj, res) {
                     let files = obj.next_files_finish(res);
                     
@@ -95,10 +95,13 @@ const Listview = new Lang.Class({
                                 let timeVal = file.get_modification_time();
                                 let date = GLib.DateTime.new_from_timeval_local(timeVal); // will this be buggy?
                                 let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
-                                let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S"));                             
+                                let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S")); 
+                                let dateCreatedYes = file.has_attribute("time::created");
+                                log(this.dateCreatedYes); 
+                                log("fell");                           
                                 this._fileInfo = 
                                     this._fileInfo.concat({ appName: null,
-                                                            dateCreated: null, 
+                                                            dateCreated: dateCreatedYes, 
                                                             dateForSort: dateModifiedSortString,                
                                                             dateModified: dateModifiedDisplayString,
                                                             fileName: returnedName,
@@ -172,88 +175,93 @@ const Listview = new Lang.Class({
                         
     _onDiscovererFinished: function(res, info, err) {
         this.result = res;
-        log(res);
-        log(err);
-        if (res == GstPbutils.DiscovererResult.OK) { // How do I recover from the error?
+
+        if (this.result == GstPbutils.DiscovererResult.OK) { 
             this.tagInfo = info.get_tags(info);
             let appString = "";
             let dateTimeCreatedString = ""; 
             appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
             let dateTimeTag = this.tagInfo.get_date_time('datetime')[1]; 
             let title = this.tagInfo.get_string('title')[1];
-            //log(appString);
             
             if (title != null) {
                 this.file.title = title;
                 // add code to show title and date created below title
-            } 
-
-            if (dateTimeTag != null) {
+            }
+             
+            /* this.file.dateCreated will usually be null since time::created it doesn't usually exist. 
+               Therefore, we prefer to set it with tags */
+            if (dateTimeTag != null) {                
                 dateTimeCreatedString = dateTimeTag.to_g_date_time();
                 this.file.dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
                 log(this.file.dateCreated);
-            } else {
-                // we can fall back on gfileinfo, but we might need to set it at record time. idk, i think it's not default.  
-                
-            }                
+            }              
             
             if (appString == GLib.get_application_name()) {
                 this.file.appName = appString;
                 log(this.file.appName);
             }
             
-            let caps = null;
-            let f = null;
-            let lp = null;
-            let k = null;
-            let s = null;
-            let discovererStreamInfo = null;
-            discovererStreamInfo = info.get_stream_info();
-            s = discovererStreamInfo.get_stream_type_nick();
-            caps = discovererStreamInfo.get_caps();
-            log(caps.to_string());
-            lp = info.get_container_streams();
-            log(lp);
-            k = info.get_audio_streams()[0];
-            log(k);
-            f = k.get_caps();
-            log(f.to_string()); 
-            log(this.file.fileName);         
-                     
-            if (caps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.OGG))) {           
-                if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_VORBIS)))
-                    log(mediaTypeMap.OGG_VORBIS);
-                else if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_OPUS)))
-                    log(mediaTypeMap.OGG_OPUS);
-            } else if (caps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP3))) {
-                if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
-                    log(mediaTypeMap.MP3);
-            } else if (caps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.AAC))) {
-                if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.AAC)))
-                    log(mediaTypeMap.AAC);
-            } else if (f.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.FLAC))) {
-                log(mediaTypeMap.FLAC);
-            } else if (caps) { // you'd think !GstPbutils.DiscovererResult.OK would filter these out
-                let notKnownContainerCaps = GstPbutils.pb_utils_get_codec_description(caps);
-                log(notKnownContainerCaps);
-            } else {
-                let notKnownAudioCaps = GstPbutils.pb_utils_get_codec_description(f);
-            }
-        
-        if (this.idx < this.endIdx && this.idx >= 0) {
-            this.idx++;
-            log(this.idx); 
-            this._runDiscover();
-        } else { 
-            this._discoverer.stop();
-            return this.idx = -1000;
-        } 
-        
-                } else {
+            this.getCapsForList(info);
+ 
+            if (this.idx < this.endIdx && this.idx >= 0) {
+                this.idx++;
+                log(this.idx); 
+                this._runDiscover();
+            } else { 
+                this._discoverer.stop();
+            }                                 
+        } else {
         // don't index files we can't play
             log("File cannot be played"); 
         }
     },
+    
+    getCapsForList: function(info) {
+               let discovererStreamInfo = null;
+            discovererStreamInfo = info.get_stream_info();
+            let s = discovererStreamInfo.get_stream_type_nick();
+           
+            let containerStreams = info.get_container_streams()[0];
+            let containerCaps = discovererStreamInfo.get_caps();
+            log(containerCaps.to_string());
+            let audioStreams = info.get_audio_streams()[0];
+            let audioCaps =  audioStreams.get_caps();
+            log(audioCaps.to_string()); 
+            log(this.file.fileName);         
+                     
+            if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.OGG))) {           
+                if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_VORBIS)))
+                    log(mediaTypeMap.OGG_VORBIS);
+                else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_OPUS)))
+                    log(mediaTypeMap.OGG_OPUS);
+            } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP3))) {
+                if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
+                    log(mediaTypeMap.MP3);
+            } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.AAC))) {
+                if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.AAC)))
+                    log(mediaTypeMap.AAC);
+            } else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.FLAC))) {
+                log(mediaTypeMap.FLAC);
+            } else if (containerCaps) { // !GstPbutils.DiscovererResult.OK should filter these out already
+                let notKnownContainerCaps = GstPbutils.pb_utils_get_codec_description(containerCaps);
+                
+                if (notKnownContainerCaps) {
+                    log(notKnownContainerCaps); 
+                } else if (notKnownContainerCaps == null) {
+                    log(""); // provide the line with an empty string as placeholder if we have no info about the caps 
+                }                              
+            } else {
+                let notKnownAudioCaps = GstPbutils.pb_utils_get_codec_description(audioCaps);
+                
+                if (notKnownAudioCaps) {
+                    log(notKnownAudioCaps); log("help");
+                } else if (notKnownAudioCaps == null) {
+                    log(""); // provide the line with an empty string as placeholder if we have no info about the caps
+                    log("help");
+                } 
+            }
+        }
                  
 });
 

@@ -33,6 +33,7 @@ const Record = imports.record;
 
 let audioProfile = null;
 let fileManager = null; // do I use this?
+let fileUtil = null;
 let list = null;
 let offsetController = null;
 let path = null;
@@ -63,9 +64,8 @@ const Application = new Lang.Class({
         this._buildFileName.ensureDirectory(path);
         list = new Listview.Listview();
         list.enumerateDirectory();
-        //list._runDiscover();
         offsetController = new FileUtil.OffsetController;
-        let fileUtil = new FileUtil.FileUtil();
+        fileUtil = new FileUtil.FileUtil();
         //fileUtil.buildPath();
         view = new MainView();
         
@@ -232,7 +232,6 @@ const MainView = new Lang.Class({
               
         this.playButton = new PlayPauseButton(this._play);
         playToolbar.pack_end(this.playButton, false, true, 0);        
-       // let buttonID = ButtonID.PLAY_BUTTON;
         
         let stopPlay = new Gtk.Button();
         this.stopImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
