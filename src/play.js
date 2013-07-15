@@ -67,7 +67,7 @@ const PipelineStates = {
         this.playState = PipelineStates.PLAYING; 
                 
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
-            log("Unable to set the playbin to the playing state.\n"); //create return string?
+            log("Unable to set the playbin to the playing state.\n"); 
             this.onEndOfStream();
         }   
     },
