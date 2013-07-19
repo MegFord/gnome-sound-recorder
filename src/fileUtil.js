@@ -30,6 +30,7 @@ const GstPbutils = imports.gi.GstPbutils;
 const Signals = imports.signals;
 
 const Application = imports.application;
+const Listview = imports.listview;
 
 const FileUtil = new Lang.Class({
     Name: "FileUtil",
@@ -48,6 +49,7 @@ const FileUtil = new Lang.Class({
 });
     
 const _OFFSET_STEP = 10;
+let CurrentEndIdx;
 
 const OffsetController = new Lang.Class({
     Name: 'OffsetController',
@@ -89,6 +91,30 @@ const OffsetController = new Lang.Class({
 
     getOffset: function() {
         return this._offset;
+    },
+    
+    setEndIdx: function() {
+        this.totItems = Application.list.getItemCount();
+        log(this.totItems);
+        this.ensureCount = this._offset + _OFFSET_STEP - 1; 
+        log(this.ensureCount);
+        log("counitn");
+        this.getItemCount();
+        if (this.ensureCount < this.totItems) {
+            this.endIdx = this.ensureCount;
+            log(this.endIdx);
+            log("wtf");}
+        else {
+            this.endIdx = this.totItems - 1;
+            log(this.endIdx); 
+            log("ttt");}
+            
+        CurrentEndIdx = this.endIdx;
+        this.getcidx();
+    },
+    
+    getcidx: function() {
+        return CurrentEndIdx;
     }
 });
 Signals.addSignalMethods(OffsetController.prototype); 

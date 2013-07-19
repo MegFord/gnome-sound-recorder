@@ -45,7 +45,7 @@ const PipelineStates = {
 const Record = new Lang.Class({
     Name: "Record",
     
-    recordPipeline: function() {
+    _recordPipeline: function() {
         this._view = Application.view; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
@@ -138,7 +138,7 @@ const Record = new Lang.Class({
         }
         
         if (!this.pipeline || this.pipeState == PipelineStates.STOPPED )
-            this.recordPipeline();
+            this._recordPipeline();
             
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
@@ -149,7 +149,7 @@ const Record = new Lang.Class({
         }
             
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, this._updateTime)); // use _SEC_TIMEOUT   
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, this._updateTime));    
         }
     },
 
@@ -157,7 +157,7 @@ const Record = new Lang.Class({
         let sent = this.pipeline.send_event(Gst.Event.new_eos());
         log(sent);
         
-         if (this.timeout) {
+        if (this.timeout) {
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
@@ -181,7 +181,7 @@ const Record = new Lang.Class({
             
             case Gst.MessageType.ELEMENT:
                 log("elem");
-                if (GstPbutils.is_missing_plugin_message(this.localMsg)) { //buggy
+                if (GstPbutils.is_missing_plugin_message(this.localMsg)) { //buggy?
                     let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
                        
                         if (detail != null)
@@ -237,17 +237,17 @@ const BuildFileName = new Lang.Class({ // move this to fileUtil.js
     
     buildInitialFilename: function() {
         let fileExtensionName = Application.audioProfile.fileExtensionReturner();
-        let dir = this.buildPath();   
+        let dir = this.buildPath();
+        let prefix = _("Recording ");   
         this.dateTime = GLib.DateTime.new_now_local();
-        let dateTimeString = this.dateTime.format(_("%Y-%m-%d %H:%M:%S")); //rename origin
-        //log(origin);
+        let dateTimeString = this.dateTime.format(_("%Y-%m-%d %H:%M:%S")); 
+        
         let extension = fileExtensionName;
-        dir.push(dateTimeString + extension);
+        dir.push(prefix + dateTimeString + extension);
         // Use GLib.build_filenamev to work around missing vararg functions.
         this.title = GLib.build_filenamev(dir);
         let file = Gio.file_new_for_path(this.title);
         log(file);
-        Application.fileUtil.setFileTimeCreated(file, this.dateTime);
         return file;
     },
     

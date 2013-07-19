@@ -56,9 +56,9 @@ const AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
    
     assignProfile: function(profileName){
-        this.profileName = profileName;
+        this._profileName = profileName;
         this._values = [];
-            switch(this.profileName) {
+            switch(this._profileName) {
                              
                 case comboBoxMap.OGG_VORBIS:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS });
@@ -87,15 +87,15 @@ const AudioProfile = new Lang.Class({
             log(this._values[idx].container);
             log(this._values[idx].audio);
             let caps = Gst.Caps.from_string(this._values[idx].container);
-            this.containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
-            this.audioCaps = Gst.Caps.from_string(this._values[idx].audio);
-            this.encodingProfile = GstPbutils.EncodingAudioProfile.new(this.audioCaps, null, null, 1);
-            this.containerProfile.add_profile(this.encodingProfile);
-            log(this.containerProfile);
-            return this.containerProfile;
+            this._containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
+            this._audioCaps = Gst.Caps.from_string(this._values[idx].audio);
+            this.encodingProfile = GstPbutils.EncodingAudioProfile.new(this._audioCaps, null, null, 1);
+            this._containerProfile.add_profile(this.encodingProfile);
+            log(this._containerProfile);
+            return this._containerProfile;
         } else if (!this._values[idx].container && this._values[idx].audio) {
-            this.audioCaps = Gst.Caps.from_string(this._values[idx].audio);
-            this.encodingProfile = GstPbutils.EncodingAudioProfile.new(this.audioCaps, null, null, 1);
+            this._audioCaps = Gst.Caps.from_string(this._values[idx].audio);
+            this.encodingProfile = GstPbutils.EncodingAudioProfile.new(this._audioCaps, null, null, 1);
             log(this.encodingProfile);
             return this.encodingProfile;
         } else {
@@ -109,7 +109,7 @@ const AudioProfile = new Lang.Class({
         if (this._values[idx].audio) {
             this.suffixName = this.encodingProfile.get_file_extension();
             if (this.suffixName == null) 
-                this.suffixName = this.containerProfile.get_file_extension();
+                this.suffixName = this._containerProfile.get_file_extension();
         }  
         
         this.audioSuffix = ("." + this.suffixName);

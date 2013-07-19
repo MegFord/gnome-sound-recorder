@@ -97,14 +97,20 @@ const Listview = new Lang.Class({
                                 let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
                                 let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S")); 
                                 let dateCreatedYes = file.has_attribute("time::created");
-                                log(this.dateCreatedYes); 
+                                log(this.dateCreatedYes);
+                                if (this.dateCreatedYes) {
+                                    let dateCreatedVal = file.get_attribute_uint64("time::created");
+                                    let dateCreated = GLib.DateTime.new_from_timeval_local(dateCreatedVal);
+                                    this.dateCreatedString = dateCreated.format(_("%Y-%m-%d %H:%M:%S"));
+                                } 
                                 log("fell");                           
                                 this._fileInfo = 
                                     this._fileInfo.concat({ appName: null,
-                                                            dateCreated: dateCreatedYes, 
+                                                            dateCreated: null, 
                                                             dateForSort: dateModifiedSortString,                
                                                             dateModified: dateModifiedDisplayString,
                                                             fileName: returnedName,
+                                                            mediaType: null,
                                                             title: null });
                             }));
                         this._sortItems(this._fileInfo);
@@ -141,16 +147,16 @@ const Listview = new Lang.Class({
     _setDiscover: function() {
         this._controller = Application.offsetController;
         this.totItems = this.getItemCount();
-        let startIdx = this._controller.getOffset();
-        log(startIdx);
-        this.ensureCount = startIdx + this._controller.getOffsetStep() - 1; 
+        this.startIdx = this._controller.getOffset();
+        log(this.startIdx);
+        this.ensureCount = this.startIdx + this._controller.getOffsetStep() - 1; 
         
         if (this.ensureCount < this.totItems)
             this.endIdx = this.ensureCount;
         else
             this.endIdx = this.totItems - 1;
 
-        this.idx = startIdx; 
+        this.idx = this.startIdx; 
         this._runDiscover();
         return false;
      },
@@ -202,7 +208,7 @@ const Listview = new Lang.Class({
                 log(this.file.appName);
             }
             
-            this.getCapsForList(info);
+            this._getCapsForList(info);
  
             if (this.idx < this.endIdx && this.idx >= 0) {
                 this.idx++;
@@ -210,6 +216,10 @@ const Listview = new Lang.Class({
                 this._runDiscover();
             } else { 
                 this._discoverer.stop();
+                Application.offsetController.setEndIdx();
+                //Application.view.list();
+                Application.view.listBoxAdd();
+                
             }                                 
         } else {
         // don't index files we can't play
@@ -217,52 +227,61 @@ const Listview = new Lang.Class({
         }
     },
     
-    getCapsForList: function(info) {
-               let discovererStreamInfo = null;
-            discovererStreamInfo = info.get_stream_info();
-            let s = discovererStreamInfo.get_stream_type_nick();
+    _getCapsForList: function(info) {
+        let discovererStreamInfo = null;
+        discovererStreamInfo = info.get_stream_info();
+        let s = discovererStreamInfo.get_stream_type_nick();
            
-            let containerStreams = info.get_container_streams()[0];
-            let containerCaps = discovererStreamInfo.get_caps();
-            log(containerCaps.to_string());
-            let audioStreams = info.get_audio_streams()[0];
-            let audioCaps =  audioStreams.get_caps();
-            log(audioCaps.to_string()); 
-            log(this.file.fileName);         
+        let containerStreams = info.get_container_streams()[0];
+        let containerCaps = discovererStreamInfo.get_caps();
+        log(containerCaps.to_string());
+        let audioStreams = info.get_audio_streams()[0];
+        let audioCaps =  audioStreams.get_caps();
+        log(audioCaps.to_string()); 
+        log(this.file.fileName);         
                      
-            if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.OGG))) {           
-                if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_VORBIS)))
-                    log(mediaTypeMap.OGG_VORBIS);
-                else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_OPUS)))
-                    log(mediaTypeMap.OGG_OPUS);
-            } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP3))) {
-                if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
-                    log(mediaTypeMap.MP3);
-            } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.AAC))) {
-                if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.AAC)))
-                    log(mediaTypeMap.AAC);
-            } else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.FLAC))) {
-                log(mediaTypeMap.FLAC);
-            } else if (containerCaps) { // !GstPbutils.DiscovererResult.OK should filter these out already
-                let notKnownContainerCaps = GstPbutils.pb_utils_get_codec_description(containerCaps);
+        if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.OGG))) {           
+            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_VORBIS)))
+                this.file.mediaType = mediaTypeMap.OGG_VORBIS;
+            else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_OPUS)))
+                this.file.mediaType = mediaTypeMap.OGG_OPUS;
+        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP3))) {
+            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
+                this.file.mediaType = mediaTypeMap.MP3;
+        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.AAC))) {
+            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.AAC)))
+                this.file.mediaType = mediaTypeMap.AAC;
+        } else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.FLAC))) {
+            this.file.mediaType = mediaTypeMap.FLAC;
+        } else if (containerCaps) { // !GstPbutils.DiscovererResult.OK should filter these out already
+            let notKnownContainerCaps = GstPbutils.pb_utils_get_codec_description(containerCaps);
                 
-                if (notKnownContainerCaps) {
-                    log(notKnownContainerCaps); 
-                } else if (notKnownContainerCaps == null) {
-                    log(""); // provide the line with an empty string as placeholder if we have no info about the caps 
-                }                              
-            } else {
-                let notKnownAudioCaps = GstPbutils.pb_utils_get_codec_description(audioCaps);
+            if (notKnownContainerCaps) {
+                this.file.mediaType = notKnownContainerCaps; 
+            } else if (notKnownContainerCaps == null) {
+                this.file.mediaType = ""; // provide the line with an empty string as placeholder if we have no info about the caps 
+            }                              
+        } else {
+            let notKnownAudioCaps = GstPbutils.pb_utils_get_codec_description(audioCaps);
                 
-                if (notKnownAudioCaps) {
-                    log(notKnownAudioCaps); log("help");
-                } else if (notKnownAudioCaps == null) {
-                    log(""); // provide the line with an empty string as placeholder if we have no info about the caps
-                    log("help");
-                } 
-            }
-        }
-                 
+            if (notKnownAudioCaps) {
+                this.file.mediaType = notKnownAudioCaps; 
+            } else if (notKnownAudioCaps == null) {
+                this.file.mediaType = ""; // provide the line with an empty string as placeholder if we have no info about the caps
+            } 
+        }        
+    }, 
+    
+    
+    getFilesInfoForList: function() {
+        return this._allFilesInfo;//return 
+    },
+    
+    getEndIdx: function() {
+    log(this.endIdx);
+    log("endidx");
+        return this.endIdx;
+    }              
 });
 
 

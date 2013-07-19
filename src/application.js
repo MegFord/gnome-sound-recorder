@@ -22,6 +22,7 @@
 imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
+const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
 const Signals = imports.signals;
 
@@ -38,10 +39,12 @@ let list = null;
 let offsetController = null;
 let path = null;
 let view = null;
+let groupGrid;
 
 const ActivePage = {
     RECORD: 'recorderPage',
-    PLAY: 'playerPage'
+    PLAY: 'playerPage',
+    LISTVIEW: 'listviewPage'
 };
 
 const PipelineStates = {
@@ -62,41 +65,47 @@ const Application = new Lang.Class({
         this._buildFileName = new Record.BuildFileName()
         path = this._buildFileName.buildPath();
         this._buildFileName.ensureDirectory(path);
-        list = new Listview.Listview();
-        list.enumerateDirectory();
         offsetController = new FileUtil.OffsetController;
         fileUtil = new FileUtil.FileUtil();
         //fileUtil.buildPath();
         view = new MainView();
         
         params = Params.fill(params, { title: GLib.get_application_name(),
-                                       default_width: 640,
+                                       default_width: 700,
                                        default_height: 480 });
         this.parent(params);
 
         let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                   halign: Gtk.Align.CENTER });
-        let header = new Gd.HeaderBar({ title: _(""),
-                                        hexpand: true });
+        let header = new Gtk.HeaderBar({ title: _(""),
+                                         hexpand: true });
 
         this._recordPageButton = new Gtk.Button({ label: _("Recorder"),
                                                   hexpand: true });
         header.pack_start(this._recordPageButton);
-        this._playPageButton = new Gtk.Button({ label: _("Player"),
+        
+        /*this._playPageButton = new Gtk.Button({ label: _("Player"),
                                                 hexpand: true });
-        header.pack_start(this._playPageButton);
+        header.pack_start(this._playPageButton);*/
+        
+        this._listviewPageButton = new Gtk.Button({ label: _("Player"),
+                                                    hexpand: true });
+        header.pack_start(this._listviewPageButton);
         
         grid.attach(header, 0, 0, 2, 2);
 
-        view.visible_child_name = (Math.random() <= 0.5) ? 'recorderPage' : 'playerPage';
         grid.add(view);
         this._recordPageButton.connect('clicked', Lang.bind(this, 
             function() {
                 view.visible_child_name = 'recorderPage'; 
             }));
-        this._playPageButton.connect('clicked', Lang.bind(this, 
+       /* this._playPageButton.connect('clicked', Lang.bind(this, 
             function(){
                 view.visible_child_name = 'playerPage'; 
+            }));*/
+        this._listviewPageButton.connect('clicked', Lang.bind(this, function(){
+                view.visible_child_name = 'listviewPage';
+                               //view.listboxcb(); 
             }));
             
         this._defineThemes();
@@ -107,38 +116,59 @@ const Application = new Lang.Class({
        
     _defineThemes : function() {
         let settings = Gtk.Settings.get_default();
-        settings.gtk_application_prefer_dark_theme = true;
+        //settings.gtk_application_prefer_dark_theme = true;
     }
 });
 
 const MainView = new Lang.Class({
     Name: 'MainView',
-    Extends: Gd.Stack,
+    Extends: Gtk.Stack,
 
     _init: function(params) {
         params = Params.fill(params, { hexpand: true,
-                                       vexpand: true });
+                                       vexpand: true,
+                                       transition_type: Gtk.StackTransitionType.CROSSFADE,
+                                       transition_duration: 100,
+                                       visible: true });
         this.parent(params);
 
         let recorderPage = this._addRecorderPage('recorderPage');
-            this.visible_child_name = 'playerPage';
+            this.visible_child_name = 'listviewPage';
             
+        let listviewPage = this._addListviewPage('listviewPage');
+             this.visible_child_name = 'playerPage';
+                
         let playerPage = this._addPlayerPage('playerPage');
             this.visible_child_name = 'recorderPage';
+            //this.visible_child_name = 'listviewPage';
             
         this.labelID = null;
     },
-
-
-    _addPage: function(name) {
-        let initialPage = Gtk.Image.new_from_icon_name("audio-input-microphone-symbolic", Gtk.IconSize.DIALOG);
-
+    
+    _addListviewPage: function(name) {
+        list = new Listview.Listview();
+        list.enumerateDirectory();
+        initialPage = new Gtk.EventBox();
         let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                   halign: Gtk.Align.CENTER,
                                   valign: Gtk.Align.CENTER,
+                                  row_spacing: 12,
                                   column_homogeneous: true });            
         grid.add(initialPage);
         this.add_named(grid, name);
+        
+        groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                                       halign: Gtk.Align.CENTER,
+                                       valign: Gtk.Align.CENTER,
+                                       row_spacing: 12,
+                                       column_homogeneous: true });  
+        grid.add(groupGrid);
+
+        //label.label = ("<b>%s</b>").format(this.labelName);
+        this.label = new Gtk.Label({ label: "",
+                                    halign: Gtk.Align.START,
+                                    hexpand: true });
+        groupGrid.add(this.label);              
     },
 
     _addRecorderPage: function(name) {
@@ -151,7 +181,8 @@ const MainView = new Lang.Class({
                                         column_spacing: 15 });
         this.recordBox.add(recordGrid);        
 
-        let toolbarStart = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
+        let toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, 
+                                         spacing: 0 });
         toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
         recordGrid.attach(toolbarStart, 20, 0, 2, 1);
                 
@@ -189,7 +220,8 @@ const MainView = new Lang.Class({
                                       column_spacing: 15 });
         this.playBox.add(playGrid);        
 
-        let playToolbar = new Gtk.Box({ orientation : Gtk.Orientation.HORIZONTAL, spacing : 0 });
+        let playToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, 
+                                        spacing: 0 });
         playToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
         playGrid.attach(playToolbar, 20, 0, 2, 1);
         
@@ -337,7 +369,85 @@ const MainView = new Lang.Class({
         let volumeValue = this.playVolume.get_value();
         
         return volumeValue;
+    },
+    
+    listBoxAdd: function() {
+        this.groupGrid = groupGrid;
+        this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
+                                                     margin_bottom: 3,
+                                                     margin_top: 5,
+                                                     hexpand: true,
+                                                     vexpand: true,
+                                                     width_request: 690,
+                                                     height_request: 480 });
+        this._scrolledWin.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC);
+        this._scrolledWin.set_shadow_type(Gtk.ShadowType.IN);
+        this.groupGrid.add(this._scrolledWin);
+        this._scrolledWin.show();
+        
+        this.listBox = Gtk.ListBox.new();
+        this._scrolledWin.add(this.listBox);
+        this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
+        this.listBox.set_header_func(null);
+        this.listBox.set_activate_on_single_click(true);
+        this.listBox.connect("row-selected", Lang.bind(this, this.rowGridCallback));
+        this.listBox.show();
+        
+        this._startIdx = offsetController.getOffset();
+        log(this._startIdx);
+        log("start");
+        this._endIdx = offsetController.getcidx();
+        log(this._endIdx);
+        this._files = [];
+        this._files = list.getFilesInfoForList();
+        
+        for (let i = this._startIdx; i <= this._endIdx; i++) {
+            //this.LBoxRow = Gtk.ListBoxRow.new(); 
+            this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                                          column_spacing: 6,
+                                          row_spacing: 6,
+                                          margin_left: 12,
+                                          margin_right: 12 });
+            this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
+            this.rowGrid.set_column_spacing(6);
+            this.listBox.add(this.rowGrid);
+            //this.LBoxRow.connect("row-selected", Lang.bind(this, this.rowGridCallback));
+            this.rowGrid.show();
+            
+            this.fileName = new Gtk.Label({ label: this._files[i].fileName,
+            12px
+                                           halign: Gtk.Align.START });
+                                           log(this._files[i].fileName);
+            this.rowGrid.add(this.fileName);
+            this.fileName.show();
+        
+            this._play = new Gtk.Button();
+            this._play.image = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
+            this.rowGrid.add(this._play);
+            this.rowGrid.add(this._play);
+            this.listBox.show();
+            this.rowGrid.show();  
+        }     
+    },
+    
+    rowGridCallback: function() {
+        //let menuForFile = Gtk.Overlay.new();
+        let menu = new Gio.Menu();
+        menu.append("New",'app.new');
+       // menu.append("About", 'app.about');
+        //menu.append("Quit",'app.quit');
+       // menuForFile.add_overlay(menu);
+        
+        let newAction = new Gio.SimpleAction ({ name: 'new' });
+        newAction.connect('activate', Lang.bind(this,
+            function() {
+                log("working!");//this._showNew();
+            }));
+        this.listBox.add_action(newAction);
+        
     }
+    
+
 });
 
 const RecordButton = new Lang.Class({
@@ -355,7 +465,7 @@ const RecordButton = new Lang.Class({
     },
     
     _onRecord: function() {
-            this._record.startRecording(); 
+        this._record.startRecording(); 
     }
 });
 
