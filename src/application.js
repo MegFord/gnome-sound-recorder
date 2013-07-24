@@ -382,7 +382,7 @@ const MainView = new Lang.Class({
                                                      width_request: 800,
                                                      height_request: 400 });
         this._scrolledWin.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC);
-        this._scrolledWin.set_shadow_type(Gtk.ShadowType.IN);
+        this._scrolledWin.get_style_context().add_class('view');
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
         
@@ -410,7 +410,6 @@ const MainView = new Lang.Class({
                                           height_request: 36,
                                           width_request: 400 });
             this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
-            this.rowGrid.get_style_context().add_class('grid-border');
             this.listBox.add(this.rowGrid);
             this.rowGrid.show();
             
@@ -418,39 +417,40 @@ const MainView = new Lang.Class({
                                              halign: Gtk.Align.START,
                                              ellipsize: true,
                                              xalign: 0,
-                                             width_chars: 60 });
+                                             width_chars: 69,
+                                             margin_left: 12 });
                                            log(this._files[i].fileName);
-            let markup = ('<span size="large">'+ this._files[i].fileName + '</span>');
+            let markup = ('<b>'+ this._files[i].fileName + '</b>');
             this._fileName.label = markup;
             this._fileName.set_no_show_all(true);
-            //this._fileName.get_style_context().add_class('grid-border');
             this.rowGrid.add(this._fileName);
-            this._fileName.show();
+            this._fileName.show();            
             
-            this._playListButton = new Gtk.Button({ halign: Gtk.Align.FILL,
-                                                    hexpand: true });
+            this._playListButton = new Gtk.Button({ //halign: Gtk.Align.END,
+                                                    hexpand: false });
             this._playListButton.image = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
             this._playListButton.sensitive = false;
             this.rowGrid.add(this._playListButton);
             
-            this._info = new Gtk.Button({ halign: Gtk.Align.FILL,
-                                          hexpand: true });
+            this._info = new Gtk.Button({ //halign: Gtk.Align.START,
+                                          hexpand: false });
             this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
             this._info.sensitive = false;
             this.rowGrid.add(this._info);
             
-            this._share = new Gtk.Button({ halign: Gtk.Align.FILL,
-                                           hexpand: true });
+            this._share = new Gtk.Button({ //halign: Gtk.Align.START,
+                                           hexpand: false });
             this._share.image = Gtk.Image.new_from_icon_name("send-to-symbolic", Gtk.IconSize.BUTTON);
             this._share.sensitive = false;
             this.rowGrid.add(this._share);
 
-            this._delete = new Gtk.Button({ halign: Gtk.Align.FILL,
-                                            hexpand: true });
+            this._delete = new Gtk.Button({ //halign: Gtk.Align.START,
+                                            hexpand: false });
             this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
             this._delete.get_style_context().add_class('toolbar');
+            this._delete.connect("clicked", Lang.bind(this, this._deleteFile));
             this._delete.sensitive = false;
-            this.rowGrid.add(this._delete);
+            this.rowGrid.add(this._delete);           
             
             this.sep = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
             this.listBox.add(this.sep);
@@ -480,6 +480,10 @@ const MainView = new Lang.Class({
                         child.show();
                 }));
         }                        
+    },
+    
+    _deleteFile: function() {
+        //this.fileName.
     }
 });
 

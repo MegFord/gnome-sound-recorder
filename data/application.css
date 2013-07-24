@@ -1,7 +1,16 @@
-@define-color border #3e7b05;
 
-.grid-border {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #bcbcbc;
+.view .scrollbar.slider {
+  background-color: alpha (@scrollbar_slider, 0.5);
+  border: #6e6e6e 1px solid;
+}
+
+.view .scrollbar.trough {
+  background-color: transparent;
+  background-image: none;
+}
+
+.view .button {
+  background-color: transparent;
+  background-image: none;
+  border-radius: 0px;
 }
