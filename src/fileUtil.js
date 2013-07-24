@@ -47,12 +47,13 @@ const FileUtil = new Lang.Class({
         let path = Application.path;
         path.push(this._text);
         let fileNav = GLib.build_filenamev(path);
-        let fileUri = Gio.file_new_for_path(fileNav);
-        return fileUri;
+       
+        return fileNav;
     },
     
-    deleteFile: function(fileToDelete) {
-        this._fileToDelete = fileToDelete;
+    deleteFile: function(fileNav) {
+        this._fileNav = fileNav;
+        this._fileToDelete = Gio.file_new_for_path(this._fileNav);       
         this._fileToDelete.delete_async(GLib.PRIORITY_DEFAULT, null, null);
     }        
 });

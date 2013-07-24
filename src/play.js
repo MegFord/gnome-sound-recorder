@@ -41,10 +41,12 @@ const PipelineStates = {
  const Play = new Lang.Class({
     Name: "Play",
            
-    _playPipeline: function(fileName) { 
+    _playPipeline: function(fileName) {
+        this._fileName = this._fileToPlay;
+        let uri = GLib.filename_to_uri(this._fileName, null); 
         this._view = Application.view; //needs to be re-named      
         this.play = Gst.ElementFactory.make("playbin", "play");
-        this.play.set_property("file", fileName);
+        this.play.set_property("uri", uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
              
@@ -92,7 +94,7 @@ const PipelineStates = {
         this.play.set_state(Gst.State.NULL);
         log("called stop");
         this.playState = PipelineStates.STOPPED;
-        this.playBus.remove_signal_watch();
+        //this.playBus.remove_signal_watch();
         this._updateTime();
                                     
             if (this.timeout) {
@@ -198,6 +200,11 @@ const PipelineStates = {
     setVolume: function(value) {
         let level = this.play.convert_volume(GstAudio.StreamVolumeFormat.LINEAR, GstAudio.StreamVolumeFormat.CUBIC, value);
         this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, level);
+    },
+    
+    passSelected: function(selected) {
+        this._selected = selected;
+        this._fileToPlay = Application.view.loadPlay(this._selected);
     }
 });
    

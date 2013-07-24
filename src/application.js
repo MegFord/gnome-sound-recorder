@@ -39,6 +39,7 @@ let fileUtil = null;
 let list = null;
 let offsetController = null;
 let path = null;
+let play = null;
 let view = null;
 let groupGrid;
 
@@ -74,6 +75,7 @@ const Application = new Lang.Class({
         offsetController = new FileUtil.OffsetController;
         fileUtil = new FileUtil.FileUtil();
         view = new MainView();
+        play = new Play.Play();
         
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        default_width: 700,
@@ -162,14 +164,7 @@ const MainView = new Lang.Class({
                                        row_spacing: 12,
                                        column_homogeneous: true }); 
         groupGrid.add(initialPage);
-        this.add_named(groupGrid, name); 
-        //grid.add(groupGrid);
-
-        //label.label = ("<b>%s</b>").format(this.labelName);
-        //this.label = new Gtk.Label({ label: "",
-                                   // halign: Gtk.Align.START,
-                                    //hexpand: true });
-        //groupGrid.add(this.label);              
+        this.add_named(groupGrid, name);             
     },
 
     _addRecorderPage: function(name) {
@@ -212,7 +207,7 @@ const MainView = new Lang.Class({
     },
     
     _addPlayerPage: function(name) {
-        this._play = new Play.Play();
+        //this._play = new Play.Play();
         this.playBox = new Gtk.EventBox();
         let playGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                       halign: Gtk.Align.CENTER,
@@ -241,7 +236,7 @@ const MainView = new Lang.Class({
         
         this.progressScale.connect("button-press-event", Lang.bind(this,
             function() { 
-                this._play.onProgressScaleConnect(); 
+                Application.play.onProgressScaleConnect(); 
                              
                 return false;
             }));
@@ -263,7 +258,7 @@ const MainView = new Lang.Class({
         this.playVolume.connect("value-changed", Lang.bind(this, this.setVolume));
         playGrid.attach(this.playVolume, 20, 4, 3, 1); 
               
-        this.playButton = new PlayPauseButton(this._play);
+        this.playButton = new PlayPauseButton();
         playToolbar.pack_end(this.playButton, false, true, 0);        
         
         let stopPlay = new Gtk.Button();
@@ -277,7 +272,7 @@ const MainView = new Lang.Class({
     
     onPlayStopClicked: function() {
         this.playButton.set_active(false);
-        this._play.stopPlaying();        
+        Application.play.stopPlaying();        
     },
     
     onRecordStopClicked: function() {
@@ -292,7 +287,7 @@ const MainView = new Lang.Class({
     setLabel: function(time, duration) {
         this.time = time
         this.duration = duration; 
-        this.playPipeState = this._play.getPipeStates();
+        this.playPipeState = play.getPipeStates();
         
         if (this.playPipeState != 2) {
             if (this.playDurationLabel.label == "0:00" && duration != 0) 
@@ -329,7 +324,7 @@ const MainView = new Lang.Class({
     onProgressScaleChangeValue: function() {
         let seconds = Math.ceil(this.progressScale.get_value());
         
-        this._play.progressScaleValueChanged(seconds);
+        Application.play.progressScaleValueChanged(seconds);
         
         return true;
     },
@@ -345,7 +340,7 @@ const MainView = new Lang.Class({
     },
 
     _updatePositionCallback: function() {
-        let position = this._play.queryPosition();
+        let position = Application.play.queryPosition();
         log(position);
         log("position");
         
@@ -359,7 +354,7 @@ const MainView = new Lang.Class({
         let volumeValue;
         if (this.setVisibleID() == ActivePage.PLAY) {
             volumeValue = this.playVolume.get_value();
-            this._play.setVolume(volumeValue);
+            Application.play.setVolume(volumeValue);
         } else if (this.setVisibleID() == ActivePage.RECORD) {
             volumeValue = this.recordVolume.get_value();
             this._record.setVolume(volumeValue);
@@ -429,6 +424,12 @@ const MainView = new Lang.Class({
             this._playListButton = new Gtk.Button({ hexpand: false });
             this._playListButton.image = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
             this._playListButton.sensitive = false;
+            this._playListButton.connect('clicked', Lang.bind(this, 
+                function(){
+                    play.passSelected(this.listBox.get_selected_row());
+                    view.visible_child_name = 'playerPage'; 
+                   
+                }));
             this.rowGrid.add(this._playListButton);
             
             this._info = new Gtk.Button({ hexpand: false });
@@ -447,7 +448,7 @@ const MainView = new Lang.Class({
             this._delete.connect("clicked", Lang.bind(this, 
                 function() {
                     this._deleteFile(this.listBox.get_selected_row());
-                    }));
+                }));
             this._delete.sensitive = false;
             this.rowGrid.add(this._delete);           
             
@@ -503,9 +504,10 @@ const MainView = new Lang.Class({
         fileUtil.deleteFile(fileToDelete);      
     },
     
-    _loadPlay:function(selected) {
+    loadPlay:function(selected) {
         this._selected = selected;
         let fileToPlay = this._getFileNameFromRow(this._selected);
+        return fileToPlay;
     }
 });
 
@@ -532,8 +534,7 @@ const PlayPauseButton = new Lang.Class({
     Name: "PlayPauseButton",
     Extends: Gtk.ToggleButton,
     
-    _init: function(play) {
-        this._play = play;
+    _init: function() {
         this.playImage = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
         this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);              
         this.parent();
@@ -542,16 +543,16 @@ const PlayPauseButton = new Lang.Class({
     },
     
     _onPlayPauseToggled: function() {
-        let activeState = this._play.getPipeStates();
+        let activeState = play.getPipeStates();
 
         if (activeState != PipelineStates.PLAYING) {
             this.set_image(this.pauseImage);
-            this._play.startPlaying();
+            play.startPlaying();
         } else if (activeState == PipelineStates.PLAYING) {
             this.set_image(this.playImage);
-            this._play.pausePlaying();         
+            play.pausePlaying();         
         }  
-    }
+    }    
 });
 
 const EncoderComboBox = new Lang.Class({ 
