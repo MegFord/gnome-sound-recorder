@@ -207,7 +207,6 @@ const MainView = new Lang.Class({
     },
     
     _addPlayerPage: function(name) {
-        //this._play = new Play.Play();
         this.playBox = new Gtk.EventBox();
         let playGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                       halign: Gtk.Align.CENTER,
@@ -272,7 +271,7 @@ const MainView = new Lang.Class({
     
     onPlayStopClicked: function() {
         this.playButton.set_active(false);
-        Application.play.stopPlaying();        
+        play.stopPlaying();       
     },
     
     onRecordStopClicked: function() {

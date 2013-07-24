@@ -11,6 +11,7 @@
 
 .view .button {
   border: 0; 
-  border-left: 1px; 
+  border-left: #6e6e6e 1px solid;
+  border-radius: 0px; 
   margin: 0; 
 }

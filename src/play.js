@@ -35,7 +35,8 @@ const Application = imports.application;
 const PipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
-    STOPPED: 2
+    STOPPED: 2,
+    NULL: 3
 }; 
  
  const Play = new Lang.Class({
@@ -90,11 +91,11 @@ const PipelineStates = {
         }
     },
     
-    onEnd: function() { 
+    onEnd: function() {
         this.play.set_state(Gst.State.NULL);
         log("called stop");
         this.playState = PipelineStates.STOPPED;
-        //this.playBus.remove_signal_watch();
+        this.playBus.remove_signal_watch();
         this._updateTime();
                                     
             if (this.timeout) {
@@ -113,7 +114,7 @@ const PipelineStates = {
         //log(msg);
         switch(msg) {
                     
-            case Gst.MessageType.EOS:                  
+            case Gst.MessageType.EOS:               
                 this.onEndOfStream(); 
                 break;
                 
@@ -145,14 +146,15 @@ const PipelineStates = {
     _updateTime: function() {          
         let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
         log(time);
+        log("time");
         this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
         this.trackDurationSecs = this.trackDuration/Gst.SECOND;        
         log(this.trackDurationSecs);
         
-        if (time >= 0) {
+        if (time >= 0 && this.playState != PipelineStates.STOPPED) {
             this._view.setLabel(time, this.trackDurationSecs);           
-        }
-        
+        } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
+            this._view.setLabel(0, this.trackDurationSecs); }
         return true;
     },
     
