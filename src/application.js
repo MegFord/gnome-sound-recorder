@@ -481,8 +481,9 @@ const MainView = new Lang.Class({
         }                        
     },
     
-    _deleteFile: function(selected) {
+    _getFileNameFromRow: function(selected) {
         this._selected = selected;
+        let fileForAction = null;
         let rowWidget = this._selected.get_child(this.fileName);
         rowWidget.foreach(Lang.bind(this, 
             function(child) {
@@ -490,10 +491,21 @@ const MainView = new Lang.Class({
                 
                 if (alwaysShow) {
                     let name = child.get_text();
-                    let fileToDelete = fileUtil.loadFile(name);
-                    fileUtil.deleteFile(fileToDelete);
+                    fileForAction = fileUtil.loadFile(name);
                 }
-            }));        
+             }));
+        return fileForAction;
+    },
+    
+    _deleteFile: function(selected) {
+        this._selected = selected;
+        let fileToDelete = this._getFileNameFromRow(this._selected);
+        fileUtil.deleteFile(fileToDelete);      
+    },
+    
+    _loadPlay:function(selected) {
+        this._selected = selected;
+        let fileToPlay = this._getFileNameFromRow(this._selected);
     }
 });
 

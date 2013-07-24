@@ -41,10 +41,10 @@ const PipelineStates = {
  const Play = new Lang.Class({
     Name: "Play",
            
-    _playPipeline: function() { 
+    _playPipeline: function(fileName) { 
         this._view = Application.view; //needs to be re-named      
         this.play = Gst.ElementFactory.make("playbin", "play");
-        this.play.set_property("uri", "file:///home/meg/Recordings/2013-07-11 02:36:58.flac");
+        this.play.set_property("file", fileName);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
              
@@ -59,9 +59,10 @@ const PipelineStates = {
             }));
     },
             
-    startPlaying: function() {
+    startPlaying: function(fileName) {
+        this._fileName = fileName;
         if (!this.play || this.playState == PipelineStates.STOPPED )
-            this._playPipeline();
+            this._playPipeline(this._fileName);
             
         this.ret = this.play.set_state(Gst.State.PLAYING);
         this.playState = PipelineStates.PLAYING; 
