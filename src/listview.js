@@ -111,7 +111,8 @@ const Listview = new Lang.Class({
                                                             dateModified: dateModifiedDisplayString,
                                                             fileName: returnedName,
                                                             mediaType: null,
-                                                            title: null });
+                                                            title: null,
+                                                            uri: null });
                             }));
                         this._sortItems(this._fileInfo);
                     } else {
@@ -168,6 +169,7 @@ const Listview = new Lang.Class({
         initialFileName.push(this.file.fileName);
         let finalFileName = GLib.build_filenamev(initialFileName);
         let uri = GLib.filename_to_uri(finalFileName, null);
+        this.file.uri = uri;
         log(uri);
         this._discoverer = new GstPbutils.Discoverer();
         this._discoverer.start();                      

@@ -260,7 +260,7 @@ const MainView = new Lang.Class({
         this.playVolume = new Gtk.VolumeButton();
         this.range = Gtk.Adjustment.new(0.5, 0, 3.375, 0.15, 0.0, 0.0);
         this.playVolume.set_adjustment(this.range);
-        this.playVolume.connect ("value-changed", Lang.bind(this, this.setVolume));
+        this.playVolume.connect("value-changed", Lang.bind(this, this.setVolume));
         playGrid.attach(this.playVolume, 20, 4, 3, 1); 
               
         this.playButton = new PlayPauseButton(this._play);
@@ -426,35 +426,34 @@ const MainView = new Lang.Class({
             this.rowGrid.add(this._fileName);
             this._fileName.show();            
             
-            this._playListButton = new Gtk.Button({ //halign: Gtk.Align.END,
-                                                    hexpand: false });
+            this._playListButton = new Gtk.Button({ hexpand: false });
             this._playListButton.image = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
             this._playListButton.sensitive = false;
             this.rowGrid.add(this._playListButton);
             
-            this._info = new Gtk.Button({ //halign: Gtk.Align.START,
-                                          hexpand: false });
+            this._info = new Gtk.Button({ hexpand: false });
             this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
             this._info.sensitive = false;
             this.rowGrid.add(this._info);
             
-            this._share = new Gtk.Button({ //halign: Gtk.Align.START,
-                                           hexpand: false });
+            this._share = new Gtk.Button({ hexpand: false });
             this._share.image = Gtk.Image.new_from_icon_name("send-to-symbolic", Gtk.IconSize.BUTTON);
             this._share.sensitive = false;
             this.rowGrid.add(this._share);
 
-            this._delete = new Gtk.Button({ //halign: Gtk.Align.START,
-                                            hexpand: false });
+            this._delete = new Gtk.Button({ hexpand: false });
             this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
             this._delete.get_style_context().add_class('toolbar');
-            this._delete.connect("clicked", Lang.bind(this, this._deleteFile));
+            this._delete.connect("clicked", Lang.bind(this, 
+                function() {
+                    this._deleteFile(this.listBox.get_selected_row());
+                    }));
             this._delete.sensitive = false;
             this.rowGrid.add(this._delete);           
             
-            this.sep = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
-            this.listBox.add(this.sep);
-            this.sep.show();           
+            this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
+            this.listBox.add(this._separator);
+            this._separator.show();           
         } 
     },
     
@@ -482,8 +481,19 @@ const MainView = new Lang.Class({
         }                        
     },
     
-    _deleteFile: function() {
-        //this.fileName.
+    _deleteFile: function(selected) {
+        this._selected = selected;
+        let rowWidget = this._selected.get_child(this.fileName);
+        rowWidget.foreach(Lang.bind(this, 
+            function(child) {
+                let alwaysShow = child.get_no_show_all();
+                
+                if (alwaysShow) {
+                    let name = child.get_text();
+                    let fileToDelete = fileUtil.loadFile(name);
+                    fileUtil.deleteFile(fileToDelete);
+                }
+            }));        
     }
 });
 

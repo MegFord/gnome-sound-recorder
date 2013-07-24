@@ -42,10 +42,19 @@ const FileUtil = new Lang.Class({
         l.set_display_name_async("lettuce", GLib.PRIORITY_DEFAULT, null, null);
     },*/
     
-    loadFile: function() {
+    loadFile: function(text) { //Do I have this somewhere?
+        this._text = text;
         let path = Application.path;
-        // Write the loadfile when eggslistbox is finished
-    }
+        path.push(this._text);
+        let fileNav = GLib.build_filenamev(path);
+        let fileUri = Gio.file_new_for_path(fileNav);
+        return fileUri;
+    },
+    
+    deleteFile: function(fileToDelete) {
+        this._fileToDelete = fileToDelete;
+        this._fileToDelete.delete_async(GLib.PRIORITY_DEFAULT, null, null);
+    }        
 });
     
 const _OFFSET_STEP = 10;
