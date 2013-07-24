@@ -199,7 +199,8 @@ const Listview = new Lang.Class({
                Therefore, we prefer to set it with tags */
             if (dateTimeTag != null) {                
                 dateTimeCreatedString = dateTimeTag.to_g_date_time();
-                this.file.dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
+                if (dateTimeCreatedString)
+                    this.file.dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
                 log(this.file.dateCreated);
             }              
             

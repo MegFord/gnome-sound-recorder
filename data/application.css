@@ -1,4 +1,7 @@
-.big-label {
-    font-size: 4em;
-    font-weight: bold;
+@define-color border #3e7b05;
+
+.grid-border {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #bcbcbc;
 }

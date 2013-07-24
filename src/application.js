@@ -373,38 +373,30 @@ const MainView = new Lang.Class({
     },
     
     listBoxAdd: function() {
-        if (this._model) {
-            this._model.clear();
-            return;
-        }
-        
         this.groupGrid = groupGrid;
-        this.groupGrid.show();
-        
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
-                                                     margin_top: 3,
+                                                     margin_top: 5,
                                                      hexpand: true,
-                                                     vexpand: true,
-                                                     width_request: 690,
-                                                     height_request: 480 });
+                                                     vexpand: false,
+                                                     width_request: 800,
+                                                     height_request: 400 });
         this._scrolledWin.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC);
         this._scrolledWin.set_shadow_type(Gtk.ShadowType.IN);
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
         
-        this._model = Gtk.ListStore.new(
-            [ GObject.TYPE_STRING ]);
+        this.listBox = Gtk.ListBox.new();
+        this._scrolledWin.add(this.listBox);
+        this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
+        this.listBox.set_header_func(null);
+        this.listBox.set_activate_on_single_click(true);
+        this.listBox.connect("row-selected", Lang.bind(this, 
+            function(){
+                this.rowGridCallback(this.listBox.get_selected_row())
+            }));
+        this.listBox.show();
         
-        this._treeView = new Gtk.TreeView({ headers_visible: false,
-                                            vexpand: true,
-                                            hexpand: true });
-        this._treeView.set_model(this._model);
-        this._treeView.show();
-
-        let col = new Gtk.TreeViewColumn();
-        this._treeView.append_column(col);
-   
         this._startIdx = offsetController.getOffset();
         log(this._startIdx);
         log("start");
@@ -413,60 +405,82 @@ const MainView = new Lang.Class({
         this._files = [];
         this._files = list.getFilesInfoForList();
         
-        // Name column
-        let cell = new Gtk.CellRendererText({ xpad: 16,
-                                              ypad: 24,
-                                              font: "Sans 12",
-                                              editable: true });
-        col.pack_start(cell, true);
-        col.add_attribute(cell, 'text', 0);
-        
         for (let i = this._startIdx; i <= this._endIdx; i++) {
-            this.name = this._files[i].fileName;
+            this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                                          height_request: 36,
+                                          width_request: 400 });
+            this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
+            this.rowGrid.get_style_context().add_class('grid-border');
+            this.listBox.add(this.rowGrid);
+            this.rowGrid.show();
             
-            let iter = this._model.append();
-            this._model.set(iter,
-                [ ListColumns.NAME ],
-                [ this.name ]); 
-        }
-                            
-        let child = this._scrolledWin.get_child();
-        
-        if (child)
-            child.destroy();
-        this._scrolledWin.add(this._treeView); 
-    },
-    
-    _addRenderers: function(fileName) {
-      /*  let nameRenderer =
-            new Gd.StyledTextRenderer({ xpad: 16 });
-        nameRenderer.add_class('dim-label');
-        listWidget.add_renderer(nameRenderer, Lang.bind(this,
-            function(col, cell, model, iter) {
-                let file.fileName = fileName;
-                nameRenderer.text = file.fileName;
-            }));
-        return nameRenderer.text;*/
-    },
-    
-    rowGridCallback: function() {
-        //let menuForFile = Gtk.Overlay.new();
-       // let menu = new Gio.Menu();
-        //menu.append("New",'app.new');
-       // menu.append("About", 'app.about');
-        //menu.append("Quit",'app.quit');
-       // menuForFile.add_overlay(menu);
-        
-        /*let newAction = new Gio.SimpleAction ({ name: 'new' });
-        newAction.connect('activate', Lang.bind(this,
-            function() {
-                log("working!");//this._showNew();
-            }));
-        this.listBox.add_action(newAction);*/
-        
-    }
-    
+            this._fileName = new Gtk.Label({ use_markup: true, 
+                                             halign: Gtk.Align.START,
+                                             ellipsize: true,
+                                             xalign: 0,
+                                             width_chars: 60 });
+                                           log(this._files[i].fileName);
+            let markup = ('<span size="large">'+ this._files[i].fileName + '</span>');
+            this._fileName.label = markup;
+            this._fileName.set_no_show_all(true);
+            //this._fileName.get_style_context().add_class('grid-border');
+            this.rowGrid.add(this._fileName);
+            this._fileName.show();
+            
+            this._playListButton = new Gtk.Button({ halign: Gtk.Align.FILL,
+                                                    hexpand: true });
+            this._playListButton.image = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
+            this._playListButton.sensitive = false;
+            this.rowGrid.add(this._playListButton);
+            
+            this._info = new Gtk.Button({ halign: Gtk.Align.FILL,
+                                          hexpand: true });
+            this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
+            this._info.sensitive = false;
+            this.rowGrid.add(this._info);
+            
+            this._share = new Gtk.Button({ halign: Gtk.Align.FILL,
+                                           hexpand: true });
+            this._share.image = Gtk.Image.new_from_icon_name("send-to-symbolic", Gtk.IconSize.BUTTON);
+            this._share.sensitive = false;
+            this.rowGrid.add(this._share);
 
+            this._delete = new Gtk.Button({ halign: Gtk.Align.FILL,
+                                            hexpand: true });
+            this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
+            this._delete.get_style_context().add_class('toolbar');
+            this._delete.sensitive = false;
+            this.rowGrid.add(this._delete);
+            
+            this.sep = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
+            this.listBox.add(this.sep);
+            this.sep.show();           
+        } 
+    },
+    
+    rowGridCallback: function(selectedRow) {
+        if (selectedRow) {
+        
+            if (this._selectedRow) {
+              let rowWidget = this._selectedRow.get_child(this.fileName);
+              rowWidget.foreach(Lang.bind(this, 
+                function(child) {
+                    let alwaysShow = child.get_no_show_all();
+                    
+                    if (!alwaysShow)
+                        child.hide();
+                }));
+            }
+                              
+            this._selectedRow = selectedRow;
+            let selectedRowWidget = this._selectedRow.get_child(this.fileName);
+            selectedRowWidget.foreach(Lang.bind(this, 
+                function(child) {
+                        child.sensitive = true;
+                        child.show();
+                }));
+        }                        
+    }
 });
 
 const RecordButton = new Lang.Class({
