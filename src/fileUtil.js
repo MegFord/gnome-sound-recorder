@@ -42,7 +42,7 @@ const FileUtil = new Lang.Class({
         l.set_display_name_async("lettuce", GLib.PRIORITY_DEFAULT, null, null);
     },*/
     
-    loadFile: function(text) { //Do I have this somewhere?
+    loadFile: function(text) { 
         this._text = text;
         let path = Application.path;
         path.push(this._text);
@@ -54,8 +54,17 @@ const FileUtil = new Lang.Class({
     deleteFile: function(fileNav) {
         this._fileNav = fileNav;
         this._fileToDelete = Gio.file_new_for_path(this._fileNav);       
-        this._fileToDelete.delete_async(GLib.PRIORITY_DEFAULT, null, null);
-    }        
+        this._fileToDelete.delete_async(GLib.PRIORITY_DEFAULT, null, Lang.bind(this, this._deleteFileCallback));
+    }, 
+    
+    _deleteFileCallback: function(obj, res) {
+        this._deleted = obj.delete_finish(res);
+        //this._list = new Listview.Listview();
+        //this._list.enumerateDirectory();
+       // Application.offsetController.resetOffset();
+       //Application.add_named(groupGrid, name);
+        
+    }      
 });
     
 const _OFFSET_STEP = 10;

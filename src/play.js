@@ -100,7 +100,7 @@ const PipelineStates = {
                                     
             if (this.timeout) {
                 GLib.source_remove(this.timeout);
-                this.timeout = 0;
+                this.timeout = null;
             }
     },
     

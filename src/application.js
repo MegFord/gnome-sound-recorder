@@ -418,29 +418,47 @@ const MainView = new Lang.Class({
             this._fileName.label = markup;
             this._fileName.set_no_show_all(true);
             this.rowGrid.add(this._fileName);
-            this._fileName.show();            
+            this._fileName.show();
+
+            this.widget = new Gtk.Toolbar({ show_arrow: false,
+                                            halign: Gtk.Align.END,
+                                            valign: Gtk.Align.END,
+                                            icon_size: Gtk.IconSize.BUTTON,
+                                            opacity: 1 });
+            this.rowGrid.attach(this.widget, 1, 0, 1, 1);
+                       
+            this._box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
+            this._group = new Gtk.ToolItem({ child: this._box });
+            this.widget.insert(this._group, -1);
             
+            // play button
             this._playListButton = new Gtk.Button({ hexpand: false });
-            this._playListButton.image = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
-            this._playListButton.sensitive = false;
+            this._playListButton.image = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);       
+            this._box.add(this._playListButton);
+            this._playListButton.set_tooltip_text(_("Play"));
+            this._playListButton.show();
             this._playListButton.connect('clicked', Lang.bind(this, 
                 function(){
                     play.passSelected(this.listBox.get_selected_row());
                     view.visible_child_name = 'playerPage'; 
                    
                 }));
-            this.rowGrid.add(this._playListButton);
             
+            // properties button
             this._info = new Gtk.Button({ hexpand: false });
-            this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
-            this._info.sensitive = false;
-            this.rowGrid.add(this._info);
+            this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON); 
+            this._info.set_tooltip_text(_("Properties"));         
+            this._box.add(this._info);
+            this._info.show();
             
+            // sharing button
             this._share = new Gtk.Button({ hexpand: false });
             this._share.image = Gtk.Image.new_from_icon_name("send-to-symbolic", Gtk.IconSize.BUTTON);
-            this._share.sensitive = false;
-            this.rowGrid.add(this._share);
+            this._share.set_tooltip_text(_("Share"));
+            this._box.add(this._share);
+            this._share.show();
 
+            // delete button
             this._delete = new Gtk.Button({ hexpand: false });
             this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
             this._delete.get_style_context().add_class('toolbar');
@@ -448,8 +466,9 @@ const MainView = new Lang.Class({
                 function() {
                     this._deleteFile(this.listBox.get_selected_row());
                 }));
-            this._delete.sensitive = false;
-            this.rowGrid.add(this._delete);           
+            this._delete.set_tooltip_text(_("Delete"));
+            this._box.add(this._delete);
+            this._box.show();                      
             
             this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
             this.listBox.add(this._separator);
@@ -460,8 +479,8 @@ const MainView = new Lang.Class({
     rowGridCallback: function(selectedRow) {
         if (selectedRow) {
         
-            if (this._selectedRow) {
-              let rowWidget = this._selectedRow.get_child(this.fileName);
+           if (this._selectedRow) {
+              let rowWidget = this._selectedRow.get_child(this.widget);
               rowWidget.foreach(Lang.bind(this, 
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
@@ -472,11 +491,14 @@ const MainView = new Lang.Class({
             }
                               
             this._selectedRow = selectedRow;
-            let selectedRowWidget = this._selectedRow.get_child(this.fileName);
+            let selectedRowWidget = this._selectedRow.get_child(this.widget);
+            selectedRowWidget.show_all();
             selectedRowWidget.foreach(Lang.bind(this, 
                 function(child) {
+                    let alwaysShow = child.get_no_show_all();
+                    
+                    if (!alwaysShow)
                         child.sensitive = true;
-                        child.show();
                 }));
         }                        
     },
@@ -494,6 +516,7 @@ const MainView = new Lang.Class({
                     fileForAction = fileUtil.loadFile(name);
                 }
              }));
+             
         return fileForAction;
     },
     
@@ -503,7 +526,7 @@ const MainView = new Lang.Class({
         fileUtil.deleteFile(fileToDelete);      
     },
     
-    loadPlay:function(selected) {
+    loadPlay: function(selected) {
         this._selected = selected;
         let fileToPlay = this._getFileNameFromRow(this._selected);
         return fileToPlay;

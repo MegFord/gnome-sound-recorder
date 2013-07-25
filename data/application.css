@@ -11,7 +11,11 @@
 
 .view .button {
   border: 0; 
-  border-left: #6e6e6e 1px solid;
+  border-left: rgba(255,255,255,0.45) 1px solid;
+  border-right: rgba(255,255,255,0.45) 1px solid;
   border-radius: 0px; 
   margin: 0; 
+}
+
+.view .toolbar {
 }
