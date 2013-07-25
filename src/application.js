@@ -403,7 +403,8 @@ const MainView = new Lang.Class({
         for (let i = this._startIdx; i <= this._endIdx; i++) {
             this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                           height_request: 36,
-                                          width_request: 400 });
+                                          width_request: 400,
+                                          name: i.toString() });
             this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
             this.listBox.add(this.rowGrid);
             this.rowGrid.show();
@@ -450,7 +451,15 @@ const MainView = new Lang.Class({
             this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
             this._info.connect("clicked", Lang.bind(this, 
                 function() {
-                    this._onInfoButton(this.listBox.get_selected_row());
+                    let row = this.listBox.get_selected_row();
+                    log(row); 
+                    let gridForName = row.get_child();
+                    let idx = parseInt(gridForName.name);
+                    log(idx);
+                    
+                    let file =  this._files[idx];
+                    log(file.fileName);
+                    this._onInfoButton(file);
                 })); 
             this._info.set_tooltip_text(_("Info"));         
             this._box.add(this._info);
@@ -477,7 +486,8 @@ const MainView = new Lang.Class({
             
             this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
             this.listBox.add(this._separator);
-            this._separator.show();           
+            this._separator.show();
+                       
         } 
     },
     
@@ -540,33 +550,13 @@ const MainView = new Lang.Class({
     
     _onInfoButton: function(selected) {
         this._selected = selected;
-        let fileForInfo = this._getFileNameFromRow(this._selected);
-        let infoDialog = new Info.InfoDialog(fileForInfo);
-        
-        this._fadeOut();
+        //let fileForInfo = this._getFileNameFromRow(this._selected);
+        let infoDialog = new Info.InfoDialog(this._selected);
 
-        dialog.widget.connect('response', Lang.bind(this,
+        infoDialog.widget.connect('response', Lang.bind(this,
             function(widget, response) {
-                dialog.widget.destroy();
-                this._fadeIn();
+                infoDialog.widget.destroy();
             }));
-    },
-    
-      _fadeIn: function() {
-        this.widget.show();
-        Tweener.addTween(this.widget, { opacity: 1,
-                                        time: 0.30,
-                                        transition: 'easeOutQuad' });
-    },
-
-    _fadeOut: function() {
-        Tweener.addTween(this.widget, { opacity: 0,
-                                        time: 0.30,
-                                        transition: 'easeOutQuad',
-                                        onComplete: function() {
-                                            this.widget.hide();
-                                        },
-                                        onCompleteScope: this });
     }
 });
 
