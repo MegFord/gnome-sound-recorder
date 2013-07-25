@@ -35,12 +35,10 @@ const Listview = imports.listview;
 const FileUtil = new Lang.Class({
     Name: "FileUtil",
         
-   /* rename: function() { 
-       let ff = Gio.file_new_for_path(GLib.get_home_dir());
-       let s = ff.get_child("Recordings");
-       let l = Gio.file_new_for_path("/home/meg/Recordings/newName.mp3");
-        l.set_display_name_async("lettuce", GLib.PRIORITY_DEFAULT, null, null);
-    },*/
+   rename: function(fileName, newFileName) { 
+       let l = Gio.file_new_for_path(fileName);
+        l.set_display_name_async(newFileName, GLib.PRIORITY_DEFAULT, null, null);
+    },
     
     loadFile: function(text) { 
         this._text = text;

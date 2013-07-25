@@ -45,7 +45,7 @@ const PipelineStates = {
     _playPipeline: function(fileName) {
         this._fileName = this._fileToPlay;
         let uri = GLib.filename_to_uri(this._fileName, null); 
-        this._view = Application.view; //needs to be re-named      
+        this._view = Application.view;      
         this.play = Gst.ElementFactory.make("playbin", "play");
         this.play.set_property("uri", uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");

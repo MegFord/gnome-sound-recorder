@@ -29,6 +29,7 @@ const Signals = imports.signals;
 
 const AudioProfile = imports.audioProfile;
 const FileUtil = imports.fileUtil;
+const Info = imports.info;
 const Listview = imports.listview;
 const Play = imports.play;
 const Record = imports.record;
@@ -288,7 +289,7 @@ const MainView = new Lang.Class({
         this.duration = duration; 
         this.playPipeState = play.getPipeStates();
         
-        if (this.playPipeState != 2) {
+        if (this.playPipeState != PipelineStates.STOPPED) { //test this
             if (this.playDurationLabel.label == "0:00" && duration != 0) 
             this.durationString = this._formatTime(duration);
         } else {
@@ -303,7 +304,7 @@ const MainView = new Lang.Class({
         } else if (this.setVisibleID() == ActivePage.PLAY) {
             this.playTimeLabel.label = this.timeLabelString;
             
-            if (this.playDurationLabel.label == "0:00" || this.playPipeState == 2) {
+            if (this.playDurationLabel.label == "0:00" || this.playPipeState == PipelineStates.STOPPED) {
                 this.playDurationLabel.label = this.durationString;
                 this.setProgressScaleSensitive();
                 this.progressScale.set_range(0.0, duration); 
@@ -444,10 +445,14 @@ const MainView = new Lang.Class({
                    
                 }));
             
-            // properties button
+            // info button
             this._info = new Gtk.Button({ hexpand: false });
-            this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON); 
-            this._info.set_tooltip_text(_("Properties"));         
+            this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
+            this._info.connect("clicked", Lang.bind(this, 
+                function() {
+                    this._onInfoButton(this.listBox.get_selected_row());
+                })); 
+            this._info.set_tooltip_text(_("Info"));         
             this._box.add(this._info);
             this._info.show();
             
@@ -529,7 +534,39 @@ const MainView = new Lang.Class({
     loadPlay: function(selected) {
         this._selected = selected;
         let fileToPlay = this._getFileNameFromRow(this._selected);
+        
         return fileToPlay;
+    },
+    
+    _onInfoButton: function(selected) {
+        this._selected = selected;
+        let fileForInfo = this._getFileNameFromRow(this._selected);
+        let infoDialog = new Info.InfoDialog(fileForInfo);
+        
+        this._fadeOut();
+
+        dialog.widget.connect('response', Lang.bind(this,
+            function(widget, response) {
+                dialog.widget.destroy();
+                this._fadeIn();
+            }));
+    },
+    
+      _fadeIn: function() {
+        this.widget.show();
+        Tweener.addTween(this.widget, { opacity: 1,
+                                        time: 0.30,
+                                        transition: 'easeOutQuad' });
+    },
+
+    _fadeOut: function() {
+        Tweener.addTween(this.widget, { opacity: 0,
+                                        time: 0.30,
+                                        transition: 'easeOutQuad',
+                                        onComplete: function() {
+                                            this.widget.hide();
+                                        },
+                                        onCompleteScope: this });
     }
 });
 
