@@ -6,8 +6,13 @@ jsdir = $(pkgdatadir)
 dist_js_DATA = \
 	main.js \
 	util.js	\
-	application.js
-
+	application.js \
+	audioProfile.js \
+	fileUtil.js \
+	listview.js \
+	record.js \
+	play.js \
+    info.js
 nodist_bin_SCRIPTS = gnome-sound-recorder
 
 EXTRA_DIST = gnome-sound-recorder.in
