@@ -33,6 +33,7 @@ const Info = imports.info;
 const Listview = imports.listview;
 const Play = imports.play;
 const Record = imports.record;
+const Toolbar = imports.toolbar;
 
 let audioProfile = null;
 let fileManager = null; // do I use this?
@@ -50,16 +51,18 @@ const ActivePage = {
     LISTVIEW: 'listviewPage'
 };
 
+const ListColumns = {
+    NAME: 0,
+    MENU: 1
+};
+
 const PipelineStates = {
     PLAYING: 0,
     PAUSED: 1,
     STOPPED: 2
 }; 
 
-const ListColumns = {
-    NAME: 0,
-    MENU: 1
-};
+
 
 const _TIME_DIVISOR = 60;
 const _SEC_TIMEOUT = 100;
@@ -68,7 +71,7 @@ const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.ApplicationWindow,
 
-    _init: function(params) {
+     _init: function(params) {
         audioProfile = new AudioProfile.AudioProfile();
         this._buildFileName = new Record.BuildFileName()
         path = this._buildFileName.buildPath();
@@ -86,36 +89,15 @@ const Application = new Lang.Class({
 
         let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                   halign: Gtk.Align.CENTER });
-        let header = new Gtk.HeaderBar({ title: _(""),
+        let stackSwitcher = Gtk.StackSwitcher.new();
+        stackSwitcher.set_stack(view);
+        let header = new Gtk.HeaderBar({ 
                                          hexpand: true });
-
-        this._recordPageButton = new Gtk.Button({ label: _("Recorder"),
-                                                  hexpand: true });
-        header.pack_start(this._recordPageButton);
-        
-        /*this._playPageButton = new Gtk.Button({ label: _("Player"),
-                                                hexpand: true });
-        header.pack_start(this._playPageButton);*/
-        
-        this._listviewPageButton = new Gtk.Button({ label: _("Player"),
-                                                    hexpand: true });
-        header.pack_start(this._listviewPageButton);
+        header.custom_title = stackSwitcher;
         
         grid.attach(header, 0, 0, 2, 2);
 
         grid.add(view);
-        this._recordPageButton.connect('clicked', Lang.bind(this, 
-            function() {
-                view.visible_child_name = 'recorderPage'; 
-            }));
-       /* this._playPageButton.connect('clicked', Lang.bind(this, 
-            function(){
-                view.visible_child_name = 'playerPage'; 
-            }));*/
-        this._listviewPageButton.connect('clicked', Lang.bind(this, function(){
-                view.visible_child_name = 'listviewPage';
-                               //view.listboxcb(); 
-            }));
             
         this._defineThemes();
                 
@@ -143,13 +125,13 @@ const MainView = new Lang.Class({
 
         let recorderPage = this._addRecorderPage('recorderPage');
             this.visible_child_name = 'listviewPage';
+            //this.
             
         let listviewPage = this._addListviewPage('listviewPage');
              this.visible_child_name = 'playerPage';
                 
         let playerPage = this._addPlayerPage('playerPage');
             this.visible_child_name = 'recorderPage';
-            //this.visible_child_name = 'listviewPage';
             
         this.labelID = null;
     },
@@ -157,15 +139,15 @@ const MainView = new Lang.Class({
     _addListviewPage: function(name) {
         list = new Listview.Listview();
         list.enumerateDirectory();
-        initialPage = new Gtk.EventBox();
+        let initialPage = new Gtk.EventBox();
         
         groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                       halign: Gtk.Align.CENTER,
-                                       valign: Gtk.Align.CENTER,
-                                       row_spacing: 12,
-                                       column_homogeneous: true }); 
+                                   halign: Gtk.Align.CENTER,
+                                   valign: Gtk.Align.CENTER,
+                                   row_spacing: 12,
+                                   column_homogeneous: true }); 
         groupGrid.add(initialPage);
-        this.add_named(groupGrid, name);             
+        this.add_titled(groupGrid, name, "View");             
     },
 
     _addRecorderPage: function(name) {
@@ -204,7 +186,7 @@ const MainView = new Lang.Class({
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
         toolbarStart.pack_end(stopRecord, true, true, 0);
 
-        this.add_named(this.recordBox, name);
+        this.add_titled(this.recordBox, name, "Record");
     },
     
     _addPlayerPage: function(name) {
@@ -267,7 +249,7 @@ const MainView = new Lang.Class({
         stopPlay.connect("clicked", Lang.bind(this, this.onPlayStopClicked));
         playToolbar.pack_end(stopPlay, true, true, 0);
 
-        this.add_named(this.playBox, name);
+        this.add_titled(this.playBox, name, "Play");
     },
     
     onPlayStopClicked: function() {
@@ -372,11 +354,11 @@ const MainView = new Lang.Class({
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
                                                      margin_top: 5,
-                                                     hexpand: true,
+                                                     hexpand: false,
                                                      vexpand: false,
                                                      width_request: 800,
                                                      height_request: 400 });
-        this._scrolledWin.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC);
+        this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this._scrolledWin.get_style_context().add_class('view');
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
@@ -414,7 +396,8 @@ const MainView = new Lang.Class({
                                              ellipsize: true,
                                              xalign: 0,
                                              width_chars: 69,
-                                             margin_left: 12 });
+                                             margin_top: 5,
+                                             margin_left: 15 });
                                            log(this._files[i].fileName);
             let markup = ('<b>'+ this._files[i].fileName + '</b>');
             this._fileName.label = markup;
@@ -424,7 +407,7 @@ const MainView = new Lang.Class({
 
             this.widget = new Gtk.Toolbar({ show_arrow: false,
                                             halign: Gtk.Align.END,
-                                            valign: Gtk.Align.END,
+                                            valign: Gtk.Align.FILL,
                                             icon_size: Gtk.IconSize.BUTTON,
                                             opacity: 1 });
             this.rowGrid.attach(this.widget, 1, 0, 1, 1);
@@ -446,13 +429,23 @@ const MainView = new Lang.Class({
                    
                 }));
             
+            this.widgetInfo = new Gtk.Toolbar({ show_arrow: false,
+                                                halign: Gtk.Align.END,
+                                                valign: Gtk.Align.FILL,
+                                                icon_size: Gtk.IconSize.BUTTON,
+                                                opacity: 1 });
+            this.rowGrid.attach(this.widgetInfo, 2, 0, 1, 1);
+            
+            this._boxInfo = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
+            this._groupInfo = new Gtk.ToolItem({ child: this._boxInfo });
+            this.widgetInfo.insert(this._groupInfo, -1);
+            
             // info button
             this._info = new Gtk.Button({ hexpand: false });
             this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
             this._info.connect("clicked", Lang.bind(this, 
                 function() {
                     let row = this.listBox.get_selected_row();
-                    log(row); 
                     let gridForName = row.get_child();
                     let idx = parseInt(gridForName.name);
                     log(idx);
@@ -462,27 +455,49 @@ const MainView = new Lang.Class({
                     this._onInfoButton(file);
                 })); 
             this._info.set_tooltip_text(_("Info"));         
-            this._box.add(this._info);
+            this._boxInfo.add(this._info);
             this._info.show();
+            
+            this.widgetShare = new Gtk.Toolbar({ show_arrow: false,
+                                                 halign: Gtk.Align.END,
+                                                 valign: Gtk.Align.FILL,
+                                                 icon_size: Gtk.IconSize.BUTTON,
+                                                 opacity: 1 });
+            this.rowGrid.attach(this.widgetShare, 3, 0, 1, 1);
+            
+            this._boxShare = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
+            this._groupShare = new Gtk.ToolItem({ child: this._boxShare });
+            this.widgetShare.insert(this._groupShare, -1);
             
             // sharing button
             this._share = new Gtk.Button({ hexpand: false });
             this._share.image = Gtk.Image.new_from_icon_name("send-to-symbolic", Gtk.IconSize.BUTTON);
             this._share.set_tooltip_text(_("Share"));
-            this._box.add(this._share);
+            this._boxShare.add(this._share);
             this._share.show();
+            
+            this.widgetDelete = new Gtk.Toolbar({ show_arrow: false,
+                                                  halign: Gtk.Align.END,
+                                                  valign: Gtk.Align.FILL,
+                                                  icon_size: Gtk.IconSize.BUTTON,
+                                                  opacity: 1 });
+            this.widgetDelete.get_style_context().add_class('toolbarEnd');                                       
+            this.rowGrid.attach(this.widgetDelete, 4, 0, 1, 1);
+            
+            this._boxDelete = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
+            this._groupDelete = new Gtk.ToolItem({ child: this._boxDelete });
+            this.widgetDelete.insert(this._groupDelete, -1);
 
             // delete button
             this._delete = new Gtk.Button({ hexpand: false });
             this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
-            this._delete.get_style_context().add_class('toolbar');
             this._delete.connect("clicked", Lang.bind(this, 
                 function() {
                     this._deleteFile(this.listBox.get_selected_row());
                 }));
             this._delete.set_tooltip_text(_("Delete"));
-            this._box.add(this._delete);
-            this._box.show();                      
+            this._boxDelete.add(this._delete);
+            this._boxDelete.show();                      
             
             this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
             this.listBox.add(this._separator);
