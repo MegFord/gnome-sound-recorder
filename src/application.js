@@ -86,13 +86,12 @@ const Application = new Lang.Class({
                                        default_height: 480,
                                        border_width: 12 });
         this.parent(params);
-
+        
         let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                   halign: Gtk.Align.CENTER });
         let stackSwitcher = Gtk.StackSwitcher.new();
         stackSwitcher.set_stack(view);
-        let header = new Gtk.HeaderBar({ 
-                                         hexpand: true });
+        let header = new Gtk.HeaderBar({ hexpand: true });
         header.custom_title = stackSwitcher;
         
         grid.attach(header, 0, 0, 2, 2);
@@ -424,7 +423,7 @@ const MainView = new Lang.Class({
             this._playListButton.show();
             this._playListButton.connect('clicked', Lang.bind(this, 
                 function(){
-                    play.passSelected(this.listBox.get_selected_row());
+                    play.passSelected(this.listBox.get_selected_row()); // this can be done with the uri. add code to set the uri in the listview.
                     view.visible_child_name = 'playerPage'; 
                    
                 }));
@@ -501,6 +500,9 @@ const MainView = new Lang.Class({
             
             this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
             this.listBox.add(this._separator);
+            this.selectionRow = this._separator.get_parent();
+            this.selectionRow.set_sensitive(false);
+            log("sl");
             this._separator.show();
                        
         } 
@@ -566,7 +568,7 @@ const MainView = new Lang.Class({
     _onInfoButton: function(selected) {
         this._selected = selected;
         //let fileForInfo = this._getFileNameFromRow(this._selected);
-        let infoDialog = new Info.InfoDialog(this._selected);
+        let infoDialog = new Info.InfoDialog(selected);
 
         infoDialog.widget.connect('response', Lang.bind(this,
             function(widget, response) {

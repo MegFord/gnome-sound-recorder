@@ -31,19 +31,22 @@ const Signals = imports.signals;
 
 const Application = imports.application;
 const Listview = imports.listview;
+const Record = imports.record;
 
 const FileUtil = new Lang.Class({
     Name: "FileUtil",
         
    rename: function(fileName, newFileName) { 
        let l = Gio.file_new_for_path(fileName);
-        l.set_display_name_async(newFileName, GLib.PRIORITY_DEFAULT, null, null);
+       l.set_display_name_async(newFileName, GLib.PRIORITY_DEFAULT, null, null);
     },
     
     loadFile: function(text) { 
         this._text = text;
-        let path = Application.path;
-        path.push(this._text);
+        this._buildFileName = new Record.BuildFileName();
+        let path = this._buildFileName.buildPath();
+        path.push(text);
+        log(path);
         let fileNav = GLib.build_filenamev(path);
        
         return fileNav;

@@ -164,7 +164,7 @@ const Listview = new Lang.Class({
      
      _runDiscover: function() {
         this.file = this._allFilesInfo[this.idx];
-        this._buildFileName = new Record.BuildFileName()
+        this._buildFileName = new Record.BuildFileName();
         let initialFileName = this._buildFileName.buildPath();
         initialFileName.push(this.file.fileName);
         let finalFileName = GLib.build_filenamev(initialFileName);
@@ -274,8 +274,7 @@ const Listview = new Lang.Class({
             } 
         }        
     }, 
-    
-    
+        
     getFilesInfoForList: function() {
         return this._allFilesInfo;//return 
     },
