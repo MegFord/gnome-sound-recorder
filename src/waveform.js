@@ -130,9 +130,10 @@ const WaveForm = new Lang.Class({
                    
         for(let i = 0; i <= this.tick; i++) {
                     
-            if (this.tick >= 40) {
+            if (this.tick >= 40 && peaks[this.newWave] != null) {
                 this.newWave = this.count + i + 1;
-                log(this.newWave); 
+                log(this.newWave);
+                log("NEWWAVE"); 
             } else {
                 this.newWave = i;
             }  
@@ -150,9 +151,11 @@ const WaveForm = new Lang.Class({
             log(peaks[this.tick]*h);
             cr.fillPreserve();*/
             }
-        }            
-        this.tick += 1;
-        this.count += 1;       
+        }
+        if (this.tick < this.nSamples) {        
+            this.tick += 1;
+            this.count += 1;
+        }       
     },
     
     timer: function()   {
