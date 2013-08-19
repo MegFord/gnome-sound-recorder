@@ -184,13 +184,13 @@ const Record = new Lang.Class({
                 if (GstPbutils.is_missing_plugin_message(this.localMsg)) { //buggy?
                     let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
                        
-                        if (detail != null)
-                            log(detail);
+                    if (detail != null)
+                        log(detail);
                                                    
                     let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
                    
-                        if (description != null)
-                            log(description);
+                    if (description != null)
+                        log(description);
                 }
                 this.stopRecording();
                 break;

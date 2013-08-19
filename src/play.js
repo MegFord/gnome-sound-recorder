@@ -106,6 +106,7 @@ const PipelineStates = {
                 GLib.source_remove(this.timeout);
                 this.timeout = null;
             }
+        Application.wave.endDrawing();
     },
     
     onEndOfStream: function() {
@@ -199,7 +200,7 @@ const PipelineStates = {
         
         if (this.timeout) {
             GLib.source_remove(this.timeout);
-                    this.timeout = null;
+            this.timeout = null;
         }
     },
     
@@ -208,7 +209,7 @@ const PipelineStates = {
         this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, level);
     },
     
-    passSelected: function(selected) {
+    passSelected: function(selected) { //I think this is unnecessary?
         this._selected = selected;
         log(selected);
         log("SELECT");

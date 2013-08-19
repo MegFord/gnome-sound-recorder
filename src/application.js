@@ -38,12 +38,14 @@ const Waveform = imports.waveform;
 let audioProfile = null;
 let fileManager = null; // do I use this?
 let fileUtil = null;
+let groupGrid;
 let list = null;
 let offsetController = null;
 let path = null;
 let play = null;
 let view = null;
-let groupGrid;
+let wave = null;
+
 
 const ActivePage = {
     RECORD: 'recorderPage',
@@ -603,7 +605,7 @@ const MainView = new Lang.Class({
                     this.wFGrid = child;                                               
              })); 
         //play.startPlaying(); this belongs here if I cache the waveform array beforehand, maybe      
-        this.waveForm = new Waveform.WaveForm(selFile, this.wFGrid);
+        wave = new Waveform.WaveForm(selFile, this.wFGrid);
     }    
 });
 

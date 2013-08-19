@@ -37,7 +37,7 @@ const Mainloop = imports.mainloop;
 const Application = imports.application;
 
 const peaks = [];
-const INTERVAL = 1000000000/10;
+const INTERVAL = 100000000;
 
 const WaveForm = new Lang.Class({
     Name: 'WaveForm',
@@ -69,7 +69,7 @@ const WaveForm = new Lang.Class({
         let bus = this.pipeline.get_bus();
         bus.add_signal_watch();
 
-        this.nSamples = Math.floor(this.duration / INTERVAL);
+        this.nSamples = Math.ceil(this.duration / INTERVAL);
         log(this.duration);
         log(this.nSamples);
         log("NSAMPLES");
@@ -101,10 +101,9 @@ const WaveForm = new Lang.Class({
                     peaks.push(this.val);                                
                }  
             }
-        }
-        
+        }        
         if (message.type == Gst.MessageType.EOS)
-                this.stopGeneration();
+            this.stopGeneration();
     }, 
 
     startGeneration: function() {
@@ -113,7 +112,6 @@ const WaveForm = new Lang.Class({
 
     stopGeneration: function() {
         this.pipeline.set_state(Gst.State.NULL);
-        //this.pipeline.get_state(Gst.CLOCK_TIME_NONE);
         this.timer();
         Application.play.startPlaying();
     },
@@ -128,8 +126,7 @@ const WaveForm = new Lang.Class({
         cr.setSourceRGBA(0.0, 185, 161, 255);
         let pixelsPerSample = w/40;
         let waveheight = h/3.375;
-        cr.moveTo(0, 100);
-      
+        cr.moveTo(0, 100);      
                    
         for(let i = 0; i <= this.tick; i++) {
                     
@@ -165,18 +162,18 @@ const WaveForm = new Lang.Class({
         }
     },
     
-    _drawEvent: function()  {
-        if (this.tick >= this.nSamples) { 
-            if (this.timeout) {
-                GLib.source_remove(this.timeout);
-                this.timeout = null;
-                        log("timeout removed");
-            }
-        return false;
-        }        
+    _drawEvent: function()  {     
         this.drawing.queue_draw();
         log("drqueue");
         return true;       
+    },
+    
+    endDrawing: function()  {
+        if (this.timeout) {
+            GLib.source_remove(this.timeout);
+            this.timeout = null;
+            log("timeout removed");
+        }
     },
 
     nsToPixel: function(duration)  { 
