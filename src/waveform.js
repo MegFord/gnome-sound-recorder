@@ -43,31 +43,24 @@ const WaveForm = new Lang.Class({
 
     _init: function(file, grid) {
         this.file = file;
+        this.count = 0;
+        this.newWave = 0;
+        this.tick = 0; 
         this.duration = this.file.duration;
+        
         this.drawing = Gtk.DrawingArea.new();
         this.drawing.set_size_request(200, 36);
         grid.add(this.drawing);                            
         this.drawing.connect("draw",  Lang.bind(this, this.fillSurface));   
-        this.discovered = false;
         this._uri = this.file.uri;
-        log(this._uri);
-        log("URI!");
-        this.actors = [];
-        
-        this.width = 0
-        this.tick = 0;
-        this.newWave = 0;
-        this.count = 0;
-        this._numFailures = 0
         this.drawing.show_all();
         grid.show_all();
-        //this.widget.show_all();
+
         this._launchPipeline();
         this.startGeneration();
     },
 
     _launchPipeline: function() {
-        log('Now generating waveforms');
         this.peaks = null;
         this.pipeline = Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! level name=wavelevel interval=10000000 post-messages=true ! fakesink qos=false");
         this._level = this.pipeline.get_by_name("wavelevel");
@@ -83,7 +76,6 @@ const WaveForm = new Lang.Class({
             function(bus, message) {
             
                 if (message != null) {
-                log("new message");
                     this._messageCb(message);
                 }
             }));
@@ -96,10 +88,6 @@ const WaveForm = new Lang.Class({
             this.peakVal = 0;
             
             if (s) {
-                p = s.get_value("rms");
-                if (p)
-                
-                log("PPPPPPPPPPP");
                 this.peakVal = s.get_value("peak");
                 
                 if (this.peakVal) {
@@ -109,7 +97,6 @@ const WaveForm = new Lang.Class({
                     let valBase =  (this.val / 20);
                     this.val = Math.pow(10, valBase);
                     log(this.val);
-                    log("VVVVVAAAAALLLLL");
                     peaks.push(this.val);                                
                }  
             }
@@ -132,7 +119,6 @@ const WaveForm = new Lang.Class({
     stopGeneration: function() {
         this.pipeline.set_state(Gst.State.NULL);
         //this.pipeline.get_state(Gst.CLOCK_TIME_NONE);
-        log("NON");
         this.timer();
         Application.play.startPlaying();
     },
@@ -145,7 +131,7 @@ const WaveForm = new Lang.Class({
  
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
-        let pixelsPerSample = w / length;
+        let pixelsPerSample = w/40;
         cr.moveTo(0, 100);
                    
         for(let i = 0; i <= this.tick; i++) {
@@ -157,7 +143,7 @@ const WaveForm = new Lang.Class({
                 this.newWave = i;
             }  
             
-            cr.lineTo(i * w/40, peaks[this.newWave] * w/40);
+            cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * pixelsPerSample);
             cr.strokePreserve();
             log("CALL");
             log(this.tick);
