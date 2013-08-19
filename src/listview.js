@@ -109,6 +109,7 @@ const Listview = new Lang.Class({
                                                             dateCreated: null, 
                                                             dateForSort: dateModifiedSortString,                
                                                             dateModified: dateModifiedDisplayString,
+                                                            duration: null,
                                                             fileName: returnedName,
                                                             mediaType: null,
                                                             title: null,
@@ -133,7 +134,7 @@ const Listview = new Lang.Class({
         this._fileArr = fileArr;
         this._allFilesInfo = this._allFilesInfo.concat(this._fileArr);
         this._allFilesInfo.sort(function(a, b) {
-            return a.dateForSort - b.dateForSort;
+            return b.dateForSort - a.dateForSort; //a - b 
         }); 
         
         if (this._stopVal == EnumeratorState.ACTIVE)
@@ -170,7 +171,7 @@ const Listview = new Lang.Class({
         let finalFileName = GLib.build_filenamev(initialFileName);
         let uri = GLib.filename_to_uri(finalFileName, null);
         this.file.uri = uri;
-        log(uri);
+        log(this.file.uri);
         this._discoverer = new GstPbutils.Discoverer();
         this._discoverer.start();                      
         this._discoverer.discover_uri_async(uri);
@@ -191,6 +192,9 @@ const Listview = new Lang.Class({
             appString = this.tagInfo.get_value_index(Gst.TAG_APPLICATION_NAME, 0);
             let dateTimeTag = this.tagInfo.get_date_time('datetime')[1]; 
             let title = this.tagInfo.get_string('title')[1];
+            let durationInfo = info.get_duration();
+            log(durationInfo);
+            this.file.duration = durationInfo;
             
             if (title != null) {
                 this.file.title = title;
@@ -221,8 +225,7 @@ const Listview = new Lang.Class({
                 this._discoverer.stop();
                 Application.offsetController.setEndIdx();
                 //Application.view.list();
-                Application.view.listBoxAdd();
-                
+                Application.view.listBoxAdd();                
             }                                 
         } else {
         // don't index files we can't play

@@ -33,7 +33,7 @@ const Info = imports.info;
 const Listview = imports.listview;
 const Play = imports.play;
 const Record = imports.record;
-const Toolbar = imports.toolbar;
+const Waveform = imports.waveform;
 
 let audioProfile = null;
 let fileManager = null; // do I use this?
@@ -62,10 +62,9 @@ const PipelineStates = {
     STOPPED: 2
 }; 
 
-
-
 const _TIME_DIVISOR = 60;
 const _SEC_TIMEOUT = 100;
+const _MILSEC_TIMEOUT = 10;
 
 const Application = new Lang.Class({
     Name: 'Application',
@@ -195,7 +194,7 @@ const MainView = new Lang.Class({
                                       valign: Gtk.Align.CENTER,
                                       column_homogeneous: true,
                                       column_spacing: 15 });
-        this.playBox.add(playGrid);        
+        this.playBox.add(playGrid);      
 
         let playToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, 
                                         spacing: 0 });
@@ -390,20 +389,6 @@ const MainView = new Lang.Class({
             this.listBox.add(this.rowGrid);
             this.rowGrid.show();
             
-            this._fileName = new Gtk.Label({ use_markup: true, 
-                                             halign: Gtk.Align.START,
-                                             ellipsize: true,
-                                             xalign: 0,
-                                             width_chars: 69,
-                                             margin_top: 5,
-                                             margin_left: 15 });
-                                           log(this._files[i].fileName);
-            let markup = ('<b>'+ this._files[i].fileName + '</b>');
-            this._fileName.label = markup;
-            this._fileName.set_no_show_all(true);
-            this.rowGrid.add(this._fileName);
-            this._fileName.show();
-
             this.widget = new Gtk.Toolbar({ show_arrow: false,
                                             halign: Gtk.Align.END,
                                             valign: Gtk.Align.FILL,
@@ -423,17 +408,47 @@ const MainView = new Lang.Class({
             this._playListButton.show();
             this._playListButton.connect('clicked', Lang.bind(this, 
                 function(){
-                    play.passSelected(this.listBox.get_selected_row()); // this can be done with the uri. add code to set the uri in the listview.
-                    view.visible_child_name = 'playerPage'; 
-                   
-                }));
+                    let row = this.listBox.get_selected_row();
+                    play.passSelected(row); // this can be done with the uri. 
+                    let gridForName = row.get_child();
+                    let idx = parseInt(gridForName.name);
+                    log(idx);
+                    
+                    let file =  this._files[idx];
+                    log(file.uri);
+                    log("PLAYURI");
+                    this._onPlayListButton(row, file);                   
+                }));           
             
+            this._fileName = new Gtk.Label({ use_markup: true, 
+                                             halign: Gtk.Align.START,
+                                             ellipsize: true,
+                                             xalign: 0,
+                                             width_chars: 69,
+                                             margin_top: 5,
+                                             margin_left: 15 });
+                                           log(this._files[i].fileName);
+            let markup = ('<b>'+ this._files[i].fileName + '</b>');
+            this._fileName.label = markup;
+            this._fileName.set_no_show_all(true);
+            this.rowGrid.add(this._fileName);
+            this._fileName.show();
+            
+            this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                                               height_request: 36,
+                                               width_request: 200,
+                                               name: "waveFormGrid" });
+            this.waveFormGrid.set_no_show_all(true);
+            this.rowGrid.add(this.waveFormGrid);
+
+            this.waveFormGrid.show();
+
             this.widgetInfo = new Gtk.Toolbar({ show_arrow: false,
                                                 halign: Gtk.Align.END,
                                                 valign: Gtk.Align.FILL,
                                                 icon_size: Gtk.IconSize.BUTTON,
                                                 opacity: 1 });
-            this.rowGrid.attach(this.widgetInfo, 2, 0, 1, 1);
+            this.rowGrid.attach(this.widgetInfo, 3, 0, 1, 1);
             
             this._boxInfo = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
             this._groupInfo = new Gtk.ToolItem({ child: this._boxInfo });
@@ -462,7 +477,7 @@ const MainView = new Lang.Class({
                                                  valign: Gtk.Align.FILL,
                                                  icon_size: Gtk.IconSize.BUTTON,
                                                  opacity: 1 });
-            this.rowGrid.attach(this.widgetShare, 3, 0, 1, 1);
+            this.rowGrid.attach(this.widgetShare, 4, 0, 1, 1);
             
             this._boxShare = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
             this._groupShare = new Gtk.ToolItem({ child: this._boxShare });
@@ -481,7 +496,7 @@ const MainView = new Lang.Class({
                                                   icon_size: Gtk.IconSize.BUTTON,
                                                   opacity: 1 });
             this.widgetDelete.get_style_context().add_class('toolbarEnd');                                       
-            this.rowGrid.attach(this.widgetDelete, 4, 0, 1, 1);
+            this.rowGrid.attach(this.widgetDelete, 5, 0, 1, 1);
             
             this._boxDelete = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
             this._groupDelete = new Gtk.ToolItem({ child: this._boxDelete });
@@ -499,12 +514,11 @@ const MainView = new Lang.Class({
             this._boxDelete.show();                      
             
             this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
+            //set sep insensitive
             this.listBox.add(this._separator);
             this.selectionRow = this._separator.get_parent();
             this.selectionRow.set_sensitive(false);
-            log("sl");
-            this._separator.show();
-                       
+            this._separator.show();                       
         } 
     },
     
@@ -563,7 +577,7 @@ const MainView = new Lang.Class({
         let fileToPlay = this._getFileNameFromRow(this._selected);
         
         return fileToPlay;
-    },
+    }, //why is this here? I can just use getFileNameFromRow, can't I?
     
     _onInfoButton: function(selected) {
         this._selected = selected;
@@ -574,7 +588,23 @@ const MainView = new Lang.Class({
             function(widget, response) {
                 infoDialog.widget.destroy();
             }));
-    }
+    },
+    
+    _onPlayListButton: function(listRow, selFile) {
+        let rowWidget = listRow.get_child(this.widget);
+        rowWidget.foreach(Lang.bind(this, 
+            function(child) {
+                let alwaysShow = child.get_no_show_all();
+                    
+                if (!alwaysShow)
+                    child.hide(); 
+                    
+                if (child.name == "waveFormGrid") 
+                    this.wFGrid = child;                                               
+             })); 
+        //play.startPlaying(); this belongs here if I cache the waveform array beforehand, maybe      
+        this.waveForm = new Waveform.WaveForm(selFile, this.wFGrid);
+    }    
 });
 
 const RecordButton = new Lang.Class({

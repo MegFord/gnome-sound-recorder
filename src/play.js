@@ -31,6 +31,7 @@ const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 
 const Application = imports.application;
+const Waveform = imports.waveform;
 
 const PipelineStates = {
     PLAYING: 0,
@@ -44,14 +45,15 @@ const PipelineStates = {
            
     _playPipeline: function(fileName) {
         this._fileName = this._fileToPlay;
-        let uri = GLib.filename_to_uri(this._fileName, null); 
+        this.uri = GLib.filename_to_uri(this._fileName, null); 
         this._view = Application.view;      
         this.play = Gst.ElementFactory.make("playbin", "play");
-        this.play.set_property("uri", uri);
+        this.play.set_property("uri", this.uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
-             
+                
         this.playBus = this.play.get_bus();
+        log(this.playBus);
         this.playBus.add_signal_watch();
         this.playBus.connect("message", Lang.bind(this,
             function(playBus, message) {
@@ -68,6 +70,8 @@ const PipelineStates = {
             this._playPipeline(this._fileName);
             
         this.ret = this.play.set_state(Gst.State.PLAYING);
+        log(this.uri);
+        //this.waveForm = new Waveform.WaveForm(this.uri);
         this.playState = PipelineStates.PLAYING; 
                 
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
@@ -111,7 +115,7 @@ const PipelineStates = {
     _onMessageReceived: function(message) {
         this.localMsg = message;
         let msg = message.type;
-        //log(msg);
+        log(msg);
         switch(msg) {
                     
             case Gst.MessageType.EOS:               
@@ -135,7 +139,7 @@ const PipelineStates = {
                     Application.view.setProgressScaleSensitive();
                 }    
                 this.updatePosition();
-                break;
+                break;         
         }
     }, 
     
@@ -206,6 +210,8 @@ const PipelineStates = {
     
     passSelected: function(selected) {
         this._selected = selected;
+        log(selected);
+        log("SELECT");
         this._fileToPlay = Application.view.loadPlay(this._selected);
     }
 });

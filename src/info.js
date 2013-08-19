@@ -85,7 +85,7 @@ const InfoDialog = new Lang.Class({
 
         // File Name item
         // Translators: "File Name" is the label next to the file name
-        // in the properties dialog
+        // in the info dialog
         this._name = new Gtk.Label({ label: C_("File Name", "Name"),
                                       halign: Gtk.Align.END });
         this._name.get_style_context ().add_class('dim-label');
