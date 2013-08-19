@@ -102,14 +102,8 @@ const WaveForm = new Lang.Class({
             }
         }
         
-        let msg = message.type;
-        
-        switch(msg) {
-    
-            case Gst.MessageType.EOS:
+        if (message.type == Gst.MessageType.EOS)
                 this.stopGeneration();
-                break;
-        }
     }, 
 
     startGeneration: function() {
