@@ -37,6 +37,7 @@ const Mainloop = imports.mainloop;
 const Application = imports.application;
 
 const peaks = [];
+const INTERVAL = 1000000000/10;
 
 const WaveForm = new Lang.Class({
     Name: 'WaveForm',
@@ -62,13 +63,13 @@ const WaveForm = new Lang.Class({
 
     _launchPipeline: function() {
         this.peaks = null;
-        this.pipeline = Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! level name=wavelevel interval=10000000 post-messages=true ! fakesink qos=false");
+        this.pipeline = Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! level name=wavelevel interval= 100000000 post-messages=true ! fakesink qos=false");
         this._level = this.pipeline.get_by_name("wavelevel");
         let decode = this.pipeline.get_by_name("decode");
         let bus = this.pipeline.get_bus();
         bus.add_signal_watch();
 
-        this.nSamples = Math.floor(this.duration / 10000000);
+        this.nSamples = Math.floor(this.duration / INTERVAL);
         log(this.duration);
         log(this.nSamples);
         log("NSAMPLES");
@@ -126,7 +127,9 @@ const WaveForm = new Lang.Class({
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
         let pixelsPerSample = w/40;
+        let waveheight = h/3.375;
         cr.moveTo(0, 100);
+      
                    
         for(let i = 0; i <= this.tick; i++) {
                     
@@ -136,17 +139,20 @@ const WaveForm = new Lang.Class({
             } else {
                 this.newWave = i;
             }  
-            
-            cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * pixelsPerSample);
+            if (peaks[this.newWave] != null) {
+            cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * waveheight);
             cr.strokePreserve();
             log("CALL");
             log(this.tick);
-            log(peaks[i]);
+            log(peaks[this.newWave] * waveheight);
+            log(peaks.length);
+            log("PEAKSLENGTH");
             /*cr.lineTo(i*5, 0);
             cr.closePath();
             log(this.tick);
             log(peaks[this.tick]*h);
             cr.fillPreserve();*/
+            }
         }            
         this.tick += 1;
         this.count += 1;       
@@ -160,18 +166,17 @@ const WaveForm = new Lang.Class({
     },
     
     _drawEvent: function()  {
-        if (this.tick > this.nSamples) { 
+        if (this.tick >= this.nSamples) { 
             if (this.timeout) {
                 GLib.source_remove(this.timeout);
                 this.timeout = null;
+                        log("timeout removed");
             }
         return false;
-        }
-        
+        }        
         this.drawing.queue_draw();
         log("drqueue");
-        return true;
-        
+        return true;       
     },
 
     nsToPixel: function(duration)  { 

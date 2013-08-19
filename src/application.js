@@ -64,7 +64,7 @@ const PipelineStates = {
 
 const _TIME_DIVISOR = 60;
 const _SEC_TIMEOUT = 100;
-const _MILSEC_TIMEOUT = 10;
+const _MILSEC_TIMEOUT = 1;
 
 const Application = new Lang.Class({
     Name: 'Application',
