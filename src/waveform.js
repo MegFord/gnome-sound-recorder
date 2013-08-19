@@ -56,6 +56,8 @@ const WaveForm = new Lang.Class({
         
         this.width = 0
         this.tick = 0;
+        this.newWave = 0;
+        this.count = 0;
         this._numFailures = 0
         this.drawing.show_all();
         grid.show_all();
@@ -147,7 +149,15 @@ const WaveForm = new Lang.Class({
         cr.moveTo(0, 100);
                    
         for(let i = 0; i <= this.tick; i++) {
-            cr.lineTo(i * 5, peaks[i] * 5);
+                    
+            if (this.tick >= 40) {
+                this.newWave = this.count + i + 1;
+                log(this.newWave); 
+            } else {
+                this.newWave = i;
+            }  
+            
+            cr.lineTo(i * w/40, peaks[this.newWave] * w/40);
             cr.strokePreserve();
             log("CALL");
             log(this.tick);
@@ -159,6 +169,7 @@ const WaveForm = new Lang.Class({
             cr.fillPreserve();*/
         }            
         this.tick += 1;
+        this.count += 1;       
     },
     
     timer: function()   {
