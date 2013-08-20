@@ -64,7 +64,7 @@ const WaveForm = new Lang.Class({
 
     _launchPipeline: function() {
         this.peaks = null;
-        this.pipeline = Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! level name=wavelevel interval= 100000000 post-messages=true ! fakesink qos=false");
+        this.pipeline = Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=1 !level name=wavelevel interval=100000000 post-messages=true ! fakesink qos=false");
         this._level = this.pipeline.get_by_name("wavelevel");
         let decode = this.pipeline.get_by_name("decode");
         let bus = this.pipeline.get_bus();
@@ -84,27 +84,36 @@ const WaveForm = new Lang.Class({
     },
 
     _messageCb: function(message) {
-        if (message.src == this._level) {
-            let s = message.get_structure();
-            let p = null;
-            this.peakVal = 0;
-            
-            if (s) {
-                this.peakVal = s.get_value("peak");
+        let msg = message.type;
+        
+        switch(msg) {
+        
+            case Gst.MessageType.ELEMENT:
+                let s = message.get_structure();
+                    if (s) {
+                        if (s.has_name("level")) {
+                            let p = null;
+                            this.peakVal = 0;
+
+                            this.peakVal = s.get_value("peak");
                 
-                if (this.peakVal) {
-                    this.val = this.peakVal.get_nth(0);
-                    log(this.val);
-                    log("this.val");
-                    let valBase =  (this.val / 20);
-                    this.val = Math.pow(10, valBase);
-                    log(this.val);
-                    peaks.push(this.val);                                
-               }  
-            }
-        }        
-        if (message.type == Gst.MessageType.EOS)
-            this.stopGeneration();
+                            if (this.peakVal) {
+                                this.val = this.peakVal.get_nth(0);
+                                log(this.val);
+                                log("this.val");
+                                let valBase = (this.val / 20);
+                                this.val = Math.pow(10, valBase);
+                                log(this.val);
+                                peaks.push(this.val);
+                            }
+                        }
+                    }                               
+                break;
+                       
+            case Gst.MessageType.EOS:
+                this.stopGeneration();
+                break;
+        }
     }, 
 
     startGeneration: function() {
@@ -146,6 +155,7 @@ const WaveForm = new Lang.Class({
                 log(peaks[this.newWave] * waveheight);
                 log(peaks.length);
                 log("PEAKSLENGTH");
+                log(this.newWave);
                 /*cr.lineTo(i*5, 0);
                 cr.closePath();
                 log(this.tick);

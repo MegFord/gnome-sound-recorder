@@ -43,6 +43,7 @@ let list = null;
 let offsetController = null;
 let path = null;
 let play = null;
+let selectable = null;
 let view = null;
 let wave = null;
 
@@ -349,6 +350,7 @@ const MainView = new Lang.Class({
     },
     
     listBoxAdd: function() {
+        selectable = true;
         this.groupGrid = groupGrid;
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
@@ -523,9 +525,9 @@ const MainView = new Lang.Class({
         } 
     },
     
-    rowGridCallback: function(selectedRow) {
+    rowGridCallback: function(selectedRow) { 
         if (selectedRow) {
-        
+
            if (this._selectedRow) {
               let rowWidget = this._selectedRow.get_child(this.widget);
               rowWidget.foreach(Lang.bind(this, 
@@ -546,8 +548,11 @@ const MainView = new Lang.Class({
                     
                     if (!alwaysShow)
                         child.sensitive = true;
+                        
+                    if (child.name == "WaveFormGrid")
+                        child.sensitive = true; 
                 }));
-        }                        
+        }                      
     },
     
     _getFileNameFromRow: function(selected) {
@@ -626,24 +631,25 @@ const PlayPauseButton = new Lang.Class({
         let activeState = play.getPipeStates();
 
         if (activeState != PipelineStates.PLAYING) {
+            this.set_image(this.pauseImage);
             play.startPlaying();
             let rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this, 
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
                     
-                    if (!alwaysShow)
-                        child.hide();
-                    log(child); 
-                                   
-                    if (child.name == "PlayToolBar") {
-                        this.set = true;
-                        child.show();
-
-                    } 
-                    
-                    if (child.name == "WaveFormGrid") 
-                        this.wFGrid = child;                                              
+                    if (!alwaysShow) {
+                        if (child.name != "PlayToolBar") {
+                            child.hide();
+                            child.sensitive(false);
+                        }
+                        log(child); 
+                    }
+                                                     
+                    if (child.name == "WaveFormGrid") {
+                        this.wFGrid = child;
+                        child.sensitive(true);
+                    }                                              
                 })); 
              log(activeState);
              log("activeState");
@@ -651,8 +657,9 @@ const PlayPauseButton = new Lang.Class({
                 wave.timer();
             else      
                 wave = new Waveform.WaveForm(selFile, this.wFGrid);
+
         } else if (activeState == PipelineStates.PLAYING) {
-            this.set_image(this.pauseImage);
+            this.set_image(this.playImage); //this is buggy
             //this.set_tooltip_text(_("Play"));
             play.pausePlaying();
             log("PAUSED");
