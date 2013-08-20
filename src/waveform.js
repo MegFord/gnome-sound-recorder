@@ -150,7 +150,6 @@ const WaveForm = new Lang.Class({
             
             if (peaks[this.newWave] != null) {
                 cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * waveheight);
-                cr.strokePreserve();
                 log("CALL");
                 log(this.tick);
                 log(peaks[this.newWave] * waveheight);
@@ -164,6 +163,7 @@ const WaveForm = new Lang.Class({
                 cr.fillPreserve();*/
             }
         }
+        cr.strokePreserve();
         
         if (this.tick < this.nSamples) {        
             this.tick += 1;
