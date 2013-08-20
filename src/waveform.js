@@ -65,16 +65,16 @@ const WaveForm = new Lang.Class({
     _launchPipeline: function() {
         this.peaks = null;
         this.pipeline = 
-            Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=1 !level name=wavelevel interval=10000000 post-messages=true ! fakesink qos=false");
+            Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=1 !level name=wavelevel interval=100000000 post-messages=true ! fakesink qos=false");
         this._level = this.pipeline.get_by_name("wavelevel");
         let decode = this.pipeline.get_by_name("decode");
         let bus = this.pipeline.get_bus();
         bus.add_signal_watch();
 
         this.nSamples = Math.ceil(this.duration / INTERVAL);
-        log(this.duration);
-        log(this.nSamples);
-        log("NSAMPLES");
+        log("value of this.duration at pipeline launch " + this.duration);
+        log("value of this.nSamples at pipeline launch " + this.nSamples);
+
         bus.connect("message", Lang.bind(this,
             function(bus, message) {
             
@@ -100,15 +100,16 @@ const WaveForm = new Lang.Class({
                 
                             if (this.peakVal) {
                                 this.val = this.peakVal.get_nth(0);
-                                log(this.val);
-                                log("this.val");
+                                log("initial value of this.val " + this.val);
                                 let valBase = (this.val / 20);
                                 this.val = Math.pow(10, valBase);
-                                log(this.val);
+                                log("linear scale value of this.val " + this.val);
                                 peaks.push(this.val);
                             }
                         }
-                    }                               
+                    }
+                       log(peaks.length);
+                log("PEAKSLENGTHELEMENT");                               
                 break;
                        
             case Gst.MessageType.EOS:
@@ -131,31 +132,29 @@ const WaveForm = new Lang.Class({
         let w = this.drawing.get_allocated_width();
         let h = this.drawing.get_allocated_height();
         let length = this.nSamples;
-        log(h);
+        log("height: " + h);
  
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
         let pixelsPerSample = w/40;
         let waveheight = h/3.375;
-        cr.moveTo(0, h);             
+        cr.moveTo(0, h); 
+                  
         for(let i = 0; i <= this.tick; i++) {
                     
             if (this.tick >= 40 && peaks[this.newWave] != null) {
                 this.newWave = this.count + i + 1;
-                log(this.newWave);
-                log("NEWWAVE"); 
+                log("value of the index for peaks (this.newWave) " + this.newWave); 
             } else {
                 this.newWave = i;
             } 
             
             if (peaks[this.newWave] != null) {
                 cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * waveheight);
-                log("CALL");
-                log(this.tick);
-                log(peaks[this.newWave] * waveheight);
-                log(peaks.length);
-                log("PEAKSLENGTH");
-                log(this.newWave);
+                log("current x co-ordinate" + this.tick);
+                log("peak height " + peaks[this.newWave] * waveheight);
+                log("array length " + peaks.length);
+                log("array index value " + this.newWave);
                 /*cr.lineTo(i*5, 0);
                 cr.closePath();
                 log(this.tick);
@@ -180,7 +179,7 @@ const WaveForm = new Lang.Class({
     
     _drawEvent: function()  {   
         this.drawing.queue_draw();
-        log("drqueue");
+        log("drawing queued");
         return true;       
     },
     
