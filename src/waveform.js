@@ -136,22 +136,24 @@ const WaveForm = new Lang.Class({
                 log("NEWWAVE"); 
             } else {
                 this.newWave = i;
-            }  
+            } 
+             
             if (peaks[this.newWave] != null) {
-            cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * waveheight);
-            cr.strokePreserve();
-            log("CALL");
-            log(this.tick);
-            log(peaks[this.newWave] * waveheight);
-            log(peaks.length);
-            log("PEAKSLENGTH");
-            /*cr.lineTo(i*5, 0);
-            cr.closePath();
-            log(this.tick);
-            log(peaks[this.tick]*h);
-            cr.fillPreserve();*/
+                cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * waveheight);
+                cr.strokePreserve();
+                log("CALL");
+                log(this.tick);
+                log(peaks[this.newWave] * waveheight);
+                log(peaks.length);
+                log("PEAKSLENGTH");
+                /*cr.lineTo(i*5, 0);
+                cr.closePath();
+                log(this.tick);
+                log(peaks[this.tick]*h);
+                cr.fillPreserve();*/
             }
         }
+        
         if (this.tick < this.nSamples) {        
             this.tick += 1;
             this.count += 1;
@@ -177,6 +179,7 @@ const WaveForm = new Lang.Class({
             this.timeout = null;
             log("timeout removed");
         }
+        this.drawing.destroy();
     },
 
     nsToPixel: function(duration)  { 

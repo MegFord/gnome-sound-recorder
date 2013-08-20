@@ -46,7 +46,6 @@ let play = null;
 let view = null;
 let wave = null;
 
-
 const ActivePage = {
     RECORD: 'recorderPage',
     PLAY: 'playerPage',
@@ -305,7 +304,7 @@ const MainView = new Lang.Class({
     
     onProgressScaleChangeValue: function() {
         let seconds = Math.ceil(this.progressScale.get_value());
-        
+                
         Application.play.progressScaleValueChanged(seconds);
         
         return true;
@@ -516,7 +515,7 @@ const MainView = new Lang.Class({
             this._boxDelete.show();                      
             
             this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
-            //set sep insensitive
+            this._separator.set_sensitive(false);
             this.listBox.add(this._separator);
             this.selectionRow = this._separator.get_parent();
             this.selectionRow.set_sensitive(false);
