@@ -44,6 +44,7 @@ const WaveForm = new Lang.Class({
 
     _init: function(file, grid) {
         this.file = file;
+        this.allowFill = true;
         this.count = 0;
         this.newWave = 0;
         this.tick = 0; 
@@ -52,7 +53,7 @@ const WaveForm = new Lang.Class({
         this.drawing = Gtk.DrawingArea.new();
         this.drawing.set_size_request(200, 36);
         grid.add(this.drawing);                            
-        this.drawing.connect("draw",  Lang.bind(this, this.fillSurface));   
+        this.drawing.connect("draw", Lang.bind(this, this.fillSurface));   
         this._uri = this.file.uri;
         this.drawing.show_all();
         grid.show_all();
@@ -126,8 +127,7 @@ const WaveForm = new Lang.Class({
         cr.setSourceRGBA(0.0, 185, 161, 255);
         let pixelsPerSample = w/40;
         let waveheight = h/3.375;
-        cr.moveTo(0, 100);      
-                   
+        cr.moveTo(0, h);             
         for(let i = 0; i <= this.tick; i++) {
                     
             if (this.tick >= 40 && peaks[this.newWave] != null) {
@@ -137,7 +137,7 @@ const WaveForm = new Lang.Class({
             } else {
                 this.newWave = i;
             } 
-             
+            
             if (peaks[this.newWave] != null) {
                 cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * waveheight);
                 cr.strokePreserve();
@@ -157,20 +157,26 @@ const WaveForm = new Lang.Class({
         if (this.tick < this.nSamples) {        
             this.tick += 1;
             this.count += 1;
-        }       
+        }  
     },
     
     timer: function()   {
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, this._drawEvent));
-            log("tell");    
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, this._drawEvent));  
         }
     },
     
-    _drawEvent: function()  {     
+    _drawEvent: function()  {   
         this.drawing.queue_draw();
         log("drqueue");
         return true;       
+    },
+    
+    pauseDrawing: function() {
+        if (this.timeout) {
+           GLib.source_remove(this.timeout);
+            this.timeout = null;
+        }
     },
     
     endDrawing: function()  {
@@ -180,12 +186,6 @@ const WaveForm = new Lang.Class({
             log("timeout removed");
         }
         this.drawing.destroy();
-    },
-
-    nsToPixel: function(duration)  { 
-        if (duration == Gst.CLOCK_TIME_NONE)
-            return 0;
-        return Math.floor(duration / Gst.SECOND);
     }
 });
 

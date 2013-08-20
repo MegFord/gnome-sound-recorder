@@ -239,8 +239,8 @@ const MainView = new Lang.Class({
         this.playVolume.connect("value-changed", Lang.bind(this, this.setVolume));
         playGrid.attach(this.playVolume, 20, 4, 3, 1); 
               
-        this.playButton = new PlayPauseButton();
-        playToolbar.pack_end(this.playButton, false, true, 0);        
+        //this.playButton = new PlayPauseButton();
+        //playToolbar.pack_end(this.playButton, false, true, 0);        
         
         let stopPlay = new Gtk.Button();
         this.stopImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
@@ -394,7 +394,8 @@ const MainView = new Lang.Class({
                                             halign: Gtk.Align.END,
                                             valign: Gtk.Align.FILL,
                                             icon_size: Gtk.IconSize.BUTTON,
-                                            opacity: 1 });
+                                            opacity: 1,
+                                            name: "PlayToolBar" });
             this.rowGrid.attach(this.widget, 1, 0, 1, 1);
                        
             this._box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
@@ -402,10 +403,8 @@ const MainView = new Lang.Class({
             this.widget.insert(this._group, -1);
             
             // play button
-            this._playListButton = new Gtk.Button({ hexpand: false });
-            this._playListButton.image = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);       
+            this._playListButton = new PlayPauseButton({ hexpand: false });     
             this._box.add(this._playListButton);
-            this._playListButton.set_tooltip_text(_("Play"));
             this._playListButton.show();
             this._playListButton.connect('clicked', Lang.bind(this, 
                 function(){
@@ -418,14 +417,15 @@ const MainView = new Lang.Class({
                     let file =  this._files[idx];
                     log(file.uri);
                     log("PLAYURI");
-                    this._onPlayListButton(row, file);                   
+                
+                    this._playListButton._onPlayPauseToggled(row, file);             
                 }));           
             
             this._fileName = new Gtk.Label({ use_markup: true, 
                                              halign: Gtk.Align.START,
                                              ellipsize: true,
                                              xalign: 0,
-                                             width_chars: 69,
+                                             width_chars: 40,
                                              margin_top: 5,
                                              margin_left: 15 });
                                            log(this._files[i].fileName);
@@ -438,7 +438,7 @@ const MainView = new Lang.Class({
             this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                                height_request: 36,
                                                width_request: 200,
-                                               name: "waveFormGrid" });
+                                               name: "WaveFormGrid" });
             this.waveFormGrid.set_no_show_all(true);
             this.rowGrid.add(this.waveFormGrid);
 
@@ -589,23 +589,7 @@ const MainView = new Lang.Class({
             function(widget, response) {
                 infoDialog.widget.destroy();
             }));
-    },
-    
-    _onPlayListButton: function(listRow, selFile) {
-        let rowWidget = listRow.get_child(this.widget);
-        rowWidget.foreach(Lang.bind(this, 
-            function(child) {
-                let alwaysShow = child.get_no_show_all();
-                    
-                if (!alwaysShow)
-                    child.hide(); 
-                    
-                if (child.name == "waveFormGrid") 
-                    this.wFGrid = child;                                               
-             })); 
-        //play.startPlaying(); this belongs here if I cache the waveform array beforehand, maybe      
-        wave = new Waveform.WaveForm(selFile, this.wFGrid);
-    }    
+    }
 });
 
 const RecordButton = new Lang.Class({
@@ -636,18 +620,45 @@ const PlayPauseButton = new Lang.Class({
         this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);              
         this.parent();
         this.set_image(this.playImage);
-        this.connect("toggled", Lang.bind(this, this._onPlayPauseToggled));
     },
     
-    _onPlayPauseToggled: function() {
+    _onPlayPauseToggled: function(listRow, selFile) {
         let activeState = play.getPipeStates();
 
         if (activeState != PipelineStates.PLAYING) {
-            this.set_image(this.pauseImage);
             play.startPlaying();
+            let rowWidget = listRow.get_child(this.widget);
+            rowWidget.foreach(Lang.bind(this, 
+                function(child) {
+                    let alwaysShow = child.get_no_show_all();
+                    
+                    if (!alwaysShow)
+                        child.hide();
+                    log(child); 
+                                   
+                    if (child.name == "PlayToolBar") {
+                        this.set = true;
+                        child.show();
+
+                    } 
+                    
+                    if (child.name == "WaveFormGrid") 
+                        this.wFGrid = child;                                              
+                })); 
+             log(activeState);
+             log("activeState");
+            if (activeState == PipelineStates.PAUSED)
+                wave.timer();
+            else      
+                wave = new Waveform.WaveForm(selFile, this.wFGrid);
         } else if (activeState == PipelineStates.PLAYING) {
-            this.set_image(this.playImage);
-            play.pausePlaying();         
+            this.set_image(this.pauseImage);
+            //this.set_tooltip_text(_("Play"));
+            play.pausePlaying();
+            log("PAUSED");
+            wave.pauseDrawing();
+            log(activeState);
+             log("activeState");          
         }  
     }    
 });

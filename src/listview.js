@@ -134,7 +134,7 @@ const Listview = new Lang.Class({
         this._fileArr = fileArr;
         this._allFilesInfo = this._allFilesInfo.concat(this._fileArr);
         this._allFilesInfo.sort(function(a, b) {
-            return b.dateForSort - a.dateForSort; //a - b 
+            return b.dateForSort - a.dateForSort; 
         }); 
         
         if (this._stopVal == EnumeratorState.ACTIVE)

@@ -70,8 +70,6 @@ const PipelineStates = {
             this._playPipeline(this._fileName);
             
         this.ret = this.play.set_state(Gst.State.PLAYING);
-        log(this.uri);
-        //this.waveForm = new Waveform.WaveForm(this.uri);
         this.playState = PipelineStates.PLAYING; 
                 
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
