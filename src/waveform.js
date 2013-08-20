@@ -94,22 +94,21 @@ const WaveForm = new Lang.Class({
                     if (s) {
                         if (s.has_name("level")) {
                             let p = null;
-                            this.peakVal = 0;
+                            let peakVal = 0;
 
-                            this.peakVal = s.get_value("peak");
+                            peakVal = s.get_value("peak");
                 
-                            if (this.peakVal) {
-                                this.val = this.peakVal.get_nth(0);
-                                log("initial value of this.val " + this.val);
-                                let valBase = (this.val / 20);
-                                this.val = Math.pow(10, valBase);
+                            if (peakVal) {
+                                let val = peakVal.get_nth(0);
+                                log("initial value of val " + val);
+                                let valBase = (val / 20);
+                                val = Math.pow(10, valBase);
                                 log("linear scale value of this.val " + this.val);
-                                peaks.push(this.val);
+                                peaks.push(val);
                             }
                         }
                     }
-                       log(peaks.length);
-                log("PEAKSLENGTHELEMENT");                               
+                log("length of the peaks array" + peaks.length);                            
                 break;
                        
             case Gst.MessageType.EOS:
@@ -151,7 +150,7 @@ const WaveForm = new Lang.Class({
             
             if (peaks[this.newWave] != null) {
                 cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * waveheight);
-                log("current x co-ordinate" + this.tick);
+                log("current base value for x co-ordinate " + this.tick);
                 log("peak height " + peaks[this.newWave] * waveheight);
                 log("array length " + peaks.length);
                 log("array index value " + this.newWave);

@@ -125,7 +125,6 @@ const MainView = new Lang.Class({
 
         let recorderPage = this._addRecorderPage('recorderPage');
             this.visible_child_name = 'listviewPage';
-            //this.
             
         let listviewPage = this._addListviewPage('listviewPage');
              this.visible_child_name = 'playerPage';
