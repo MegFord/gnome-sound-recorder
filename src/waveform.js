@@ -1,31 +1,30 @@
 /*
- * Copyright 2013 Meg Ford
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
- *
- *
- * Author: Meg Ford <megford@gnome.org>
- */
+* Copyright 2013 Meg Ford
+* This library is free software; you can redistribute it and/or
+* modify it under the terms of the GNU Library General Public
+* License as published by the Free Software Foundation; either
+* version 2 of the License, or (at your option) any later version.
+*
+* This library is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* Library General Public License for more details.
+*
+* You should have received a copy of the GNU Library General Public
+* License along with this library; if not, write to the
+* Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+* Boston, MA 02111-1307, USA.
+*
+*
+* Author: Meg Ford <megford@gnome.org>
+*/
 
-// based on code from Pitivi 
+// based on code from Pitivi
 
 const Cairo = imports.cairo;
-const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject; 
+const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
 const GstAudio = imports.gi.GstAudio;
 const Gtk = imports.gi.Gtk;
@@ -47,13 +46,13 @@ const WaveForm = new Lang.Class({
         this.allowFill = true;
         this.count = 0;
         this.newWave = 0;
-        this.tick = 0; 
+        this.tick = 0;
         this.duration = this.file.duration;
         
         this.drawing = Gtk.DrawingArea.new();
         this.drawing.set_size_request(200, 36);
-        grid.add(this.drawing);                            
-        this.drawing.connect("draw", Lang.bind(this, this.fillSurface));   
+        grid.add(this.drawing);
+        this.drawing.connect("draw", Lang.bind(this, this.fillSurface));
         this._uri = this.file.uri;
         this.drawing.show_all();
         grid.show_all();
@@ -64,7 +63,7 @@ const WaveForm = new Lang.Class({
 
     _launchPipeline: function() {
         this.peaks = null;
-        this.pipeline = 
+        this.pipeline =
             Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=1 !level name=wavelevel interval=100000000 post-messages=true ! fakesink qos=false");
         this._level = this.pipeline.get_by_name("wavelevel");
         let decode = this.pipeline.get_by_name("decode");
@@ -108,14 +107,14 @@ const WaveForm = new Lang.Class({
                             }
                         }
                     }
-                log("length of the peaks array" + peaks.length);                            
+                log("length of the peaks array" + peaks.length);
                 break;
                        
             case Gst.MessageType.EOS:
                 this.stopGeneration();
                 break;
         }
-    }, 
+    },
 
     startGeneration: function() {
         this.pipeline.set_state(Gst.State.PLAYING)
@@ -127,7 +126,7 @@ const WaveForm = new Lang.Class({
         Application.play.startPlaying();
     },
                 
-    fillSurface: function(drawing, cr) { 
+    fillSurface: function(drawing, cr) {
         let w = this.drawing.get_allocated_width();
         let h = this.drawing.get_allocated_height();
         let length = this.nSamples;
@@ -137,16 +136,16 @@ const WaveForm = new Lang.Class({
         cr.setSourceRGBA(0.0, 185, 161, 255);
         let pixelsPerSample = w/40;
         let waveheight = h/3.375;
-        cr.moveTo(0, h); 
+        cr.moveTo(0, h);
                   
         for(let i = 0; i <= this.tick; i++) {
                     
             if (this.tick >= 40 && peaks[this.newWave] != null) {
                 this.newWave = this.count + i + 1;
-                log("value of the index for peaks (this.newWave) " + this.newWave); 
+                log("value of the index for peaks (this.newWave) " + this.newWave);
             } else {
                 this.newWave = i;
-            } 
+            }
             
             if (peaks[this.newWave] != null) {
                 cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * waveheight);
@@ -155,31 +154,31 @@ const WaveForm = new Lang.Class({
                 log("array length " + peaks.length);
                 log("array index value " + this.newWave);
                 /*cr.lineTo(i*5, 0);
-                cr.closePath();
-                log(this.tick);
-                log(peaks[this.tick]*h);
-                cr.fillPreserve();*/
+cr.closePath();
+log(this.tick);
+log(peaks[this.tick]*h);
+cr.fillPreserve();*/
             }
         }
         cr.strokePreserve();
         
-        if (this.tick < this.nSamples) {        
+        if (this.tick < this.nSamples) {
             this.tick += 1;
             this.count += 1;
-        }  
+        } 
     },
     
-    timer: function()   {
+    timer: function() {
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, 
-                this._drawEvent));  
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this,
+                this._drawEvent));
         }
     },
     
-    _drawEvent: function()  {   
+    _drawEvent: function() {
         this.drawing.queue_draw();
         log("drawing queued");
-        return true;       
+        return true;
     },
     
     pauseDrawing: function() {
@@ -189,13 +188,15 @@ const WaveForm = new Lang.Class({
         }
     },
     
-    endDrawing: function()  {
+    endDrawing: function() {
         if (this.timeout) {
             GLib.source_remove(this.timeout);
             this.timeout = null;
             log("timeout removed");
         }
-        this.drawing.destroy();
+        this.drawing.destroy(); 
     }
 });
+
+
 

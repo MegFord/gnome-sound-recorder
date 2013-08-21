@@ -66,6 +66,7 @@ const PipelineStates = {
             
     startPlaying: function(fileName) {
         this._fileName = fileName;
+        
         if (!this.play || this.playState == PipelineStates.STOPPED )
             this._playPipeline(this._fileName);
             
@@ -105,6 +106,7 @@ const PipelineStates = {
                 this.timeout = null;
             }
         Application.wave.endDrawing();
+        log("DRAWING CALL END");
     },
     
     onEndOfStream: function() {
@@ -173,7 +175,8 @@ const PipelineStates = {
     updatePosition: function() {
          
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, this._updateTime));    
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, 
+                this._updateTime));    
         }
     },
     
