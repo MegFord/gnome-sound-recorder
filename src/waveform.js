@@ -130,6 +130,7 @@ const WaveForm = new Lang.Class({
         let w = this.drawing.get_allocated_width();
         let h = this.drawing.get_allocated_height();
         let length = this.nSamples;
+        let idx;
         log("height: " + h);
  
         cr.setLineWidth(1);
@@ -140,32 +141,27 @@ const WaveForm = new Lang.Class({
                   
         for(let i = 0; i <= this.tick; i++) {
                     
-            if (this.tick >= 40 && peaks[this.newWave] != null) {
-                this.newWave = this.count + i + 1;
-                log("value of the index for peaks (this.newWave) " + this.newWave);
+            if (this.tick >= 40 && peaks[idx] != null) {
+                idx = this.count + i + 1;
+                log("value of the index for peaks (this.newWave) " + idx);
             } else {
-                this.newWave = i;
+                idx = i;
             }
             
-            if (peaks[this.newWave] != null) {
-                cr.lineTo(i * pixelsPerSample, peaks[this.newWave] * waveheight);
+            if (peaks[idx] != null) {
+                cr.lineTo(i * pixelsPerSample, peaks[idx] * waveheight);
                 log("current base value for x co-ordinate " + this.tick);
-                log("peak height " + peaks[this.newWave] * waveheight);
+                log("peak height " + peaks[idx] * waveheight);
                 log("array length " + peaks.length);
-                log("array index value " + this.newWave);
+                log("array index value " + idx);
                 /*cr.lineTo(i*5, 0);
-cr.closePath();
-log(this.tick);
-log(peaks[this.tick]*h);
-cr.fillPreserve();*/
+                cr.closePath();
+                log(this.tick);
+                log(peaks[this.tick]*h);
+                cr.fillPreserve();*/
             }
         }
         cr.strokePreserve();
-        
-        if (this.tick < this.nSamples) {
-            this.tick += 1;
-            this.count += 1;
-        } 
     },
     
     timer: function() {
@@ -175,7 +171,11 @@ cr.fillPreserve();*/
         }
     },
     
-    _drawEvent: function() {
+    _drawEvent: function() {                
+        if (this.tick < this.nSamples) {
+            this.tick += 1;
+            this.count += 1;
+        } 
         this.drawing.queue_draw();
         log("drawing queued");
         return true;
