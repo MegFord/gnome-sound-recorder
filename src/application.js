@@ -82,7 +82,7 @@ const Application = new Lang.Class({
         view = new MainView();
         play = new Play.Play();
         
-        params = Params.fill(params, { title: GLib.get_application_name(),
+        params = Params.fill(params, { title: GLib.get_application_name(), //can I get rid of this?
                                        default_width: 700,
                                        default_height: 480,
                                        border_width: 12 });
@@ -94,8 +94,16 @@ const Application = new Lang.Class({
         stackSwitcher.set_stack(view);
         let header = new Gtk.HeaderBar({ hexpand: true });
         header.custom_title = stackSwitcher;
+        header.set_show_close_button(true);
+        this.set_titlebar(header);
         
-        grid.attach(header, 0, 0, 2, 2);
+        this.playVolume = new Gtk.VolumeButton();
+        this.playVolume.set_property("use-symbolic", true);
+        this.range = Gtk.Adjustment.new(0.5, 0, 3.375, 0.15, 0.0, 0.0);
+        this.playVolume.set_adjustment(this.range);
+        //this.playVolume.connect("value-changed", Lang.bind(this, this.setVolume));
+        
+        header.pack_end(this.playVolume);
 
         grid.add(view);
             
@@ -103,6 +111,7 @@ const Application = new Lang.Class({
                 
         this.add(grid);
         grid.show_all();
+        this.show_all();
     },
        
     _defineThemes : function() {
@@ -233,11 +242,11 @@ const MainView = new Lang.Class({
               
         playGrid.attach(this.progressScale, 20, 3, 3, 1);
         
-        this.playVolume = new Gtk.VolumeButton();
+        /*this.playVolume = new Gtk.VolumeButton();
         this.range = Gtk.Adjustment.new(0.5, 0, 3.375, 0.15, 0.0, 0.0);
         this.playVolume.set_adjustment(this.range);
         this.playVolume.connect("value-changed", Lang.bind(this, this.setVolume));
-        playGrid.attach(this.playVolume, 20, 4, 3, 1);
+        playGrid.attach(this.playVolume, 20, 4, 3, 1);*/
               
         //this.playButton = new PlayPauseButton();
         //playToolbar.pack_end(this.playButton, false, true, 0);
@@ -474,7 +483,7 @@ const MainView = new Lang.Class({
             this._boxInfo.add(this._info);
             this._info.show();
             
-            this.widgetShare = new Gtk.Toolbar({ show_arrow: false,
+            /*this.widgetShare = new Gtk.Toolbar({ show_arrow: false,
                                                  halign: Gtk.Align.END,
                                                  valign: Gtk.Align.FILL,
                                                  icon_size: Gtk.IconSize.BUTTON,
@@ -490,7 +499,7 @@ const MainView = new Lang.Class({
             this._share.image = Gtk.Image.new_from_icon_name("send-to-symbolic", Gtk.IconSize.BUTTON);
             this._share.set_tooltip_text(_("Share"));
             this._boxShare.add(this._share);
-            this._share.show();
+            this._share.show();*/
             
             this.widgetDelete = new Gtk.Toolbar({ show_arrow: false,
                                                   halign: Gtk.Align.END,
