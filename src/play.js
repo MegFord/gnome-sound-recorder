@@ -44,6 +44,7 @@ const PipelineStates = {
     Name: "Play",
            
     _playPipeline: function(fileName) {
+        this.baseTime = 0;
         this._fileName = this._fileToPlay;
         this.uri = GLib.filename_to_uri(this._fileName, null); 
         this._view = Application.view;      
@@ -51,6 +52,7 @@ const PipelineStates = {
         this.play.set_property("uri", this.uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
+        this.clock = this.play.get_clock();
                 
         this.playBus = this.play.get_bus();
         log(this.playBus);
@@ -117,8 +119,7 @@ const PipelineStates = {
         this.localMsg = message;
         let msg = message.type;
         log(msg);
-        switch(msg) {
-                    
+        switch(msg) {                                               
             case Gst.MessageType.EOS:               
                 this.onEndOfStream(); 
                 break;
@@ -159,11 +160,29 @@ const PipelineStates = {
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
             this._view.setLabel(time, this.trackDurationSecs);           
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
-            this._view.setLabel(0, this.trackDurationSecs); }
+            this._view.setLabel(0, this.trackDurationSecs); 
+        }
+                   
+        this.absoluteTime = this.clock.get_time();
+        if (this.baseTime == 0)
+            this.baseTime = this.absoluteTime;
+            log("base time " + this.baseTime);
+ 
+        this.runTime = this.absoluteTime- this.baseTime;
+
+        log(this.runTime);
+        log("current clocktime " + this.absoluteTime);
+        
+        let seg = Gst.Segment.new();
+        log(seg);
+        seg.init(Gst.Format.TIME);
+        let l = seg.to_running_time(Gst.Format.TIME, time);
+        log(l);
+        
         return true;
     },
     
-    queryPosition: function() {
+    queryPosition: function() { // Do I use this?
         let position = 0;
         while (position == 0) {
             position = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;

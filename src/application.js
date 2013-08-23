@@ -668,10 +668,11 @@ const PlayPauseButton = new Lang.Class({
                 }));
              log(this.activeState);
              log("activeState");
-            if (this.activeState == PipelineStates.PAUSED)
+            if (this.activeState == PipelineStates.PAUSED) {
                 wave.timer();
-            else
+            } else {
                 wave = new Waveform.WaveForm(selFile, this.wFGrid);
+            }
 
         } else if (this.activeState == PipelineStates.PLAYING) {
             this.set_image(this.playImage); //this is buggy

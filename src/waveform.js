@@ -37,6 +37,7 @@ const Application = imports.application;
 
 const peaks = [];
 const INTERVAL = 100000000;
+const pauseVal = 10;
 
 const WaveForm = new Lang.Class({
     Name: 'WaveForm',
@@ -94,7 +95,12 @@ const WaveForm = new Lang.Class({
                         if (s.has_name("level")) {
                             let p = null;
                             let peakVal = 0;
-
+                            let st = s.get_value("timestamp");
+                            log(st);
+                            let dur = s.get_value("duration");
+                            log(dur);
+                            let runTime = s.get_value("running-time");
+                            log(runTime);
                             peakVal = s.get_value("peak");
                 
                             if (peakVal) {
@@ -102,12 +108,24 @@ const WaveForm = new Lang.Class({
                                 log("initial value of val " + val);
                                 let valBase = (val / 20);
                                 val = Math.pow(10, valBase);
-                                log("linear scale value of this.val " + this.val);
+                                log("linear scale value of val " + val);
                                 peaks.push(val);
-                            }
+                            }                           
                         }
                     }
                 log("length of the peaks array" + peaks.length);
+                // Start drawing when we get one second's worth of samples
+                
+                if (peaks.length % pauseVal == 0) {
+                    this.pipeline.set_state(Gst.State.PAUSED);
+                    log("pause value " + peaks.length);
+                    
+                    if (peaks.length == pauseVal) {
+                        this.timer();
+                        Application.play.startPlaying();
+                        log("pause value equals " + peaks.length);
+                    }                        
+                }
                 break;
                        
             case Gst.MessageType.EOS:
@@ -122,8 +140,8 @@ const WaveForm = new Lang.Class({
 
     stopGeneration: function() {
         this.pipeline.set_state(Gst.State.NULL);
-        this.timer();
-        Application.play.startPlaying();
+        //this.timer();
+        //Application.play.startPlaying();
     },
                 
     fillSurface: function(drawing, cr) {
@@ -143,7 +161,7 @@ const WaveForm = new Lang.Class({
                     
             if (this.tick >= 40 && peaks[idx] != null) {
                 idx = this.count + i + 1;
-                log("value of the index for peaks (this.newWave) " + idx);
+                log("value of the index for peaks " + idx);
             } else {
                 idx = i;
             }
@@ -172,10 +190,15 @@ const WaveForm = new Lang.Class({
     },
     
     _drawEvent: function() {                
-        if (this.tick < this.nSamples) {
+        if (this.tick < peaks.length && this.tick < this.nSamples) {
             this.tick += 1;
             this.count += 1;
-        } 
+        }
+        
+        if (this.tick == peaks.length - 5) {
+            this.pipeline.set_state(Gst.State.PLAYING);
+            log("continue drawing " + peaks.length);
+        }
         this.drawing.queue_draw();
         log("drawing queued");
         return true;
@@ -194,9 +217,9 @@ const WaveForm = new Lang.Class({
             this.timeout = null;
             log("timeout removed");
         }
+        this.tick = 0;
+        this.count = 0;
+        peaks.length = 0;
         this.drawing.destroy(); 
     }
 });
-
-
-
