@@ -44,7 +44,6 @@ const WaveForm = new Lang.Class({
 
     _init: function(file, grid) {
         this.file = file;
-        this.allowFill = true;
         this.count = 0;
         this.newWave = 0;
         this.tick = 0;
@@ -105,27 +104,24 @@ const WaveForm = new Lang.Class({
                 
                             if (peakVal) {
                                 let val = peakVal.get_nth(0);
-                                log("initial value of val " + val);
                                 let valBase = (val / 20);
                                 val = Math.pow(10, valBase);
-                                log("linear scale value of val " + val);
                                 peaks.push(val);
                             }                           
                         }
                     }
                 log("length of the peaks array" + peaks.length);
-                // Start drawing when we get one second's worth of samples
-                
-                if (peaks.length % pauseVal == 0) {
+
+                if (peaks.length == this.playTime) {
                     this.pipeline.set_state(Gst.State.PAUSED);
-                    log("pause value " + peaks.length);
+                    log("pause value ");
                     
-                    if (peaks.length == pauseVal) {
-                        this.timer();
-                        Application.play.startPlaying();
-                        log("pause value equals " + peaks.length);
-                    }                        
                 }
+                
+                if (peaks.length == pauseVal) {
+                    this.pipeline.set_state(Gst.State.PAUSED);
+                    log("pause value equals " + peaks.length);
+                }                                      
                 break;
                        
             case Gst.MessageType.EOS:
@@ -140,16 +136,18 @@ const WaveForm = new Lang.Class({
 
     stopGeneration: function() {
         this.pipeline.set_state(Gst.State.NULL);
-        //this.timer();
-        //Application.play.startPlaying();
     },
                 
     fillSurface: function(drawing, cr) {
+            
+        if (peaks.length == this.playTime - 7) {
+            this.pipeline.set_state(Gst.State.PLAYING);
+            log("continue drawing " + peaks.length);
+        }
         let w = this.drawing.get_allocated_width();
         let h = this.drawing.get_allocated_height();
         let length = this.nSamples;
         let idx;
-        log("height: " + h);
  
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
@@ -169,7 +167,7 @@ const WaveForm = new Lang.Class({
             if (peaks[idx] != null) {
                 cr.lineTo(i * pixelsPerSample, peaks[idx] * waveheight);
                 log("current base value for x co-ordinate " + this.tick);
-                log("peak height " + peaks[idx] * waveheight);
+                //log("peak height " + peaks[idx] * waveheight);
                 log("array length " + peaks.length);
                 log("array index value " + idx);
                 /*cr.lineTo(i*5, 0);
@@ -182,29 +180,31 @@ const WaveForm = new Lang.Class({
         cr.strokePreserve();
     },
     
-    timer: function() {
-        if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this,
-                this._drawEvent));
-        }
-    },
-    
-    _drawEvent: function() {                
-        if (this.tick < peaks.length && this.tick < this.nSamples) {
-            this.tick += 1;
-            this.count += 1;
-        }
-        
-        if (this.tick == peaks.length - 5) {
+    _drawEvent: function(playTime) {
+        let lastTime = this.playTime;
+        this.playTime = playTime;
+        log("check peaks" + peaks.length);
+        log("playTime time" + this.playTime);
+                  
+        if (peaks.length < this.playTime) {
             this.pipeline.set_state(Gst.State.PLAYING);
             log("continue drawing " + peaks.length);
+        } 
+                    
+        if (this.tick < this.playTime && this.tick < this.nSamples) { //this.tick < this.nSamples should be somewhere else
+            this.tick += 1;
+            this.count += 1;
+            log("tick value" + this.tick);
         }
-        this.drawing.queue_draw();
-        log("drawing queued");
+        
+        if (lastTime != this.playTime) {
+            this.drawing.queue_draw();
+            log("drawing queued");
+        }
         return true;
     },
     
-    pauseDrawing: function() {
+    pauseDrawing: function() { //rewrite
         if (this.timeout) {
            GLib.source_remove(this.timeout);
             this.timeout = null;
@@ -212,14 +212,9 @@ const WaveForm = new Lang.Class({
     },
     
     endDrawing: function() {
-        if (this.timeout) {
-            GLib.source_remove(this.timeout);
-            this.timeout = null;
-            log("timeout removed");
-        }
         this.tick = 0;
         this.count = 0;
         peaks.length = 0;
         this.drawing.destroy(); 
-    }
+    }    
 });

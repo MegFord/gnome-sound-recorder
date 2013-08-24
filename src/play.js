@@ -39,6 +39,8 @@ const PipelineStates = {
     STOPPED: 2,
     NULL: 3
 }; 
+
+const _TENTH_SEC = 100000000;
  
  const Play = new Lang.Class({
     Name: "Play",
@@ -67,13 +69,14 @@ const PipelineStates = {
     },
             
     startPlaying: function(fileName) {
+        log("playing started");
         this._fileName = fileName;
         
         if (!this.play || this.playState == PipelineStates.STOPPED )
             this._playPipeline(this._fileName);
             
         this.ret = this.play.set_state(Gst.State.PLAYING);
-        this.playState = PipelineStates.PLAYING; 
+        this.playState = PipelineStates.PLAYING;
                 
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the playbin to the playing state.\n"); 
@@ -162,22 +165,19 @@ const PipelineStates = {
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
             this._view.setLabel(0, this.trackDurationSecs); 
         }
-                   
+        
         this.absoluteTime = this.clock.get_time();
+        
         if (this.baseTime == 0)
             this.baseTime = this.absoluteTime;
-            log("base time " + this.baseTime);
+            //log("base time " + this.baseTime);
  
         this.runTime = this.absoluteTime- this.baseTime;
-
         log(this.runTime);
-        log("current clocktime " + this.absoluteTime);
-        
-        let seg = Gst.Segment.new();
-        log(seg);
-        seg.init(Gst.Format.TIME);
-        let l = seg.to_running_time(Gst.Format.TIME, time);
-        log(l);
+        //log("current clocktime " + this.absoluteTime);
+        let approxTime = Math.round(this.runTime/_TENTH_SEC);
+        log("approx" + approxTime);
+        Application.wave._drawEvent(approxTime);
         
         return true;
     },
@@ -194,7 +194,7 @@ const PipelineStates = {
     updatePosition: function() {
          
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, 
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, Lang.bind(this, 
                 this._updateTime));    
         }
     },
