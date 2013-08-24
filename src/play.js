@@ -75,6 +75,12 @@ const _TENTH_SEC = 100000000;
         if (!this.play || this.playState == PipelineStates.STOPPED )
             this._playPipeline(this._fileName);
             
+        log(this.playState);
+        log("start playing");
+        if (this.playState == PipelineStates.PAUSED) {
+            this.updatePosition();   
+        }
+            
         this.ret = this.play.set_state(Gst.State.PLAYING);
         this.playState = PipelineStates.PLAYING;
                 
@@ -87,9 +93,11 @@ const _TENTH_SEC = 100000000;
     pausePlaying: function() {
         this.play.set_state(Gst.State.PAUSED);
         this.playState = PipelineStates.PAUSED;
-        
+        this.baseTime = this.absoluteTime;
+        log("pause");
         if (this.timeout) {
-            this.timeout = 0;
+           GLib.source_remove(this.timeout);
+            this.timeout = null;
         }
     },
     
@@ -170,11 +178,11 @@ const _TENTH_SEC = 100000000;
         
         if (this.baseTime == 0)
             this.baseTime = this.absoluteTime;
-            //log("base time " + this.baseTime);
+            log("base time " + this.baseTime);
  
         this.runTime = this.absoluteTime- this.baseTime;
         log(this.runTime);
-        //log("current clocktime " + this.absoluteTime);
+        log("current clocktime " + this.absoluteTime);
         let approxTime = Math.round(this.runTime/_TENTH_SEC);
         log("approx" + approxTime);
         Application.wave._drawEvent(approxTime);

@@ -576,7 +576,7 @@ const MainView = new Lang.Class({
         rowWidget.foreach(Lang.bind(this,
             function(child) {
                 let alwaysShow = child.get_no_show_all();
-                
+                log(child.name);
                 if (alwaysShow) {
                     let name = child.get_text();
                     fileForAction = fileUtil.loadFile(name);
@@ -679,7 +679,7 @@ const PlayPauseButton = new Lang.Class({
             play.pausePlaying();
             log("PAUSED");
             wave.pauseDrawing();
-            log(activeState);
+            log(this.activeState);
              log("activeState");
         }
     }
