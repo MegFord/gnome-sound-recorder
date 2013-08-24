@@ -105,8 +105,10 @@ const WaveForm = new Lang.Class({
                             if (peakVal) {
                                 let val = peakVal.get_nth(0);
                                 let valBase = (val / 20);
-                                val = Math.pow(10, valBase);
-                                peaks.push(val);
+                                let value = Math.pow(10, valBase);
+                                let peaknumber = value/3.375;
+                                log("wave height" + peaknumber);
+                                peaks.push(peaknumber);
                             }                           
                         }
                     }
@@ -146,13 +148,14 @@ const WaveForm = new Lang.Class({
         }
         let w = this.drawing.get_allocated_width();
         let h = this.drawing.get_allocated_height();
+        log("height" + h);
         let length = this.nSamples;
         let idx;
  
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
-        let pixelsPerSample = w/40;
-        let waveheight = h/3.375;
+        let pixelsPerSample = w/peaks.length;
+        let waveheight = h;
         cr.moveTo(0, h);
                   
         for(let i = 0; i <= this.tick; i++) {
@@ -167,7 +170,7 @@ const WaveForm = new Lang.Class({
             if (peaks[idx] != null) {
                 cr.lineTo(i * pixelsPerSample, peaks[idx] * waveheight);
                 log("current base value for x co-ordinate " + this.tick);
-                //log("peak height " + peaks[idx] * waveheight);
+                log("peak height " + peaks[idx]);
                 log("array length " + peaks.length);
                 log("array index value " + idx);
                 /*cr.lineTo(i*5, 0);
