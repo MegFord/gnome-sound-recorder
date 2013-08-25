@@ -145,7 +145,6 @@ const Record = new Lang.Class({
         let approxTime = Math.round(this.runTime/_TENTH_SEC);
         log("approx" + approxTime);
         log("peakruntime" + this.peak);
-        if (approxTime > 0) 
         Application.wave._drawEvent(approxTime, this.peak);
         
         return true;

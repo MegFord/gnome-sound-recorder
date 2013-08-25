@@ -203,47 +203,47 @@ const WaveForm = new Lang.Class({
         let lastTime;
         log("WHAT THE HELL" + recPeaks);
         if (this.waveType == WaveType.PLAY) {
-        lastTime = this.playTime;
-        this.playTime = playTime;
-        log("check peaks" + peaks.length);
-        log("playTime time" + this.playTime);
+            lastTime = this.playTime;
+            this.playTime = playTime;
+            log("check peaks" + peaks.length);
+            log("playTime time" + this.playTime);
                   
-        if (peaks.length < this.playTime) {
-            this.pipeline.set_state(Gst.State.PLAYING);
-            log("continue drawing " + peaks.length);
-        } 
+            if (peaks.length < this.playTime) {
+                this.pipeline.set_state(Gst.State.PLAYING);
+                log("continue drawing " + peaks.length);
+            } 
                     
-        if (this.tick < this.playTime) {//&& this.tick < this.nSamples) {  should be somewhere else
-            this.tick += 1;
-            this.count += 1;
-            log("tick value" + this.tick);
-        }
+            if (this.tick < this.playTime) {//&& this.tick < this.nSamples) {  should be somewhere else
+                this.tick += 1;
+                this.count += 1;
+                log("tick value" + this.tick);
+            }
         
-        if (lastTime != this.playTime) {
-            this.drawing.queue_draw();
-            log("drawing queued");
-        }
+            if (lastTime != this.playTime) {
+                this.drawing.queue_draw();
+                log("drawing queued");
+            }
         } else {
-        peaks.push(recPeaks);
-        lastTime = this.recordTime;
-        this.recordTime = playTime;
-        log("rec check peaks" + peaks.length);
-        log("recordTime time" + this.recordTime);
+            peaks.push(recPeaks);
+            lastTime = this.recordTime;
+            this.recordTime = playTime;
+            log("rec check peaks" + peaks.length);
+            log("recordTime time" + this.recordTime);
                   
-        if (peaks.length < this.recordTime) {
-            log("error");
-        } 
+            if (peaks.length < this.recordTime) {
+                log("error");
+            } 
                     
-        if (this.tick < this.recordTime) {//&& this.tick < this.nSamples) { should be somewhere else
-            this.tick += 1;
-            this.count += 1;
-            log("rec tick value" + this.tick);
-        }
+            if (this.tick < this.recordTime) {//&& this.tick < this.nSamples) { should be somewhere else
+                this.tick += 1;
+                this.count += 1;
+                log("rec tick value" + this.tick);
+            }
         
-        if (lastTime != this.recordTime) {
-            this.drawing.queue_draw();
-            log("rec drawing queued");
-        }
+            if (lastTime != this.recordTime) {
+                this.drawing.queue_draw();
+                log("rec drawing queued");
+            }
         }
         return true;
     },
