@@ -41,11 +41,14 @@ const PipelineStates = {
     PAUSED: 1,
     STOPPED: 2
 };
+
+const _TENTH_SEC = 100000000;
    
 const Record = new Lang.Class({
     Name: "Record",
     
     _recordPipeline: function() {
+        this.baseTime = 0;
         this._view = Application.view; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
@@ -68,6 +71,7 @@ const Record = new Lang.Class({
         }
         
         this.pipeline.add(this.srcElement);
+        this.clock = this.pipeline.get_clock();
         this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();
         this.recordBus.connect("message", Lang.bind(this,
@@ -76,7 +80,10 @@ const Record = new Lang.Class({
                 if (message != null) {
                     this._onMessageReceived(message);
                 }
-            }));  
+            }));
+        this.level = Gst.ElementFactory.make("level", "level");
+        log(this.level);
+        this.pipeline.add(this.level);  
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         this.ebin.connect("element-added", Lang.bind(this,
             function(ebin, element) {
@@ -109,10 +116,11 @@ const Record = new Lang.Class({
             this.onEndOfStream();
         }
             
-        let srcLink = this.srcElement.link(this.ebin);
+        let srcLink = this.srcElement.link(this.level);
+        let levelLink = this.level.link(this.ebin);
         let ebinLink = this.ebin.link(this.giosink);
         
-        if (!srcLink || !ebinLink) {
+        if (!srcLink || !levelLink || !ebinLink) {
             log("Not all of the elements were linked");
             this.onEndOfStream();
         }
@@ -124,6 +132,21 @@ const Record = new Lang.Class({
         if (time >= 0) {
             this._view.setLabel(time, 0);            
         }
+        
+        this.absoluteTime = this.clock.get_time();
+        
+        if (this.baseTime == 0)
+            this.baseTime = this.absoluteTime;
+            log("base time " + this.baseTime);
+ 
+        this.runTime = this.absoluteTime- this.baseTime;
+        log(this.runTime);
+        log("current clocktime " + this.absoluteTime);
+        let approxTime = Math.round(this.runTime/_TENTH_SEC);
+        log("approx" + approxTime);
+        log("peakruntime" + this.peak);
+        if (approxTime > 0) 
+        Application.wave._drawEvent(approxTime, this.peak);
         
         return true;
     },
@@ -161,6 +184,7 @@ const Record = new Lang.Class({
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
+        Application.wave.endDrawing();
     },
     
     onEndOfStream: function() {
@@ -191,8 +215,33 @@ const Record = new Lang.Class({
                    
                     if (description != null)
                         log(description);
+                        
+                    this.stopRecording();
                 }
-                this.stopRecording();
+                
+                let s = message.get_structure();
+                    if (s) {
+                        if (s.has_name("level")) {
+                            log("level");
+                            let p = null;
+                            let peakVal = 0;
+                            let st = s.get_value("timestamp");
+                            log(st);
+                            let dur = s.get_value("duration");
+                            log(dur);
+                            let runTime = s.get_value("running-time");
+                            log(runTime);
+                            peakVal = s.get_value("peak");
+                            log("peakVal" + peakVal);
+                            if (peakVal) {
+                                let val = peakVal.get_nth(0);
+                                let valBase = (val / 20);
+                                let value = Math.pow(10, valBase);
+                                this.peak = value/3.375;
+                                log("record wave height" + value);                                
+                            }                           
+                        }
+                    }
                 break;
                     
             case Gst.MessageType.EOS:                  

@@ -51,12 +51,15 @@ const comboBoxMap = {
     AAC: 4
 };
 
-
 const AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
    
     assignProfile: function(profileName){
-        this._profileName = profileName;
+        if (profileName)
+            this._profileName = profileName;
+        else 
+            this._profileName = 0;
+            log("profileName" + this._profileName);
         this._values = [];
             switch(this._profileName) {
                              
@@ -76,6 +79,7 @@ const AudioProfile = new Lang.Class({
                     this._values.push({ container: containerProfileMap.AAC, audio: audioCodecMap.AAC });
                     break;
                 default:
+                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS });
                     break;
             }
     },
@@ -100,7 +104,7 @@ const AudioProfile = new Lang.Class({
             return this.encodingProfile;
         } else {
             return -1; 
-        }     
+        }    
     },
     
     fileExtensionReturner: function() {

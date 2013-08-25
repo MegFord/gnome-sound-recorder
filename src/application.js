@@ -92,17 +92,19 @@ const Application = new Lang.Class({
         let stackSwitcher = Gtk.StackSwitcher.new();
         stackSwitcher.set_stack(view);
         let header = new Gtk.HeaderBar({ hexpand: true });
-        header.custom_title = stackSwitcher;
+        //header.custom_title = stackSwitcher;
         header.set_show_close_button(true);
         this.set_titlebar(header);
         
-        this.playVolume = new Gtk.VolumeButton();
-        this.playVolume.set_property("use-symbolic", true);
-        this.range = Gtk.Adjustment.new(0.5, 0, 3.375, 0.15, 0.0, 0.0);
-        this.playVolume.set_adjustment(this.range);
-        //this.playVolume.connect("value-changed", Lang.bind(this, this.setVolume));
+        let recordButton = new RecordButton({label: "Record"});
+        header.pack_start(recordButton);
         
-        header.pack_end(this.playVolume);
+        let preferencesButton = new Gtk.Button();
+        let preferencesImage = Gtk.Image.new_from_icon_name("emblem-system-symbolic", Gtk.IconSize.BUTTON);
+        preferencesButton.image = preferencesImage;
+        //add code to choose codec
+        
+        header.pack_end(preferencesButton);
 
         grid.add(view);
             
@@ -130,12 +132,12 @@ const MainView = new Lang.Class({
                                        transition_duration: 100,
                                        visible: true });
         this.parent(params);
-
-        let recorderPage = this._addRecorderPage('recorderPage');
-            this.visible_child_name = 'listviewPage';
             
         let listviewPage = this._addListviewPage('listviewPage');
              this.visible_child_name = 'playerPage';
+        
+        let recorderPage = this._addRecorderPage('recorderPage');
+            this.visible_child_name = 'listviewPage';
                 
         let playerPage = this._addPlayerPage('playerPage');
             this.visible_child_name = 'recorderPage';
@@ -184,8 +186,8 @@ const MainView = new Lang.Class({
         this.recordVolume.connect ("value-changed", Lang.bind(this, this.setVolume));
         recordGrid.attach(this.recordVolume, 20, 4, 3, 1);
         
-        let recordButton = new RecordButton(this._record);
-        toolbarStart.pack_end(recordButton, false, true, 0);
+        /*let recordButton = new RecordButton(this._record);
+        toolbarStart.pack_end(recordButton, false, true, 0);*/
                 
         let stopRecord = new Gtk.Button();
         this.stopRecImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
@@ -359,6 +361,16 @@ const MainView = new Lang.Class({
     listBoxAdd: function() {
         selectable = true;
         this.groupGrid = groupGrid;
+        
+                
+        this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                                          height_request: 36,
+                                          width_request: 400,
+                                          name: "recordGrid" });
+        this.recordGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
+        this.groupGrid.add(this.recordGrid);
+        //this.recordGrid.show();
+            
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
                                                      margin_top: 5,
@@ -446,7 +458,7 @@ const MainView = new Lang.Class({
             
             this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                                height_request: 36,
-                                               width_request: 200,
+                                               width_request: 350,
                                                name: "WaveFormGrid" });
             this.waveFormGrid.set_no_show_all(true);
             this.rowGrid.add(this.waveFormGrid);
@@ -608,6 +620,10 @@ const MainView = new Lang.Class({
             function(widget, response) {
                 infoDialog.widget.destroy();
             }));
+    },
+    
+    onrecordButton: function() {
+        this.recordGrid.show();
     }
 });
 
@@ -615,18 +631,21 @@ const RecordButton = new Lang.Class({
     Name: "RecordButton",
     Extends: Gtk.Button,
     
-    _init: function(record, activeProfile) {
-        this._record = record;
+    _init: function(activeProfile) {
         this._activeProfile = activeProfile;
-        this.recordImage = Gtk.Image.new_from_icon_name("media-record-symbolic", Gtk.IconSize.BUTTON);
-        this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);
+        //this.recordImage = Gtk.Image.new_from_icon_name("media-record-symbolic", Gtk.IconSize.BUTTON);
+        //this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);
         this.parent();
-        this.set_image(this.recordImage);
+        this.set_label("Record");
+        //this.set_image(this.recordImage);
         this.connect("clicked", Lang.bind(this, this._onRecord));
     },
     
     _onRecord: function() {
-        this._record.startRecording();
+        view.recordGrid.show();
+        audioProfile.assignProfile();
+        view._record.startRecording();
+        wave = new Waveform.WaveForm(view.recordGrid);
     }
 });
 
@@ -667,10 +686,9 @@ const PlayPauseButton = new Lang.Class({
                 }));
              log(this.activeState);
              log("activeState");
-            if (this.activeState == PipelineStates.PAUSED) {
-                //wave.timer();
-            } else {
-                wave = new Waveform.WaveForm(selFile, this.wFGrid);
+            
+            if (this.activeState != PipelineStates.PAUSED) {
+                wave = new Waveform.WaveForm(this.wFGrid, selFile);
             }
 
         } else if (this.activeState == PipelineStates.PLAYING) {

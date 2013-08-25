@@ -54,8 +54,7 @@ const _TENTH_SEC = 100000000;
         this.play.set_property("uri", this.uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
-        this.clock = this.play.get_clock();
-                
+        this.clock = this.play.get_clock();                
         this.playBus = this.play.get_bus();
         log(this.playBus);
         this.playBus.add_signal_watch();
@@ -161,7 +160,7 @@ const _TENTH_SEC = 100000000;
     },    
                        
     _updateTime: function() {          
-        let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
+        let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND; //if add label to UI update so this just updates every second since the callback happens 1/10 sec now
         log(time);
         log("time");
         this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];

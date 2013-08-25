@@ -39,26 +39,39 @@ const peaks = [];
 const INTERVAL = 100000000;
 const pauseVal = 10;
 
+const WaveType = {
+    RECORD: 0,
+    PLAY: 1
+};
+
 const WaveForm = new Lang.Class({
     Name: 'WaveForm',
 
-    _init: function(file, grid) {
-        this.file = file;
+    _init: function(grid, file) {
+        if (file) {
+            this.waveType = WaveType.PLAY;
+            this.file = file;
+            this.duration = this.file.duration;
+            this._uri = this.file.uri;
+        } else {
+          this.waveType = WaveType.RECORD;
+        }  
+        
         this.count = 0;
-        this.newWave = 0;
         this.tick = 0;
-        this.duration = this.file.duration;
         
         this.drawing = Gtk.DrawingArea.new();
         this.drawing.set_size_request(200, 36);
         grid.add(this.drawing);
         this.drawing.connect("draw", Lang.bind(this, this.fillSurface));
-        this._uri = this.file.uri;
         this.drawing.show_all();
         grid.show_all();
-
-        this._launchPipeline();
-        this.startGeneration();
+        
+        if (this.waveType == WaveType.PLAY) { 
+            this._launchPipeline();            
+            this.startGeneration();
+            log("LAUNCHED ANYWAY");
+        }
     },
 
     _launchPipeline: function() {
@@ -107,7 +120,7 @@ const WaveForm = new Lang.Class({
                                 let valBase = (val / 20);
                                 let value = Math.pow(10, valBase);
                                 let peaknumber = value/3.375;
-                                log("wave height" + peaknumber);
+                                log("wave height" + value);
                                 peaks.push(peaknumber);
                             }                           
                         }
@@ -141,14 +154,17 @@ const WaveForm = new Lang.Class({
     },
                 
     fillSurface: function(drawing, cr) {
-            
-        if (peaks.length == this.playTime - 7) {
-            this.pipeline.set_state(Gst.State.PLAYING);
-            log("continue drawing " + peaks.length);
+        if (this.waveType == WaveType.PLAY) {
+            log("fill surface error" + this.waveType);
+            if (peaks.length == this.playTime - 7) {
+                this.pipeline.set_state(Gst.State.PLAYING);
+                log("continue drawing " + peaks.length);
+            }
         }
+        
         let w = this.drawing.get_allocated_width();
         let h = this.drawing.get_allocated_height();
-        log("height" + h);
+        log("height DDDD" + h);
         let length = this.nSamples;
         let idx;
  
@@ -183,8 +199,11 @@ const WaveForm = new Lang.Class({
         cr.strokePreserve();
     },
     
-    _drawEvent: function(playTime) {
-        let lastTime = this.playTime;
+    _drawEvent: function(playTime, recPeaks) {
+        let lastTime;
+        log("WHAT THE HELL" + recPeaks);
+        if (this.waveType == WaveType.PLAY) {
+        lastTime = this.playTime;
         this.playTime = playTime;
         log("check peaks" + peaks.length);
         log("playTime time" + this.playTime);
@@ -194,7 +213,7 @@ const WaveForm = new Lang.Class({
             log("continue drawing " + peaks.length);
         } 
                     
-        if (this.tick < this.playTime && this.tick < this.nSamples) { //this.tick < this.nSamples should be somewhere else
+        if (this.tick < this.playTime) {//&& this.tick < this.nSamples) {  should be somewhere else
             this.tick += 1;
             this.count += 1;
             log("tick value" + this.tick);
@@ -204,14 +223,29 @@ const WaveForm = new Lang.Class({
             this.drawing.queue_draw();
             log("drawing queued");
         }
-        return true;
-    },
-    
-    pauseDrawing: function() { //rewrite
-        if (this.timeout) {
-           GLib.source_remove(this.timeout);
-            this.timeout = null;
+        } else {
+        peaks.push(recPeaks);
+        lastTime = this.recordTime;
+        this.recordTime = playTime;
+        log("rec check peaks" + peaks.length);
+        log("recordTime time" + this.recordTime);
+                  
+        if (peaks.length < this.recordTime) {
+            log("error");
+        } 
+                    
+        if (this.tick < this.recordTime) {//&& this.tick < this.nSamples) { should be somewhere else
+            this.tick += 1;
+            this.count += 1;
+            log("rec tick value" + this.tick);
         }
+        
+        if (lastTime != this.recordTime) {
+            this.drawing.queue_draw();
+            log("rec drawing queued");
+        }
+        }
+        return true;
     },
     
     endDrawing: function() {
