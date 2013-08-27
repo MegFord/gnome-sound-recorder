@@ -17,6 +17,9 @@ dist_js_DATA = \
     record.js \
     waveform.js\
     $(NULL)
+ nodist_bin_SCRIPTS = gnome-sound-recorder
+ 
+ EXTRA_DIST = gnome-sound-recorder.in
     
 $(PACKAGE_NAME): $(PACKAGE_NAME).in
 	$(AM_V_GEN) sed \

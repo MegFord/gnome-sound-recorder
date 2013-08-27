@@ -16,7 +16,7 @@ LIBGD_INIT([header-bar notification revealer stack tagged-entry gir])
 GLIB_GSETTINGS
 GOBJECT_INTROSPECTION_REQUIRE([1.0])
 
-AC_PATH_PROG(GJS, [gjs])
+AC_PROG_SED
 
 AC_OUTPUT([
 Makefile
@@ -24,6 +24,5 @@ data/Makefile
 data/gnome-sound-recorder.desktop.in
 libgd/Makefile
 src/Makefile
-src/gnome-sound-recorder
 po/Makefile.in
 ])
