@@ -6,6 +6,8 @@ AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.11 foreign -Wno-portability tar-ustar dist-xz])
 AM_SILENT_RULES([yes])
 
+AC_SUBST([PACKAGE], [$PACKAGE_NAME])
+
 LT_INIT([disable-static])
 IT_PROG_INTLTOOL([0.26])
 
