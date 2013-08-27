@@ -2,21 +2,21 @@
 
 ## Created by Anjuta  
 
-
 jsdir = $(pkgdatadir)
 dist_js_DATA = \
     util.js	\
-	application.js \
-	audioProfile.js \
-	fileUtil.js \
-	info.js \
-	listview.js \
+    application.js \    
+    audioProfile.js \
+    fileUtil.js \
+    info.js \
+    listview.js \
     main.js \
-	package.js	\
-	play.js \
+    package.js	\
+    play.js \
     record.js \
     waveform.js\
     $(NULL)
+    
  nodist_bin_SCRIPTS = gnome-sound-recorder
  
  EXTRA_DIST = gnome-sound-recorder.in
