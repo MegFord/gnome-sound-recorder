@@ -25,6 +25,7 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 pkg.initSubmodule('libgd');
+//pkg.initGettext();
 pkg.require({ 'Gd': '1.0',
               'Gdk': '3.0',
               'GLib': '2.0',
@@ -38,6 +39,7 @@ imports.gi.versions.Gst = '1.0';
 
 const Util = imports.util;
 const Application = imports.application;
+const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
 
 const MyApplication = new Lang.Class({
@@ -45,11 +47,10 @@ const MyApplication = new Lang.Class({
     Extends: Gtk.Application,
 
     _init: function() {
-        _init: function() {
             this.parent({ application_id: pkg.name,
                           flags: Gio.ApplicationFlags.IS_SERVICE });
-            let valid = GLib.application_id_is_valid(pkg.name);
-            GLib.set_application_name(_("SoundRecorder")););
+
+            GLib.set_application_name(_("SoundRecorder"));
     },
 
     vfunc_startup: function() {
