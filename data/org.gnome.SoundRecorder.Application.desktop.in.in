@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+_Name=SoundRecorder
+Icon=face-smile
+Exec=@pkgdatadir@/@PACKAGE_NAME@
+DBusActivatable=true
+
