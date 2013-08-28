@@ -45,8 +45,11 @@ const MyApplication = new Lang.Class({
     Extends: Gtk.Application,
 
     _init: function() {
-        this.parent({ application_id: 'org.gnome.sound-recorder' });
-        GLib.set_application_name(_("Sound Recorder"));
+        _init: function() {
+            this.parent({ application_id: pkg.name,
+                          flags: Gio.ApplicationFlags.IS_SERVICE });
+            let valid = GLib.application_id_is_valid(pkg.name);
+            GLib.set_application_name(_("SoundRecorder")););
     },
 
     vfunc_startup: function() {

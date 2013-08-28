@@ -1,4 +1,4 @@
-AC_INIT([gnome-sound-recorder], [0.1])
+AC_INIT([org.gnome.SoundRecorder.Application],[0.1],[gnome-sound-recorder])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
@@ -16,12 +16,11 @@ LIBGD_INIT([header-bar notification revealer stack tagged-entry gir])
 GLIB_GSETTINGS
 GOBJECT_INTROSPECTION_REQUIRE([1.0])
 
-AC_PROG_SED
+AC_PATH_PROG(GJS, [gjs])
 
 AC_OUTPUT([
 Makefile
 data/Makefile
-data/gnome-sound-recorder.desktop.in
 libgd/Makefile
 src/Makefile
 po/Makefile.in

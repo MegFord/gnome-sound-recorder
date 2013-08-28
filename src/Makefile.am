@@ -18,8 +18,6 @@ dist_js_DATA = \
     $(NULL)
     
  nodist_bin_SCRIPTS = gnome-sound-recorder
- 
- EXTRA_DIST = gnome-sound-recorder.in
     
 $(PACKAGE_NAME): $(PACKAGE_NAME).in
 	$(AM_V_GEN) sed \

@@ -1,3 +1,10 @@
-data/my-js-app.desktop.in
 src/main.js
 src/util.js
+src/application.js
+src/audioProfile.js
+src/fileUtil.js
+src/info.js
+src/listview.js
+src/play.js
+src/record.js
+src/waveform.js

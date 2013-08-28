@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-_Name=Sound Recorder
-_GenericName=GNOME Sound Recorder
-_Keywords=sound;recorder;GNOME
-Exec=@GJS@ -c 'imports.package.start({ name: "@PACKAGE_NAME@", version: "@PACKAGE_VERSION@", prefix: "@prefix@" })'
-Icon=face-smile
