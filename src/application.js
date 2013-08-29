@@ -162,37 +162,20 @@ const MainView = new Lang.Class({
     _addRecorderPage: function(name) {
         this._record = new Record.Record(audioProfile);
         this.recordBox = new Gtk.EventBox();
-        let recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
-                                        halign: Gtk.Align.CENTER,
-                                        valign: Gtk.Align.CENTER,
-                                        column_homogeneous: true,
-                                        column_spacing: 15 });
-        this.recordBox.add(recordGrid);
-
-        let toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                         spacing: 0 });
-        toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        recordGrid.attach(toolbarStart, 20, 0, 2, 1);
+        
                 
         this._comboBoxText = new EncoderComboBox();
-        recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
+        //recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
         
         this.recordTimeLabel = new Gtk.Label();
-        recordGrid.attach(this.recordTimeLabel, 20, 2, 3, 1);
+        //recordGrid.attach(this.recordTimeLabel, 20, 2, 3, 1);
         
         this.recordVolume = new Gtk.VolumeButton();
         this.recordRange = Gtk.Adjustment.new(0.2, 0, 3.375, 0.05, 0.0, 0.0);
         this.recordVolume.set_adjustment(this.recordRange);
         this.recordVolume.connect ("value-changed", Lang.bind(this, this.setVolume));
-        recordGrid.attach(this.recordVolume, 20, 4, 3, 1);
-        
-        /*let recordButton = new RecordButton(this._record);
-        toolbarStart.pack_end(recordButton, false, true, 0);*/
+        //recordGrid.attach(this.recordVolume, 20, 4, 3, 1);
                 
-        let stopRecord = new Gtk.Button();
-        this.stopRecImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
-        stopRecord.set_image(this.stopRecImage);
-        stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
 
         this.add_titled(this.recordBox, name, "Record");
     },
