@@ -62,7 +62,7 @@ const WaveForm = new Lang.Class({
         
         this.drawing = Gtk.DrawingArea.new();
         this.drawing.set_size_request(200, 36);
-        grid.add(this.drawing);
+        grid.attach(this.drawing, 2, 0, 1, 1);
         this.drawing.connect("draw", Lang.bind(this, this.fillSurface));
         this.drawing.show_all();
         grid.show_all();
@@ -70,7 +70,6 @@ const WaveForm = new Lang.Class({
         if (this.waveType == WaveType.PLAY) { 
             this._launchPipeline();            
             this.startGeneration();
-            log("LAUNCHED ANYWAY");
         }
     },
 
@@ -164,7 +163,6 @@ const WaveForm = new Lang.Class({
         
         let w = this.drawing.get_allocated_width();
         let h = this.drawing.get_allocated_height();
-        log("height DDDD" + h);
         let length = this.nSamples;
         let idx;
  
@@ -201,7 +199,6 @@ const WaveForm = new Lang.Class({
     
     _drawEvent: function(playTime, recPeaks) {
         let lastTime;
-        log("WHAT THE HELL" + recPeaks);
         if (this.waveType == WaveType.PLAY) {
             lastTime = this.playTime;
             this.playTime = playTime;

@@ -81,7 +81,7 @@ const Application = new Lang.Class({
         view = new MainView();
         play = new Play.Play();
         
-        params = Params.fill(params, { title: GLib.get_application_name(), //can I get rid of this?
+        params = Params.fill(params, { title: GLib.get_application_name(), 
                                        default_width: 700,
                                        default_height: 480,
                                        border_width: 12 });
@@ -193,7 +193,6 @@ const MainView = new Lang.Class({
         this.stopRecImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
         stopRecord.set_image(this.stopRecImage);
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
-        toolbarStart.pack_end(stopRecord, true, true, 0);
 
         this.add_titled(this.recordBox, name, "Record");
     },
@@ -369,7 +368,18 @@ const MainView = new Lang.Class({
                                           name: "recordGrid" });
         this.recordGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
         this.groupGrid.add(this.recordGrid);
-        //this.recordGrid.show();
+        
+        this.toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                         spacing: 0 });
+        this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
+        this.recordGrid.attach(this.toolbarStart, 1, 0, 1, 1);
+        
+        let stopRecord = new Gtk.Button();
+        this.stopRecImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
+        stopRecord.set_image(this.stopRecImage);
+        stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
+        this.toolbarStart.pack_start(stopRecord, false, true, 0);
+        this.toolbarStart.show_all();
             
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
@@ -620,10 +630,6 @@ const MainView = new Lang.Class({
             function(widget, response) {
                 infoDialog.widget.destroy();
             }));
-    },
-    
-    onrecordButton: function() {
-        this.recordGrid.show();
     }
 });
 
