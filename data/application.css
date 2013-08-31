@@ -25,18 +25,13 @@
 
 .view .toolbarEnd {
   background-color: #86A0F1;
-  border-right: rgba(255,255,255,0.45) 1px solid;  
+  border-right: rgba(255,255,255,1.0) 1px solid;  
   border-radius: 0px; 
 }
 
-.topbar {
-    background-image: linear-gradient(to bottom,
-                                      @button_gradient_color_a,
-                                      @button_gradient_color_b 40%,
-                                      @button_gradient_color_c
-                                      );
-}
 
 .header .button {
-    border-radius: 0px; 
+  background-color: rgba(204,0,0,0.75);
+  background-image: none; 
+  border: none; 
 }

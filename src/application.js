@@ -47,10 +47,9 @@ let selectable = null;
 let view = null;
 let wave = null;
 
-const ActivePage = {
-    RECORD: 'recorderPage',
-    PLAY: 'playerPage',
-    LISTVIEW: 'listviewPage'
+const ActiveArea = {
+    RECORD: 0,
+    PLAY: 1
 };
 
 const ListColumns = {
@@ -96,8 +95,16 @@ const Application = new Lang.Class({
         header.set_show_close_button(true);
         this.set_titlebar(header);
         
+        let recordToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                        spacing: 0 });
+        recordToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
+        header.pack_start(recordToolbar);
         let recordButton = new RecordButton({label: "Record"});
-        header.pack_start(recordButton);
+        recordToolbar.pack_end(recordButton, false, true, 0);
+        recordToolbar.get_style_context().add_class('header');
+        recordToolbar.show();
+        recordButton.show();
+        //header.pack_start(recordButton);
         
         let preferencesButton = new Gtk.Button();
         let preferencesImage = Gtk.Image.new_from_icon_name("emblem-system-symbolic", Gtk.IconSize.BUTTON);
@@ -167,7 +174,7 @@ const MainView = new Lang.Class({
         this._comboBoxText = new EncoderComboBox();
         //recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
         
-        this.recordTimeLabel = new Gtk.Label();
+       // this.recordTimeLabel = new Gtk.Label();
         //recordGrid.attach(this.recordTimeLabel, 20, 2, 3, 1);
         
         this.recordVolume = new Gtk.VolumeButton();
@@ -252,40 +259,6 @@ const MainView = new Lang.Class({
         this._record.stopRecording();
     },
     
-    setVisibleID: function() {
-        let activePage = this.get_visible_child_name();
-        return activePage;
-    },
-    
-    setLabel: function(time, duration) {
-        this.time = time
-        this.duration = duration;
-        this.playPipeState = play.getPipeStates();
-        
-        if (this.playPipeState != PipelineStates.STOPPED) { //test this
-            if (this.playDurationLabel.label == "0:00" && duration != 0)
-            this.durationString = this._formatTime(duration);
-        } else {
-            this.durationString = this._formatTime(duration);
-        }
-        
-        this.timeLabelString = this._formatTime(time);
-        
-        
-        if (this.setVisibleID() == ActivePage.RECORD ) {
-            this.recordTimeLabel.label = this.timeLabelString;
-        } else if (this.setVisibleID() == ActivePage.PLAY) {
-            this.playTimeLabel.label = this.timeLabelString;
-            
-            if (this.playDurationLabel.label == "0:00" || this.playPipeState == PipelineStates.STOPPED) {
-                this.playDurationLabel.label = this.durationString;
-                this.setProgressScaleSensitive();
-                this.progressScale.set_range(0.0, duration);
-            }
-            this.progressScale.set_value(this.time);
-        }
-    },
-    
     setProgressScaleSensitive: function() {
         this.progressScale.sensitive = true;
     },
@@ -325,10 +298,10 @@ const MainView = new Lang.Class({
     
     setVolume: function() {
         let volumeValue;
-        if (this.setVisibleID() == ActivePage.PLAY) {
+        if (this.setVisibleID == ActiveArea.PLAY) {
             volumeValue = this.playVolume.get_value();
             Application.play.setVolume(volumeValue);
-        } else if (this.setVisibleID() == ActivePage.RECORD) {
+        } else if (this.setVisibleID == ActiveArea.RECORD) {
             volumeValue = this.recordVolume.get_value();
             this._record.setVolume(volumeValue);
         }
@@ -346,23 +319,51 @@ const MainView = new Lang.Class({
         
                 
         this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                          height_request: 36,
-                                          width_request: 400,
-                                          name: "recordGrid" });
+                                         height_request: 36,
+                                         width_request: 400,
+                                         name: "recordGrid" });
         this.recordGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
         this.groupGrid.add(this.recordGrid);
         
-        this.toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                         spacing: 0 });
-        this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        this.recordGrid.attach(this.toolbarStart, 1, 0, 1, 1);
+        this.widgetRecord = new Gtk.Toolbar({ show_arrow: false,
+                                              halign: Gtk.Align.START,
+                                              valign: Gtk.Align.FILL,
+                                              icon_size: Gtk.IconSize.BUTTON,
+                                              opacity: 1 });
+        this.widgetRecord.get_style_context().add_class('toolbarEnd');
+        this.recordGrid.attach(this.widgetRecord, 0, 0, 2, 2);
+            
+        this._boxRecord = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        this._groupRecord = new Gtk.ToolItem({ child: this._boxRecord });
+        this.widgetRecord.insert(this._groupRecord, -1);
         
-        let stopRecord = new Gtk.Button();
-        this.stopRecImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
-        stopRecord.set_image(this.stopRecImage);
+        this.recordTextLabel = new Gtk.Label({ margin_bottom: 4,
+                                               margin_top: 6,
+                                               margin_left: 6,
+                                               margin_right: 6 });
+        this.recordTextLabel.label = "Recording...";
+        this._boxRecord.pack_start(this.recordTextLabel, false, true, 0);
+        
+        this.recordTimeLabel = new Gtk.Label({ margin_bottom: 4,
+                                                margin_top: 6,
+                                                margin_left: 6,
+                                                margin_right: 6 });
+        
+        this._boxRecord.pack_start(this.recordTimeLabel, false, true, 0);
+        
+        this.toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                          spacing: 0 });
+        this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
+
+        
+        let stopRecord = new Gtk.Button({ label: "Finish",
+                                          margin_bottom: 4,
+                                          margin_top: 6,
+                                          margin_left: 6,
+                                          margin_right: 6 });
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
-        this.toolbarStart.pack_start(stopRecord, false, true, 0);
-        this.toolbarStart.show_all();
+        this.toolbarStart.pack_end(stopRecord, true, true, 0);
+        this.recordGrid.attach(this.toolbarStart, 5, 0, 2, 2);
             
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
@@ -613,7 +614,35 @@ const MainView = new Lang.Class({
             function(widget, response) {
                 infoDialog.widget.destroy();
             }));
-    }
+    },   
+        
+    setLabel: function(time, duration) {
+        this.time = time
+        this.duration = duration;
+        this.playPipeState = play.getPipeStates();
+        
+        if (this.playPipeState != PipelineStates.STOPPED) { //test this
+            if (this.playDurationLabel.label == "0:00" && duration != 0)
+            this.durationString = this._formatTime(duration);
+        } else {
+            this.durationString = this._formatTime(duration);
+        }
+        
+        this.timeLabelString = this._formatTime(time);
+        
+        if (this.setVisibleID == ActiveArea.RECORD) {
+            this.recordTimeLabel.label = this.timeLabelString;
+        } else if (this.setVisibleID == ActiveArea.PLAY) {
+            this.playTimeLabel.label = this.timeLabelString;
+            
+            if (this.playDurationLabel.label == "0:00" || this.playPipeState == PipelineStates.STOPPED) {
+                this.playDurationLabel.label = this.durationString;
+                this.setProgressScaleSensitive();
+                this.progressScale.set_range(0.0, duration);
+            }
+            this.progressScale.set_value(this.time);
+        }
+    },
 });
 
 const RecordButton = new Lang.Class({
@@ -622,16 +651,14 @@ const RecordButton = new Lang.Class({
     
     _init: function(activeProfile) {
         this._activeProfile = activeProfile;
-        //this.recordImage = Gtk.Image.new_from_icon_name("media-record-symbolic", Gtk.IconSize.BUTTON);
-        //this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);
         this.parent();
         this.set_label("Record");
-        //this.set_image(this.recordImage);
         this.connect("clicked", Lang.bind(this, this._onRecord));
     },
     
     _onRecord: function() {
-        view.recordGrid.show();
+        view.setVisibleID = ActiveArea.RECORD;
+        view.recordGrid.show_all();
         audioProfile.assignProfile();
         view._record.startRecording();
         wave = new Waveform.WaveForm(view.recordGrid);
