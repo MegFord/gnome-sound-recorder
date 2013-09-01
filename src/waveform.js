@@ -48,6 +48,8 @@ const WaveForm = new Lang.Class({
     Name: 'WaveForm',
 
     _init: function(grid, file) {
+        this._grid = grid;
+        
         if (file) {
             this.waveType = WaveType.PLAY;
             this.file = file;
@@ -63,17 +65,18 @@ const WaveForm = new Lang.Class({
         if (this.waveType == WaveType.RECORD) {
             let gridWidth = Application.groupGrid.get_allocated_width();
             log("gridWidth " + gridWidth);
-            let drawingWidth = gridWidth * 0.625;
+            let drawingWidth = gridWidth * 0.75;
             this.drawing.set_size_request(drawingWidth, 36);
-            grid.attach(this.drawing, 2, 0, 3, 2);
+            this._grid.attach(this.drawing, 2, 0, 3, 2);
         } else {
             this.drawing.set_size_request(200, 36);
-            grid.add(this.drawing);
+            this._grid.add(this.drawing);
         }
 
         this.drawing.connect("draw", Lang.bind(this, this.fillSurface));
         this.drawing.show_all();
-        grid.show_all();
+        this.drawing.get_style_context().add_class('background');
+        this._grid.show_all();
         
         if (this.waveType == WaveType.PLAY) { 
             this._launchPipeline();            
@@ -175,6 +178,7 @@ const WaveForm = new Lang.Class({
         let idx;
         let gradient = new Cairo.LinearGradient(0, 0, this.tick * pixelsPerSample, peaks[idx] * waveheight);
         gradient.addColorStopRGBA(0.0, 0.0, 0.72, 0.64, 0.35);
+        
         gradient.addColorStopRGBA(0.75, 0.2, 0.54, 0.47, 0.22);
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
@@ -198,17 +202,7 @@ const WaveForm = new Lang.Class({
                 log("peak height " + peaks[idx]);
                 log("array length " + peaks.length);
                 log("array index value " + idx);
-                
-               /* let gradient = new Cairo.LinearGradient(0, 0, i * pixelsPerSample, peaks[idx] * waveheight);
-                cr.setSource(gradient)
-                gradient.addColorStopRGBA(0.0, 1.0, 0.0, 0.0, 1.0);
-                gradient.addColorStopRGBA(1.0, 0.0, 0.0, 1.0, 0.5);
-				cr.paint();
-                /*cr.lineTo(i*5, 0);
-                cr.closePath();
-                log(this.tick);
-                log(peaks[this.tick]*h);
-                cr.fillPreserve();*/
+
             } 
         }
 
@@ -269,9 +263,12 @@ const WaveForm = new Lang.Class({
     },
     
     endDrawing: function() {
+        let width = this._grid.get_allocated_width();
         this.tick = 0;
         this.count = 0;
         peaks.length = 0;
-        this.drawing.destroy(); 
+        this.drawing.destroy();
+        Application.view.waveFormGrid.set_property("width-request", 350);
+        Application.view.waveFormGrid.show(); 
     }    
 });

@@ -168,6 +168,7 @@ const _TENTH_SEC = 100000000;
         log(this.trackDurationSecs);
         
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
+            log("called UPDATE");
             this._view.setLabel(time, this.trackDurationSecs);           
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
             this._view.setLabel(0, this.trackDurationSecs); 

@@ -22,6 +22,7 @@
 imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
+const Gdk = imports.gi.Gdk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
@@ -91,7 +92,6 @@ const Application = new Lang.Class({
         let stackSwitcher = Gtk.StackSwitcher.new();
         stackSwitcher.set_stack(view);
         let header = new Gtk.HeaderBar({ hexpand: true });
-        //header.custom_title = stackSwitcher;
         header.set_show_close_button(true);
         this.set_titlebar(header);
         
@@ -99,12 +99,15 @@ const Application = new Lang.Class({
                                         spacing: 0 });
         recordToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
         header.pack_start(recordToolbar);
-        let recordButton = new RecordButton({label: "Record"});
+        let recordButton = new RecordButton({ label: "Record",
+                                              margin_bottom: 4,
+                                              margin_top: 6,
+                                              margin_left: 6,
+                                              margin_right: 6 });
         recordToolbar.pack_end(recordButton, false, true, 0);
         recordToolbar.get_style_context().add_class('header');
         recordToolbar.show();
         recordButton.show();
-        //header.pack_start(recordButton);
         
         let preferencesButton = new Gtk.Button();
         let preferencesImage = Gtk.Image.new_from_icon_name("emblem-system-symbolic", Gtk.IconSize.BUTTON);
@@ -133,8 +136,8 @@ const MainView = new Lang.Class({
     Extends: Gtk.Stack,
 
     _init: function(params) {
-        params = Params.fill(params, { hexpand: true,
-                                       vexpand: true,
+        params = Params.fill(params, { hexpand: false,
+                                       vexpand: false,
                                        transition_type: Gtk.StackTransitionType.CROSSFADE,
                                        transition_duration: 100,
                                        visible: true });
@@ -203,13 +206,7 @@ const MainView = new Lang.Class({
         
         let loadButton = new LoadMoreButton(playGrid);
         
-        this.playTimeLabel = new Gtk.Label();
-        this.playTimeLabel.label = "0:00";
-        playGrid.attach(this.playTimeLabel, 20, 1, 3, 1);
-        
-        this.playDurationLabel = new Gtk.Label();
-        this.playDurationLabel.label = "0:00";
-        playGrid.attach(this.playDurationLabel, 20, 2, 3, 1);
+       
         
         this.progressScale = new Gtk.Scale();
         this.progressScale.sensitive = false;
@@ -257,6 +254,7 @@ const MainView = new Lang.Class({
     
     onRecordStopClicked: function() {
         this._record.stopRecording();
+        this.recordGrid.hide();
     },
     
     setProgressScaleSensitive: function() {
@@ -326,7 +324,7 @@ const MainView = new Lang.Class({
         this.groupGrid.add(this.recordGrid);
         
         this.widgetRecord = new Gtk.Toolbar({ show_arrow: false,
-                                              halign: Gtk.Align.START,
+                                              halign: Gtk.Align.END,
                                               valign: Gtk.Align.FILL,
                                               icon_size: Gtk.IconSize.BUTTON,
                                               opacity: 1 });
@@ -345,25 +343,26 @@ const MainView = new Lang.Class({
         this._boxRecord.pack_start(this.recordTextLabel, false, true, 0);
         
         this.recordTimeLabel = new Gtk.Label({ margin_bottom: 4,
-                                                margin_top: 6,
-                                                margin_left: 6,
-                                                margin_right: 6 });
+                                               margin_top: 6,
+                                               margin_left: 6,
+                                               margin_right: 6 });
         
         this._boxRecord.pack_start(this.recordTimeLabel, false, true, 0);
         
-        this.toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                          spacing: 0 });
+        this.toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
         this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
 
-        
+        // finish button (stop recording)
         let stopRecord = new Gtk.Button({ label: "Finish",
                                           margin_bottom: 4,
                                           margin_top: 6,
                                           margin_left: 6,
-                                          margin_right: 6 });
+                                          margin_right: 6,
+                                          hexpand: true,
+                                          vexpand: true });
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
-        this.toolbarStart.pack_end(stopRecord, true, true, 0);
-        this.recordGrid.attach(this.toolbarStart, 5, 0, 2, 2);
+        this.toolbarStart.pack_start(stopRecord, true, true, 0);
+        this.recordGrid.attach(this.toolbarStart, 5, 1, 1, 2);
             
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
@@ -411,15 +410,20 @@ const MainView = new Lang.Class({
                                             icon_size: Gtk.IconSize.BUTTON,
                                             opacity: 1,
                                             name: "PlayToolBar" });
-            this.rowGrid.attach(this.widget, 1, 0, 1, 1);
+            this.widget.get_style_context().add_class('toolbar');
+            this.rowGrid.attach(this.widget, 1, 0, 1, 2);
                        
             this._box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
             this._group = new Gtk.ToolItem({ child: this._box });
             this.widget.insert(this._group, -1);
             
             // play button
-            this._playListButton = new PlayPauseButton({ hexpand: false });
-            this._box.add(this._playListButton);
+            let playImage = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
+            let pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);
+            this._playListButton = new PlayPauseButton({ hexpand: false,
+                                                         name: "PlayButton" });
+            this._playListButton.set_image(playImage);
+            this._box.pack_start(this._playListButton, false, true, 0);
             this._playListButton.show();
             this._playListButton.connect('clicked', Lang.bind(this,
                 function(){
@@ -427,12 +431,8 @@ const MainView = new Lang.Class({
                     play.passSelected(row); // this can be done with the uri.
                     let gridForName = row.get_child();
                     let idx = parseInt(gridForName.name);
-                    log(idx);
                     
                     let file = this._files[idx];
-                    log(file.uri);
-                    log("PLAYURI");
-                
                     this._playListButton._onPlayPauseToggled(row, file);
                 }));
             
@@ -442,13 +442,38 @@ const MainView = new Lang.Class({
                                              xalign: 0,
                                              width_chars: 40,
                                              margin_top: 5,
-                                             margin_left: 15 });
-                                           log(this._files[i].fileName);
+                                             margin_left: 15,
+                                             name: "FileNameLabel" });
             let markup = ('<b>'+ this._files[i].fileName + '</b>');
             this._fileName.label = markup;
             this._fileName.set_no_show_all(true);
-            this.rowGrid.add(this._fileName);
+            this.rowGrid.attach(this._fileName, 2, 0, 1, 3);
             this._fileName.show();
+            
+            this._playLabelBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                               name: "PlayLabelBox" });
+            this.rowGrid.attach(this._playLabelBox, 2, 1, 1, 1);
+            this._playLabelBox.show();
+                    
+            this.playDurationLabel = new Gtk.Label({ margin_left: 15,
+                                                     halign: Gtk.Align.END,
+                                                     name: "PlayDurationLabel" });
+            this.fileDuration = this._formatTime(this._files[i].duration/Gst.SECOND);
+            this.playDurationLabel.label = this.fileDuration;
+            this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
+            this.playDurationLabel.show();
+            
+            this.dividerLabel = new Gtk.Label({ halign: Gtk.Align.START,
+                                                 name: "DividerLabel" });
+            this.dividerLabel.label = "/";
+            this._playLabelBox.pack_start(this.dividerLabel, false, true, 0);
+            this.dividerLabel.hide();
+            
+            this.playTimeLabel = new Gtk.Label({ halign: Gtk.Align.START,
+                                                 name: "PlayTimeLabel" });
+            this.playTimeLabel.label = "0:00";
+            this._playLabelBox.pack_start(this.playTimeLabel, false, true, 0);
+            this.playTimeLabel.hide();
             
             this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                                height_request: 36,
@@ -463,15 +488,18 @@ const MainView = new Lang.Class({
                                                 halign: Gtk.Align.END,
                                                 valign: Gtk.Align.FILL,
                                                 icon_size: Gtk.IconSize.BUTTON,
-                                                opacity: 1 });
-            this.rowGrid.attach(this.widgetInfo, 3, 0, 1, 1);
+                                                opacity: 1,
+                                                name: "InfoToolbar" });
+            this.rowGrid.attach(this.widgetInfo, 4, 0, 1, 2);
+            this.widgetInfo.get_style_context().add_class('toolbar');
             
             this._boxInfo = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
             this._groupInfo = new Gtk.ToolItem({ child: this._boxInfo });
             this.widgetInfo.insert(this._groupInfo, -1);
             
             // info button
-            this._info = new Gtk.Button({ hexpand: false });
+            this._info = new Gtk.Button({ hexpand: false,
+                                          name: "InfoButton" });
             this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
             this._info.connect("clicked", Lang.bind(this,
                 function() {
@@ -486,40 +514,24 @@ const MainView = new Lang.Class({
                 }));
             this._info.set_tooltip_text(_("Info"));
             this._boxInfo.add(this._info);
-            this._info.show();
-            
-            /*this.widgetShare = new Gtk.Toolbar({ show_arrow: false,
-                                                 halign: Gtk.Align.END,
-                                                 valign: Gtk.Align.FILL,
-                                                 icon_size: Gtk.IconSize.BUTTON,
-                                                 opacity: 1 });
-            this.rowGrid.attach(this.widgetShare, 4, 0, 1, 1);
-            
-            this._boxShare = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
-            this._groupShare = new Gtk.ToolItem({ child: this._boxShare });
-            this.widgetShare.insert(this._groupShare, -1);
-            
-            // sharing button
-            this._share = new Gtk.Button({ hexpand: false });
-            this._share.image = Gtk.Image.new_from_icon_name("send-to-symbolic", Gtk.IconSize.BUTTON);
-            this._share.set_tooltip_text(_("Share"));
-            this._boxShare.add(this._share);
-            this._share.show();*/
+            this._info.hide();
             
             this.widgetDelete = new Gtk.Toolbar({ show_arrow: false,
                                                   halign: Gtk.Align.END,
                                                   valign: Gtk.Align.FILL,
                                                   icon_size: Gtk.IconSize.BUTTON,
-                                                  opacity: 1 });
+                                                  opacity: 1,
+                                                  name: "DeleteToolbar" });
             this.widgetDelete.get_style_context().add_class('toolbarEnd');
-            this.rowGrid.attach(this.widgetDelete, 5, 0, 1, 1);
+            this.rowGrid.attach(this.widgetDelete, 5, 0, 1, 2);
             
             this._boxDelete = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
             this._groupDelete = new Gtk.ToolItem({ child: this._boxDelete });
             this.widgetDelete.insert(this._groupDelete, -1);
 
             // delete button
-            this._delete = new Gtk.Button({ hexpand: false });
+            this._delete = new Gtk.Button({ hexpand: false,
+                                            name: "DeleteButton" });
             this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
             this._delete.connect("clicked", Lang.bind(this,
                 function() {
@@ -621,22 +633,23 @@ const MainView = new Lang.Class({
         this.duration = duration;
         this.playPipeState = play.getPipeStates();
         
-        if (this.playPipeState != PipelineStates.STOPPED) { //test this
+       /* if (this.playPipeState != PipelineStates.STOPPED) { //test this
             if (this.playDurationLabel.label == "0:00" && duration != 0)
             this.durationString = this._formatTime(duration);
         } else {
             this.durationString = this._formatTime(duration);
-        }
+        }*/
         
         this.timeLabelString = this._formatTime(time);
         
         if (this.setVisibleID == ActiveArea.RECORD) {
             this.recordTimeLabel.label = this.timeLabelString;
+            this.recordTimeLabel.get_style_context().add_class('dim-label');
         } else if (this.setVisibleID == ActiveArea.PLAY) {
             this.playTimeLabel.label = this.timeLabelString;
             
             if (this.playDurationLabel.label == "0:00" || this.playPipeState == PipelineStates.STOPPED) {
-                this.playDurationLabel.label = this.durationString;
+                //this.playDurationLabel.label = this.durationString;
                 this.setProgressScaleSensitive();
                 this.progressScale.set_range(0.0, duration);
             }
@@ -667,33 +680,46 @@ const RecordButton = new Lang.Class({
 
 const PlayPauseButton = new Lang.Class({
     Name: "PlayPauseButton",
-    Extends: Gtk.ToggleButton,
+    Extends: Gtk.Button,
     
     _init: function() {
-        this.playImage = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
-        this.pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);
+        //let playImage = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
         this.parent();
-        this.set_image(this.playImage);
+        //this.set_image(playImage);
     },
     
     _onPlayPauseToggled: function(listRow, selFile) {
         this.activeState = play.getPipeStates();
-
+        view.setVisibleID = ActiveArea.PLAY;
+        log(listRow);
+        let width = listRow.get_allocated_width();
         if (this.activeState != PipelineStates.PLAYING) {
-            this.set_image(this.pauseImage);
             play.startPlaying();
+            log(this);
+            
             let rowWidget = listRow.get_child(this.widget);
+            log(rowWidget + "rowWidget");
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
-                    let alwaysShow = child.get_no_show_all();
-                    
-                    if (!alwaysShow) {
-                        if (child.name != "PlayToolBar") {
+                        
+                        if (child.name == "InfoToolbar" || child.name == "DeleteToolbar" ) {
                             child.hide();
                             child.sensitive = false;
                         }
-                        log(child);
-                    }
+                    
+                        if (child.name == "PlayLabelBox") {
+                            child.foreach(Lang.bind(this, 
+                                function(grandchild) {
+                                
+                                    if (grandchild.name == "PlayTimeLabel") {
+                                        view.playTimeLabel = grandchild;
+                                        log(view.playTimeLabelLabel)
+                                    }
+                                    
+                                    if (grandchild.name == "DividerLabel" )
+                                        grandchild.show();
+                                }));
+                        }
                                                      
                     if (child.name == "WaveFormGrid") {
                         this.wFGrid = child;
@@ -702,19 +728,14 @@ const PlayPauseButton = new Lang.Class({
                 }));
              log(this.activeState);
              log("activeState");
+             listRow.set_property("width-request", width);
             
             if (this.activeState != PipelineStates.PAUSED) {
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
             }
 
         } else if (this.activeState == PipelineStates.PLAYING) {
-            this.set_image(this.playImage); //this is buggy
-            //this.set_tooltip_text(_("Play"));
             play.pausePlaying();
-            log("PAUSED");
-            wave.pauseDrawing();
-            log(this.activeState);
-             log("activeState");
         }
     }
 });
