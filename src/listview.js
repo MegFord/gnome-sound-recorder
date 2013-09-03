@@ -42,10 +42,10 @@ const EnumeratorState = {
 
 const mediaTypeMap = {
     OGG_VORBIS: "Ogg Vorbis",
-    OGG_OPUS: "Ogg Opus",
+    OPUS: "Opus",
     FLAC: "Flac",
     MP3: "MP3",
-    AAC: "AAC"
+    MP4: "MP4"
 };   
 
 const Listview = new Lang.Class({
@@ -56,7 +56,7 @@ const Listview = new Lang.Class({
         this._allFilesInfo = [];
         this.mp3Caps = Gst.Caps.from_string("audio/mpeg, mpegversion=(int)1");
         this.oggCaps = Gst.Caps.from_string("audio/ogg");
-        this.aacCaps = Gst.Caps.from_string("video/quicktime, variant=(string)iso");
+        this.mp4Caps = Gst.Caps.from_string("video/quicktime, variant=(string)iso");
         this.flacCaps = Gst.Caps.from_string("audio/x-flac");
     },
             
@@ -249,14 +249,14 @@ const Listview = new Lang.Class({
         if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.OGG))) {           
             if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_VORBIS)))
                 this.file.mediaType = mediaTypeMap.OGG_VORBIS;
-            else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_OPUS)))
-                this.file.mediaType = mediaTypeMap.OGG_OPUS;
-        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP3))) {
-            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
+            else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OPUS)))
+                this.file.mediaType = mediaTypeMap.OPUS;
+        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.ID3))) {
+            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.ID3)))
                 this.file.mediaType = mediaTypeMap.MP3;
-        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.AAC))) {
-            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.AAC)))
-                this.file.mediaType = mediaTypeMap.AAC;
+        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP4))) {
+            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP4)))
+                this.file.mediaType = mediaTypeMap.MP4;
         } else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.FLAC))) {
             this.file.mediaType = mediaTypeMap.FLAC;
         } else if (containerCaps) { // !GstPbutils.DiscovererResult.OK should filter these out already

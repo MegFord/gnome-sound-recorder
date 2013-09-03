@@ -31,24 +31,24 @@ const Mainloop = imports.mainloop;
 
 const containerProfileMap = {
     OGG: "application/ogg", 
-    MP3: "application/x-id3",
-    AAC: "video/quicktime,variant=(string)iso"
+    ID3: "application/x-id3",
+    MP4: "video/quicktime,variant=(string)iso"
 };
 
 const audioCodecMap = {
     FLAC: "audio/x-flac",      
-    MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
-    AAC: "audio/mpeg,mpegversion=(int)4",
-    OGG_OPUS: "audio/x-opus", 
+    ID3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
+    MP4: "audio/mpeg,mpegversion=(int)4",
+    OPUS: "audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
 };
 
 const comboBoxMap = {
     OGG_VORBIS: 0,
-    OGG_OPUS: 1,
+    OPUS: 1,
     FLAC: 2,
-    MP3: 3,
-    AAC: 4
+    ID3: 3,
+    MP4: 4
 };
 
 const AudioProfile = new Lang.Class({
@@ -66,17 +66,17 @@ const AudioProfile = new Lang.Class({
                 case comboBoxMap.OGG_VORBIS:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS });
                     break;
-                case comboBoxMap.OGG_OPUS:
-                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_OPUS }); 
+                case comboBoxMap.OPUS:
+                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OPUS }); 
                     break;
                 case comboBoxMap.FLAC:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.FLAC });
                     break;
-                case comboBoxMap.MP3:
-                    this._values.push({ container: containerProfileMap.MP3, audio: audioCodecMap.MP3 });
+                case comboBoxMap.ID3:
+                    this._values.push({ container: containerProfileMap.MP3, audio: audioCodecMap.ID3 });
                     break;
-                case comboBoxMap.AAC:
-                    this._values.push({ container: containerProfileMap.AAC, audio: audioCodecMap.AAC });
+                case comboBoxMap.MP4:
+                    this._values.push({ container: containerProfileMap.AAC, audio: audioCodecMap.MP4 });
                     break;
                 default:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS });

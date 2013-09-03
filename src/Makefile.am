@@ -4,13 +4,13 @@
 
 jsdir = $(pkgdatadir)
 dist_js_DATA = \
-    util.js	\
-    application.js \    
+    util.js	\   
     audioProfile.js \
     fileUtil.js \
     info.js \
     listview.js \
     main.js \
+    mainWindow.js \
     package.js	\
     play.js \
     record.js \

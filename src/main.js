@@ -48,8 +48,29 @@ const Application = new Lang.Class({
     Extends: Gtk.Application,
 
     _init: function() {
-        GLib.set_application_name(_("SoundRecorder"));
-        this.parent({ application_id: pkg.name });          
+        this.parent({ application_id: pkg.name }); 
+        GLib.set_application_name(_("SoundRecorder"));         
+    },
+    
+    _initAppMenu: function() {
+        let menu = new Gio.Menu();
+        menu.append("Preferences", 'app.preferences');
+        menu.append("Quit",'app.quit');    
+        this.set_app_menu(menu);
+        
+        let preferences = new Gio.SimpleAction ({ name: 'preferences' });
+        preferences.connect('activate', Lang.bind(this,
+            function() {
+                this._showPreferences();
+            }));
+        this.add_action(preferences);
+        
+        let quitAction = new Gio.SimpleAction ({ name: 'quit' });
+        quitAction.connect('activate', Lang.bind(this,
+            function() {
+                this.quit();
+            }));
+         this.add_action(quitAction);
     },
 
     vfunc_startup: function() {
@@ -58,15 +79,17 @@ const Application = new Lang.Class({
         Util.loadStyleSheet();
         log(_("Sound Recorder started"));
         Gst.init(null, 0);
+        this._initAppMenu();
     },
 
     vfunc_activate: function() {
         (new MainWindow.MainWindow({ application: this })).show();
     },
+    
+    
 });
 
 function main(argv) {
-
 
     return (new Application()).run(argv);
 }

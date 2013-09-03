@@ -24,17 +24,17 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-/*function loadUI(file) {
-    file = file || 'main.ui';
+/*function loadAppMenu() {
+    let file = 'appMenu.ui';
 
     let ui = new Gtk.Builder();
-    ui.add_from_file(GLib.build_filenamev([pkg.pkgdatadir,
-                                           file]));
+    ui.new_from_resource (GLib.build_filenamev([pkg.pkgdatadir,
+                                                  file]));
     return ui;
 }*/
 
-function loadStyleSheet(file) {
-    file = file || 'application.css';
+function loadStyleSheet() {
+    let file = 'application.css';
 
     let provider = new Gtk.CssProvider();
     provider.load_from_path(GLib.build_filenamev([pkg.pkgdatadir,

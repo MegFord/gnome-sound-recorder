@@ -126,7 +126,7 @@ const MainWindow = new Lang.Class({
     },
        
     _defineThemes : function() {
-        let settings = Gtk.Settings.get_default();
+        //let settings = Gtk.Settings.get_default();
         //settings.gtk_application_prefer_dark_theme = true;
     }
 });

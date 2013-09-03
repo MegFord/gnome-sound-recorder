@@ -294,13 +294,13 @@ function initSubmodule(name) {
     }
 }
 
-function launch(params) {
+/*function launch(params) {
     params.flags = params.flags || 0;
     let app = new Gio.Application({ application_id: params.name,
                                     flags: (Gio.ApplicationFlags.IS_LAUNCHER |
                                             params.flags),
                                   });
     return app.run(ARGV);
-}
+}*/
 
 
