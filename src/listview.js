@@ -31,7 +31,7 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Signals = imports.signals;
 
-const Application = imports.application;
+const MainWindow = imports.mainWindow;
 const AudioProfile = imports.audioProfile;
 const Record = imports.record;
 
@@ -61,7 +61,7 @@ const Listview = new Lang.Class({
     },
             
     enumerateDirectory: function() {
-        let path = Application.path;
+        let path = MainWindow.path;
         let dirName = GLib.build_filenamev(path);
         let dir = Gio.file_new_for_path(dirName);    
       
@@ -147,7 +147,7 @@ const Listview = new Lang.Class({
     },
        
     _setDiscover: function() {
-        this._controller = Application.offsetController;
+        this._controller = MainWindow.offsetController;
         this.totItems = this.getItemCount();
         this.startIdx = this._controller.getOffset();
         log(this.startIdx);
@@ -223,9 +223,9 @@ const Listview = new Lang.Class({
                 this._runDiscover();
             } else { 
                 this._discoverer.stop();
-                Application.offsetController.setEndIdx();
+                MainWindow.offsetController.setEndIdx();
                 //Application.view.list();
-                Application.view.listBoxAdd();                
+                MainWindow.view.listBoxAdd();                
             }                                 
         } else {
         // don't index files we can't play

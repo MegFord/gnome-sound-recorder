@@ -30,7 +30,7 @@ const GstAudio = imports.gi.GstAudio;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 
-const Application = imports.application;
+const MainWindow = imports.mainWindow;
 const Waveform = imports.waveform;
 
 const PipelineStates = {
@@ -49,7 +49,7 @@ const _TENTH_SEC = 100000000;
         this.baseTime = 0;
         this._fileName = this._fileToPlay;
         this.uri = GLib.filename_to_uri(this._fileName, null); 
-        this._view = Application.view;      
+        this._view = MainWindow.view;      
         this.play = Gst.ElementFactory.make("playbin", "play");
         this.play.set_property("uri", this.uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
@@ -117,7 +117,7 @@ const _TENTH_SEC = 100000000;
                 GLib.source_remove(this.timeout);
                 this.timeout = null;
             }
-        Application.wave.endDrawing();
+        MainWindow.wave.endDrawing();
         log("DRAWING CALL END");
     },
     
@@ -148,7 +148,7 @@ const _TENTH_SEC = 100000000;
                 log(this.sought);
                 if (this.sought) {
                     this.play.set_state(this._lastState);                    
-                    Application.view.setProgressScaleSensitive();
+                    MainWindow.view.setProgressScaleSensitive();
                 }    
                 this.updatePosition();
                 break;         
@@ -185,7 +185,7 @@ const _TENTH_SEC = 100000000;
         log("current clocktime " + this.absoluteTime);
         let approxTime = Math.round(this.runTime/_TENTH_SEC);
         log("approx" + approxTime);
-        Application.wave._drawEvent(approxTime);
+        MainWindow.wave._drawEvent(approxTime);
         
         return true;
     },
@@ -241,7 +241,7 @@ const _TENTH_SEC = 100000000;
         this._selected = selected;
         log(selected);
         log("SELECT");
-        this._fileToPlay = Application.view.loadPlay(this._selected);
+        this._fileToPlay = MainWindow.view.loadPlay(this._selected);
     }
 });
    

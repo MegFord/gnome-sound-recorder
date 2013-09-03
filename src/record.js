@@ -33,7 +33,7 @@ const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 
-const Application = imports.application;
+const MainWindow = imports.mainWindow;
 const AudioProfile = imports.audioProfile;
 
 const PipelineStates = {
@@ -49,7 +49,7 @@ const Record = new Lang.Class({
     
     _recordPipeline: function() {
         this.baseTime = 0;
-        this._view = Application.view; 
+        this._view = MainWindow.view; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
         log(this.initialFileName);
@@ -145,14 +145,14 @@ const Record = new Lang.Class({
         let approxTime = Math.round(this.runTime/_TENTH_SEC);
         log("approx" + approxTime);
         log("peakruntime" + this.peak);
-        Application.wave._drawEvent(approxTime, this.peak);
+        MainWindow.wave._drawEvent(approxTime, this.peak);
         
         return true;
     },
        
     startRecording: function(activeProfile) {
         this._activeProfile = activeProfile;
-        this._audioProfile = Application.audioProfile;
+        this._audioProfile = MainWindow.audioProfile;
         this._mediaProfile = this._audioProfile.mediaProfile();
         
         if (this._mediaProfile == -1) {
@@ -171,7 +171,7 @@ const Record = new Lang.Class({
         }
             
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, Application._SEC_TIMEOUT, Lang.bind(this, this._updateTime));    
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, MainWindow._SEC_TIMEOUT, Lang.bind(this, this._updateTime));    
         }
     },
 
@@ -183,7 +183,7 @@ const Record = new Lang.Class({
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
-        Application.wave.endDrawing();
+        MainWindow.wave.endDrawing();
     },
     
     onEndOfStream: function() {
@@ -284,7 +284,7 @@ const BuildFileName = new Lang.Class({ // move this to fileUtil.js
     },
     
     buildInitialFilename: function() {
-        let fileExtensionName = Application.audioProfile.fileExtensionReturner();
+        let fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
         let dir = this.buildPath();
         let prefix = _("Recording ");   
         this.dateTime = GLib.DateTime.new_now_local();

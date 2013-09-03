@@ -33,7 +33,7 @@ const C_ = imports.gettext.pgettext;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 
-const Application = imports.application;
+const MainWindow = imports.mainWindow;
 
 const peaks = [];
 const INTERVAL = 100000000;
@@ -63,7 +63,7 @@ const WaveForm = new Lang.Class({
         this.tick = 0;
         this.drawing = Gtk.DrawingArea.new();
         if (this.waveType == WaveType.RECORD) {
-            let gridWidth = Application.groupGrid.get_allocated_width();
+            let gridWidth = MainWindow.groupGrid.get_allocated_width();
             log("gridWidth " + gridWidth);
             let drawingWidth = gridWidth * 0.75;
             this.drawing.set_size_request(drawingWidth, 36);
@@ -266,8 +266,6 @@ const WaveForm = new Lang.Class({
         this.tick = 0;
         this.count = 0;
         peaks.length = 0;
-        this.drawing.destroy();
-        Application.view.waveFormGrid.set_property("width-request", 350);
-        Application.view.waveFormGrid.show(); 
+        this.drawing.destroy(); 
     }    
 });

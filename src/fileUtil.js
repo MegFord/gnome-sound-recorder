@@ -29,7 +29,7 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Signals = imports.signals;
 
-const Application = imports.application;
+const MainWindow = imports.mainWindow;
 const Listview = imports.listview;
 const Record = imports.record;
 
@@ -88,7 +88,7 @@ const OffsetController = new Lang.Class({
 
     // to be called when a recording is made/deleted
     resetItemCount: function() {
-      Application.list.enumerateDirectory();         
+      MainWindow.list.enumerateDirectory();         
     },
 
     resetOffset: function() {
@@ -96,7 +96,7 @@ const OffsetController = new Lang.Class({
     },
 
     getItemCount: function() {
-        this._itemCount = Application.list.getItemCount();
+        this._itemCount = MainWindow.list.getItemCount();
         log("itemCount");
         log(this._itemCount); 
     },
@@ -114,7 +114,7 @@ const OffsetController = new Lang.Class({
     },
     
     setEndIdx: function() {
-        this.totItems = Application.list.getItemCount();
+        this.totItems = MainWindow.list.getItemCount();
         log(this.totItems);
         this.ensureCount = this._offset + _OFFSET_STEP - 1; 
         log(this.ensureCount);
@@ -137,6 +137,6 @@ const OffsetController = new Lang.Class({
         return CurrentEndIdx;
     }
 });
-Signals.addSignalMethods(OffsetController.prototype); 
+Signals.addSignalMethods(OffsetController.prototype); //Do I use this?
 
 

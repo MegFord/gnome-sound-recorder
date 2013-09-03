@@ -27,7 +27,7 @@ const _ = imports.gettext.gettext;
 const C_ = imports.gettext.pgettext;
 const Lang = imports.lang;
 
-const Application = imports.application;
+const MainWindow = imports.mainWindow;
 const FileUtil = imports.fileUtil;
 
 const _TITLE_ENTRY_TIMEOUT = 200;
@@ -40,7 +40,7 @@ const InfoDialog = new Lang.Class({
         log("nav");
         let fileName = fileNav;
         
-        let n = Application.fileUtil.loadFile(fileName.fileName); // create new one, geez
+        let n = MainWindow.fileUtil.loadFile(fileName.fileName); // create new one, geez
         log(n);
         let dateModified = fileName.dateModified;
 
@@ -144,7 +144,7 @@ const InfoDialog = new Lang.Class({
                             let newFileName = this._fileNameEntry.get_text(); 
                              log(newFileName.toString());
                              log("j");
-                            Application.fileUtil.rename(n, newFileName);
+                            MainWindow.fileUtil.rename(n, newFileName);
                             return false;
                            
                         }));

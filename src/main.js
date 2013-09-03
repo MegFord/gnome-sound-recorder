@@ -39,7 +39,7 @@ pkg.require({ 'Gd': '1.0',
 imports.gi.versions.Gst = '1.0';
 
 const Util = imports.util;
-const Application = imports.application;
+const MainWindow = imports.mainWindow;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
 
@@ -61,7 +61,7 @@ const MyApplication = new Lang.Class({
     },
 
     vfunc_activate: function() {
-        (new Application.Application({ application: this })).show();
+        (new MainWindow.MainWindow({ application: this })).show();
     },
 });
 
