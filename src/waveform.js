@@ -177,8 +177,7 @@ const WaveForm = new Lang.Class({
         let length = this.nSamples;
         let idx;
         let gradient = new Cairo.LinearGradient(0, 0, this.tick * pixelsPerSample, peaks[idx] * waveheight);
-        gradient.addColorStopRGBA(0.0, 0.0, 0.72, 0.64, 0.35);
-        
+        gradient.addColorStopRGBA(0.0, 0.0, 0.72, 0.64, 0.35);       
         gradient.addColorStopRGBA(0.75, 0.2, 0.54, 0.47, 0.22);
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);

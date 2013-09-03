@@ -1,7 +1,10 @@
 [Desktop Entry]
 Type=Application
-_Name=SoundRecorder
+_Name=Sound Recorder
+_Comment=Record sound via the microphone and play it back
 Icon=face-smile
+Categories=GNOME;GTK;Utility;Audio;
+_Keywords=Audio;Application;Record;
 Exec=@pkgdatadir@/@PACKAGE_NAME@
 DBusActivatable=true
 
