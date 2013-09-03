@@ -67,8 +67,8 @@ const PipelineStates = {
 const _TIME_DIVISOR = 60;
 const _SEC_TIMEOUT = 100;
 
-const Application = new Lang.Class({
-    Name: 'Application',
+const MainWindow = new Lang.Class({
+    Name: 'MainWindow',
     Extends: Gtk.ApplicationWindow,
 
      _init: function(params) {
@@ -81,7 +81,7 @@ const Application = new Lang.Class({
         view = new MainView();
         play = new Play.Play();
         
-        params = Params.fill(params, { title: GLib.get_application_name(), 
+        params = Params.fill(params, { title: GLib.get_application_name(), //change this
                                        default_width: 700,
                                        default_height: 480,
                                        border_width: 12 });
@@ -213,7 +213,7 @@ const MainView = new Lang.Class({
         
         this.progressScale.connect("button-press-event", Lang.bind(this,
             function() {
-                Application.play.onProgressScaleConnect();
+                MainWindow.play.onProgressScaleConnect();
                              
                 return false;
             }));
@@ -268,7 +268,7 @@ const MainView = new Lang.Class({
     onProgressScaleChangeValue: function() {
         let seconds = Math.ceil(this.progressScale.get_value());
                 
-        Application.play.progressScaleValueChanged(seconds);
+        MainWindow.play.progressScaleValueChanged(seconds);
         
         return true;
     },
@@ -284,7 +284,7 @@ const MainView = new Lang.Class({
     },
 
     _updatePositionCallback: function() {
-        let position = Application.play.queryPosition();
+        let position = MainWindow.play.queryPosition();
         log(position);
         log("position");
         
@@ -298,7 +298,7 @@ const MainView = new Lang.Class({
         let volumeValue;
         if (this.setVisibleID == ActiveArea.PLAY) {
             volumeValue = this.playVolume.get_value();
-            Application.play.setVolume(volumeValue);
+            MainWindow.play.setVolume(volumeValue);
         } else if (this.setVisibleID == ActiveArea.RECORD) {
             volumeValue = this.recordVolume.get_value();
             this._record.setVolume(volumeValue);
@@ -747,7 +747,7 @@ const EncoderComboBox = new Lang.Class({
     // encoding setting labels in combobox
     _init: function() {
         this.parent();
-        let combo = [_("Ogg Vorbis"), _("Ogg Opus"), _("Flac"), _("Mp3"), _("AAC")];
+        let combo = [_("Ogg Vorbis"), _("Ogg Opus"), _("FLAC"), _("MP3"), _("AAC")];
         
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
