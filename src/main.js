@@ -39,9 +39,11 @@ pkg.require({ 'Gd': '1.0',
 imports.gi.versions.Gst = '1.0';
 
 const Util = imports.util;
-const MainWindow = imports.mainWindow;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
+
+const MainWindow = imports.mainWindow;
+const Preferences = imports.preferences;
 
 const Application = new Lang.Class({
     Name: 'Application',
@@ -86,7 +88,14 @@ const Application = new Lang.Class({
         (new MainWindow.MainWindow({ application: this })).show();
     },
     
-    
+    _showPreferences: function() {
+         let preferencesDialog = new Preferences.Preferences();
+
+        preferencesDialog.widget.connect('response', Lang.bind(this,
+            function(widget, response) {
+                preferencesDialog.widget.destroy();
+            }));
+    }
 });
 
 function main(argv) {

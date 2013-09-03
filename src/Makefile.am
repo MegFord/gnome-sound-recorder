@@ -13,6 +13,7 @@ dist_js_DATA = \
     mainWindow.js \
     package.js	\
     play.js \
+    preferences.js \
     record.js \
     waveform.js\
     $(NULL)

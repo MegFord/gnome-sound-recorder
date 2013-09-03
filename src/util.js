@@ -24,15 +24,6 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-/*function loadAppMenu() {
-    let file = 'appMenu.ui';
-
-    let ui = new Gtk.Builder();
-    ui.new_from_resource (GLib.build_filenamev([pkg.pkgdatadir,
-                                                  file]));
-    return ui;
-}*/
-
 function loadStyleSheet() {
     let file = 'application.css';
 
