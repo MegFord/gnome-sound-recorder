@@ -166,27 +166,29 @@ const WaveForm = new Lang.Class({
     fillSurface: function(drawing, cr) {
         if (this.waveType == WaveType.PLAY) {
             log("fill surface error" + this.waveType);
-            if (peaks.length == this.playTime - 7) { //this needs to be generalized somehow.
+            if (peaks.length != this.playTime) { 
                 this.pipeline.set_state(Gst.State.PLAYING);
                 log("continue drawing " + peaks.length);
             }
         }
         
         let w = this.drawing.get_allocated_width();
+        log("w " + w);
         let h = this.drawing.get_allocated_height();
         let length = this.nSamples;
+        log("length " + this.nSamples);
+        let waveheight = h;
+        let pixelsPerSample = w/40;
+        log("pixelsPerSample " + pixelsPerSample);
         let idx;
         let gradient = new Cairo.LinearGradient(0, 0, this.tick * pixelsPerSample, peaks[idx] * waveheight);
-        gradient.addColorStopRGBA(0.0, 0.0, 0.72, 0.64, 0.35);       
-        gradient.addColorStopRGBA(0.75, 0.2, 0.54, 0.47, 0.22);
+        gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);       
+        gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
-        let pixelsPerSample = w/peaks.length;
-        let waveheight = h;
         cr.moveTo(0, h);
                   
-        for(let i = 0; i <= this.tick; i++) {
-        
+        for(let i = 0; i <= this.tick; i++) {       
                     
             if (this.tick >= 40 && peaks[idx] != null) {
                 idx = this.count + i + 1;
