@@ -43,8 +43,8 @@ const MainWindow = imports.mainWindow;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
 
-const MyApplication = new Lang.Class({
-    Name: 'MyApplication',
+const Application = new Lang.Class({
+    Name: 'Application',
     Extends: Gtk.Application,
 
     _init: function() {
@@ -68,5 +68,5 @@ const MyApplication = new Lang.Class({
 function main(argv) {
 
 
-    return (new MyApplication()).run(argv);
+    return (new Application()).run(argv);
 }
