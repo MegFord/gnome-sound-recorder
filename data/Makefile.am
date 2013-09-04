@@ -6,19 +6,19 @@ apps_DATA = $(PACKAGE_NAME).desktop
 
 @INTLTOOL_DESKTOP_RULE@
 
-gsettings_SCHEMAS = $(PACKAGE_NAME).gschema.xml
+gsettings_SCHEMAS = $org.gnome.SoundRecorder.gschema.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@ 
 @GSETTINGS_RULES@
 
-$(PACKAGE_NAME).service: $(PACKAGE_NAME).service.in
+$org.gnome.SoundRecorder.Application.service: $org.gnome.SoundRecorder.Application.service.in
 	$(AM_V_GEN) sed \
 		-e "s|[@]PACKAGE_NAME@|$(PACKAGE_NAME)|g" \
 		-e "s|[@]pkgdatadir@|$(pkgdatadir)|g" \
 		-e "s|[@]pkglibdir@|$(pkglibdir)|g" \
 		$< > $@
 
-$(PACKAGE_NAME).desktop.in: $(PACKAGE_NAME).desktop.in.in
+$org.gnome.SoundRecorder.Application.desktop.in: $org.gnome.SoundRecorder.Application.desktop.in.in
 	$(AM_V_GEN) sed \
 		-e "s|[@]PACKAGE_NAME@|$(PACKAGE_NAME)|g" \
 		-e "s|[@]pkgdatadir@|$(pkgdatadir)|g" \
@@ -26,19 +26,19 @@ $(PACKAGE_NAME).desktop.in: $(PACKAGE_NAME).desktop.in.in
 		$< > $@
 
 servicedir = $(datadir)/dbus-1/services
-service_DATA = $(PACKAGE_NAME).service
+service_DATA = $org.gnome.SoundRecorder.Application.service
 
 EXTRA_DIST = \
 	CREDITS \
 	$(PACKAGE_NAME).desktop.in.in \
-	$(PACKAGE_NAME).service.in \
+	$org.gnome.SoundRecorder.Application.service.in \
 	$(gsettings_SCHEMAS) \
 	$(resource_files) \
 	$(NULL)
 
 CLEANFILES = \
 	$(PACKAGE_NAME).desktop.in \
-	$(PACKAGE_NAME).service \
+	$org.gnome.SoundRecorder.Application.service \
 	$(apps_DATA) \
 	*.valid \
 	gschemas.compiled \
