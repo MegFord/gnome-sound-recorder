@@ -49,12 +49,12 @@ const _TENTH_SEC = 100000000;
         this.baseTime = 0;
         this._fileName = this._fileToPlay;
         this.uri = GLib.filename_to_uri(this._fileName, null); 
-        this._view = MainWindow.view;      
+        this.view = MainWindow.view;      
         this.play = Gst.ElementFactory.make("playbin", "play");
         this.play.set_property("uri", this.uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
-        this.clock = this.play.get_clock();                
+        this.clock = this.play.get_clock();               
         this.playBus = this.play.get_bus();
         log(this.playBus);
         this.playBus.add_signal_watch();
@@ -122,7 +122,7 @@ const _TENTH_SEC = 100000000;
     },
     
     onEndOfStream: function() {
-        this._view.onPlayStopClicked();
+        this.view.onPlayStopClicked();
     },
         
     _onMessageReceived: function(message) {
@@ -135,8 +135,8 @@ const _TENTH_SEC = 100000000;
                 break;
                 
             case Gst.MessageType.ERROR:
-                log("Error :");
-                log(this.localMsg.parse_error());                
+                log("Error :" + e.parse_error());
+                this._showErrorDialog(_("Error :" + e.parse_error()));              
                 break;
                 
             case Gst.MessageType.DURATION: 
@@ -151,16 +151,27 @@ const _TENTH_SEC = 100000000;
                     MainWindow.view.setProgressScaleSensitive();
                 }    
                 this.updatePosition();
-                break;         
+                break; 
+                
+            case Gst.MessageType.CLOCK_LOST:
+                this.pausePlaying();
+                break;
+           
+           case Gst.MessageType.NEW_CLOCK:
+                if (this.playState == PipelineStates.PAUSED) {
+                    this.clock = this.play.get_clock();
+                    this.startPlaying();
+                }
+                break;    
         }
     }, 
     
     getPipeStates: function() {
         return this.playState;
-    },    
+    },  
                        
     _updateTime: function() {          
-        let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND; //if add label to UI update so this just updates every second since the callback happens 1/10 sec now
+        let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND; 
         log(time);
         log("time");
         this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
@@ -169,9 +180,9 @@ const _TENTH_SEC = 100000000;
         
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
             log("called UPDATE");
-            this._view.setLabel(time, this.trackDurationSecs);           
+            this.view.setLabel(time, this.trackDurationSecs);           
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
-            this._view.setLabel(0, this.trackDurationSecs); 
+            this.view.setLabel(0, this.trackDurationSecs); 
         }
         
         this.absoluteTime = this.clock.get_time();
@@ -180,10 +191,10 @@ const _TENTH_SEC = 100000000;
             this.baseTime = this.absoluteTime;
             log("base time " + this.baseTime);
  
-        this.runTime = this.absoluteTime- this.baseTime;
-        log(this.runTime);
+        let runTime = this.absoluteTime- this.baseTime;
+        log(runTime);
         log("current clocktime " + this.absoluteTime);
-        let approxTime = Math.round(this.runTime/_TENTH_SEC);
+        let approxTime = Math.round(runTime/_TENTH_SEC);
         log("approx" + approxTime);
         MainWindow.wave._drawEvent(approxTime);
         
@@ -214,8 +225,7 @@ const _TENTH_SEC = 100000000;
             this.sought = this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, seconds * Gst.SECOND);
          
         } else {
-            // Rewind a second back before the track end
-            this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, duration - Gst.SECOND);
+            this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, duration);
 
         }
     },
@@ -242,6 +252,21 @@ const _TENTH_SEC = 100000000;
         log(selected);
         log("SELECT");
         this._fileToPlay = MainWindow.view.loadPlay(this._selected);
+    },
+    
+    _showErrorDialog: function(errorStr) {
+        let errorDialog = new Gtk.MessageDialog ({ transient_for: this.widget,
+                                                   modal: true,
+                                                   destroy_with_parent: true,
+                                                   buttons: Gtk.ButtonsType.OK,
+                                                   message_type: Gtk.MessageType.WARNING,
+                                                   text: errorStr });
+
+        errorDialog.connect ('response', Lang.bind(this,
+            function() {
+                errorDialog.destroy();
+            }));
+        errorDialog.show();
     }
 });
    
