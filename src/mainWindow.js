@@ -121,13 +121,7 @@ const MainWindow = new Lang.Class({
     _defineThemes: function() {
         let settings = Gtk.Settings.get_default();
         //settings.gtk_application_prefer_dark_theme = true;
-    },
-    
-    resiz: function() {
-     //this.resize({ width:700, 
-                   //height: 480 }); 
-                log("YAY");
-   }
+    }
 });
 
 const MainView = new Lang.Class({
