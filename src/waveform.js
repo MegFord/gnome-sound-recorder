@@ -38,6 +38,7 @@ const MainWindow = imports.mainWindow;
 const peaks = [];
 const INTERVAL = 100000000;
 const pauseVal = 10;
+const waveSamples = 40;
 
 const WaveType = {
     RECORD: 0,
@@ -59,17 +60,21 @@ const WaveForm = new Lang.Class({
           this.waveType = WaveType.RECORD;
         }  
         
-        this.count = 0;
         this.tick = 0;
-        this.drawing = Gtk.DrawingArea.new();
+        let gridWidth = 0;
+        let drawingWidth = 0;
+        let drawingHeight = 0;
+        this.drawing = Gtk.DrawingArea.new({ height_request: 45,
+                                             width_request: 350,
+                                             valign: Gtk.Align.FILL });
         if (this.waveType == WaveType.RECORD) {
-            let gridWidth = MainWindow.groupGrid.get_allocated_width();
+            gridWidth = MainWindow.groupGrid.get_allocated_width();
             log("gridWidth " + gridWidth);
-            let drawingWidth = gridWidth * 0.75;
+            drawingWidth = gridWidth * 0.75;
             this.drawing.set_size_request(drawingWidth, 36);
             this._grid.attach(this.drawing, 2, 0, 3, 2);
         } else {
-            this.drawing.set_size_request(200, 36);
+            this.drawing.set_size_request(350, 36);
             this._grid.add(this.drawing);
         }
 
@@ -117,6 +122,8 @@ const WaveForm = new Lang.Class({
                         if (s.has_name("level")) {
                             let p = null;
                             let peakVal = 0;
+                            let peaknumber = 0;
+                            let value = 0;
                             let st = s.get_value("timestamp");
                             log(st);
                             let dur = s.get_value("duration");
@@ -127,10 +134,14 @@ const WaveForm = new Lang.Class({
                 
                             if (peakVal) {
                                 let val = peakVal.get_nth(0);
-                                let valBase = (val / 20);
-                                let value = Math.pow(10, valBase);
-                                let peaknumber = value/3.375;
-                                log("wave height" + value);
+                                
+                                if (val >= 0) {
+                                    value = Math.pow(val, 1/3);
+                                    peaknumber = value * 0.1;
+                                    log("wave height" + value);
+                                } else {
+                                    peaknumber = 0;
+                                }
                                 peaks.push(peaknumber);
                             }                           
                         }
@@ -171,43 +182,60 @@ const WaveForm = new Lang.Class({
                 log("continue drawing " + peaks.length);
             }
         }
-        
         let w = this.drawing.get_allocated_width();
         log("w " + w);
         let h = this.drawing.get_allocated_height();
+        log("h" + h)
         let length = this.nSamples;
         log("length " + this.nSamples);
         let waveheight = h;
-        let pixelsPerSample = w/40;
+        let pixelsPerSample = w/waveSamples;
         log("pixelsPerSample " + pixelsPerSample);
-        let idx;
-        let gradient = new Cairo.LinearGradient(0, 0, this.tick * pixelsPerSample, peaks[idx] * waveheight);
+
+        let start = 0;
+        let i = 0;
+        
+        if (this.tick < waveSamples) {
+            start = (waveSamples - this.tick);
+        }
+        
+        if (this.tick >= waveSamples) {
+            let num = Math.floor(this.tick / waveSamples);
+            log(num);
+            let add = this.tick % (num * waveSamples);
+            log("add" + add);
+            i += add;
+        }
+        log("set i" + i);
+        cr.moveTo(start * pixelsPerSample, h);
+        let gradient = new Cairo.LinearGradient(0, 0, w , h);
         gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);       
         gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
+        let base;
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
-        cr.moveTo(0, h);
                   
-        for(let i = 0; i <= this.tick; i++) {       
-                    
-            if (this.tick >= 40 && peaks[idx] != null) {
-                idx = this.count + i + 1;
-                log("value of the index for peaks " + idx);
-            } else {
-                idx = i;
-            }
-            
-                if (peaks[idx] != null) {
-                cr.lineTo(i * pixelsPerSample, peaks[idx] * waveheight);
-                log("current base value for x co-ordinate " + this.tick);
-                log("peak height " + peaks[idx]);
-                log("array length " + peaks.length);
-                log("array index value " + idx);
+        for(i; i < this.tick; i++) {       
 
+                if (peaks[i] != null) {
+                
+                    if (this.tick < waveSamples) {
+                        base = start + i;
+                        cr.lineTo((base * pixelsPerSample), (h - (peaks[i] * waveheight)));
+                    } else {
+                        cr.lineTo((start * pixelsPerSample), (h - (peaks[i] * waveheight)));
+                    }
+                log("current base value for x co-ordinate " + this.tick);
+                log("peak height " + (h - (peaks[i] * waveheight)));
+                log("h " + h);
+                log("array index value " + peaks[i] * waveheight);
+                log("start " + start);
             } 
+            if (this.tick > waveSamples)
+                start += 1;
         }
 
-        cr.lineTo(this.tick * pixelsPerSample, h);
+        cr.lineTo(w, h);
         cr.closePath();
         cr.strokePreserve();
        
@@ -230,7 +258,6 @@ const WaveForm = new Lang.Class({
                     
             if (this.tick < this.playTime) {//&& this.tick < this.nSamples) {  should be somewhere else
                 this.tick += 1;
-                this.count += 1;
                 log("tick value" + this.tick);
             }
         
@@ -249,16 +276,9 @@ const WaveForm = new Lang.Class({
                 log("error");
             } 
                     
-            if (this.tick < this.recordTime) {//&& this.tick < this.nSamples) { should be somewhere else
-                this.tick += 1;
-                this.count += 1;
-                log("rec tick value" + this.tick);
-            }
-        
-            if (lastTime != this.recordTime) {
-                this.drawing.queue_draw();
-                log("rec drawing queued");
-            }
+            this.tick += 1;
+            log("rec tick value" + this.tick); 
+            this.drawing.queue_draw();
         }
         return true;
     },
@@ -269,5 +289,9 @@ const WaveForm = new Lang.Class({
         this.count = 0;
         peaks.length = 0;
         this.drawing.destroy(); 
-    }    
+    },
+    
+    resize: function() {
+    MainWindow.MainWindow.resiz();
+    }
 });

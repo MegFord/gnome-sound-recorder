@@ -95,7 +95,7 @@ const _TENTH_SEC = 100000000;
         this.baseTime = this.absoluteTime;
         log("pause");
         if (this.timeout) {
-           GLib.source_remove(this.timeout);
+            GLib.source_remove(this.timeout);
             this.timeout = null;
         }
     },
@@ -136,7 +136,7 @@ const _TENTH_SEC = 100000000;
                 
             case Gst.MessageType.ERROR:
                 log("Error :" + e.parse_error());
-                this._showErrorDialog(_("Error :" + e.parse_error()));              
+                this._showErrorDialog(_("Error :" + e.parse_error()));   //should I only show for specific error messages           
                 break;
                 
             case Gst.MessageType.DURATION: 
@@ -157,7 +157,7 @@ const _TENTH_SEC = 100000000;
                 this.pausePlaying();
                 break;
            
-           case Gst.MessageType.NEW_CLOCK:
+            case Gst.MessageType.NEW_CLOCK:
                 if (this.playState == PipelineStates.PAUSED) {
                     this.clock = this.play.get_clock();
                     this.startPlaying();

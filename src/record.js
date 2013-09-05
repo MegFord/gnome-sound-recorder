@@ -224,6 +224,7 @@ const Record = new Lang.Class({
                             log("level");
                             let p = null;
                             let peakVal = 0;
+                            let val = 0;
                             let st = s.get_value("timestamp");
                             log(st);
                             let dur = s.get_value("duration");
@@ -232,13 +233,13 @@ const Record = new Lang.Class({
                             log(runTime);
                             peakVal = s.get_value("peak");
                             log("peakVal" + peakVal);
-                            if (peakVal) {
+                         if (peakVal) {
                                 let val = peakVal.get_nth(0);
-                                let valBase = (val / 20);
-                                let value = Math.pow(10, valBase);
-                                this.peak = value/3.375;
-                                log("record wave height" + value);                                
-                            }                           
+                                log("val" + val);
+                                    let value = Math.pow(val, 3);
+                                    this.peak = value * 0.001;
+                                    log("wave height" + this.peak);
+                            }                          
                         }
                     }
                 break;
@@ -257,9 +258,9 @@ const Record = new Lang.Class({
     },
     
     setVolume: function(value) {
-        let level = this.srcElement.convert_volume(GstAudio.StreamVolumeFormat.LINEAR, GstAudio.StreamVolumeFormat.CUBIC, value);
+        let level = this.srcElement.convert_volume(GstAudio.StreamVolumeFormat.CUBIC, GstAudio.StreamVolumeFormat.LINEAR, value);
         log(level);
-        this.srcElement.set_volume(GstAudio.StreamVolumeFormat.CUBIC, level);
+        this.srcElement.set_volume(GstAudio.StreamVolumeFormat.LINEAR, level);
     } 
 });
 
