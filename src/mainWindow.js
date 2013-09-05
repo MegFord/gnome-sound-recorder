@@ -108,13 +108,6 @@ const MainWindow = new Lang.Class({
         recordToolbar.get_style_context().add_class('header');
         recordToolbar.show();
         recordButton.show();
-        
-        let preferencesButton = new Gtk.Button();
-        let preferencesImage = Gtk.Image.new_from_icon_name("emblem-system-symbolic", Gtk.IconSize.BUTTON);
-        preferencesButton.image = preferencesImage;
-        //add code to choose codec
-        
-        header.pack_end(preferencesButton);
 
         grid.add(view);
             
@@ -125,10 +118,16 @@ const MainWindow = new Lang.Class({
         this.show_all();
     },
        
-    _defineThemes : function() {
-        //let settings = Gtk.Settings.get_default();
+    _defineThemes: function() {
+        let settings = Gtk.Settings.get_default();
         //settings.gtk_application_prefer_dark_theme = true;
-    }
+    },
+    
+    resiz: function() {
+     //this.resize({ width:700, 
+                   //height: 480 }); 
+                log("YAY");
+   }
 });
 
 const MainView = new Lang.Class({
@@ -181,7 +180,7 @@ const MainView = new Lang.Class({
         //recordGrid.attach(this.recordTimeLabel, 20, 2, 3, 1);
         
         this.recordVolume = new Gtk.VolumeButton();
-        this.recordRange = Gtk.Adjustment.new(0.2, 0, 3.375, 0.05, 0.0, 0.0);
+        this.recordRange = Gtk.Adjustment.new(0.2, 0, 1.0, 0.05, 0.0, 0.0);
         this.recordVolume.set_adjustment(this.recordRange);
         this.recordVolume.connect ("value-changed", Lang.bind(this, this.setVolume));
         //recordGrid.attach(this.recordVolume, 20, 4, 3, 1);
@@ -230,7 +229,7 @@ const MainView = new Lang.Class({
         playGrid.attach(this.progressScale, 20, 3, 3, 1);
         
         /*this.playVolume = new Gtk.VolumeButton();
-        this.range = Gtk.Adjustment.new(0.5, 0, 3.375, 0.15, 0.0, 0.0);
+        this.range = Gtk.Adjustment.new(0.90, 0, 1.0, 0.05, 0.0, 0.0);
         this.playVolume.set_adjustment(this.range);
         this.playVolume.connect("value-changed", Lang.bind(this, this.setVolume));
         playGrid.attach(this.playVolume, 20, 4, 3, 1);*/
@@ -255,6 +254,7 @@ const MainView = new Lang.Class({
     onRecordStopClicked: function() {
         this._record.stopRecording();
         this.recordGrid.hide();
+        wave.resize();     
     },
     
     setProgressScaleSensitive: function() {
@@ -397,7 +397,7 @@ const MainView = new Lang.Class({
         
         for (let i = this._startIdx; i <= this._endIdx; i++) {
             this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                          height_request: 36,
+                                          height_request: 45,
                                           width_request: 400,
                                           name: i.toString() });
             this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
@@ -438,6 +438,7 @@ const MainView = new Lang.Class({
             
             this._fileName = new Gtk.Label({ use_markup: true,
                                              halign: Gtk.Align.START,
+                                             valign: Gtk.Align.START,
                                              ellipsize: true,
                                              xalign: 0,
                                              width_chars: 40,
@@ -451,12 +452,15 @@ const MainView = new Lang.Class({
             this._fileName.show();
             
             this._playLabelBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                               name: "PlayLabelBox" });
+                                               name: "PlayLabelBox",
+                                               height_request: 36 });
             this.rowGrid.attach(this._playLabelBox, 2, 1, 1, 1);
             this._playLabelBox.show();
                     
             this.playDurationLabel = new Gtk.Label({ margin_left: 15,
                                                      halign: Gtk.Align.END,
+                                                     valign: Gtk.Align.END,
+                                                     margin_top: 5,
                                                      name: "PlayDurationLabel" });
             this.fileDuration = this._formatTime(this._files[i].duration/Gst.SECOND);
             this.playDurationLabel.label = this.fileDuration;
@@ -464,23 +468,28 @@ const MainView = new Lang.Class({
             this.playDurationLabel.show();
             
             this.dividerLabel = new Gtk.Label({ halign: Gtk.Align.START,
-                                                 name: "DividerLabel" });
+                                                name: "DividerLabel",
+                                                valign: Gtk.Align.END,
+                                                margin_top: 5 });
             this.dividerLabel.label = "/";
             this._playLabelBox.pack_start(this.dividerLabel, false, true, 0);
             this.dividerLabel.hide();
             
             this.playTimeLabel = new Gtk.Label({ halign: Gtk.Align.START,
-                                                 name: "PlayTimeLabel" });
+                                                 name: "PlayTimeLabel",
+                                                 valign: Gtk.Align.END,
+                                                 margin_top: 5 });
             this.playTimeLabel.label = "0:00";
             this._playLabelBox.pack_start(this.playTimeLabel, false, true, 0);
             this.playTimeLabel.hide();
             
             this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                               height_request: 36,
+                                               height_request: 45,
                                                width_request: 350,
+                                               valign: Gtk.Align.FILL,
                                                name: "WaveFormGrid" });
             this.waveFormGrid.set_no_show_all(true);
-            this.rowGrid.add(this.waveFormGrid);
+            this.rowGrid.attach(this.waveFormGrid, 9, 1, 1, 2);
 
             this.waveFormGrid.show();
 
@@ -490,7 +499,7 @@ const MainView = new Lang.Class({
                                                 icon_size: Gtk.IconSize.BUTTON,
                                                 opacity: 1,
                                                 name: "InfoToolbar" });
-            this.rowGrid.attach(this.widgetInfo, 4, 0, 1, 2);
+            this.rowGrid.attach(this.widgetInfo, 10, 0, 1, 2);
             this.widgetInfo.get_style_context().add_class('toolbar');
             
             this._boxInfo = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
@@ -523,7 +532,7 @@ const MainView = new Lang.Class({
                                                   opacity: 1,
                                                   name: "DeleteToolbar" });
             this.widgetDelete.get_style_context().add_class('toolbarEnd');
-            this.rowGrid.attach(this.widgetDelete, 5, 0, 1, 2);
+            this.rowGrid.attach(this.widgetDelete, 11, 0, 1, 2);
             
             this._boxDelete = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
             this._groupDelete = new Gtk.ToolItem({ child: this._boxDelete });
