@@ -284,6 +284,7 @@ const WaveForm = new Lang.Class({
         this.tick = 0;
         this.count = 0;
         peaks.length = 0;
-        this.drawing.destroy(); 
+        this.drawing.destroy();
+        cr.$dispose(); 
     }
 });

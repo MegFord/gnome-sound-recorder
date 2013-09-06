@@ -96,8 +96,7 @@ const MainWindow = new Lang.Class({
         this.set_titlebar(header);
         
         let recordToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                        spacing: 0 });
-        recordToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
+                                          spacing: 0 });
         header.pack_start(recordToolbar);
         let recordButton = new RecordButton({ label: "Record",
                                               margin_bottom: 4,
