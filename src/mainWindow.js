@@ -595,9 +595,8 @@ const MainView = new Lang.Class({
         let rowWidget = this._selected.get_child(this.fileName);
         rowWidget.foreach(Lang.bind(this,
             function(child) {
-                let alwaysShow = child.get_no_show_all();
-                log(child.name);
-                if (alwaysShow) {
+            
+                if (child.name == "FileNameLabel") {
                     let name = child.get_text();
                     fileForAction = fileUtil.loadFile(name);
                 }
