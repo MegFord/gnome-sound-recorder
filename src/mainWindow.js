@@ -37,8 +37,8 @@ const Record = imports.record;
 const Waveform = imports.waveform;
 
 let audioProfile = null;
-let fileManager = null; // do I use this?
 let fileUtil = null;
+let grid = null;
 let groupGrid;
 let list = null;
 let offsetController = null;
@@ -47,6 +47,8 @@ let play = null;
 let selectable = null;
 let view = null;
 let wave = null;
+let recordPipeline = null;
+let recordButton = null;
 
 const ActiveArea = {
     RECORD: 0,
@@ -64,6 +66,12 @@ const PipelineStates = {
     STOPPED: 2
 };
 
+const RecordPipelineStates = {
+    PLAYING: 0,
+    PAUSED: 1,
+    STOPPED: 2
+};
+
 const _TIME_DIVISOR = 60;
 const _SEC_TIMEOUT = 100;
 
@@ -76,19 +84,23 @@ const MainWindow = new Lang.Class({
         this._buildFileName = new Record.BuildFileName()
         path = this._buildFileName.buildPath();
         this._buildFileName.ensureDirectory(path);
-        offsetController = new FileUtil.OffsetController;
         fileUtil = new FileUtil.FileUtil();
+        offsetController = new FileUtil.OffsetController;
         view = new MainView();
         play = new Play.Play();
         
         params = Params.fill(params, { title: GLib.get_application_name(), //change this
                                        default_width: 700,
-                                       default_height: 480,
-                                       border_width: 12 });
+                                       default_height: 480 });
         this.parent(params);
         
-        let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                  halign: Gtk.Align.CENTER });
+        grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                              halign: Gtk.Align.CENTER,
+                              height_request: 109,
+                              width_request: 900,
+                              border_width: 12,
+                              vexpand: false });
+        grid.set_row_homogeneous(true);
         let stackSwitcher = Gtk.StackSwitcher.new();
         stackSwitcher.set_stack(view);
         let header = new Gtk.HeaderBar({ hexpand: true });
@@ -98,7 +110,7 @@ const MainWindow = new Lang.Class({
         let recordToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                           spacing: 0 });
         header.pack_start(recordToolbar);
-        let recordButton = new RecordButton({ label: "Record",
+        recordButton = new RecordButton({ label: "Record",
                                               margin_bottom: 4,
                                               margin_top: 6,
                                               margin_left: 6,
@@ -115,11 +127,11 @@ const MainWindow = new Lang.Class({
         this.add(grid);
         grid.show_all();
         this.show_all();
+        log("grid" + grid.get_preferred_height());
     },
        
     _defineThemes: function() {
         let settings = Gtk.Settings.get_default();
-        //settings.gtk_application_prefer_dark_theme = true;
     }
 });
 
@@ -137,19 +149,15 @@ const MainView = new Lang.Class({
             
         let listviewPage = this._addListviewPage('listviewPage');
              this.visible_child_name = 'playerPage';
-        
-        let recorderPage = this._addRecorderPage('recorderPage');
-            this.visible_child_name = 'listviewPage';
-                
-        let playerPage = this._addPlayerPage('playerPage');
-            this.visible_child_name = 'recorderPage';
             
         this.labelID = null;
     },
     
     _addListviewPage: function(name) {
         list = new Listview.Listview();
+        list.setListTypeNew();
         list.enumerateDirectory();
+        this._record = new Record.Record(audioProfile);
         let initialPage = new Gtk.EventBox();
         
         groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
@@ -160,84 +168,6 @@ const MainView = new Lang.Class({
         groupGrid.add(initialPage);
         this.add_titled(groupGrid, name, "View");
     },
-
-    _addRecorderPage: function(name) {
-        this._record = new Record.Record(audioProfile);
-        this.recordBox = new Gtk.EventBox();
-        
-                
-        this._comboBoxText = new EncoderComboBox();
-        //recordGrid.attach(this._comboBoxText, 20, 1, 3, 1);
-        
-       // this.recordTimeLabel = new Gtk.Label();
-        //recordGrid.attach(this.recordTimeLabel, 20, 2, 3, 1);
-        
-        this.recordVolume = new Gtk.VolumeButton();
-        this.recordRange = Gtk.Adjustment.new(0.2, 0, 1.0, 0.05, 0.0, 0.0);
-        this.recordVolume.set_adjustment(this.recordRange);
-        this.recordVolume.connect ("value-changed", Lang.bind(this, this.setVolume));
-        //recordGrid.attach(this.recordVolume, 20, 4, 3, 1);
-                
-
-        this.add_titled(this.recordBox, name, "Record");
-    },
-    
-    _addPlayerPage: function(name) {
-        this.playBox = new Gtk.EventBox();
-        let playGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
-                                      halign: Gtk.Align.CENTER,
-                                      valign: Gtk.Align.CENTER,
-                                      column_homogeneous: true,
-                                      column_spacing: 15 });
-        this.playBox.add(playGrid);
-
-        let playToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                        spacing: 0 });
-        playToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        playGrid.attach(playToolbar, 20, 0, 2, 1);
-        
-        let loadButton = new LoadMoreButton(playGrid);
-        
-       
-        
-        this.progressScale = new Gtk.Scale();
-        this.progressScale.sensitive = false;
-        
-        this.progressScale.connect("button-press-event", Lang.bind(this,
-            function() {
-                MainWindow.play.onProgressScaleConnect();
-                             
-                return false;
-            }));
-            
-        this.progressScale.connect("button-release-event", Lang.bind(this,
-            function() {
-                this.setProgressScaleInsensitive();
-                this.onProgressScaleChangeValue();
-                this._updatePositionCallback();
-                
-                return false;
-            }));
-              
-        playGrid.attach(this.progressScale, 20, 3, 3, 1);
-        
-        /*this.playVolume = new Gtk.VolumeButton();
-        this.range = Gtk.Adjustment.new(0.90, 0, 1.0, 0.05, 0.0, 0.0);
-        this.playVolume.set_adjustment(this.range);
-        this.playVolume.connect("value-changed", Lang.bind(this, this.setVolume));
-        playGrid.attach(this.playVolume, 20, 4, 3, 1);*/
-              
-        //this.playButton = new PlayPauseButton();
-        //playToolbar.pack_end(this.playButton, false, true, 0);
-        
-        let stopPlay = new Gtk.Button();
-        this.stopImage = Gtk.Image.new_from_icon_name("media-playback-stop-symbolic", Gtk.IconSize.BUTTON);
-        stopPlay.set_image(this.stopImage);
-        stopPlay.connect("clicked", Lang.bind(this, this.onPlayStopClicked));
-        playToolbar.pack_end(stopPlay, true, true, 0);
-
-        this.add_titled(this.playBox, name, "Play");
-    },
     
     onPlayStopClicked: function() {
         //this.playButton.set_active(false);
@@ -247,23 +177,8 @@ const MainView = new Lang.Class({
     onRecordStopClicked: function() {
         this._record.stopRecording();
         this.recordGrid.hide();
-        wave.resize();     
-    },
-    
-    setProgressScaleSensitive: function() {
-        this.progressScale.sensitive = true;
-    },
-    
-    setProgressScaleInsensitive: function() {
-        this.progressScale.sensitive = false;
-    },
-    
-    onProgressScaleChangeValue: function() {
-        let seconds = Math.ceil(this.progressScale.get_value());
-                
-        MainWindow.play.progressScaleValueChanged(seconds);
-        
-        return true;
+        recordPipeline = RecordPipelineStates.STOPPED;
+        recordButton.set_sensitive(true);    
     },
      
     _formatTime: function(unformattedTime) {
@@ -356,13 +271,15 @@ const MainView = new Lang.Class({
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
         this.toolbarStart.pack_start(stopRecord, true, true, 0);
         this.recordGrid.attach(this.toolbarStart, 5, 1, 1, 2);
-            
+    },
+     
+    scrolledWinAdd: function() {       
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
                                                      margin_top: 5,
                                                      hexpand: false,
                                                      vexpand: false,
-                                                     width_request: 800,
+                                                     width_request: 900,
                                                      height_request: 400 });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this._scrolledWin.get_style_context().add_class('view');
@@ -391,7 +308,7 @@ const MainView = new Lang.Class({
         for (let i = this._startIdx; i <= this._endIdx; i++) {
             this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                           height_request: 45,
-                                          width_request: 400,
+                                          width_request: 900,
                                           name: i.toString() });
             this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
             this.listBox.add(this.rowGrid);
@@ -549,7 +466,21 @@ const MainView = new Lang.Class({
             this.selectionRow = this._separator.get_parent();
             this.selectionRow.set_sensitive(false);
             this._separator.show();
+            list.monitorListview();
         }
+    },
+    
+    listBoxRefresh: function() {
+        fileUtil = new FileUtil.FileUtil();
+        list.enumerateDirectory();
+
+    },
+    
+    scrolledWinDelete: function() {
+        let w = this.rowGrid.get_allocated_width();
+        this._scrolledWin.destroy();
+        this.scrolledWinAdd();
+        log("destroy " + w);  
     },
     
     rowGridCallback: function(selectedRow) {
@@ -620,7 +551,6 @@ const MainView = new Lang.Class({
     
     _onInfoButton: function(selected) {
         this._selected = selected;
-        //let fileForInfo = this._getFileNameFromRow(this._selected);
         let infoDialog = new Info.InfoDialog(selected);
 
         infoDialog.widget.connect('response', Lang.bind(this,
@@ -629,17 +559,9 @@ const MainView = new Lang.Class({
             }));
     },   
         
-    setLabel: function(time, duration) {
+    setLabel: function(time) {
         this.time = time
-        this.duration = duration;
         this.playPipeState = play.getPipeStates();
-        
-       /* if (this.playPipeState != PipelineStates.STOPPED) { //test this
-            if (this.playDurationLabel.label == "0:00" && duration != 0)
-            this.durationString = this._formatTime(duration);
-        } else {
-            this.durationString = this._formatTime(duration);
-        }*/
         
         this.timeLabelString = this._formatTime(time);
         
@@ -648,13 +570,6 @@ const MainView = new Lang.Class({
             this.recordTimeLabel.get_style_context().add_class('dim-label');
         } else if (this.setVisibleID == ActiveArea.PLAY) {
             this.playTimeLabel.label = this.timeLabelString;
-            
-            if (this.playDurationLabel.label == "0:00" || this.playPipeState == PipelineStates.STOPPED) {
-                //this.playDurationLabel.label = this.durationString;
-                this.setProgressScaleSensitive();
-                this.progressScale.set_range(0.0, duration);
-            }
-            this.progressScale.set_value(this.time);
         }
     },
 });
@@ -671,6 +586,7 @@ const RecordButton = new Lang.Class({
     },
     
     _onRecord: function() {
+        this.set_sensitive(false);
         view.setVisibleID = ActiveArea.RECORD;
         view.recordGrid.show_all();
         audioProfile.assignProfile();

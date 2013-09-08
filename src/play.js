@@ -136,7 +136,7 @@ const _TENTH_SEC = 100000000;
                 
             case Gst.MessageType.ERROR:
                 log("Error :" + e.parse_error());
-                this._showErrorDialog(_("Error :" + e.parse_error()));   //should I only show for specific error messages           
+                this._showErrorDialog(_("Error:" + e.parse_error()));   //should I only show for specific error messages           
                 break;
                 
             case Gst.MessageType.DURATION: 
@@ -180,9 +180,9 @@ const _TENTH_SEC = 100000000;
         
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
             log("called UPDATE");
-            this.view.setLabel(time, this.trackDurationSecs);           
+            this.view.setLabel(time);           
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
-            this.view.setLabel(0, this.trackDurationSecs); 
+            this.view.setLabel(0); 
         }
         
         this.absoluteTime = this.clock.get_time();

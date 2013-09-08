@@ -46,24 +46,45 @@ const mediaTypeMap = {
     FLAC: "FLAC",
     MP3: "MP3",
     MP4: "MP4"
-};   
+}; 
+
+const ListType = {
+    NEW: 0,
+    REFRESH: 1
+};
+
+const CurrentlyEnumerating = {
+    TRUE: 0,
+    FALSE: 1
+};
+
+let currentlyEnumerating = null; 
+let stopVal = null;
+let allFilesInfo = null;
+let fileInfo = null;
+let listType = null;
+let startRecording = false; 
 
 const Listview = new Lang.Class({
     Name: "Listview",
 
     _init: function() {
-        this._stopVal = EnumeratorState.ACTIVE;
-        this._allFilesInfo = [];
+        stopVal = EnumeratorState.ACTIVE;
+        allFilesInfo = [];
         this.mp3Caps = Gst.Caps.from_string("audio/mpeg, mpegversion=(int)1");
         this.oggCaps = Gst.Caps.from_string("audio/ogg");
         this.mp4Caps = Gst.Caps.from_string("video/quicktime, variant=(string)iso");
         this.flacCaps = Gst.Caps.from_string("audio/x-flac");
+    },    
+        
+    monitorListview: function() {
+        let dir = MainWindow.fileUtil.getDirPath(); 
+        this.dirMonitor = dir.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+        this.dirMonitor.connect('changed', this._onDirChanged);      
     },
             
     enumerateDirectory: function() {
-        let path = MainWindow.path;
-        let dirName = GLib.build_filenamev(path);
-        let dir = Gio.file_new_for_path(dirName);    
+        let dir = MainWindow.fileUtil.getDirPath();    
       
         dir.enumerate_children_async('standard::name,time::created,time::modified',
                                      Gio.FileQueryInfoFlags.NONE,
@@ -82,7 +103,7 @@ const Listview = new Lang.Class({
     },
     
     _onNextFileComplete: function () {
-        this._fileInfo = [];
+        fileInfo = [];
         try{
             this._enumerator.next_files_async(10, GLib.PRIORITY_DEFAULT, null, Lang.bind(this,
                 function(obj, res) {
@@ -107,8 +128,8 @@ const Listview = new Lang.Class({
                                     this.dateCreatedString = dateCreated.format(_("%Y-%m-%d %H:%M:%S"));
                                 } 
                        
-                                this._fileInfo = 
-                                    this._fileInfo.concat({ appName: null,
+                                fileInfo = 
+                                    fileInfo.concat({ appName: null,
                                                             dateCreated: null, 
                                                             dateForSort: dateModifiedSortString,                
                                                             dateModified: dateModifiedDisplayString,
@@ -118,10 +139,10 @@ const Listview = new Lang.Class({
                                                             title: null,
                                                             uri: null });
                             }));
-                        this._sortItems(this._fileInfo);
+                        this._sortItems(fileInfo);
                     } else {
-                        //log("done");
-                        this._stopVal = EnumeratorState.CLOSED;
+                        log("done");
+                        stopVal = EnumeratorState.CLOSED;
                         this._enumerator.close(null);
                         this._setDiscover();
                                                  
@@ -133,27 +154,30 @@ const Listview = new Lang.Class({
         }
     }, 
     
-    _sortItems: function(fileArr) {       
+    _sortItems: function(fileArr) { 
+        log("sort");      
         this._fileArr = fileArr;
-        this._allFilesInfo = this._allFilesInfo.concat(this._fileArr);
-        this._allFilesInfo.sort(function(a, b) {
+        allFilesInfo = allFilesInfo.concat(this._fileArr);
+        allFilesInfo.sort(function(a, b) {
             return b.dateForSort - a.dateForSort; 
         }); 
-        
-        if (this._stopVal == EnumeratorState.ACTIVE)
-            this._onNextFileComplete();  
+        log("this._stopVal " + stopVal);
+        if (stopVal == EnumeratorState.ACTIVE) {
+            this._onNextFileComplete(); 
+            log("sort done");
+        } 
     }, 
     
     getItemCount: function() {
-        //log(this._allFilesInfo.length);
-        return this._allFilesInfo.length;
+        log(allFilesInfo.length);
+        return allFilesInfo.length;
     },
        
     _setDiscover: function() {
         this._controller = MainWindow.offsetController;
         this.totItems = this.getItemCount();
         this.startIdx = this._controller.getOffset();
-        //log(this.startIdx);
+        log("this.startIdx" + this.startIdx);
         this.ensureCount = this.startIdx + this._controller.getOffsetStep() - 1; 
         
         if (this.ensureCount < this.totItems)
@@ -167,14 +191,14 @@ const Listview = new Lang.Class({
      },
      
      _runDiscover: function() {
-        this.file = this._allFilesInfo[this.idx];
+        this.file = allFilesInfo[this.idx];
         this._buildFileName = new Record.BuildFileName();
         let initialFileName = this._buildFileName.buildPath();
         initialFileName.push(this.file.fileName);
         let finalFileName = GLib.build_filenamev(initialFileName);
         let uri = GLib.filename_to_uri(finalFileName, null);
         this.file.uri = uri;
-        //log(this.file.uri);
+        log(this.file.uri);
         this._discoverer = new GstPbutils.Discoverer();
         this._discoverer.start();                      
         this._discoverer.discover_uri_async(uri);
@@ -222,21 +246,57 @@ const Listview = new Lang.Class({
             }
             
             this._getCapsForList(info);
- 
-            if (this.idx < this.endIdx && this.idx >= 0) {
-                this.idx++;
-                //log(this.idx); 
-                this._runDiscover();
-            } else { 
-                this._discoverer.stop();
-                MainWindow.offsetController.setEndIdx();
-                //Application.view.list();
-                MainWindow.view.listBoxAdd();                
-            }                                 
         } else {
         // don't index files we can't play
             log("File cannot be played"); 
         }
+ 
+        if (this.idx < this.endIdx && this.idx >= 0) {
+            this.idx++;
+            log("this.listType discovering" + listType);
+            this._runDiscover();
+        } else { 
+            this._discoverer.stop();
+            log("this.listType discovering" + listType);
+            MainWindow.offsetController.setEndIdx();
+            
+            if (listType == ListType.NEW) {
+                MainWindow.view.listBoxAdd();
+                MainWindow.view.scrolledWinAdd();
+                currentlyEnumerating = CurrentlyEnumerating.FALSE;
+                log("this.currentlyEnumerating new" +currentlyEnumerating);
+            } else if (listType == ListType.REFRESH){
+                MainWindow.view.scrolledWinDelete();
+                currentlyEnumerating = CurrentlyEnumerating.FALSE;
+                log("this.currentlyEnumerating " +currentlyEnumerating);
+            }                
+        }                                 
+    },
+    
+    setListTypeNew: function() {
+        listType = ListType.NEW;
+    },    
+        
+    _onDirChanged: function(dirMonitor, file1, file2, eventType) {
+        log("eventType" + eventType);
+        if (eventType == Gio.FileMonitorEvent.DELETED || 
+            (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
+          stopVal = EnumeratorState.ACTIVE;
+          allFilesInfo.length = 0;
+          fileInfo.length = 0;
+          log(stopVal + "this._stopVal");
+          listType = ListType.REFRESH;
+          log("this.listType" + listType);
+          log("this.currentlyEnumerating " + currentlyEnumerating);
+          if(currentlyEnumerating == CurrentlyEnumerating.FALSE) {
+            currentlyEnumerating = CurrentlyEnumerating.TRUE;
+            MainWindow.view.listBoxRefresh();
+          }
+        }
+        
+        if (eventType == Gio.FileMonitorEvent.CREATED)
+            startRecording = true;
+        log("MainWindow.recordPipeline" + MainWindow.recordPipeline);     
     },
     
     _getCapsForList: function(info) {
@@ -285,7 +345,7 @@ const Listview = new Lang.Class({
     }, 
         
     getFilesInfoForList: function() {
-        return this._allFilesInfo;//return 
+        return allFilesInfo;
     },
     
     getEndIdx: function() {
