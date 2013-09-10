@@ -187,15 +187,15 @@ const WaveForm = new Lang.Class({
         let end = this.tick + 39;
         log(end);
         let width = this.drawing.get_allocated_width();
-        log("w " + w);
+        log("w " + width);
         let waveheight = this.drawing.get_allocated_height();
-        log("h" + h)
+        log("h" + waveheight)
         let length = this.nSamples;
         log("length " + this.nSamples);
         let pixelsPerSample = width/waveSamples;
         log("pixelsPerSample " + pixelsPerSample);    
 
-        let gradient = new Cairo.LinearGradient(0, 0, w , h);
+        let gradient = new Cairo.LinearGradient(0, 0, width , waveheight);
         gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);       
         gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
         cr.setLineWidth(1);
