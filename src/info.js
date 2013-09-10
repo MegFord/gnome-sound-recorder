@@ -27,8 +27,8 @@ const _ = imports.gettext.gettext;
 const C_ = imports.gettext.pgettext;
 const Lang = imports.lang;
 
-const MainWindow = imports.mainWindow;
 const FileUtil = imports.fileUtil;
+const MainWindow = imports.mainWindow;
 
 const _FILE_NAME_ENTRY_TIMEOUT = 600;
 

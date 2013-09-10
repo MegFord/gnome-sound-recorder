@@ -28,6 +28,10 @@ const C_ = imports.gettext.pgettext;
 const MainWindow = imports.mainWindow;
 const Main = imports.main;
 
+let comboBoxText = null;
+let recordVolume= null;
+let playVolume = null;
+
 const Preferences = new Lang.Class({
     Name: 'Preferences',
     
@@ -67,8 +71,7 @@ const Preferences = new Lang.Class({
                                           use_markup: true });
         grid.attach(formatLabel, 0, 0, 1, 1);
         
-        let comboBoxText = new MainWindow.EncoderComboBox({ halign: Gtk.Align.END });
-        comboBoxText.set_active(0);
+        comboBoxText = new MainWindow.EncoderComboBox({ halign: Gtk.Align.END });
         grid.attach(comboBoxText, 2, 0, 1, 1);
         
         let volumeLabel = new Gtk.Label({ label: '<b>' + _("Volume") + '</b>',
@@ -76,38 +79,38 @@ const Preferences = new Lang.Class({
                                           use_markup: true });
         grid.attach(volumeLabel, 0, 1, 2, 1);
         
-        this.playVolume = new Gtk.Scale({ orientation: Gtk.Orientation.HORIZONTAL });
-        this.playRange = Gtk.Adjustment.new(0.75, 0, 1.0, 0.05, 0.0, 0.0);
-        this.playVolume.set_adjustment(this.playRange);
-        this.playVolume.set_sensitive(true);
-        this.playVolume.connect("value-changed", Lang.bind(this, 
+        playVolume = new Gtk.Scale({ orientation: Gtk.Orientation.HORIZONTAL });
+        this.playRange = Gtk.Adjustment.new(MainWindow.volumeValue[0].play, 0, 1.0, 0.05, 0.0, 0.0);
+        playVolume.set_adjustment(this.playRange);
+        playVolume.set_sensitive(true);
+        playVolume.connect("value-changed", Lang.bind(this, 
             function() {
-                MainWindow.view.setVisibleID == MainWindow.ActiveArea.PLAY;
-                MainWindow.view.setVolume();
+                MainWindow.view.presetVolume(MainWindow.ActiveArea.PLAY, playVolume.get_value());
             }));
-        grid.attach(this.playVolume, 2, 1, 2, 1);
+        grid.attach(playVolume, 2, 1, 2, 1);
         
         let micVolLabel = new Gtk.Label({ label: '<b>' + _("Microphone") + '</b>',
                                           halign: Gtk.Align.START,
                                           use_markup: true });
         grid.attach(micVolLabel, 0, 2, 2, 1);
         
-        this.recordVolume = new Gtk.Scale({ orientation: Gtk.Orientation.HORIZONTAL });
-        this.recordRange = Gtk.Adjustment.new(0.75, 0, 1.0, 0.05, 0.0, 0.0);
-        this.recordVolume.set_adjustment(this.recordRange);
-        this.recordVolume.set_sensitive(true);
-        this.recordVolume.connect("value-changed", Lang.bind(this, 
+        recordVolume = new Gtk.Scale({ orientation: Gtk.Orientation.HORIZONTAL });
+        this.recordRange = Gtk.Adjustment.new(MainWindow.volumeValue[0].record, 0, 1.0, 0.05, 0.0, 0.0);
+        recordVolume.set_adjustment(this.recordRange);
+        recordVolume.set_sensitive(true);
+        recordVolume.connect("value-changed", Lang.bind(this, 
             function() {
-                MainWindow.view.setVisibleID == MainWindow.ActiveArea.RECORD;
-                MainWindow.view.setVolume();
+                MainWindow.view.presetVolume(MainWindow.ActiveArea.RECORD, recordVolume.get_value());
             }));
-        grid.attach(this.recordVolume, 2, 2, 2, 1);
+        grid.attach(recordVolume, 2, 2, 2, 1);
         
         this.widget.show_all();
       },
       
       onDoneClicked: function() {
         this.widget.destroy(); 
-      }  
+      },
+      
+       
       
 });

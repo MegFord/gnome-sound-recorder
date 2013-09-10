@@ -59,11 +59,7 @@ const FileUtil = new Lang.Class({
     }, 
     
     _deleteFileCallback: function(obj, res) {
-        this._deleted = obj.delete_finish(res);
-        //this._list = new Listview.Listview();
-        //this._list.refreshListview();
-        //MainWindow.offsetController.resetOffset();
-        //MainWindow.view.listBoxAdd();        
+        this._deleted = obj.delete_finish(res);        
     },
     
     getDirPath: function() {

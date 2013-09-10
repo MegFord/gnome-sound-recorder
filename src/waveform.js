@@ -35,8 +35,8 @@ const Mainloop = imports.mainloop;
 
 const MainWindow = imports.mainWindow;
 
-const peaks = [];
 const INTERVAL = 100000000;
+const peaks = [];
 const pauseVal = 10;
 const waveSamples = 40;
 
@@ -51,6 +51,8 @@ const WaveForm = new Lang.Class({
     _init: function(grid, file) {
         this._grid = grid;
         
+        for (let i = 0; i < 40; i++)
+            peaks.push(-100);
         if (file) {
             this.waveType = WaveType.PLAY;
             this.file = file;
@@ -90,9 +92,8 @@ const WaveForm = new Lang.Class({
     },
 
     _launchPipeline: function() {
-        this.peaks = null;
         this.pipeline =
-            Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=1 !level name=wavelevel interval=100000000 post-messages=true ! fakesink qos=false");
+            Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=1 !level name=level interval=100000000 post-messages=true ! fakesink qos=false");
         this._level = this.pipeline.get_by_name("wavelevel");
         let decode = this.pipeline.get_by_name("decode");
         let bus = this.pipeline.get_bus();
@@ -120,28 +121,29 @@ const WaveForm = new Lang.Class({
                 let s = message.get_structure();
                     if (s) {
                         if (s.has_name("level")) {
-                            let p = null;
-                            let peakVal = 0;
                             let peaknumber = 0;
-                            let value = 0;
                             let st = s.get_value("timestamp");
                             let dur = s.get_value("duration");
                             let runTime = s.get_value("running-time");
                             log(runTime);
-                            peakVal = s.get_value("peak");
+                            let peakVal = s.get_value("peak");
                 
                             if (peakVal) {
                                 let val = peakVal.get_nth(0);
-                                
-                                if (val >= 0) {
-                                    value = Math.pow(val, 1/3);
-                                    peaknumber = value * 0.1;
-                                    log("wave height" + value);
-                                } else {
+                                log("val" + val);
+                                let value = Math.pow(10, val/20);
+                                log(value);
+                            
+                                if (value <= 0)
                                     peaknumber = 0;
-                                }
+                                else if (value >= 1)
+                                    peaknumber = 1;
+                                else
+                                    peaknumber = value;
+                                    
                                 peaks.push(peaknumber);
-                            }                           
+                                log("wave height" + peaknumber);
+                            }                            
                         }
                     }
                 log("length of the peaks array" + peaks.length);
@@ -173,65 +175,45 @@ const WaveForm = new Lang.Class({
     },
                 
     fillSurface: function(drawing, cr) {
-        if (this.waveType == WaveType.PLAY) {
-            log("fill surface error" + this.waveType);
-            
+        if (this.waveType == WaveType.PLAY) {            
             if (peaks.length != this.playTime) { 
                 this.pipeline.set_state(Gst.State.PLAYING);
                 log("continue drawing " + peaks.length);
             }
         }
         
-        let start = 0;
         let i = 0;
-        let base;
-        let w = this.drawing.get_allocated_width();
+        let xAxis = 0;
+        let end = this.tick + 39;
+        log(end);
+        let width = this.drawing.get_allocated_width();
         log("w " + w);
-        let h = this.drawing.get_allocated_height();
+        let waveheight = this.drawing.get_allocated_height();
         log("h" + h)
         let length = this.nSamples;
         log("length " + this.nSamples);
-        let waveheight = h;
-        let pixelsPerSample = w/waveSamples;
-        log("pixelsPerSample " + pixelsPerSample);
+        let pixelsPerSample = width/waveSamples;
+        log("pixelsPerSample " + pixelsPerSample);    
 
-        
-        if (this.tick < waveSamples) {
-            start = (waveSamples - this.tick);
-        }
-        
-        if (this.tick >= waveSamples) {
-            let num = Math.floor(this.tick / waveSamples);
-            log(num);
-            let add = this.tick % (num * waveSamples);
-            log("add" + add);
-            i += add;
-        }
-        
-        cr.moveTo(start * pixelsPerSample, h);
         let gradient = new Cairo.LinearGradient(0, 0, w , h);
         gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);       
         gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
                   
-        for(i; i < this.tick; i++) { 
-              
-            if (peaks[i] != null) {
-            
-                if (this.tick < waveSamples) {
-                    base = start + i;
-                    cr.lineTo((base * pixelsPerSample), (h - (peaks[i] * waveheight)));
-                } else {
-                    cr.lineTo((start * pixelsPerSample), (h - (peaks[i] * waveheight)));
-                }
-            }
-             
-            if (this.tick > waveSamples)
-                start += 1;
+        for(i = this.tick; i <= end; i++) {
+                
+            // Keep moving until we get to a non-null array member
+            if (peaks[i] < 0 || (this.tick > 39 && xAxis == 0))               
+                cr.moveTo((xAxis * pixelsPerSample), waveheight);
+      
+            // Start drawing when we reach the first non-null array member  
+            if (peaks[i] != null && peaks[i] >= 0) 
+                    cr.lineTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)));
+                    
+            xAxis += 1;
         }
-
-        cr.lineTo(w, h);
+        cr.lineTo(width, waveheight);
         cr.closePath();
         cr.strokePreserve();       
         cr.setSource(gradient);
@@ -242,6 +224,7 @@ const WaveForm = new Lang.Class({
         let lastTime;
         if (this.waveType == WaveType.PLAY) {
             lastTime = this.playTime;
+            log("lastTime time" + lastTime);
             this.playTime = playTime;
             log("check peaks" + peaks.length);
             log("playTime time" + this.playTime);
