@@ -33,9 +33,11 @@ const FileUtil = imports.fileUtil;
 const Info = imports.info;
 const Listview = imports.listview;
 const Play = imports.play;
+const Preferences = imports.preferences;
 const Record = imports.record;
 const Waveform = imports.waveform;
 
+let activeProfile = null;
 let audioProfile = null;
 let fileUtil = null;
 let grid = null;
@@ -44,11 +46,13 @@ let list = null;
 let offsetController = null;
 let path = null;
 let play = null;
-let selectable = null;
-let view = null;
-let wave = null;
 let recordPipeline = null;
 let recordButton = null;
+let selectable = null;
+let setVisibleID = null;
+let view = null;
+let volumeValue = [];
+let wave = null;
 
 const ActiveArea = {
     RECORD: 0,
@@ -202,27 +206,34 @@ const MainView = new Lang.Class({
         return true;
     },
     
+    presetVolume: function(source, vol) {
+        if (source == ActiveArea.PLAY)
+            volumeValue[0].play = vol;
+        else
+            volumeValue[0].record = vol;               
+    },
+    
     setVolume: function() {
-        let volumeValue;
-        if (this.setVisibleID == ActiveArea.PLAY) {
-            volumeValue = this.playVolume.get_value();
-            MainWindow.play.setVolume(volumeValue);
-        } else if (this.setVisibleID == ActiveArea.RECORD) {
-            volumeValue = this.recordVolume.get_value();
-            this._record.setVolume(volumeValue);
+        log("VOLUME VIS" + setVisibleID);
+        if (setVisibleID == ActiveArea.PLAY) {
+        log("volumeValue.play " + volumeValue[0].play);
+            play.setVolume(volumeValue[0].play);
+        } else if (setVisibleID == ActiveArea.RECORD) {
+           this._record.setVolume(volumeValue[0].record);
         }
     },
     
     getVolume: function() {
         let volumeValue = this.playVolume.get_value();
-        
+
         return volumeValue;
     },
     
     listBoxAdd: function() {
         selectable = true;
         this.groupGrid = groupGrid;
-        
+        volumeValue.push({ record: 0.5, play: 0.5 });
+        activeProfile = AudioProfile.comboBoxMap.OGG_VORBIS;
                 
         this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                          height_request: 36,
@@ -565,10 +576,10 @@ const MainView = new Lang.Class({
         
         this.timeLabelString = this._formatTime(time);
         
-        if (this.setVisibleID == ActiveArea.RECORD) {
+        if (setVisibleID == ActiveArea.RECORD) {
             this.recordTimeLabel.label = this.timeLabelString;
             this.recordTimeLabel.get_style_context().add_class('dim-label');
-        } else if (this.setVisibleID == ActiveArea.PLAY) {
+        } else if (setVisibleID == ActiveArea.PLAY) {
             this.playTimeLabel.label = this.timeLabelString;
         }
     },
@@ -579,7 +590,6 @@ const RecordButton = new Lang.Class({
     Extends: Gtk.Button,
     
     _init: function(activeProfile) {
-        this._activeProfile = activeProfile;
         this.parent();
         this.set_label("Record");
         this.connect("clicked", Lang.bind(this, this._onRecord));
@@ -587,10 +597,13 @@ const RecordButton = new Lang.Class({
     
     _onRecord: function() {
         this.set_sensitive(false);
-        view.setVisibleID = ActiveArea.RECORD;
+        setVisibleID = ActiveArea.RECORD;
         view.recordGrid.show_all();
-        audioProfile.assignProfile();
-        view._record.startRecording();
+        
+        if (activeProfile == null)
+            activeProfile = 0; 
+        audioProfile.assignProfile(activeProfile);
+        view._record.startRecording(activeProfile);
         wave = new Waveform.WaveForm(view.recordGrid);
     }
 });
@@ -607,7 +620,7 @@ const PlayPauseButton = new Lang.Class({
     
     _onPlayPauseToggled: function(listRow, selFile) {
         this.activeState = play.getPipeStates();
-        view.setVisibleID = ActiveArea.PLAY;
+        setVisibleID = ActiveArea.PLAY;
         log(listRow);
         let width = listRow.get_allocated_width();
         if (this.activeState != PipelineStates.PLAYING) {
@@ -664,18 +677,18 @@ const EncoderComboBox = new Lang.Class({
     // encoding setting labels in combobox
     _init: function() {
         this.parent();
-        let combo = [_("Ogg Vorbis"), _("Ogg Opus"), _("FLAC"), _("MP3"), _("AAC")];
+        let combo = [_("Ogg Vorbis"), _("Opus"), _("FLAC"), _("MP3"), _("AAC")];
         
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
-
+            
         this.set_sensitive(true);
+        this.set_active(activeProfile);
         this.connect("changed", Lang.bind(this, this._onComboBoxTextChanged));
     },
    
     _onComboBoxTextChanged: function() {
-        let activeProfile = this.get_active();
-        audioProfile.assignProfile(activeProfile);
+        activeProfile = this.get_active();
     }
 });
 

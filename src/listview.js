@@ -317,8 +317,8 @@ const Listview = new Lang.Class({
                 this.file.mediaType = mediaTypeMap.OGG_VORBIS;
             else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OPUS)))
                 this.file.mediaType = mediaTypeMap.OPUS;
-        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.ID3))) {
-            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.ID3)))
+        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP3))) {
+            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
                 this.file.mediaType = mediaTypeMap.MP3;
         } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP4))) {
             if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP4)))
