@@ -187,16 +187,18 @@ const _TENTH_SEC = 100000000;
             this.view.setLabel(0); 
         }
         
-        let clockTime = this.clock.get_time();
-	    let baseTime = this.pipeline.get_base_time();
-	    let runningTime = clockTime - baseTime;
-	    log("clock time " + clockTime);
-	    log("base time " + baseTime);
-	    log("running time " + runningTime);
-	    let approxTime = Math.round(runningTime / _TENTH_SEC);
+       this.absoluteTime = this.clock.get_time();
+        
+        if (this.baseTime == 0)
+            this.baseTime = this.absoluteTime;
+            log("base time " + this.baseTime);
  
+        let runTime = this.absoluteTime- this.baseTime;
+        log(runTime);
+        log("current clocktime " + this.absoluteTime);
+        let approxTime = Math.round(runTime/_TENTH_SEC);
         log("approx" + approxTime);
-	    MainWindow.wave._drawEvent(approxTime, this.peak);
+        MainWindow.wave._drawEvent(approxTime);
         
         return true;
     },
