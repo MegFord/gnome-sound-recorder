@@ -131,13 +131,16 @@ const WaveForm = new Lang.Class({
                             if (peakVal) {
                                 let val = peakVal.get_nth(0);
                                 log("val" + val);
-                                                        
-                                if (val > 0)
-                                    val = 0;
-                                
                                 let value = Math.pow(10, val/20);
                                 log(value);
-                                this.peak = value;                                     
+                            
+                                if (value <= 0)
+                                    peaknumber = 0;
+                                else if (value >= 1)
+                                    peaknumber = 1;
+                                else
+                                    peaknumber = value;
+                                    
                                 peaks.push(peaknumber);
                                 log("wave height" + peaknumber);
                             }                            
@@ -172,7 +175,7 @@ const WaveForm = new Lang.Class({
     },
                 
     fillSurface: function(drawing, cr) {
-        let start = 0;
+         let start = 0;
         if (this.waveType == WaveType.PLAY) {            
             if (peaks.length != this.playTime) { 
                 this.pipeline.set_state(Gst.State.PLAYING);
@@ -181,14 +184,13 @@ const WaveForm = new Lang.Class({
             }
         } else {
             if (this.recordTime >= 0)
-                start = Math.floor(this.recordTime);
+            start = this.recordTime;
         }
         
         let i = 0;
         let xAxis = 0;
+
         let end = start + 40;
-        log(start + "start");
-        log(end + "end");
         let width = this.drawing.get_allocated_width();
         let waveheight = this.drawing.get_allocated_height();
         let length = this.nSamples;
@@ -203,7 +205,7 @@ const WaveForm = new Lang.Class({
         for(i = start; i <= end; i++) {
         
             // Keep moving until we get to a non-null array member
-            if (peaks[i] < 0) {              
+            if (peaks[i] < 0) { //|| (this.tick >= 40 && xAxis == 0)) {              
                 cr.moveTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)))
                 log(i);
             }
@@ -252,8 +254,7 @@ const WaveForm = new Lang.Class({
             if (peaks.length < this.recordTime) {
                 log("error");
             }
-            log(peaks.length);
-            log("draw event");      
+                      
             this.drawing.queue_draw();
         }
         return true;
