@@ -48,7 +48,6 @@ const Record = new Lang.Class({
     Name: "Record",
     
     _recordPipeline: function() {
-        this.baseTime = 0;
         this._view = MainWindow.view; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
@@ -132,23 +131,8 @@ const Record = new Lang.Class({
     _updateTime: function() {          
         let time = this.pipeline.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
         
-        if (time >= 0) {
+        if (time >= 0) 
             this._view.setLabel(time, 0);            
-        }
-        
-        this.absoluteTime = this.clock.get_time();
-        
-        if (this.baseTime == 0)
-            this.baseTime = this.absoluteTime;
-            log("base time " + this.baseTime);
- 
-        this.runTime = this.absoluteTime- this.baseTime;
-        log(this.runTime);
-        log("current clocktime " + this.absoluteTime);
-        let approxTime = Math.round(this.runTime/_TENTH_SEC);
-        log("approx" + approxTime);
-        log("peakruntime" + this.peak);
-        MainWindow.wave._drawEvent(approxTime, this.peak);
         
         return true;
     },
@@ -245,21 +229,26 @@ const Record = new Lang.Class({
                         if (peakVal) {
                             let val = peakVal.get_nth(0);
                             log("val" + val);
-                            log("profile!" + this.profile);
+                                                        
+                            if (val > 0)
+                                val = 0;
+                                
                             let value = Math.pow(10, val/20);
                             log(value);
-                            
-                            if (value <= 0)
-                                this.peak = 0;
-                            else if (value >= 1)
-                                this.peak = 1;
-                            else
-                                this.peak = value;
-                                
-                                log("wave height" + this.peak);
-                            }                          
-                        }
+                            this.peak = value;                                
+                            let clockTime = this.clock.get_time();
+			                let baseTime = this.pipeline.get_base_time();
+			                let runningTime = clockTime - baseTime;
+			                log("clock time " + clockTime);
+			                log("base time " + baseTime);
+			                log("running time " + runningTime);
+			                let approxTime = Math.round(runningTime / _TENTH_SEC);
+ 
+                            log("approx" + approxTime);
+			                MainWindow.wave._drawEvent(approxTime, this.peak);
+                        }                          
                     }
+                }
                 break;
                     
             case Gst.MessageType.EOS:                  
