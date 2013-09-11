@@ -214,7 +214,6 @@ const MainView = new Lang.Class({
     },
     
     setVolume: function() {
-        log("VOLUME VIS" + setVisibleID);
         if (setVisibleID == ActiveArea.PLAY) {
         log("volumeValue.play " + volumeValue[0].play);
             play.setVolume(volumeValue[0].play);
@@ -508,9 +507,8 @@ const MainView = new Lang.Class({
                 }));
                 this.activeState = play.getPipeStates();
                 
-                if (this.activeState == PipelineStates.PLAYING) {
+                if (this.activeState == PipelineStates.PLAYING || this.activeState == PipelineStates.PAUSED) {
                 log("this.activeState == PipelineStates.PLAYING");
-                    this._playListButton.set_active(false);
                     play.stopPlaying();
                 }
             }

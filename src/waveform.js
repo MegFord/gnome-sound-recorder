@@ -51,8 +51,9 @@ const WaveForm = new Lang.Class({
     _init: function(grid, file) {
         this._grid = grid;
         
+        let placeHolder = -100;
         for (let i = 0; i < 40; i++)
-            peaks.push(-100);
+            peaks.push(placeHolder);
         if (file) {
             this.waveType = WaveType.PLAY;
             this.file = file;
@@ -184,16 +185,11 @@ const WaveForm = new Lang.Class({
         
         let i = 0;
         let xAxis = 0;
-        let end = this.tick + 39;
-        log(end);
+        let end = this.tick + 40;
         let width = this.drawing.get_allocated_width();
-        log("w " + width);
         let waveheight = this.drawing.get_allocated_height();
-        log("h" + waveheight)
         let length = this.nSamples;
-        log("length " + this.nSamples);
-        let pixelsPerSample = width/waveSamples;
-        log("pixelsPerSample " + pixelsPerSample);    
+        let pixelsPerSample = width/waveSamples;   
 
         let gradient = new Cairo.LinearGradient(0, 0, width , waveheight);
         gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);       
@@ -202,61 +198,63 @@ const WaveForm = new Lang.Class({
         cr.setSourceRGBA(0.0, 185, 161, 255);
                   
         for(i = this.tick; i <= end; i++) {
-                
+        
             // Keep moving until we get to a non-null array member
-            if (peaks[i] < 0 || (this.tick > 39 && xAxis == 0))               
-                cr.moveTo((xAxis * pixelsPerSample), waveheight);
+            if (peaks[i] < 0) { //|| (this.tick >= 40 && xAxis == 0)) {              
+                cr.moveTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)))
+                log(i);
+            }
       
             // Start drawing when we reach the first non-null array member  
-            if (peaks[i] != null && peaks[i] >= 0) 
-                    cr.lineTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)));
-                    
+            if (peaks[i] != null && peaks[i] >= 0) {
+                let idx = i - 1;
+                
+                if (this.tick >= 40 && xAxis == 0) { 
+                     cr.moveTo((xAxis * pixelsPerSample), waveheight);
+                }
+                
+                cr.lineTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)));
+            }
+                                
             xAxis += 1;
         }
-        cr.lineTo(width, waveheight);
+        cr.lineTo(xAxis * pixelsPerSample, waveheight);
         cr.closePath();
         cr.strokePreserve();       
         cr.setSource(gradient);
 	    cr.fillPreserve();
+	    cr.$dispose(); 
     },
     
     _drawEvent: function(playTime, recPeaks) {
         let lastTime;
+        
         if (this.waveType == WaveType.PLAY) {
             lastTime = this.playTime;
-            log("lastTime time" + lastTime);
             this.playTime = playTime;
-            log("check peaks" + peaks.length);
-            log("playTime time" + this.playTime);
                   
             if (peaks.length < this.playTime) {
                 this.pipeline.set_state(Gst.State.PLAYING);
-                log("continue drawing " + peaks.length);
             } 
                     
             if (this.tick < this.playTime) {
                 this.tick += 1;
-                log("tick value" + this.tick);
             }
         
             if (lastTime != this.playTime) {
                 this.drawing.queue_draw();
-                log("drawing queued");
             }
             
         } else {
             peaks.push(recPeaks);
             lastTime = this.recordTime;
             this.recordTime = playTime;
-            log("rec check peaks" + peaks.length);
-            log("recordTime time" + this.recordTime);
                   
             if (peaks.length < this.recordTime) {
                 log("error");
             }
                       
             this.tick += 1;
-            log("rec tick value" + this.tick); 
             this.drawing.queue_draw();
         }
         return true;
@@ -268,6 +266,5 @@ const WaveForm = new Lang.Class({
         this.count = 0;
         peaks.length = 0;
         this.drawing.destroy();
-        //cr.$dispose(); 
     }
 });

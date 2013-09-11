@@ -83,7 +83,9 @@ const Record = new Lang.Class({
             }));
         this.level = Gst.ElementFactory.make("level", "level");
         log(this.level);
-        this.pipeline.add(this.level);  
+        this.pipeline.add(this.level);
+        this.volume = Gst.ElementFactory.make("volume", "volume");
+        this.pipeline.add(this.volume);  
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         this.ebin.connect("element-added", Lang.bind(this,
             function(ebin, element) {
@@ -117,7 +119,8 @@ const Record = new Lang.Class({
         }
             
         let srcLink = this.srcElement.link(this.level);
-        let levelLink = this.level.link(this.ebin);
+        let levelLink = this.level.link(this.volume);
+        let volLink = this.volume.link(this.ebin);
         let ebinLink = this.ebin.link(this.giosink);
         
         if (!srcLink || !levelLink || !ebinLink) {
@@ -166,11 +169,12 @@ const Record = new Lang.Class({
             
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
+        log("return " + ret);
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the pipeline to the recording state.\n"); //create return string?
             this.onEndOfStream();  
-        } else if (ret == Gst.StateChangeReturn.SUCCESS) {        
+        } else {        
             MainWindow.view.setVolume(); 
         }
            
@@ -272,8 +276,8 @@ const Record = new Lang.Class({
     },
     
     setVolume: function(value) {
-        let level = value;
-        this.srcElement.set_volume(GstAudio.StreamVolumeFormat.CUBIC, level);
+        this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
+        log("volumefromrecord " + this.volume.get_volume(GstAudio.StreamVolumeFormat.LINEAR));
     } 
 });
 
