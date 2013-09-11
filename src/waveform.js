@@ -130,16 +130,11 @@ const WaveForm = new Lang.Class({
                 
                             if (peakVal) {
                                 let val = peakVal.get_nth(0);
-                                log("val" + val);
+                                
+                                if (val > 0)
+                                    val = 0;
                                 let value = Math.pow(10, val/20);
                                 log(value);
-                            
-                                if (value <= 0)
-                                    peaknumber = 0;
-                                else if (value >= 1)
-                                    peaknumber = 1;
-                                else
-                                    peaknumber = value;
                                     
                                 peaks.push(peaknumber);
                                 log("wave height" + peaknumber);
