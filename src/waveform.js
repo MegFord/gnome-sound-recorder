@@ -63,7 +63,6 @@ const WaveForm = new Lang.Class({
           this.waveType = WaveType.RECORD;
         }  
         
-        this.tick = 0;
         let gridWidth = 0;
         let drawingWidth = 0;
         let drawingHeight = 0;
@@ -185,7 +184,8 @@ const WaveForm = new Lang.Class({
         
         let i = 0;
         let xAxis = 0;
-        let end = this.tick + 40;
+	let start = Math.floor(this.playTime);
+        let end = start + 40;
         let width = this.drawing.get_allocated_width();
         let waveheight = this.drawing.get_allocated_height();
         let length = this.nSamples;
@@ -197,7 +197,7 @@ const WaveForm = new Lang.Class({
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
                   
-        for(i = this.tick; i <= end; i++) {
+        for(i = start; i <= end; i++) {
         
             // Keep moving until we get to a non-null array member
             if (peaks[i] < 0) { //|| (this.tick >= 40 && xAxis == 0)) {              
@@ -209,7 +209,7 @@ const WaveForm = new Lang.Class({
             if (peaks[i] != null && peaks[i] >= 0) {
                 let idx = i - 1;
                 
-                if (this.tick >= 40 && xAxis == 0) { 
+                if (start >= 40 && xAxis == 0) { 
                      cr.moveTo((xAxis * pixelsPerSample), waveheight);
                 }
                 
@@ -237,10 +237,6 @@ const WaveForm = new Lang.Class({
                 this.pipeline.set_state(Gst.State.PLAYING);
             } 
                     
-            if (this.tick < this.playTime) {
-                this.tick += 1;
-            }
-        
             if (lastTime != this.playTime) {
                 this.drawing.queue_draw();
             }
@@ -254,7 +250,6 @@ const WaveForm = new Lang.Class({
                 log("error");
             }
                       
-            this.tick += 1;
             this.drawing.queue_draw();
         }
         return true;
@@ -262,7 +257,6 @@ const WaveForm = new Lang.Class({
     
     endDrawing: function() {
         let width = this._grid.get_allocated_width();
-        this.tick = 0;
         this.count = 0;
         peaks.length = 0;
         this.drawing.destroy();
