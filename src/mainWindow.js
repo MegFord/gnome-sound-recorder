@@ -482,10 +482,11 @@ const MainView = new Lang.Class({
     },
     
     listBoxRefresh: function() {
+        previousSelRow = null;
         this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);  
         fileUtil = new FileUtil.FileUtil();
         list.enumerateDirectory();
-        this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);  
+        //this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);  
     },
     
     scrolledWinDelete: function() {
