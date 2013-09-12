@@ -49,6 +49,7 @@ let play = null;
 let recordPipeline = null;
 let recordButton = null;
 let selectable = null;
+let previousSelRow = null;
 let setVisibleID = null;
 let view = null;
 let volumeValue = [];
@@ -174,7 +175,7 @@ const MainView = new Lang.Class({
     },
     
     onPlayStopClicked: function() {
-        //this.playButton.set_active(false);
+        //recordButton.set_sensitive(true);
         play.stopPlaying();
     },
     
@@ -182,7 +183,7 @@ const MainView = new Lang.Class({
         this._record.stopRecording();
         this.recordGrid.hide();
         recordPipeline = RecordPipelineStates.STOPPED;
-        recordButton.set_sensitive(true);    
+        recordButton.set_sensitive(true);  
     },
      
     _formatTime: function(unformattedTime) {
@@ -481,9 +482,10 @@ const MainView = new Lang.Class({
     },
     
     listBoxRefresh: function() {
+        this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);  
         fileUtil = new FileUtil.FileUtil();
         list.enumerateDirectory();
-
+        this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);  
     },
     
     scrolledWinDelete: function() {
@@ -493,11 +495,10 @@ const MainView = new Lang.Class({
         log("destroy " + w);  
     },
     
-    rowGridCallback: function(selectedRow) {
-        if (selectedRow) {
-
-           if (this._selectedRow) {
-              let rowWidget = this._selectedRow.get_child(this.widget);
+    hasPreviousSelRow: function() {
+       log("this._selectedRow  " + previousSelRow);
+           if (previousSelRow != null) {
+              let rowWidget = previousSelRow.get_child(this.widget);
               rowWidget.foreach(Lang.bind(this,
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
@@ -511,10 +512,19 @@ const MainView = new Lang.Class({
                 log("this.activeState == PipelineStates.PLAYING");
                     play.stopPlaying();
                 }
-            }
-                              
-            this._selectedRow = selectedRow;
-            let selectedRowWidget = this._selectedRow.get_child(this.widget);
+            } 
+        previousSelRow = null;
+    }, 
+    
+    rowGridCallback: function(selectedRow) {
+        if (selectedRow) {
+            log("this._selectedRow  " + previousSelRow);
+            if (previousSelRow != null) {
+                this.hasPreviousSelRow();
+            }  
+                          
+            previousSelRow = selectedRow;
+            let selectedRowWidget = previousSelRow.get_child(this.widget);
             selectedRowWidget.show_all();
             selectedRowWidget.foreach(Lang.bind(this,
                 function(child) {
@@ -527,7 +537,7 @@ const MainView = new Lang.Class({
                         child.sensitive = true;
                 }));
         }
-    },
+    },    
     
     _getFileNameFromRow: function(selected) {
         this._selected = selected;
@@ -594,6 +604,8 @@ const RecordButton = new Lang.Class({
     },
     
     _onRecord: function() {
+        view.hasPreviousSelRow();
+        view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
         this.set_sensitive(false);
         setVisibleID = ActiveArea.RECORD;
         view.recordGrid.show_all();
