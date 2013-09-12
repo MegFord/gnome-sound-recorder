@@ -178,7 +178,7 @@ const Listview = new Lang.Class({
         this.totItems = this.getItemCount();
         this.startIdx = this._controller.getOffset();
         log("this.startIdx" + this.startIdx);
-        this.ensureCount = this.startIdx + this._controller.getOffsetStep() - 1; 
+        this.ensureCount = this.startIdx + this._controller.getOffset() - 1; 
         
         if (this.ensureCount < this.totItems)
             this.endIdx = this.ensureCount;

@@ -85,7 +85,7 @@ const OffsetController = new Lang.Class({
     // to be called to load more files into the listview
     increaseOffset: function() {
         this._offset += _OFFSET_STEP;
-        this.emit('offset-changed', this._offset);
+        //this.emit('offset-changed', this._offset);
     },
 
     // to be called when a recording is made/deleted

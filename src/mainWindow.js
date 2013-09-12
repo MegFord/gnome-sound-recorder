@@ -54,6 +54,7 @@ let setVisibleID = null;
 let view = null;
 let volumeValue = [];
 let wave = null;
+let UpperBoundVal = 182;
 
 const ActiveArea = {
     RECORD: 0,
@@ -294,6 +295,23 @@ const MainView = new Lang.Class({
                                                      height_request: 400 });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this._scrolledWin.get_style_context().add_class('view');
+        this.scrollbar = this._scrolledWin.get_vadjustment();
+        this.scrollbar.set_upper(UpperBoundVal);
+        
+        this.scrollbar.connect("value_changed", Lang.bind(this, 
+            function() {
+                this.currentBound = this.scrollbar.get_value();
+                log(this.currentBound + "this.currentBound");
+                log(UpperBoundVal + "this.lowerBound");
+                
+                if (UpperBoundVal == this.currentBound && this.loadMoreButton == null)
+                    this.addLoadMoreButton();
+                else if (UpperBoundVal != this.currentBound && this.loadMoreButton) {
+                    this.loadMoreButton.destroy();
+                    this.loadMoreButton = null;
+                }
+            }));
+                  
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
         
@@ -354,7 +372,7 @@ const MainView = new Lang.Class({
                     let idx = parseInt(gridForName.name);
                     
                     let file = this._files[idx];
-                    this._playListButton._onPlayPauseToggled(row, file);
+                    this._playListButton.onPlayPauseToggled(row, file);
                 }));
             
             this._fileName = new Gtk.Label({ use_markup: true,
@@ -479,6 +497,13 @@ const MainView = new Lang.Class({
             this._separator.show();
             list.monitorListview();
         }
+    },
+    
+    addLoadMoreButton: function() {
+       this.loadMoreButton = new LoadMoreButton();
+       this.loadMoreButton.connect('clicked', Lang.bind(this, this.loadMoreButton.onLoadMore)); 
+       this.groupGrid.add(this.loadMoreButton);
+       this.loadMoreButton.show();      
     },
     
     listBoxRefresh: function() {
@@ -628,7 +653,7 @@ const PlayPauseButton = new Lang.Class({
         //this.set_image(playImage);
     },
     
-    _onPlayPauseToggled: function(listRow, selFile) {
+    onPlayPauseToggled: function(listRow, selFile) {
         this.activeState = play.getPipeStates();
         setVisibleID = ActiveArea.PLAY;
         log(listRow);
@@ -704,28 +729,25 @@ const EncoderComboBox = new Lang.Class({
 
 const LoadMoreButton = new Lang.Class({
     Name: 'LoadMoreButton',
+    Extends: Gtk.Button,
 
-    _init: function(playgr) {
+    _init: function() {
+        this.parent();
         this._block = false;
 
-        this._controller = offsetController;
-
         // Translators: "more" refers to recordings in this context
-        this._label = new Gtk.Label({ label: _("Load More"),
-                                      visible: true });
-        playgr.add(this._label);
+        let label = new Gtk.Label({ label: _("Load More"),
+                                    visible: true });
 
-        this.widget = new Gtk.Button();
-                                       
-        this.widget.get_style_context().add_class('documents-load-more');
-        playgr.add(this.widget);
-        
-        this.widget.connect('clicked', Lang.bind(this,
-            function() {
-                this._label.label = _("Loading…");
-
-                this._controller.increaseOffset();
-                list._setDiscover();
-            }));
+        //this.widget = new Gtk.Button();
+        this.label = _("Load More");                                       
+        this.get_style_context().add_class('documents-load-more');
+    },
+     
+    onLoadMore: function() {   
+        offsetController.increaseOffset();
+        UpperBoundVal += 182;
+        view.scrollbar.set_upper(UpperBoundVal);
+        view.listBoxRefresh();
     }
 }); 
