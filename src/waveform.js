@@ -130,14 +130,15 @@ const WaveForm = new Lang.Class({
                 
                             if (peakVal) {
                                 let val = peakVal.get_nth(0);
-                                
+                                log(val);
                                 if (val > 0)
                                     val = 0;
+                                    
                                 let value = Math.pow(10, val/20);
                                 log(value);
                                     
-                                peaks.push(peaknumber);
-                                log("wave height" + peaknumber);
+                                peaks.push(value);
+                                log("wave height" + value);
                             }                            
                         }
                     }
@@ -170,13 +171,15 @@ const WaveForm = new Lang.Class({
     },
                 
     fillSurface: function(drawing, cr) {
-         let start = 0;
-        if (this.waveType == WaveType.PLAY) {            
+        let start = 0;
+        
+        if (this.waveType == WaveType.PLAY) { 
+                   
             if (peaks.length != this.playTime) { 
                 this.pipeline.set_state(Gst.State.PLAYING);
                 log("continue drawing " + peaks.length);
-                start = Math.floor(this.playTime);
             }
+            start = Math.floor(this.playTime);
         } else {
             if (this.recordTime >= 0)
             start = this.recordTime;
@@ -184,10 +187,11 @@ const WaveForm = new Lang.Class({
         
         let i = 0;
         let xAxis = 0;
-
         let end = start + 40;
         let width = this.drawing.get_allocated_width();
+        log(width);
         let waveheight = this.drawing.get_allocated_height();
+        log(waveheight);
         let length = this.nSamples;
         let pixelsPerSample = width/waveSamples;   
 
@@ -200,7 +204,7 @@ const WaveForm = new Lang.Class({
         for(i = start; i <= end; i++) {
         
             // Keep moving until we get to a non-null array member
-            if (peaks[i] < 0) { //|| (this.tick >= 40 && xAxis == 0)) {              
+            if (peaks[i] < 0) {            
                 cr.moveTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)))
                 log(i);
             }
@@ -214,6 +218,7 @@ const WaveForm = new Lang.Class({
                 }
                 
                 cr.lineTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)));
+                log(peaks[i] * waveheight + "lines");
             }
                                 
             xAxis += 1;

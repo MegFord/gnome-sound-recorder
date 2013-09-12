@@ -234,7 +234,7 @@ const Record = new Lang.Class({
                             log("profile!" + this.profile);
                             
                             if (val > 0)
-			                val = 0;
+			                    val = 0;
                             let value = Math.pow(10, val/20);
                             this.peak = value;
                             
