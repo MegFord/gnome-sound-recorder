@@ -50,14 +50,14 @@ const Application = new Lang.Class({
     Extends: Gtk.Application,
 
     _init: function() {
-        this.parent({ application_id: pkg.name }); 
-        GLib.set_application_name(_("SoundRecorder"));         
+        this.parent({ application_id: pkg.name });
+        GLib.set_application_name(_("SoundRecorder"));
     },
     
     _initAppMenu: function() {
         let menu = new Gio.Menu();
         menu.append("Preferences", 'app.preferences');
-        menu.append("Quit",'app.quit');    
+        menu.append("Quit",'app.quit');
         this.set_app_menu(menu);
         
         let preferences = new Gio.SimpleAction ({ name: 'preferences' });

@@ -4,7 +4,7 @@
 
 jsdir = $(pkgdatadir)
 dist_js_DATA = \
-    util.js	\   
+    util.js	\
     audioProfile.js \
     fileUtil.js \
     info.js \
