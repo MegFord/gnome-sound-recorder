@@ -43,17 +43,20 @@ let fileUtil = null;
 let grid = null;
 let groupGrid;
 let list = null;
+let loadMoreButton = null;
 let offsetController = null;
 let path = null;
 let play = null;
+let previousSelRow = null;
 let recordPipeline = null;
 let recordButton = null;
 let selectable = null;
-let previousSelRow = null;
 let setVisibleID = null;
+let UpperBoundVal = 182;
 let view = null;
 let volumeValue = [];
 let wave = null;
+
 
 const ActiveArea = {
     RECORD: 0,
@@ -159,6 +162,7 @@ const MainView = new Lang.Class({
     },
     
     _addListviewPage: function(name) {
+        fileUtil = new FileUtil.FileUtil();
         list = new Listview.Listview();
         list.setListTypeNew();
         list.enumerateDirectory();
@@ -294,6 +298,20 @@ const MainView = new Lang.Class({
                                                      height_request: 400 });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this._scrolledWin.get_style_context().add_class('view');
+        this.scrollbar = this._scrolledWin.get_vadjustment();
+        
+        this.scrollbar.connect("value_changed", Lang.bind(this, 
+            function() {
+                this.currentBound = this.scrollbar.get_value();
+                UpperBoundVal = this.scrollbar.upper - this.scrollbar.page_size;
+                if (UpperBoundVal == this.currentBound && loadMoreButton == null) {
+                    this.addLoadMoreButton();
+                } else if (UpperBoundVal != this.currentBound && loadMoreButton) {
+                    loadMoreButton.destroy();
+                    loadMoreButton = null;
+                }
+            }));
+                  
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
         
@@ -308,7 +326,7 @@ const MainView = new Lang.Class({
             }));
         this.listBox.show();
         
-        this._startIdx = offsetController.getOffset();
+        this._startIdx = 0;
         log(this._startIdx);
         log("start");
         this._endIdx = offsetController.getcidx();
@@ -354,7 +372,7 @@ const MainView = new Lang.Class({
                     let idx = parseInt(gridForName.name);
                     
                     let file = this._files[idx];
-                    this._playListButton._onPlayPauseToggled(row, file);
+                    this._playListButton.onPlayPauseToggled(row, file);
                 }));
             
             this._fileName = new Gtk.Label({ use_markup: true,
@@ -384,6 +402,8 @@ const MainView = new Lang.Class({
                                                      margin_top: 5,
                                                      name: "PlayDurationLabel" });
             this.fileDuration = this._formatTime(this._files[i].duration/Gst.SECOND);
+            log(this.fileDuration + "FILEDURATION");
+            log(this._files[i].duration);
             this.playDurationLabel.label = this.fileDuration;
             this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
             this.playDurationLabel.show();
@@ -477,16 +497,32 @@ const MainView = new Lang.Class({
             this.selectionRow = this._separator.get_parent();
             this.selectionRow.set_sensitive(false);
             this._separator.show();
-            list.monitorListview();
         }
+        list.monitorListview();
+    },
+    
+    addLoadMoreButton: function() {
+       loadMoreButton = new LoadMoreButton();
+       loadMoreButton.connect('clicked', Lang.bind(this, loadMoreButton.onLoadMore)); 
+       this.groupGrid.add(loadMoreButton);
+       loadMoreButton.show();      
     },
     
     listBoxRefresh: function() {
         previousSelRow = null;
         this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);  
-        fileUtil = new FileUtil.FileUtil();
         list.enumerateDirectory();
-        //this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);  
+        //this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);          
+    },
+    
+    listBoxLoadMore: function() {
+       loadMoreButton.destroy();
+       loeadMoreButton = null;
+       this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
+       offsetController.increaseEndIdxStep();
+       list.setListTypeRefresh();
+       list._setDiscover();
+       this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
     },
     
     scrolledWinDelete: function() {
@@ -629,7 +665,7 @@ const PlayPauseButton = new Lang.Class({
         //this.set_image(playImage);
     },
     
-    _onPlayPauseToggled: function(listRow, selFile) {
+    onPlayPauseToggled: function(listRow, selFile) {
         this.activeState = play.getPipeStates();
         setVisibleID = ActiveArea.PLAY;
         log(listRow);
@@ -705,28 +741,24 @@ const EncoderComboBox = new Lang.Class({
 
 const LoadMoreButton = new Lang.Class({
     Name: 'LoadMoreButton',
+    Extends: Gtk.Button,
 
-    _init: function(playgr) {
+    _init: function() {
+        this.parent();
         this._block = false;
 
-        this._controller = offsetController;
-
         // Translators: "more" refers to recordings in this context
-        this._label = new Gtk.Label({ label: _("Load More"),
-                                      visible: true });
-        playgr.add(this._label);
+        let label = new Gtk.Label({ label: _("Load More"),
+                                    visible: true });
 
-        this.widget = new Gtk.Button();
-                                       
-        this.widget.get_style_context().add_class('documents-load-more');
-        playgr.add(this.widget);
-        
-        this.widget.connect('clicked', Lang.bind(this,
-            function() {
-                this._label.label = _("Loading…");
-
-                this._controller.increaseOffset();
-                list._setDiscover();
-            }));
+        this.label = _("Load More");                                       
+        this.get_style_context().add_class('documents-load-more');
+    },
+     
+    onLoadMore: function() {   
+        //offsetController.increaseOffset();
+        UpperBoundVal += 182;
+        view.scrollbar.set_upper(UpperBoundVal);
+        view.listBoxLoadMore();        
     }
 }); 

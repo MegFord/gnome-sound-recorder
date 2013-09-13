@@ -80,12 +80,13 @@ const OffsetController = new Lang.Class({
         this._offset = 0;
         this._itemCount = 0;
         this._context = context;
+        CurrentEndIdx = _OFFSET_STEP;
     },
 
     // to be called to load more files into the listview
     increaseOffset: function() {
         this._offset += _OFFSET_STEP;
-        this.emit('offset-changed', this._offset);
+        //this.emit('offset-changed', this._offset);
     },
 
     // to be called when a recording is made/deleted
@@ -95,12 +96,6 @@ const OffsetController = new Lang.Class({
 
     resetOffset: function() {
         this._offset = 0;
-    },
-
-    getItemCount: function() {
-        this._itemCount = MainWindow.list.getItemCount();
-        log("itemCount");
-        log(this._itemCount); 
     },
 
     getRemainingFiles: function() {
@@ -115,14 +110,11 @@ const OffsetController = new Lang.Class({
         return this._offset;
     },
     
-    setEndIdx: function() {
+    getEndIdx: function() {
         this.totItems = MainWindow.list.getItemCount();
         log(this.totItems);
-        this.ensureCount = this._offset + _OFFSET_STEP - 1; 
-        log(this.ensureCount);
-        this.getItemCount();
-        if (this.ensureCount < this.totItems) {
-            this.endIdx = this.ensureCount;
+        if (CurrentEndIdx < this.totItems) {
+            this.endIdx = CurrentEndIdx;
             log(this.endIdx);
         } else {
             this.endIdx = this.totItems - 1;
@@ -130,7 +122,12 @@ const OffsetController = new Lang.Class({
         }
             
         CurrentEndIdx = this.endIdx;
-        this.getcidx();
+        
+        return CurrentEndIdx;
+     },
+    
+    increaseEndIdxStep: function() {
+        CurrentEndIdx += _OFFSET_STEP;
     },
     
     getcidx: function() {
