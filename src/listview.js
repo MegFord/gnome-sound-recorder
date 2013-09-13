@@ -169,7 +169,7 @@ const Listview = new Lang.Class({
     }, 
     
     getItemCount: function() {
-        log(allFilesInfo.length);
+        log(allFilesInfo.length + "item count");
         return allFilesInfo.length;
     },
        
@@ -220,7 +220,7 @@ const Listview = new Lang.Class({
             let dateTimeTag = this.tagInfo.get_date_time('datetime')[1]; 
             let title = this.tagInfo.get_string('title')[1];
             let durationInfo = info.get_duration();
-            //log(durationInfo);
+            log(durationInfo + "duration from listview");
             this.file.duration = durationInfo;
             
             if (title != null) {

@@ -402,6 +402,8 @@ const MainView = new Lang.Class({
                                                      margin_top: 5,
                                                      name: "PlayDurationLabel" });
             this.fileDuration = this._formatTime(this._files[i].duration/Gst.SECOND);
+            log(this.fileDuration + "FILEDURATION");
+            log(this._files[i].duration);
             this.playDurationLabel.label = this.fileDuration;
             this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
             this.playDurationLabel.show();
@@ -495,13 +497,13 @@ const MainView = new Lang.Class({
             this.selectionRow = this._separator.get_parent();
             this.selectionRow.set_sensitive(false);
             this._separator.show();
-            list.monitorListview();
         }
+        list.monitorListview();
     },
     
     addLoadMoreButton: function() {
        this.loadMoreButton = new LoadMoreButton();
-       this.loadMoreButton.connect('clicked', Lang.bind(this, this.loadMoreButton.onLoadMore)); 
+       //this.loadMoreButton.connect('clicked', Lang.bind(this, this.loadMoreButton.onLoadMore)); 
        this.groupGrid.add(this.loadMoreButton);
        this.loadMoreButton.show();      
     },
@@ -739,15 +741,14 @@ const LoadMoreButton = new Lang.Class({
         let label = new Gtk.Label({ label: _("Load More"),
                                     visible: true });
 
-        //this.widget = new Gtk.Button();
         this.label = _("Load More");                                       
         this.get_style_context().add_class('documents-load-more');
     },
      
     onLoadMore: function() {   
-        offsetController.increaseOffset();
+        //offsetController.increaseOffset();
         UpperBoundVal += 182;
         view.scrollbar.set_upper(UpperBoundVal);
-        view.listBoxRefresh();
+        //view.listBoxRefresh();
     }
 }); 
