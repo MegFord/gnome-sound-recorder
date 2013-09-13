@@ -27,33 +27,19 @@ const _ = imports.gettext.gettext;
 const C_ = imports.gettext.pgettext;
 const Lang = imports.lang;
 
-const MainWindow = imports.mainWindow;
 const FileUtil = imports.fileUtil;
+const MainWindow = imports.mainWindow;
 
-const _TITLE_ENTRY_TIMEOUT = 200;
+const _FILE_NAME_ENTRY_TIMEOUT = 600;
 
 const InfoDialog = new Lang.Class({
     Name: 'InfoDialog',
 
     _init: function(fileNav) {
-        log(fileNav);
-        log("nav");
         let fileName = fileNav;
         
-        let n = MainWindow.fileUtil.loadFile(fileName.fileName); // create new one, geez
-        log(n);
-        let dateModified = fileName.dateModified;
-
-        let dateCreatedString = null;
-        if (fileName.dateCreated != -1) {
-            dateCreatedString = fileName.dateCreated;
-        }
+        this.nav = MainWindow.fileUtil.loadFile(fileName.fileName);
         
-        let appName = null;
-        if (fileName.appName != -1) {
-            appName = fileName.appName;
-        }
-
         //let toplevel = Application.get_windows()[0];
         this.widget = new Gtk.Dialog ({ resizable: false,
                                         //transient_for: toplevel,
@@ -62,7 +48,38 @@ const InfoDialog = new Lang.Class({
                                         default_width: 400,
                                         title: _("Info"),
                                         hexpand: true });
-       
+        
+        let header = new Gtk.HeaderBar({ hexpand: true });
+        header.set_show_close_button(false);
+        this.widget.set_titlebar(header);
+        
+        let cancelToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                          spacing: 0 });
+        cancelToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
+        header.pack_start(cancelToolbar);
+        
+        let cancelButton = new Gtk.Button({ label: _("Cancel"),
+                                            margin_bottom: 4,
+                                            margin_top: 6,
+                                            margin_right: 6 });
+        cancelButton.connect("clicked", Lang.bind(this, this.onCancelClicked));
+        cancelToolbar.pack_end(cancelButton, false, true, 0);
+        cancelButton.show();
+        cancelToolbar.show();
+        
+        let buttonToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                          spacing: 0 });
+        buttonToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
+        header.pack_end(buttonToolbar);
+        
+        let button = new Gtk.Button({ label: _("Done"),
+                                      margin_bottom: 4,
+                                      margin_top: 6,
+                                      margin_right: 6 });
+        button.connect("clicked", Lang.bind(this, this.onDoneClicked));
+        buttonToolbar.pack_end(button, false, true, 0);
+        button.show();
+        buttonToolbar.show();      
 
         let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
                                    row_homogeneous: true,
@@ -77,119 +94,99 @@ const InfoDialog = new Lang.Class({
 
         let contentArea = this.widget.get_content_area();
         contentArea.pack_start(grid, true, true, 2);
-        
-        let button = new Gtk.Button({ label: "Done" });
-        button.connect("clicked", Lang.bind(this, this.onDoneClicked));
-        grid.add(button);
-        //.set_default_response(Gtk.ResponseType.OK);
 
         // File Name item
         // Translators: "File Name" is the label next to the file name
         // in the info dialog
         this._name = new Gtk.Label({ label: C_("File Name", "Name"),
-                                      halign: Gtk.Align.END });
+                                     halign: Gtk.Align.END });
         this._name.get_style_context ().add_class('dim-label');
         grid.add(this._name);
 
 
         // Source item
-        if (fileName.appName) {
         this._source = new Gtk.Label({ label: _("Source"),
                                        halign: Gtk.Align.END });
         this._source.get_style_context ().add_class('dim-label');
-        grid.add (this._source);
+            
+        if (fileName.appName != null) {
+            grid.add(this._source);
+        }
 
         // Date Modified item
-        this._dateModified = new Gtk.Label({ label: _("Date Modified"),
-                                             halign: Gtk.Align.END });
-        this._dateModified.get_style_context ().add_class('dim-label');
-        grid.add (this._dateModified);
+        this._dateModifiedLabel = new Gtk.Label({ label: _("Date Modified"),
+                                                  halign: Gtk.Align.END });
+        this._dateModifiedLabel.get_style_context ().add_class('dim-label');
+        grid.add(this._dateModifiedLabel);
 
         // Date Created item
-        if (dateCreatedString) {
-            this._dateCreated = new Gtk.Label({ label: _("Date Created"),
-                                                halign: Gtk.Align.END });
-            this._dateCreated.get_style_context ().add_class('dim-label');
-            grid.add (this._dateCreated);
+        this._dateCreatedLabel = new Gtk.Label({ label: _("Date Created"),
+                                                 halign: Gtk.Align.END });
+        this._dateCreatedLabel.get_style_context ().add_class('dim-label');
+        
+        if (fileName.dateCreated != null) {
+            grid.add(this._dateCreatedLabel);
         }
 
         // Media type item
         // Translators: "Type" is the label next to the media type
         // (Ogg Vorbis, AAC, ...) in the info dialog
         this._mediaType = new Gtk.Label({ label: C_("Media Type", "Type"),
-                                        halign: Gtk.Align.END });
+                                          halign: Gtk.Align.END });
         this._mediaType.get_style_context ().add_class('dim-label');
-        grid.add (this._mediaType);
+        grid.add(this._mediaType);
 
-        // file name value
+        // File name value
         this._fileNameEntry = new Gtk.Entry({ activates_default: true,
-                                               text: fileName.fileName,
-                                               editable: true,
-                                               hexpand: true,
-                                               width_chars: 40,
-                                               halign: Gtk.Align.START });
-        grid.attach_next_to (this._fileNameEntry, this._name, Gtk.PositionType.RIGHT, 2, 1);
-
-        this._fileNameEntryTimeout = 0;
-        this._fileNameEntry.connect('changed', Lang.bind (this,
-                function() {
-                    if (this._fileNameEntryTimeout != 0) {
-                        Mainloop.source_remove(this._fileNameEntryTimeout);
-                        this._fileNameEntryTimeout = 0;
-                    }
-
-                    this._fileNameEntryTimeout = Mainloop.timeout_add(_TITLE_ENTRY_TIMEOUT, Lang.bind(this,
-                        function() {
-                            this._fileNameEntryTimeout = 0;
-                            let newFileName = this._fileNameEntry.get_text(); 
-                             log(newFileName.toString());
-                             log("j");
-                            MainWindow.fileUtil.rename(n, newFileName);
-                            return false;
-                           
-                        }));
-                }));
-        } else { log(fileName.toString());
-            this._fileNameEntry = new Gtk.Label({ label: fileName.fileName,
-                                                  halign: Gtk.Align.START });
-            grid.attach_next_to (this._fileNameEntry, this._name, Gtk.PositionType.RIGHT, 2, 1);
-        }
+                                              text: fileName.fileName,
+                                              editable: true,
+                                              hexpand: true,
+                                              width_chars: 40,
+                                              halign: Gtk.Align.START });
+        grid.attach_next_to(this._fileNameEntry, this._name, Gtk.PositionType.RIGHT, 2, 1);
 
         // Source value
-        let uri = GLib.filename_to_uri(n, null);
+        let uri = GLib.filename_to_uri(this.nav, null);
         let sourceLink = Gio.file_new_for_uri(uri).get_parent();
-        log(sourceLink);
         let sourcePath = sourceLink.get_path();
+        log(sourceLink.get_uri());
+        log(sourcePath);
 
         this._sourceData = new Gtk.LinkButton({ label: sourcePath,
                                                 uri: sourceLink.get_uri(),
                                                 halign: Gtk.Align.START });
-        if (fileName.appName)
-        grid.attach_next_to (this._sourceData, this._source, Gtk.PositionType.RIGHT, 2, 1);
+        if (fileName.appName != null)
+            grid.attach_next_to(this._sourceData, this._source, Gtk.PositionType.RIGHT, 2, 1);
 
         // Date Modified value
-        this._dateModifiedData = new Gtk.Label({ label: fileName.dateModified,
-                                                 halign: Gtk.Align.START });
-                                                 
-        if (fileName.dateModified) //bug
-        grid.attach_next_to (this._dateModifiedData, this._dateModified, Gtk.PositionType.RIGHT, 2, 1);
+        if (fileName.dateModified != null) {
+            this._dateModifiedData = new Gtk.Label({ label: fileName.dateModified,
+                                                     halign: Gtk.Align.START });
+            grid.attach_next_to(this._dateModifiedData, this._dateModifiedLabel, Gtk.PositionType.RIGHT, 2, 1);
+        }
 
         // Date Created value
-        if (this._dateCreated) {
-            this._dateCreatedData = new Gtk.Label({ label: dateCreatedString,
+        if (fileName.dateCreated) {
+            this._dateCreatedData = new Gtk.Label({ label: fileName.dateCreated,
                                                     halign: Gtk.Align.START });
-            grid.attach_next_to (this._dateCreatedData, this._dateCreated, Gtk.PositionType.RIGHT, 2, 1);
+            grid.attach_next_to(this._dateCreatedData, this._dateCreatedLabel, Gtk.PositionType.RIGHT, 2, 1);
         }
 
         // Document type value
         this._mediaTypeData = new Gtk.Label({ label: fileName.mediaType,
                                               halign: Gtk.Align.START });
-        grid.attach_next_to (this._mediaTypeData, this._mediaType, Gtk.PositionType.RIGHT, 2, 1);
+        grid.attach_next_to(this._mediaTypeData, this._mediaType, Gtk.PositionType.RIGHT, 2, 1);
 
         this.widget.show_all();
     },
     
     onDoneClicked: function() {
-    this.widget.destroy(); 
-    }   
+        let newFileName = this._fileNameEntry.get_text(); 
+        MainWindow.fileUtil.rename(this.nav, newFileName);
+        this.widget.destroy(); 
+    },
+    
+    onCancelClicked: function() {
+        this.widget.destroy();    
+    }  
 });

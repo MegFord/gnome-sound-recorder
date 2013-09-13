@@ -83,7 +83,9 @@ const Record = new Lang.Class({
             }));
         this.level = Gst.ElementFactory.make("level", "level");
         log(this.level);
-        this.pipeline.add(this.level);  
+        this.pipeline.add(this.level);
+        this.volume = Gst.ElementFactory.make("volume", "volume");
+        this.pipeline.add(this.volume);  
         this.ebin = Gst.ElementFactory.make("encodebin", "ebin");
         this.ebin.connect("element-added", Lang.bind(this,
             function(ebin, element) {
@@ -117,7 +119,8 @@ const Record = new Lang.Class({
         }
             
         let srcLink = this.srcElement.link(this.level);
-        let levelLink = this.level.link(this.ebin);
+        let levelLink = this.level.link(this.volume);
+        let volLink = this.volume.link(this.ebin);
         let ebinLink = this.ebin.link(this.giosink);
         
         if (!srcLink || !levelLink || !ebinLink) {
@@ -131,29 +134,17 @@ const Record = new Lang.Class({
         
         if (time >= 0) {
             this._view.setLabel(time, 0);            
-        }
-        
-        this.absoluteTime = this.clock.get_time();
-        
-        if (this.baseTime == 0)
-            this.baseTime = this.absoluteTime;
-            log("base time " + this.baseTime);
- 
-        this.runTime = this.absoluteTime- this.baseTime;
-        log(this.runTime);
-        log("current clocktime " + this.absoluteTime);
-        let approxTime = Math.round(this.runTime/_TENTH_SEC);
-        log("approx" + approxTime);
-        log("peakruntime" + this.peak);
-        MainWindow.wave._drawEvent(approxTime, this.peak);
+        }        
         
         return true;
     },
        
-    startRecording: function(activeProfile) {
-        this._activeProfile = activeProfile;
+    startRecording: function(profile) {
+        this.profile = profile;
+        log("PROFILE" + this.profile);
         this._audioProfile = MainWindow.audioProfile;
         this._mediaProfile = this._audioProfile.mediaProfile();
+        log("Media Profile was set." + this._mediaProfile);
         
         if (this._mediaProfile == -1) {
             log("No Media Profile was set.");
@@ -164,12 +155,15 @@ const Record = new Lang.Class({
             
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
+        log("return " + ret);
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the pipeline to the recording state.\n"); //create return string?
             this.onEndOfStream();  
+        } else {        
+            MainWindow.view.setVolume(); 
         }
-            
+           
         if (!this.timeout) {
             this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, MainWindow._SEC_TIMEOUT, Lang.bind(this, this._updateTime));    
         }
@@ -204,7 +198,7 @@ const Record = new Lang.Class({
             
             case Gst.MessageType.ELEMENT:
                 log("elem");
-                if (GstPbutils.is_missing_plugin_message(this.localMsg)) { //buggy?
+                if (GstPbutils.is_missing_plugin_message(this.localMsg)) { 
                     let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
                        
                     if (detail != null)
@@ -219,26 +213,45 @@ const Record = new Lang.Class({
                 }
                 
                 let s = message.get_structure();
-                    if (s) {
-                        if (s.has_name("level")) {
-                            log("level");
-                            let p = null;
-                            let peakVal = 0;
-                            let st = s.get_value("timestamp");
-                            log(st);
-                            let dur = s.get_value("duration");
-                            log(dur);
-                            let runTime = s.get_value("running-time");
-                            log(runTime);
-                            peakVal = s.get_value("peak");
-                            log("peakVal" + peakVal);
-                            if (peakVal) {
-                                let val = peakVal.get_nth(0);
-                                let valBase = (val / 20);
-                                let value = Math.pow(10, valBase);
-                                this.peak = value/3.375;
-                                log("record wave height" + value);                                
-                            }                           
+                if (s) {
+                    if (s.has_name("level")) {
+                        log("level");
+                        let p = null;
+                        let peakVal = 0;
+                        let val = 0;
+                        let st = s.get_value("timestamp");
+                        log(st);
+                        let dur = s.get_value("duration");
+                        log(dur);
+                        let runTime = s.get_value("running-time");
+                        log(runTime);
+                        peakVal = s.get_value("peak");
+                        log("peakVal" + peakVal);
+                        
+                        if (peakVal) {
+                            let val = peakVal.get_nth(0);
+                            log("val" + val);
+                            log("profile!" + this.profile);
+                            
+                            if (val > 0)
+			                    val = 0;
+                            let value = Math.pow(10, val/20);
+                            this.peak = value;
+                            
+                            this.absoluteTime = this.clock.get_time();
+
+                            if (this.baseTime == 0)
+                                this.baseTime = this.absoluteTime;
+                                log("base time " + this.baseTime);
+ 
+                            this.runTime = this.absoluteTime- this.baseTime;
+                            log(this.runTime);
+                            log("current clocktime " + this.absoluteTime);
+                            let approxTime = Math.round(this.runTime/_TENTH_SEC);
+                            log("approx" + approxTime);
+                            log("peakruntime" + this.peak);
+                            MainWindow.wave._drawEvent(approxTime, this.peak);
+                            }                          
                         }
                     }
                 break;
@@ -250,16 +263,15 @@ const Record = new Lang.Class({
                                         
             case Gst.MessageType.ERROR:
                 log("error");
-                let errorMessage = msg.parse_error();
+                let errorMessage = message.parse_error(); // add general error dialog for the app to pop up for all cases
                 log(errorMessage);                  
                 break;
         }
     },
     
     setVolume: function(value) {
-        let level = this.srcElement.convert_volume(GstAudio.StreamVolumeFormat.LINEAR, GstAudio.StreamVolumeFormat.CUBIC, value);
-        log(level);
-        this.srcElement.set_volume(GstAudio.StreamVolumeFormat.CUBIC, level);
+        this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
+        log("volumefromrecord " + this.volume.get_volume(GstAudio.StreamVolumeFormat.LINEAR));
     } 
 });
 

@@ -43,27 +43,48 @@ const EnumeratorState = {
 const mediaTypeMap = {
     OGG_VORBIS: "Ogg Vorbis",
     OPUS: "Opus",
-    FLAC: "Flac",
+    FLAC: "FLAC",
     MP3: "MP3",
     MP4: "MP4"
-};   
+}; 
+
+const ListType = {
+    NEW: 0,
+    REFRESH: 1
+};
+
+const CurrentlyEnumerating = {
+    TRUE: 0,
+    FALSE: 1
+};
+
+let currentlyEnumerating = null; 
+let stopVal = null;
+let allFilesInfo = null;
+let fileInfo = null;
+let listType = null;
+let startRecording = false; 
 
 const Listview = new Lang.Class({
     Name: "Listview",
 
     _init: function() {
-        this._stopVal = EnumeratorState.ACTIVE;
-        this._allFilesInfo = [];
+        stopVal = EnumeratorState.ACTIVE;
+        allFilesInfo = [];
         this.mp3Caps = Gst.Caps.from_string("audio/mpeg, mpegversion=(int)1");
         this.oggCaps = Gst.Caps.from_string("audio/ogg");
         this.mp4Caps = Gst.Caps.from_string("video/quicktime, variant=(string)iso");
         this.flacCaps = Gst.Caps.from_string("audio/x-flac");
+    },    
+        
+    monitorListview: function() {
+        let dir = MainWindow.fileUtil.getDirPath(); 
+        this.dirMonitor = dir.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+        this.dirMonitor.connect('changed', this._onDirChanged);      
     },
             
     enumerateDirectory: function() {
-        let path = MainWindow.path;
-        let dirName = GLib.build_filenamev(path);
-        let dir = Gio.file_new_for_path(dirName);    
+        let dir = MainWindow.fileUtil.getDirPath();    
       
         dir.enumerate_children_async('standard::name,time::created,time::modified',
                                      Gio.FileQueryInfoFlags.NONE,
@@ -82,7 +103,7 @@ const Listview = new Lang.Class({
     },
     
     _onNextFileComplete: function () {
-        this._fileInfo = [];
+        fileInfo = [];
         try{
             this._enumerator.next_files_async(10, GLib.PRIORITY_DEFAULT, null, Lang.bind(this,
                 function(obj, res) {
@@ -92,20 +113,23 @@ const Listview = new Lang.Class({
                         files.forEach(Lang.bind(this,
                             function(file) {
                                 let returnedName = file.get_attribute_as_string("standard::name");
+                                log(returnedName);
                                 let timeVal = file.get_modification_time();
-                                let date = GLib.DateTime.new_from_timeval_local(timeVal); // will this be buggy?
+                                let date = GLib.DateTime.new_from_timeval_local(timeVal);
+                                //log(date); // will this be buggy?
                                 let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
-                                let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S")); 
+                                let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S"));
+                                //log(dateModifiedDisplayString); 
                                 let dateCreatedYes = file.has_attribute("time::created");
-                                log(this.dateCreatedYes);
+                                //log(this.dateCreatedYes);
                                 if (this.dateCreatedYes) {
                                     let dateCreatedVal = file.get_attribute_uint64("time::created");
                                     let dateCreated = GLib.DateTime.new_from_timeval_local(dateCreatedVal);
                                     this.dateCreatedString = dateCreated.format(_("%Y-%m-%d %H:%M:%S"));
                                 } 
-                                log("fell");                           
-                                this._fileInfo = 
-                                    this._fileInfo.concat({ appName: null,
+                       
+                                fileInfo = 
+                                    fileInfo.concat({ appName: null,
                                                             dateCreated: null, 
                                                             dateForSort: dateModifiedSortString,                
                                                             dateModified: dateModifiedDisplayString,
@@ -115,10 +139,10 @@ const Listview = new Lang.Class({
                                                             title: null,
                                                             uri: null });
                             }));
-                        this._sortItems(this._fileInfo);
+                        this._sortItems(fileInfo);
                     } else {
                         log("done");
-                        this._stopVal = EnumeratorState.CLOSED;
+                        stopVal = EnumeratorState.CLOSED;
                         this._enumerator.close(null);
                         this._setDiscover();
                                                  
@@ -130,27 +154,30 @@ const Listview = new Lang.Class({
         }
     }, 
     
-    _sortItems: function(fileArr) {       
+    _sortItems: function(fileArr) { 
+        log("sort");      
         this._fileArr = fileArr;
-        this._allFilesInfo = this._allFilesInfo.concat(this._fileArr);
-        this._allFilesInfo.sort(function(a, b) {
+        allFilesInfo = allFilesInfo.concat(this._fileArr);
+        allFilesInfo.sort(function(a, b) {
             return b.dateForSort - a.dateForSort; 
         }); 
-        
-        if (this._stopVal == EnumeratorState.ACTIVE)
-            this._onNextFileComplete();  
+        log("this._stopVal " + stopVal);
+        if (stopVal == EnumeratorState.ACTIVE) {
+            this._onNextFileComplete(); 
+            log("sort done");
+        } 
     }, 
     
     getItemCount: function() {
-        log(this._allFilesInfo.length);
-        return this._allFilesInfo.length;
+        log(allFilesInfo.length);
+        return allFilesInfo.length;
     },
        
     _setDiscover: function() {
         this._controller = MainWindow.offsetController;
         this.totItems = this.getItemCount();
         this.startIdx = this._controller.getOffset();
-        log(this.startIdx);
+        log("this.startIdx" + this.startIdx);
         this.ensureCount = this.startIdx + this._controller.getOffsetStep() - 1; 
         
         if (this.ensureCount < this.totItems)
@@ -164,7 +191,7 @@ const Listview = new Lang.Class({
      },
      
      _runDiscover: function() {
-        this.file = this._allFilesInfo[this.idx];
+        this.file = allFilesInfo[this.idx];
         this._buildFileName = new Record.BuildFileName();
         let initialFileName = this._buildFileName.buildPath();
         initialFileName.push(this.file.fileName);
@@ -193,7 +220,7 @@ const Listview = new Lang.Class({
             let dateTimeTag = this.tagInfo.get_date_time('datetime')[1]; 
             let title = this.tagInfo.get_string('title')[1];
             let durationInfo = info.get_duration();
-            log(durationInfo);
+            //log(durationInfo);
             this.file.duration = durationInfo;
             
             if (title != null) {
@@ -205,32 +232,71 @@ const Listview = new Lang.Class({
                Therefore, we prefer to set it with tags */
             if (dateTimeTag != null) {                
                 dateTimeCreatedString = dateTimeTag.to_g_date_time();
-                if (dateTimeCreatedString)
+                if (dateTimeCreatedString) {
                     this.file.dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
-                log(this.file.dateCreated);
+                   // log("dateCreated" + this.file.dateCreated);
+                } else if (this.dateCreatedString) {
+                    this.file.dateCreated = this.dateCreatedString;
+                }
             }              
             
             if (appString == GLib.get_application_name()) {
                 this.file.appName = appString;
-                log(this.file.appName);
+                //log(this.file.appName);
             }
             
             this._getCapsForList(info);
- 
-            if (this.idx < this.endIdx && this.idx >= 0) {
-                this.idx++;
-                log(this.idx); 
-                this._runDiscover();
-            } else { 
-                this._discoverer.stop();
-                MainWindow.offsetController.setEndIdx();
-                //Application.view.list();
-                MainWindow.view.listBoxAdd();                
-            }                                 
         } else {
         // don't index files we can't play
             log("File cannot be played"); 
         }
+ 
+        if (this.idx < this.endIdx && this.idx >= 0) {
+            this.idx++;
+            log("this.listType discovering" + listType);
+            this._runDiscover();
+        } else { 
+            this._discoverer.stop();
+            log("this.listType discovering" + listType);
+            MainWindow.offsetController.setEndIdx();
+            
+            if (listType == ListType.NEW) {
+                MainWindow.view.listBoxAdd();
+                MainWindow.view.scrolledWinAdd();
+                currentlyEnumerating = CurrentlyEnumerating.FALSE;
+                log("this.currentlyEnumerating new" +currentlyEnumerating);
+            } else if (listType == ListType.REFRESH){
+                MainWindow.view.scrolledWinDelete();
+                currentlyEnumerating = CurrentlyEnumerating.FALSE;
+                log("this.currentlyEnumerating " +currentlyEnumerating);
+            }                
+        }                                 
+    },
+    
+    setListTypeNew: function() {
+        listType = ListType.NEW;
+    },    
+        
+    _onDirChanged: function(dirMonitor, file1, file2, eventType) {
+        log("eventType" + eventType);
+        if (eventType == Gio.FileMonitorEvent.DELETED || 
+            (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
+          stopVal = EnumeratorState.ACTIVE;
+          allFilesInfo.length = 0;
+          fileInfo.length = 0;
+          log(stopVal + "this._stopVal");
+          listType = ListType.REFRESH;
+          log("this.listType" + listType);
+          log("this.currentlyEnumerating " + currentlyEnumerating);
+          if(currentlyEnumerating == CurrentlyEnumerating.FALSE) {
+            currentlyEnumerating = CurrentlyEnumerating.TRUE;
+            MainWindow.view.listBoxRefresh();
+          }
+        }
+        
+        if (eventType == Gio.FileMonitorEvent.CREATED)
+            startRecording = true;
+        log("MainWindow.recordPipeline" + MainWindow.recordPipeline);     
     },
     
     _getCapsForList: function(info) {
@@ -240,19 +306,19 @@ const Listview = new Lang.Class({
            
         let containerStreams = info.get_container_streams()[0];
         let containerCaps = discovererStreamInfo.get_caps();
-        log(containerCaps.to_string());
+        //log(containerCaps.to_string());
         let audioStreams = info.get_audio_streams()[0];
         let audioCaps =  audioStreams.get_caps();
-        log(audioCaps.to_string()); 
-        log(this.file.fileName);         
+        //log(audioCaps.to_string()); 
+        //log(this.file.fileName);         
                      
         if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.OGG))) {           
             if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_VORBIS)))
                 this.file.mediaType = mediaTypeMap.OGG_VORBIS;
             else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OPUS)))
                 this.file.mediaType = mediaTypeMap.OPUS;
-        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.ID3))) {
-            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.ID3)))
+        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP3))) {
+            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
                 this.file.mediaType = mediaTypeMap.MP3;
         } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP4))) {
             if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP4)))
@@ -279,7 +345,7 @@ const Listview = new Lang.Class({
     }, 
         
     getFilesInfoForList: function() {
-        return this._allFilesInfo;//return 
+        return allFilesInfo;
     },
     
     getEndIdx: function() {

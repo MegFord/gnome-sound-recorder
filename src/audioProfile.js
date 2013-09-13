@@ -29,15 +29,18 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 
+const MainWindow = imports.mainWindow;
+const Preferences = imports.preferences;
+
 const containerProfileMap = {
     OGG: "application/ogg", 
-    ID3: "application/x-id3",
+    MP3: "application/x-id3",
     MP4: "video/quicktime,variant=(string)iso"
 };
 
 const audioCodecMap = {
     FLAC: "audio/x-flac",      
-    ID3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
+    MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
     MP4: "audio/mpeg,mpegversion=(int)4",
     OPUS: "audio/x-opus", 
     OGG_VORBIS: "audio/x-vorbis"
@@ -47,7 +50,7 @@ const comboBoxMap = {
     OGG_VORBIS: 0,
     OPUS: 1,
     FLAC: 2,
-    ID3: 3,
+    MP3: 3,
     MP4: 4
 };
 
@@ -57,8 +60,8 @@ const AudioProfile = new Lang.Class({
     assignProfile: function(profileName){
         if (profileName)
             this._profileName = profileName;
-        else 
-            this._profileName = 0;
+       else 
+            this._profileName = comboBoxMap.OGG_VORBIS;
             log("profileName" + this._profileName);
         this._values = [];
             switch(this._profileName) {
@@ -72,14 +75,13 @@ const AudioProfile = new Lang.Class({
                 case comboBoxMap.FLAC:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.FLAC });
                     break;
-                case comboBoxMap.ID3:
-                    this._values.push({ container: containerProfileMap.MP3, audio: audioCodecMap.ID3 });
+                case comboBoxMap.MP3:
+                    this._values.push({ container: containerProfileMap.MP3, audio: audioCodecMap.MP3 });
                     break;
                 case comboBoxMap.MP4:
                     this._values.push({ container: containerProfileMap.AAC, audio: audioCodecMap.MP4 });
                     break;
                 default:
-                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS });
                     break;
             }
     },

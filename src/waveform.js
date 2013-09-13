@@ -35,9 +35,10 @@ const Mainloop = imports.mainloop;
 
 const MainWindow = imports.mainWindow;
 
-const peaks = [];
 const INTERVAL = 100000000;
+const peaks = [];
 const pauseVal = 10;
+const waveSamples = 40;
 
 const WaveType = {
     RECORD: 0,
@@ -50,6 +51,9 @@ const WaveForm = new Lang.Class({
     _init: function(grid, file) {
         this._grid = grid;
         
+        let placeHolder = -100;
+        for (let i = 0; i < 40; i++)
+            peaks.push(placeHolder);
         if (file) {
             this.waveType = WaveType.PLAY;
             this.file = file;
@@ -59,17 +63,20 @@ const WaveForm = new Lang.Class({
           this.waveType = WaveType.RECORD;
         }  
         
-        this.count = 0;
-        this.tick = 0;
-        this.drawing = Gtk.DrawingArea.new();
+        let gridWidth = 0;
+        let drawingWidth = 0;
+        let drawingHeight = 0;
+        this.drawing = Gtk.DrawingArea.new({ height_request: 45,
+                                             width_request: 350,
+                                             valign: Gtk.Align.FILL });
         if (this.waveType == WaveType.RECORD) {
-            let gridWidth = MainWindow.groupGrid.get_allocated_width();
+            gridWidth = MainWindow.groupGrid.get_allocated_width();
             log("gridWidth " + gridWidth);
-            let drawingWidth = gridWidth * 0.75;
+            drawingWidth = gridWidth * 0.75;
             this.drawing.set_size_request(drawingWidth, 36);
             this._grid.attach(this.drawing, 2, 0, 3, 2);
         } else {
-            this.drawing.set_size_request(200, 36);
+            this.drawing.set_size_request(350, 36);
             this._grid.add(this.drawing);
         }
 
@@ -85,9 +92,8 @@ const WaveForm = new Lang.Class({
     },
 
     _launchPipeline: function() {
-        this.peaks = null;
         this.pipeline =
-            Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=1 !level name=wavelevel interval=100000000 post-messages=true ! fakesink qos=false");
+            Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=1 !level name=level interval=100000000 post-messages=true ! fakesink qos=false");
         this._level = this.pipeline.get_by_name("wavelevel");
         let decode = this.pipeline.get_by_name("decode");
         let bus = this.pipeline.get_bus();
@@ -115,24 +121,25 @@ const WaveForm = new Lang.Class({
                 let s = message.get_structure();
                     if (s) {
                         if (s.has_name("level")) {
-                            let p = null;
-                            let peakVal = 0;
+                            let peaknumber = 0;
                             let st = s.get_value("timestamp");
-                            log(st);
                             let dur = s.get_value("duration");
-                            log(dur);
                             let runTime = s.get_value("running-time");
                             log(runTime);
-                            peakVal = s.get_value("peak");
+                            let peakVal = s.get_value("peak");
                 
                             if (peakVal) {
                                 let val = peakVal.get_nth(0);
-                                let valBase = (val / 20);
-                                let value = Math.pow(10, valBase);
-                                let peaknumber = value/3.375;
+                                log(val);
+                                if (val > 0)
+                                    val = 0;
+                                    
+                                let value = Math.pow(10, val/20);
+                                log(value);
+                                    
+                                peaks.push(value);
                                 log("wave height" + value);
-                                peaks.push(peaknumber);
-                            }                           
+                            }                            
                         }
                     }
                 log("length of the peaks array" + peaks.length);
@@ -164,110 +171,99 @@ const WaveForm = new Lang.Class({
     },
                 
     fillSurface: function(drawing, cr) {
-        if (this.waveType == WaveType.PLAY) {
-            log("fill surface error" + this.waveType);
+        let start = 0;
+        
+        if (this.waveType == WaveType.PLAY) { 
+                   
             if (peaks.length != this.playTime) { 
                 this.pipeline.set_state(Gst.State.PLAYING);
                 log("continue drawing " + peaks.length);
             }
+            start = Math.floor(this.playTime);
+        } else {
+            if (this.recordTime >= 0)
+            start = this.recordTime;
         }
         
-        let w = this.drawing.get_allocated_width();
-        log("w " + w);
-        let h = this.drawing.get_allocated_height();
+        let i = 0;
+        let xAxis = 0;
+        let end = start + 40;
+        let width = this.drawing.get_allocated_width();
+        log(width);
+        let waveheight = this.drawing.get_allocated_height();
+        log(waveheight);
         let length = this.nSamples;
-        log("length " + this.nSamples);
-        let waveheight = h;
-        let pixelsPerSample = w/40;
-        log("pixelsPerSample " + pixelsPerSample);
-        let idx;
-        let gradient = new Cairo.LinearGradient(0, 0, this.tick * pixelsPerSample, peaks[idx] * waveheight);
+        let pixelsPerSample = width/waveSamples;   
+
+        let gradient = new Cairo.LinearGradient(0, 0, width , waveheight);
         gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);       
         gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
         cr.setLineWidth(1);
         cr.setSourceRGBA(0.0, 185, 161, 255);
-        cr.moveTo(0, h);
                   
-        for(let i = 0; i <= this.tick; i++) {       
-                    
-            if (this.tick >= 40 && peaks[idx] != null) {
-                idx = this.count + i + 1;
-                log("value of the index for peaks " + idx);
-            } else {
-                idx = i;
+        for(i = start; i <= end; i++) {
+        
+            // Keep moving until we get to a non-null array member
+            if (peaks[i] < 0) {            
+                cr.moveTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)))
+                log(i);
             }
-            
-                if (peaks[idx] != null) {
-                cr.lineTo(i * pixelsPerSample, peaks[idx] * waveheight);
-                log("current base value for x co-ordinate " + this.tick);
-                log("peak height " + peaks[idx]);
-                log("array length " + peaks.length);
-                log("array index value " + idx);
-
-            } 
+      
+            // Start drawing when we reach the first non-null array member  
+            if (peaks[i] != null && peaks[i] >= 0) {
+                let idx = i - 1;
+                
+                if (start >= 40 && xAxis == 0) { 
+                     cr.moveTo((xAxis * pixelsPerSample), waveheight);
+                }
+                
+                cr.lineTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)));
+                log(peaks[i] * waveheight + "lines");
+            }
+                                
+            xAxis += 1;
         }
-
-        cr.lineTo(this.tick * pixelsPerSample, h);
+        cr.lineTo(xAxis * pixelsPerSample, waveheight);
         cr.closePath();
-        cr.strokePreserve();
-       
+        cr.strokePreserve();       
         cr.setSource(gradient);
 	    cr.fillPreserve();
+	    cr.$dispose(); 
     },
     
     _drawEvent: function(playTime, recPeaks) {
         let lastTime;
+        
         if (this.waveType == WaveType.PLAY) {
             lastTime = this.playTime;
             this.playTime = playTime;
-            log("check peaks" + peaks.length);
-            log("playTime time" + this.playTime);
                   
             if (peaks.length < this.playTime) {
                 this.pipeline.set_state(Gst.State.PLAYING);
-                log("continue drawing " + peaks.length);
             } 
                     
-            if (this.tick < this.playTime) {//&& this.tick < this.nSamples) {  should be somewhere else
-                this.tick += 1;
-                this.count += 1;
-                log("tick value" + this.tick);
-            }
-        
             if (lastTime != this.playTime) {
                 this.drawing.queue_draw();
-                log("drawing queued");
             }
+            
         } else {
             peaks.push(recPeaks);
             lastTime = this.recordTime;
             this.recordTime = playTime;
-            log("rec check peaks" + peaks.length);
-            log("recordTime time" + this.recordTime);
                   
             if (peaks.length < this.recordTime) {
                 log("error");
-            } 
-                    
-            if (this.tick < this.recordTime) {//&& this.tick < this.nSamples) { should be somewhere else
-                this.tick += 1;
-                this.count += 1;
-                log("rec tick value" + this.tick);
             }
-        
-            if (lastTime != this.recordTime) {
-                this.drawing.queue_draw();
-                log("rec drawing queued");
-            }
+                      
+            this.drawing.queue_draw();
         }
         return true;
     },
     
     endDrawing: function() {
         let width = this._grid.get_allocated_width();
-        this.tick = 0;
         this.count = 0;
         peaks.length = 0;
-        this.drawing.destroy(); 
-    }    
+        this.drawing.destroy();
+    }
 });

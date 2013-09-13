@@ -86,7 +86,9 @@ const _TENTH_SEC = 100000000;
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
             log("Unable to set the playbin to the playing state.\n"); 
             this.onEndOfStream();
-        }   
+        } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {        
+            MainWindow.view.setVolume(); 
+        }  
     },
     
     pausePlaying: function() {
@@ -95,7 +97,7 @@ const _TENTH_SEC = 100000000;
         this.baseTime = this.absoluteTime;
         log("pause");
         if (this.timeout) {
-           GLib.source_remove(this.timeout);
+            GLib.source_remove(this.timeout);
             this.timeout = null;
         }
     },
@@ -135,8 +137,8 @@ const _TENTH_SEC = 100000000;
                 break;
                 
             case Gst.MessageType.ERROR:
-                log("Error :" + e.parse_error());
-                this._showErrorDialog(_("Error :" + e.parse_error()));              
+                log("Error :" + message.parse_error());
+                this._showErrorDialog(_("Error:" + message.parse_error()));           
                 break;
                 
             case Gst.MessageType.DURATION: 
@@ -157,7 +159,7 @@ const _TENTH_SEC = 100000000;
                 this.pausePlaying();
                 break;
            
-           case Gst.MessageType.NEW_CLOCK:
+            case Gst.MessageType.NEW_CLOCK:
                 if (this.playState == PipelineStates.PAUSED) {
                     this.clock = this.play.get_clock();
                     this.startPlaying();
@@ -180,12 +182,12 @@ const _TENTH_SEC = 100000000;
         
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
             log("called UPDATE");
-            this.view.setLabel(time, this.trackDurationSecs);           
+            this.view.setLabel(time);           
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
-            this.view.setLabel(0, this.trackDurationSecs); 
+            this.view.setLabel(0); 
         }
         
-        this.absoluteTime = this.clock.get_time();
+       this.absoluteTime = this.clock.get_time();
         
         if (this.baseTime == 0)
             this.baseTime = this.absoluteTime;
@@ -243,8 +245,7 @@ const _TENTH_SEC = 100000000;
     },
     
     setVolume: function(value) {
-        let level = this.play.convert_volume(GstAudio.StreamVolumeFormat.LINEAR, GstAudio.StreamVolumeFormat.CUBIC, value);
-        this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, level);
+        this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
     },
     
     passSelected: function(selected) { 

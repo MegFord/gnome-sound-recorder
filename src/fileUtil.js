@@ -59,12 +59,14 @@ const FileUtil = new Lang.Class({
     }, 
     
     _deleteFileCallback: function(obj, res) {
-        this._deleted = obj.delete_finish(res);
-        //this._list = new Listview.Listview();
-        //this._list.enumerateDirectory();
-       // Application.offsetController.resetOffset();
-       //Application.add_named(groupGrid, name);
-        
+        this._deleted = obj.delete_finish(res);        
+    },
+    
+    getDirPath: function() {
+        let path = MainWindow.path;
+        let dirName = GLib.build_filenamev(path);
+        let dir = Gio.file_new_for_path(dirName);
+        return dir;
     }      
 });
     
@@ -118,16 +120,14 @@ const OffsetController = new Lang.Class({
         log(this.totItems);
         this.ensureCount = this._offset + _OFFSET_STEP - 1; 
         log(this.ensureCount);
-        log("counitn");
         this.getItemCount();
         if (this.ensureCount < this.totItems) {
             this.endIdx = this.ensureCount;
             log(this.endIdx);
-            log("wtf");}
-        else {
+        } else {
             this.endIdx = this.totItems - 1;
             log(this.endIdx); 
-            log("ttt");}
+        }
             
         CurrentEndIdx = this.endIdx;
         this.getcidx();
@@ -137,6 +137,5 @@ const OffsetController = new Lang.Class({
         return CurrentEndIdx;
     }
 });
-Signals.addSignalMethods(OffsetController.prototype); //Do I use this?
 
 
