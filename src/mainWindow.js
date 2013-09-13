@@ -509,7 +509,9 @@ const MainView = new Lang.Class({
     },
     
     listBoxRefresh: function() {
+        loadMoreButton.destroy();
         previousSelRow = null;
+        loadMoreButton = null;
         this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);  
         list.enumerateDirectory();
         //this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);          
@@ -757,8 +759,8 @@ const LoadMoreButton = new Lang.Class({
      
     onLoadMore: function() {   
         //offsetController.increaseOffset();
-        UpperBoundVal += 182;
-        view.scrollbar.set_upper(UpperBoundVal);
+        //UpperBoundVal += 182;
+        //view.scrollbar.set_upper(UpperBoundVal);
         view.listBoxLoadMore();        
     }
 }); 

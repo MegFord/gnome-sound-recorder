@@ -281,7 +281,7 @@ const Listview = new Lang.Class({
             allFilesInfo.length = 0;
             fileInfo.length = 0;
             log(stopVal + "this._stopVal");
-            this.setListTypeRefresh();
+            listType = ListType.REFRESH;
             log("this.listType" + listType);
             log("this.currentlyEnumerating " + currentlyEnumerating);
             
