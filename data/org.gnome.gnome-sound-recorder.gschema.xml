@@ -1,0 +1,16 @@
+<schemalist>
+  <schema id="org.gnome.gnome-sound-recorder" path="/org/gnome/gnome-sound-recorder/">
+    <key name="window-size" type="ai">
+      <default>[700, 480]</default>
+      <summary>Window size</summary>
+      <description>Window size (width and height).</description>
+    </key>
+    <key name="window-position" type="ai">
+      <default>[]</default>
+      <summary>Window position</summary>
+      <description>Window position (x and y).</description>
+    </key>
+  </schema>
+</schemalist>
+
+

@@ -247,7 +247,7 @@ const _TENTH_SEC = 100000000;
         this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, level);
     },
     
-    passSelected: function(selected) { //I think this is unnecessary?
+    passSelected: function(selected) { 
         this._selected = selected;
         log(selected);
         log("SELECT");
