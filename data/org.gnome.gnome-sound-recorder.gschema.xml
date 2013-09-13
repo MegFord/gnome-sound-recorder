@@ -11,7 +11,7 @@
       <description>Window position (x and y).</description>
     </key>
   </schema>
-  <schema id="org.gnome.SoundRecorder.Application.encoding-settings" path="/org/gnome/SoundRecorder/Application/encoding-settings/">
+  <schema id="org.org.gnome.gnome-sound-recorder.encoding-settings" path="/org/gnome/gnome-sound-recorder/encoding-settings/">
     <key name="media-type" type="s">
       <default>'audio/x-vorbis'</default>
       <summary>Preferred media type for encoding audio when recording</summary>
@@ -23,14 +23,14 @@
       <description>Maps media types to audio encoder preset names. If there is no mapping for a media type, the default encoder settings will be used.</description>
     </key>
   </schema>
-   <schema id="org.gnome.SoundRecorder.Application.play" path="/org/gnome/SoundRecorder/Application/play/">
+   <schema id="org.org.gnome.gnome-sound-recorder.play" path="/org/gnome/gnome-sound-recorder/play/">
  <key name="volume" type="d">
       <default>0.75</default>
       <summary>Volume level</summary>
       <description>Volume level.</description>
     </key>
   </schema>
-   <schema id="org.gnome.SoundRecorder.Application.record" path="/org/gnome/SoundRecorder/Application/record/">
+   <schema id="org.org.gnome.gnome-sound-recorder.record" path="/org/gnome/gnome-sound-recorder/record/">
  <key name="volume" type="d">
       <default>0.75</default>
       <summary>Volume level</summary>
