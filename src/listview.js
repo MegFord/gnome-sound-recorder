@@ -175,16 +175,9 @@ const Listview = new Lang.Class({
        
     _setDiscover: function() {
         this._controller = MainWindow.offsetController;
-        this.totItems = this.getItemCount();
-        this.startIdx = this._controller.getOffset();
+        this.startIdx = 0;
         log("this.startIdx" + this.startIdx);
-        this.ensureCount = this.startIdx + this._controller.getOffsetStep() - 1; ; 
-        
-        if (this.ensureCount < this.totItems)
-            this.endIdx = this.ensureCount;
-        else
-            this.endIdx = this.totItems - 1;
-
+        this.endIdx = this._controller.getEndIdx(); 
         this.idx = this.startIdx; 
         this._runDiscover();
         return false;
@@ -258,7 +251,6 @@ const Listview = new Lang.Class({
         } else { 
             this._discoverer.stop();
             log("this.listType discovering" + listType);
-            MainWindow.offsetController.setEndIdx();
             
             if (listType == ListType.NEW) {
                 MainWindow.view.listBoxAdd();
@@ -275,23 +267,28 @@ const Listview = new Lang.Class({
     
     setListTypeNew: function() {
         listType = ListType.NEW;
-    },    
+    }, 
+    
+    setListTypeRefresh: function() {
+        listType = ListType.REFRESH;
+    },
         
     _onDirChanged: function(dirMonitor, file1, file2, eventType) {
         log("eventType" + eventType);
         if (eventType == Gio.FileMonitorEvent.DELETED || 
             (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
-          stopVal = EnumeratorState.ACTIVE;
-          allFilesInfo.length = 0;
-          fileInfo.length = 0;
-          log(stopVal + "this._stopVal");
-          listType = ListType.REFRESH;
-          log("this.listType" + listType);
-          log("this.currentlyEnumerating " + currentlyEnumerating);
-          if(currentlyEnumerating == CurrentlyEnumerating.FALSE) {
-            currentlyEnumerating = CurrentlyEnumerating.TRUE;
-            MainWindow.view.listBoxRefresh();
-          }
+            stopVal = EnumeratorState.ACTIVE;
+            allFilesInfo.length = 0;
+            fileInfo.length = 0;
+            log(stopVal + "this._stopVal");
+            this.setListTypeRefresh();
+            log("this.listType" + listType);
+            log("this.currentlyEnumerating " + currentlyEnumerating);
+            
+            if (currentlyEnumerating == CurrentlyEnumerating.FALSE) {
+                currentlyEnumerating = CurrentlyEnumerating.TRUE;
+                MainWindow.view.listBoxRefresh();
+            }
         }
         
         if (eventType == Gio.FileMonitorEvent.CREATED)
@@ -348,11 +345,11 @@ const Listview = new Lang.Class({
         return allFilesInfo;
     },
     
-    getEndIdx: function() {
-    log(this.endIdx);
-    log("endidx");
+    /*getEndIdx: function() {
+        log(this.endIdx);
+        log("endidx");
         return this.endIdx;
-    }              
+    }  */           
 });
 
 
