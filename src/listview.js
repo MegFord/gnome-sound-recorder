@@ -343,13 +343,7 @@ const Listview = new Lang.Class({
         
     getFilesInfoForList: function() {
         return allFilesInfo;
-    },
-    
-    /*getEndIdx: function() {
-        log(this.endIdx);
-        log("endidx");
-        return this.endIdx;
-    }  */           
+    }          
 });
 
 

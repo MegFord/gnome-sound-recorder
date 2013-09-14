@@ -114,6 +114,7 @@ const AudioProfile = new Lang.Class({
         
         if (this._values[idx].audio) {
             this.suffixName = this.encodingProfile.get_file_extension();
+            
             if (this.suffixName == null) 
                 this.suffixName = this._containerProfile.get_file_extension();
         }  

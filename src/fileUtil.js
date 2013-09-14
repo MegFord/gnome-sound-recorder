@@ -83,36 +83,13 @@ const OffsetController = new Lang.Class({
         CurrentEndIdx = _OFFSET_STEP;
     },
 
-    // to be called to load more files into the listview
-    increaseOffset: function() {
-        this._offset += _OFFSET_STEP;
-        //this.emit('offset-changed', this._offset);
-    },
-
-    // to be called when a recording is made/deleted
-    resetItemCount: function() {
-      MainWindow.list.enumerateDirectory();         
-    },
-
-    resetOffset: function() {
-        this._offset = 0;
-    },
-
-    getRemainingFiles: function() {
-        return (this._itemCount - (this._offset + _OFFSET_STEP));
-    },
-
-    getOffsetStep: function() {
-        return _OFFSET_STEP;
-    },
-
     getOffset: function() {
         return this._offset;
     },
     
     getEndIdx: function() {
         this.totItems = MainWindow.list.getItemCount();
-        log(this.totItems);
+ 
         if (CurrentEndIdx < this.totItems) {
             this.endIdx = CurrentEndIdx;
             log(this.endIdx);

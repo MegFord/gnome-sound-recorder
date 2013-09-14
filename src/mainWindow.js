@@ -352,16 +352,17 @@ const MainView = new Lang.Class({
             this.widget.get_style_context().add_class('toolbar');
             this.rowGrid.attach(this.widget, 1, 0, 1, 2);
                        
-            this._box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
-            this._group = new Gtk.ToolItem({ child: this._box });
+            this._box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                      name: "Playbox" });
+            this._group = new Gtk.ToolItem({ child: this._box, name: "PlayGroup"});
             this.widget.insert(this._group, -1);
             
             // play button
-            let playImage = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
-            let pauseImage = Gtk.Image.new_from_icon_name("media-playback-pause-symbolic", Gtk.IconSize.BUTTON);
-            this._playListButton = new PlayPauseButton({ hexpand: false,
-                                                         name: "PlayButton" });
-            this._playListButton.set_image(playImage);
+            this.playImage = Gtk.Image.new();
+            this.playImage.set_from_icon_name('media-playback-start-symbolic', Gtk.IconSize.BUTTON);
+            this._playListButton = new Gtk.Button({ hexpand: false,
+                                                    name: "PlayButton" });
+            this._playListButton.set_image(this.playImage);
             this._box.pack_start(this._playListButton, false, true, 0);
             this._playListButton.show();
             this._playListButton.connect('clicked', Lang.bind(this,
@@ -372,7 +373,35 @@ const MainView = new Lang.Class({
                     let idx = parseInt(gridForName.name);
                     
                     let file = this._files[idx];
-                    this._playListButton.onPlayPauseToggled(row, file);
+                    this.onPlayPauseToggled(row, file);
+                }));
+                
+            this.pauseWidget = new Gtk.Toolbar({ show_arrow: false,
+                                                 halign: Gtk.Align.END,
+                                                 valign: Gtk.Align.FILL,
+                                                 icon_size: Gtk.IconSize.BUTTON,
+                                                 opacity: 1,
+                                                 name: "PauseToolBar" });
+            this.pauseWidget.get_style_context().add_class('toolbar');
+            this.rowGrid.attach(this.pauseWidget, 1, 0, 1, 2);
+                       
+            this._pauseBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                           name: "Pausebox" });
+            this._pauseGroup = new Gtk.ToolItem({ child: this._pauseBox, name: "PauseGroup"});
+            this.pauseWidget.insert(this._pauseGroup, -1);
+            
+            // pause button
+            this.pauseImage = Gtk.Image.new();
+            this.pauseImage.set_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
+            this._pauseListButton = new Gtk.Button({ hexpand: false,
+                                                     name: "PauseButton" });
+            this._pauseListButton.set_image(this.pauseImage);
+            this._pauseBox.pack_start(this._pauseListButton, false, true, 0);
+            this._pauseListButton.show();
+            this._pauseListButton.connect('clicked', Lang.bind(this,
+                function(){
+                    let row = this.listBox.get_selected_row();
+                    this.onPause(row);
                 }));
             
             this._fileName = new Gtk.Label({ use_markup: true,
@@ -508,18 +537,22 @@ const MainView = new Lang.Class({
        loadMoreButton.show();      
     },
     
+    destroyLoadMoreButton: function() {
+        if (loadMoreButton != null) {
+            loadMoreButton.destroy();
+            loadMoreButton = null;
+        }
+    },
+    
     listBoxRefresh: function() {
-        loadMoreButton.destroy();
+        this.destroyLoadMoreButton();        
         previousSelRow = null;
-        loadMoreButton = null;
         this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);  
-        list.enumerateDirectory();
-        //this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);          
+        list.enumerateDirectory();         
     },
     
     listBoxLoadMore: function() {
-       loadMoreButton.destroy();
-       loeadMoreButton = null;
+       this.destroyLoadMoreButton();
        this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
        offsetController.increaseEndIdxStep();
        list.setListTypeRefresh();
@@ -605,7 +638,7 @@ const MainView = new Lang.Class({
         let fileToPlay = this._getFileNameFromRow(this._selected);
         
         return fileToPlay;
-    }, //why is this here? I can just use getFileNameFromRow, can't I?
+    }, 
     
     _onInfoButton: function(selected) {
         this._selected = selected;
@@ -630,6 +663,81 @@ const MainView = new Lang.Class({
             this.playTimeLabel.label = this.timeLabelString;
         }
     },
+    
+    onPause: function(listRow) {
+        this.activeState = play.getPipeStates();
+        if (this.activeState == PipelineStates.PLAYING) {
+            play.pausePlaying();
+            let rowWidget = listRow.get_child(this.widget);
+            log(rowWidget + "rowWidget");
+            rowWidget.foreach(Lang.bind(this,
+                function(child) {
+                
+                    if (child.name == "PauseToolbar") {
+                        child.hide();
+                        child.sensitive = false;
+                    }  
+                           
+                    if (child.name == "PlayToolBar" ) {
+                        child.show();
+                        child.sensitive = true;
+                    }
+                }));
+        }
+    },
+    
+    onPlayPauseToggled: function(listRow, selFile) {
+        this.activeState = play.getPipeStates();
+        setVisibleID = ActiveArea.PLAY;
+        log(listRow);
+        let width = listRow.get_allocated_width();
+        if (this.activeState != PipelineStates.PLAYING) {
+            play.startPlaying();
+            log(this);
+            
+            let rowWidget = listRow.get_child(this.widget);
+            log(rowWidget + "rowWidget");
+            rowWidget.foreach(Lang.bind(this,
+                function(child) {
+                           
+                    if (child.name == "InfoToolbar" || child.name == "DeleteToolbar" || child.name == "PlayToolBar" ) {
+                        child.hide();
+                        child.sensitive = false;
+                    }
+                    
+                    if (child.name == "PauseToolbar") {
+                        child.show();
+                        child.sensitive = true;
+                    }    
+                   
+                    if (child.name == "PlayLabelBox") {
+                        child.foreach(Lang.bind(this, 
+                            function(grandchild) {
+                                
+                                if (grandchild.name == "PlayTimeLabel") {
+                                    view.playTimeLabel = grandchild;
+                                    log(view.playTimeLabelLabel)
+                                }
+                                    
+                                if (grandchild.name == "DividerLabel" )
+                                    grandchild.show();
+                             }));
+                    }
+                                                     
+                    if (child.name == "WaveFormGrid") {
+                        this.wFGrid = child;
+                        child.sensitive = true;
+                    }
+                }));
+             log(this.activeState);
+             log("activeState");
+             listRow.set_property("width-request", width);
+            
+            if (this.activeState != PipelineStates.PAUSED) {
+                wave = new Waveform.WaveForm(this.wFGrid, selFile);
+            }
+        }
+    }
 });
 
 const RecordButton = new Lang.Class({
@@ -638,11 +746,14 @@ const RecordButton = new Lang.Class({
     
     _init: function(activeProfile) {
         this.parent();
+        this.image = Gtk.Image.new_from_icon_name('media-record-symbolic', Gtk.IconSize.BUTTON);
+        this.set_always_show_image(true);
         this.set_label("Record");
         this.connect("clicked", Lang.bind(this, this._onRecord));
     },
     
     _onRecord: function() {
+        view.destroyLoadMoreButton();
         view.hasPreviousSelRow();
         view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
         this.set_sensitive(false);
@@ -659,15 +770,18 @@ const RecordButton = new Lang.Class({
 
 const PlayPauseButton = new Lang.Class({
     Name: "PlayPauseButton",
-    Extends: Gtk.Button,
+    //Extends: Gtk.Button,
     
     _init: function() {
-        //let playImage = Gtk.Image.new_from_icon_name("media-playback-start-symbolic", Gtk.IconSize.BUTTON);
         this.parent();
-        //this.set_image(playImage);
+        this.playImage = Gtk.Image.new_from_icon_name('media-playback-start-symbolic', Gtk.IconSize.BUTTON);
+        this.set_image(this.playImage);
     },
     
     onPlayPauseToggled: function(listRow, selFile) {
+        //this.playImage.destroy();
+        this.pauseImage = Gtk.Image.new_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
+        this.show();
         this.activeState = play.getPipeStates();
         setVisibleID = ActiveArea.PLAY;
         log(listRow);
@@ -680,25 +794,34 @@ const PlayPauseButton = new Lang.Class({
             log(rowWidget + "rowWidget");
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
-                        
-                        if (child.name == "InfoToolbar" || child.name == "DeleteToolbar" ) {
-                            child.hide();
-                            child.sensitive = false;
-                        }
+                    log(child.name)
+                    if (child.name == "PlayToolBar") {
+                       // let childButton = child.get_nth_item(1);
+
+                              log(childButton);                 // greatgrandchild.set_image(this.pauseImage);
+                                        //}));
+                                 }
+                            //}));
+                   // } 
+                           
+                    if (child.name == "InfoToolbar" || child.name == "DeleteToolbar" ) {
+                        child.hide();
+                        child.sensitive = false;
+                    }
                     
-                        if (child.name == "PlayLabelBox") {
-                            child.foreach(Lang.bind(this, 
-                                function(grandchild) {
+                    if (child.name == "PlayLabelBox") {
+                        child.foreach(Lang.bind(this, 
+                            function(grandchild) {
                                 
-                                    if (grandchild.name == "PlayTimeLabel") {
-                                        view.playTimeLabel = grandchild;
-                                        log(view.playTimeLabelLabel)
-                                    }
+                                if (grandchild.name == "PlayTimeLabel") {
+                                    view.playTimeLabel = grandchild;
+                                    log(view.playTimeLabelLabel)
+                                }
                                     
-                                    if (grandchild.name == "DividerLabel" )
-                                        grandchild.show();
-                                }));
-                        }
+                                if (grandchild.name == "DividerLabel" )
+                                    grandchild.show();
+                             }));
+                    }
                                                      
                     if (child.name == "WaveFormGrid") {
                         this.wFGrid = child;
@@ -749,18 +872,11 @@ const LoadMoreButton = new Lang.Class({
         this.parent();
         this._block = false;
 
-        // Translators: "more" refers to recordings in this context
-        let label = new Gtk.Label({ label: _("Load More"),
-                                    visible: true });
-
         this.label = _("Load More");                                       
         this.get_style_context().add_class('documents-load-more');
     },
      
     onLoadMore: function() {   
-        //offsetController.increaseOffset();
-        //UpperBoundVal += 182;
-        //view.scrollbar.set_upper(UpperBoundVal);
         view.listBoxLoadMore();        
     }
 }); 

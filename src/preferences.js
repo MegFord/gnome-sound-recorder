@@ -109,8 +109,5 @@ const Preferences = new Lang.Class({
       
       onDoneClicked: function() {
         this.widget.destroy(); 
-      },
-      
-       
-      
+      }      
 });
