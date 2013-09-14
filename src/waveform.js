@@ -67,7 +67,7 @@ const WaveForm = new Lang.Class({
         let drawingWidth = 0;
         let drawingHeight = 0;
         this.drawing = Gtk.DrawingArea.new({ height_request: 45,
-                                             width_request: 350,
+                                             width_request: 380,
                                              valign: Gtk.Align.FILL });
         if (this.waveType == WaveType.RECORD) {
             gridWidth = MainWindow.groupGrid.get_allocated_width();
@@ -76,13 +76,12 @@ const WaveForm = new Lang.Class({
             this.drawing.set_size_request(drawingWidth, 36);
             this._grid.attach(this.drawing, 2, 0, 3, 2);
         } else {
-            this.drawing.set_size_request(350, 36);
+            this.drawing.set_size_request(380, 36);
             this._grid.add(this.drawing);
         }
 
         this.drawing.connect("draw", Lang.bind(this, this.fillSurface));
         this.drawing.show_all();
-        this.drawing.get_style_context().add_class('background');
         this._grid.show_all();
         
         if (this.waveType == WaveType.PLAY) { 
@@ -194,12 +193,19 @@ const WaveForm = new Lang.Class({
         log(waveheight);
         let length = this.nSamples;
         let pixelsPerSample = width/waveSamples;   
-
+        log("WAVE" + this.waveType)
         let gradient = new Cairo.LinearGradient(0, 0, width , waveheight);
-        gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);       
-        gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
-        cr.setLineWidth(1);
-        cr.setSourceRGBA(0.0, 185, 161, 255);
+        if (this.waveType == WaveType.PLAY) { 
+              gradient.addColorStopRGBA(0.75, 0.94, 1.0, 0.94, 0.75);       
+              gradient.addColorStopRGBA(0.0, 0.94, 1.0, 0.94, 0.22);
+              cr.setLineWidth(1);
+              cr.setSourceRGBA(0.0, 255, 255, 255);
+        } else {
+            gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);       
+            gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
+            cr.setLineWidth(1);
+            cr.setSourceRGBA(0.0, 185, 161, 255);
+        }
                   
         for(i = start; i <= end; i++) {
         

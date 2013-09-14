@@ -455,7 +455,7 @@ const MainView = new Lang.Class({
             
             this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                                height_request: 45,
-                                               width_request: 350,
+                                               width_request: 380,
                                                valign: Gtk.Align.FILL,
                                                name: "WaveFormGrid" });
             this.waveFormGrid.set_no_show_all(true);
@@ -765,80 +765,6 @@ const RecordButton = new Lang.Class({
         audioProfile.assignProfile(activeProfile);
         view._record.startRecording(activeProfile);
         wave = new Waveform.WaveForm(view.recordGrid);
-    }
-});
-
-const PlayPauseButton = new Lang.Class({
-    Name: "PlayPauseButton",
-    //Extends: Gtk.Button,
-    
-    _init: function() {
-        this.parent();
-        this.playImage = Gtk.Image.new_from_icon_name('media-playback-start-symbolic', Gtk.IconSize.BUTTON);
-        this.set_image(this.playImage);
-    },
-    
-    onPlayPauseToggled: function(listRow, selFile) {
-        //this.playImage.destroy();
-        this.pauseImage = Gtk.Image.new_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
-        this.show();
-        this.activeState = play.getPipeStates();
-        setVisibleID = ActiveArea.PLAY;
-        log(listRow);
-        let width = listRow.get_allocated_width();
-        if (this.activeState != PipelineStates.PLAYING) {
-            play.startPlaying();
-            log(this);
-            
-            let rowWidget = listRow.get_child(this.widget);
-            log(rowWidget + "rowWidget");
-            rowWidget.foreach(Lang.bind(this,
-                function(child) {
-                    log(child.name)
-                    if (child.name == "PlayToolBar") {
-                       // let childButton = child.get_nth_item(1);
-
-                              log(childButton);                 // greatgrandchild.set_image(this.pauseImage);
-                                        //}));
-                                 }
-                            //}));
-                   // } 
-                           
-                    if (child.name == "InfoToolbar" || child.name == "DeleteToolbar" ) {
-                        child.hide();
-                        child.sensitive = false;
-                    }
-                    
-                    if (child.name == "PlayLabelBox") {
-                        child.foreach(Lang.bind(this, 
-                            function(grandchild) {
-                                
-                                if (grandchild.name == "PlayTimeLabel") {
-                                    view.playTimeLabel = grandchild;
-                                    log(view.playTimeLabelLabel)
-                                }
-                                    
-                                if (grandchild.name == "DividerLabel" )
-                                    grandchild.show();
-                             }));
-                    }
-                                                     
-                    if (child.name == "WaveFormGrid") {
-                        this.wFGrid = child;
-                        child.sensitive = true;
-                    }
-                }));
-             log(this.activeState);
-             log("activeState");
-             listRow.set_property("width-request", width);
-            
-            if (this.activeState != PipelineStates.PAUSED) {
-                wave = new Waveform.WaveForm(this.wFGrid, selFile);
-            }
-
-        } else if (this.activeState == PipelineStates.PLAYING) {
-            play.pausePlaying();
-        }
     }
 });
 
