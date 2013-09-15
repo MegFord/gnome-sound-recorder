@@ -34,8 +34,9 @@ const Preferences = imports.preferences;
 
 const containerProfileMap = {
     OGG: "application/ogg", 
-    MP3: "application/x-id3",
-    MP4: "video/quicktime,variant=(string)iso"
+    ID3: "application/x-id3",
+    MP4: "video/quicktime,variant=(string)iso",
+    NONE: "none"
 };
 
 const audioCodecMap = {
@@ -43,7 +44,7 @@ const audioCodecMap = {
     MP3: "audio/mpeg,mpegversion=(int)1,layer=(int)3",
     MP4: "audio/mpeg,mpegversion=(int)4",
     OPUS: "audio/x-opus", 
-    OGG_VORBIS: "audio/x-vorbis"
+    VORBIS: "audio/x-vorbis"
 };
 
 const comboBoxMap = {
@@ -57,7 +58,7 @@ const comboBoxMap = {
 const AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
    
-    assignProfile: function(profileName){
+    profile: function(profileName){
         if (profileName)
             this._profileName = profileName;
        else 
@@ -67,19 +68,19 @@ const AudioProfile = new Lang.Class({
             switch(this._profileName) {
                              
                 case comboBoxMap.OGG_VORBIS:
-                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OGG_VORBIS });
+                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.VORBIS });
                     break;
                 case comboBoxMap.OPUS:
                     this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OPUS }); 
                     break;
                 case comboBoxMap.FLAC:
-                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.FLAC });
+                    this._values.push({ audio: audioCodecMap.FLAC });
                     break;
                 case comboBoxMap.MP3:
-                    this._values.push({ container: containerProfileMap.MP3, audio: audioCodecMap.MP3 });
+                    this._values.push({ container: containerProfileMap.ID3, audio: audioCodecMap.MP3 });
                     break;
                 case comboBoxMap.MP4:
-                    this._values.push({ container: containerProfileMap.AAC, audio: audioCodecMap.MP4 });
+                    this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP4 });
                     break;
                 default:
                     break;
@@ -88,20 +89,21 @@ const AudioProfile = new Lang.Class({
        
     mediaProfile: function(){
         let idx = 0;
-                
+        let audioCaps; 
+        this._containerProfile = null;       
         if (this._values[idx].container) {
             log(this._values[idx].container);
             log(this._values[idx].audio);
             let caps = Gst.Caps.from_string(this._values[idx].container);
             this._containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
-            this._audioCaps = Gst.Caps.from_string(this._values[idx].audio);
-            this.encodingProfile = GstPbutils.EncodingAudioProfile.new(this._audioCaps, null, null, 1);
+            audioCaps = Gst.Caps.from_string(this._values[idx].audio);
+            this.encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             this._containerProfile.add_profile(this.encodingProfile);
             log(this._containerProfile);
             return this._containerProfile;
         } else if (!this._values[idx].container && this._values[idx].audio) {
-            this._audioCaps = Gst.Caps.from_string(this._values[idx].audio);
-            this.encodingProfile = GstPbutils.EncodingAudioProfile.new(this._audioCaps, null, null, 1);
+            audioCaps = Gst.Caps.from_string(this._values[idx].audio);
+            this.encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             log(this.encodingProfile);
             return this.encodingProfile;
         } else {
@@ -111,15 +113,17 @@ const AudioProfile = new Lang.Class({
     
     fileExtensionReturner: function() {
         let idx = 0;
+        let suffixName;
         
         if (this._values[idx].audio) {
-            this.suffixName = this.encodingProfile.get_file_extension();
+            if (this._containerProfile != null)
+                suffixName = this._containerProfile.get_file_extension();
             
-            if (this.suffixName == null) 
-                this.suffixName = this._containerProfile.get_file_extension();
+            if (suffixName == null) 
+                suffixName = this.encodingProfile.get_file_extension();
         }  
         
-        this.audioSuffix = ("." + this.suffixName);
+        this.audioSuffix = ("." + suffixName);
         return this.audioSuffix;   
     }
 });

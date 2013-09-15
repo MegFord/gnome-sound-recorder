@@ -227,7 +227,7 @@ const Listview = new Lang.Class({
                 dateTimeCreatedString = dateTimeTag.to_g_date_time();
                 if (dateTimeCreatedString) {
                     this.file.dateCreated = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S")); 
-                   // log("dateCreated" + this.file.dateCreated);
+                   log("dateCreated" + this.file.dateCreated);
                 } else if (this.dateCreatedString) {
                     this.file.dateCreated = this.dateCreatedString;
                 }
@@ -310,11 +310,11 @@ const Listview = new Lang.Class({
         //log(this.file.fileName);         
                      
         if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.OGG))) {           
-            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OGG_VORBIS)))
+            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.VORBIS)))
                 this.file.mediaType = mediaTypeMap.OGG_VORBIS;
             else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OPUS)))
                 this.file.mediaType = mediaTypeMap.OPUS;
-        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP3))) {
+        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.ID3))) {
             if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
                 this.file.mediaType = mediaTypeMap.MP3;
         } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP4))) {
@@ -322,22 +322,10 @@ const Listview = new Lang.Class({
                 this.file.mediaType = mediaTypeMap.MP4;
         } else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.FLAC))) {
             this.file.mediaType = mediaTypeMap.FLAC;
-        } else if (containerCaps) { // !GstPbutils.DiscovererResult.OK should filter these out already
-            let notKnownContainerCaps = GstPbutils.pb_utils_get_codec_description(containerCaps);
-                
-            if (notKnownContainerCaps) {
-                this.file.mediaType = notKnownContainerCaps; 
-            } else if (notKnownContainerCaps == null) {
-                this.file.mediaType = ""; // provide the line with an empty string as placeholder if we have no info about the caps 
-            }                              
+        } else if (containerCaps) { 
+                allFilesInfo.splice(this.idx, 1); // Remove the file from the array if we don't recognize it                          
         } else {
-            let notKnownAudioCaps = GstPbutils.pb_utils_get_codec_description(audioCaps);
-                
-            if (notKnownAudioCaps) {
-                this.file.mediaType = notKnownAudioCaps; 
-            } else if (notKnownAudioCaps == null) {
-                this.file.mediaType = ""; // provide the line with an empty string as placeholder if we have no info about the caps
-            } 
+                allFilesInfo.splice(this.idx, 1);// Remove the file from the array if we don't recognize it
         }        
     }, 
         

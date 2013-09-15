@@ -431,7 +431,7 @@ const MainView = new Lang.Class({
                                                      margin_top: 5,
                                                      name: "PlayDurationLabel" });
             this.fileDuration = this._formatTime(this._files[i].duration/Gst.SECOND);
-            log(this.fileDuration + "FILEDURATION");
+            log(this.fileDuration + "FILE DURATION");
             log(this._files[i].duration);
             this.playDurationLabel.label = this.fileDuration;
             this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
@@ -762,7 +762,7 @@ const RecordButton = new Lang.Class({
         
         if (activeProfile == null)
             activeProfile = 0; 
-        audioProfile.assignProfile(activeProfile);
+        audioProfile.profile(activeProfile);
         view._record.startRecording(activeProfile);
         wave = new Waveform.WaveForm(view.recordGrid);
     }

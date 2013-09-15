@@ -1,6 +1,7 @@
 // -*- Mode: js; indent-tabs-mode: nil; c-basic-offset: 4; tab-width: 4 -*-
 //
 // Copyright (c) 2013 Giovanni Campagna <scampa.giovanni@gmail.com>
+// Copyright (c) 2013 Meg Ford <megford@gnome.org>
 //
 // Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
