@@ -64,26 +64,31 @@ const AudioProfile = new Lang.Class({
             this._profileName = comboBoxMap.OGG_VORBIS;
             
         this._values = [];
-            switch(this._profileName) {
+        switch(this._profileName) {
                              
-                case comboBoxMap.OGG_VORBIS:
-                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.VORBIS });
-                    break;
-                case comboBoxMap.OPUS:
-                    this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OPUS }); 
-                    break;
-                case comboBoxMap.FLAC:
-                    this._values.push({ audio: audioCodecMap.FLAC });
-                    break;
-                case comboBoxMap.MP3:
-                    this._values.push({ container: containerProfileMap.ID3, audio: audioCodecMap.MP3 });
-                    break;
-                case comboBoxMap.MP4:
-                    this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP4 });
-                    break;
-                default:
-                    break;
-            }
+        case comboBoxMap.OGG_VORBIS:
+            this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.VORBIS });
+            break;
+            
+        case comboBoxMap.OPUS:
+            this._values.push({ container: containerProfileMap.OGG, audio: audioCodecMap.OPUS }); 
+            break;
+            
+        case comboBoxMap.FLAC:
+            this._values.push({ audio: audioCodecMap.FLAC });
+            break;
+            
+        case comboBoxMap.MP3:
+            this._values.push({ container: containerProfileMap.ID3, audio: audioCodecMap.MP3 });
+            break;
+            
+        case comboBoxMap.MP4:
+            this._values.push({ container: containerProfileMap.MP4, audio: audioCodecMap.MP4 });
+            break;
+            
+        default:
+            break;
+        }
     },
        
     mediaProfile: function(){
