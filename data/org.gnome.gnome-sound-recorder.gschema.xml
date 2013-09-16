@@ -1,0 +1,42 @@
+<schemalist>
+  <schema id="org.gnome.gnome-sound-recorder" path="/org/gnome/gnome-sound-recorder/">
+    <key name="window-size" type="ai">
+      <default>[700, 480]</default>
+      <summary>Window size</summary>
+      <description>Window size (width and height).</description>
+    </key>
+    <key name="window-position" type="ai">
+      <default>[]</default>
+      <summary>Window position</summary>
+      <description>Window position (x and y).</description>
+    </key>
+  </schema>
+  <schema id="org.org.gnome.gnome-sound-recorder.encoding-settings" path="/org/gnome/gnome-sound-recorder/encoding-settings/">
+    <key name="media-type" type="s">
+      <default>'audio/x-vorbis'</default>
+      <summary>Preferred media type for encoding audio when recording</summary>
+      <description>Preferred media type for encoding audio when recording. 'audio/x-vorbis' for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type.</description>
+    </key>
+    <key name="media-type-presets" type="a{ss}">
+      <default>[]</default>
+      <summary>Maps media types to audio encoder preset names.</summary>
+      <description>Maps media types to audio encoder preset names. If there is no mapping for a media type, the default encoder settings will be used.</description>
+    </key>
+  </schema>
+   <schema id="org.org.gnome.gnome-sound-recorder.play" path="/org/gnome/gnome-sound-recorder/play/">
+ <key name="volume" type="d">
+      <default>0.75</default>
+      <summary>Volume level</summary>
+      <description>Volume level.</description>
+    </key>
+  </schema>
+   <schema id="org.org.gnome.gnome-sound-recorder.record" path="/org/gnome/gnome-sound-recorder/record/">
+ <key name="volume" type="d">
+      <default>0.75</default>
+      <summary>Volume level</summary>
+      <description>Volume level.</description>
+    </key>
+  </schema>
+</schemalist>
+
+
