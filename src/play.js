@@ -193,7 +193,7 @@ const _TENTH_SEC = 100000000;
         return true;
     },
     
-    queryPosition: function() { // Do I use this?
+    queryPosition: function() { 
         let position = 0;
         while (position == 0) {
             position = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;

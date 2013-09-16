@@ -97,7 +97,7 @@ const MainWindow = new Lang.Class({
         view = new MainView();
         play = new Play.Play();
         
-        params = Params.fill(params, { title: GLib.get_application_name(), //change this
+        params = Params.fill(params, { title: GLib.get_application_name(), 
                                        default_width: 700,
                                        default_height: 480 });
         this.parent(params);
@@ -119,10 +119,10 @@ const MainWindow = new Lang.Class({
                                           spacing: 0 });
         header.pack_start(recordToolbar);
         recordButton = new RecordButton({ label: "Record",
-                                              margin_bottom: 4,
-                                              margin_top: 6,
-                                              margin_left: 6,
-                                              margin_right: 6 });
+                                          margin_bottom: 4,
+                                          margin_top: 6,
+                                          margin_left: 6,
+                                          margin_right: 6 });
         recordToolbar.pack_end(recordButton, false, true, 0);
         recordToolbar.get_style_context().add_class('header');
         recordToolbar.show();
@@ -135,7 +135,6 @@ const MainWindow = new Lang.Class({
         this.add(grid);
         grid.show_all();
         this.show_all();
-        log("grid" + grid.get_preferred_height());
     },
        
     _defineThemes: function() {
@@ -179,7 +178,6 @@ const MainView = new Lang.Class({
     },
     
     onPlayStopClicked: function() {
-        //recordButton.set_sensitive(true);
         play.stopPlaying();
     },
     
@@ -202,8 +200,6 @@ const MainView = new Lang.Class({
 
     _updatePositionCallback: function() {
         let position = MainWindow.play.queryPosition();
-        log(position);
-        log("position");
         
         if (position >= 0) {
             this.progressScale.set_value(position);
@@ -220,7 +216,6 @@ const MainView = new Lang.Class({
     
     setVolume: function() {
         if (setVisibleID == ActiveArea.PLAY) {
-        log("volumeValue.play " + volumeValue[0].play);
             play.setVolume(volumeValue[0].play);
         } else if (setVisibleID == ActiveArea.RECORD) {
            this._record.setVolume(volumeValue[0].record);
@@ -368,7 +363,7 @@ const MainView = new Lang.Class({
             this._playListButton.connect('clicked', Lang.bind(this,
                 function(){
                     let row = this.listBox.get_selected_row();
-                    play.passSelected(row); // this can be done with the uri.
+                    play.passSelected(row); 
                     let gridForName = row.get_child();
                     let idx = parseInt(gridForName.name);
                     
@@ -431,8 +426,6 @@ const MainView = new Lang.Class({
                                                      margin_top: 5,
                                                      name: "PlayDurationLabel" });
             this.fileDuration = this._formatTime(this._files[i].duration/Gst.SECOND);
-            log(this.fileDuration + "FILE DURATION");
-            log(this._files[i].duration);
             this.playDurationLabel.label = this.fileDuration;
             this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
             this.playDurationLabel.show();
@@ -484,11 +477,8 @@ const MainView = new Lang.Class({
                 function() {
                     let row = this.listBox.get_selected_row();
                     let gridForName = row.get_child();
-                    let idx = parseInt(gridForName.name);
-                    log(idx);
-                    
+                    let idx = parseInt(gridForName.name);                    
                     let file = this._files[idx];
-                    log(file.fileName);
                     this._onInfoButton(file);
                 }));
             this._info.set_tooltip_text(_("Info"));
@@ -563,13 +553,11 @@ const MainView = new Lang.Class({
     scrolledWinDelete: function() {
         let w = this.rowGrid.get_allocated_width();
         this._scrolledWin.destroy();
-        this.scrolledWinAdd();
-        log("destroy " + w);  
+        this.scrolledWinAdd(); 
     },
     
     hasPreviousSelRow: function() {
        this.destroyLoadMoreButton();
-       log("this._selectedRow  " + previousSelRow);
            if (previousSelRow != null) {
               let rowWidget = previousSelRow.get_child(this.widget);
               rowWidget.foreach(Lang.bind(this,
@@ -582,7 +570,6 @@ const MainView = new Lang.Class({
                 this.activeState = play.getPipeStates();
                 
                 if (this.activeState == PipelineStates.PLAYING || this.activeState == PipelineStates.PAUSED) {
-                log("this.activeState == PipelineStates.PLAYING");
                     play.stopPlaying();
                 }
             } 
@@ -592,7 +579,6 @@ const MainView = new Lang.Class({
     rowGridCallback: function(selectedRow) {
         this.destroyLoadMoreButton();
         if (selectedRow) {
-            log("this._selectedRow  " + previousSelRow);
             if (previousSelRow != null) {
                 this.hasPreviousSelRow();
             }  
@@ -671,7 +657,6 @@ const MainView = new Lang.Class({
         if (this.activeState == PipelineStates.PLAYING) {
             play.pausePlaying();
             let rowWidget = listRow.get_child(this.widget);
-            log(rowWidget + "rowWidget");
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
                 
@@ -691,14 +676,12 @@ const MainView = new Lang.Class({
     onPlayPauseToggled: function(listRow, selFile) {
         this.activeState = play.getPipeStates();
         setVisibleID = ActiveArea.PLAY;
-        log(listRow);
         let width = listRow.get_allocated_width();
+        
         if (this.activeState != PipelineStates.PLAYING) {
             play.startPlaying();
-            log(this);
             
             let rowWidget = listRow.get_child(this.widget);
-            log(rowWidget + "rowWidget");
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
                            
@@ -731,8 +714,6 @@ const MainView = new Lang.Class({
                         child.sensitive = true;
                     }
                 }));
-             log(this.activeState);
-             log("activeState");
              listRow.set_property("width-request", width);
             
             if (this.activeState != PipelineStates.PAUSED) {
