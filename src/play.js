@@ -89,6 +89,7 @@ const _TENTH_SEC = 100000000;
         this.play.set_state(Gst.State.PAUSED);
         this.playState = PipelineStates.PAUSED;
         this.baseTime = this.absoluteTime;
+        
         if (this.timeout) {
             GLib.source_remove(this.timeout);
             this.timeout = null;
@@ -107,10 +108,11 @@ const _TENTH_SEC = 100000000;
         this.playBus.remove_signal_watch();
         this._updateTime();
                                     
-            if (this.timeout) {
-                GLib.source_remove(this.timeout);
-                this.timeout = null;
-            }
+        if (this.timeout) {
+            GLib.source_remove(this.timeout);
+            this.timeout = null;
+        }
+        
         MainWindow.wave.endDrawing();
     },
     
@@ -121,48 +123,47 @@ const _TENTH_SEC = 100000000;
     _onMessageReceived: function(message) {
         this.localMsg = message;
         let msg = message.type;
-        log(msg);
         switch(msg) {
                                                        
-            case Gst.MessageType.EOS:               
-                this.onEndOfStream(); 
-                break;
+        case Gst.MessageType.EOS:               
+            this.onEndOfStream(); 
+            break;
                 
-            case Gst.MessageType.ERROR:
-                this._showErrorDialog(_("Error:" + message.parse_error()));
-                this.play.set_state(Gst.State.NULL);
-                this.playState = PipelineStates.STOPPED;
-                this.playBus.remove_signal_watch();
-                this._updateTime();
+        case Gst.MessageType.ERROR:
+            this._showErrorDialog(_("Error:" + message.parse_error()));
+            this.play.set_state(Gst.State.NULL);
+            this.playState = PipelineStates.STOPPED;
+            this.playBus.remove_signal_watch();
+            this._updateTime();
                                     
-                if (this.timeout) {
-                    GLib.source_remove(this.timeout);
-                    this.timeout = null;
-                }
+            if (this.timeout) {
+                GLib.source_remove(this.timeout);
+                this.timeout = null;
+            }
                 
-                MainWindow.wave.endDrawing();           
-                break;
+            MainWindow.wave.endDrawing();           
+            break;
             
-            case Gst.MessageType.ASYNC_DONE:
-                if (this.sought) {
-                    this.play.set_state(this._lastState);                    
-                    MainWindow.view.setProgressScaleSensitive();
-                }
+        case Gst.MessageType.ASYNC_DONE:
+            if (this.sought) {
+                this.play.set_state(this._lastState);                    
+                MainWindow.view.setProgressScaleSensitive();
+            }
                     
-                this.updatePosition();
-                break; 
+            this.updatePosition();
+            break; 
                 
-            case Gst.MessageType.CLOCK_LOST:
-                this.pausePlaying();
-                break;
+        case Gst.MessageType.CLOCK_LOST:
+            this.pausePlaying();
+            break;
            
-            case Gst.MessageType.NEW_CLOCK:
-                if (this.playState == PipelineStates.PAUSED) {
-                    this.clock = this.play.get_clock();
-                    this.startPlaying();
-                }
+        case Gst.MessageType.NEW_CLOCK:
+            if (this.playState == PipelineStates.PAUSED) {
+                this.clock = this.play.get_clock();
+                this.startPlaying();
+            }
                 
-                break;    
+            break;    
         }
     }, 
     
