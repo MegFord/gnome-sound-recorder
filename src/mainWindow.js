@@ -553,11 +553,11 @@ const MainView = new Lang.Class({
     
     listBoxLoadMore: function() {
        this.destroyLoadMoreButton();
+       previousSelRow = null;
        this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
        offsetController.increaseEndIdxStep();
        list.setListTypeRefresh();
        list._setDiscover();
-       this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
     },
     
     scrolledWinDelete: function() {
@@ -568,6 +568,7 @@ const MainView = new Lang.Class({
     },
     
     hasPreviousSelRow: function() {
+       this.destroyLoadMoreButton();
        log("this._selectedRow  " + previousSelRow);
            if (previousSelRow != null) {
               let rowWidget = previousSelRow.get_child(this.widget);
@@ -589,6 +590,7 @@ const MainView = new Lang.Class({
     }, 
     
     rowGridCallback: function(selectedRow) {
+        this.destroyLoadMoreButton();
         if (selectedRow) {
             log("this._selectedRow  " + previousSelRow);
             if (previousSelRow != null) {

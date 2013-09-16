@@ -18,8 +18,6 @@
  * Author: Meg Ford <megford@gnome.org>
  *
  */
- 
- //./src/gnome-sound-recorder
 
 imports.gi.versions.Gst = '1.0';
 
@@ -48,15 +46,14 @@ const _TENTH_SEC = 100000000;
     _playPipeline: function(fileName) {
         this.baseTime = 0;
         this._fileName = this._fileToPlay;
-        this.uri = GLib.filename_to_uri(this._fileName, null); 
+        let uri = GLib.filename_to_uri(this._fileName, null); 
         this.view = MainWindow.view;      
         this.play = Gst.ElementFactory.make("playbin", "play");
-        this.play.set_property("uri", this.uri);
+        this.play.set_property("uri", uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
         this.clock = this.play.get_clock();               
         this.playBus = this.play.get_bus();
-        log(this.playBus);
         this.playBus.add_signal_watch();
         this.playBus.connect("message", Lang.bind(this,
             function(playBus, message) {
@@ -68,14 +65,11 @@ const _TENTH_SEC = 100000000;
     },
             
     startPlaying: function(fileName) {
-        log("playing started");
         this._fileName = fileName;
         
         if (!this.play || this.playState == PipelineStates.STOPPED )
             this._playPipeline(this._fileName);
             
-        log(this.playState);
-        log("start playing");
         if (this.playState == PipelineStates.PAUSED) {
             this.updatePosition();   
         }
@@ -95,7 +89,6 @@ const _TENTH_SEC = 100000000;
         this.play.set_state(Gst.State.PAUSED);
         this.playState = PipelineStates.PAUSED;
         this.baseTime = this.absoluteTime;
-        log("pause");
         if (this.timeout) {
             GLib.source_remove(this.timeout);
             this.timeout = null;
@@ -110,7 +103,6 @@ const _TENTH_SEC = 100000000;
     
     onEnd: function() {
         this.play.set_state(Gst.State.NULL);
-        log("called stop");
         this.playState = PipelineStates.STOPPED;
         this.playBus.remove_signal_watch();
         this._updateTime();
@@ -120,7 +112,6 @@ const _TENTH_SEC = 100000000;
                 this.timeout = null;
             }
         MainWindow.wave.endDrawing();
-        log("DRAWING CALL END");
     },
     
     onEndOfStream: function() {
@@ -131,27 +122,33 @@ const _TENTH_SEC = 100000000;
         this.localMsg = message;
         let msg = message.type;
         log(msg);
-        switch(msg) {                                               
+        switch(msg) {
+                                                       
             case Gst.MessageType.EOS:               
                 this.onEndOfStream(); 
                 break;
                 
             case Gst.MessageType.ERROR:
-                log("Error :" + message.parse_error());
-                this._showErrorDialog(_("Error:" + message.parse_error()));           
-                break;
+                this._showErrorDialog(_("Error:" + message.parse_error()));
+                this.play.set_state(Gst.State.NULL);
+                this.playState = PipelineStates.STOPPED;
+                this.playBus.remove_signal_watch();
+                this._updateTime();
+                                    
+                if (this.timeout) {
+                    GLib.source_remove(this.timeout);
+                    this.timeout = null;
+                }
                 
-            case Gst.MessageType.DURATION: 
-                log("duration changed");
+                MainWindow.wave.endDrawing();           
                 break;
             
             case Gst.MessageType.ASYNC_DONE:
-                log("asyncdone");
-                log(this.sought);
                 if (this.sought) {
                     this.play.set_state(this._lastState);                    
                     MainWindow.view.setProgressScaleSensitive();
-                }    
+                }
+                    
                 this.updatePosition();
                 break; 
                 
@@ -164,6 +161,7 @@ const _TENTH_SEC = 100000000;
                     this.clock = this.play.get_clock();
                     this.startPlaying();
                 }
+                
                 break;    
         }
     }, 
@@ -174,14 +172,10 @@ const _TENTH_SEC = 100000000;
                        
     _updateTime: function() {          
         let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND; 
-        log(time);
-        log("time");
         this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
         this.trackDurationSecs = this.trackDuration/Gst.SECOND;        
-        log(this.trackDurationSecs);
         
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
-            log("called UPDATE");
             this.view.setLabel(time);           
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
             this.view.setLabel(0); 
@@ -191,13 +185,9 @@ const _TENTH_SEC = 100000000;
         
         if (this.baseTime == 0)
             this.baseTime = this.absoluteTime;
-            log("base time " + this.baseTime);
  
         let runTime = this.absoluteTime- this.baseTime;
-        log(runTime);
-        log("current clocktime " + this.absoluteTime);
         let approxTime = Math.round(runTime/_TENTH_SEC);
-        log("approx" + approxTime);
         MainWindow.wave._drawEvent(approxTime);
         
         return true;
@@ -212,8 +202,7 @@ const _TENTH_SEC = 100000000;
         return position;
     },
     
-    updatePosition: function() {
-         
+    updatePosition: function() {         
         if (!this.timeout) {
             this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, Lang.bind(this, 
                 this._updateTime));    
@@ -248,16 +237,13 @@ const _TENTH_SEC = 100000000;
         this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
     },
     
-    passSelected: function(selected) { //I think this is unnecessary?
+    passSelected: function(selected) { 
         this._selected = selected;
-        log(selected);
-        log("SELECT");
         this._fileToPlay = MainWindow.view.loadPlay(this._selected);
     },
     
     _showErrorDialog: function(errorStr) {
-        let errorDialog = new Gtk.MessageDialog ({ transient_for: this.widget,
-                                                   modal: true,
+        let errorDialog = new Gtk.MessageDialog ({ modal: true,
                                                    destroy_with_parent: true,
                                                    buttons: Gtk.ButtonsType.OK,
                                                    message_type: Gtk.MessageType.WARNING,
