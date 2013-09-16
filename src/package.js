@@ -19,9 +19,9 @@
 // IN THE SOFTWARE.
 
 /**
- * This module provides a set of convenience APIs for building packaged
- * applications.
- */
+* This module provides a set of convenience APIs for building packaged
+* applications.
+*/
 
 const GLib = imports.gi.GLib;
 const GIRepository = imports.gi.GIRepository;
@@ -59,46 +59,46 @@ function _runningFromSource(name) {
 }
 
 /**
- * init:
- * @params: package parameters
- *
- * Initialize directories and global variables. Must be called
- * before any of other API in Package is used.
- * @params must be an object with at least the following keys:
- *  - name: the package name ($(PACKAGE_NAME) in autotools)
- *  - version: the package version
- *  - prefix: the installation prefix
- *
- * init() will take care to check if the program is running from
- * the source directory or not, by looking for a 'src' directory.
- *
- * At the end, the global variable 'pkg' will contain the
- * Package module (imports.package). Additionally, the following
- * module variables will be available:
- *  - name, version: same as in @params
- *  - prefix: the installation prefix (as passed in @params)
- *  - datadir, libdir: the final datadir and libdir when installed;
- *                     usually, these would be prefix + '/share' and
- *                     and prefix + '/lib' (or '/lib64')
- *  - pkgdatadir: the directory to look for private data files, such as
- *                images, stylesheets and UI definitions;
- *                this will be datadir + name when installed and
- *                './data' when running from the source tree
- *  - pkglibdir: the directory to look for private typelibs and C
- *               libraries;
- *               this will be libdir + name when installed and
- *               './lib' when running from the source tree
- *  - moduledir: the directory to look for JS modules;
- *               this will be pkglibdir when installed and
- *               './src' when running from the source tree
- *  - localedir: the directory containing gettext translation files;
- *               this will be datadir + '/locale' when installed
- *               and './po' in the source tree
- *
- * All paths are absolute and will not end with '/'.
- *
- * As a side effect, init() calls GLib.set_prgname().
- */
+* init:
+* @params: package parameters
+*
+* Initialize directories and global variables. Must be called
+* before any of other API in Package is used.
+* @params must be an object with at least the following keys:
+* - name: the package name ($(PACKAGE_NAME) in autotools)
+* - version: the package version
+* - prefix: the installation prefix
+*
+* init() will take care to check if the program is running from
+* the source directory or not, by looking for a 'src' directory.
+*
+* At the end, the global variable 'pkg' will contain the
+* Package module (imports.package). Additionally, the following
+* module variables will be available:
+* - name, version: same as in @params
+* - prefix: the installation prefix (as passed in @params)
+* - datadir, libdir: the final datadir and libdir when installed;
+* usually, these would be prefix + '/share' and
+* and prefix + '/lib' (or '/lib64')
+* - pkgdatadir: the directory to look for private data files, such as
+* images, stylesheets and UI definitions;
+* this will be datadir + name when installed and
+* './data' when running from the source tree
+* - pkglibdir: the directory to look for private typelibs and C
+* libraries;
+* this will be libdir + name when installed and
+* './lib' when running from the source tree
+* - moduledir: the directory to look for JS modules;
+* this will be pkglibdir when installed and
+* './src' when running from the source tree
+* - localedir: the directory containing gettext translation files;
+* this will be datadir + '/locale' when installed
+* and './po' in the source tree
+*
+* All paths are absolute and will not end with '/'.
+*
+* As a side effect, init() calls GLib.set_prgname().
+*/
 function init(params) {
     window.pkg = imports.package;
     name = params.name;
@@ -140,14 +140,14 @@ function init(params) {
 }
 
 /**
- * start:
- * @params: see init()
- *
- * This is a convenience function if your package has a
- * single entry point.
- * You must define a main(ARGV) function inside a main.js
- * module in moduledir.
- */
+* start:
+* @params: see init()
+*
+* This is a convenience function if your package has a
+* single entry point.
+* You must define a main(ARGV) function inside a main.js
+* module in moduledir.
+*/
 function start(params) {
     init(params);
 
@@ -222,18 +222,18 @@ function _isGjsModule(name, version) {
 }
 
 /**
- * require:
- * @libs: the external dependencies to import
- *
- * Mark a dependency on a specific version of one or more
- * external GI typelibs.
- * @libs must be an object whose keys are a typelib name,
- * and values are the respective version. The empty string
- * indicates any version.
- *
- * If dependencies are statisfied, require() will make
- * the module objects available as global names.
- */
+* require:
+* @libs: the external dependencies to import
+*
+* Mark a dependency on a specific version of one or more
+* external GI typelibs.
+* @libs must be an object whose keys are a typelib name,
+* and values are the respective version. The empty string
+* indicates any version.
+*
+* If dependencies are statisfied, require() will make
+* the module objects available as global names.
+*/
 function require(libs) {
     _requires = libs;
 
@@ -294,13 +294,17 @@ function initSubmodule(name) {
     }
 }
 
-/*function launch(params) {
+function initResources() {
+    let resource = Gio.Resource.load(GLib.build_filenamev([pkg.pkgdatadir,
+                                                           pkg.name + '.gresource']));
+    resource._register();
+}
+
+function launch(params) {
     params.flags = params.flags || 0;
     let app = new Gio.Application({ application_id: params.name,
                                     flags: (Gio.ApplicationFlags.IS_LAUNCHER |
                                             params.flags),
                                   });
     return app.run(ARGV);
-}*/
-
-
+}
