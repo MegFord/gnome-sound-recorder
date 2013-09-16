@@ -19,7 +19,6 @@
  * Author: Meg Ford <megford@gnome.org>
  *
  */
-//./src/gnome-sound-recorder
  
 imports.gi.versions.Gst = '1.0';
 

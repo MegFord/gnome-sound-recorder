@@ -19,8 +19,6 @@
  *
  */
  
- //GST_DEBUG=4 ./src/gnome-sound-recorder
- 
 imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
@@ -32,11 +30,20 @@ const Mainloop = imports.mainloop;
 const MainWindow = imports.mainWindow;
 const Preferences = imports.preferences;
 
+const comboBoxMap = {
+    OGG_VORBIS: 0,
+    OPUS: 1,
+    FLAC: 2,
+    MP3: 3,
+    MP4: 4
+};
+
 const containerProfileMap = {
     OGG: "application/ogg", 
     ID3: "application/x-id3",
     MP4: "video/quicktime,variant=(string)iso"
 };
+
 
 const audioCodecMap = {
     FLAC: "audio/x-flac",      
@@ -46,13 +53,6 @@ const audioCodecMap = {
     VORBIS: "audio/x-vorbis"
 };
 
-const comboBoxMap = {
-    OGG_VORBIS: 0,
-    OPUS: 1,
-    FLAC: 2,
-    MP3: 3,
-    MP4: 4
-};
 
 const AudioProfile = new Lang.Class({
     Name: 'AudioProfile',
@@ -62,7 +62,7 @@ const AudioProfile = new Lang.Class({
             this._profileName = profileName;
        else 
             this._profileName = comboBoxMap.OGG_VORBIS;
-            log("profileName" + this._profileName);
+            
         this._values = [];
             switch(this._profileName) {
                              
@@ -89,21 +89,18 @@ const AudioProfile = new Lang.Class({
     mediaProfile: function(){
         let idx = 0;
         let audioCaps; 
-        this._containerProfile = null;       
+        this._containerProfile = null;
+               
         if (this._values[idx].container) {
-            log(this._values[idx].container);
-            log(this._values[idx].audio);
             let caps = Gst.Caps.from_string(this._values[idx].container);
             this._containerProfile = GstPbutils.EncodingContainerProfile.new("record", null, caps, null);
             audioCaps = Gst.Caps.from_string(this._values[idx].audio);
             this.encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             this._containerProfile.add_profile(this.encodingProfile);
-            log(this._containerProfile);
             return this._containerProfile;
         } else if (!this._values[idx].container && this._values[idx].audio) {
             audioCaps = Gst.Caps.from_string(this._values[idx].audio);
             this.encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
-            log(this.encodingProfile);
             return this.encodingProfile;
         } else {
             return -1; 
