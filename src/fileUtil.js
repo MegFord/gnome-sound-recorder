@@ -29,16 +29,16 @@ const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Signals = imports.signals;
 
-const MainWindow = imports.mainWindow;
 const Listview = imports.listview;
+const MainWindow = imports.mainWindow;
 const Record = imports.record;
 
 const FileUtil = new Lang.Class({
     Name: "FileUtil",
         
    rename: function(fileName, newFileName) { 
-       let l = Gio.file_new_for_path(fileName);
-       l.set_display_name_async(newFileName, GLib.PRIORITY_DEFAULT, null, null);
+       let fileToRename = Gio.file_new_for_path(fileName);
+       fileToRename.set_display_name_async(newFileName, GLib.PRIORITY_DEFAULT, null, null);
     },
     
     loadFile: function(text) { 
@@ -46,7 +46,6 @@ const FileUtil = new Lang.Class({
         this._buildFileName = new Record.BuildFileName();
         let path = this._buildFileName.buildPath();
         path.push(text);
-        log(path);
         let fileNav = GLib.build_filenamev(path);
        
         return fileNav;
@@ -92,10 +91,8 @@ const OffsetController = new Lang.Class({
  
         if (CurrentEndIdx < this.totItems) {
             this.endIdx = CurrentEndIdx;
-            log(this.endIdx);
         } else {
             this.endIdx = this.totItems - 1;
-            log(this.endIdx); 
         }
             
         CurrentEndIdx = this.endIdx;
