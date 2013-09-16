@@ -35,8 +35,7 @@ const Preferences = imports.preferences;
 const containerProfileMap = {
     OGG: "application/ogg", 
     ID3: "application/x-id3",
-    MP4: "video/quicktime,variant=(string)iso",
-    NONE: "none"
+    MP4: "video/quicktime,variant=(string)iso"
 };
 
 const audioCodecMap = {

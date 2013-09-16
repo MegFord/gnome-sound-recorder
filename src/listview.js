@@ -46,7 +46,18 @@ const mediaTypeMap = {
     FLAC: "FLAC",
     MP3: "MP3",
     MP4: "MP4"
-}; 
+};
+
+const codecDescription = {
+    OGG: "Ogg",
+    VORBIS: "Vorbis",
+    OPUS: "Opus",
+    ID3: "ID3 tag",
+    MP3: "MPEG-1 Layer 3 (MP3)",
+    QT: "Quicktime",
+    MP4: "MPEG-4 AAC",
+    FLAC: "Free Lossless Audio Codec (FLAC)"
+};
 
 const ListType = {
     NEW: 0,
@@ -130,14 +141,14 @@ const Listview = new Lang.Class({
                        
                                 fileInfo = 
                                     fileInfo.concat({ appName: null,
-                                                            dateCreated: null, 
-                                                            dateForSort: dateModifiedSortString,                
-                                                            dateModified: dateModifiedDisplayString,
-                                                            duration: null,
-                                                            fileName: returnedName,
-                                                            mediaType: null,
-                                                            title: null,
-                                                            uri: null });
+                                                      dateCreated: null, 
+                                                      dateForSort: dateModifiedSortString,                
+                                                      dateModified: dateModifiedDisplayString,
+                                                      duration: null,
+                                                      fileName: returnedName,
+                                                      mediaType: null,
+                                                      title: null,
+                                                      uri: null });
                             }));
                         this._sortItems(fileInfo);
                     } else {
@@ -300,32 +311,40 @@ const Listview = new Lang.Class({
         let discovererStreamInfo = null;
         discovererStreamInfo = info.get_stream_info();
         let s = discovererStreamInfo.get_stream_type_nick();
-           
+        log(s);
         let containerStreams = info.get_container_streams()[0];
         let containerCaps = discovererStreamInfo.get_caps();
-        //log(containerCaps.to_string());
+        log(containerCaps);
+        log(GstPbutils.pb_utils_get_codec_description(containerCaps));
         let audioStreams = info.get_audio_streams()[0];
         let audioCaps =  audioStreams.get_caps();
-        //log(audioCaps.to_string()); 
-        //log(this.file.fileName);         
-                     
-        if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.OGG))) {           
-            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.VORBIS)))
+        log(audioCaps.to_string()); 
+        log(this.file.fileName);         
+        log(GstPbutils.pb_utils_get_codec_description(audioCaps));
+     
+        if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.OGG) { 
+                  
+            if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.VORBIS) 
                 this.file.mediaType = mediaTypeMap.OGG_VORBIS;
-            else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.OPUS)))
+            else if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.OPUS) 
                 this.file.mediaType = mediaTypeMap.OPUS;
-        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.ID3))) {
-            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP3)))
+
+        } else if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.ID3) {
+        
+            if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.MP3) 
                 this.file.mediaType = mediaTypeMap.MP3;
-        } else if (containerCaps.is_subset(Gst.Caps.from_string(AudioProfile.containerProfileMap.MP4))) {
-            if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.MP4)))
-                this.file.mediaType = mediaTypeMap.MP4;
-        } else if (audioCaps.is_subset(Gst.Caps.from_string(AudioProfile.audioCodecMap.FLAC))) {
-            this.file.mediaType = mediaTypeMap.FLAC;
-        } else if (containerCaps) { 
-                allFilesInfo.splice(this.idx, 1); // Remove the file from the array if we don't recognize it                          
+
+        } else if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.QT) {
+        
+            if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.MP4) 
+                this.file.mediaType = mediaTypeMap.MP4;                
+
+        } else if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.FLAC) {
+            this.file.mediaType = mediaTypeMap.FLAC;                          
         } else {
-                allFilesInfo.splice(this.idx, 1);// Remove the file from the array if we don't recognize it
+        
+            if (this.file.mediaType == null) 
+                allFilesInfo.splice(this.idx, 1);// Remove the file from the array if we don't recognize it        
         }        
     }, 
         
