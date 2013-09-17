@@ -322,8 +322,6 @@ const MainView = new Lang.Class({
         this.listBox.show();
         
         this._startIdx = 0;
-        log(this._startIdx);
-        log("start");
         this._endIdx = offsetController.getcidx();
         log(this._endIdx);
         this._files = [];
@@ -758,7 +756,7 @@ const EncoderComboBox = new Lang.Class({
     // encoding setting labels in combobox
     _init: function() {
         this.parent();
-        let combo = [_("Ogg Vorbis"), _("Opus"), _("FLAC"), _("MP3"), _("AAC")];
+        let combo = [_("Ogg Vorbis"), _("Opus"), _("FLAC"), _("MP3"), _("MOV")];
         
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);

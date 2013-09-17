@@ -115,49 +115,42 @@ const WaveForm = new Lang.Class({
         let msg = message.type;
         
         switch(msg) {
-        
-            case Gst.MessageType.ELEMENT:
-                let s = message.get_structure();
-                    if (s) {
-                        if (s.has_name("level")) {
-                            let peaknumber = 0;
-                            let st = s.get_value("timestamp");
-                            let dur = s.get_value("duration");
-                            let runTime = s.get_value("running-time");
-                            log(runTime);
-                            let peakVal = s.get_value("peak");
+        case Gst.MessageType.ELEMENT:
+            let s = message.get_structure();
+            
+            if (s) {
                 
-                            if (peakVal) {
-                                let val = peakVal.get_nth(0);
-                                log(val);
-                                if (val > 0)
-                                    val = 0;
+                if (s.has_name("level")) {
+                    let peaknumber = 0;
+                    let st = s.get_value("timestamp");
+                    let dur = s.get_value("duration");
+                    let runTime = s.get_value("running-time");
+                    let peakVal = s.get_value("peak");
+                
+                    if (peakVal) {
+                        let val = peakVal.get_nth(0);
+                            
+                        if (val > 0)
+                            val = 0;
                                     
-                                let value = Math.pow(10, val/20);
-                                log(value);
-                                    
-                                peaks.push(value);
-                                log("wave height" + value);
-                            }                            
-                        }
-                    }
-                log("length of the peaks array" + peaks.length);
-
-                if (peaks.length == this.playTime) {
-                    this.pipeline.set_state(Gst.State.PAUSED);
-                    log("pause value ");
-                    
+                        let value = Math.pow(10, val/20);
+                        peaks.push(value);
+                    }                            
                 }
+            }
+
+            if (peaks.length == this.playTime) {
+                this.pipeline.set_state(Gst.State.PAUSED);                    
+            }
                 
-                if (peaks.length == pauseVal) {
-                    this.pipeline.set_state(Gst.State.PAUSED);
-                    log("pause value equals " + peaks.length);
-                }                                      
-                break;
+            if (peaks.length == pauseVal) {
+                this.pipeline.set_state(Gst.State.PAUSED);
+            }                                      
+            break;
                        
-            case Gst.MessageType.EOS:
-                this.stopGeneration();
-                break;
+        case Gst.MessageType.EOS:
+            this.stopGeneration();
+            break;
         }
     },
 
@@ -176,10 +169,10 @@ const WaveForm = new Lang.Class({
                    
             if (peaks.length != this.playTime) { 
                 this.pipeline.set_state(Gst.State.PLAYING);
-                log("continue drawing " + peaks.length);
             }
             start = Math.floor(this.playTime);
         } else {
+        
             if (this.recordTime >= 0)
             start = this.recordTime;
         }
@@ -188,12 +181,9 @@ const WaveForm = new Lang.Class({
         let xAxis = 0;
         let end = start + 40;
         let width = this.drawing.get_allocated_width();
-        log(width);
         let waveheight = this.drawing.get_allocated_height();
-        log(waveheight);
         let length = this.nSamples;
         let pixelsPerSample = width/waveSamples;   
-        log("WAVE" + this.waveType)
         let gradient = new Cairo.LinearGradient(0, 0, width , waveheight);
         if (this.waveType == WaveType.PLAY) { 
               gradient.addColorStopRGBA(0.75, 0.94, 1.0, 0.94, 0.75);       
@@ -212,7 +202,6 @@ const WaveForm = new Lang.Class({
             // Keep moving until we get to a non-null array member
             if (peaks[i] < 0) {            
                 cr.moveTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)))
-                log(i);
             }
       
             // Start drawing when we reach the first non-null array member  
@@ -224,7 +213,6 @@ const WaveForm = new Lang.Class({
                 }
                 
                 cr.lineTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)));
-                log(peaks[i] * waveheight + "lines");
             }
                                 
             xAxis += 1;

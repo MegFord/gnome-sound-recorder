@@ -40,9 +40,7 @@ const InfoDialog = new Lang.Class({
         
         this.nav = MainWindow.fileUtil.loadFile(fileName.fileName);
         
-        //let toplevel = Application.get_windows()[0];
         this.widget = new Gtk.Dialog ({ resizable: false,
-                                        //transient_for: toplevel,
                                         modal: true,
                                         destroy_with_parent: true,
                                         default_width: 400,

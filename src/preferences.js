@@ -35,10 +35,8 @@ let playVolume = null;
 const Preferences = new Lang.Class({
     Name: 'Preferences',
     
-     _init: function() {  
-        //let toplevel = Main.Application.get_windows()[0];   
+     _init: function() {    
         this.widget = new Gtk.Dialog ({ resizable: false,
-                                        //transient_for: toplevel,
                                         modal: true,
                                         destroy_with_parent: true,
                                         width_request: 350,

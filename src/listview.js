@@ -312,7 +312,8 @@ const Listview = new Lang.Class({
         } else {
         
             if (allFilesInfo[this.idx].mediaType == null) {
-                allFilesInfo.splice(this.idx, 1); // Remove the file from the array if we don't recognize it
+                // Remove the file from the array if we don't recognize it
+                allFilesInfo.splice(this.idx, 1); 
             }       
         }        
     }, 

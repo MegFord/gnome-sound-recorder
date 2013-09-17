@@ -78,7 +78,7 @@ const _TENTH_SEC = 100000000;
         this.playState = PipelineStates.PLAYING;
                 
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
-            log("Unable to set the playbin to the playing state.\n"); 
+            this._showErrorDialog(_('Unable to set the playbin to the playing state.')); 
             this.onEndOfStream();
         } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {        
             MainWindow.view.setVolume(); 
@@ -130,7 +130,8 @@ const _TENTH_SEC = 100000000;
             break;
                 
         case Gst.MessageType.ERROR:
-            this._showErrorDialog(_("Error:" + message.parse_error()));
+            let errMsg = "Error:" + message.parse_error();
+            this._showErrorDialog(_(errMsg));
             this.play.set_state(Gst.State.NULL);
             this.playState = PipelineStates.STOPPED;
             this.playBus.remove_signal_watch();

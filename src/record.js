@@ -54,7 +54,7 @@ const Record = new Lang.Class({
         this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(this.dateTime);
         
         if (this.initialFileName == -1) {
-            log('Unable to create Recordings directory');
+            this._showErrorDialog(_('Unable to create Recordings directory.'));
             this.onEndOfStream();
         }
                       
@@ -62,7 +62,7 @@ const Record = new Lang.Class({
         this.srcElement = Gst.ElementFactory.make("pulsesrc", "srcElement");
         
         if(this.srcElement == null) {
-          let sourceError = "Your audio capture settings are invalid.";
+          this._showErrorDialog(_('Your audio capture settings are invalid.'));
           this.onEndOfStream();
         }
         
@@ -78,7 +78,6 @@ const Record = new Lang.Class({
                 }
             }));
         this.level = Gst.ElementFactory.make("level", "level");
-        log(this.level);
         this.pipeline.add(this.level);
         this.volume = Gst.ElementFactory.make("volume", "volume");
         this.pipeline.add(this.volume);  
@@ -89,14 +88,10 @@ const Record = new Lang.Class({
                 
                 if (factory != null) {
                         this.hasTagSetter = factory.has_interface("GstTagSetter");
-                        log("has interface");
                         if (this.hasTagSetter == true) {
                             this.taglist = Gst.TagList.new_empty();
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                            // set title only when the user renames the file
-                            //this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, this.initialFileName.get_basename());
-                            //element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, this.gstreamerDateTime);
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
                     }
@@ -110,7 +105,7 @@ const Record = new Lang.Class({
         this.pipeline.add(this.giosink);
         
         if (!this.pipeline || !this.giosink) {
-            log ("Not all elements could be created.\n");
+            this._showErrorDialog(_('Not all elements could be created.'));
             this.onEndOfStream();
         }
             
@@ -120,7 +115,7 @@ const Record = new Lang.Class({
         let ebinLink = this.ebin.link(this.giosink);
         
         if (!srcLink || !levelLink || !ebinLink) {
-            log("Not all of the elements were linked");
+            this._showErrorDialog(_('Not all of the elements were linked'));
             this.onEndOfStream();
         }
     },
@@ -137,13 +132,11 @@ const Record = new Lang.Class({
        
     startRecording: function(profile) {
         this.profile = profile;
-        log("PROFILE" + this.profile);
         this._audioProfile = MainWindow.audioProfile;
         this._mediaProfile = this._audioProfile.mediaProfile();
-        log("Media Profile was set." + this._mediaProfile);
         
         if (this._mediaProfile == -1) {
-            log("No Media Profile was set.");
+            this._showErrorDialog(_('No Media Profile was set.'));
         }
         
         if (!this.pipeline || this.pipeState == PipelineStates.STOPPED )
@@ -251,7 +244,6 @@ const Record = new Lang.Class({
     
     setVolume: function(value) {
         this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
-        log("volumefromrecord " + this.volume.get_volume(GstAudio.StreamVolumeFormat.LINEAR));
     },
     
     _showErrorDialog: function(errorStr) {
@@ -269,7 +261,7 @@ const Record = new Lang.Class({
     } 
 });
 
-const BuildFileName = new Lang.Class({ // move this to fileUtil.js
+const BuildFileName = new Lang.Class({ 
     Name: 'BuildFileName',
 
     buildPath: function() {
@@ -281,12 +273,9 @@ const BuildFileName = new Lang.Class({ // move this to fileUtil.js
     },
     
     ensureDirectory: function(name) {
-        log(name);
-        this._name = name;
-        log(this._name);       
+        this._name = name;    
         let dirName = GLib.build_filenamev(this._name);
         let namedDir = GLib.mkdir_with_parents(dirName, 0775);
-        log(namedDir);
     },
     
     buildInitialFilename: function() {
@@ -294,14 +283,13 @@ const BuildFileName = new Lang.Class({ // move this to fileUtil.js
         let dir = this.buildPath();
         let prefix = _("Recording ");   
         this.dateTime = GLib.DateTime.new_now_local();
-        let dateTimeString = this.dateTime.format(_("%Y-%m-%d %H:%M:%S")); 
-        
+        let dateTimeString = this.dateTime.format(_("%Y-%m-%d %H:%M:%S"));         
         let extension = fileExtensionName;
         dir.push(prefix + dateTimeString + extension);
         // Use GLib.build_filenamev to work around missing vararg functions.
         this.title = GLib.build_filenamev(dir);
         let file = Gio.file_new_for_path(this.title);
-        log(file);
+        
         return file;
     },
     
