@@ -323,7 +323,6 @@ const MainView = new Lang.Class({
         
         this._startIdx = 0;
         this._endIdx = offsetController.getcidx();
-        log(this._endIdx);
         this._files = [];
         this._files = list.getFilesInfoForList();
         
@@ -363,8 +362,7 @@ const MainView = new Lang.Class({
                     let row = this.listBox.get_selected_row();
                     play.passSelected(row); 
                     let gridForName = row.get_child();
-                    let idx = parseInt(gridForName.name);
-                    
+                    let idx = parseInt(gridForName.name);                   
                     let file = this._files[idx];
                     this.onPlayPauseToggled(row, file);
                 }));
@@ -699,7 +697,6 @@ const MainView = new Lang.Class({
                                 
                                 if (grandchild.name == "PlayTimeLabel") {
                                     view.playTimeLabel = grandchild;
-                                    log(view.playTimeLabelLabel)
                                 }
                                     
                                 if (grandchild.name == "DividerLabel" )

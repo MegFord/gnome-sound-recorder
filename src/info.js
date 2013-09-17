@@ -147,8 +147,6 @@ const InfoDialog = new Lang.Class({
         let uri = GLib.filename_to_uri(this.nav, null);
         let sourceLink = Gio.file_new_for_uri(uri).get_parent();
         let sourcePath = sourceLink.get_path();
-        log(sourceLink.get_uri());
-        log(sourcePath);
 
         this._sourceData = new Gtk.LinkButton({ label: sourcePath,
                                                 uri: sourceLink.get_uri(),

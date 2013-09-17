@@ -71,7 +71,6 @@ const WaveForm = new Lang.Class({
                                              valign: Gtk.Align.FILL });
         if (this.waveType == WaveType.RECORD) {
             gridWidth = MainWindow.groupGrid.get_allocated_width();
-            log("gridWidth " + gridWidth);
             drawingWidth = gridWidth * 0.75;
             this.drawing.set_size_request(drawingWidth, 36);
             this._grid.attach(this.drawing, 2, 0, 3, 2);
@@ -99,8 +98,6 @@ const WaveForm = new Lang.Class({
         bus.add_signal_watch();
 
         this.nSamples = Math.ceil(this.duration / INTERVAL);
-        log("value of this.duration at pipeline launch " + this.duration);
-        log("value of this.nSamples at pipeline launch " + this.nSamples);
 
         bus.connect("message", Lang.bind(this,
             function(bus, message) {
