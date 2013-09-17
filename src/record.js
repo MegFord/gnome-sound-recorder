@@ -18,8 +18,6 @@
  *  Author: Meg Ford <megford@gnome.org>
  *
  */
- 
- //GST_DEBUG=4 ./src/gnome-sound-recorder
 
 imports.gi.versions.Gst = '1.0';
 
@@ -33,8 +31,8 @@ const GstPbutils = imports.gi.GstPbutils;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 
-const MainWindow = imports.mainWindow;
 const AudioProfile = imports.audioProfile;
+const MainWindow = imports.mainWindow;
 
 const PipelineStates = {
     PLAYING: 0,
@@ -52,7 +50,6 @@ const Record = new Lang.Class({
         this._view = MainWindow.view; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
-        log(this.initialFileName);
         this.dateTime = this._buildFileName.getOrigin();
         this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(this.dateTime);
         
@@ -66,7 +63,6 @@ const Record = new Lang.Class({
         
         if(this.srcElement == null) {
           let sourceError = "Your audio capture settings are invalid.";
-          log(sourceError);
           this.onEndOfStream();
         }
         
@@ -155,10 +151,9 @@ const Record = new Lang.Class({
             
         let ret = this.pipeline.set_state(Gst.State.PLAYING);
         this.pipeState = PipelineStates.PLAYING;
-        log("return " + ret);
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
-            log("Unable to set the pipeline to the recording state.\n"); //create return string?
+            this._showErrorDialog(_("Unable to set the pipeline to the recording state.")); 
             this.onEndOfStream();  
         } else {        
             MainWindow.view.setVolume(); 
@@ -171,7 +166,6 @@ const Record = new Lang.Class({
 
     stopRecording: function() {
         let sent = this.pipeline.send_event(Gst.Event.new_eos());
-        log(sent);
         
         if (this.timeout) {
             GLib.source_remove(this.timeout);
@@ -184,7 +178,6 @@ const Record = new Lang.Class({
         this.srcElement.set_state(Gst.State.NULL); 
         this.srcElement.get_state(null, null, -1); 
         this.pipeline.set_state(Gst.State.NULL);
-        log("called stop");
         this.pipeState = PipelineStates.STOPPED;
         this.recordBus.remove_signal_watch();
         this._updateTime(); 
@@ -193,45 +186,39 @@ const Record = new Lang.Class({
     _onMessageReceived: function(message) {
         this.localMsg = message;
         let msg = message.type;
-        //log(msg);
         switch(msg) {
             
-            case Gst.MessageType.ELEMENT:
-                log("elem");
-                if (GstPbutils.is_missing_plugin_message(this.localMsg)) { 
-                    let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
+        case Gst.MessageType.ELEMENT:
+            if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
+                let errorOne = "";
+                let errorTwo = ""; 
+                let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
                        
-                    if (detail != null)
-                        log(detail);
+                if (detail != null)
+                    errorOne = detail;
                                                    
-                    let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
+                let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
                    
-                    if (description != null)
-                        log(description);
-                        
-                    this.stopRecording();
-                }
+                if (description != null)
+                    errorTwo = description;
+                    
+                this._showErrorDialog(_("Error: " + errorOne + " " + errorTwo));                        
+                this.stopRecording();
+            }
                 
-                let s = message.get_structure();
+            let s = message.get_structure();
                 if (s) {
                     if (s.has_name("level")) {
-                        log("level");
                         let p = null;
                         let peakVal = 0;
                         let val = 0;
                         let st = s.get_value("timestamp");
-                        log(st);
                         let dur = s.get_value("duration");
-                        log(dur);
                         let runTime = s.get_value("running-time");
-                        log(runTime);
                         peakVal = s.get_value("peak");
-                        log("peakVal" + peakVal);
                         
                         if (peakVal) {
                             let val = peakVal.get_nth(0);
-                            log("val" + val);
-                            log("profile!" + this.profile);
                             
                             if (val > 0)
 			                    val = 0;
@@ -242,36 +229,43 @@ const Record = new Lang.Class({
 
                             if (this.baseTime == 0)
                                 this.baseTime = this.absoluteTime;
-                                log("base time " + this.baseTime);
  
                             this.runTime = this.absoluteTime- this.baseTime;
-                            log(this.runTime);
-                            log("current clocktime " + this.absoluteTime);
                             let approxTime = Math.round(this.runTime/_TENTH_SEC);
-                            log("approx" + approxTime);
-                            log("peakruntime" + this.peak);
                             MainWindow.wave._drawEvent(approxTime, this.peak);
                             }                          
                         }
                     }
-                break;
+            break;
                     
-            case Gst.MessageType.EOS:                  
-                log("eos");
-                this.onEndOfStream(); 
-                break;
+        case Gst.MessageType.EOS:                  
+            this.onEndOfStream(); 
+            break;
                                         
-            case Gst.MessageType.ERROR:
-                log("error");
-                let errorMessage = message.parse_error(); // add general error dialog for the app to pop up for all cases
-                log(errorMessage);                  
-                break;
+        case Gst.MessageType.ERROR:
+            let errorMessage = message.parse_error();
+            this._showErrorDialog(_("Error: " + errorMessage));              
+            break;
         }
     },
     
     setVolume: function(value) {
         this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
         log("volumefromrecord " + this.volume.get_volume(GstAudio.StreamVolumeFormat.LINEAR));
+    },
+    
+    _showErrorDialog: function(errorStr) {
+        let errorDialog = new Gtk.MessageDialog ({ modal: true,
+                                                   destroy_with_parent: true,
+                                                   buttons: Gtk.ButtonsType.OK,
+                                                   message_type: Gtk.MessageType.WARNING,
+                                                   text: errorStr });
+
+        errorDialog.connect ('response', Lang.bind(this,
+            function() {
+                errorDialog.destroy();
+            }));
+        errorDialog.show();
     } 
 });
 

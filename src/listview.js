@@ -173,7 +173,6 @@ const Listview = new Lang.Class({
     }, 
     
     getItemCount: function() {
-        log(allFilesInfo.length + "item count");
         return allFilesInfo.length;
     },
        
@@ -234,7 +233,7 @@ const Listview = new Lang.Class({
             
             this._getCapsForList(info);
         } else {
-        // don't index files we can't play
+            // don't index files we can't play
             log("File cannot be played"); 
         }
          
@@ -250,9 +249,8 @@ const Listview = new Lang.Class({
                 currentlyEnumerating = CurrentlyEnumerating.FALSE;
             }
             return false; 
-        } 
-        
-        this.idx++;                               
+        }         
+        this.idx++;                              
     },
     
     setListTypeNew: function() {
