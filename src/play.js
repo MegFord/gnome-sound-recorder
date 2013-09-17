@@ -210,30 +210,7 @@ const _TENTH_SEC = 100000000;
                 this._updateTime));    
         }
     },
-    
-    progressScaleValueChanged: function(seconds) {
-        let duration = this.trackDurationSecs;
-        
-        if (seconds < duration) {
-            this.sought = this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, seconds * Gst.SECOND);
-         
-        } else {
-            this.play.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH | Gst.SeekFlags.KEY_UNIT, duration);
 
-        }
-    },
-    
-    onProgressScaleConnect: function() {
-        this._lastState = this.play.get_state(1)[1];
-        
-        if (this._lastState == Gst.State.PLAYING)
-            this.play.set_state(Gst.State.PAUSED);
-        
-        if (this.timeout) {
-            GLib.source_remove(this.timeout);
-            this.timeout = null;
-        }
-    },
     
     setVolume: function(value) {
         this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);

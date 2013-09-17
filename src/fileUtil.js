@@ -98,7 +98,7 @@ const OffsetController = new Lang.Class({
         CurrentEndIdx = this.endIdx;
         
         return CurrentEndIdx;
-     },
+    },
     
     increaseEndIdxStep: function() {
         CurrentEndIdx += _OFFSET_STEP;
