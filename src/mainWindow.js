@@ -178,7 +178,25 @@ const MainView = new Lang.Class({
     },
     
     onPlayStopClicked: function() {
-        play.stopPlaying();
+        this.activeState = play.getPipeStates();
+        let listRow = this.listBox.get_selected_row();
+        if (this.activeState == PipelineStates.PLAYING) {
+            play.stopPlaying();
+            let rowWidget = listRow.get_child(this.widget);
+            rowWidget.foreach(Lang.bind(this,
+                function(child) {
+                
+                    if (child.name == "PauseToolbar") {
+                        child.hide();
+                        child.sensitive = false;
+                    }  
+                           
+                    if (child.name == "PlayToolBar" ) {
+                        child.show();
+                        child.sensitive = true;
+                    }
+                }));
+        }
     },
     
     onRecordStopClicked: function() {
@@ -257,7 +275,7 @@ const MainView = new Lang.Class({
                                                margin_top: 6,
                                                margin_left: 6,
                                                margin_right: 6 });
-        this.recordTextLabel.label = "Recording...";
+        this.recordTextLabel.label = _("Recording...");
         this._boxRecord.pack_start(this.recordTextLabel, false, true, 0);
         
         this.recordTimeLabel = new Gtk.Label({ margin_bottom: 4,
