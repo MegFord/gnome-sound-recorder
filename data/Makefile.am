@@ -11,7 +11,7 @@ gsettings_SCHEMAS = org.gnome.gnome-sound-recorder.gschema.xml
 @INTLTOOL_XML_NOMERGE_RULE@ 
 @GSETTINGS_RULES@
 
-org.gnome-sound-recorder.service: org.gnome-sound-recorder.service.in
+org.gnome.gnome-sound-recorder.service: org.gnome.gnome-sound-recorder.service.in
 	$(AM_V_GEN) sed \
 		-e "s|[@]PACKAGE_NAME@|$(PACKAGE_NAME)|g" \
 		-e "s|[@]pkgdatadir@|$(pkgdatadir)|g" \
@@ -29,9 +29,8 @@ servicedir = $(datadir)/dbus-1/services
 service_DATA = org.gnome.gnome-sound-recorder.service
 
 EXTRA_DIST = \
-	CREDITS \
 	$(PACKAGE_NAME).desktop.in.in \
-	org.gnome-sound-recorder.service.in \
+	org.gnome.gnome-sound-recorder.service.in \
 	$(gsettings_SCHEMAS) \
 	$(resource_files) \
 	$(NULL)
