@@ -1,0 +1,216 @@
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Aviary.pl
+# Jeśli masz jakiekolwiek uwagi odnoszące się do tłumaczenia lub chcesz
+# pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
+# gnomepl@aviary.pl
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Piotr Drąg <piotrdrag@gmail.com>, 2013.
+# Aviary.pl <gnomepl@aviary.pl>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-19 19:27+0200\n"
+"PO-Revision-Date: 2013-09-19 19:28+0200\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"Language-Team: Polish <gnomepl@aviary.pl>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: Poland\n"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:1 ../src/record.js:93
+msgid "Sound Recorder"
+msgstr "Nagrywanie dźwięku"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Nagrywanie dźwięku przez mikrofon i jego odtwarzanie"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Dźwięk;Audio;Nagrywanie;Nagraj;Record;"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Rozmiar okna"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Rozmiar okna (szerokość i wysokość)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Położenie okna"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Położenie okna (na osi X i Y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Preferowany typ multimediów do kodowania dźwięku podczas nagrywania"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Preferowany typ multimediów do kodowania dźwięku podczas nagrywania, na "
+"przykład \"audio/x-vorbis\" dla Ogg Vorbis lub \"audio/mpeg\" dla MP3. Nie "
+"jest to typ MIME."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "Mapuje typy multimediów do nazw ustawień kodera dźwięku."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Mapuje typy multimediów do nazw ustawień kodera dźwięku. Jeśli nie ma "
+"mapowania dla typu multimediów, to zostaną użyte domyślne ustawienia kodera."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Poziom głośności"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Poziom głośności."
+
+#: ../src/info.js:47 ../src/mainWindow.js:498
+msgid "Info"
+msgstr "Informacje"
+
+#: ../src/info.js:59
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: ../src/info.js:73 ../src/preferences.js:46
+msgid "Done"
+msgstr "Gotowe"
+
+#: ../src/info.js:99
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nazwa"
+
+#: ../src/info.js:106
+msgid "Source"
+msgstr "Źródło"
+
+#: ../src/info.js:115
+msgid "Date Modified"
+msgstr "Data modyfikacji"
+
+#: ../src/info.js:121
+msgid "Date Created"
+msgstr "Data utworzenia"
+
+#: ../src/info.js:132
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Typ"
+
+#: ../src/listview.js:130 ../src/listview.js:135 ../src/listview.js:224
+#: ../src/record.js:286
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d-%m-%Y, %H:%M:%S"
+
+#: ../src/main.js:55
+msgid "SoundRecorder"
+msgstr "Nagrywanie dźwięku"
+
+#: ../src/main.js:83
+msgid "Sound Recorder started"
+msgstr "Uruchomiono program do nagrywania dźwięku"
+
+#: ../src/mainWindow.js:278
+msgid "Recording…"
+msgstr "Nagrywanie…"
+
+#: ../src/mainWindow.js:523
+msgid "Delete"
+msgstr "Usuń"
+
+#: ../src/mainWindow.js:774
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:774
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:774
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:774
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:774
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:797
+msgid "Load More"
+msgstr "Wczytaj więcej"
+
+#: ../src/play.js:81
+msgid "Unable to set the playbin to the playing state."
+msgstr "Nie można ustawić mechanizmu playbin na stan odtwarzania."
+
+#: ../src/preferences.js:67
+msgid "Preferred format"
+msgstr "Preferowany format"
+
+#: ../src/preferences.js:75
+msgid "Volume"
+msgstr "Głośność"
+
+#: ../src/preferences.js:90
+msgid "Microphone"
+msgstr "Mikrofon"
+
+#: ../src/record.js:57
+msgid "Unable to create Recordings directory."
+msgstr "Nie można utworzyć katalogu Nagrania."
+
+#: ../src/record.js:65
+msgid "Your audio capture settings are invalid."
+msgstr "Ustawienia przechwytywania dźwięku są nieprawidłowe."
+
+#: ../src/record.js:108
+msgid "Not all elements could be created."
+msgstr "Nie można utworzyć wszystkich elementów."
+
+#: ../src/record.js:118
+msgid "Not all of the elements were linked"
+msgstr "Nie można dowiązać wszystkich elementów"
+
+#: ../src/record.js:139
+msgid "No Media Profile was set."
+msgstr "Nie ustawiono żadnego profilu multimediów."
+
+#: ../src/record.js:149
+msgid "Unable to set the pipeline to the recording state."
+msgstr "Nie można ustawić potoku na stan nagrywania."
+
+#: ../src/record.js:198 ../src/record.js:240
+msgid "Error: "
+msgstr "Błąd: "
+
+#: ../src/record.js:270
+msgid "Recordings"
+msgstr "Nagrania"
+
+#: ../src/record.js:284
+msgid "Recording "
+msgstr "Nagranie "
