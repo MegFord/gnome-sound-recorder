@@ -275,7 +275,7 @@ const MainView = new Lang.Class({
                                                margin_top: 6,
                                                margin_left: 6,
                                                margin_right: 6 });
-        this.recordTextLabel.label = _("Recording...");
+        this.recordTextLabel.label = _("Recording…");
         this._boxRecord.pack_start(this.recordTextLabel, false, true, 0);
         
         this.recordTimeLabel = new Gtk.Label({ margin_bottom: 4,
