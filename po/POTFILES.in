@@ -1,12 +1,13 @@
 data/gnome-sound-recorder.desktop.in.in
-src/main.js
-src/util.js
-src/mainWindow.js
+data/org.gnome.gnome-sound-recorder.gschema.xml
 src/audioProfile.js
 src/fileUtil.js
 src/info.js
 src/listview.js
+src/main.js
+src/mainWindow.js
 src/play.js
 src/preferences.js
 src/record.js
+src/util.js
 src/waveform.js
