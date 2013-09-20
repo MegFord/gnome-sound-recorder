@@ -1,0 +1,199 @@
+# Brazilian Portuguese translation for gnome-sound-recorder.
+# Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Rafael Ferreira <rafael.f.f1@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-09-20 08:29+0000\n"
+"PO-Revision-Date: 2013-09-20 08:31-0300\n"
+"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:1 ../src/record.js:93
+msgid "Sound Recorder"
+msgstr "Gravador de som"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Grave som por meio de microfone e reproduza-o"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Áudio;Aplicativo;Gravador;"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Tamanho da janela"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Tamanho da janela (largura e altura)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Posição da janela"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Posição da janela (x e y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Tipo de mídia preferida para codificação de áudio ao gravar"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Tipo de mídia preferida para codificação de áudio ao gravar. \"audio/x-vorbis"
+"\" para Ogg Vorbis ou \"audio/mpeg\" para MP3, por exemplo. Isso não é um "
+"tipo MIME."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+"Mapeia tipos de mídia de nomes de predefinições de codificador de áudio."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Mapeia tipos de mídia de nomes de predefinições de codificação de áudio. Se "
+"não houver mapeamento algum para um tipo de mídia, as configurações padrão "
+"de codificação serão usadas."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Nível de volume"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Nível de volume."
+
+#: ../src/info.js:47 ../src/mainWindow.js:498
+msgid "Info"
+msgstr "Info"
+
+#: ../src/info.js:59
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../src/info.js:73 ../src/preferences.js:46
+msgid "Done"
+msgstr "Pronto"
+
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:99
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nome"
+
+#. Source item
+#: ../src/info.js:106
+msgid "Source"
+msgstr "Fonte"
+
+#. Date Modified item
+#: ../src/info.js:115
+msgid "Date Modified"
+msgstr "Última alteração"
+
+#. Date Created item
+#: ../src/info.js:121
+msgid "Date Created"
+msgstr "Data de criação"
+
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:132
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tipo"
+
+#: ../src/listview.js:130 ../src/listview.js:135 ../src/listview.js:224
+#: ../src/record.js:286
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/main.js:55
+msgid "SoundRecorder"
+msgstr "GravadorDeSom"
+
+#: ../src/main.js:83
+msgid "Sound Recorder started"
+msgstr "O gravador de som iniciou"
+
+#: ../src/mainWindow.js:278
+msgid "Recording…"
+msgstr "Gravando…"
+
+#: ../src/mainWindow.js:523
+msgid "Delete"
+msgstr "Excluir"
+
+#: ../src/mainWindow.js:774
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:774
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:774
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:774
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:774
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:797
+msgid "Load More"
+msgstr "Carregar mais"
+
+#: ../src/preferences.js:67
+msgid "Preferred format"
+msgstr "Formato preferido"
+
+#: ../src/preferences.js:75
+msgid "Volume"
+msgstr "Volume"
+
+#: ../src/preferences.js:90
+msgid "Microphone"
+msgstr "Microfone"
+
+#: ../src/record.js:149
+msgid "Unable to set the pipeline to the recording state."
+msgstr "Desabilite para configurar o redirecionamento para estado de gravação."
+
+#: ../src/record.js:198 ../src/record.js:240
+msgid "Error: "
+msgstr "Erro: "
+
+#: ../src/record.js:270
+msgid "Recordings"
+msgstr "Gravações"
+
+#: ../src/record.js:284
+msgid "Recording "
+msgstr "Gravação"
