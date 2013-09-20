@@ -1,6 +1,12 @@
 ## Process this file with automake to produce Makefile.in
 
-## Created by Anjuta  
+## Created by Anjuta 
+NULL = 
+ 
+nodist_bin_SCRIPTS = $(PACKAGE_TARNAME)
+nodist_pkgdata_SCRIPTS = $(PACKAGE_NAME)
+
+EXTRA_SCRIPTS = org.gnome.SoundRecorder gnome-sound-recorder
 
 jsdir = $(pkgdatadir)
 dist_js_DATA = \
@@ -18,7 +24,17 @@ dist_js_DATA = \
     waveform.js\
     $(NULL)
     
- nodist_bin_SCRIPTS = gnome-sound-recorder
+
+$(PACKAGE_TARNAME): $(PACKAGE_TARNAME).in
+	$(AM_V_GEN) sed \
+		-e "s|[@]GJS@|$(GJS)|g" \
+		-e "s|[@]PACKAGE_NAME@|$(PACKAGE_NAME)|g" \
+		-e "s|[@]PACKAGE_VERSION@|$(PACKAGE_VERSION)|g" \
+		-e "s|[@]prefix@|$(prefix)|g" \
+		-e "s|[@]libdir@|$(libdir)|g" \
+		-e "s|[@]pkgdatadir@|$(pkgdatadir)|g" \
+		$< > $@
+	@chmod +x $@
     
 $(PACKAGE_NAME): $(PACKAGE_NAME).in
 	$(AM_V_GEN) sed \

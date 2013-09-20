@@ -42,16 +42,23 @@ imports.gi.versions.Gst = '1.0';
 const Util = imports.util;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
+const GLib = imports.gi.GLib;
 
 const MainWindow = imports.mainWindow;
 const Preferences = imports.preferences;
+
+function initEnvironment() {
+    mainWindow.getApp = function() {
+        return Gio.Application.get_default();
+    };
+}
 
 const Application = new Lang.Class({
     Name: 'Application',
     Extends: Gtk.Application,
 
     _init: function() {
-        this.parent({ application_id: "org.gnome.gnome-sound-recorder" }); 
+        this.parent({ application_id: "org.gnome.SoundRecorder" }); 
         GLib.set_application_name(_("SoundRecorder"));         
     },
     
@@ -100,6 +107,7 @@ const Application = new Lang.Class({
 });
 
 function main(argv) {
+    initEnvironment();
 
     return (new Application()).run(argv);
 }
