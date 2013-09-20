@@ -1,5 +1,4 @@
-# I chose to use recursive automake so I can use nobase_ and avoid
-# 5 different directory declarations
+
 
 appsdir = $(datadir)/applications
 apps_DATA = $(PACKAGE_NAME).desktop
