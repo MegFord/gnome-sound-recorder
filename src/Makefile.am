@@ -4,7 +4,11 @@
 NULL = 
  
 nodist_bin_SCRIPTS = $(PACKAGE_TARNAME)
-nodist_pkgdata_SCRIPTS = $(PACKAGE_NAME)
+nodist_pkgdata_SCRIPTS = \
+    org.gnome.SoundRecorder \
+    gnome-sound-recorder \
+    $(NULL)
+    
 
 EXTRA_SCRIPTS = org.gnome.SoundRecorder gnome-sound-recorder
 
@@ -25,7 +29,7 @@ dist_js_DATA = \
     $(NULL)
     
 
-$(PACKAGE_TARNAME): $(PACKAGE_TARNAME).in
+org.gnome.SoundRecorder: org.gnome.SoundRecorder.in
 	$(AM_V_GEN) sed \
 		-e "s|[@]GJS@|$(GJS)|g" \
 		-e "s|[@]PACKAGE_NAME@|$(PACKAGE_NAME)|g" \
@@ -47,7 +51,11 @@ $(PACKAGE_NAME): $(PACKAGE_NAME).in
 		$< > $@
 	@chmod +x $@
 
-EXTRA_DIST = $(PACKAGE_NAME).in 
+EXTRA_DIST = \
+    org.gnome.SoundRecorder.in \
+    $(PACKAGE_NAME).in \
+    $(NULL)
+    
 CLEANFILES = $(PACKAGE_NAME) 
 
 -include $(top_srcdir)/git.mk
