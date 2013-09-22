@@ -1,0 +1,194 @@
+# Slovenian translation for gnome-sound-recorder.
+# Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+#
+# Martin Srebotnjak <<miles@filmsi.net>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-09-20 17:33+0000\n"
+"PO-Revision-Date: 2013-09-20 22:04+0100\n"
+"Last-Translator: filmsi <miles@filmsi.net>\n"
+"Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 or n%100==4 ? 3 : 0) ;\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:1 ../src/record.js:93
+msgid "Sound Recorder"
+msgstr "Snemalnik zvoka"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Snemajte zvok prek mikrofona in ga predvajajte"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Zvok;Program;Snemaj;"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Velikost okna"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Velikost okna (širina in višina)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Položaj okna"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Položaj okna (x in y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Raven glasnosti"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Raven glasnosti."
+
+#: ../src/info.js:47 ../src/mainWindow.js:498
+msgid "Info"
+msgstr "Podatki"
+
+#: ../src/info.js:59
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: ../src/info.js:73 ../src/preferences.js:46
+msgid "Done"
+msgstr "Dokončano"
+
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:99
+msgctxt "File Name"
+msgid "Name"
+msgstr "Ime"
+
+#. Source item
+#: ../src/info.js:106
+msgid "Source"
+msgstr "Vir"
+
+#. Date Modified item
+#: ../src/info.js:115
+msgid "Date Modified"
+msgstr "Datum spremembe"
+
+#. Date Created item
+#: ../src/info.js:121
+msgid "Date Created"
+msgstr "Datum nastanka"
+
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:132
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Vrsta"
+
+#: ../src/listview.js:130 ../src/listview.js:135 ../src/listview.js:224
+#: ../src/record.js:286
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/main.js:55
+msgid "SoundRecorder"
+msgstr ""
+
+#: ../src/main.js:83
+msgid "Sound Recorder started"
+msgstr "Snemalnik zvoka zagnan"
+
+#: ../src/mainWindow.js:278
+msgid "Recording…"
+msgstr "Snemanje v teku ..."
+
+#: ../src/mainWindow.js:523
+msgid "Delete"
+msgstr "Izbriši"
+
+#: ../src/mainWindow.js:774
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:774
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:774
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:774
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:774
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:797
+msgid "Load More"
+msgstr "Naloži več"
+
+#: ../src/preferences.js:67
+msgid "Preferred format"
+msgstr "Priljubljeni zapis"
+
+#: ../src/preferences.js:75
+msgid "Volume"
+msgstr "Glasnost"
+
+#: ../src/preferences.js:90
+msgid "Microphone"
+msgstr "Mikrofon"
+
+#: ../src/record.js:149
+msgid "Unable to set the pipeline to the recording state."
+msgstr ""
+
+#: ../src/record.js:198 ../src/record.js:240
+msgid "Error: "
+msgstr "Napaka: "
+
+#: ../src/record.js:270
+msgid "Recordings"
+msgstr ""
+
+#: ../src/record.js:284
+msgid "Recording "
+msgstr ""
