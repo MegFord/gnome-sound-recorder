@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 data/org.gnome.SoundRecorder.desktop.in.in
 src/main.js
 src/util.js
@@ -7,6 +8,16 @@ src/mainWindow.js
 data/gnome-sound-recorder.desktop.in.in
 data/org.gnome.gnome-sound-recorder.gschema.xml
 >>>>>>> Updated POTFILES.in
+=======
+data/gnome-sound-recorder.desktop.in.in
+data/org.gnome.gnome-sound-recorder.gschema.xml
+=======
+data/org.gnome.SoundRecorder.desktop.in.in
+src/main.js
+src/util.js
+src/mainWindow.js
+>>>>>>> rename the desktop file
+>>>>>>> rename the desktop file
 src/audioProfile.js
 src/fileUtil.js
 src/info.js
