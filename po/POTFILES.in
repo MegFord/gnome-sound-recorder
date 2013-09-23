@@ -1,4 +1,4 @@
-data/gnome-sound-recorder.desktop.in.in
+data/org.gnome.SoundRecorder.desktop.in.in
 src/main.js
 src/util.js
 src/mainWindow.js

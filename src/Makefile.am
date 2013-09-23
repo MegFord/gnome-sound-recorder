@@ -36,7 +36,6 @@ $(PACKAGE_NAME): $(PACKAGE_NAME).in
 	@chmod +x $@
 
 EXTRA_DIST = gnome-sound-recorder.in 
-    
-CLEANFILES =  gnome-sound-recorder.in 
+DISTCLEANFILES = gnome-sound-recorder
 
 -include $(top_srcdir)/git.mk
