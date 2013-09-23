@@ -52,7 +52,9 @@ const Application = new Lang.Class({
     Extends: Gtk.Application,
 
     _init: function() {
-        this.parent({ application_id: "org.gnome.SoundRecorder" }); 
+        this.parent({ application_id: "org.gnome.SoundRecorder",
+                      flags: Gio.ApplicationFlags.IS_SERVICE,
+                      inactivity_timeout: 60000 }); 
         GLib.set_application_name(_("SoundRecorder"));         
     },
     
@@ -101,7 +103,5 @@ const Application = new Lang.Class({
 });
 
 function main(argv) {
-
-
     return (new Application()).run(argv);
 }

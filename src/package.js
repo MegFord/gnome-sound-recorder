@@ -301,10 +301,8 @@ function initResources() {
 }
 
 function launch(params) {
-    params.flags = params.flags || 0;
     let app = new Gio.Application({ application_id: "org.gnome.SoundRecorder",
-                                    flags: (Gio.ApplicationFlags.IS_LAUNCHER |
-                                            params.flags),
+                                    flags: Gio.ApplicationFlags.IS_LAUNCHER,
                                   });
     return app.run(ARGV);
 }

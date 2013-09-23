@@ -1,7 +1,7 @@
 
 
 appsdir = $(datadir)/applications
-apps_DATA = $(PACKAGE_NAME).desktop
+apps_DATA = org.gnome.SoundRecorder.desktop
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -17,7 +17,7 @@ org.gnome.gnome-sound-recorder.service: org.gnome.gnome-sound-recorder.service.i
 		-e "s|[@]pkglibdir@|$(pkglibdir)|g" \
 		$< > $@
 
-gnome-sound-recorder.desktop.in: gnome-sound-recorder.desktop.in.in
+org.gnome.SoundRecorder.desktop.in: org.gnome.SoundRecorder.desktop.in.in
 	$(AM_V_GEN) sed \
 		-e "s|[@]PACKAGE_NAME@|$(PACKAGE_NAME)|g" \
 		-e "s|[@]pkgdatadir@|$(pkgdatadir)|g" \
@@ -28,14 +28,14 @@ servicedir = $(datadir)/dbus-1/services
 service_DATA = org.gnome.gnome-sound-recorder.service
 
 EXTRA_DIST = \
-	$(PACKAGE_NAME).desktop.in.in \
+	org.gnome.SoundRecorder.desktop.in.in \
 	org.gnome.gnome-sound-recorder.service.in \
 	$(gsettings_SCHEMAS) \
 	$(resource_files) \
 	$(NULL)
 
 CLEANFILES = \
-	$(PACKAGE_NAME).desktop.in \
+	org.gnome.SoundRecorder.desktop.in \
 	org.gnome.gnome-sound-recorder.service \
 	$(apps_DATA) \
 	*.valid \

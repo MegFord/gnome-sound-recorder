@@ -1,5 +1,5 @@
 #!@GJS@
 imports.searchPath.push("@pkgdatadir@");
-imports.package.launch({ name: "org.gnome.SoundRecorder" })
+imports.package.launch({ name: "org.gnome.SoundRecorder" });
 
 
