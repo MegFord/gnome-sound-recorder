@@ -1,0 +1,196 @@
+# Finnish translation for gnome-sound-recorder.
+# Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-09-19 17:29+0000\n"
+"PO-Revision-Date: 2013-09-19 21:04+0300\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.6\n"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:1 ../src/record.js:93
+msgid "Sound Recorder"
+msgstr "Ääninauhuri"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Tallenna ääntä mikrofonilta ja toista tallenteita"
+
+#: ../data/gnome-sound-recorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audio;Application;Record;ääni;sovellus;nauhuri;nauhoitin"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Ikkunan koko"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Ikkunan koko (leveys ja korkeus)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Ikkunan sijainti"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Ikkunan sijainti (x ja y)"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Ensisijainen äänikoodauksen tyyppi nauhoittaessa"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Ensisijainen äänikoodauksen tyyppi nauhoittaessa. Esimerkiksi 'audio/x-"
+"vorbis' Ogg Vorbikselle tai 'audio/mpeg' MP3:lle. Kyseessä ei ole MIME-"
+"tyyppi."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Äänentaso"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Äänenvoimakkuuden taso."
+
+#: ../src/info.js:47 ../src/mainWindow.js:498
+msgid "Info"
+msgstr "Info"
+
+#: ../src/info.js:59
+msgid "Cancel"
+msgstr "Peru"
+
+#: ../src/info.js:73 ../src/preferences.js:46
+msgid "Done"
+msgstr "Valmis"
+
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:99
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nimi"
+
+#. Source item
+#: ../src/info.js:106
+msgid "Source"
+msgstr "Lähde"
+
+#. Date Modified item
+#: ../src/info.js:115
+msgid "Date Modified"
+msgstr "Muokkauspäivä"
+
+#. Date Created item
+#: ../src/info.js:121
+msgid "Date Created"
+msgstr "Luontipäivä"
+
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:132
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tyyppi"
+
+#: ../src/listview.js:130 ../src/listview.js:135 ../src/listview.js:224
+#: ../src/record.js:286
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr ""
+
+#: ../src/main.js:55
+msgid "SoundRecorder"
+msgstr "Ääninauhuri"
+
+#: ../src/main.js:83
+msgid "Sound Recorder started"
+msgstr "Ääninauhuri käynnisty"
+
+#: ../src/mainWindow.js:278
+msgid "Recording…"
+msgstr "Nauhoitetaan…"
+
+#: ../src/mainWindow.js:523
+msgid "Delete"
+msgstr "Poista"
+
+#: ../src/mainWindow.js:774
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:774
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:774
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:774
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:774
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:797
+msgid "Load More"
+msgstr "Lataa lisää"
+
+#: ../src/preferences.js:67
+msgid "Preferred format"
+msgstr "Ensisijainen muoto"
+
+#: ../src/preferences.js:75
+msgid "Volume"
+msgstr "Äänenvoimakkuus"
+
+#: ../src/preferences.js:90
+msgid "Microphone"
+msgstr "Mikrofoni"
+
+#: ../src/record.js:149
+msgid "Unable to set the pipeline to the recording state."
+msgstr ""
+
+#: ../src/record.js:198 ../src/record.js:240
+msgid "Error: "
+msgstr "Virhe:"
+
+#: ../src/record.js:270
+msgid "Recordings"
+msgstr "Tallenteet"
+
+#: ../src/record.js:284
+msgid "Recording "
+msgstr "Tallenne"
