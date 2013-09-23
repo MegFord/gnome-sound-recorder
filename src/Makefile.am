@@ -3,11 +3,8 @@
 ## Created by Anjuta 
 NULL = 
  
-nodist_bin_SCRIPTS = $(PACKAGE_TARNAME)
-nodist_pkgdata_SCRIPTS = \
-    org.gnome.SoundRecorder \
-    gnome-sound-recorder \
-    $(NULL)
+nodist_bin_SCRIPTS = gnome-sound-recorder 
+nodist_pkgdata_SCRIPTS = org.gnome.SoundRecorder
     
 
 EXTRA_SCRIPTS = org.gnome.SoundRecorder gnome-sound-recorder
@@ -53,9 +50,12 @@ $(PACKAGE_NAME): $(PACKAGE_NAME).in
 
 EXTRA_DIST = \
     org.gnome.SoundRecorder.in \
-    $(PACKAGE_NAME).in \
+    gnome-sound-recorder.in \
     $(NULL)
     
-CLEANFILES = $(PACKAGE_NAME) 
+CLEANFILES =  \
+    org.gnome.SoundRecorder.in \
+    gnome-sound-recorder.in \
+    $(NULL)
 
 -include $(top_srcdir)/git.mk
