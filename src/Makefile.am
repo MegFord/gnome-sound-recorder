@@ -4,10 +4,7 @@
 NULL = 
  
 nodist_bin_SCRIPTS = gnome-sound-recorder 
-nodist_pkgdata_SCRIPTS = org.gnome.SoundRecorder
     
-
-EXTRA_SCRIPTS = org.gnome.SoundRecorder gnome-sound-recorder
 
 jsdir = $(pkgdatadir)
 dist_js_DATA = \
@@ -26,16 +23,6 @@ dist_js_DATA = \
     $(NULL)
     
 
-org.gnome.SoundRecorder: org.gnome.SoundRecorder.in
-	$(AM_V_GEN) sed \
-		-e "s|[@]GJS@|$(GJS)|g" \
-		-e "s|[@]PACKAGE_NAME@|$(PACKAGE_NAME)|g" \
-		-e "s|[@]PACKAGE_VERSION@|$(PACKAGE_VERSION)|g" \
-		-e "s|[@]prefix@|$(prefix)|g" \
-		-e "s|[@]libdir@|$(libdir)|g" \
-		-e "s|[@]pkgdatadir@|$(pkgdatadir)|g" \
-		$< > $@
-	@chmod +x $@
     
 $(PACKAGE_NAME): $(PACKAGE_NAME).in
 	$(AM_V_GEN) sed \
@@ -48,14 +35,8 @@ $(PACKAGE_NAME): $(PACKAGE_NAME).in
 		$< > $@
 	@chmod +x $@
 
-EXTRA_DIST = \
-    org.gnome.SoundRecorder.in \
-    gnome-sound-recorder.in \
-    $(NULL)
+EXTRA_DIST = gnome-sound-recorder.in 
     
-CLEANFILES =  \
-    org.gnome.SoundRecorder.in \
-    gnome-sound-recorder.in \
-    $(NULL)
+CLEANFILES =  gnome-sound-recorder.in 
 
 -include $(top_srcdir)/git.mk
