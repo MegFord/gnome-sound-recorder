@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-20 17:33+0000\n"
-"PO-Revision-Date: 2013-09-20 22:04+0100\n"
-"Last-Translator: filmsi <miles@filmsi.net>\n"
+"POT-Creation-Date: 2013-09-22 19:26+0000\n"
+"PO-Revision-Date: 2013-09-23 22:35+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -50,14 +50,18 @@ msgid "Window position (x and y)."
 msgstr "Položaj okna (x in y)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+#, fuzzy
 msgid "Preferred media type for encoding audio when recording"
-msgstr ""
+msgstr "Priljubljena vrsta medija za kodiranje zvoka ob snemanju"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+#, fuzzy
 msgid ""
 "Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
 "Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
 msgstr ""
+"Priljubljena vrsta medija za kodiranje zvoka ob snemanju. Primer: 'audio/x-"
+"vorbis' za Ogg Vorbis ali 'audio/mpeg' za MP3. To ni vrsta MIME."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
@@ -126,8 +130,9 @@ msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
 #: ../src/main.js:55
+#, fuzzy
 msgid "SoundRecorder"
-msgstr ""
+msgstr "Snemalnik zvoka"
 
 #: ../src/main.js:83
 msgid "Sound Recorder started"
@@ -178,17 +183,20 @@ msgid "Microphone"
 msgstr "Mikrofon"
 
 #: ../src/record.js:149
+#, fuzzy
 msgid "Unable to set the pipeline to the recording state."
-msgstr ""
+msgstr "Cevovoda ni mogoče nastaviti na stanje snemanja."
 
 #: ../src/record.js:198 ../src/record.js:240
 msgid "Error: "
 msgstr "Napaka: "
 
 #: ../src/record.js:270
+#, fuzzy
 msgid "Recordings"
-msgstr ""
+msgstr "Posnetki"
 
 #: ../src/record.js:284
+#, fuzzy
 msgid "Recording "
-msgstr ""
+msgstr "posnetek"
