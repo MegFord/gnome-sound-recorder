@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-22 19:26+0000\n"
-"PO-Revision-Date: 2013-09-23 22:35+0100\n"
+"POT-Creation-Date: 2013-09-23 13:17+0000\n"
+"PO-Revision-Date: 2013-09-27 00:06+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
 "Language: sl\n"
@@ -50,28 +50,29 @@ msgid "Window position (x and y)."
 msgstr "Položaj okna (x in y)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
-#, fuzzy
 msgid "Preferred media type for encoding audio when recording"
-msgstr "Priljubljena vrsta medija za kodiranje zvoka ob snemanju"
+msgstr "Priljubljena vrsta zapisa za kodiranje zvoka ob snemanju"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
-#, fuzzy
 msgid ""
 "Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
 "Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
 msgstr ""
-"Priljubljena vrsta medija za kodiranje zvoka ob snemanju. Primer: 'audio/x-"
+"Priljubljena vrsta zapisa za kodiranje zvoka ob snemanju. Primer: 'audio/x-"
 "vorbis' za Ogg Vorbis ali 'audio/mpeg' za MP3. To ni vrsta MIME."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
-msgstr ""
+msgstr "Preslika vrste zapisa na prednastavljena imena zvočnega kodirnika."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping for a "
 "media type, the default encoder settings will be used."
 msgstr ""
+"Preslika vrste zapisa na prednastavljena imena zvočnega kodirnika. Če za "
+"vrsto medija preslikava ni določena, bodo uporabljene privzete nastavitve "
+"kodirnika."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Volume level"
@@ -130,7 +131,6 @@ msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
 #: ../src/main.js:55
-#, fuzzy
 msgid "SoundRecorder"
 msgstr "Snemalnik zvoka"
 
@@ -183,7 +183,6 @@ msgid "Microphone"
 msgstr "Mikrofon"
 
 #: ../src/record.js:149
-#, fuzzy
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Cevovoda ni mogoče nastaviti na stanje snemanja."
 
@@ -192,11 +191,9 @@ msgid "Error: "
 msgstr "Napaka: "
 
 #: ../src/record.js:270
-#, fuzzy
 msgid "Recordings"
-msgstr "Posnetki"
+msgstr "posnetkov"
 
 #: ../src/record.js:284
-#, fuzzy
 msgid "Recording "
 msgstr "posnetek"
