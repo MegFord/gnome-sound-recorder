@@ -269,6 +269,7 @@ const Listview = new Lang.Class({
             stopVal = EnumeratorState.ACTIVE;
             allFilesInfo.length = 0;
             fileInfo.length = 0;
+            this.idx = 0;
             listType = ListType.REFRESH;
             
             if (currentlyEnumerating == CurrentlyEnumerating.FALSE) {
