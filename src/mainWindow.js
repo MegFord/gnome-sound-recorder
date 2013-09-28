@@ -26,6 +26,7 @@ const Gdk = imports.gi.Gdk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
+
 const Signals = imports.signals;
 
 const AudioProfile = imports.audioProfile;
@@ -43,6 +44,7 @@ let fileUtil = null;
 let grid = null;
 let groupGrid;
 let list = null;
+let listBox = null;
 let loadMoreButton = null;
 let offsetController = null;
 let path = null;
@@ -95,6 +97,7 @@ const MainWindow = new Lang.Class({
         fileUtil = new FileUtil.FileUtil();
         offsetController = new FileUtil.OffsetController;
         view = new MainView();
+	log(view);
         play = new Play.Play();
         
         params = Params.fill(params, { title: GLib.get_application_name(), 
@@ -163,9 +166,12 @@ const MainView = new Lang.Class({
     _addListviewPage: function(name) {
         fileUtil = new FileUtil.FileUtil();
         list = new Listview.Listview();
+	log(list);
+log(list.allFilesInfo);
         list.setListTypeNew();
         list.enumerateDirectory();
         this._record = new Record.Record(audioProfile);
+log(this._record._TENTH_SEC);
         let initialPage = new Gtk.EventBox();
         
         groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
@@ -301,7 +307,8 @@ const MainView = new Lang.Class({
         this.recordGrid.attach(this.toolbarStart, 5, 1, 1, 2);
     },
      
-    scrolledWinAdd: function() {       
+    scrolledWinAdd: function() { 
+	log("Scrolled window added");      
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
                                                      margin_top: 5,
@@ -328,21 +335,23 @@ const MainView = new Lang.Class({
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
         
-        this.listBox = Gtk.ListBox.new();
-        this._scrolledWin.add(this.listBox);
-        this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
-        this.listBox.set_header_func(null);
-        this.listBox.set_activate_on_single_click(true);
-        this.listBox.connect("row-selected", Lang.bind(this,
+        listBox = Gtk.ListBox.new();
+	log(listBox);
+        this._scrolledWin.add(listBox);
+        listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
+        listBox.set_header_func(null);
+        listBox.set_activate_on_single_click(true);
+        listBox.connect("row-selected", Lang.bind(this,
             function(){
-                this.rowGridCallback(this.listBox.get_selected_row())
+                this.rowGridCallback(listBox.get_selected_row())
             }));
-        this.listBox.show();
+        listBox.show();
         
         this._startIdx = 0;
         this._endIdx = offsetController.getcidx();
         this._files = [];
         this._files = list.getFilesInfoForList();
+log("this._files.length");
         
         for (let i = this._startIdx; i <= this._endIdx; i++) {
             this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
@@ -350,7 +359,7 @@ const MainView = new Lang.Class({
                                           width_request: 900,
                                           name: i.toString() });
             this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
-            this.listBox.add(this.rowGrid);
+            listBox.add(this.rowGrid);
             this.rowGrid.show();
             
             this.widget = new Gtk.Toolbar({ show_arrow: false,
@@ -377,7 +386,7 @@ const MainView = new Lang.Class({
             this._playListButton.show();
             this._playListButton.connect('clicked', Lang.bind(this,
                 function(){
-                    let row = this.listBox.get_selected_row();
+                    let row = listBox.get_selected_row();
                     play.passSelected(row); 
                     let gridForName = row.get_child();
                     let idx = parseInt(gridForName.name);                   
@@ -409,7 +418,7 @@ const MainView = new Lang.Class({
             this._pauseListButton.show();
             this._pauseListButton.connect('clicked', Lang.bind(this,
                 function(){
-                    let row = this.listBox.get_selected_row();
+                    let row = listBox.get_selected_row();
                     this.onPause(row);
                 }));
             
@@ -489,7 +498,7 @@ const MainView = new Lang.Class({
             this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
             this._info.connect("clicked", Lang.bind(this,
                 function() {
-                    let row = this.listBox.get_selected_row();
+                    let row = listBox.get_selected_row();
                     let gridForName = row.get_child();
                     let idx = parseInt(gridForName.name);                    
                     let file = this._files[idx];
@@ -518,7 +527,7 @@ const MainView = new Lang.Class({
             this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
             this._delete.connect("clicked", Lang.bind(this,
                 function() {
-                    this._deleteFile(this.listBox.get_selected_row());
+                    this._deleteFile(listBox.get_selected_row());
                 }));
             this._delete.set_tooltip_text(_("Delete"));
             this._boxDelete.add(this._delete);
@@ -526,7 +535,7 @@ const MainView = new Lang.Class({
             
             this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
             this._separator.set_sensitive(false);
-            this.listBox.add(this._separator);
+            listBox.add(this._separator);
             this.selectionRow = this._separator.get_parent();
             this.selectionRow.set_sensitive(false);
             this._separator.show();
@@ -551,14 +560,14 @@ const MainView = new Lang.Class({
     listBoxRefresh: function() {
         this.destroyLoadMoreButton();        
         previousSelRow = null;
-        this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);  
+        listBox.set_selection_mode(Gtk.SelectionMode.NONE);  
         list.enumerateDirectory();         
     },
     
     listBoxLoadMore: function() {
        this.destroyLoadMoreButton();
        previousSelRow = null;
-       this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
+       listBox.set_selection_mode(Gtk.SelectionMode.NONE);
        offsetController.increaseEndIdxStep();
        list.setListTypeRefresh();
        list._setDiscover();
@@ -751,7 +760,7 @@ const RecordButton = new Lang.Class({
     _onRecord: function() {
         view.destroyLoadMoreButton();
         view.hasPreviousSelRow();
-        view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
+        listBox.set_selection_mode(Gtk.SelectionMode.NONE);
         this.set_sensitive(false);
         setVisibleID = ActiveArea.RECORD;
         view.recordGrid.show_all();

@@ -16,6 +16,7 @@ dist_js_DATA = \
     main.js \
     mainWindow.js \
     package.js	\
+    params.js \
     play.js \
     preferences.js \
     record.js \

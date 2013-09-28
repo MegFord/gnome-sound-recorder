@@ -26,9 +26,9 @@
 const GLib = imports.gi.GLib;
 const GIRepository = imports.gi.GIRepository;
 const Gio = imports.gi.Gio;
-const System = imports.system;
 
 const Gettext = imports.gettext;
+const System = imports.system;
 
 /*< public >*/
 var name;
@@ -181,6 +181,8 @@ function _checkVersion(required, current) {
 }
 
 function _isGjsModule(name, version) {
+	log(name + "name");
+	log(version + "version");
     // This is a subset of the JS modules we offer,
     // it includes only those that makes sense to use
     // standalone and in a general app.

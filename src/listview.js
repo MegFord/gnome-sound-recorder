@@ -28,6 +28,7 @@ const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject; 
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
+
 const Signals = imports.signals;
 
 const AudioProfile = imports.audioProfile;
@@ -239,7 +240,8 @@ const Listview = new Lang.Class({
          
         if (this.idx == this.endIdx) { 
             this._discoverer.stop();
-            
+            log(this.idx + "index");
+	    log(this.endIdx + "endIndex");
             if (listType == ListType.NEW) {
                 MainWindow.view.listBoxAdd();
                 MainWindow.view.scrolledWinAdd();
@@ -248,7 +250,7 @@ const Listview = new Lang.Class({
                 MainWindow.view.scrolledWinDelete();
                 currentlyEnumerating = CurrentlyEnumerating.FALSE;
             }
-            return false; 
+            //return false; 
         }         
         this.idx++;                              
     },
