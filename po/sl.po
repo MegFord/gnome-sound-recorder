@@ -9,29 +9,18 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-23 13:17+0000\n"
-"PO-Revision-Date: 2013-09-27 00:06+0100\n"
+"POT-Creation-Date: 2013-09-28 19:20+0000\n"
+"PO-Revision-Date: 2013-09-29 14:01+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 1.5.7\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-
-#: ../data/gnome-sound-recorder.desktop.in.in.h:1 ../src/record.js:93
-msgid "Sound Recorder"
-msgstr "Snemalnik zvoka"
-
-#: ../data/gnome-sound-recorder.desktop.in.in.h:2
-msgid "Record sound via the microphone and play it back"
-msgstr "Snemajte zvok prek mikrofona in ga predvajajte"
-
-#: ../data/gnome-sound-recorder.desktop.in.in.h:3
-msgid "Audio;Application;Record;"
-msgstr "Zvok;Program;Snemaj;"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -82,6 +71,18 @@ msgstr "Raven glasnosti"
 msgid "Volume level."
 msgstr "Raven glasnosti."
 
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:56
+msgid "SoundRecorder"
+msgstr "Snemalnik zvoka"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Snemajte zvok prek mikrofona in ga predvajajte"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Zvok;Program;Snemaj;"
+
 #: ../src/info.js:47 ../src/mainWindow.js:498
 msgid "Info"
 msgstr "Podatki"
@@ -94,32 +95,23 @@ msgstr "Prekliči"
 msgid "Done"
 msgstr "Dokončano"
 
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
 #: ../src/info.js:99
 msgctxt "File Name"
 msgid "Name"
 msgstr "Ime"
 
-#. Source item
 #: ../src/info.js:106
 msgid "Source"
 msgstr "Vir"
 
-#. Date Modified item
 #: ../src/info.js:115
 msgid "Date Modified"
 msgstr "Datum spremembe"
 
-#. Date Created item
 #: ../src/info.js:121
 msgid "Date Created"
 msgstr "Datum nastanka"
 
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
 #: ../src/info.js:132
 msgctxt "Media Type"
 msgid "Type"
@@ -130,11 +122,7 @@ msgstr "Vrsta"
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/main.js:55
-msgid "SoundRecorder"
-msgstr "Snemalnik zvoka"
-
-#: ../src/main.js:83
+#: ../src/main.js:84
 msgid "Sound Recorder started"
 msgstr "Snemalnik zvoka zagnan"
 
@@ -170,6 +158,10 @@ msgstr "MOV"
 msgid "Load More"
 msgstr "Naloži več"
 
+#: ../src/play.js:81
+msgid "Unable to set the playbin to the playing state."
+msgstr "Predvajalnika ni mogoče nastaviti na stanje predvajanja."
+
 #: ../src/preferences.js:67
 msgid "Preferred format"
 msgstr "Priljubljeni zapis"
@@ -181,6 +173,30 @@ msgstr "Glasnost"
 #: ../src/preferences.js:90
 msgid "Microphone"
 msgstr "Mikrofon"
+
+#: ../src/record.js:57
+msgid "Unable to create Recordings directory."
+msgstr "Mape posnetkov ni mogoče ustvariti!"
+
+#: ../src/record.js:65
+msgid "Your audio capture settings are invalid."
+msgstr "Določene so neveljavne nastavitve zajemanja zvoka."
+
+#: ../src/record.js:93
+msgid "Sound Recorder"
+msgstr "Snemalnik zvoka"
+
+#: ../src/record.js:108
+msgid "Not all elements could be created."
+msgstr "Vseh predmetov ni mogoče ustvariti."
+
+#: ../src/record.js:118
+msgid "Not all of the elements were linked"
+msgstr "Vsi predmeti niso povezani"
+
+#: ../src/record.js:139
+msgid "No Media Profile was set."
+msgstr "Ni nastavljenega profila posnetkov."
 
 #: ../src/record.js:149
 msgid "Unable to set the pipeline to the recording state."
