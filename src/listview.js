@@ -151,8 +151,16 @@ const Listview = new Lang.Class({
                     } else {
                         stopVal = EnumeratorState.CLOSED;
                         this._enumerator.close(null);
+                        
+                        if (MainWindow.offsetController.getEndIdx() == -1) {
+                            MainWindow.view.listBoxAdd();
+                            MainWindow.view.scrolledWinAdd();
+                            currentlyEnumerating = CurrentlyEnumerating.FALSE;
+                        } else {
+                            
                         this._setDiscover();
-                                                 
+                        log("set Discover");  
+                        }                       
                         return;
                    }                    
                 }));
@@ -201,7 +209,6 @@ const Listview = new Lang.Class({
                         
     _onDiscovererFinished: function(res, info, err) {
         this.result = res;
-        
         if (this.result == GstPbutils.DiscovererResult.OK) { 
             this.tagInfo = info.get_tags(info);
             let appString = "";
@@ -237,11 +244,9 @@ const Listview = new Lang.Class({
             // don't index files we can't play
             log("File cannot be played"); 
         }
-         
+        
         if (this.idx == this.endIdx) { 
             this._discoverer.stop();
-            log(this.idx + "index");
-	    log(this.endIdx + "endIndex");
             if (listType == ListType.NEW) {
                 MainWindow.view.listBoxAdd();
                 MainWindow.view.scrolledWinAdd();
@@ -252,7 +257,7 @@ const Listview = new Lang.Class({
             }
             //return false; 
         }         
-        this.idx++;                              
+        this.idx++;                            
     },
     
     setListTypeNew: function() {
@@ -271,7 +276,6 @@ const Listview = new Lang.Class({
             fileInfo.length = 0;
             this.idx = 0;
             listType = ListType.REFRESH;
-            
             if (currentlyEnumerating == CurrentlyEnumerating.FALSE) {
                 currentlyEnumerating = CurrentlyEnumerating.TRUE;
                 MainWindow.view.listBoxRefresh();

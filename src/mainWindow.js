@@ -96,7 +96,6 @@ const MainWindow = new Lang.Class({
         fileUtil = new FileUtil.FileUtil();
         offsetController = new FileUtil.OffsetController;
         view = new MainView();
-	log(view);
         play = new Play.Play();
         
         params = Params.fill(params, { title: GLib.get_application_name(), 
@@ -165,8 +164,6 @@ const MainView = new Lang.Class({
     _addListviewPage: function(name) {
         fileUtil = new FileUtil.FileUtil();
         list = new Listview.Listview();
-	log(list);
-	log(list.allFilesInfo);
         list.setListTypeNew();
         list.enumerateDirectory();
         this._record = new Record.Record(audioProfile);
@@ -305,8 +302,7 @@ const MainView = new Lang.Class({
         this.recordGrid.attach(this.toolbarStart, 5, 1, 1, 2);
     },
      
-    scrolledWinAdd: function() { 
-	log("Scrolled window added");      
+    scrolledWinAdd: function() {    
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
                                                      margin_top: 5,
@@ -334,7 +330,6 @@ const MainView = new Lang.Class({
         this._scrolledWin.show();
         
         this.listBox = Gtk.ListBox.new();
-	log(this.listBox);
         this._scrolledWin.add(this.listBox);
         this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
         this.listBox.set_header_func(null);
@@ -346,7 +341,7 @@ const MainView = new Lang.Class({
         this.listBox.show();
         
         this._startIdx = 0;
-        this._endIdx = offsetController.getcidx();
+        this._endIdx = offsetController.getEndIdx();
         this._files = [];
         this._files = list.getFilesInfoForList();
         
@@ -557,7 +552,8 @@ const MainView = new Lang.Class({
     listBoxRefresh: function() {
         this.destroyLoadMoreButton();        
         previousSelRow = null;
-        this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);  
+        this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
+        list.setListTypeRefresh();  
         list.enumerateDirectory();         
     },
     
@@ -571,7 +567,7 @@ const MainView = new Lang.Class({
     },
     
     scrolledWinDelete: function() {
-        let w = this.rowGrid.get_allocated_width();
+        //let w = this.rowGrid.get_allocated_width();
         this._scrolledWin.destroy();
         this.scrolledWinAdd(); 
     },

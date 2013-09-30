@@ -5,6 +5,6 @@ _Comment=Record sound via the microphone and play it back
 Icon=face-smile
 Categories=GNOME;GTK;
 _Keywords=Audio;Application;Record;
-Exec=@GJS@ -c 'imports.package.start({ name: "gnome-sound-recorder", version: "@PACKAGE_VERSION@", prefix: "@prefix@" })'
+Exec=gnome-sound-recorder
 StartupNotify=true
 

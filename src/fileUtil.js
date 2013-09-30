@@ -89,16 +89,16 @@ const OffsetController = new Lang.Class({
     
     getEndIdx: function() {
         this.totItems = MainWindow.list.getItemCount();
- 
+ log(this.totItems + "totitems");
         if (CurrentEndIdx < this.totItems) {
             this.endIdx = CurrentEndIdx;
+            log("greater");
         } else {
             this.endIdx = this.totItems - 1;
+            log("less");
         }
-            
-        CurrentEndIdx = this.endIdx;
         
-        return CurrentEndIdx;
+        return this.endIdx;
     },
     
     increaseEndIdxStep: function() {
