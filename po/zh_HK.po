@@ -1,0 +1,195 @@
+# Chinese (Hong Kong) translation for gnome-sound-recorder.
+# Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-30 19:44+0800\n"
+"PO-Revision-Date: 2013-09-30 19:44+0800\n"
+"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
+"Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "視窗大小"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "視窗大小 (闊度和高度)。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "視窗位置"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "視窗位置 (x 與 y)。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "錄音時所偏好的音訊編碼媒體類型"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr "錄音時所偏好的音訊編碼媒體類型。舉例來說，「audio/x-vorbis」為 Ogg Vorbis，或「audio/mpeg」為 MP3。這不是 MIME 類型。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "將媒體類型對應至音訊編碼器預置名稱。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr "將媒體類型對應至音訊編碼器預置名稱。若媒體類型沒有對應的編碼器預置名稱，則會使用預設的編碼器設定值。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "音量等級"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "音量等級。"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:56
+msgid "SoundRecorder"
+msgstr "錄音機"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "透過麥克風錄音並回播"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audio;Application;Record;音訊;錄音;錄製;應用程式;"
+
+#: ../src/info.js:47 ../src/mainWindow.js:498
+msgid "Info"
+msgstr "資訊"
+
+#: ../src/info.js:59
+msgid "Cancel"
+msgstr "取消"
+
+#: ../src/info.js:73 ../src/preferences.js:46
+msgid "Done"
+msgstr "完成"
+
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:99
+msgctxt "File Name"
+msgid "Name"
+msgstr "名稱"
+
+#. Source item
+#: ../src/info.js:106
+msgid "Source"
+msgstr "來源"
+
+#. Date Modified item
+#: ../src/info.js:115
+msgid "Date Modified"
+msgstr "修改日期"
+
+#. Date Created item
+#: ../src/info.js:121
+msgid "Date Created"
+msgstr "建立日期"
+
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:132
+msgctxt "Media Type"
+msgid "Type"
+msgstr "類型"
+
+#: ../src/listview.js:130 ../src/listview.js:135 ../src/listview.js:224
+#: ../src/record.js:286
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/main.js:84
+msgid "Sound Recorder started"
+msgstr "錄音機已啟動"
+
+#: ../src/mainWindow.js:278
+msgid "Recording…"
+msgstr "錄製中…"
+
+#: ../src/mainWindow.js:523
+msgid "Delete"
+msgstr "刪除"
+
+#: ../src/mainWindow.js:774
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:774
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:774
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:774
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:774
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:797
+msgid "Load More"
+msgstr "載入更多"
+
+#: ../src/preferences.js:67
+msgid "Preferred format"
+msgstr "偏好格式"
+
+#: ../src/preferences.js:75
+msgid "Volume"
+msgstr "音量"
+
+#: ../src/preferences.js:90
+msgid "Microphone"
+msgstr "麥克風"
+
+#: ../src/record.js:93
+msgid "Sound Recorder"
+msgstr "錄音機"
+
+#: ../src/record.js:149
+msgid "Unable to set the pipeline to the recording state."
+msgstr "無法將導管設定為錄製狀態。"
+
+#: ../src/record.js:198 ../src/record.js:240
+msgid "Error: "
+msgstr "錯誤："
+
+#: ../src/record.js:270
+msgid "Recordings"
+msgstr "錄製品"
+
+#: ../src/record.js:284
+msgid "Recording "
+msgstr "錄製品"
+
+#, fuzzy
+#~| msgid "Unable to set the pipeline to the recording state."
+#~ msgid "Unable to set the playbin to the playing state."
+#~ msgstr "無法將導管設定為錄製狀態。"
