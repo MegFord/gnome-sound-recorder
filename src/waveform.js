@@ -28,9 +28,9 @@ const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
 const GstAudio = imports.gi.GstAudio;
 const Gtk = imports.gi.Gtk;
+
 const _ = imports.gettext.gettext;
 const C_ = imports.gettext.pgettext;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 
 const MainWindow = imports.mainWindow;
