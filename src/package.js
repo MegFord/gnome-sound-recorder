@@ -181,8 +181,6 @@ function _checkVersion(required, current) {
 }
 
 function _isGjsModule(name, version) {
-	log(name + "name");
-	log(version + "version");
     // This is a subset of the JS modules we offer,
     // it includes only those that makes sense to use
     // standalone and in a general app.

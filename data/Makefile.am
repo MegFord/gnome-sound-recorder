@@ -1,5 +1,5 @@
 resourcedir = $(pkgdatadir)
-resource_DATA = org.gnome.gnome-sound-recorder.gresource application.css
+resource_DATA = application.css
 
 appsdir = $(datadir)/applications
 apps_DATA = org.gnome.SoundRecorder.desktop
@@ -28,7 +28,6 @@ EXTRA_DIST = \
 
 CLEANFILES = \
 	org.gnome.SoundRecorder.desktop.in \
-	org.gnome.gnome-sound-recorder.gresource \
 	$(apps_DATA) \
 	*.valid \
 	gschemas.compiled \
