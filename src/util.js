@@ -28,6 +28,7 @@ function loadStyleSheet() {
     let file = 'application.css';
 
     let provider = new Gtk.CssProvider();
+    log(GLib.build_filenamev([pkg.pkgdatadir, file]));
     provider.load_from_path(GLib.build_filenamev([pkg.pkgdatadir,
                                                   file]));
     Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),

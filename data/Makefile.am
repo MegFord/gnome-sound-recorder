@@ -1,4 +1,5 @@
-
+resourcedir = $(pkgdatadir)
+resource_DATA = org.gnome.gnome-sound-recorder.gresource application.css
 
 appsdir = $(datadir)/applications
 apps_DATA = org.gnome.SoundRecorder.desktop
@@ -22,14 +23,16 @@ org.gnome.SoundRecorder.desktop.in: org.gnome.SoundRecorder.desktop.in.in
 EXTRA_DIST = \
 	org.gnome.SoundRecorder.desktop.in.in \
 	$(gsettings_SCHEMAS) \
-	$(resource_files) \
+	application.css \
 	$(NULL)
 
 CLEANFILES = \
 	org.gnome.SoundRecorder.desktop.in \
+	org.gnome.gnome-sound-recorder.gresource \
 	$(apps_DATA) \
 	*.valid \
 	gschemas.compiled \
+	application.css \
 	$(NULL)
 
 # For uninstalled use
