@@ -159,7 +159,6 @@ const Listview = new Lang.Class({
                         } else {
                             
                         this._setDiscover();
-                        log("set Discover");  
                         }                       
                         return;
                    }                    
