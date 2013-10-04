@@ -1,35 +1,25 @@
 # Czech translation for gnome-sound-recorder.
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
+#
 # Adam Matoušek <adamatousek@gmail.com>, 2013.
+# Marek Černocký <marek@manet.cz>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-23 13:17+0000\n"
-"PO-Revision-Date: 2013-09-24 18:01+0100\n"
-"Last-Translator: Adam Matoušek <adamatousek@gmail.com>\n"
+"POT-Creation-Date: 2013-09-28 19:20+0000\n"
+"PO-Revision-Date: 2013-10-04 10:55+0200\n"
+"Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 1.5.4\n"
-
-#: ../data/gnome-sound-recorder.desktop.in.in.h:1 ../src/record.js:93
-msgid "Sound Recorder"
-msgstr "Záznamník zvuků"
-
-#: ../data/gnome-sound-recorder.desktop.in.in.h:2
-msgid "Record sound via the microphone and play it back"
-msgstr "Nahrává mikrofonem zvuk a zpětně jej přehrává"
-
-#: ../data/gnome-sound-recorder.desktop.in.in.h:3
-msgid "Audio;Application;Record;"
-msgstr "Audio;Aplikace;Nahrávání;Nahrávka"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -79,6 +69,18 @@ msgstr "Úroveň hlasitosti"
 msgid "Volume level."
 msgstr "Úroveň hlasitosti."
 
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:56
+msgid "SoundRecorder"
+msgstr "Nahrávání zvuků"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Nahrává mikrofonem zvuk a zpětně jej přehrává"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "audio;aplikace;nahrávání;nahrávka;záznam;"
+
 #: ../src/info.js:47 ../src/mainWindow.js:498
 msgid "Info"
 msgstr "Informace"
@@ -91,32 +93,23 @@ msgstr "Zrušit"
 msgid "Done"
 msgstr "Hotovo"
 
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
 #: ../src/info.js:99
 msgctxt "File Name"
 msgid "Name"
 msgstr "Název souboru"
 
-#. Source item
 #: ../src/info.js:106
 msgid "Source"
 msgstr "Zdroj"
 
-#. Date Modified item
 #: ../src/info.js:115
 msgid "Date Modified"
 msgstr "Datum změny"
 
-#. Date Created item
 #: ../src/info.js:121
 msgid "Date Created"
 msgstr "Datum vytvoření"
 
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
 #: ../src/info.js:132
 msgctxt "Media Type"
 msgid "Type"
@@ -127,11 +120,7 @@ msgstr "Formát"
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d.%m.%Y %H:%M:%S"
 
-#: ../src/main.js:55
-msgid "SoundRecorder"
-msgstr "Záznamník zvuků"
-
-#: ../src/main.js:83
+#: ../src/main.js:84
 msgid "Sound Recorder started"
 msgstr "Záznamník zvuků byl spuštěn"
 
@@ -167,6 +156,10 @@ msgstr "MOV"
 msgid "Load More"
 msgstr "Načíst další"
 
+#: ../src/play.js:81
+msgid "Unable to set the playbin to the playing state."
+msgstr "Přehrávací prvek (playbin) se nezdařilo uvést do stavu pro nahrávání."
+
 #: ../src/preferences.js:67
 msgid "Preferred format"
 msgstr "Preferovaný formát"
@@ -178,6 +171,30 @@ msgstr "Hlasitost"
 #: ../src/preferences.js:90
 msgid "Microphone"
 msgstr "Mikrofon"
+
+#: ../src/record.js:57
+msgid "Unable to create Recordings directory."
+msgstr "Nelze vytvořit složku pro nahrávky."
+
+#: ../src/record.js:65
+msgid "Your audio capture settings are invalid."
+msgstr "Vaše nastavení zachytávání zvuku je neplatné."
+
+#: ../src/record.js:93
+msgid "Sound Recorder"
+msgstr "Záznamník zvuků"
+
+#: ../src/record.js:108
+msgid "Not all elements could be created."
+msgstr "Ne všechny prvky mohly být vytvořeny."
+
+#: ../src/record.js:118
+msgid "Not all of the elements were linked"
+msgstr "Ne všechny prvky byly propojeny"
+
+#: ../src/record.js:139
+msgid "No Media Profile was set."
+msgstr "Nebyl nastaven žádný multimediální profil."
 
 #: ../src/record.js:149
 msgid "Unable to set the pipeline to the recording state."
