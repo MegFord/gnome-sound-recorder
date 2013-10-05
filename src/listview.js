@@ -153,8 +153,12 @@ const Listview = new Lang.Class({
                         this._enumerator.close(null);
                         
                         if (MainWindow.offsetController.getEndIdx() == -1) {
-                            MainWindow.view.listBoxAdd();
-                            MainWindow.view.scrolledWinAdd();
+                             if (listType == ListType.NEW) {
+                                MainWindow.view.listBoxAdd();
+                                MainWindow.view.scrolledWinAdd();
+                            } else if (listType == ListType.REFRESH) {
+                                MainWindow.view.scrolledWinDelete();
+                            }
                             currentlyEnumerating = CurrentlyEnumerating.FALSE;
                         } else {
                             

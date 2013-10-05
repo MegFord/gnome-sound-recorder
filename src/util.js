@@ -1,6 +1,7 @@
 // -*- Mode: js; indent-tabs-mode: nil; c-basic-offset: 4; tab-width: 4 -*-
 //
 // Copyright (c) 2013 Giovanni Campagna <scampa.giovanni@gmail.com>
+// Copyright (c) 2013 Meg Ford <megford@gnome.org>
 //
 // Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
@@ -26,9 +27,7 @@
 
 function loadStyleSheet() {
     let file = 'application.css';
-
     let provider = new Gtk.CssProvider();
-    log(GLib.build_filenamev([pkg.pkgdatadir, file]));
     provider.load_from_path(GLib.build_filenamev([pkg.pkgdatadir,
                                                   file]));
     Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
