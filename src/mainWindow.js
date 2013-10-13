@@ -156,7 +156,6 @@ const MainView = new Lang.Class({
         this.parent(params);
             
         let listviewPage = this._addListviewPage('listviewPage');
-             this.visible_child_name = 'playerPage';
             
         this.labelID = null;
     },
