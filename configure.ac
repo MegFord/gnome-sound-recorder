@@ -9,7 +9,7 @@ AM_SILENT_RULES([yes])
 LT_INIT([disable-static])
 IT_PROG_INTLTOOL([0.26])
 
-LIBGD_INIT([header-bar notification revealer stack tagged-entry gir])
+LIBGD_INIT([ notification tagged-entry gir])
 
 GLIB_GSETTINGS
 GOBJECT_INTROSPECTION_REQUIRE([1.0])
