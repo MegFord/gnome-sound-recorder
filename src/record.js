@@ -148,7 +148,6 @@ const Record = new Lang.Class({
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
             this._showErrorDialog(_("Unable to set the pipeline to the recording state.")); 
-            this.onEndOfStream();  
         } else {        
             MainWindow.view.setVolume(); 
         }
@@ -165,12 +164,12 @@ const Record = new Lang.Class({
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
-        MainWindow.wave.endDrawing();
+         
+        if (MainWindow.wave != null)    
+            MainWindow.wave.endDrawing();
     },
     
-    onEndOfStream: function() {
-        this.srcElement.set_state(Gst.State.NULL); 
-        this.srcElement.get_state(null, null, -1); 
+    onEndOfStream: function() { 
         this.pipeline.set_state(Gst.State.NULL);
         this.pipeState = PipelineStates.STOPPED;
         this.recordBus.remove_signal_watch();
@@ -197,7 +196,6 @@ const Record = new Lang.Class({
                     errorTwo = description;
                     
                 this._showErrorDialog(_("Error: " + errorOne + " " + errorTwo));                        
-                this.stopRecording();
             }
                 
             let s = message.get_structure();
@@ -257,6 +255,7 @@ const Record = new Lang.Class({
         errorDialog.connect ('response', Lang.bind(this,
             function() {
                 errorDialog.destroy();
+                MainWindow.view.onRecordStopClicked();
             }));
         errorDialog.show();
     } 
