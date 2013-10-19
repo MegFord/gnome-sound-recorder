@@ -60,17 +60,25 @@ const Application = new Lang.Class({
     _initAppMenu: function() {
         let menu = new Gio.Menu();
         menu.append("Preferences", 'app.preferences');
+        menu.append('About Sound Recorder', 'app.about');
         menu.append("Quit",'app.quit');    
         this.set_app_menu(menu);
         
-        let preferences = new Gio.SimpleAction ({ name: 'preferences' });
+        let preferences = new Gio.SimpleAction({ name: 'preferences' });
         preferences.connect('activate', Lang.bind(this,
             function() {
                 this._showPreferences();
             }));
         this.add_action(preferences);
         
-        let quitAction = new Gio.SimpleAction ({ name: 'quit' });
+        let aboutAction = new Gio.SimpleAction({ name: 'about' });
+        aboutAction.connect('activate', Lang.bind(this, 
+            function() {
+                this._showAbout();
+            }));
+        this.add_action(aboutAction);
+        
+        let quitAction = new Gio.SimpleAction({ name: 'quit' });
         quitAction.connect('activate', Lang.bind(this,
             function() {
                 this.quit();
@@ -88,7 +96,7 @@ const Application = new Lang.Class({
     },
 
     vfunc_activate: function() {
-        (new MainWindow.MainWindow({ application: this })).show();
+        (this.window = new MainWindow.MainWindow({ application: this })).show();
     },
     
     _showPreferences: function() {
@@ -98,6 +106,28 @@ const Application = new Lang.Class({
             function(widget, response) {
                 preferencesDialog.widget.destroy();
             }));
+    },
+    
+    _showAbout: function() {
+        let aboutDialog = new Gtk.AboutDialog();       
+        aboutDialog.artists = [ 'Reda Lazri <the.red.shortcut@gmail.com>',
+                                'Garrett LaSage <garrettl@gmail.com>',
+                                'Hylke Bons <hylkebons@gmail.com>' ];
+        aboutDialog.authors = [ 'Meg Ford <megford@gnome.org>' ];
+        aboutDialog.translator_credits = _("translator-credits");
+        aboutDialog.program_name = _("Sound Recorder");
+        aboutDialog.copyright = 'Copyright ' + String.fromCharCode(0x00A9) + ' 2013' + String.fromCharCode(0x2013) + 'Meg Ford.';
+        aboutDialog.license_type = Gtk.License.GPL_2_0;
+        aboutDialog.version = '3.10';
+        aboutDialog.website = 'http://live.gnome.org/GnomeSoundRecorder';
+        aboutDialog.wrap_license = true;
+        aboutDialog.modal = true;
+        aboutDialog.transient_for = this.window;
+
+        aboutDialog.show();
+        aboutDialog.connect('response', function() {
+            aboutDialog.destroy();
+        });
     }
 });
 
