@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-01 15:26+0000\n"
-"PO-Revision-Date: 2013-09-28 19:33-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2013-10-20 16:21+0000\n"
+"PO-Revision-Date: 2013-10-21 13:02-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgstr "Grave som por meio de microfone e reproduza-o"
 msgid "Audio;Application;Record;"
 msgstr "Áudio;Aplicativo;Gravador;"
 
-#: ../src/info.js:47 ../src/mainWindow.js:499
+#: ../src/info.js:47 ../src/mainWindow.js:498
 msgid "Info"
 msgstr "Info"
 
@@ -116,44 +116,52 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:232
-#: ../src/record.js:287
+#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
+#: ../src/record.js:286
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/main.js:85
+#: ../src/main.js:93
 msgid "Sound Recorder started"
 msgstr "O gravador de som iniciou"
 
-#: ../src/mainWindow.js:279
+#: ../src/main.js:117
+msgid "translator-credits"
+msgstr "Rafael Ferreira <rafael.f.f1@gmail.com>, 2013."
+
+#: ../src/main.js:118 ../src/record.js:94
+msgid "Sound Recorder"
+msgstr "Gravador de som"
+
+#: ../src/mainWindow.js:278
 msgid "Recording…"
 msgstr "Gravando…"
 
-#: ../src/mainWindow.js:524
+#: ../src/mainWindow.js:523
 msgid "Delete"
 msgstr "Excluir"
 
-#: ../src/mainWindow.js:776
+#: ../src/mainWindow.js:775
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:776
+#: ../src/mainWindow.js:775
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:776
+#: ../src/mainWindow.js:775
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:776
+#: ../src/mainWindow.js:775
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:776
+#: ../src/mainWindow.js:775
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:799
+#: ../src/mainWindow.js:798
 msgid "Load More"
 msgstr "Carregar mais"
 
@@ -183,10 +191,6 @@ msgstr "Não foi possível criar o diretório de gravações."
 msgid "Your audio capture settings are invalid."
 msgstr "Suas configurações de captura de áudio são inválidas."
 
-#: ../src/record.js:94
-msgid "Sound Recorder"
-msgstr "Gravador de som"
-
 #: ../src/record.js:109
 msgid "Not all elements could be created."
 msgstr "Nem todos os elementos puderam ser criados."
@@ -203,14 +207,14 @@ msgstr "Nenhum perfil de mídia foi definido."
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Desabilite para configurar o redirecionamento para estado de gravação."
 
-#: ../src/record.js:199 ../src/record.js:241
+#: ../src/record.js:198 ../src/record.js:239
 msgid "Error: "
 msgstr "Erro: "
 
-#: ../src/record.js:271
+#: ../src/record.js:270
 msgid "Recordings"
 msgstr "Gravações"
 
-#: ../src/record.js:285
+#: ../src/record.js:284
 msgid "Recording "
 msgstr "Gravação"
