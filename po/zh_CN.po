@@ -1,0 +1,214 @@
+# Chinese (China) translation for gnome-sound-recorder.
+# Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# tuhaihe <1132321739qq@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-10-22 12:36+0000\n"
+"PO-Revision-Date: 2013-10-22 21:49+0800\n"
+"Last-Translator: tuhaihe <1132321739qq@gmail.com>\n"
+"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "窗口大小"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "窗口大小(宽度与高度)。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "窗口位置"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "窗口位置(水平和竖直)。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "录音时音频编码首选的媒体类型"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"录音时音频编码首选的媒体类型。比如，“audio/x-vorbis”代表 Ogg Vorbis，"
+"或“audio/mpeg”代表 MP3。这不是 MIME 类型。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "将媒体类型对应到音频编码器预设名称。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"将媒体类型对应到音频编码器的预设名称。如果某个媒体类型无对应，则将使用默认的"
+"编码器设置。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "音量级别"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "音量级别。"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:57
+msgid "SoundRecorder"
+msgstr "录音机"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "通过麦克风录制声音并播放"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audio;Application;Record;音频;应用程序;录音;"
+
+#: ../src/info.js:47 ../src/mainWindow.js:498
+msgid "Info"
+msgstr "信息"
+
+#: ../src/info.js:59
+msgid "Cancel"
+msgstr "取消"
+
+#: ../src/info.js:73 ../src/preferences.js:47
+msgid "Done"
+msgstr "完成"
+
+#: ../src/info.js:99
+msgctxt "File Name"
+msgid "Name"
+msgstr "名称"
+
+#: ../src/info.js:106
+msgid "Source"
+msgstr "来源"
+
+#: ../src/info.js:115
+msgid "Date Modified"
+msgstr "修改日期"
+
+#: ../src/info.js:121
+msgid "Date Created"
+msgstr "创建日期"
+
+#: ../src/info.js:132
+msgctxt "Media Type"
+msgid "Type"
+msgstr "类型"
+
+#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
+#: ../src/record.js:286
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/main.js:93
+msgid "Sound Recorder started"
+msgstr "录音机已经开启"
+
+#: ../src/main.js:117
+msgid "translator-credits"
+msgstr "tuhaihe <1132321739qq@gmail.com>, 2013."
+
+#: ../src/main.js:118 ../src/record.js:94
+msgid "Sound Recorder"
+msgstr "录音机"
+
+#: ../src/mainWindow.js:278
+msgid "Recording…"
+msgstr "正在录音..."
+
+#: ../src/mainWindow.js:523
+msgid "Delete"
+msgstr "删除"
+
+#: ../src/mainWindow.js:775
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:775
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:775
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:775
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:775
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:798
+msgid "Load More"
+msgstr "加载更多"
+
+#: ../src/play.js:82
+msgid "Unable to set the playbin to the playing state."
+msgstr "无法将 playbin 设为播放状态。"
+
+#: ../src/preferences.js:68
+msgid "Preferred format"
+msgstr "首选格式"
+
+#: ../src/preferences.js:76
+msgid "Volume"
+msgstr "音量"
+
+#: ../src/preferences.js:91
+msgid "Microphone"
+msgstr "麦克风"
+
+#: ../src/record.js:58
+msgid "Unable to create Recordings directory."
+msgstr "无法创建录音目录。"
+
+#: ../src/record.js:66
+msgid "Your audio capture settings are invalid."
+msgstr "您的音频捕捉设置无效。"
+
+#: ../src/record.js:109
+msgid "Not all elements could be created."
+msgstr "并非全部的元素皆可创建。"
+
+#: ../src/record.js:119
+msgid "Not all of the elements were linked"
+msgstr "并非全部的元素皆已链接"
+
+#: ../src/record.js:140
+msgid "No Media Profile was set."
+msgstr "未设置媒体配置文件。"
+
+#: ../src/record.js:150
+msgid "Unable to set the pipeline to the recording state."
+msgstr "无法将管道线设为录音状态。"
+
+#: ../src/record.js:198 ../src/record.js:239
+msgid "Error: "
+msgstr "错误："
+
+#: ../src/record.js:270
+msgid "Recordings"
+msgstr "录音"
+
+#: ../src/record.js:284
+msgid "Recording "
+msgstr "正在录制"
