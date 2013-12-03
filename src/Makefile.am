@@ -2,13 +2,13 @@
 
 ## Created by Anjuta 
 NULL = 
- 
+
 nodist_bin_SCRIPTS = gnome-sound-recorder 
-    
+
 
 jsdir = $(pkgdatadir)
 dist_js_DATA = \
-    util.js	\   
+    util.js	\
     audioProfile.js \
     fileUtil.js \
     info.js \
@@ -22,9 +22,9 @@ dist_js_DATA = \
     record.js \
     waveform.js\
     $(NULL)
-    
 
-    
+
+
 $(PACKAGE_NAME): $(PACKAGE_NAME).in
 	$(AM_V_GEN) sed \
 		-e "s|[@]GJS@|$(GJS)|g" \
