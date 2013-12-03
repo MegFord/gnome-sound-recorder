@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-28 19:20+0000\n"
-"PO-Revision-Date: 2013-10-04 10:55+0200\n"
+"POT-Creation-Date: 2013-10-20 00:48+0000\n"
+"PO-Revision-Date: 2013-12-03 20:54+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -69,7 +69,7 @@ msgstr "Úroveň hlasitosti"
 msgid "Volume level."
 msgstr "Úroveň hlasitosti."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:56
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:57
 msgid "SoundRecorder"
 msgstr "Nahrávání zvuků"
 
@@ -89,7 +89,7 @@ msgstr "Informace"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../src/info.js:73 ../src/preferences.js:46
+#: ../src/info.js:73 ../src/preferences.js:47
 msgid "Done"
 msgstr "Hotovo"
 
@@ -115,14 +115,24 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Formát"
 
-#: ../src/listview.js:130 ../src/listview.js:135 ../src/listview.js:224
+#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
 #: ../src/record.js:286
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d.%m.%Y %H:%M:%S"
 
-#: ../src/main.js:84
+#: ../src/main.js:93
 msgid "Sound Recorder started"
 msgstr "Záznamník zvuků byl spuštěn"
+
+#: ../src/main.js:117
+msgid "translator-credits"
+msgstr ""
+"Adam Matoušek <adamatousek@gmail.com>\n"
+"Marek Černocký <marek@manet.cz>"
+
+#: ../src/main.js:118 ../src/record.js:94
+msgid "Sound Recorder"
+msgstr "Záznamník zvuků"
 
 #: ../src/mainWindow.js:278
 msgid "Recording…"
@@ -132,75 +142,71 @@ msgstr "Nahrává se…"
 msgid "Delete"
 msgstr "Smazat"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:775
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:775
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:775
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:775
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:775
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:797
+#: ../src/mainWindow.js:798
 msgid "Load More"
 msgstr "Načíst další"
 
-#: ../src/play.js:81
+#: ../src/play.js:82
 msgid "Unable to set the playbin to the playing state."
 msgstr "Přehrávací prvek (playbin) se nezdařilo uvést do stavu pro nahrávání."
 
-#: ../src/preferences.js:67
+#: ../src/preferences.js:68
 msgid "Preferred format"
 msgstr "Preferovaný formát"
 
-#: ../src/preferences.js:75
+#: ../src/preferences.js:76
 msgid "Volume"
 msgstr "Hlasitost"
 
-#: ../src/preferences.js:90
+#: ../src/preferences.js:91
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:57
+#: ../src/record.js:58
 msgid "Unable to create Recordings directory."
 msgstr "Nelze vytvořit složku pro nahrávky."
 
-#: ../src/record.js:65
+#: ../src/record.js:66
 msgid "Your audio capture settings are invalid."
 msgstr "Vaše nastavení zachytávání zvuku je neplatné."
 
-#: ../src/record.js:93
-msgid "Sound Recorder"
-msgstr "Záznamník zvuků"
-
-#: ../src/record.js:108
+#: ../src/record.js:109
 msgid "Not all elements could be created."
 msgstr "Ne všechny prvky mohly být vytvořeny."
 
-#: ../src/record.js:118
+#: ../src/record.js:119
 msgid "Not all of the elements were linked"
 msgstr "Ne všechny prvky byly propojeny"
 
-#: ../src/record.js:139
+#: ../src/record.js:140
 msgid "No Media Profile was set."
 msgstr "Nebyl nastaven žádný multimediální profil."
 
-#: ../src/record.js:149
+#: ../src/record.js:150
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Rouru se nezdařilo uvést do stavu pro nahrávání."
 
-#: ../src/record.js:198 ../src/record.js:240
+#: ../src/record.js:198 ../src/record.js:239
 msgid "Error: "
 msgstr "Chyba: "
 
