@@ -282,9 +282,9 @@ const BuildFileName = new Lang.Class({
     buildInitialFilename: function() {
         let fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
         let dir = this.buildPath();
-        /* Translators: "Recording" here is the beginning of the default name assigned to a file created
-            by the application (for example, "Recording 2013-10-05 13:25:21.ogg").*/
-        let prefix = _("Recording"); 
+        /* Translators: "Audio from" is the beginning of the default name assigned to a file created
+            by the application (for example, "Audio from 2013-10-05 13:25:21.ogg").*/
+        let prefix = _("Audio from"); 
         this.dateTime = GLib.DateTime.new_now_local();
         let dateTimeString = this.dateTime.format(" %Y-%m-%d %H:%M:%S");                   
         dir.push(prefix + dateTimeString + fileExtensionName);
