@@ -51,8 +51,8 @@ const Record = new Lang.Class({
         this._view = MainWindow.view; 
         this._buildFileName = new BuildFileName();
         this.initialFileName = this._buildFileName.buildInitialFilename();
-        this.dateTime = this._buildFileName.getOrigin();
-        this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(this.dateTime);
+        let localDateTime = this._buildFileName.getOrigin();
+        this.gstreamerDateTime = Gst.DateTime.new_from_g_date_time(localDateTime);
         
         if (this.initialFileName == -1) {
             this._showErrorDialog(_('Unable to create Recordings directory.'));
@@ -147,7 +147,7 @@ const Record = new Lang.Class({
         this.pipeState = PipelineStates.PLAYING;
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
-            this._showErrorDialog(_("Unable to set the pipeline to the recording state.")); 
+            this._showErrorDialog(_('Unable to set the pipeline to the recording state.')); 
         } else {        
             MainWindow.view.setVolume(); 
         }
@@ -193,9 +193,8 @@ const Record = new Lang.Class({
                 let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
                    
                 if (description != null)
-                    errorTwo = description;
-                    
-                this._showErrorDialog(_("Error: " + errorOne + " " + errorTwo));                        
+                    errorTwo = description;    
+                this._showErrorDialog(errorOne, errorTwo);                       
             }
                 
             let s = message.get_structure();
@@ -236,7 +235,7 @@ const Record = new Lang.Class({
                                         
         case Gst.MessageType.ERROR:
             let errorMessage = message.parse_error();
-            this._showErrorDialog(_("Error: " + errorMessage));              
+            this._showErrorDialog(errorMessage);              
             break;
         }
     },
@@ -245,12 +244,13 @@ const Record = new Lang.Class({
         this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
     },
     
-    _showErrorDialog: function(errorStr) {
+    _showErrorDialog: function(errorStrOne, errorStrTwo) {
+        let errors = errorStrOne + " " + errorStrTwo;
         let errorDialog = new Gtk.MessageDialog ({ modal: true,
                                                    destroy_with_parent: true,
                                                    buttons: Gtk.ButtonsType.OK,
                                                    message_type: Gtk.MessageType.WARNING,
-                                                   text: errorStr });
+                                                   text: errors });
 
         errorDialog.connect ('response', Lang.bind(this,
             function() {
@@ -267,6 +267,7 @@ const BuildFileName = new Lang.Class({
     buildPath: function() {
         let initialFileName = [];
         initialFileName.push(GLib.get_home_dir());
+        // Translators: "Recordings" here refers to the name of the directory where the application places files
         initialFileName.push(_("Recordings"));
         
         return initialFileName;
@@ -281,14 +282,15 @@ const BuildFileName = new Lang.Class({
     buildInitialFilename: function() {
         let fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
         let dir = this.buildPath();
-        let prefix = _("Recording ");   
+        /* Translators: "Recording" here is the beginning of the default name assigned to a file created
+            by the application (for example, "Recording 2013-10-05 13:25:21.ogg").*/
+        let prefix = _("Recording"); 
         this.dateTime = GLib.DateTime.new_now_local();
-        let dateTimeString = this.dateTime.format(_("%Y-%m-%d %H:%M:%S"));         
-        let extension = fileExtensionName;
-        dir.push(prefix + dateTimeString + extension);
+        let dateTimeString = this.dateTime.format(" %Y-%m-%d %H:%M:%S");                   
+        dir.push(prefix + dateTimeString + fileExtensionName);
         // Use GLib.build_filenamev to work around missing vararg functions.
-        this.title = GLib.build_filenamev(dir);
-        let file = Gio.file_new_for_path(this.title);
+        let title = GLib.build_filenamev(dir);
+        let file = Gio.file_new_for_path(title);
         
         return file;
     },
