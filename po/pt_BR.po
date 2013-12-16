@@ -2,15 +2,16 @@
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # Rafael Ferreira <rafael.f.f1@gmail.com>, 2013.
+# Adorilson Bezerra <adorilson@gmail.com>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-20 16:21+0000\n"
-"PO-Revision-Date: 2013-10-21 13:02-0300\n"
-"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"POT-Creation-Date: 2013-12-15 00:58+0000\n"
+"PO-Revision-Date: 2013-12-14 23:30-0300\n"
+"Last-Translator: Adorilson Bezerra <adorilson@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +118,6 @@ msgid "Type"
 msgstr "Tipo"
 
 #: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
-#: ../src/record.js:286
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
@@ -207,14 +207,18 @@ msgstr "Nenhum perfil de mídia foi definido."
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Desabilite para configurar o redirecionamento para estado de gravação."
 
-#: ../src/record.js:198 ../src/record.js:239
-msgid "Error: "
-msgstr "Erro: "
-
-#: ../src/record.js:270
+#: ../src/record.js:271
 msgid "Recordings"
 msgstr "Gravações"
 
-#: ../src/record.js:284
-msgid "Recording "
-msgstr "Gravação"
+#. Translators: "Audio from" is the beginning of the default name assigned to a file created
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg").*/
+#: ../src/record.js:287
+msgid "Audio from"
+msgstr "Áudio de"
+
+#~ msgid "Error: "
+#~ msgstr "Erro: "
+
+#~ msgid "Recording "
+#~ msgstr "Gravação"
