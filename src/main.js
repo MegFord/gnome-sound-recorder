@@ -114,6 +114,7 @@ const Application = new Lang.Class({
                                 'Garrett LaSage <garrettl@gmail.com>',
                                 'Hylke Bons <hylkebons@gmail.com>' ];
         aboutDialog.authors = [ 'Meg Ford <megford@gnome.org>' ];
+        /* Translators: Replace "translator-credits" with your names, one name per line */
         aboutDialog.translator_credits = _("translator-credits");
         aboutDialog.program_name = _("Sound Recorder");
         aboutDialog.copyright = 'Copyright ' + String.fromCharCode(0x00A9) + ' 2013' + String.fromCharCode(0x2013) + 'Meg Ford';
