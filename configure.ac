@@ -7,6 +7,10 @@ AM_INIT_AUTOMAKE([1.11 foreign -Wno-portability tar-ustar dist-xz])
 AM_SILENT_RULES([yes])
 
 LT_INIT([disable-static])
+GETTEXT_PACKAGE=gnome-sound-recorder
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
+                   [The prefix for our gettext translation domains.])
 IT_PROG_INTLTOOL([0.26])
 
 LIBGD_INIT([ notification tagged-entry gir])
