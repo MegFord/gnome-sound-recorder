@@ -30,7 +30,7 @@ msgstr "Tallenna ääntä mikrofonilta ja toista tallenteita"
 
 #: ../data/gnome-sound-recorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
-msgstr "Audio;Application;Record;ääni;sovellus;nauhuri;nauhoitin"
+msgstr "Audio;Application;Record;ääni;sovellus;nauhuri;nauhoitin;"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
