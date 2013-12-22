@@ -9,16 +9,15 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-20 00:49+0000\n"
-"PO-Revision-Date: 2013-10-20 18:21+0100\n"
+"POT-Creation-Date: 2013-12-18 21:46+0000\n"
+"PO-Revision-Date: 2013-12-22 19:14+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -95,30 +94,38 @@ msgstr "Prekliči"
 msgid "Done"
 msgstr "Dokončano"
 
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
 #: ../src/info.js:99
 msgctxt "File Name"
 msgid "Name"
 msgstr "Ime"
 
+#. Source item
 #: ../src/info.js:106
 msgid "Source"
 msgstr "Vir"
 
+#. Date Modified item
 #: ../src/info.js:115
 msgid "Date Modified"
 msgstr "Datum spremembe"
 
+#. Date Created item
 #: ../src/info.js:121
 msgid "Date Created"
 msgstr "Datum nastanka"
 
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
 #: ../src/info.js:132
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Vrsta"
 
 #: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
-#: ../src/record.js:286
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
@@ -126,11 +133,12 @@ msgstr "%Y-%m-%d %H:%M:%S"
 msgid "Sound Recorder started"
 msgstr "Snemalnik zvoka zagnan"
 
-#: ../src/main.js:117
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/main.js:118
 msgid "translator-credits"
 msgstr "Matej Urbančič"
 
-#: ../src/main.js:118 ../src/record.js:94
+#: ../src/main.js:119 ../src/record.js:94
 msgid "Sound Recorder"
 msgstr "Snemalnik zvoka"
 
@@ -166,10 +174,6 @@ msgstr "MOV"
 msgid "Load More"
 msgstr "Naloži več"
 
-#: ../src/play.js:82
-msgid "Unable to set the playbin to the playing state."
-msgstr "Predvajalnika ni mogoče nastaviti na stanje predvajanja."
-
 #: ../src/preferences.js:68
 msgid "Preferred format"
 msgstr "Priljubljeni zapis"
@@ -182,38 +186,40 @@ msgstr "Glasnost"
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:58
-msgid "Unable to create Recordings directory."
-msgstr "Mape posnetkov ni mogoče ustvariti!"
-
-#: ../src/record.js:66
-msgid "Your audio capture settings are invalid."
-msgstr "Določene so neveljavne nastavitve zajemanja zvoka."
-
-#: ../src/record.js:109
-msgid "Not all elements could be created."
-msgstr "Vseh predmetov ni mogoče ustvariti."
-
-#: ../src/record.js:119
-msgid "Not all of the elements were linked"
-msgstr "Vsi predmeti niso povezani"
-
-#: ../src/record.js:140
-msgid "No Media Profile was set."
-msgstr "Ni nastavljenega profila posnetkov."
-
-#: ../src/record.js:150
-msgid "Unable to set the pipeline to the recording state."
-msgstr "Cevovoda ni mogoče nastaviti na stanje snemanja."
-
-#: ../src/record.js:198 ../src/record.js:239
-msgid "Error: "
-msgstr "Napaka: "
-
-#: ../src/record.js:270
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/record.js:271
 msgid "Recordings"
 msgstr "posnetkov"
 
-#: ../src/record.js:284
-msgid "Recording "
-msgstr "posnetek"
+#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg").
+#: ../src/record.js:288
+msgid "Audio from %Y-%m-%d %H:%M:%S"
+msgstr "Posnetek %d.%m.%Y %H:%M:%S"
+
+#~ msgid "Unable to set the playbin to the playing state."
+#~ msgstr "Predvajalnika ni mogoče nastaviti na stanje predvajanja."
+
+#~ msgid "Unable to create Recordings directory."
+#~ msgstr "Mape posnetkov ni mogoče ustvariti!"
+
+#~ msgid "Your audio capture settings are invalid."
+#~ msgstr "Določene so neveljavne nastavitve zajemanja zvoka."
+
+#~ msgid "Not all elements could be created."
+#~ msgstr "Vseh predmetov ni mogoče ustvariti."
+
+#~ msgid "Not all of the elements were linked"
+#~ msgstr "Vsi predmeti niso povezani"
+
+#~ msgid "No Media Profile was set."
+#~ msgstr "Ni nastavljenega profila posnetkov."
+
+#~ msgid "Unable to set the pipeline to the recording state."
+#~ msgstr "Cevovoda ni mogoče nastaviti na stanje snemanja."
+
+#~ msgid "Error: "
+#~ msgstr "Napaka: "
+
+#~ msgid "Recording "
+#~ msgstr "posnetek"
