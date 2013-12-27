@@ -45,7 +45,6 @@ const _TENTH_SEC = 100000000;
     Name: "Play",
            
     _playPipeline: function(fileName) {
-        this.baseTime = 0;
         this._fileName = this._fileToPlay;
         let uri = GLib.filename_to_uri(this._fileName, null); 
         this.view = MainWindow.view;      
@@ -67,12 +66,16 @@ const _TENTH_SEC = 100000000;
             
     startPlaying: function(fileName) {
         this._fileName = fileName;
+        this.baseTime = 0;
         
-        if (!this.play || this.playState == PipelineStates.STOPPED )
+        if (!this.play || this.playState == PipelineStates.STOPPED ) {
             this._playPipeline(this._fileName);
+        }
             
         if (this.playState == PipelineStates.PAUSED) {
-            this.updatePosition();   
+            this.updatePosition(); 
+            this.play.set_base_time(this.clock.get_time()); 
+            this.baseTime = this.play.get_base_time() - this.runTime;  
         }
             
         this.ret = this.play.set_state(Gst.State.PLAYING);
@@ -89,7 +92,6 @@ const _TENTH_SEC = 100000000;
     pausePlaying: function() {
         this.play.set_state(Gst.State.PAUSED);
         this.playState = PipelineStates.PAUSED;
-        this.baseTime = this.absoluteTime;
         
         if (this.timeout) {
             GLib.source_remove(this.timeout);
@@ -184,13 +186,13 @@ const _TENTH_SEC = 100000000;
             this.view.setLabel(0); 
         }
         
-       this.absoluteTime = this.clock.get_time();
+        let absoluteTime = this.clock.get_time();
         
         if (this.baseTime == 0)
-            this.baseTime = this.absoluteTime;
+            this.baseTime = absoluteTime;
  
-        let runTime = this.absoluteTime- this.baseTime;
-        let approxTime = Math.round(runTime/_TENTH_SEC);
+        this.runTime = absoluteTime- this.baseTime;
+        let approxTime = Math.round(this.runTime/_TENTH_SEC);
         MainWindow.wave._drawEvent(approxTime);
         
         return true;
