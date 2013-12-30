@@ -1,0 +1,196 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2013 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Fran Dieguez <frandieguez@gnome.org>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-30 02:38+0100\n"
+"PO-Revision-Date: 2013-12-30 02:45+0200\n"
+"Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
+"Language-Team: gnome-l10n-gl@gnome.org\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Tamaño da xanela"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Tamaño da xanela (ancho e alto)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Posición da xanela"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Posición da xanela (x e y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Tipo multimedia preferido para o son codificado ao gravar"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Tipo de multimedia preferido para codificar son ao gravar. 'audio/x-vorbis' "
+"para Ogg Vorbis, ou 'audio/mpeg' para MP3, por exemplo. Isto non é un tipo "
+"MIME."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+"Mapea os tipos de medio a nomes de coficicadores de son prestabelecidos."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Mapea os tipos de medios a nomes de codificadores de son prestabelecidos. Se "
+"non existe o mapeo para untipo de medio, usarase a configuración do "
+"codificador predeterminado"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Nivel do volume"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Nivel do volume."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:57
+msgid "SoundRecorder"
+msgstr "Gravadora de sons"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Grava son co micrófono e reprodúceo"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Son;Aplicativo;Gravar;"
+
+#: ../src/info.js:47 ../src/mainWindow.js:498
+msgid "Info"
+msgstr "Información"
+
+#: ../src/info.js:59
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../src/info.js:73 ../src/preferences.js:47
+msgid "Done"
+msgstr "Feito"
+
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:99
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nome"
+
+#. Source item
+#: ../src/info.js:106
+msgid "Source"
+msgstr "Fonte"
+
+#. Date Modified item
+#: ../src/info.js:115
+msgid "Date Modified"
+msgstr "Data de modificación"
+
+#. Date Created item
+#: ../src/info.js:121
+msgid "Date Created"
+msgstr "Data de creación"
+
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:132
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tipo"
+
+#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d/%m/%Y %H:%M:%S"
+
+#: ../src/main.js:93
+msgid "Sound Recorder started"
+msgstr "Gravadora de son iniciada"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/main.js:118
+msgid "translator-credits"
+msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013-2014"
+
+#: ../src/main.js:119 ../src/record.js:94
+msgid "Sound Recorder"
+msgstr "Gravadora de son"
+
+#: ../src/mainWindow.js:278
+msgid "Recording…"
+msgstr "Gravando…"
+
+#: ../src/mainWindow.js:523
+msgid "Delete"
+msgstr "Eliminar"
+
+#: ../src/mainWindow.js:775
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:775
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:775
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:775
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:775
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:798
+msgid "Load More"
+msgstr "Cargar máis"
+
+#: ../src/preferences.js:68
+msgid "Preferred format"
+msgstr "Formato preferido"
+
+#: ../src/preferences.js:76
+msgid "Volume"
+msgstr "Volume"
+
+#: ../src/preferences.js:91
+msgid "Microphone"
+msgstr "Micrófono"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/record.js:271
+msgid "Recordings"
+msgstr "Gravacións"
+
+#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg").
+#: ../src/record.js:288
+msgid "Audio from %Y-%m-%d %H:%M:%S"
+msgstr "Son de %Y-%m-%d %H:%M:%S"
