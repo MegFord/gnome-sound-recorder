@@ -169,14 +169,14 @@ const MainView = new Lang.Class({
         this.emptyGrid.add(new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
                                          icon_size: Gtk.IconSize.LARGE_TOOLBAR }));
         this.emptyGrid.add(new Gtk.Label({ name: 'emptyPage-title',
-                                      label: _("Add Recordings"),
-                                      halign: Gtk.Align.CENTER,
-                                      valign: Gtk.Align.CENTER }));
+                                           label: _("Add Recordings"),
+                                           halign: Gtk.Align.CENTER,
+                                           valign: Gtk.Align.CENTER }));
         this.emptyGrid.add(new Gtk.Label({ label: _("Use the <b>Record</b> button to make sound recordings"),
-                                         use_markup: true,
-                                         max_width_chars: 30,
-                                         halign: Gtk.Align.CENTER,
-                                         valign: Gtk.Align.CENTER }));
+                                           use_markup: true,
+                                           max_width_chars: 30,
+                                           halign: Gtk.Align.CENTER,
+                                           valign: Gtk.Align.CENTER }));
         this.emptyGrid.show_all();
     },        
     
@@ -354,8 +354,7 @@ const MainView = new Lang.Class({
         
         if (this._endIdx == -1) {
             this._addEmptyPage();
-        } else {
-        
+        } else {       
             this.listBox = Gtk.ListBox.new();
             this._scrolledWin.add(this.listBox);
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
@@ -787,7 +786,7 @@ const RecordButton = new Lang.Class({
         if (view.listBox) {
             view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
         } else {
-            view.emptyGrid.hide();
+            view.emptyGrid.destroy();
         }
             
         this.set_sensitive(false);
