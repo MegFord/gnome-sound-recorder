@@ -4,14 +4,14 @@
 # pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# Piotr Drąg <piotrdrag@gmail.com>, 2013.
-# Aviary.pl <gnomepl@aviary.pl>, 2013.
+# Piotr Drąg <piotrdrag@gmail.com>, 2013-2014.
+# Aviary.pl <gnomepl@aviary.pl>, 2013-2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-18 15:46+0100\n"
-"PO-Revision-Date: 2013-12-18 15:47+0100\n"
+"POT-Creation-Date: 2014-01-01 05:14+0100\n"
+"PO-Revision-Date: 2014-01-01 05:15+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -84,7 +84,7 @@ msgstr "Nagrywanie dźwięku przez mikrofon i jego odtwarzanie"
 msgid "Audio;Application;Record;"
 msgstr "Dźwięk;Audio;Nagrywanie;Nagraj;Record;"
 
-#: ../src/info.js:47 ../src/mainWindow.js:498
+#: ../src/info.js:47 ../src/mainWindow.js:523
 msgid "Info"
 msgstr "Informacje"
 
@@ -130,46 +130,54 @@ msgstr "Uruchomiono program do nagrywania dźwięku"
 #: ../src/main.js:118
 msgid "translator-credits"
 msgstr ""
-"Piotr Drąg <piotrdrag@gmail.com>, 2013\n"
-"Aviary.pl <gnomepl@aviary.pl>, 2013"
+"Piotr Drąg <piotrdrag@gmail.com>, 2013-2014\n"
+"Aviary.pl <gnomepl@aviary.pl>, 2013-2014"
 
 #: ../src/main.js:119 ../src/record.js:94
 msgid "Sound Recorder"
 msgstr "Nagrywanie dźwięku"
 
-#: ../src/mainWindow.js:278
+#: ../src/mainWindow.js:172
+msgid "Add Recordings"
+msgstr "Dodaj nagrania"
+
+#: ../src/mainWindow.js:175
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Aby nagrywać dźwięk, należy użyć przycisku <b>Nagraj</b>"
+
+#: ../src/mainWindow.js:298
 msgid "Recording…"
 msgstr "Nagrywanie…"
 
-#: ../src/mainWindow.js:523
+#: ../src/mainWindow.js:548
 msgid "Delete"
 msgstr "Usuń"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:798
+#: ../src/mainWindow.js:834
 msgid "Load More"
 msgstr "Wczytaj więcej"
 
-#: ../src/play.js:82
+#: ../src/play.js:85
 msgid "Unable to set the playbin to the playing state."
 msgstr "Nie można ustawić mechanizmu playbin na stan odtwarzania."
 
