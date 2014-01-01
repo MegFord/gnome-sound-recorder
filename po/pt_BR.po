@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-15 00:58+0000\n"
-"PO-Revision-Date: 2013-12-14 23:30-0300\n"
-"Last-Translator: Adorilson Bezerra <adorilson@gmail.com>\n"
+"POT-Creation-Date: 2013-12-31 22:18+0000\n"
+"PO-Revision-Date: 2014-01-01 17:18-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -81,9 +81,9 @@ msgstr "Grave som por meio de microfone e reproduza-o"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
-msgstr "Áudio;Aplicativo;Gravador;"
+msgstr "Áudio;Aplicativo;Gravador;Sons;Som"
 
-#: ../src/info.js:47 ../src/mainWindow.js:498
+#: ../src/info.js:47 ../src/mainWindow.js:523
 msgid "Info"
 msgstr "Info"
 
@@ -125,47 +125,57 @@ msgstr "%Y-%m-%d %H:%M:%S"
 msgid "Sound Recorder started"
 msgstr "O gravador de som iniciou"
 
-#: ../src/main.js:117
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/main.js:118
 msgid "translator-credits"
 msgstr "Rafael Ferreira <rafael.f.f1@gmail.com>, 2013."
 
-#: ../src/main.js:118 ../src/record.js:94
+#: ../src/main.js:119 ../src/record.js:94
 msgid "Sound Recorder"
 msgstr "Gravador de som"
 
-#: ../src/mainWindow.js:278
+#: ../src/mainWindow.js:172
+#| msgid "Recordings"
+msgid "Add Recordings"
+msgstr "Adicionar gravações"
+
+#: ../src/mainWindow.js:175
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Use o botão <b>Gravar</b> para efetuar gravações de sons"
+
+#: ../src/mainWindow.js:298
 msgid "Recording…"
 msgstr "Gravando…"
 
-#: ../src/mainWindow.js:523
+#: ../src/mainWindow.js:548
 msgid "Delete"
 msgstr "Excluir"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:811
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:798
+#: ../src/mainWindow.js:834
 msgid "Load More"
 msgstr "Carregar mais"
 
-#: ../src/play.js:82
+#: ../src/play.js:85
 msgid "Unable to set the playbin to the playing state."
 msgstr ""
 "Não foi possível definir a executável de reprodução para o estado de em "
@@ -207,15 +217,19 @@ msgstr "Nenhum perfil de mídia foi definido."
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Desabilite para configurar o redirecionamento para estado de gravação."
 
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
 #: ../src/record.js:271
 msgid "Recordings"
 msgstr "Gravações"
 
-#. Translators: "Audio from" is the beginning of the default name assigned to a file created
-#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg").*/
-#: ../src/record.js:287
-msgid "Audio from"
-msgstr "Áudio de"
+#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
+#: ../src/record.js:288
+msgid "Audio from %Y-%m-%d %H:%M:%S"
+msgstr "Áudio de %d-%m-%Y %H:%M:%S"
+
+#~ msgid "Audio from"
+#~ msgstr "Áudio de"
 
 #~ msgid "Error: "
 #~ msgstr "Erro: "
