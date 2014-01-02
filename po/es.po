@@ -2,15 +2,15 @@
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2013.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-18 13:41+0000\n"
-"PO-Revision-Date: 2013-12-18 14:48+0100\n"
+"POT-Creation-Date: 2013-12-31 19:48+0000\n"
+"PO-Revision-Date: 2014-01-02 10:02+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -84,7 +84,7 @@ msgstr "Grabar sonido con el micrófono y reproducirlo"
 msgid "Audio;Application;Record;"
 msgstr "sonido;aplicación;grabar;"
 
-#: ../src/info.js:47 ../src/mainWindow.js:498
+#: ../src/info.js:47 ../src/mainWindow.js:524
 msgid "Info"
 msgstr "Información"
 
@@ -96,32 +96,23 @@ msgstr "Cancelar"
 msgid "Done"
 msgstr "Hecho"
 
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
 #: ../src/info.js:99
 msgctxt "File Name"
 msgid "Name"
 msgstr "Nombre"
 
-#. Source item
 #: ../src/info.js:106
 msgid "Source"
 msgstr "Fuente"
 
-#. Date Modified item
 #: ../src/info.js:115
 msgid "Date Modified"
 msgstr "Fecha de modificación"
 
-#. Date Created item
 #: ../src/info.js:121
 msgid "Date Created"
 msgstr "Fecha de creación"
 
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
 #: ../src/info.js:132
 msgctxt "Media Type"
 msgid "Type"
@@ -135,7 +126,7 @@ msgstr "%d/%m/%Y %H:%M:%S"
 msgid "Sound Recorder started"
 msgstr "Grabadora de sonidos iniciada"
 
-#. Translators: Replace "translator-credits" with your names, one name per line
+#. Translators: Replace "translator-credits" with your names, one name per line */
 #: ../src/main.js:118
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013"
@@ -144,37 +135,50 @@ msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013"
 msgid "Sound Recorder"
 msgstr "Grabadora de sonidos"
 
-#: ../src/mainWindow.js:278
+#: ../src/mainWindow.js:172
+#| msgid "Recordings"
+msgid "Add Recordings"
+msgstr "Añadir grabaciones"
+
+#: ../src/mainWindow.js:175
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Use el botón <b>Grabar</b> para realizar grabaciones de sonido"
+
+#: ../src/mainWindow.js:298
 msgid "Recording…"
 msgstr "Grabando…"
 
-#: ../src/mainWindow.js:523
+#: ../src/mainWindow.js:549
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:798
+#: ../src/mainWindow.js:835
 msgid "Load More"
 msgstr "Cargar más"
+
+#: ../src/play.js:85
+msgid "Unable to set the playbin to the playing state."
+msgstr "No se pudo establecer el «playbin» al estado de la grabación."
 
 #: ../src/preferences.js:68
 msgid "Preferred format"
@@ -188,38 +192,40 @@ msgstr "Volumen"
 msgid "Microphone"
 msgstr "Micrófono"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/record.js:58
+msgid "Unable to create Recordings directory."
+msgstr "No se puede crear la carpeta Grabaciones."
+
+#: ../src/record.js:66
+msgid "Your audio capture settings are invalid."
+msgstr "La configuración para la captura de sonido no es válida."
+
+#: ../src/record.js:109
+msgid "Not all elements could be created."
+msgstr "No se pudieron crear todos los elementos."
+
+#: ../src/record.js:119
+msgid "Not all of the elements were linked"
+msgstr "No se han enlazado todos los elementos"
+
+#: ../src/record.js:140
+msgid "No Media Profile was set."
+msgstr "No se ha establecido un perfil multimedia."
+
+#: ../src/record.js:150
+msgid "Unable to set the pipeline to the recording state."
+msgstr "No se pudo establecer la tubería al estado de la grabación."
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
 #: ../src/record.js:271
 msgid "Recordings"
 msgstr "Grabaciones"
 
 #. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
-#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg").
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
 #: ../src/record.js:288
-#| msgid "%Y-%m-%d %H:%M:%S"
 msgid "Audio from %Y-%m-%d %H:%M:%S"
 msgstr "Sonido de %Y-%m-%d %H:%M:%S"
-
-#~ msgid "Unable to set the playbin to the playing state."
-#~ msgstr "No se pudo establecer el «playbin» al estado de la grabación."
-
-#~ msgid "Unable to create Recordings directory."
-#~ msgstr "No se puede crear la carpeta Grabaciones."
-
-#~ msgid "Your audio capture settings are invalid."
-#~ msgstr "La configuración para la captura de sonido no es válida."
-
-#~ msgid "Not all elements could be created."
-#~ msgstr "No se pudieron crear todos los elementos."
-
-#~ msgid "Not all of the elements were linked"
-#~ msgstr "No se han enlazado todos los elementos"
-
-#~ msgid "No Media Profile was set."
-#~ msgstr "No se ha establecido un perfil multimedia."
-
-#~ msgid "Unable to set the pipeline to the recording state."
-#~ msgstr "No se pudo establecer la tubería al estado de la grabación."
 
 #~ msgid "Audio from"
 #~ msgstr "Sonido de"
