@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the gnome-sound-recorder package.
 #
 # Adam Matoušek <adamatousek@gmail.com>, 2013.
-# Marek Černocký <marek@manet.cz>, 2013.
+# Marek Černocký <marek@manet.cz>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-18 13:41+0000\n"
-"PO-Revision-Date: 2013-12-24 19:24+0100\n"
+"POT-Creation-Date: 2013-12-31 19:48+0000\n"
+"PO-Revision-Date: 2014-01-03 08:14+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -81,7 +81,7 @@ msgstr "Nahrává mikrofonem zvuk a zpětně jej přehrává"
 msgid "Audio;Application;Record;"
 msgstr "audio;aplikace;nahrávání;nahrávka;záznam;"
 
-#: ../src/info.js:47 ../src/mainWindow.js:498
+#: ../src/info.js:47 ../src/mainWindow.js:524
 msgid "Info"
 msgstr "Informace"
 
@@ -93,32 +93,23 @@ msgstr "Zrušit"
 msgid "Done"
 msgstr "Hotovo"
 
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
 #: ../src/info.js:99
 msgctxt "File Name"
 msgid "Name"
 msgstr "Název souboru"
 
-#. Source item
 #: ../src/info.js:106
 msgid "Source"
 msgstr "Zdroj"
 
-#. Date Modified item
 #: ../src/info.js:115
 msgid "Date Modified"
 msgstr "Datum změny"
 
-#. Date Created item
 #: ../src/info.js:121
 msgid "Date Created"
 msgstr "Datum vytvoření"
 
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
 #: ../src/info.js:132
 msgctxt "Media Type"
 msgid "Type"
@@ -132,7 +123,7 @@ msgstr "%d.%m.%Y %H:%M:%S"
 msgid "Sound Recorder started"
 msgstr "Záznamník zvuků byl spuštěn"
 
-#. Translators: Replace "translator-credits" with your names, one name per line
+#. Translators: Replace "translator-credits" with your names, one name per line */
 #: ../src/main.js:118
 msgid "translator-credits"
 msgstr ""
@@ -143,37 +134,49 @@ msgstr ""
 msgid "Sound Recorder"
 msgstr "Záznamník zvuků"
 
-#: ../src/mainWindow.js:278
+#: ../src/mainWindow.js:172
+msgid "Add Recordings"
+msgstr "Přidání nahrávek"
+
+#: ../src/mainWindow.js:175
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Použijte tlačítko <b>Nahrát</b> k vytvoření zvukového záznamu"
+
+#: ../src/mainWindow.js:298
 msgid "Recording…"
 msgstr "Nahrává se…"
 
-#: ../src/mainWindow.js:523
+#: ../src/mainWindow.js:549
 msgid "Delete"
 msgstr "Smazat"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:812
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:798
+#: ../src/mainWindow.js:835
 msgid "Load More"
 msgstr "Načíst další"
+
+#: ../src/play.js:85
+msgid "Unable to set the playbin to the playing state."
+msgstr "Nelze nastavit prvek „playbin“ do přehrávacího stavu."
 
 #: ../src/preferences.js:68
 msgid "Preferred format"
@@ -187,13 +190,37 @@ msgstr "Hlasitost"
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/record.js:58
+msgid "Unable to create Recordings directory."
+msgstr "Nelze vytvořit složku pro nahrávky."
+
+#: ../src/record.js:66
+msgid "Your audio capture settings are invalid."
+msgstr "Vaše nastavení zachytávání zvuku je neplatné."
+
+#: ../src/record.js:109
+msgid "Not all elements could be created."
+msgstr "Ne všechny prvky byly vytvořeny."
+
+#: ../src/record.js:119
+msgid "Not all of the elements were linked"
+msgstr "Ne všechny prvky byly propojeny."
+
+#: ../src/record.js:140
+msgid "No Media Profile was set."
+msgstr "Nebyl nastaven žádný profil multimédií."
+
+#: ../src/record.js:150
+msgid "Unable to set the pipeline to the recording state."
+msgstr "Nelze nastavit rouru do nahrávacího stavu."
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
 #: ../src/record.js:271
 msgid "Recordings"
 msgstr "Nahrávky"
 
 #. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
-#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg").
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
 #: ../src/record.js:288
 msgid "Audio from %Y-%m-%d %H:%M:%S"
 msgstr "Zvuk z %d.%m.%Y %H:%M:%S"
