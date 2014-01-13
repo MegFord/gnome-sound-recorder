@@ -1,0 +1,226 @@
+# Greek translation for gnome-sound-recorder.
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Dimitris Spingos <dmtrs32@gmail.com>, 2014.
+# Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-01-03 07:20+0000\n"
+"PO-Revision-Date: 2014-01-12 09:42+0300\n"
+"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
+"Language-Team: www.gnome.gr\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Μέγεθος παραθύρου"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Μέγεθος παραθύρου (πλάτος και ύψος)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Θέση παραθύρου"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Θέση παραθύρου (x και y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Προτιμώμενος τύπος πολυμέσων για κωδικοποίηση ήχου κατά την εγγραφή"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Ο προτιμώμενος τύπος πολυμέσων για κωδικοποίηση ήχου κατά την εγγραφή. Για "
+"παράδειγμα, 'audio/x-vorbis' για Ogg Vorbis, ή 'audio/mpeg' για MP3."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+"Χαρτογραφεί τύπους πολυμέσων στα προκαθορισμένα ονόματα κωδικοποιητή ήχου."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Απεικονίζει τύπους πολυμέσων στα προκαθορισμένα ονόματα κωδικοποιητή ήχου. "
+"Αν δεν υπάρχει χαρτογράφηση για ένα τύπο πολυμέσου, θα χρησιμοποιηθούν οι "
+"προεπιλεγμένες ρυθμίσεις κωδικοποιητή."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Επίπεδο έντασης"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Επίπεδο έντασης."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:57
+msgid "SoundRecorder"
+msgstr "Εγγραφή ήχου"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Εγγραφή ήχου μέσα από το μικρόφωνο και αναπαραγωγή του"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Ήχος;εφαρμογή;καταγραφή;"
+
+#: ../src/info.js:47 ../src/mainWindow.js:523
+msgid "Info"
+msgstr "Πληροφορίες"
+
+#: ../src/info.js:59
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: ../src/info.js:73 ../src/preferences.js:47
+msgid "Done"
+msgstr "Έτοιμο"
+
+#: ../src/info.js:99
+msgctxt "File Name"
+msgid "Name"
+msgstr "Όνομα"
+
+#: ../src/info.js:106
+msgid "Source"
+msgstr "Πηγή"
+
+#: ../src/info.js:115
+msgid "Date Modified"
+msgstr "Ημερομηνία τροποποίησης"
+
+#: ../src/info.js:121
+msgid "Date Created"
+msgstr "Ημερομηνία δημιουργίας"
+
+#: ../src/info.js:132
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Τύπος"
+
+#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d-%m-%Y %H:%M:%S"
+
+#: ../src/main.js:93
+msgid "Sound Recorder started"
+msgstr "Ξεκίνησε η εγγραφή του ήχου"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/main.js:118
+msgid "translator-credits"
+msgstr "Δημήτρης Σπίγγος <dmtrs32@gmail.com>"
+
+#: ../src/main.js:119 ../src/record.js:94
+msgid "Sound Recorder"
+msgstr "Εγγραφή ήχου"
+
+#: ../src/mainWindow.js:172
+msgid "Add Recordings"
+msgstr "Προσθήκη εγγραφών"
+
+#: ../src/mainWindow.js:175
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Χρησιμοποιήστε το πλήκτρο <b>Εγγραφή</b> για εγγραφή ήχου"
+
+#: ../src/mainWindow.js:298
+msgid "Recording…"
+msgstr "Ηχογράφηση…"
+
+#: ../src/mainWindow.js:548
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: ../src/mainWindow.js:811
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:811
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:811
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:811
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:811
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:834
+msgid "Load More"
+msgstr "Φόρτωση περισσοτέρων"
+
+#: ../src/play.js:85
+msgid "Unable to set the playbin to the playing state."
+msgstr ""
+"Αδύνατη η ρύθμιση του δυαδικού αναπαραγωγής στην κατάσταση αναπαραγωγής."
+
+#: ../src/preferences.js:68
+msgid "Preferred format"
+msgstr "Προτιμώμενη μορφή"
+
+#: ../src/preferences.js:76
+msgid "Volume"
+msgstr "Ένταση ήχου"
+
+#: ../src/preferences.js:91
+msgid "Microphone"
+msgstr "Μικρόφωνο"
+
+#: ../src/record.js:58
+msgid "Unable to create Recordings directory."
+msgstr "Αδύνατη η δημιουργία καταλόγου ηχογραφήσεων."
+
+#: ../src/record.js:66
+msgid "Your audio capture settings are invalid."
+msgstr "Οι ρυθμίσεις σύλληψης ήχου είναι άκυρες."
+
+#: ../src/record.js:109
+msgid "Not all elements could be created."
+msgstr "Δεν μπόρεσαν να δημιουργηθούν όλα τα στοιχεία."
+
+#: ../src/record.js:119
+msgid "Not all of the elements were linked"
+msgstr "Δεν συνδέθηκαν όλα τα στοιχεία"
+
+#: ../src/record.js:140
+msgid "No Media Profile was set."
+msgstr "Δεν ορίστηκε κατατομή πολυμέσων."
+
+#: ../src/record.js:150
+msgid "Unable to set the pipeline to the recording state."
+msgstr "Αδύνατη η ρύθμιση της διοχέτευσης στην κατάσταση εγγραφής."
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/record.js:271
+msgid "Recordings"
+msgstr "Ηχογραφήσεις (Recordings)"
+
+#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
+#: ../src/record.js:288
+msgid "Audio from %Y-%m-%d %H:%M:%S"
+msgstr "Ήχος από %d-%m-%Y %H:%M:%S"
