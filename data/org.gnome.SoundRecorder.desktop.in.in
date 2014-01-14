@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-_Name=SoundRecorder
+_Name=Sound Recorder
 _Comment=Record sound via the microphone and play it back
 Icon=audio-input-microphone
 Categories=GNOME;GTK;
