@@ -46,8 +46,7 @@ const _TENTH_SEC = 100000000;
            
     _playPipeline: function(fileName) {
         this._fileName = this._fileToPlay;
-        let uri = GLib.filename_to_uri(this._fileName, null); 
-        this.view = MainWindow.view;      
+        let uri = GLib.filename_to_uri(this._fileName, null);       
         this.play = Gst.ElementFactory.make("playbin", "play");
         this.play.set_property("uri", uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
@@ -120,7 +119,7 @@ const _TENTH_SEC = 100000000;
     },
     
     onEndOfStream: function() {
-        this.view.onPlayStopClicked();
+        MainWindow.view.onPlayStopClicked();
     },
         
     _onMessageReceived: function(message) {
@@ -181,9 +180,9 @@ const _TENTH_SEC = 100000000;
         this.trackDurationSecs = this.trackDuration/Gst.SECOND;        
         
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
-            this.view.setLabel(time);           
+            MainWindow.view.setLabel(time);           
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
-            this.view.setLabel(0); 
+            MainWindow.view.setLabel(0); 
         }
         
         let absoluteTime = this.clock.get_time();
