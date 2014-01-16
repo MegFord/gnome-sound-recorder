@@ -98,7 +98,9 @@ const MainWindow = new Lang.Class({
         view = new MainView();
         play = new Play.Play();
         
-        params = Params.fill(params, { title: GLib.get_application_name(), 
+        params = Params.fill(params, { title: GLib.get_application_name(),
+                                       hexpand: true,
+                                       vexpand: true, 
                                        default_width: 700,
                                        default_height: 480 });
         this.parent(params);
@@ -108,7 +110,8 @@ const MainWindow = new Lang.Class({
                               height_request: 109,
                               width_request: 900,
                               border_width: 12,
-                              vexpand: false });
+                              hexpand: true,
+                              vexpand: true });
         grid.set_row_homogeneous(true);
         let stackSwitcher = Gtk.StackSwitcher.new();
         stackSwitcher.set_stack(view);
@@ -148,8 +151,8 @@ const MainView = new Lang.Class({
     Extends: Gtk.Stack,
 
     _init: function(params) {
-        params = Params.fill(params, { hexpand: false,
-                                       vexpand: false,
+        params = Params.fill(params, { hexpand: true,
+                                       vexpand: true,
                                        transition_type: Gtk.StackTransitionType.CROSSFADE,
                                        transition_duration: 100,
                                        visible: true });
@@ -162,12 +165,14 @@ const MainView = new Lang.Class({
     
     _addEmptyPage: function() {
         this.emptyGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                       halign: Gtk.Align.CENTER,
-                                       valign: Gtk.Align.CENTER });
+                                        hexpand: true,
+                                        vexpand: true,
+                                        halign: Gtk.Align.CENTER,
+                                        valign: Gtk.Align.CENTER });
         this._scrolledWin.add(this.emptyGrid);
 
         this.emptyGrid.add(new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
-                                         icon_size: Gtk.IconSize.LARGE_TOOLBAR }));
+                                           icon_size: Gtk.IconSize.LARGE_TOOLBAR }));
         this.emptyGrid.add(new Gtk.Label({ name: 'emptyPage-title',
                                            label: _("Add Recordings"),
                                            halign: Gtk.Align.CENTER,
@@ -186,11 +191,14 @@ const MainView = new Lang.Class({
         list.setListTypeNew();
         list.enumerateDirectory();
         this._record = new Record.Record(audioProfile);
-        let initialPage = new Gtk.EventBox();
+        let initialPage = new Gtk.EventBox({ hexpand: true,
+                                             vexpand: true });
         
         groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                    halign: Gtk.Align.CENTER,
                                    valign: Gtk.Align.CENTER,
+                                   hexpand: true,
+                                   vexpand: true,
                                    row_spacing: 12,
                                    column_homogeneous: true });
         groupGrid.add(initialPage);
@@ -275,6 +283,8 @@ const MainView = new Lang.Class({
         this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                          height_request: 36,
                                          width_request: 400,
+                                         hexpand: true,
+                                         vexpand: true,
                                          name: "recordGrid" });
         this.recordGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
         this.groupGrid.add(this.recordGrid);
@@ -325,8 +335,8 @@ const MainView = new Lang.Class({
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      margin_bottom: 3,
                                                      margin_top: 5,
-                                                     hexpand: false,
-                                                     vexpand: false,
+                                                     hexpand: true,
+                                                     vexpand: true,
                                                      width_request: 900,
                                                      height_request: 400 });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
@@ -355,7 +365,8 @@ const MainView = new Lang.Class({
         if (this._endIdx == -1) {
             this._addEmptyPage();
         } else {       
-            this.listBox = Gtk.ListBox.new();
+            this.listBox = Gtk.ListBox.new({ hexpand: true,
+                                             vexpand: true });
             this._scrolledWin.add(this.listBox);
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
             this.listBox.set_header_func(null);
@@ -373,6 +384,8 @@ const MainView = new Lang.Class({
                 this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                               height_request: 45,
                                               width_request: 900,
+                                              hexpand: true,
+                                              vexpand: true,
                                               name: i.toString() });
                 this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
                 this.listBox.add(this.rowGrid);
@@ -489,6 +502,8 @@ const MainView = new Lang.Class({
                                                    height_request: 45,
                                                    width_request: 380,
                                                    valign: Gtk.Align.FILL,
+                                                   hexpand: true,
+                                                   vexpand: true,
                                                    name: "WaveFormGrid" });
                 this.waveFormGrid.set_no_show_all(true);
                 this.rowGrid.attach(this.waveFormGrid, 9, 1, 1, 2);
@@ -579,7 +594,7 @@ const MainView = new Lang.Class({
         previousSelRow = null;
         
         if (this.listBox) {
-        this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
+            this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
         }
 
         list.setListTypeRefresh();  
@@ -596,7 +611,6 @@ const MainView = new Lang.Class({
     },
     
     scrolledWinDelete: function() {
-        //let w = this.rowGrid.get_allocated_width();
         this._scrolledWin.destroy();
         this.scrolledWinAdd(); 
     },
