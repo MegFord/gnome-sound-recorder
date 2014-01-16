@@ -34,42 +34,6 @@ const Listview = imports.listview;
 const MainWindow = imports.mainWindow;
 const Record = imports.record;
 
-const FileUtil = new Lang.Class({
-    Name: "FileUtil",
-        
-   rename: function(fileName, newFileName) { 
-       let fileToRename = Gio.file_new_for_path(fileName);
-       fileToRename.set_display_name_async(newFileName, GLib.PRIORITY_DEFAULT, null, null);
-    },
-    
-    loadFile: function(text) { 
-        this._text = text;
-        this._buildFileName = new Record.BuildFileName();
-        let path = this._buildFileName.buildPath();
-        path.push(text);
-        let fileNav = GLib.build_filenamev(path);
-       
-        return fileNav;
-    },
-    
-    deleteFile: function(fileNav) {
-        this._fileNav = fileNav;
-        this._fileToDelete = Gio.file_new_for_path(this._fileNav);       
-        this._fileToDelete.delete_async(GLib.PRIORITY_DEFAULT, null, Lang.bind(this, this._deleteFileCallback));
-    }, 
-    
-    _deleteFileCallback: function(obj, res) {
-        this._deleted = obj.delete_finish(res);        
-    },
-    
-    getDirPath: function() {
-        let path = MainWindow.path;
-        let dirName = GLib.build_filenamev(path);
-        let dir = Gio.file_new_for_path(dirName);
-        return dir;
-    }      
-});
-    
 const _OFFSET_STEP = 10;
 let CurrentEndIdx;
 

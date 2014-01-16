@@ -43,10 +43,9 @@ const _TENTH_SEC = 100000000;
  
  const Play = new Lang.Class({
     Name: "Play",
-           
-    _playPipeline: function(fileName) {
-        this._fileName = this._fileToPlay;
-        let uri = GLib.filename_to_uri(this._fileName, null);       
+
+    _playPipeline: function() {
+        let uri = this._fileToPlay.get_uri();
         this.play = Gst.ElementFactory.make("playbin", "play");
         this.play.set_property("uri", uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
@@ -62,13 +61,12 @@ const _TENTH_SEC = 100000000;
                 }
             }));
     },
-            
-    startPlaying: function(fileName) {
-        this._fileName = fileName;
+
+    startPlaying: function() {
         this.baseTime = 0;
         
         if (!this.play || this.playState == PipelineStates.STOPPED ) {
-            this._playPipeline(this._fileName);
+            this._playPipeline();
         }
             
         if (this.playState == PipelineStates.PAUSED) {

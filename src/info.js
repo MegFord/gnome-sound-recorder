@@ -27,7 +27,6 @@ const Gtk = imports.gi.Gtk;
 const _ = imports.gettext.gettext;
 const C_ = imports.gettext.pgettext;
 
-const FileUtil = imports.fileUtil;
 const MainWindow = imports.mainWindow;
 
 const _FILE_NAME_ENTRY_TIMEOUT = 600;
@@ -37,9 +36,9 @@ const InfoDialog = new Lang.Class({
 
     _init: function(fileNav) {
         let fileName = fileNav;
-        
-        this.nav = MainWindow.fileUtil.loadFile(fileName.fileName);
-        
+
+        this._file = Gio.File.new_for_uri(fileNav.uri);
+
         this.widget = new Gtk.Dialog ({ resizable: false,
                                         modal: true,
                                         destroy_with_parent: true,
@@ -144,8 +143,7 @@ const InfoDialog = new Lang.Class({
         grid.attach_next_to(this._fileNameEntry, this._name, Gtk.PositionType.RIGHT, 2, 1);
 
         // Source value
-        let uri = GLib.filename_to_uri(this.nav, null);
-        let sourceLink = Gio.file_new_for_uri(uri).get_parent();
+        let sourceLink = this._file.get_parent();
         let sourcePath = sourceLink.get_path();
 
         this._sourceData = new Gtk.LinkButton({ label: sourcePath,
@@ -177,9 +175,9 @@ const InfoDialog = new Lang.Class({
     },
     
     onDoneClicked: function() {
-        let newFileName = this._fileNameEntry.get_text(); 
-        MainWindow.fileUtil.rename(this.nav, newFileName);
-        this.widget.destroy(); 
+        let newFileName = this._fileNameEntry.get_text();
+        this._file.set_display_name_async(newFileName, GLib.PRIORITY_DEFAULT, null, null);
+        this.widget.destroy();
     },
     
     onCancelClicked: function() {

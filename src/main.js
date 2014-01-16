@@ -93,6 +93,13 @@ const Application = new Lang.Class({
         log(_("Sound Recorder started"));
         Gst.init(null, 0);
         this._initAppMenu();
+
+        /* Translators: "Recordings" here refers to the name of the directory where the application places files */
+        let path = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
+
+        // Ensure Recordings directory
+        GLib.mkdir_with_parents(path, 0755);
+        this.saveDir = Gio.file_new_for_path(path);
     },
 
     vfunc_activate: function() {

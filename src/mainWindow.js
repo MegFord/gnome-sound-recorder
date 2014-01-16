@@ -40,13 +40,11 @@ const Waveform = imports.waveform;
 
 let activeProfile = null;
 let audioProfile = null;
-let fileUtil = null;
 let grid = null;
 let groupGrid;
 let list = null;
 let loadMoreButton = null;
 let offsetController = null;
-let path = null;
 let play = null;
 let previousSelRow = null;
 let recordPipeline = null;
@@ -90,10 +88,6 @@ const MainWindow = new Lang.Class({
 
      _init: function(params) {
         audioProfile = new AudioProfile.AudioProfile();
-        this._buildFileName = new Record.BuildFileName()
-        path = this._buildFileName.buildPath();
-        this._buildFileName.ensureDirectory(path);
-        fileUtil = new FileUtil.FileUtil();
         offsetController = new FileUtil.OffsetController;
         view = new MainView();
         play = new Play.Play();
@@ -186,7 +180,6 @@ const MainView = new Lang.Class({
     },        
     
     _addListviewPage: function(name) {
-        fileUtil = new FileUtil.FileUtil();
         list = new Listview.Listview();
         list.setListTypeNew();
         list.enumerateDirectory();
@@ -656,9 +649,9 @@ const MainView = new Lang.Class({
                         child.sensitive = true;
                 }));
         }
-    },    
-    
-    _getFileNameFromRow: function(selected) {
+    },
+
+    _getFileFromRow: function(selected) {
         this._selected = selected;
         let fileForAction = null;
         let rowWidget = this._selected.get_child(this.fileName);
@@ -667,7 +660,8 @@ const MainView = new Lang.Class({
             
                 if (child.name == "FileNameLabel") {
                     let name = child.get_text();
-                    fileForAction = fileUtil.loadFile(name);
+                    let application = Gio.Application.get_default();
+                    fileForAction = application.saveDir.get_child_for_display_name(name);
                 }
              }));
              
@@ -676,14 +670,14 @@ const MainView = new Lang.Class({
     
     _deleteFile: function(selected) {
         this._selected = selected;
-        let fileToDelete = this._getFileNameFromRow(this._selected);
-        fileUtil.deleteFile(fileToDelete);
+        let fileToDelete = this._getFileFromRow(this._selected);
+        fileToDelete.delete_async(GLib.PRIORITY_DEFAULT, null, null);
     },
     
     loadPlay: function(selected) {
         this._selected = selected;
-        let fileToPlay = this._getFileNameFromRow(this._selected);
-        
+        let fileToPlay = this._getFileFromRow(this._selected);
+
         return fileToPlay;
     }, 
     

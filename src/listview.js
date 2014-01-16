@@ -82,18 +82,18 @@ const Listview = new Lang.Class({
     _init: function() {
         stopVal = EnumeratorState.ACTIVE;
         allFilesInfo = [];
-    },    
-        
+
+        // Save a reference to the savedir to quickly access it
+        this._saveDir = Gio.Application.get_default().saveDir;
+    },
+
     monitorListview: function() {
-        let dir = MainWindow.fileUtil.getDirPath(); 
-        this.dirMonitor = dir.monitor_directory(Gio.FileMonitorFlags.NONE, null);
-        this.dirMonitor.connect('changed', this._onDirChanged);      
+        this.dirMonitor = this._saveDir.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+        this.dirMonitor.connect('changed', this._onDirChanged);
     },
             
     enumerateDirectory: function() {
-        let dir = MainWindow.fileUtil.getDirPath();    
-      
-        dir.enumerate_children_async('standard::name,time::created,time::modified',
+        this._saveDir.enumerate_children_async('standard::name,time::created,time::modified',
                                      Gio.FileQueryInfoFlags.NONE,
                                      GLib.PRIORITY_LOW, 
                                      null, Lang.bind(this, 
@@ -120,10 +120,8 @@ const Listview = new Lang.Class({
                         files.forEach(Lang.bind(this,
                             function(file) {
                                 let returnedName = file.get_attribute_as_string("standard::name");
-                                let buildFileName = new Record.BuildFileName();
-                                let initialFileName = buildFileName.buildPath();
-                                initialFileName.push(returnedName);
-                                let finalFileName = GLib.build_filenamev(initialFileName);
+                                let finalFileName = GLib.build_filenamev([this._saveDir.get_path(),
+                                                                          returnedName]);
                                 let fileUri = GLib.filename_to_uri(finalFileName, null);
                                 let timeVal = file.get_modification_time();
                                 let date = GLib.DateTime.new_from_timeval_local(timeVal);
