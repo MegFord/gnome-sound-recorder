@@ -29,11 +29,3 @@
   border-right: rgba(255,255,255, 0.45) 1px solid;  
   border-radius: 0px; 
 }
-
-
-.header .button {
-  color: rgba(255,255,255,1.0);
-  background-color: rgba(204,0,0,0.75);
-  background-image: none; 
-  border: none; 
-}

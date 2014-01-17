@@ -98,45 +98,21 @@ const MainWindow = new Lang.Class({
                                        default_width: 700,
                                        default_height: 480 });
         this.parent(params);
-        
-        grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                              halign: Gtk.Align.CENTER,
-                              height_request: 109,
-                              width_request: 900,
-                              border_width: 12,
-                              hexpand: true,
-                              vexpand: true });
-        grid.set_row_homogeneous(true);
-        let stackSwitcher = Gtk.StackSwitcher.new();
-        stackSwitcher.set_stack(view);
-        let header = new Gtk.HeaderBar({ hexpand: true });
-        header.set_show_close_button(true);
+
+        let header = new Gtk.HeaderBar({ hexpand: true,
+                                         show_close_button: true });
         this.set_titlebar(header);
-        
-        let recordToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                          spacing: 0 });
-        header.pack_start(recordToolbar);
+
         recordButton = new RecordButton({ label: "Record",
                                           margin_bottom: 4,
                                           margin_top: 6,
                                           margin_left: 6,
                                           margin_right: 6 });
-        recordToolbar.pack_end(recordButton, false, true, 0);
-        recordToolbar.get_style_context().add_class('header');
-        recordToolbar.show();
-        recordButton.show();
+        recordButton.get_style_context().add_class('destructive-action');
+        header.pack_start(recordButton);
 
-        grid.add(view);
-            
-        this._defineThemes();
-                
-        this.add(grid);
-        grid.show_all();
+        this.add(view);
         this.show_all();
-    },
-       
-    _defineThemes: function() {
-        let settings = Gtk.Settings.get_default();
     }
 });
 
@@ -151,9 +127,8 @@ const MainView = new Lang.Class({
                                        transition_duration: 100,
                                        visible: true });
         this.parent(params);
-            
-        let listviewPage = this._addListviewPage('listviewPage');
-            
+
+        this._addListviewPage('listviewPage');
         this.labelID = null;
     },
     
@@ -184,17 +159,12 @@ const MainView = new Lang.Class({
         list.setListTypeNew();
         list.enumerateDirectory();
         this._record = new Record.Record(audioProfile);
-        let initialPage = new Gtk.EventBox({ hexpand: true,
-                                             vexpand: true });
-        
+
         groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                   halign: Gtk.Align.CENTER,
-                                   valign: Gtk.Align.CENTER,
                                    hexpand: true,
                                    vexpand: true,
                                    row_spacing: 12,
                                    column_homogeneous: true });
-        groupGrid.add(initialPage);
         this.add_titled(groupGrid, name, "View");
     },
     
@@ -277,7 +247,6 @@ const MainView = new Lang.Class({
                                          height_request: 36,
                                          width_request: 400,
                                          hexpand: true,
-                                         vexpand: true,
                                          name: "recordGrid" });
         this.recordGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
         this.groupGrid.add(this.recordGrid);
@@ -317,8 +286,7 @@ const MainView = new Lang.Class({
                                           margin_top: 6,
                                           margin_left: 6,
                                           margin_right: 6,
-                                          hexpand: true,
-                                          vexpand: true });
+                                          hexpand: true });
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
         this.toolbarStart.pack_start(stopRecord, true, true, 0);
         this.recordGrid.attach(this.toolbarStart, 5, 1, 1, 2);
@@ -326,12 +294,11 @@ const MainView = new Lang.Class({
      
     scrolledWinAdd: function() {    
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
+                                                     border_width: 12,
                                                      margin_bottom: 3,
                                                      margin_top: 5,
                                                      hexpand: true,
-                                                     vexpand: true,
-                                                     width_request: 900,
-                                                     height_request: 400 });
+                                                     vexpand: true });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this._scrolledWin.get_style_context().add_class('view');
         this.scrollbar = this._scrolledWin.get_vadjustment();
