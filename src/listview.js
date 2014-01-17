@@ -112,7 +112,7 @@ const Listview = new Lang.Class({
     _onNextFileComplete: function () {
         fileInfo = [];
         try{
-            this._enumerator.next_files_async(10, GLib.PRIORITY_DEFAULT, null, Lang.bind(this,
+            this._enumerator.next_files_async(20, GLib.PRIORITY_DEFAULT, null, Lang.bind(this,
                 function(obj, res) {
                     let files = obj.next_files_finish(res);
                     

@@ -34,7 +34,7 @@ const Listview = imports.listview;
 const MainWindow = imports.mainWindow;
 const Record = imports.record;
 
-const _OFFSET_STEP = 10;
+const _OFFSET_STEP = 20;
 let CurrentEndIdx;
 
 const OffsetController = new Lang.Class({
@@ -54,7 +54,7 @@ const OffsetController = new Lang.Class({
     getEndIdx: function() {
         this.totItems = MainWindow.list.getItemCount();
         if (CurrentEndIdx < this.totItems) {
-            this.endIdx = CurrentEndIdx;
+            this.endIdx = CurrentEndIdx -1;
         } else {
             this.endIdx = this.totItems - 1;
         }
