@@ -81,7 +81,7 @@ msgstr "Grave som por meio de microfone e reproduza-o"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
-msgstr "Áudio;Aplicativo;Gravador;Sons;Som"
+msgstr "Áudio;Aplicativo;Gravador;Sons;Som;"
 
 #: ../src/info.js:47 ../src/mainWindow.js:523
 msgid "Info"
