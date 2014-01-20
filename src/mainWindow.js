@@ -357,7 +357,6 @@ const MainView = new Lang.Class({
                                                 icon_size: Gtk.IconSize.BUTTON,
                                                 opacity: 1,
                                                 name: "PlayToolBar" });
-                this.widget.get_style_context().add_class('toolbar');
                 this.rowGrid.attach(this.widget, 1, 0, 1, 2);
                            
                 this._box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
@@ -389,7 +388,6 @@ const MainView = new Lang.Class({
                                                      icon_size: Gtk.IconSize.BUTTON,
                                                      opacity: 1,
                                                      name: "PauseToolBar" });
-                this.pauseWidget.get_style_context().add_class('toolbar');
                 this.rowGrid.attach(this.pauseWidget, 1, 0, 1, 2);
                            
                 this._pauseBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
@@ -477,7 +475,6 @@ const MainView = new Lang.Class({
                                                     opacity: 1,
                                                     name: "InfoToolbar" });
                 this.rowGrid.attach(this.widgetInfo, 10, 0, 1, 2);
-                this.widgetInfo.get_style_context().add_class('toolbar');
                 
                 this._boxInfo = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
                 this._groupInfo = new Gtk.ToolItem({ child: this._boxInfo });
