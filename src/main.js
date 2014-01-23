@@ -120,7 +120,7 @@ const Application = new Lang.Class({
     },
     
     _showAbout: function() {
-        let aboutDialog = new Gtk.AboutDialog();       
+        let aboutDialog = new Gtk.AboutDialog({ use_header_bar: true });
         aboutDialog.artists = [ 'Reda Lazri <the.red.shortcut@gmail.com>',
                                 'Garrett LeSage <garrettl@gmail.com>',
                                 'Hylke Bons <hylkebons@gmail.com>' ];
