@@ -103,7 +103,7 @@ const MainWindow = new Lang.Class({
                                          show_close_button: true });
         this.set_titlebar(header);
 
-        recordButton = new RecordButton({ label: "Record",
+        recordButton = new RecordButton({ label: _("Record"),
                                           margin_bottom: 4,
                                           margin_top: 6,
                                           margin_left: 6,
@@ -281,7 +281,7 @@ const MainView = new Lang.Class({
         this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
 
         // finish button (stop recording)
-        let stopRecord = new Gtk.Button({ label: "Finish",
+        let stopRecord = new Gtk.Button({ label: _("Finish"),
                                           margin_bottom: 4,
                                           margin_top: 6,
                                           margin_left: 6,
@@ -747,7 +747,7 @@ const RecordButton = new Lang.Class({
         this.parent();
         this.image = Gtk.Image.new_from_icon_name('media-record-symbolic', Gtk.IconSize.BUTTON);
         this.set_always_show_image(true);
-        this.set_label("Record");
+        this.set_label(_("Record"));
         this.connect("clicked", Lang.bind(this, this._onRecord));
     },
     
