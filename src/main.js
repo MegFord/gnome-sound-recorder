@@ -126,6 +126,7 @@ const Application = new Lang.Class({
         aboutDialog.program_name = _("Sound Recorder");
         aboutDialog.copyright = 'Copyright ' + String.fromCharCode(0x00A9) + ' 2013' + String.fromCharCode(0x2013) + 'Meg Ford';
         aboutDialog.license_type = Gtk.License.GPL_2_0;
+        aboutDialog.logo_icon_name = 'audio-input-microphone';
         aboutDialog.version = '3.11.4';
         aboutDialog.website = 'http://live.gnome.org/GnomeSoundRecorder';
         aboutDialog.wrap_license = true;
