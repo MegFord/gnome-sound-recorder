@@ -44,6 +44,7 @@ const Preferences = new Lang.Class({
                                         margin_top: 5,
                                         hexpand: true }); 
                                         
+        this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
         this.widget.add_button(_("Done"), Gtk.ResponseType.OK);                                     
         
         let mainGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
