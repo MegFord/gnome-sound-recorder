@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder 3.9.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-24 01:13+0200\n"
-"PO-Revision-Date: 2014-01-24 01:05+0200\n"
+"POT-Creation-Date: 2014-01-24 05:27+0200\n"
+"PO-Revision-Date: 2014-01-24 05:27+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -67,7 +67,7 @@ msgstr "Volume level"
 msgid "Volume level."
 msgstr "Volume level."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:126
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:130
 #: ../src/record.js:94
 msgid "Sound Recorder"
 msgstr "רשמקול"
@@ -80,7 +80,7 @@ msgstr "להקליט קול באמצעות המיקרופון ולנגן שוב"
 msgid "Audio;Application;Record;"
 msgstr "שמע;אודיו;יישום;הקלטה;"
 
-#: ../src/info.js:46 ../src/mainWindow.js:495
+#: ../src/info.js:46 ../src/mainWindow.js:501
 msgid "Info"
 msgstr "מידע"
 
@@ -88,7 +88,7 @@ msgstr "מידע"
 msgid "Cancel"
 msgstr "ביטול"
 
-#: ../src/info.js:72 ../src/preferences.js:47
+#: ../src/info.js:72 ../src/preferences.js:49
 msgid "Done"
 msgstr "בוצע"
 
@@ -122,33 +122,33 @@ msgstr "%Y-%m-%d %H:%M:%S"
 msgid "SoundRecorder"
 msgstr "רשמקול"
 
-#: ../src/main.js:62
+#: ../src/main.js:64 ../src/preferences.js:40
 msgid "Preferences"
 msgstr "העדפות"
 
-#: ../src/main.js:63
-msgid "About Sound Recorder"
-msgstr "על אודות רשמקול"
+#: ../src/main.js:67
+msgid "About"
+msgstr "על אודות"
 
-#: ../src/main.js:64
+#: ../src/main.js:68
 msgid "Quit"
 msgstr "יציאה"
 
-#: ../src/main.js:93
+#: ../src/main.js:97
 msgid "Sound Recorder started"
 msgstr "הקלטת שמע התחילה"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/main.js:98
+#: ../src/main.js:102
 msgid "Recordings"
 msgstr "הקלטות"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/main.js:125
+#: ../src/main.js:129
 msgid "translator-credits"
 msgstr "יוסף אור בוצ׳קו <yoseforb@gnome.org>"
 
-#: ../src/mainWindow.js:106 ../src/mainWindow.js:750
+#: ../src/mainWindow.js:106 ../src/mainWindow.js:757
 msgid "Record"
 msgstr "הקלטה"
 
@@ -168,31 +168,31 @@ msgstr "מקליט…"
 msgid "Finish"
 msgstr "סיום"
 
-#: ../src/mainWindow.js:520
+#: ../src/mainWindow.js:526
 msgid "Delete"
 msgstr "מחיקה"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:791
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:791
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:791
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:791
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:791
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:814
 msgid "Load More"
 msgstr "טעינת עוד"
 
@@ -200,15 +200,15 @@ msgstr "טעינת עוד"
 msgid "Unable to set the playbin to the playing state."
 msgstr "לא ניתן להגדיר את playbin למצב פעיל."
 
-#: ../src/preferences.js:68
+#: ../src/preferences.js:70
 msgid "Preferred format"
 msgstr "תבנית מועדפת"
 
-#: ../src/preferences.js:76
+#: ../src/preferences.js:78
 msgid "Volume"
 msgstr "עצמת שמע"
 
-#: ../src/preferences.js:91
+#: ../src/preferences.js:93
 msgid "Microphone"
 msgstr "מיקרופון"
 
@@ -241,6 +241,9 @@ msgstr "לא ניתן להגדיר את הצינור למצב הקלטה."
 #: ../src/record.js:273
 msgid "Audio from %Y-%m-%d %H:%M:%S"
 msgstr "שמע מ־%Y-%m-%d %H:%M:%S"
+
+#~ msgid "About Sound Recorder"
+#~ msgstr "על אודות רשמקול"
 
 #~ msgid "Error: "
 #~ msgstr "שגיאה:"
