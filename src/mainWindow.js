@@ -365,7 +365,9 @@ const MainView = new Lang.Class({
 
                 // play button
                 this.playImage = Gtk.Image.new();
-                this.playImage.set_from_icon_name('media-playback-start-symbolic', Gtk.IconSize.BUTTON);
+                this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
+                                                        'media-playback-start-symbolic',
+                                                  Gtk.IconSize.BUTTON);
                 this._playListButton = new Gtk.Button({ hexpand: false,
                                                         name: "PlayButton" });
                 this._playListButton.set_image(this.playImage);
