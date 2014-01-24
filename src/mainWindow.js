@@ -364,6 +364,8 @@ const MainView = new Lang.Class({
                 this._group = new Gtk.ToolItem({ child: this._box, name: "PlayGroup"});
                 this.widget.insert(this._group, -1);
                 
+                let rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
+
                 // play button
                 this.playImage = Gtk.Image.new();
                 this.playImage.set_from_icon_name('media-playback-start-symbolic', Gtk.IconSize.BUTTON);
@@ -416,7 +418,8 @@ const MainView = new Lang.Class({
                                                  xalign: 0,
                                                  width_chars: 40,
                                                  margin_top: 5,
-                                                 margin_left: 15,
+                                                 margin_left: rtl ? 0 : 15,
+                                                 margin_right: rtl ? 15 : 0,
                                                  name: "FileNameLabel" });
                 let markup = ('<b>'+ this._files[i].fileName + '</b>');
                 this._fileName.label = markup;
@@ -430,7 +433,8 @@ const MainView = new Lang.Class({
                 this.rowGrid.attach(this._playLabelBox, 2, 1, 1, 1);
                 this._playLabelBox.show();
                         
-                this.playDurationLabel = new Gtk.Label({ margin_left: 15,
+                this.playDurationLabel = new Gtk.Label({ margin_left: rtl ? 0 : 15,
+                                                         margin_right: rtl ? 15 : 0,
                                                          halign: Gtk.Align.END,
                                                          valign: Gtk.Align.END,
                                                          margin_top: 5,

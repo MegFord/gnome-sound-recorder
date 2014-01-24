@@ -22,6 +22,10 @@
   border-radius: 0px; 
 }
 
-.view .toolbarEnd {
+.view .toolbarEnd:dir(ltr) {
   border-left: rgba(255,255,255,0.45) 1px solid; 
+}
+
+.view .toolbarEnd:dir(rtl) {
+  border-right: rgba(255,255,255,0.45) 1px solid; 
 }
