@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-01 05:14+0100\n"
-"PO-Revision-Date: 2014-01-01 05:15+0100\n"
+"POT-Creation-Date: 2014-01-25 00:09+0100\n"
+"PO-Revision-Date: 2014-01-25 00:10+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -72,8 +72,9 @@ msgstr "Poziom głośności"
 msgid "Volume level."
 msgstr "Poziom głośności."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:57
-msgid "SoundRecorder"
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:130
+#: ../src/record.js:94
+msgid "Sound Recorder"
 msgstr "Nagrywanie dźwięku"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
@@ -84,112 +85,137 @@ msgstr "Nagrywanie dźwięku przez mikrofon i jego odtwarzanie"
 msgid "Audio;Application;Record;"
 msgstr "Dźwięk;Audio;Nagrywanie;Nagraj;Record;"
 
-#: ../src/info.js:47 ../src/mainWindow.js:523
+#: ../src/info.js:46 ../src/mainWindow.js:501
 msgid "Info"
 msgstr "Informacje"
 
-#: ../src/info.js:59
+#: ../src/info.js:58
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: ../src/info.js:73 ../src/preferences.js:47
+#: ../src/info.js:72 ../src/preferences.js:49
 msgid "Done"
 msgstr "Gotowe"
 
-#: ../src/info.js:99
+#: ../src/info.js:98
 msgctxt "File Name"
 msgid "Name"
 msgstr "Nazwa"
 
-#: ../src/info.js:106
+#: ../src/info.js:105
 msgid "Source"
 msgstr "Źródło"
 
-#: ../src/info.js:115
+#: ../src/info.js:114
 msgid "Date Modified"
 msgstr "Data modyfikacji"
 
-#: ../src/info.js:121
+#: ../src/info.js:120
 msgid "Date Created"
 msgstr "Data utworzenia"
 
-#: ../src/info.js:132
+#: ../src/info.js:131
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Typ"
 
-#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
+#: ../src/listview.js:129 ../src/listview.js:134 ../src/listview.js:233
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d-%m-%Y, %H∶%M∶%S"
 
-#: ../src/main.js:93
+#: ../src/main.js:57
+msgid "SoundRecorder"
+msgstr "Nagrywanie dźwięku"
+
+#: ../src/main.js:64 ../src/preferences.js:40
+msgid "Preferences"
+msgstr "Preferencje"
+
+#: ../src/main.js:67
+msgid "About"
+msgstr "O programie"
+
+#: ../src/main.js:68
+msgid "Quit"
+msgstr "Zakończ"
+
+#: ../src/main.js:97
 msgid "Sound Recorder started"
 msgstr "Uruchomiono program do nagrywania dźwięku"
 
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/main.js:102
+msgid "Recordings"
+msgstr "Nagrania"
+
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/main.js:118
+#: ../src/main.js:129
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013-2014\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013-2014"
 
-#: ../src/main.js:119 ../src/record.js:94
-msgid "Sound Recorder"
-msgstr "Nagrywanie dźwięku"
+#: ../src/mainWindow.js:106 ../src/mainWindow.js:757
+msgid "Record"
+msgstr "Nagraj"
 
-#: ../src/mainWindow.js:172
+#: ../src/mainWindow.js:146
 msgid "Add Recordings"
 msgstr "Dodaj nagrania"
 
-#: ../src/mainWindow.js:175
+#: ../src/mainWindow.js:149
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Aby nagrywać dźwięk, należy użyć przycisku <b>Nagraj</b>"
 
-#: ../src/mainWindow.js:298
+#: ../src/mainWindow.js:270
 msgid "Recording…"
 msgstr "Nagrywanie…"
 
-#: ../src/mainWindow.js:548
+#: ../src/mainWindow.js:284
+msgid "Finish"
+msgstr "Zakończ"
+
+#: ../src/mainWindow.js:526
 msgid "Delete"
 msgstr "Usuń"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:791
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:791
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:791
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:791
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:791
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:834
+#: ../src/mainWindow.js:814
 msgid "Load More"
 msgstr "Wczytaj więcej"
 
-#: ../src/play.js:85
+#: ../src/play.js:82
 msgid "Unable to set the playbin to the playing state."
 msgstr "Nie można ustawić mechanizmu playbin na stan odtwarzania."
 
-#: ../src/preferences.js:68
+#: ../src/preferences.js:70
 msgid "Preferred format"
 msgstr "Preferowany format"
 
-#: ../src/preferences.js:76
+#: ../src/preferences.js:78
 msgid "Volume"
 msgstr "Głośność"
 
-#: ../src/preferences.js:91
+#: ../src/preferences.js:93
 msgid "Microphone"
 msgstr "Mikrofon"
 
@@ -217,13 +243,8 @@ msgstr "Nie ustawiono żadnego profilu multimediów."
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Nie można ustawić potoku na stan nagrywania."
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/record.js:271
-msgid "Recordings"
-msgstr "Nagrania"
-
 #. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
 #. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
-#: ../src/record.js:288
+#: ../src/record.js:273
 msgid "Audio from %Y-%m-%d %H:%M:%S"
 msgstr "Dźwięk z %d-%m-%Y, %H∶%M∶%S"
