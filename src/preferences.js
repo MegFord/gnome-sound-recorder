@@ -37,7 +37,8 @@ const Preferences = new Lang.Class({
     Name: 'Preferences',
     
      _init: function() {    
-        this.widget = new Gtk.Dialog ({ resizable: false,
+        this.widget = new Gtk.Dialog ({ title: _("Preferences"),
+                                        resizable: false,
                                         modal: true,
                                         destroy_with_parent: true,
                                         width_request: 350,
