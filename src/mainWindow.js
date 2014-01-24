@@ -286,7 +286,9 @@ const MainView = new Lang.Class({
                                           margin_top: 6,
                                           margin_left: 6,
                                           margin_right: 6,
+                                          valign: Gtk.Align.CENTER,
                                           hexpand: true });
+        stopRecord.get_style_context().add_class('text-button');
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
         this.toolbarStart.pack_start(stopRecord, true, true, 0);
         this.recordGrid.attach(this.toolbarStart, 5, 1, 1, 2);
@@ -751,7 +753,9 @@ const RecordButton = new Lang.Class({
         this.parent();
         this.image = Gtk.Image.new_from_icon_name('media-record-symbolic', Gtk.IconSize.BUTTON);
         this.set_always_show_image(true);
+        this.set_valign(Gtk.Align.CENTER);
         this.set_label(_("Record"));
+        this.get_style_context().add_class('text-button');
         this.connect("clicked", Lang.bind(this, this._onRecord));
     },
     
