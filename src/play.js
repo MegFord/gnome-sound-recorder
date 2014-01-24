@@ -162,8 +162,7 @@ const _TENTH_SEC = 100000000;
             if (this.playState == PipelineStates.PAUSED) {
                 this.clock = this.play.get_clock();
                 this.startPlaying();
-            }
-                
+            }              
             break;    
         }
     }, 
