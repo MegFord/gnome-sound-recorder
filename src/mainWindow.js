@@ -182,7 +182,7 @@ const MainView = new Lang.Class({
                         child.sensitive = false;
                     }  
                            
-                    if (child.name == "PlayToolBar" ) {
+                    else {
                         child.show();
                         child.sensitive = true;
                     }
