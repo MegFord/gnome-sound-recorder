@@ -2,15 +2,16 @@
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # tuhaihe <1132321739qq@gmail.com>, 2013.
+# YunQiang Su <wzssyqa@gmail.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-22 12:36+0000\n"
-"PO-Revision-Date: 2013-10-22 21:49+0800\n"
-"Last-Translator: tuhaihe <1132321739qq@gmail.com>\n"
+"POT-Creation-Date: 2014-01-24 03:17+0000\n"
+"PO-Revision-Date: 2014-01-25 11:14+0800\n"
+"Last-Translator: YunQiang Su <wzssyqa@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -66,8 +67,9 @@ msgstr "音量级别"
 msgid "Volume level."
 msgstr "音量级别。"
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:57
-msgid "SoundRecorder"
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:130
+#: ../src/record.js:94
+msgid "Sound Recorder"
 msgstr "录音机"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
@@ -78,86 +80,121 @@ msgstr "通过麦克风录制声音并播放"
 msgid "Audio;Application;Record;"
 msgstr "Audio;Application;Record;音频;应用程序;录音;"
 
-#: ../src/info.js:47 ../src/mainWindow.js:498
+#: ../src/info.js:46 ../src/mainWindow.js:501
 msgid "Info"
 msgstr "信息"
 
-#: ../src/info.js:59
+#: ../src/info.js:58
 msgid "Cancel"
 msgstr "取消"
 
-#: ../src/info.js:73 ../src/preferences.js:47
+#: ../src/info.js:72 ../src/preferences.js:49
 msgid "Done"
 msgstr "完成"
 
-#: ../src/info.js:99
+#: ../src/info.js:98
 msgctxt "File Name"
 msgid "Name"
 msgstr "名称"
 
-#: ../src/info.js:106
+#: ../src/info.js:105
 msgid "Source"
 msgstr "来源"
 
-#: ../src/info.js:115
+#: ../src/info.js:114
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: ../src/info.js:121
+#: ../src/info.js:120
 msgid "Date Created"
 msgstr "创建日期"
 
-#: ../src/info.js:132
+#: ../src/info.js:131
 msgctxt "Media Type"
 msgid "Type"
 msgstr "类型"
 
-#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
-#: ../src/record.js:286
+#: ../src/listview.js:129 ../src/listview.js:134 ../src/listview.js:233
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/main.js:93
+#: ../src/main.js:57
+msgid "SoundRecorder"
+msgstr "录音机"
+
+#: ../src/main.js:64 ../src/preferences.js:40
+msgid "Preferences"
+msgstr "首选项"
+
+#: ../src/main.js:67
+msgid "About"
+msgstr "关于"
+
+#: ../src/main.js:68
+msgid "Quit"
+msgstr "退出"
+
+#: ../src/main.js:97
 msgid "Sound Recorder started"
 msgstr "录音机已经开启"
 
-#: ../src/main.js:117
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/main.js:102
+msgid "Recordings"
+msgstr "录音"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/main.js:129
 msgid "translator-credits"
-msgstr "tuhaihe <1132321739qq@gmail.com>, 2013."
+msgstr "tuhaihe <1132321739qq@gmail.com>, 2013.\n"
+"YunQiang Su <wzssyqa@gmail.com>, 2014."
 
-#: ../src/main.js:118 ../src/record.js:94
-msgid "Sound Recorder"
-msgstr "录音机"
+#: ../src/mainWindow.js:106 ../src/mainWindow.js:757
+#| msgid "Recordings"
+msgid "Record"
+msgstr "录音"
 
-#: ../src/mainWindow.js:278
+#: ../src/mainWindow.js:146
+msgid "Add Recordings"
+msgstr "添加录音"
+
+#: ../src/mainWindow.js:149
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "使用 <b>录音</b> 键创建录音"
+
+#: ../src/mainWindow.js:270
 msgid "Recording…"
 msgstr "正在录音..."
 
-#: ../src/mainWindow.js:523
+#: ../src/mainWindow.js:284
+msgid "Finish"
+msgstr "完成"
+
+#: ../src/mainWindow.js:526
 msgid "Delete"
 msgstr "删除"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:791
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:791
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:791
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:791
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:791
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:798
+#: ../src/mainWindow.js:814
 msgid "Load More"
 msgstr "加载更多"
 
@@ -165,15 +202,15 @@ msgstr "加载更多"
 msgid "Unable to set the playbin to the playing state."
 msgstr "无法将 playbin 设为播放状态。"
 
-#: ../src/preferences.js:68
+#: ../src/preferences.js:70
 msgid "Preferred format"
 msgstr "首选格式"
 
-#: ../src/preferences.js:76
+#: ../src/preferences.js:78
 msgid "Volume"
 msgstr "音量"
 
-#: ../src/preferences.js:91
+#: ../src/preferences.js:93
 msgid "Microphone"
 msgstr "麦克风"
 
@@ -201,14 +238,14 @@ msgstr "未设置媒体配置文件。"
 msgid "Unable to set the pipeline to the recording state."
 msgstr "无法将管道线设为录音状态。"
 
-#: ../src/record.js:198 ../src/record.js:239
-msgid "Error: "
-msgstr "错误："
+#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
+#: ../src/record.js:273
+msgid "Audio from %Y-%m-%d %H:%M:%S"
+msgstr "从 %Y-%m-%d %H:%M:%S 开始的录音"
 
-#: ../src/record.js:270
-msgid "Recordings"
-msgstr "录音"
+#~ msgid "Error: "
+#~ msgstr "错误："
 
-#: ../src/record.js:284
-msgid "Recording "
-msgstr "正在录制"
+#~ msgid "Recording "
+#~ msgstr "正在录制"
