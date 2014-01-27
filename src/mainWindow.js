@@ -163,7 +163,6 @@ const MainView = new Lang.Class({
         groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                    hexpand: true,
                                    vexpand: true,
-                                   row_spacing: 12,
                                    column_homogeneous: true });
         this.add_titled(groupGrid, name, "View");
     },
@@ -171,6 +170,7 @@ const MainView = new Lang.Class({
     onPlayStopClicked: function() {
         this.activeState = play.getPipeStates();
         let listRow = this.listBox.get_selected_row();
+        
         if (this.activeState == PipelineStates.PLAYING) {
             play.stopPlaying();
             let rowWidget = listRow.get_child(this.widget);
@@ -180,9 +180,7 @@ const MainView = new Lang.Class({
                     if (child.name == "PauseToolbar") {
                         child.hide();
                         child.sensitive = false;
-                    }  
-                           
-                    else {
+                    } else {
                         child.show();
                         child.sensitive = true;
                     }
@@ -296,9 +294,6 @@ const MainView = new Lang.Class({
      
     scrolledWinAdd: function() {    
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
-                                                     border_width: 12,
-                                                     margin_bottom: 3,
-                                                     margin_top: 5,
                                                      hexpand: true,
                                                      vexpand: true });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
@@ -600,7 +595,9 @@ const MainView = new Lang.Class({
     
     rowGridCallback: function(selectedRow) {
         this.destroyLoadMoreButton();
+        
         if (selectedRow) {
+        
             if (previousSelRow != null) {
                 this.hasPreviousSelRow();
             }  
@@ -677,6 +674,7 @@ const MainView = new Lang.Class({
     
     onPause: function(listRow) {
         this.activeState = play.getPipeStates();
+        
         if (this.activeState == PipelineStates.PLAYING) {
             play.pausePlaying();
             let rowWidget = listRow.get_child(this.widget);
@@ -736,7 +734,7 @@ const MainView = new Lang.Class({
                         child.sensitive = true;
                     }
                 }));
-             listRow.set_property("width-request", width);
+            listRow.set_property("width-request", width);
             
             if (this.activeState != PipelineStates.PAUSED) {
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
@@ -775,6 +773,7 @@ const RecordButton = new Lang.Class({
         
         if (activeProfile == null)
             activeProfile = 0; 
+            
         audioProfile.profile(activeProfile);
         view._record.startRecording(activeProfile);
         wave = new Waveform.WaveForm(view.recordGrid);
