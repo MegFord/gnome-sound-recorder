@@ -1,9 +1,14 @@
 .view .button {
-  background-color: transparent;
+  background-color: #86A0F1;
   background-image: none;
   border: none; 
   border-radius: 0px; 
   margin: 0; 
+}
+
+.view .button:hover {
+    background-color: #AABCF5;
+    transition: 200ms linear
 }
 
 .view .toolbar {

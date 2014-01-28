@@ -95,7 +95,7 @@ const MainWindow = new Lang.Class({
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        hexpand: true,
                                        vexpand: true, 
-                                       default_width: 700,
+                                       default_width: 675,
                                        default_height: 480 });
         this.parent(params);
 
@@ -182,7 +182,7 @@ const MainView = new Lang.Class({
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
                 
-                    if (child.name == "PauseToolbar") {
+                    if (child.name == "PauseButton") {
                         child.hide();
                         child.sensitive = false;
                     } else {
@@ -346,27 +346,14 @@ const MainView = new Lang.Class({
             for (let i = this._startIdx; i <= this._endIdx; i++) {
                 this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                               height_request: 45,
-                                              width_request: 900,
+                                              width_request: 675,
                                               hexpand: true,
                                               vexpand: true,
+                                              column_homogeneous: true,
                                               name: i.toString() });
                 this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
                 this.listBox.add(this.rowGrid);
-                this.rowGrid.show();
-                
-                this.widget = new Gtk.Toolbar({ show_arrow: false,
-                                                halign: Gtk.Align.END,
-                                                valign: Gtk.Align.FILL,
-                                                icon_size: Gtk.IconSize.BUTTON,
-                                                opacity: 1,
-                                                name: "PlayToolBar" });
-                this.rowGrid.attach(this.widget, 1, 0, 1, 2);
-                           
-                this._box = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                          name: "Playbox" });
-                this._group = new Gtk.ToolItem({ child: this._box, name: "PlayGroup"});
-                this.widget.insert(this._group, -1);
-                
+                this.rowGrid.show();                
                 let rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
 
                 // play button
@@ -375,10 +362,11 @@ const MainView = new Lang.Class({
                                                         'media-playback-start-symbolic',
                                                   Gtk.IconSize.BUTTON);
                 this._playListButton = new Gtk.Button({ hexpand: false,
+                                                        vexpand: true,
                                                         name: "PlayButton" });
                 this._playListButton.set_image(this.playImage);
-                this._box.pack_start(this._playListButton, false, true, 0);
-                this._playListButton.show();
+                this.rowGrid.attach(this._playListButton, 0, 0, 1, 2);
+                this._playListButton.hide();
                 this._playListButton.connect('clicked', Lang.bind(this,
                     function(){
                         let row = this.listBox.get_selected_row();
@@ -388,28 +376,16 @@ const MainView = new Lang.Class({
                         let file = this._files[idx];
                         this.onPlayPauseToggled(row, file);
                     }));
-                    
-                this.pauseWidget = new Gtk.Toolbar({ show_arrow: false,
-                                                     halign: Gtk.Align.END,
-                                                     valign: Gtk.Align.FILL,
-                                                     icon_size: Gtk.IconSize.BUTTON,
-                                                     opacity: 1,
-                                                     name: "PauseToolBar" });
-                this.rowGrid.attach(this.pauseWidget, 1, 0, 1, 2);
-                           
-                this._pauseBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                               name: "Pausebox" });
-                this._pauseGroup = new Gtk.ToolItem({ child: this._pauseBox, name: "PauseGroup"});
-                this.pauseWidget.insert(this._pauseGroup, -1);
                 
                 // pause button
                 this.pauseImage = Gtk.Image.new();
                 this.pauseImage.set_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
                 this._pauseListButton = new Gtk.Button({ hexpand: false,
+                                                         vexpand: true,
                                                          name: "PauseButton" });
                 this._pauseListButton.set_image(this.pauseImage);
-                this._pauseBox.pack_start(this._pauseListButton, false, true, 0);
-                this._pauseListButton.show();
+                this.rowGrid.attach(this._pauseListButton, 0, 0, 1, 2);
+                this._pauseListButton.hide();
                 this._pauseListButton.connect('clicked', Lang.bind(this,
                     function(){
                         let row = this.listBox.get_selected_row();
@@ -429,13 +405,13 @@ const MainView = new Lang.Class({
                 let markup = ('<b>'+ this._files[i].fileName + '</b>');
                 this._fileName.label = markup;
                 this._fileName.set_no_show_all(true);
-                this.rowGrid.attach(this._fileName, 2, 0, 1, 3);
+                this.rowGrid.attach(this._fileName, 1, 0, 10, 3);
                 this._fileName.show();
                 
                 this._playLabelBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                                    name: "PlayLabelBox",
-                                                   height_request: 36 });
-                this.rowGrid.attach(this._playLabelBox, 2, 1, 1, 1);
+                                                   height_request: 45 });
+                this.rowGrid.attach(this._playLabelBox, 1, 1, 10, 1);
                 this._playLabelBox.show();
                         
                 this.playDurationLabel = new Gtk.Label({ margin_left: rtl ? 0 : 15,
@@ -473,24 +449,12 @@ const MainView = new Lang.Class({
                                                    vexpand: true,
                                                    name: "WaveFormGrid" });
                 this.waveFormGrid.set_no_show_all(true);
-                this.rowGrid.attach(this.waveFormGrid, 9, 1, 1, 2);
-
+                this.rowGrid.attach(this.waveFormGrid, 11, 1, 18, 4);
                 this.waveFormGrid.show();
-
-                this.widgetInfo = new Gtk.Toolbar({ show_arrow: false,
-                                                    halign: Gtk.Align.END,
-                                                    valign: Gtk.Align.FILL,
-                                                    icon_size: Gtk.IconSize.BUTTON,
-                                                    opacity: 1,
-                                                    name: "InfoToolbar" });
-                this.rowGrid.attach(this.widgetInfo, 10, 0, 1, 2);
-                
-                this._boxInfo = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
-                this._groupInfo = new Gtk.ToolItem({ child: this._boxInfo });
-                this.widgetInfo.insert(this._groupInfo, -1);
                 
                 // info button
                 this._info = new Gtk.Button({ hexpand: false,
+                                              vexpand: true,
                                               name: "InfoButton" });
                 this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
                 this._info.connect("clicked", Lang.bind(this,
@@ -502,21 +466,8 @@ const MainView = new Lang.Class({
                         this._onInfoButton(file);
                     }));
                 this._info.set_tooltip_text(_("Info"));
-                this._boxInfo.add(this._info);
+                this.rowGrid.attach(this._info, 29, 0, 1, 2);
                 this._info.hide();
-                
-                this.widgetDelete = new Gtk.Toolbar({ show_arrow: false,
-                                                      halign: Gtk.Align.END,
-                                                      valign: Gtk.Align.FILL,
-                                                      icon_size: Gtk.IconSize.BUTTON,
-                                                      opacity: 1,
-                                                      name: "DeleteToolbar" });
-                this.widgetDelete.get_style_context().add_class('toolbarEnd');
-                this.rowGrid.attach(this.widgetDelete, 11, 0, 1, 2);
-                
-                this._boxDelete = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
-                this._groupDelete = new Gtk.ToolItem({ child: this._boxDelete });
-                this.widgetDelete.insert(this._groupDelete, -1);
 
                 // delete button
                 this._delete = new Gtk.Button({ hexpand: false,
@@ -527,8 +478,8 @@ const MainView = new Lang.Class({
                         this._deleteFile(this.listBox.get_selected_row());
                     }));
                 this._delete.set_tooltip_text(_("Delete"));
-                this._boxDelete.add(this._delete);
-                this._boxDelete.show();
+                this.rowGrid.attach(this._delete, 30, 0, 1, 2);
+                this._delete.hide();
                 
                 this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
                 this._separator.set_sensitive(false);
@@ -689,12 +640,12 @@ const MainView = new Lang.Class({
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
                 
-                    if (child.name == "PauseToolbar") {
+                    if (child.name == "PauseButton") {
                         child.hide();
                         child.sensitive = false;
                     }  
                            
-                    if (child.name == "PlayToolBar" ) {
+                    if (child.name == "PlayButton" ) {
                         child.show();
                         child.sensitive = true;
                     }
@@ -714,12 +665,12 @@ const MainView = new Lang.Class({
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
                            
-                    if (child.name == "InfoToolbar" || child.name == "DeleteToolbar" || child.name == "PlayToolBar" ) {
+                    if (child.name == "InfoButton" || child.name == "DeleteButton" || child.name == "PlayButton" ) {
                         child.hide();
                         child.sensitive = false;
                     }
                     
-                    if (child.name == "PauseToolbar") {
+                    if (child.name == "PauseButton") {
                         child.show();
                         child.sensitive = true;
                     }    
