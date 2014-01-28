@@ -6,9 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-30 19:44+0800\n"
-"PO-Revision-Date: 2013-09-30 19:44+0800\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-01-28 05:49+0000\n"
+"PO-Revision-Date: 2014-01-28 20:26+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "Language: zh_TW\n"
@@ -61,8 +62,9 @@ msgstr "音量等級"
 msgid "Volume level."
 msgstr "音量等級。"
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:56
-msgid "SoundRecorder"
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:130
+#: ../src/record.js:94
+msgid "Sound Recorder"
 msgstr "錄音機"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
@@ -73,123 +75,170 @@ msgstr "透過麥克風錄音並回播"
 msgid "Audio;Application;Record;"
 msgstr "Audio;Application;Record;音訊;錄音;錄製;應用程式;"
 
-#: ../src/info.js:47 ../src/mainWindow.js:498
+#: ../src/info.js:46 ../src/mainWindow.js:504
 msgid "Info"
 msgstr "資訊"
 
-#: ../src/info.js:59
+#: ../src/info.js:58
 msgid "Cancel"
 msgstr "取消"
 
-#: ../src/info.js:73 ../src/preferences.js:46
+#: ../src/info.js:72 ../src/preferences.js:49
 msgid "Done"
 msgstr "完成"
 
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
-#: ../src/info.js:99
+#: ../src/info.js:98
 msgctxt "File Name"
 msgid "Name"
 msgstr "名稱"
 
-#. Source item
-#: ../src/info.js:106
+#: ../src/info.js:105
 msgid "Source"
 msgstr "來源"
 
-#. Date Modified item
-#: ../src/info.js:115
+#: ../src/info.js:114
 msgid "Date Modified"
 msgstr "修改日期"
 
-#. Date Created item
-#: ../src/info.js:121
+#: ../src/info.js:120
 msgid "Date Created"
 msgstr "建立日期"
 
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
-#: ../src/info.js:132
+#: ../src/info.js:131
 msgctxt "Media Type"
 msgid "Type"
 msgstr "類型"
 
-#: ../src/listview.js:130 ../src/listview.js:135 ../src/listview.js:224
-#: ../src/record.js:286
+#: ../src/listview.js:129 ../src/listview.js:134 ../src/listview.js:233
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/main.js:84
+#: ../src/main.js:57
+msgid "SoundRecorder"
+msgstr "錄音機"
+
+#: ../src/main.js:64 ../src/preferences.js:40
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: ../src/main.js:67
+msgid "About"
+msgstr "關於"
+
+#: ../src/main.js:68
+msgid "Quit"
+msgstr "退出"
+
+#: ../src/main.js:97
 msgid "Sound Recorder started"
 msgstr "錄音機已啟動"
 
-#: ../src/mainWindow.js:278
-msgid "Recording…"
-msgstr "錄製中…"
-
-#: ../src/mainWindow.js:523
-msgid "Delete"
-msgstr "刪除"
-
-#: ../src/mainWindow.js:774
-msgid "Ogg Vorbis"
-msgstr "Ogg Vorbis"
-
-#: ../src/mainWindow.js:774
-msgid "Opus"
-msgstr "Opus"
-
-#: ../src/mainWindow.js:774
-msgid "FLAC"
-msgstr "FLAC"
-
-#: ../src/mainWindow.js:774
-msgid "MP3"
-msgstr "MP3"
-
-#: ../src/mainWindow.js:774
-msgid "MOV"
-msgstr "MOV"
-
-#: ../src/mainWindow.js:797
-msgid "Load More"
-msgstr "載入更多"
-
-#: ../src/preferences.js:67
-msgid "Preferred format"
-msgstr "偏好格式"
-
-#: ../src/preferences.js:75
-msgid "Volume"
-msgstr "音量"
-
-#: ../src/preferences.js:90
-msgid "Microphone"
-msgstr "麥克風"
-
-#: ../src/record.js:93
-msgid "Sound Recorder"
-msgstr "錄音機"
-
-#: ../src/record.js:149
-msgid "Unable to set the pipeline to the recording state."
-msgstr "無法將導管設定為錄製狀態。"
-
-#: ../src/record.js:198 ../src/record.js:240
-msgid "Error: "
-msgstr "錯誤："
-
-#: ../src/record.js:270
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/main.js:102
 msgid "Recordings"
 msgstr "錄製品"
 
-#: ../src/record.js:284
-msgid "Recording "
-msgstr "錄製品"
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/main.js:129
+msgid "translator-credits"
+msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2014."
 
-#, fuzzy
-#~| msgid "Unable to set the pipeline to the recording state."
-#~ msgid "Unable to set the playbin to the playing state."
-#~ msgstr "無法將導管設定為錄製狀態。"
+#: ../src/mainWindow.js:106 ../src/mainWindow.js:763
+msgid "Record"
+msgstr "錄製"
+
+#: ../src/mainWindow.js:147
+msgid "Add Recordings"
+msgstr "加入錄製品"
+
+#: ../src/mainWindow.js:152
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "使用 <b>錄製</b> 按鈕錄音"
+
+#: ../src/mainWindow.js:273
+msgid "Recording…"
+msgstr "錄製中…"
+
+#: ../src/mainWindow.js:287
+msgid "Finish"
+msgstr "完成"
+
+#: ../src/mainWindow.js:529
+msgid "Delete"
+msgstr "刪除"
+
+#: ../src/mainWindow.js:798
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:798
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:798
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:798
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:798
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:821
+msgid "Load More"
+msgstr "載入更多"
+
+#: ../src/play.js:82
+msgid "Unable to set the playbin to the playing state."
+msgstr "無法將 playbin 設定為播放狀態。"
+
+#: ../src/preferences.js:70
+msgid "Preferred format"
+msgstr "偏好格式"
+
+#: ../src/preferences.js:78
+msgid "Volume"
+msgstr "音量"
+
+#: ../src/preferences.js:93
+msgid "Microphone"
+msgstr "麥克風"
+
+#: ../src/record.js:58
+msgid "Unable to create Recordings directory."
+msgstr "無法建立錄製品目錄。"
+
+#: ../src/record.js:66
+msgid "Your audio capture settings are invalid."
+msgstr "你的音訊捕捉設定無效。"
+
+#: ../src/record.js:109
+msgid "Not all elements could be created."
+msgstr "並非所有元素都可建立。"
+
+#: ../src/record.js:119
+msgid "Not all of the elements were linked"
+msgstr "並非所有元素都可連結"
+
+#: ../src/record.js:140
+msgid "No Media Profile was set."
+msgstr "並未設定 Media Profile。"
+
+#: ../src/record.js:150
+msgid "Unable to set the pipeline to the recording state."
+msgstr "無法將導管設定為錄製狀態。"
+
+#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
+#: ../src/record.js:273
+msgid "Audio from %Y-%m-%d %H:%M:%S"
+msgstr "音訊取自 %Y-%m-%d %H:%M:%S"
+
+#~ msgid "Error: "
+#~ msgstr "錯誤："
+
+#~ msgid "Recording "
+#~ msgstr "錄製品"
