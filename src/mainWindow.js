@@ -140,17 +140,22 @@ const MainView = new Lang.Class({
                                         valign: Gtk.Align.CENTER });
         this._scrolledWin.add(this.emptyGrid);
 
-        this.emptyGrid.add(new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
-                                           icon_size: Gtk.IconSize.LARGE_TOOLBAR }));
-        this.emptyGrid.add(new Gtk.Label({ name: 'emptyPage-title',
-                                           label: _("Add Recordings"),
-                                           halign: Gtk.Align.CENTER,
-                                           valign: Gtk.Align.CENTER }));
-        this.emptyGrid.add(new Gtk.Label({ label: _("Use the <b>Record</b> button to make sound recordings"),
-                                           use_markup: true,
-                                           max_width_chars: 30,
-                                           halign: Gtk.Align.CENTER,
-                                           valign: Gtk.Align.CENTER }));
+        let emptyPageImage = new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
+                                             icon_size: Gtk.IconSize.LARGE_TOOLBAR });
+        emptyPageImage.get_style_context().add_class('dim-label');
+        this.emptyGrid.add(emptyPageImage);
+        let emptyPageTitle = new Gtk.Label({ label: _("Add Recordings"),
+                                             halign: Gtk.Align.CENTER,
+                                             valign: Gtk.Align.CENTER });
+        emptyPageTitle.get_style_context().add_class('dim-label');
+        this.emptyGrid.add(emptyPageTitle);
+        let emptyPageDirections = new Gtk.Label({ label: _("Use the <b>Record</b> button to make sound recordings"),
+                                                  use_markup: true,
+                                                  max_width_chars: 30,
+                                                  halign: Gtk.Align.CENTER,
+                                                  valign: Gtk.Align.CENTER });
+        emptyPageDirections.get_style_context().add_class('dim-label');
+        this.emptyGrid.add(emptyPageDirections);
         this.emptyGrid.show_all();
     },        
     
@@ -320,6 +325,7 @@ const MainView = new Lang.Class({
         this._endIdx = offsetController.getEndIdx();
         
         if (this._endIdx == -1) {
+            this._scrolledWin.get_style_context().add_class('emptyGrid');
             this._addEmptyPage();
         } else {       
             this.listBox = Gtk.ListBox.new({ hexpand: true,
