@@ -152,7 +152,7 @@ const WaveForm = new Lang.Class({
     },
 
     startGeneration: function() {
-        this.pipeline.set_state(Gst.State.PLAYING)
+        this.pipeline.set_state(Gst.State.PLAYING);
     },
 
     stopGeneration: function() {
@@ -253,6 +253,10 @@ const WaveForm = new Lang.Class({
     
     endDrawing: function() {
         let width = this._grid.get_allocated_width();
+        
+        if(this.pipeline)
+            this.stopGeneration();
+            
         this.count = 0;
         peaks.length = 0;
         this.drawing.destroy();
