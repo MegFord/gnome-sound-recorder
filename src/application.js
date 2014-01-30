@@ -73,10 +73,8 @@ const Application = new Lang.Class({
     },
     
     onWindowDestroy: function() {
-        this.quit();
-        //if (MainWindow.wave != null)
-            //MainWindow.wave.pipeline.set_state(Gst.State.NULL); 
-            log("killed");
+        if (MainWindow.wave != null)
+            MainWindow.wave.pipeline.set_state(Gst.State.NULL); 
     },
     
     _showPreferences: function() {
