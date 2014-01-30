@@ -9,6 +9,7 @@ nodist_bin_SCRIPTS = gnome-sound-recorder
 jsdir = $(pkgdatadir)
 dist_js_DATA = \
     util.js	\
+    application.js \
     audioProfile.js \
     fileUtil.js \
     info.js \

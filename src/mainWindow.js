@@ -25,8 +25,6 @@ const GdkPixbuf = imports.gi.GdkPixbuf;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
 
-const Signals = imports.signals;
-
 const AudioProfile = imports.audioProfile;
 const FileUtil = imports.fileUtil;
 const Info = imports.info;
