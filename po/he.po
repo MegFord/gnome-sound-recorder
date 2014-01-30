@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder 3.9.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-24 05:27+0200\n"
+"POT-Creation-Date: 2014-01-31 01:57+0200\n"
 "PO-Revision-Date: 2014-01-24 05:27+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
@@ -67,8 +67,8 @@ msgstr "Volume level"
 msgid "Volume level."
 msgstr "Volume level."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:130
-#: ../src/record.js:94
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:97
+#: ../src/record.js:92
 msgid "Sound Recorder"
 msgstr "רשמקול"
 
@@ -80,165 +80,165 @@ msgstr "להקליט קול באמצעות המיקרופון ולנגן שוב"
 msgid "Audio;Application;Record;"
 msgstr "שמע;אודיו;יישום;הקלטה;"
 
-#: ../src/info.js:46 ../src/mainWindow.js:501
-msgid "Info"
-msgstr "מידע"
-
-#: ../src/info.js:58
-msgid "Cancel"
-msgstr "ביטול"
-
-#: ../src/info.js:72 ../src/preferences.js:49
-msgid "Done"
-msgstr "בוצע"
-
-#: ../src/info.js:98
-msgctxt "File Name"
-msgid "Name"
-msgstr "שם"
-
-#: ../src/info.js:105
-msgid "Source"
-msgstr "מקור"
-
-#: ../src/info.js:114
-msgid "Date Modified"
-msgstr "תאריך שינוי"
-
-#: ../src/info.js:120
-msgid "Date Created"
-msgstr "תאריך יצירה"
-
-#: ../src/info.js:131
-msgctxt "Media Type"
-msgid "Type"
-msgstr "סוג"
-
-#: ../src/listview.js:129 ../src/listview.js:134 ../src/listview.js:233
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%Y-%m-%d %H:%M:%S"
-
-#: ../src/main.js:57
+#: ../src/application.js:17
 msgid "SoundRecorder"
 msgstr "רשמקול"
 
-#: ../src/main.js:64 ../src/preferences.js:40
+#: ../src/application.js:24 ../src/preferences.js:38
 msgid "Preferences"
 msgstr "העדפות"
 
-#: ../src/main.js:67
+#: ../src/application.js:27
 msgid "About"
 msgstr "על אודות"
 
-#: ../src/main.js:68
+#: ../src/application.js:28
 msgid "Quit"
 msgstr "יציאה"
 
-#: ../src/main.js:97
+#: ../src/application.js:57
 msgid "Sound Recorder started"
 msgstr "הקלטת שמע התחילה"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/main.js:102
+#: ../src/application.js:63
 msgid "Recordings"
 msgstr "הקלטות"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/main.js:129
+#: ../src/application.js:96
 msgid "translator-credits"
 msgstr "יוסף אור בוצ׳קו <yoseforb@gnome.org>"
 
-#: ../src/mainWindow.js:106 ../src/mainWindow.js:757
+#: ../src/info.js:44 ../src/mainWindow.js:464
+msgid "Info"
+msgstr "מידע"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "ביטול"
+
+#: ../src/info.js:70 ../src/preferences.js:47
+msgid "Done"
+msgstr "בוצע"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "שם"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "מקור"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "תאריך שינוי"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "תאריך יצירה"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "סוג"
+
+#: ../src/listview.js:127 ../src/listview.js:132 ../src/listview.js:231
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:102 ../src/mainWindow.js:710
 msgid "Record"
 msgstr "הקלטה"
 
-#: ../src/mainWindow.js:146
+#: ../src/mainWindow.js:143
 msgid "Add Recordings"
 msgstr "הוספת הקלטות"
 
-#: ../src/mainWindow.js:149
+#: ../src/mainWindow.js:148
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "יש להשתמש בכפתור <b>הקלטה</b> כדי להקליט צלילים"
 
-#: ../src/mainWindow.js:270
+#: ../src/mainWindow.js:269
 msgid "Recording…"
 msgstr "מקליט…"
 
-#: ../src/mainWindow.js:284
+#: ../src/mainWindow.js:283
 msgid "Finish"
 msgstr "סיום"
 
-#: ../src/mainWindow.js:526
+#: ../src/mainWindow.js:476
 msgid "Delete"
 msgstr "מחיקה"
 
-#: ../src/mainWindow.js:791
+#: ../src/mainWindow.js:745
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:791
+#: ../src/mainWindow.js:745
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:791
+#: ../src/mainWindow.js:745
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:791
+#: ../src/mainWindow.js:745
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:791
+#: ../src/mainWindow.js:745
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:768
 msgid "Load More"
 msgstr "טעינת עוד"
 
-#: ../src/play.js:82
+#: ../src/play.js:80
 msgid "Unable to set the playbin to the playing state."
 msgstr "לא ניתן להגדיר את playbin למצב פעיל."
 
-#: ../src/preferences.js:70
+#: ../src/preferences.js:68
 msgid "Preferred format"
 msgstr "תבנית מועדפת"
 
-#: ../src/preferences.js:78
+#: ../src/preferences.js:76
 msgid "Volume"
 msgstr "עצמת שמע"
 
-#: ../src/preferences.js:93
+#: ../src/preferences.js:91
 msgid "Microphone"
 msgstr "מיקרופון"
 
-#: ../src/record.js:58
+#: ../src/record.js:56
 msgid "Unable to create Recordings directory."
 msgstr "לא ניתן ליצור תיקיית הקלטות."
 
-#: ../src/record.js:66
+#: ../src/record.js:64
 msgid "Your audio capture settings are invalid."
 msgstr "הגדרות לכידת השמע שלך אינן תקפות."
 
-#: ../src/record.js:109
+#: ../src/record.js:107
 msgid "Not all elements could be created."
 msgstr "לא כל הרכיבים ניתנים ליצירה."
 
-#: ../src/record.js:119
+#: ../src/record.js:117
 msgid "Not all of the elements were linked"
 msgstr "לא כל הרכיבים קושרו"
 
-#: ../src/record.js:140
+#: ../src/record.js:138
 msgid "No Media Profile was set."
 msgstr "לא הוגדר פרופיל מדיה."
 
-#: ../src/record.js:150
+#: ../src/record.js:148
 msgid "Unable to set the pipeline to the recording state."
 msgstr "לא ניתן להגדיר את הצינור למצב הקלטה."
 
 #. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
 #. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
-#: ../src/record.js:273
+#: ../src/record.js:271
 msgid "Audio from %Y-%m-%d %H:%M:%S"
 msgstr "שמע מ־%Y-%m-%d %H:%M:%S"
 
