@@ -1,3 +1,22 @@
+/*
+* Copyright 2013 Meg Ford
+* This library is free software; you can redistribute it and/or
+* modify it under the terms of the GNU Library General Public
+* License as published by the Free Software Foundation; either
+* version 2 of the License, or (at your option) any later version.
+*
+* This library is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* Library General Public License for more details.
+*
+* You should have received a copy of the GNU Library General Public
+* License along with this library; if not, see <http://www.gnu.org/licenses/>.
+*
+* Author: Meg Ford <megford@gnome.org>
+*
+*/
+
 const Util = imports.util;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
@@ -69,12 +88,11 @@ const Application = new Lang.Class({
 
     vfunc_activate: function() {
         (this.window = new MainWindow.MainWindow({ application: this })).show();
-        this.window.connect('destroy', Lang.bind(this, this.onWindowDestroy));
     },
     
     onWindowDestroy: function() {
         if (MainWindow.wave != null)
-            MainWindow.wave.pipeline.set_state(Gst.State.NULL); 
+            MainWindow.wave.pipeline.set_state(Gst.State.NULL);          
     },
     
     _showPreferences: function() {
