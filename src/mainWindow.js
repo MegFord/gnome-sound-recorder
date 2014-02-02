@@ -361,6 +361,7 @@ const MainView = new Lang.Class({
                                                         vexpand: true,
                                                         name: "PlayButton" });
                 this._playListButton.set_image(this.playImage);
+                this._playListButton.set_tooltip_text(_("Play"));
                 this.rowGrid.attach(this._playListButton, 0, 0, 1, 2);
                 this._playListButton.hide();
                 this._playListButton.connect('clicked', Lang.bind(this,
@@ -380,6 +381,7 @@ const MainView = new Lang.Class({
                                                          vexpand: true,
                                                          name: "PauseButton" });
                 this._pauseListButton.set_image(this.pauseImage);
+                this._pauseListButton.set_tooltip_text(_("Pause"));
                 this.rowGrid.attach(this._pauseListButton, 0, 0, 1, 2);
                 this._pauseListButton.hide();
                 this._pauseListButton.connect('clicked', Lang.bind(this,
@@ -462,6 +464,7 @@ const MainView = new Lang.Class({
                         this._onInfoButton(file);
                     }));
                 this._info.set_tooltip_text(_("Info"));
+                this._info.get_style_context().add_class(rtl ? "toolbarEnd" : "toolbarSecond");
                 this.rowGrid.attach(this._info, 29, 0, 1, 2);
                 this._info.hide();
 
@@ -475,6 +478,7 @@ const MainView = new Lang.Class({
                     }));
                 this._delete.set_tooltip_text(_("Delete"));
                 this.rowGrid.attach(this._delete, 30, 0, 1, 2);
+                this._delete.get_style_context().add_class(rtl ? "toolbarSecond" : "toolbarEnd");
                 this._delete.hide();
                 
                 this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
