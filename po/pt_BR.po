@@ -1,16 +1,17 @@
 # Brazilian Portuguese translation for gnome-sound-recorder.
-# Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # Rafael Ferreira <rafael.f.f1@gmail.com>, 2013.
 # Adorilson Bezerra <adorilson@gmail.com>, 2013.
+# Enrico Nicoletto <liverig@gmail.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-12-31 22:18+0000\n"
-"PO-Revision-Date: 2014-01-01 17:18-0300\n"
+"POT-Creation-Date: 2014-02-02 08:20+0000\n"
+"PO-Revision-Date: 2014-02-04 20:10-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.3\n"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -71,9 +72,10 @@ msgstr "Nível de volume"
 msgid "Volume level."
 msgstr "Nível de volume."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:57
-msgid "SoundRecorder"
-msgstr "GravadorDeSom"
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:115
+#: ../src/record.js:92
+msgid "Sound Recorder"
+msgstr "Gravador de som"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -83,99 +85,132 @@ msgstr "Grave som por meio de microfone e reproduza-o"
 msgid "Audio;Application;Record;"
 msgstr "Áudio;Aplicativo;Gravador;Sons;Som;"
 
-#: ../src/info.js:47 ../src/mainWindow.js:523
+#: ../src/application.js:36
+msgid "SoundRecorder"
+msgstr "GravadorDeSom"
+
+#: ../src/application.js:43 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Preferências"
+
+#: ../src/application.js:46
+msgid "About"
+msgstr "Sobre"
+
+#: ../src/application.js:47
+msgid "Quit"
+msgstr "Sair"
+
+#: ../src/application.js:76
+msgid "Sound Recorder started"
+msgstr "O gravador de som iniciou"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:82
+msgid "Recordings"
+msgstr "Gravações"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:114
+msgid "translator-credits"
+msgstr "Rafael Ferreira <rafael.f.f1@gmail.com>, 2013."
+
+#: ../src/info.js:44 ../src/mainWindow.js:466
 msgid "Info"
 msgstr "Info"
 
-#: ../src/info.js:59
+#: ../src/info.js:56
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../src/info.js:73 ../src/preferences.js:47
+#: ../src/info.js:70 ../src/preferences.js:47
 msgid "Done"
 msgstr "Pronto"
 
-#: ../src/info.js:99
+#: ../src/info.js:96
 msgctxt "File Name"
 msgid "Name"
 msgstr "Nome"
 
-#: ../src/info.js:106
+#: ../src/info.js:103
 msgid "Source"
 msgstr "Fonte"
 
-#: ../src/info.js:115
+#: ../src/info.js:112
 msgid "Date Modified"
 msgstr "Última alteração"
 
-#: ../src/info.js:121
+#: ../src/info.js:118
 msgid "Date Created"
 msgstr "Data de criação"
 
-#: ../src/info.js:132
+#: ../src/info.js:129
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
+#: ../src/listview.js:127 ../src/listview.js:132 ../src/listview.js:231
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/main.js:93
-msgid "Sound Recorder started"
-msgstr "O gravador de som iniciou"
-
-#. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/main.js:118
-msgid "translator-credits"
-msgstr "Rafael Ferreira <rafael.f.f1@gmail.com>, 2013."
-
-#: ../src/main.js:119 ../src/record.js:94
-msgid "Sound Recorder"
-msgstr "Gravador de som"
-
-#: ../src/mainWindow.js:172
+#: ../src/mainWindow.js:102 ../src/mainWindow.js:714
 #| msgid "Recordings"
+msgid "Record"
+msgstr "Gravar"
+
+#: ../src/mainWindow.js:143
 msgid "Add Recordings"
 msgstr "Adicionar gravações"
 
-#: ../src/mainWindow.js:175
+#: ../src/mainWindow.js:148
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Use o botão <b>Gravar</b> para efetuar gravações de sons"
 
-#: ../src/mainWindow.js:298
+#: ../src/mainWindow.js:269
 msgid "Recording…"
 msgstr "Gravando…"
 
-#: ../src/mainWindow.js:548
+#: ../src/mainWindow.js:283
+msgid "Finish"
+msgstr "Concluir"
+
+#: ../src/mainWindow.js:364
+msgid "Play"
+msgstr "Reproduzir"
+
+#: ../src/mainWindow.js:384
+msgid "Pause"
+msgstr "Pausar"
+
+#: ../src/mainWindow.js:479
 msgid "Delete"
 msgstr "Excluir"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:749
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:749
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:749
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:749
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:811
+#: ../src/mainWindow.js:749
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:834
+#: ../src/mainWindow.js:772
 msgid "Load More"
 msgstr "Carregar mais"
 
-#: ../src/play.js:85
+#: ../src/play.js:80
 msgid "Unable to set the playbin to the playing state."
 msgstr ""
 "Não foi possível definir a executável de reprodução para o estado de em "
@@ -193,38 +228,33 @@ msgstr "Volume"
 msgid "Microphone"
 msgstr "Microfone"
 
-#: ../src/record.js:58
+#: ../src/record.js:56
 msgid "Unable to create Recordings directory."
 msgstr "Não foi possível criar o diretório de gravações."
 
-#: ../src/record.js:66
+#: ../src/record.js:64
 msgid "Your audio capture settings are invalid."
 msgstr "Suas configurações de captura de áudio são inválidas."
 
-#: ../src/record.js:109
+#: ../src/record.js:107
 msgid "Not all elements could be created."
 msgstr "Nem todos os elementos puderam ser criados."
 
-#: ../src/record.js:119
+#: ../src/record.js:117
 msgid "Not all of the elements were linked"
 msgstr "Nem todos os elementos foram vinculados"
 
-#: ../src/record.js:140
+#: ../src/record.js:138
 msgid "No Media Profile was set."
 msgstr "Nenhum perfil de mídia foi definido."
 
-#: ../src/record.js:150
+#: ../src/record.js:148
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Desabilite para configurar o redirecionamento para estado de gravação."
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/record.js:271
-msgid "Recordings"
-msgstr "Gravações"
-
 #. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
 #. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
-#: ../src/record.js:288
+#: ../src/record.js:271
 msgid "Audio from %Y-%m-%d %H:%M:%S"
 msgstr "Áudio de %d-%m-%Y %H:%M:%S"
 
