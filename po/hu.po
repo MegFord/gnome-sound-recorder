@@ -1,35 +1,23 @@
 # Hungarian translation of gnome-sound-recorder
-# Copyright (C) 2013. Free Software Foundation, Inc.
+# Copyright (C) 2013, 2014. Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-sound-recorder package.
 #
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2013.
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-20 08:29+0000\n"
-"PO-Revision-Date: 2013-09-20 14:19+0200\n"
+"POT-Creation-Date: 2014-02-02 08:20+0000\n"
+"PO-Revision-Date: 2014-02-04 14:25+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
-"Language-Team: Hungarian <gnome-hu-list@gnome.org>\n"
+"Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
-
-#: ../data/gnome-sound-recorder.desktop.in.in.h:1 ../src/record.js:93
-msgid "Sound Recorder"
-msgstr "Hangrögzítő"
-
-#: ../data/gnome-sound-recorder.desktop.in.in.h:2
-msgid "Record sound via the microphone and play it back"
-msgstr "Hangfelvétel a mikrofonból és lejátszás"
-
-#: ../data/gnome-sound-recorder.desktop.in.in.h:3
-msgid "Audio;Application;Record;"
-msgstr "audio;hang;felvétel;rögzítés;mikrofon;"
+"X-Generator: Lokalize 1.4\n"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -56,9 +44,8 @@ msgid ""
 "Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
 "Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
 msgstr ""
-"Előnyben részesített médiatípus a hangkódoláshoz felvételkor. Például "
-"„audio/x-vorbis” Ogg Vorbishoz, vagy „audio/mpeg” MP3-hoz. Ez nem egy "
-"MIME-típus."
+"Előnyben részesített médiatípus a hangkódoláshoz felvételkor. Például „audio/"
+"x-vorbis” Ogg Vorbishoz, vagy „audio/mpeg” MP3-hoz. Ez nem egy MIME-típus."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
@@ -81,119 +68,195 @@ msgstr "Hangerő"
 msgid "Volume level."
 msgstr "Hangerő."
 
-#: ../src/info.js:47 ../src/mainWindow.js:498
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:115
+#: ../src/record.js:92
+msgid "Sound Recorder"
+msgstr "Hangrögzítő"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Hangfelvétel a mikrofonból és lejátszás"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "audio;hang;felvétel;rögzítés;mikrofon;"
+
+#: ../src/application.js:36
+msgid "SoundRecorder"
+msgstr "Hangrögzítő"
+
+#: ../src/application.js:43 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Beállítások"
+
+#: ../src/application.js:46
+msgid "About"
+msgstr "Névjegy"
+
+#: ../src/application.js:47
+msgid "Quit"
+msgstr "Kilépés"
+
+#: ../src/application.js:76
+msgid "Sound Recorder started"
+msgstr "A Hangrögzítő elindult"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:82
+msgid "Recordings"
+msgstr "Felvételek"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:114
+msgid "translator-credits"
+msgstr "Kelemen Gábor <kelemeng at gnome dot hu>"
+
+#: ../src/info.js:44 ../src/mainWindow.js:466
 msgid "Info"
 msgstr "Információ"
 
-#: ../src/info.js:59
+#: ../src/info.js:56
 msgid "Cancel"
 msgstr "Mégse"
 
-#: ../src/info.js:73 ../src/preferences.js:46
+#: ../src/info.js:70 ../src/preferences.js:47
 msgid "Done"
 msgstr "Kész"
 
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
-#: ../src/info.js:99
+#: ../src/info.js:96
 msgctxt "File Name"
 msgid "Name"
 msgstr "Név"
 
-#. Source item
-#: ../src/info.js:106
+#: ../src/info.js:103
 msgid "Source"
 msgstr "Forrás"
 
-#. Date Modified item
-#: ../src/info.js:115
+#: ../src/info.js:112
 msgid "Date Modified"
 msgstr "Módosítás dátuma"
 
-#. Date Created item
-#: ../src/info.js:121
+#: ../src/info.js:118
 msgid "Date Created"
 msgstr "Létrehozás dátuma"
 
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
-#: ../src/info.js:132
+#: ../src/info.js:129
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Típus"
 
-#: ../src/listview.js:130 ../src/listview.js:135 ../src/listview.js:224
-#: ../src/record.js:286
+#: ../src/listview.js:127 ../src/listview.js:132 ../src/listview.js:231
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y. %m. %d. %H.%M.%S"
 
-#: ../src/main.js:55
-msgid "SoundRecorder"
-msgstr "Hangrögzítő"
+#: ../src/mainWindow.js:102 ../src/mainWindow.js:714
+#| msgid "Recordings"
+msgid "Record"
+msgstr "Felvétel"
 
-#: ../src/main.js:83
-msgid "Sound Recorder started"
-msgstr "A Hangrögzítő elindult"
+#: ../src/mainWindow.js:143
+#| msgid "Recordings"
+msgid "Add Recordings"
+msgstr "Felvételek hozzáadása"
 
-#: ../src/mainWindow.js:278
+#: ../src/mainWindow.js:148
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "A <b>Felvétel</b> gombbal készíthet hangfelvételeket"
+
+#: ../src/mainWindow.js:269
 msgid "Recording…"
 msgstr "Felvétel…"
 
-#: ../src/mainWindow.js:523
+#: ../src/mainWindow.js:283
+msgid "Finish"
+msgstr "Befejezés"
+
+#: ../src/mainWindow.js:364
+msgid "Play"
+msgstr "Lejátszás"
+
+#: ../src/mainWindow.js:384
+msgid "Pause"
+msgstr "Szünet"
+
+#: ../src/mainWindow.js:479
 msgid "Delete"
 msgstr "Törlés"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:749
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:749
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:749
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:749
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:749
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:797
+#: ../src/mainWindow.js:772
 msgid "Load More"
 msgstr "Több betöltése"
 
-#: ../src/preferences.js:67
+#: ../src/play.js:80
+#| msgid "Unable to set the pipeline to the recording state."
+msgid "Unable to set the playbin to the playing state."
+msgstr "A lejátszó nem állítható lejátszási állapotba."
+
+#: ../src/preferences.js:68
 msgid "Preferred format"
 msgstr "Előnyben részesített formátum"
 
-#: ../src/preferences.js:75
+#: ../src/preferences.js:76
 msgid "Volume"
 msgstr "Hangerő"
 
-#: ../src/preferences.js:90
+#: ../src/preferences.js:91
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:149
+#: ../src/record.js:56
+msgid "Unable to create Recordings directory."
+msgstr "Nem hozható létre a Felvételek könyvtár."
+
+#: ../src/record.js:64
+msgid "Your audio capture settings are invalid."
+msgstr "A hangfelvételi beállítások érvénytelenek."
+
+#: ../src/record.js:107
+msgid "Not all elements could be created."
+msgstr "Nem minden elem hozható létre."
+
+#: ../src/record.js:117
+msgid "Not all of the elements were linked"
+msgstr "Nem minden elem volt összekapcsolva"
+
+#: ../src/record.js:138
+msgid "No Media Profile was set."
+msgstr "Nincs beállítva médiaprofil."
+
+#: ../src/record.js:148
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Az adatcsatorna nem állítható felvételi állapotba."
 
-#: ../src/record.js:198 ../src/record.js:240
-msgid "Error: "
-msgstr "Hiba: "
+#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
+#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
+#: ../src/record.js:271
+#| msgid "%Y-%m-%d %H:%M:%S"
+msgid "Audio from %Y-%m-%d %H:%M:%S"
+msgstr "Hangfelvétel – %Y. %m. %d. %H.%M.%S"
 
-#: ../src/record.js:270
-msgid "Recordings"
-msgstr "Felvételek"
+#~ msgid "Error: "
+#~ msgstr "Hiba: "
 
-#: ../src/record.js:284
-msgid "Recording "
-msgstr "Felvétel "
-
+#~ msgid "Recording "
+#~ msgstr "Felvétel "
