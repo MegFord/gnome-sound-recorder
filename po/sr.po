@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sounds-recorder\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-01-24 02:07+0000\n"
-"PO-Revision-Date: 2014-01-29 10:44+0200\n"
+"POT-Creation-Date: 2014-02-02 08:20+0000\n"
+"PO-Revision-Date: 2014-02-04 21:55+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Virtaal 0.6.1\n"
+"X-Project-Style: gnome\n"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -68,8 +68,8 @@ msgstr "Јачина звука"
 msgid "Volume level."
 msgstr "Јачина звука."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:130
-#: ../src/record.js:94
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:115
+#: ../src/record.js:92
 msgid "Sound Recorder"
 msgstr "Снимач звука"
 
@@ -81,128 +81,134 @@ msgstr "Снимајте звук путем микрофона и пуштај�
 msgid "Audio;Application;Record;"
 msgstr "звук;програм;снимање;"
 
-#: ../src/info.js:46 ../src/mainWindow.js:495
-msgid "Info"
-msgstr "Подаци"
-
-#: ../src/info.js:58
-msgid "Cancel"
-msgstr "Откажи"
-
-#: ../src/info.js:72 ../src/preferences.js:47
-msgid "Done"
-msgstr "Готово"
-
-#: ../src/info.js:98
-msgctxt "File Name"
-msgid "Name"
-msgstr "Назив"
-
-#: ../src/info.js:105
-msgid "Source"
-msgstr "Извор"
-
-#: ../src/info.js:114
-msgid "Date Modified"
-msgstr "Датум измене"
-
-#: ../src/info.js:120
-msgid "Date Created"
-msgstr "Датум стварања"
-
-#: ../src/info.js:131
-msgctxt "Media Type"
-msgid "Type"
-msgstr "Врста"
-
-#: ../src/listview.js:129 ../src/listview.js:134 ../src/listview.js:233
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d. %m. %Y. у %H:%M:%S"
-
-#: ../src/main.js:57
+#: ../src/application.js:36
 msgid "SoundRecorder"
 msgstr "Снимач звука"
 
-#: ../src/main.js:64
+#: ../src/application.js:43 ../src/preferences.js:38
 msgid "Preferences"
 msgstr "Поставке"
 
-#: ../src/main.js:67
+#: ../src/application.js:46
 msgid "About"
 msgstr "О програму"
 
-#: ../src/main.js:68
+#: ../src/application.js:47
 msgid "Quit"
 msgstr "Изађи"
 
-#: ../src/main.js:97
+#: ../src/application.js:76
 msgid "Sound Recorder started"
 msgstr "Снимач звука је покренут"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/main.js:102
+#: ../src/application.js:82
 msgid "Recordings"
 msgstr "Снимци"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/main.js:129
+#: ../src/application.js:114
 msgid "translator-credits"
 msgstr ""
 "  Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "\n"
 "http://prevod.org — превод на српски језик"
 
-#: ../src/mainWindow.js:106 ../src/mainWindow.js:750
-#| msgid "Recordings"
+#: ../src/info.js:44 ../src/mainWindow.js:466
+msgid "Info"
+msgstr "Подаци"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "Откажи"
+
+#: ../src/info.js:70 ../src/preferences.js:47
+msgid "Done"
+msgstr "Готово"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "Назив"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "Извор"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "Датум измене"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "Датум стварања"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Врста"
+
+#: ../src/listview.js:127 ../src/listview.js:132 ../src/listview.js:231
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d. %m. %Y. у %H:%M:%S"
+
+#: ../src/mainWindow.js:102 ../src/mainWindow.js:714
 msgid "Record"
 msgstr "Снимај"
 
-#: ../src/mainWindow.js:146
-#| msgid "Recordings"
+#: ../src/mainWindow.js:143
 msgid "Add Recordings"
 msgstr "Додај снимања"
 
-#: ../src/mainWindow.js:149
+#: ../src/mainWindow.js:148
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Користите дугме <b>Снимај</b> да снимите звук"
 
-#: ../src/mainWindow.js:270
+#: ../src/mainWindow.js:269
 msgid "Recording…"
 msgstr "Снимам…"
 
-#: ../src/mainWindow.js:284
+#: ../src/mainWindow.js:283
 msgid "Finish"
 msgstr "Заврши"
 
-#: ../src/mainWindow.js:520
+#: ../src/mainWindow.js:364
+msgid "Play"
+msgstr "Пусти"
+
+#: ../src/mainWindow.js:384
+msgid "Pause"
+msgstr "Застани"
+
+#: ../src/mainWindow.js:479
 msgid "Delete"
 msgstr "Обриши"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "Ogg Vorbis"
 msgstr "Огг Ворбис"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "Opus"
 msgstr "Опус"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "FLAC"
 msgstr "ФЛАЦ"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "MP3"
 msgstr "МП3"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "MOV"
 msgstr "МОВ"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:772
 msgid "Load More"
 msgstr "Учитај још"
 
-#: ../src/play.js:82
+#: ../src/play.js:80
 msgid "Unable to set the playbin to the playing state."
 msgstr "Не могу да подесим извршног пуштања на стање снимања."
 
@@ -218,33 +224,32 @@ msgstr "Јачина звука"
 msgid "Microphone"
 msgstr "Микрофон"
 
-#: ../src/record.js:58
+#: ../src/record.js:56
 msgid "Unable to create Recordings directory."
 msgstr "Не могу да направим директоријум „Снимања“."
 
-#: ../src/record.js:66
+#: ../src/record.js:64
 msgid "Your audio capture settings are invalid."
 msgstr "Ваша подешавања за снимање звука нису исправна."
 
-#: ../src/record.js:109
+#: ../src/record.js:107
 msgid "Not all elements could be created."
 msgstr "Не могу сви елементи бити направљени."
 
-#: ../src/record.js:119
+#: ../src/record.js:117
 msgid "Not all of the elements were linked"
 msgstr "Нису сви елементи повезани"
 
-#: ../src/record.js:140
+#: ../src/record.js:138
 msgid "No Media Profile was set."
 msgstr "Није подешен профил медија."
 
-#: ../src/record.js:150
+#: ../src/record.js:148
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Не могу да подесим спојку на стање снимања."
 
 #. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
 #. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
-#: ../src/record.js:273
-#| msgid "%Y-%m-%d %H:%M:%S"
+#: ../src/record.js:271
 msgid "Audio from %Y-%m-%d %H:%M:%S"
 msgstr "Звук снимљен %d. %m. %Y. у %H:%M:%S"
