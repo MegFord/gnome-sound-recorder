@@ -2,7 +2,7 @@
 Type=Application
 _Name=Sound Recorder
 _Comment=Record sound via the microphone and play it back
-Icon=audio-input-microphone
+Icon=gnome-sound-recorder
 Categories=GNOME;GTK;
 _Keywords=Audio;Application;Record;
 Exec=gnome-sound-recorder

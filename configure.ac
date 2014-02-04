@@ -33,6 +33,7 @@ AC_SUBST(GLIB_COMPILE_RESOURCES)
 AC_OUTPUT([
 Makefile
 data/Makefile
+data/icons/Makefile
 libgd/Makefile
 src/Makefile
 po/Makefile.in

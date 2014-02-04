@@ -1,3 +1,5 @@
+SUBDIRS = icons
+
 resourcedir = $(pkgdatadir)
 resource_DATA = application.css
 
