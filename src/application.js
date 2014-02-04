@@ -108,7 +108,8 @@ const Application = new Lang.Class({
         let aboutDialog = new Gtk.AboutDialog({ use_header_bar: true });
         aboutDialog.artists = [ 'Reda Lazri <the.red.shortcut@gmail.com>',
                                 'Garrett LeSage <garrettl@gmail.com>',
-                                'Hylke Bons <hylkebons@gmail.com>' ];
+                                'Hylke Bons <hylkebons@gmail.com>',
+                                'Sam Hewitt <hewittsamuel@gmail.com>' ];
         aboutDialog.authors = [ 'Meg Ford <megford@gnome.org>' ];
         /* Translators: Replace "translator-credits" with your names, one name per line */
         aboutDialog.translator_credits = _("translator-credits");
