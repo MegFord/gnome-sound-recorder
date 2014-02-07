@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-01-24 02:07+0000\n"
-"PO-Revision-Date: 2014-01-25 22:50+0100\n"
+"POT-Creation-Date: 2014-02-02 08:20+0000\n"
+"PO-Revision-Date: 2014-02-07 19:55+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -69,8 +69,8 @@ msgstr "Úroveň hlasitosti"
 msgid "Volume level."
 msgstr "Úroveň hlasitosti."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:130
-#: ../src/record.js:94
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:115
+#: ../src/record.js:92
 msgid "Sound Recorder"
 msgstr "Záznamník zvuků"
 
@@ -82,125 +82,133 @@ msgstr "Nahrává mikrofonem zvuk a zpětně jej přehrává"
 msgid "Audio;Application;Record;"
 msgstr "audio;aplikace;nahrávání;nahrávka;záznam;"
 
-#: ../src/info.js:46 ../src/mainWindow.js:495
-msgid "Info"
-msgstr "Informace"
-
-#: ../src/info.js:58
-msgid "Cancel"
-msgstr "Zrušit"
-
-#: ../src/info.js:72 ../src/preferences.js:47
-msgid "Done"
-msgstr "Hotovo"
-
-#: ../src/info.js:98
-msgctxt "File Name"
-msgid "Name"
-msgstr "Název souboru"
-
-#: ../src/info.js:105
-msgid "Source"
-msgstr "Zdroj"
-
-#: ../src/info.js:114
-msgid "Date Modified"
-msgstr "Datum změny"
-
-#: ../src/info.js:120
-msgid "Date Created"
-msgstr "Datum vytvoření"
-
-#: ../src/info.js:131
-msgctxt "Media Type"
-msgid "Type"
-msgstr "Formát"
-
-#: ../src/listview.js:129 ../src/listview.js:134 ../src/listview.js:233
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d.%m.%Y %H:%M:%S"
-
-#: ../src/main.js:57
+#: ../src/application.js:36
 msgid "SoundRecorder"
 msgstr "Nahrávání zvuků"
 
-#: ../src/main.js:64
+#: ../src/application.js:43 ../src/preferences.js:38
 msgid "Preferences"
 msgstr "Předvolby"
 
-#: ../src/main.js:67
+#: ../src/application.js:46
 msgid "About"
 msgstr "O aplikaci"
 
-#: ../src/main.js:68
+#: ../src/application.js:47
 msgid "Quit"
 msgstr "Ukončit"
 
-#: ../src/main.js:97
+#: ../src/application.js:76
 msgid "Sound Recorder started"
 msgstr "Záznamník zvuků byl spuštěn"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/main.js:102
+#: ../src/application.js:82
 msgid "Recordings"
 msgstr "Nahrávky"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/main.js:129
+#: ../src/application.js:114
 msgid "translator-credits"
 msgstr ""
 "Adam Matoušek <adamatousek@gmail.com>\n"
 "Marek Černocký <marek@manet.cz>"
 
-#: ../src/mainWindow.js:106 ../src/mainWindow.js:750
+#: ../src/info.js:44 ../src/mainWindow.js:466
+msgid "Info"
+msgstr "Informace"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: ../src/info.js:70 ../src/preferences.js:47
+msgid "Done"
+msgstr "Hotovo"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "Název souboru"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "Zdroj"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "Datum změny"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "Datum vytvoření"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Formát"
+
+#: ../src/listview.js:127 ../src/listview.js:132 ../src/listview.js:231
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d.%m.%Y %H:%M:%S"
+
+#: ../src/mainWindow.js:102 ../src/mainWindow.js:714
 msgid "Record"
 msgstr "Nahrát"
 
-#: ../src/mainWindow.js:146
+#: ../src/mainWindow.js:143
 msgid "Add Recordings"
 msgstr "Přidání nahrávek"
 
-#: ../src/mainWindow.js:149
+#: ../src/mainWindow.js:148
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Použijte tlačítko <b>Nahrát</b> k vytvoření zvukového záznamu"
 
-#: ../src/mainWindow.js:270
+#: ../src/mainWindow.js:269
 msgid "Recording…"
 msgstr "Nahrává se…"
 
-#: ../src/mainWindow.js:284
+#: ../src/mainWindow.js:283
 msgid "Finish"
 msgstr "Dokončit"
 
-#: ../src/mainWindow.js:520
+#: ../src/mainWindow.js:364
+msgid "Play"
+msgstr "Přehrát"
+
+#: ../src/mainWindow.js:384
+msgid "Pause"
+msgstr "Pozastavit"
+
+#: ../src/mainWindow.js:479
 msgid "Delete"
 msgstr "Smazat"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:749
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:772
 msgid "Load More"
 msgstr "Načíst další"
 
-#: ../src/play.js:82
+#: ../src/play.js:80
 msgid "Unable to set the playbin to the playing state."
 msgstr "Nelze nastavit prvek „playbin“ do přehrávacího stavu."
 
@@ -216,32 +224,32 @@ msgstr "Hlasitost"
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:58
+#: ../src/record.js:56
 msgid "Unable to create Recordings directory."
 msgstr "Nelze vytvořit složku pro nahrávky."
 
-#: ../src/record.js:66
+#: ../src/record.js:64
 msgid "Your audio capture settings are invalid."
 msgstr "Vaše nastavení zachytávání zvuku je neplatné."
 
-#: ../src/record.js:109
+#: ../src/record.js:107
 msgid "Not all elements could be created."
 msgstr "Ne všechny prvky byly vytvořeny."
 
-#: ../src/record.js:119
+#: ../src/record.js:117
 msgid "Not all of the elements were linked"
 msgstr "Ne všechny prvky byly propojeny."
 
-#: ../src/record.js:140
+#: ../src/record.js:138
 msgid "No Media Profile was set."
 msgstr "Nebyl nastaven žádný profil multimédií."
 
-#: ../src/record.js:150
+#: ../src/record.js:148
 msgid "Unable to set the pipeline to the recording state."
 msgstr "Nelze nastavit rouru do nahrávacího stavu."
 
 #. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
 #. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
-#: ../src/record.js:273
+#: ../src/record.js:271
 msgid "Audio from %Y-%m-%d %H:%M:%S"
 msgstr "Zvuk z %d.%m.%Y %H:%M:%S"
