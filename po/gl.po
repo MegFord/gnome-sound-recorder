@@ -1,16 +1,16 @@
 # English translations for PACKAGE package.
 # Copyright (C) 2013 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Fran Dieguez <frandieguez@gnome.org>, 2013.
+# Fran Dieguez <frandieguez@gnome.org>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-30 02:38+0100\n"
-"PO-Revision-Date: 2013-12-30 02:45+0200\n"
+"POT-Creation-Date: 2014-02-07 01:47+0100\n"
+"PO-Revision-Date: 2014-02-07 01:48+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
-"Language: en\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -68,9 +68,10 @@ msgstr "Nivel do volume"
 msgid "Volume level."
 msgstr "Nivel do volume."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:57
-msgid "SoundRecorder"
-msgstr "Gravadora de sons"
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:115
+#: ../src/record.js:92
+msgid "Sound Recorder"
+msgstr "Gravadora de son"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -80,95 +81,137 @@ msgstr "Grava son co micrófono e reprodúceo"
 msgid "Audio;Application;Record;"
 msgstr "Son;Aplicativo;Gravar;"
 
-#: ../src/info.js:47 ../src/mainWindow.js:498
+#: ../src/application.js:36
+msgid "SoundRecorder"
+msgstr "Gravadora de sons"
+
+#: ../src/application.js:43 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: ../src/application.js:46
+msgid "About"
+msgstr "Sobre"
+
+#: ../src/application.js:47
+msgid "Quit"
+msgstr "Saír"
+
+#: ../src/application.js:76
+msgid "Sound Recorder started"
+msgstr "Gravadora de son iniciada"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/application.js:82
+msgid "Recordings"
+msgstr "Gravacións"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/application.js:114
+msgid "translator-credits"
+msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013-2014"
+
+#: ../src/info.js:44 ../src/mainWindow.js:466
 msgid "Info"
 msgstr "Información"
 
-#: ../src/info.js:59
+#: ../src/info.js:56
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../src/info.js:73 ../src/preferences.js:47
+#: ../src/info.js:70 ../src/preferences.js:47
 msgid "Done"
 msgstr "Feito"
 
 #. File Name item
 #. Translators: "File Name" is the label next to the file name
 #. in the info dialog
-#: ../src/info.js:99
+#: ../src/info.js:96
 msgctxt "File Name"
 msgid "Name"
 msgstr "Nome"
 
 #. Source item
-#: ../src/info.js:106
+#: ../src/info.js:103
 msgid "Source"
 msgstr "Fonte"
 
 #. Date Modified item
-#: ../src/info.js:115
+#: ../src/info.js:112
 msgid "Date Modified"
 msgstr "Data de modificación"
 
 #. Date Created item
-#: ../src/info.js:121
+#: ../src/info.js:118
 msgid "Date Created"
 msgstr "Data de creación"
 
 #. Media type item
 #. Translators: "Type" is the label next to the media type
 #. (Ogg Vorbis, AAC, ...) in the info dialog
-#: ../src/info.js:132
+#: ../src/info.js:129
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../src/listview.js:131 ../src/listview.js:136 ../src/listview.js:235
+#: ../src/listview.js:127 ../src/listview.js:132 ../src/listview.js:231
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d/%m/%Y %H:%M:%S"
 
-#: ../src/main.js:93
-msgid "Sound Recorder started"
-msgstr "Gravadora de son iniciada"
+#: ../src/mainWindow.js:102 ../src/mainWindow.js:714
+msgid "Record"
+msgstr "Gravar"
 
-#. Translators: Replace "translator-credits" with your names, one name per line
-#: ../src/main.js:118
-msgid "translator-credits"
-msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013-2014"
+#: ../src/mainWindow.js:143
+msgid "Add Recordings"
+msgstr "Engadir gravacións"
 
-#: ../src/main.js:119 ../src/record.js:94
-msgid "Sound Recorder"
-msgstr "Gravadora de son"
+#: ../src/mainWindow.js:148
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Use o botón <b>Gravar</b> para facer novas gravacións de son"
 
-#: ../src/mainWindow.js:278
+#: ../src/mainWindow.js:269
 msgid "Recording…"
 msgstr "Gravando…"
 
-#: ../src/mainWindow.js:523
+#. finish button (stop recording)
+#: ../src/mainWindow.js:283
+msgid "Finish"
+msgstr "Rematar"
+
+#: ../src/mainWindow.js:364
+msgid "Play"
+msgstr "Reproducir"
+
+#: ../src/mainWindow.js:384
+msgid "Pause"
+msgstr "Pausar"
+
+#: ../src/mainWindow.js:479
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:749
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:749
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:749
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:749
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:775
+#: ../src/mainWindow.js:749
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:798
+#: ../src/mainWindow.js:772
 msgid "Load More"
 msgstr "Cargar máis"
 
@@ -184,13 +227,8 @@ msgstr "Volume"
 msgid "Microphone"
 msgstr "Micrófono"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: ../src/record.js:271
-msgid "Recordings"
-msgstr "Gravacións"
-
 #. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
 #. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg").
-#: ../src/record.js:288
+#: ../src/record.js:271
 msgid "Audio from %Y-%m-%d %H:%M:%S"
 msgstr "Son de %Y-%m-%d %H:%M:%S"
