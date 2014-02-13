@@ -77,7 +77,7 @@ const _TENTH_SEC = 100000000;
         this.playState = PipelineStates.PLAYING;
                 
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
-            this._showErrorDialog(_('Unable to set the playbin to the playing state.')); 
+            this._showErrorDialog(_('Unable to play recording')); 
             this.onEndOfStream();
         } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {        
             MainWindow.view.setVolume(); 
@@ -122,14 +122,32 @@ const _TENTH_SEC = 100000000;
         this.localMsg = message;
         let msg = message.type;
         switch(msg) {
+        
+        case Gst.MessageType.ELEMENT:
+            if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
+                let errorOne = null;
+                let errorTwo = null; 
+                let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
+                       
+                if (detail != null)
+                    errorOne = detail;
+                                                   
+                let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
+                   
+                if (description != null)
+                    errorTwo = description;
+                        
+                this._showErrorDialog(errorOne, errorTwo);                       
+            }
+            break;
                                                        
         case Gst.MessageType.EOS:               
             this.onEndOfStream(); 
             break;
                 
         case Gst.MessageType.ERROR:
-            let errMsg = "Error:" + message.parse_error();
-            this._showErrorDialog(_(errMsg));
+            let errorMessage = message.parse_error();
+            this._showErrorDialog(errorMessage);              
             this.play.set_state(Gst.State.NULL);
             this.playState = PipelineStates.STOPPED;
             this.playBus.remove_signal_watch();
@@ -218,13 +236,20 @@ const _TENTH_SEC = 100000000;
         this._fileToPlay = MainWindow.view.loadPlay(this._selected);
     },
     
-    _showErrorDialog: function(errorStr) {
+    _showErrorDialog: function(errorStrOne, errorStrTwo) {
         let errorDialog = new Gtk.MessageDialog ({ modal: true,
                                                    destroy_with_parent: true,
                                                    buttons: Gtk.ButtonsType.OK,
-                                                   message_type: Gtk.MessageType.WARNING,
-                                                   text: errorStr });
+                                                   message_type: Gtk.MessageType.ERROR });
 
+        if (errorStrOne != null) {
+            let strOne = errorDialog.set_property('text', errorStrOne);
+        }
+         
+        if (errorStrTwo != null)
+            errorDialog.set_property('secondary-text', errorStrTwo);
+
+        errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
         errorDialog.connect ('response', Lang.bind(this,
             function() {
                 errorDialog.destroy();

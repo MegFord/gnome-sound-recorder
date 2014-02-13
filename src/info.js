@@ -43,7 +43,7 @@ const InfoDialog = new Lang.Class({
                                         default_width: 400,
                                         title: _("Info"),
                                         hexpand: true });
-        
+        this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
         let header = new Gtk.HeaderBar({ hexpand: true });
         header.set_show_close_button(false);
         this.widget.set_titlebar(header);

@@ -26,6 +26,7 @@ const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
 const GstAudio = imports.gi.GstAudio;
 const GstPbutils = imports.gi.GstPbutils;
+const Pango = imports.gi.Pango;
 
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
@@ -145,7 +146,7 @@ const Record = new Lang.Class({
         this.pipeState = PipelineStates.PLAYING;
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
-            this._showErrorDialog(_('Unable to set the pipeline to the recording state.')); 
+            this._showErrorDialog(_('Unable to set the pipeline \n to the recording state')); 
         } else {        
             MainWindow.view.setVolume(); 
         }
@@ -181,8 +182,8 @@ const Record = new Lang.Class({
             
         case Gst.MessageType.ELEMENT:
             if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
-                let errorOne = "";
-                let errorTwo = ""; 
+                let errorOne = null;
+                let errorTwo = null; 
                 let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
                        
                 if (detail != null)
@@ -191,7 +192,8 @@ const Record = new Lang.Class({
                 let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
                    
                 if (description != null)
-                    errorTwo = description;    
+                    errorTwo = description; 
+                       
                 this._showErrorDialog(errorOne, errorTwo);                       
             }
                 
@@ -243,14 +245,19 @@ const Record = new Lang.Class({
     },
     
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
-        let errors = errorStrOne + " " + errorStrTwo;
         let errorDialog = new Gtk.MessageDialog ({ modal: true,
                                                    destroy_with_parent: true,
                                                    buttons: Gtk.ButtonsType.OK,
-                                                   message_type: Gtk.MessageType.WARNING,
-                                                   text: errors });
-
-        errorDialog.connect ('response', Lang.bind(this,
+                                                   message_type: Gtk.MessageType.ERROR });
+        if (errorStrOne != null) {
+            let strOne = errorDialog.set_property('text', errorStrOne);
+        }
+         
+        if (errorStrTwo != null)
+            errorDialog.set_property('secondary-text', errorStrTwo);
+            
+        errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
+        errorDialog.connect('response', Lang.bind(this,
             function() {
                 errorDialog.destroy();
                 MainWindow.view.onRecordStopClicked();

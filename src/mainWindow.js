@@ -24,6 +24,7 @@ const Gdk = imports.gi.Gdk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
+const Pango = imports.gi.Pango;
 
 const AudioProfile = imports.audioProfile;
 const FileUtil = imports.fileUtil;
@@ -137,7 +138,7 @@ const MainView = new Lang.Class({
         this._scrolledWin.add(this.emptyGrid);
 
         let emptyPageImage = new Gtk.Image({ icon_name: 'audio-input-microphone-symbolic',
-                                             icon_size: Gtk.IconSize.LARGE_TOOLBAR });
+                                             icon_size: Gtk.IconSize.DIALOG });
         emptyPageImage.get_style_context().add_class('dim-label');
         this.emptyGrid.add(emptyPageImage);
         let emptyPageTitle = new Gtk.Label({ label: _("Add Recordings"),
@@ -393,7 +394,7 @@ const MainView = new Lang.Class({
                 this._fileName = new Gtk.Label({ use_markup: true,
                                                  halign: Gtk.Align.START,
                                                  valign: Gtk.Align.START,
-                                                 ellipsize: true,
+                                                 ellipsize: rtl ? Pango.EllipsizeMode.START : Pango.EllipsizeMode.END,
                                                  xalign: 0,
                                                  width_chars: 40,
                                                  margin_top: 5,
@@ -447,7 +448,7 @@ const MainView = new Lang.Class({
                                                    vexpand: true,
                                                    name: "WaveFormGrid" });
                 this.waveFormGrid.set_no_show_all(true);
-                this.rowGrid.attach(this.waveFormGrid, 11, 1, 18, 4);
+                this.rowGrid.attach(this.waveFormGrid, 11, 1, 18, 2);
                 this.waveFormGrid.show();
                 
                 // info button
