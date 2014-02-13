@@ -24,8 +24,11 @@ const GLib = imports.gi.GLib;
 
 const MainWindow = imports.mainWindow;
 const Preferences = imports.preferences;
+const SIGINT = 2;
+const SIGTERM = 15;
 
 let application = null;
+
 
 const Application = new Lang.Class({
     Name: 'Application',
@@ -92,7 +95,13 @@ const Application = new Lang.Class({
     
     onWindowDestroy: function() {
         if (MainWindow.wave != null)
-            MainWindow.wave.pipeline.set_state(Gst.State.NULL);          
+            MainWindow.wave.pipeline.set_state(Gst.State.NULL);
+            
+        if (MainWindow._record.pipeline.getState(Gst.Second) != null) 
+            MainWindow._record.pipeline.set_state(Gst.State.NULL);
+        
+        if (MainWindow.play.play.getState(Gst.Second) != null) 
+            MainWindow.play.play.set_state(Gst.State.NULL);        
     },
     
     _showPreferences: function() {

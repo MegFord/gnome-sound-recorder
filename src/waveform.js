@@ -38,8 +38,6 @@ const INTERVAL = 100000000;
 const peaks = [];
 const pauseVal = 10;
 const waveSamples = 40;
-const SIGINT = 2;
-const SIGTERM = 15;
 
 const WaveType = {
     RECORD: 0,
@@ -97,8 +95,8 @@ const WaveForm = new Lang.Class({
         let decode = this.pipeline.get_by_name("decode");
         let bus = this.pipeline.get_bus();
         bus.add_signal_watch();
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, SIGINT, Application.application.onWindowDestroy, this.pipeline);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, SIGTERM, Application.application.onWindowDestroy, this.pipeline);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy, this.pipeline);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy, this.pipeline);
 
         this.nSamples = Math.ceil(this.duration / INTERVAL);
 
@@ -263,9 +261,5 @@ const WaveForm = new Lang.Class({
         this.count = 0;
         peaks.length = 0;
         this.drawing.destroy();
-    },
-    
-    print: function() {
-    log("HELL");
     }
 });

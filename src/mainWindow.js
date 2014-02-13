@@ -194,7 +194,8 @@ const MainView = new Lang.Class({
         this._record.stopRecording();
         this.recordGrid.hide();
         recordPipeline = RecordPipelineStates.STOPPED;
-        recordButton.set_sensitive(true);  
+        recordButton.set_sensitive(true);
+        this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);  
     },
      
     _formatTime: function(unformattedTime) {

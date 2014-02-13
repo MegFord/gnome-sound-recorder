@@ -27,6 +27,7 @@ const GstPbutils = imports.gi.GstPbutils;
 
 const Mainloop = imports.mainloop;
 
+const Application = imports.application;
 const MainWindow = imports.mainWindow;
 const Waveform = imports.waveform;
 
@@ -81,7 +82,9 @@ const _TENTH_SEC = 100000000;
             this.onEndOfStream();
         } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {        
             MainWindow.view.setVolume(); 
-        }  
+        }
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy, this.play);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy, this.play); 
     },
     
     pausePlaying: function() {
@@ -122,24 +125,6 @@ const _TENTH_SEC = 100000000;
         this.localMsg = message;
         let msg = message.type;
         switch(msg) {
-        
-        case Gst.MessageType.ELEMENT:
-            if (GstPbutils.is_missing_plugin_message(this.localMsg)) {
-                let errorOne = null;
-                let errorTwo = null; 
-                let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
-                       
-                if (detail != null)
-                    errorOne = detail;
-                                                   
-                let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
-                   
-                if (description != null)
-                    errorTwo = description;
-                        
-                this._showErrorDialog(errorOne, errorTwo);                       
-            }
-            break;
                                                        
         case Gst.MessageType.EOS:               
             this.onEndOfStream(); 
@@ -240,10 +225,10 @@ const _TENTH_SEC = 100000000;
         let errorDialog = new Gtk.MessageDialog ({ modal: true,
                                                    destroy_with_parent: true,
                                                    buttons: Gtk.ButtonsType.OK,
-                                                   message_type: Gtk.MessageType.ERROR });
+                                                   message_type: Gtk.MessageType.WARNING });
 
         if (errorStrOne != null) {
-            let strOne = errorDialog.set_property('text', errorStrOne);
+            errorDialog.set_property('text', errorStrOne);
         }
          
         if (errorStrTwo != null)

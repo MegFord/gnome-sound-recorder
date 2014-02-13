@@ -31,6 +31,7 @@ const Pango = imports.gi.Pango;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 
+const Application = imports.application;
 const AudioProfile = imports.audioProfile;
 const MainWindow = imports.mainWindow;
 
@@ -118,6 +119,9 @@ const Record = new Lang.Class({
             this._showErrorDialog(_('Not all of the elements were linked'));
             this.onEndOfStream();
         }
+        
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy, this.pipeline);
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy, this.pipeline);
     },
                    
     _updateTime: function() {          
@@ -248,9 +252,9 @@ const Record = new Lang.Class({
         let errorDialog = new Gtk.MessageDialog ({ modal: true,
                                                    destroy_with_parent: true,
                                                    buttons: Gtk.ButtonsType.OK,
-                                                   message_type: Gtk.MessageType.ERROR });
+                                                   message_type: Gtk.MessageType.WARNING });
         if (errorStrOne != null) {
-            let strOne = errorDialog.set_property('text', errorStrOne);
+            errorDialog.set_property('text', errorStrOne);
         }
          
         if (errorStrTwo != null)
