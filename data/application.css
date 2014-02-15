@@ -37,3 +37,8 @@
 .emptyGrid {
    background-color: @theme_bg_color;
 }
+
+.list-row {
+  -GtkWidget-focus-padding: 0;
+  -GtkWidget-focus-line-width: 0;
+}
