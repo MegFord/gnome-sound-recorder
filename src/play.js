@@ -222,8 +222,7 @@ const _TENTH_SEC = 100000000;
     },
     
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
-        let errorDialog = new Gtk.MessageDialog ({ modal: true,
-                                                   destroy_with_parent: true,
+        let errorDialog = new Gtk.MessageDialog ({ destroy_with_parent: true,
                                                    buttons: Gtk.ButtonsType.OK,
                                                    message_type: Gtk.MessageType.WARNING });
 

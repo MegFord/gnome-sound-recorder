@@ -92,7 +92,7 @@ const MainWindow = new Lang.Class({
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        hexpand: true,
                                        vexpand: true, 
-                                       default_width: 675,
+                                       default_width: 1200,
                                        default_height: 480 });
         this.parent(params);
 
@@ -195,7 +195,8 @@ const MainView = new Lang.Class({
         this.recordGrid.hide();
         recordPipeline = RecordPipelineStates.STOPPED;
         recordButton.set_sensitive(true);
-        this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);  
+        if (this.listBox != null)
+            this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);  
     },
      
     _formatTime: function(unformattedTime) {

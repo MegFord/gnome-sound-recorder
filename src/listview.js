@@ -242,12 +242,6 @@ const Listview = new Lang.Class({
         } else {
             // don't index files we can't play
             log("File cannot be played");
-            let name = allFilesInfo[this.idx].fileName;
-            let application = Gio.Application.get_default();
-            let deleteFile = application.saveDir.get_child_for_display_name(name);
-            deleteFile.delete_async(GLib.PRIORITY_DEFAULT, null, null);
-            allFilesInfo.splice(this.idx, 1);
-            this.idx -= this.idx++;
         }
         
         if (this.idx == this.endIdx) { 

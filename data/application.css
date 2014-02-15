@@ -32,7 +32,7 @@
 .view .toolbarSecond:hover {
   border-right: rgba(255,255,255,0.45) 1px solid;
   transition: 200ms linear; 
-}
+} 
 
 .emptyGrid {
    background-color: @theme_bg_color;
