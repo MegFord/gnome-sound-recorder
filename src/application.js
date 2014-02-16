@@ -94,13 +94,13 @@ const Application = new Lang.Class({
     },
     
     onWindowDestroy: function() {
-        if (MainWindow.wave != null)
+        if (MainWindow.wave.pipeline)
             MainWindow.wave.pipeline.set_state(Gst.State.NULL);
             
-        if (MainWindow._record.pipeline.getState(Gst.Second) != null) 
+        if (MainWindow._record.pipeline) 
             MainWindow._record.pipeline.set_state(Gst.State.NULL);
         
-        if (MainWindow.play.play.getState(Gst.Second) != null) 
+        if (MainWindow.play.play) 
             MainWindow.play.play.set_state(Gst.State.NULL);        
     },
     
