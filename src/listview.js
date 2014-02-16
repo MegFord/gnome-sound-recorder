@@ -91,7 +91,7 @@ const Listview = new Lang.Class({
     },
             
     enumerateDirectory: function() {
-        this._saveDir.enumerate_children_async('standard::name,time::created,time::modified',
+        this._saveDir.enumerate_children_async('standard::display-name,time::created,time::modified',
                                      Gio.FileQueryInfoFlags.NONE,
                                      GLib.PRIORITY_LOW, 
                                      null, Lang.bind(this, 
@@ -117,7 +117,7 @@ const Listview = new Lang.Class({
                     if (files.length) {
                         files.forEach(Lang.bind(this,
                             function(file) {
-                                let returnedName = file.get_attribute_as_string("standard::name");
+                                let returnedName = file.get_attribute_as_string("standard::display-name");
                                 let finalFileName = GLib.build_filenamev([this._saveDir.get_path(),
                                                                           returnedName]);
                                 let fileUri = GLib.filename_to_uri(finalFileName, null);
