@@ -49,19 +49,15 @@ const Preferences = new Lang.Class({
         let mainGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                       row_spacing: 6,
                                       margin_left: 12,
-                                      margin_right: 12,
-                                      margin_bottom: 12,
-                                      margin_top: 12  });
+                                      margin_right: 12 });
         let contentArea = this.widget.get_content_area();
         contentArea.pack_start(mainGrid, true, true, 0);
        
         let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                    hexpand: true,
-                                    vexpand: true,
-                                    column_spacing: 18,
-                                    row_spacing: 6,
-                                    margin_bottom: 12,
-                                    margin_top: 12 });
+                                  hexpand: true,
+                                  vexpand: true,
+                                  column_spacing: 18,
+                                  row_spacing: 6 });
         mainGrid.add(grid);
 
         

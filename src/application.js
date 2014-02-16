@@ -105,7 +105,7 @@ const Application = new Lang.Class({
     },
     
     _showPreferences: function() {
-         let preferencesDialog = new Preferences.Preferences();
+        let preferencesDialog = new Preferences.Preferences();
 
         preferencesDialog.widget.connect('response', Lang.bind(this,
             function(widget, response) {
