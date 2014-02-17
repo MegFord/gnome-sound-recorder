@@ -66,7 +66,7 @@ const WaveForm = new Lang.Class({
         let drawingWidth = 0;
         let drawingHeight = 0;
         this.drawing = Gtk.DrawingArea.new({ height_request: 45,
-                                             width_request: 380,
+                                             width_request: 325,
                                              valign: Gtk.Align.FILL });
         if (this.waveType == WaveType.RECORD) {
             gridWidth = MainWindow.groupGrid.get_allocated_width();
@@ -74,7 +74,7 @@ const WaveForm = new Lang.Class({
             this.drawing.set_size_request(drawingWidth, 36);
             this._grid.attach(this.drawing, 2, 0, 3, 2);
         } else {
-            this.drawing.set_size_request(380, 36);
+            this.drawing.set_size_request(325, 36);
             this._grid.add(this.drawing);
         }
 
@@ -253,7 +253,7 @@ const WaveForm = new Lang.Class({
     },
     
     endDrawing: function() {
-        let width = this._grid.get_allocated_width();
+        let width = 380;
         
         if(this.pipeline)
             this.stopGeneration();

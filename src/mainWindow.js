@@ -92,7 +92,7 @@ const MainWindow = new Lang.Class({
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        hexpand: true,
                                        vexpand: true, 
-                                       default_width: 1200,
+                                       default_width: 800,
                                        default_height: 480 });
         this.parent(params);
 
@@ -118,8 +118,7 @@ const MainView = new Lang.Class({
     Extends: Gtk.Stack,
 
     _init: function(params) {
-        params = Params.fill(params, { hexpand: true,
-                                       vexpand: true,
+        params = Params.fill(params, { vexpand: true,
                                        transition_type: Gtk.StackTransitionType.CROSSFADE,
                                        transition_duration: 100,
                                        visible: true });
@@ -164,8 +163,7 @@ const MainView = new Lang.Class({
 
         groupGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                    hexpand: true,
-                                   vexpand: true,
-                                   column_homogeneous: true });
+                                   vexpand: true });
         this.add_titled(groupGrid, name, "View");
     },
     
@@ -245,12 +243,10 @@ const MainView = new Lang.Class({
         volumeValue.push({ record: 0.5, play: 0.5 });
         activeProfile = AudioProfile.comboBoxMap.OGG_VORBIS;
                 
-        this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+        this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                          height_request: 36,
-                                         width_request: 400,
-                                         hexpand: true,
+                                         width_request: 775,
                                          name: "recordGrid" });
-        this.recordGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
         this.groupGrid.add(this.recordGrid);
         
         this.widgetRecord = new Gtk.Toolbar({ show_arrow: false,
@@ -298,7 +294,7 @@ const MainView = new Lang.Class({
      
     scrolledWinAdd: function() {    
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
-                                                     hexpand: true,
+                                                     width_request: 775,
                                                      vexpand: true });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this._scrolledWin.get_style_context().add_class('view');
@@ -327,8 +323,7 @@ const MainView = new Lang.Class({
             this._scrolledWin.get_style_context().add_class('emptyGrid');
             this._addEmptyPage();
         } else {       
-            this.listBox = Gtk.ListBox.new({ hexpand: true,
-                                             vexpand: true });
+            this.listBox = Gtk.ListBox.new({ vexpand: true });
             this._scrolledWin.add(this.listBox);
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
             this.listBox.set_header_func(null);
@@ -345,10 +340,8 @@ const MainView = new Lang.Class({
             for (let i = this._startIdx; i <= this._endIdx; i++) {
                 this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                               height_request: 45,
-                                              width_request: 675,
-                                              hexpand: true,
+                                              width_request: 775,
                                               vexpand: true,
-                                              column_homogeneous: true,
                                               name: i.toString() });
                 this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
                 this.listBox.add(this.rowGrid);
@@ -398,7 +391,7 @@ const MainView = new Lang.Class({
                                                  valign: Gtk.Align.START,
                                                  ellipsize: rtl ? Pango.EllipsizeMode.START : Pango.EllipsizeMode.END,
                                                  xalign: 0,
-                                                 width_chars: 40,
+                                                 width_chars: 35,
                                                  margin_top: 5,
                                                  margin_left: rtl ? 0 : 15,
                                                  margin_right: rtl ? 15 : 0,
@@ -413,8 +406,7 @@ const MainView = new Lang.Class({
                                                    name: "PlayLabelBox",
                                                    height_request: 45 });
                 this.rowGrid.attach(this._playLabelBox, 1, 1, 10, 1);
-                this._playLabelBox.show();
-                        
+                this._playLabelBox.show();       
                 this.playDurationLabel = new Gtk.Label({ margin_left: rtl ? 0 : 15,
                                                          margin_right: rtl ? 15 : 0,
                                                          halign: Gtk.Align.END,
@@ -444,7 +436,7 @@ const MainView = new Lang.Class({
                 
                 this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                                    height_request: 45,
-                                                   width_request: 380,
+                                                   width_request: 350,
                                                    valign: Gtk.Align.FILL,
                                                    hexpand: true,
                                                    vexpand: true,
@@ -545,6 +537,20 @@ const MainView = new Lang.Class({
                     
                     if (!alwaysShow)
                         child.hide();
+                        
+                    if (child.name == "PlayLabelBox") {
+                        child.show();
+                        child.foreach(Lang.bind(this, 
+                            function(grandchild) {
+                                
+                                if (grandchild.name == "PlayTimeLabel") {
+                                    grandchild.hide();
+                                }
+                                    
+                                if (grandchild.name == "DividerLabel" )
+                                    grandchild.hide();
+                             }));
+                    }
                 }));
                 this.activeState = play.getPipeStates();
                 
@@ -697,6 +703,7 @@ const MainView = new Lang.Class({
                     }
                 }));
             listRow.set_property("width-request", width);
+            log(this.get_allocated_width());
             
             if (this.activeState != PipelineStates.PAUSED) {
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
