@@ -39,39 +39,50 @@ const Preferences = new Lang.Class({
                                         resizable: false,
                                         modal: true,
                                         destroy_with_parent: true,
-                                        width_request: 350,
+                                        default_width: 400,
                                         margin_top: 5,
                                         hexpand: true }); 
                                         
         this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
-        this.widget.add_button(_("Done"), Gtk.ResponseType.OK);                                     
+        let header = new Gtk.HeaderBar({ hexpand: true });
+        header.set_show_close_button(false);
+        this.widget.set_titlebar(header);
         
-        let mainGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                      row_spacing: 6,
-                                      margin_left: 12,
-                                      margin_right: 12 });
+        let buttonToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
+                                          spacing: 0 });
+        buttonToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
+        header.pack_end(buttonToolbar);
+        
+        let button = new Gtk.Button({ label: _("Done") });
+        button.connect("clicked", Lang.bind(this, this.onDoneClicked));
+        buttonToolbar.pack_end(button, false, true, 0);
+        button.show();
+        buttonToolbar.show();                                     
+        
+        let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
+                                   row_homogeneous: true,
+                                   column_homogeneous: true,
+                                   halign: Gtk.Align.CENTER,
+                                   row_spacing: 6,
+                                   column_spacing: 24,
+                                   margin_top: 12,
+                                   margin_left: 24,
+                                   margin_right: 24,
+                                   margin_bottom: 12 });
         let contentArea = this.widget.get_content_area();
-        contentArea.pack_start(mainGrid, true, true, 0);
-       
-        let grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                  hexpand: true,
-                                  vexpand: true,
-                                  column_spacing: 18,
-                                  row_spacing: 6 });
-        mainGrid.add(grid);
-
+        contentArea.pack_start(grid, true, true, 2);
         
-        let formatLabel = new Gtk.Label({ label: '<b>' + _("Preferred format") + '</b>',
-                                          halign: Gtk.Align.START,
-                                          use_markup: true });
-        grid.attach(formatLabel, 0, 0, 1, 1);
+        let formatLabel = new Gtk.Label({ label: _("Preferred format"),
+                                          halign: Gtk.Align.END });
+        formatLabel.get_style_context ().add_class('dim-label');
+        grid.attach(formatLabel, 0, 0, 2, 1);
         
         comboBoxText = new MainWindow.EncoderComboBox({ halign: Gtk.Align.END });
-        grid.attach(comboBoxText, 2, 0, 1, 1);
+        grid.attach(comboBoxText, 2, 0, 2, 1);
         
-        let volumeLabel = new Gtk.Label({ label: '<b>' + _("Volume") + '</b>',
-                                          halign: Gtk.Align.START,
-                                          use_markup: true });
+        let volumeLabel = new Gtk.Label({ label: _("Volume"),
+                                          halign: Gtk.Align.END });
+        volumeLabel.get_style_context ().add_class('dim-label');
         grid.attach(volumeLabel, 0, 1, 2, 1);
         
         playVolume = new Gtk.Scale({ orientation: Gtk.Orientation.HORIZONTAL });
@@ -84,9 +95,9 @@ const Preferences = new Lang.Class({
             }));
         grid.attach(playVolume, 2, 1, 2, 1);
         
-        let micVolLabel = new Gtk.Label({ label: '<b>' + _("Microphone") + '</b>',
-                                          halign: Gtk.Align.START,
-                                          use_markup: true });
+        let micVolLabel = new Gtk.Label({ label: _("Microphone"),
+                                          halign: Gtk.Align.END });
+        micVolLabel.get_style_context ().add_class('dim-label');
         grid.attach(micVolLabel, 0, 2, 2, 1);
         
         recordVolume = new Gtk.Scale({ orientation: Gtk.Orientation.HORIZONTAL });
@@ -104,5 +115,5 @@ const Preferences = new Lang.Class({
       
       onDoneClicked: function() {
         this.widget.destroy(); 
-      }      
+      }  
 });

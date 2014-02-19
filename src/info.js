@@ -37,11 +37,11 @@ const InfoDialog = new Lang.Class({
 
         this._file = Gio.File.new_for_uri(fileNav.uri);
 
-        this.widget = new Gtk.Dialog ({ resizable: false,
+        this.widget = new Gtk.Dialog ({ title: _("Info"),
+                                        resizable: false,
                                         modal: true,
                                         destroy_with_parent: true,
                                         default_width: 400,
-                                        title: _("Info"),
                                         hexpand: true });
         this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
         let header = new Gtk.HeaderBar({ hexpand: true });
