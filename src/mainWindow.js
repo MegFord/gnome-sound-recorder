@@ -99,6 +99,7 @@ const MainWindow = new Lang.Class({
         let header = new Gtk.HeaderBar({ hexpand: true,
                                          show_close_button: true });
         this.set_titlebar(header);
+        header.get_style_context().add_class('titlebar');
 
         recordButton = new RecordButton({ label: _("Record"),
                                           margin_bottom: 4,
