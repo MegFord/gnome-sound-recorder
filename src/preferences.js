@@ -77,7 +77,7 @@ const Preferences = new Lang.Class({
         formatLabel.get_style_context ().add_class('dim-label');
         grid.attach(formatLabel, 0, 0, 2, 1);
         
-        comboBoxText = new MainWindow.EncoderComboBox({ halign: Gtk.Align.END });
+        comboBoxText = new MainWindow.EncoderComboBox();
         grid.attach(comboBoxText, 2, 0, 2, 1);
         
         let volumeLabel = new Gtk.Label({ label: _("Volume"),

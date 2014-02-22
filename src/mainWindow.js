@@ -101,11 +101,7 @@ const MainWindow = new Lang.Class({
         this.set_titlebar(header);
         header.get_style_context().add_class('titlebar');
 
-        recordButton = new RecordButton({ label: _("Record"),
-                                          margin_bottom: 4,
-                                          margin_top: 6,
-                                          margin_left: 6,
-                                          margin_right: 6 });
+        recordButton = new RecordButton({ label: _("Record") });
         recordButton.get_style_context().add_class('destructive-action');
         header.pack_start(recordButton);
 
@@ -761,7 +757,7 @@ const EncoderComboBox = new Lang.Class({
         
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
-            
+        this.set_property('valign', Gtk.Align.CENTER);  
         this.set_sensitive(true);
         this.set_active(activeProfile);
         this.connect("changed", Lang.bind(this, this._onComboBoxTextChanged));
@@ -779,7 +775,6 @@ const LoadMoreButton = new Lang.Class({
     _init: function() {
         this.parent();
         this._block = false;
-
         this.label = _("Load More");                                       
         this.get_style_context().add_class('documents-load-more');
     },
