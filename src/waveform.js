@@ -66,16 +66,17 @@ const WaveForm = new Lang.Class({
         let drawingWidth = 0;
         let drawingHeight = 0;
         this.drawing = Gtk.DrawingArea.new({ height_request: 45,
-                                             width_request: 350,
-                                             hexpand:true,
+                                             width_request: 600,
                                              valign: Gtk.Align.FILL });
         if (this.waveType == WaveType.RECORD) {
             gridWidth = MainWindow.groupGrid.get_allocated_width();
             drawingWidth = gridWidth * 0.75;
             this.drawing.set_size_request(drawingWidth, 36);
+            this.drawing.set_property("hexpand",true);
             this._grid.attach(this.drawing, 2, 0, 3, 2);
         } else {
-            this.drawing.set_size_request(325, 36);
+            this.drawing.set_size_request(350, 45);
+            this.drawing.set_property("hexpand",true);
             this._grid.add(this.drawing);
         }
 

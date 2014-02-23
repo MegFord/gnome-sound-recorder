@@ -243,6 +243,7 @@ const MainView = new Lang.Class({
         this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                          height_request: 36,
                                          width_request: 775,
+                                         hexpand: true,
                                          name: "recordGrid" });
         this.groupGrid.add(this.recordGrid);
         
@@ -272,7 +273,7 @@ const MainView = new Lang.Class({
         
         this._boxRecord.pack_start(this.recordTimeLabel, false, true, 0);
         
-        this.toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
+        this.toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, expand: false });
         this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
 
         // finish button (stop recording)
@@ -282,11 +283,12 @@ const MainView = new Lang.Class({
                                           margin_left: 6,
                                           margin_right: 6,
                                           valign: Gtk.Align.CENTER,
+                                          halign: Gtk.Align.FILL,
                                           hexpand: true });
         stopRecord.get_style_context().add_class('text-button');
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
         this.toolbarStart.pack_start(stopRecord, true, true, 0);
-        this.recordGrid.attach(this.toolbarStart, 5, 1, 1, 2);
+        this.recordGrid.attach(this.toolbarStart, 5, 1, 2, 2);
     },
      
     scrolledWinAdd: function() {    
@@ -355,7 +357,7 @@ const MainView = new Lang.Class({
                                                         name: "PlayButton" });
                 this._playListButton.set_image(this.playImage);
                 this._playListButton.set_tooltip_text(_("Play"));
-                this.rowGrid.attach(this._playListButton, 0, 0, 3, 2);
+                this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
                 this._playListButton.hide();
                 this._playListButton.connect('clicked', Lang.bind(this,
                     function(){
@@ -375,7 +377,7 @@ const MainView = new Lang.Class({
                                                          name: "PauseButton" });
                 this._pauseListButton.set_image(this.pauseImage);
                 this._pauseListButton.set_tooltip_text(_("Pause"));
-                this.rowGrid.attach(this._pauseListButton, 0, 0, 3, 2);
+                this.rowGrid.attach(this._pauseListButton, 0, 0, 2, 2);
                 this._pauseListButton.hide();
                 this._pauseListButton.connect('clicked', Lang.bind(this,
                     function(){
@@ -700,7 +702,6 @@ const MainView = new Lang.Class({
                     }
                 }));
             listRow.set_property("width-request", width);
-            log(this.get_allocated_width());
             
             if (this.activeState != PipelineStates.PAUSED) {
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
