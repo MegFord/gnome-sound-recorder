@@ -350,12 +350,12 @@ const MainView = new Lang.Class({
                 this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
                                                         'media-playback-start-symbolic',
                                                   Gtk.IconSize.BUTTON);
-                this._playListButton = new Gtk.Button({ hexpand: false,
+                this._playListButton = new Gtk.Button({ hexpand: true,
                                                         vexpand: true,
                                                         name: "PlayButton" });
                 this._playListButton.set_image(this.playImage);
                 this._playListButton.set_tooltip_text(_("Play"));
-                this.rowGrid.attach(this._playListButton, 0, 0, 1, 2);
+                this.rowGrid.attach(this._playListButton, 0, 0, 3, 2);
                 this._playListButton.hide();
                 this._playListButton.connect('clicked', Lang.bind(this,
                     function(){
@@ -370,12 +370,12 @@ const MainView = new Lang.Class({
                 // pause button
                 this.pauseImage = Gtk.Image.new();
                 this.pauseImage.set_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
-                this._pauseListButton = new Gtk.Button({ hexpand: false,
+                this._pauseListButton = new Gtk.Button({ hexpand: true,
                                                          vexpand: true,
                                                          name: "PauseButton" });
                 this._pauseListButton.set_image(this.pauseImage);
                 this._pauseListButton.set_tooltip_text(_("Pause"));
-                this.rowGrid.attach(this._pauseListButton, 0, 0, 1, 2);
+                this.rowGrid.attach(this._pauseListButton, 0, 0, 3, 2);
                 this._pauseListButton.hide();
                 this._pauseListButton.connect('clicked', Lang.bind(this,
                     function(){
@@ -396,13 +396,13 @@ const MainView = new Lang.Class({
                 let markup = ('<b>'+ this._files[i].fileName + '</b>');
                 this._fileName.label = markup;
                 this._fileName.set_no_show_all(true);
-                this.rowGrid.attach(this._fileName, 1, 0, 10, 3);
+                this.rowGrid.attach(this._fileName, 3, 0, 10, 3);
                 this._fileName.show();
                 
                 this._playLabelBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                                    name: "PlayLabelBox",
                                                    height_request: 45 });
-                this.rowGrid.attach(this._playLabelBox, 1, 1, 10, 1);
+                this.rowGrid.attach(this._playLabelBox, 3, 1, 10, 1);
                 this._playLabelBox.show();       
                 this.playDurationLabel = new Gtk.Label({ margin_left: rtl ? 0 : 15,
                                                          margin_right: rtl ? 15 : 0,
@@ -457,7 +457,7 @@ const MainView = new Lang.Class({
                     }));
                 this._info.set_tooltip_text(_("Info"));
                 this._info.get_style_context().add_class(rtl ? "toolbarEnd" : "toolbarSecond");
-                this.rowGrid.attach(this._info, 29, 0, 1, 2);
+                this.rowGrid.attach(this._info, 27, 0, 1, 2);
                 this._info.hide();
 
                 // delete button
@@ -469,7 +469,7 @@ const MainView = new Lang.Class({
                         this._deleteFile(this.listBox.get_selected_row());
                     }));
                 this._delete.set_tooltip_text(_("Delete"));
-                this.rowGrid.attach(this._delete, 30, 0, 1, 2);
+                this.rowGrid.attach(this._delete, 28, 0, 1, 2);
                 this._delete.get_style_context().add_class(rtl ? "toolbarSecond" : "toolbarEnd");
                 this._delete.hide();
                 

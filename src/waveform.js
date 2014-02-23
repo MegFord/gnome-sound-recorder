@@ -66,7 +66,8 @@ const WaveForm = new Lang.Class({
         let drawingWidth = 0;
         let drawingHeight = 0;
         this.drawing = Gtk.DrawingArea.new({ height_request: 45,
-                                             width_request: 325,
+                                             width_request: 350,
+                                             hexpand:true,
                                              valign: Gtk.Align.FILL });
         if (this.waveType == WaveType.RECORD) {
             gridWidth = MainWindow.groupGrid.get_allocated_width();
