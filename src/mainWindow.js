@@ -346,7 +346,21 @@ const MainView = new Lang.Class({
                 this.listBox.add(this.rowGrid);
                 this.rowGrid.show();                
                 let rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
-
+                
+                this.placeholderImage = Gtk.Image.new();
+                this.placeholderImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
+                                                            'media-playback-start-symbolic',
+                                                         Gtk.IconSize.BUTTON);
+                this._placeholderButton = new Gtk.Button({ hexpand: true,
+                                                           vexpand: true,
+                                                           name: "PlaceholderButton" });
+                this._placeholderButton.set_image(this.placeholderImage);
+                this.rowGrid.attach(this._placeholderButton, 0, 0, 2, 2);
+                this._placeholderButton.set_no_show_all(true);
+                this.placeholderImage.show();
+                this._placeholderButton.show();
+                this._placeholderButton.get_style_context().add_class("dim-label");
+                
                 // play button
                 this.playImage = Gtk.Image.new();
                 this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
@@ -357,6 +371,7 @@ const MainView = new Lang.Class({
                                                         name: "PlayButton" });
                 this._playListButton.set_image(this.playImage);
                 this._playListButton.set_tooltip_text(_("Play"));
+                this._playListButton.get_style_context().add_class("toolbar");
                 this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
                 this._playListButton.hide();
                 this._playListButton.connect('clicked', Lang.bind(this,
@@ -378,6 +393,7 @@ const MainView = new Lang.Class({
                 this._pauseListButton.set_image(this.pauseImage);
                 this._pauseListButton.set_tooltip_text(_("Pause"));
                 this.rowGrid.attach(this._pauseListButton, 0, 0, 2, 2);
+                this._pauseListButton.get_style_context().add_class("toolbar");
                 this._pauseListButton.hide();
                 this._pauseListButton.connect('clicked', Lang.bind(this,
                     function(){
@@ -536,6 +552,11 @@ const MainView = new Lang.Class({
                     
                     if (!alwaysShow)
                         child.hide();
+                    
+                    if (child.name == "PauseButton") {
+                        child.hide();
+                        child.sensitive = false;
+                    } 
                         
                     if (child.name == "PlayLabelBox") {
                         child.show();
@@ -578,6 +599,11 @@ const MainView = new Lang.Class({
                     
                     if (!alwaysShow)
                         child.sensitive = true;
+                        
+                    if (child.name == "PauseButton") {
+                        child.hide();
+                        child.sensitive = false;
+                    } 
                         
                     if (child.name == "WaveFormGrid")
                         child.sensitive = true;

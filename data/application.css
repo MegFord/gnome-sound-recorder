@@ -1,37 +1,42 @@
 .view .button {
-  background-color: shade(@theme_selected_bg_color, 1.1);
+  background-color: rgba(255,255,255,0.20);
+  border-left: rgba(255,255,255,1.0) 0.5px solid;
+  border-right: rgba(255,255,255,1.0) 0.5px solid;
   background-image: none;
   border: none;
-  color: rgba(255,255,255,0.45);
   border-radius: 0px; 
   margin: 0; 
 }
 
 .view .button:hover {
-    background-color: shade(@theme_selected_bg_color, 1.45);
-    transition: 200ms linear
+  background-color: rgba(255,255,255,0.30);
+  transition: 200ms linear;
 }
 
-.view .toolbar {
-  background-color: @theme_selected_bg_color;  
+.view .toolbar { 
+  border-right: rgba(255,255,255,1.0) 0.5px solid; 
   border-radius: 0px;
 }
 
 .view .toolbarEnd {
-  border-left: rgba(255,255,255,0.45) 1px solid; 
+  color: rgba(255,255,255, 1.0); 
 }
 
 .view .toolbarEnd:hover {
-  border-left: rgba(255,255,255,0.45) 1px solid;
+  color: rgba(255,255,255, 1.0);
   transition: 200ms linear; 
 }
 
 .view .toolbarSecond {
-  border-right: rgba(255,255,255,0.45) 1px solid;
+  border-left: rgba(255,255,255,1.0) 0.5px solid;
+  border-right: rgba(255,255,255,1.0) 0.5px solid;
+  color: rgba(255,255,255, 1.0);
 }
 
 .view .toolbarSecond:hover {
-  border-right: rgba(255,255,255,0.45) 1px solid;
+  border-left: rgba(255,255,255,1.0) 0.5px solid;
+  border-right: rgba(255,255,255,1.0) 0.5px solid;
+  color: rgba(255,255,255, 1.0);
   transition: 200ms linear; 
 }
 
