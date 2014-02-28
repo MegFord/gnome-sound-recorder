@@ -605,7 +605,7 @@ const MainView = new Lang.Class({
     _deleteFile: function(selected) {
         this._selected = selected;
         let fileToDelete = this._getFileFromRow(this._selected);
-        fileToDelete.delete_async(GLib.PRIORITY_DEFAULT, null, null);
+        fileToDelete.trash_async(GLib.PRIORITY_DEFAULT, null, null);
     },
     
     loadPlay: function(selected) {
