@@ -19,6 +19,7 @@
  
 imports.gi.versions.Gst = '1.0';
 
+const Gettext = imports.gettext;
 const _ = imports.gettext.gettext;
 const Gdk = imports.gi.Gdk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
@@ -317,7 +318,12 @@ const MainView = new Lang.Class({
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
         let itemNumber = list.getItemCount();
-        let title = _("%d Recorded Sounds").format(itemNumber);
+        let title;
+        // Translators: This is the title in the headerbar
+        if (sounds > 0)
+            title = Gettext.ngettext("%d Recorded Sound",
+                                     "%d Recorded Sounds", 
+                                      sounds).format(sounds);
         header.set_title(title);
         this.listBox = null;
         this._startIdx = 0;
