@@ -277,7 +277,7 @@ const MainView = new Lang.Class({
         this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
 
         // finish button (stop recording)
-        let stopRecord = new Gtk.Button({ label: _("Finish"),
+        let stopRecord = new Gtk.Button({ label: _("Done"),
                                           margin_bottom: 4,
                                           margin_top: 6,
                                           margin_left: 6,
