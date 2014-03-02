@@ -92,26 +92,26 @@ const DisplayTime = new Lang.Class({
             text = _("Yesterday");
         } else if (difference < 7 * DAY) {
             text = Gettext.ngettext("%d day ago",
-                                                 "%d days ago",
-                                                 days).format(days);
+                                    "%d days ago",
+                                     days).format(days);
         } else if (difference < 14 * DAY) {
             text = _("Last week");
         } else if (difference < 28 * DAY) {
             text = Gettext.ngettext("%d week ago",
-                                                 "%d weeks ago",
-                                                 weeks).format(weeks);
+                                     "%d weeks ago",
+                                     weeks).format(weeks);
         } else if (difference < 60 * DAY) {
             text = _("Last month");
         } else if (difference < 360 * DAY) {
             text = Gettext.ngettext("%d month ago",
-                                                 "%d months ago",
-                                                 months).format(months);
+                                     "%d months ago",
+                                     months).format(months);
         } else if (difference < 730 * DAY) {
             text = _("Last year");
         } else {
             text = Gettext.ngettext("%d year ago",
-                                                 "%d years ago",
-                                                 years).format(years);
+                                    "%d years ago",
+                                    years).format(years);
         }
         return text;
     }
