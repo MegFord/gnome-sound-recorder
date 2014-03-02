@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder 3.9.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-02 09:56+0200\n"
-"PO-Revision-Date: 2014-03-02 10:05+0200\n"
+"POT-Creation-Date: 2014-03-02 21:13+0200\n"
+"PO-Revision-Date: 2014-03-02 21:14+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -110,11 +110,11 @@ msgstr "הקלטות"
 msgid "translator-credits"
 msgstr "יוסף אור בוצ׳קו <yoseforb@gnome.org>"
 
-#: ../src/fileUtil.js:90
+#: ../src/fileUtil.js:92
 msgid "Yesterday"
 msgstr "אתמול"
 
-#: ../src/fileUtil.js:92
+#: ../src/fileUtil.js:94
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -122,11 +122,11 @@ msgstr[0] "אתמול"
 msgstr[1] "לפני %d ימים"
 msgstr[2] "שלשום"
 
-#: ../src/fileUtil.js:96
+#: ../src/fileUtil.js:98
 msgid "Last week"
 msgstr "לפני שבוע"
 
-#: ../src/fileUtil.js:98
+#: ../src/fileUtil.js:100
 #, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -134,11 +134,11 @@ msgstr[0] "לפני שבוע"
 msgstr[1] "לפני %d שבועות"
 msgstr[2] "לפני שבועיים"
 
-#: ../src/fileUtil.js:102
+#: ../src/fileUtil.js:104
 msgid "Last month"
 msgstr "לפני חודש"
 
-#: ../src/fileUtil.js:104
+#: ../src/fileUtil.js:106
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -146,11 +146,11 @@ msgstr[0] "לפני חודש"
 msgstr[1] "לפני %d חודשים"
 msgstr[2] "לפני חודשיים"
 
-#: ../src/fileUtil.js:108
+#: ../src/fileUtil.js:110
 msgid "Last year"
 msgstr "לפני שנה"
 
-#: ../src/fileUtil.js:110
+#: ../src/fileUtil.js:112
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -158,7 +158,7 @@ msgstr[0] "לפני שנה"
 msgstr[1] "לפני %d שנים"
 msgstr[2] "לפני שנתיים"
 
-#: ../src/info.js:40 ../src/mainWindow.js:490
+#: ../src/info.js:40 ../src/mainWindow.js:501
 msgid "Info"
 msgstr "מידע"
 
@@ -166,7 +166,7 @@ msgstr "מידע"
 msgid "Cancel"
 msgstr "ביטול"
 
-#: ../src/info.js:70 ../src/mainWindow.js:282 ../src/preferences.js:56
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
 msgid "Done"
 msgstr "בוצע"
 
@@ -196,55 +196,63 @@ msgstr "סוג"
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/mainWindow.js:106 ../src/mainWindow.js:762
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:773
 msgid "Record"
 msgstr "הקלטה"
 
-#: ../src/mainWindow.js:142
+#: ../src/mainWindow.js:144
 msgid "Add Recordings"
 msgstr "הוספת הקלטות"
 
-#: ../src/mainWindow.js:147
+#: ../src/mainWindow.js:149
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "יש להשתמש בכפתור <b>הקלטה</b> כדי להקליט צלילים"
 
-#: ../src/mainWindow.js:268
+#: ../src/mainWindow.js:270
 msgid "Recording…"
 msgstr "מקליט…"
 
-#: ../src/mainWindow.js:375
+#: ../src/mainWindow.js:325
+#, c-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "הקלטת שמע אחת"
+msgstr[1] "%d הקלטות שמע"
+msgstr[2] "שתי הקלטות שמע"
+
+#: ../src/mainWindow.js:386
 msgid "Play"
 msgstr "ניגון"
 
-#: ../src/mainWindow.js:396
+#: ../src/mainWindow.js:407
 msgid "Pause"
 msgstr "עצירה"
 
-#: ../src/mainWindow.js:503
+#: ../src/mainWindow.js:514
 msgid "Delete"
 msgstr "מחיקה"
 
-#: ../src/mainWindow.js:797
+#: ../src/mainWindow.js:808
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:797
+#: ../src/mainWindow.js:808
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:797
+#: ../src/mainWindow.js:808
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:797
+#: ../src/mainWindow.js:808
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:797
+#: ../src/mainWindow.js:808
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:819
+#: ../src/mainWindow.js:830
 msgid "Load More"
 msgstr "טעינת עוד"
 
@@ -293,7 +301,7 @@ msgstr "לא ניתן להגדיר את הצינור למצב הקלטה"
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
 #: ../src/record.js:291
-#, c-format
+#, javascript-format
 msgid "Clip %d"
 msgstr "הקלטה %d"
 
