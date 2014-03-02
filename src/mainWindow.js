@@ -37,6 +37,7 @@ const Waveform = imports.waveform;
 
 let activeProfile = null;
 let audioProfile = null;
+let displayTime = null;
 let grid = null;
 let groupGrid;
 let list = null;
@@ -86,6 +87,7 @@ const MainWindow = new Lang.Class({
      _init: function(params) {
         audioProfile = new AudioProfile.AudioProfile();
         offsetController = new FileUtil.OffsetController;
+        displayTime = new FileUtil.DisplayTime;
         view = new MainView();
         play = new Play.Play();
         
@@ -420,7 +422,7 @@ const MainView = new Lang.Class({
                 this._playLabelBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                                    name: "PlayLabelBox",
                                                    height_request: 45 });
-                this.rowGrid.attach(this._playLabelBox, 3, 1, 10, 1);
+                this.rowGrid.attach(this._playLabelBox, 3, 1, 6, 1);
                 this._playLabelBox.show();       
                 this.playDurationLabel = new Gtk.Label({ margin_left: rtl ? 0 : 15,
                                                          margin_right: rtl ? 15 : 0,
@@ -449,15 +451,27 @@ const MainView = new Lang.Class({
                 this._playLabelBox.pack_start(this.playTimeLabel, false, true, 0);
                 this.playTimeLabel.hide();
                 
+                //Date Modified label
+                this.dateModifiedLabel = new Gtk.Label({ margin_left: 15,
+                                                         margin_right: 15,
+                                                         halign: Gtk.Align.END,
+                                                         valign: Gtk.Align.CENTER,
+                                                         margin_top: 5,
+                                                         name: "dateModifiedLabel" });
+                this.dateModifiedLabel.label = this._files[i].dateModified;
+                this.dateModifiedLabel.get_style_context().add_class('dim-label');
+                this.rowGrid.attach(this.dateModifiedLabel, 3, 1, 6, 1);
+                this.dateModifiedLabel.show();
+                
                 this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                                    height_request: 45,
-                                                   width_request: 350,
+                                                   width_request: 300,
                                                    valign: Gtk.Align.FILL,
                                                    hexpand: true,
                                                    vexpand: true,
                                                    name: "WaveFormGrid" });
                 this.waveFormGrid.set_no_show_all(true);
-                this.rowGrid.attach(this.waveFormGrid, 11, 1, 18, 2);
+                this.rowGrid.attach(this.waveFormGrid, 12, 1, 17, 2);
                 this.waveFormGrid.show();
                 
                 // info button

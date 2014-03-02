@@ -34,6 +34,7 @@ const Signals = imports.signals;
 const Application = imports.application;
 const AudioProfile = imports.audioProfile;
 const MainWindow = imports.mainWindow;
+const Listview = imports.listview;
 
 const PipelineStates = {
     PLAYING: 0,
@@ -92,6 +93,10 @@ const Record = new Lang.Class({
                         if (this.hasTagSetter == true) {
                             this.taglist = Gst.TagList.new_empty();
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
+                            element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
+                            let trackNumber = Listview.trackNumber + 1;
+                            let trackNumberString = trackNumber.toString();
+                            this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, trackNumberString);
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, this.gstreamerDateTime);
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
@@ -279,10 +284,12 @@ const BuildFileName = new Lang.Class({
         let fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
         let dir = Gio.Application.get_default().saveDir;
         this.dateTime = GLib.DateTime.new_now_local();
-        /* Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
-            by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
-        let dateTimeString = this.dateTime.format(_("Audio from %Y-%m-%d %H:%M:%S"));
-        let file = dir.get_child_for_display_name(dateTimeString + fileExtensionName);
+        this.clipNumber = Listview.trackNumber + 1;
+        this.clipNumberString = this.clipNumber.toString();
+        /* Translators: ""Clip %d"" is the default name assigned to a file created
+            by the application (for example, "Clip 1"). */
+        let clipName = _("Clip %d").format(this.clipNumberString);
+        let file = dir.get_child_for_display_name(clipName);
 
         return file;
     },
@@ -293,7 +300,7 @@ const BuildFileName = new Lang.Class({
     
     getOrigin: function() {
         return this.dateTime;
-    }    
+    } 
 });
 
 

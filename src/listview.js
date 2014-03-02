@@ -73,6 +73,7 @@ let fileInfo = null;
 let listType = null;
 let startRecording = false; 
 let stopVal = null;
+let trackNumber = 0;
 
 const Listview = new Lang.Class({
     Name: "Listview",
@@ -124,7 +125,7 @@ const Listview = new Lang.Class({
                                 let timeVal = file.get_modification_time();
                                 let date = GLib.DateTime.new_from_timeval_local(timeVal);
                                 let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
-                                let dateModifiedDisplayString = date.format(_("%Y-%m-%d %H:%M:%S"));
+                                let dateModifiedDisplayString = MainWindow.displayTime.getDisplayTime(timeVal);
                                 let dateCreatedYes = file.has_attribute("time::created");
                                 if (this.dateCreatedYes) {
                                     let dateCreatedVal = file.get_attribute_uint64("time::created");
@@ -219,8 +220,11 @@ const Listview = new Lang.Class({
             allFilesInfo[this.idx].duration = durationInfo;
             
             if (title != null) {
-                this.file.title = title;
+                allFilesInfo[this.idx].title = title;
+                if (parseInt(title) > trackNumber)
+                    trackNumber = parseInt(title);
             }
+            
              
             /* this.file.dateCreated will usually be null since time::created it doesn't usually exist. 
                Therefore, we prefer to set it with tags */

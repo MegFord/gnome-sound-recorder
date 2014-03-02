@@ -19,6 +19,7 @@
  
 imports.gi.versions.Gst = '1.0';
 
+const Gettext = imports.gettext;
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
@@ -68,5 +69,50 @@ const OffsetController = new Lang.Class({
         return CurrentEndIdx;
     }
 });
+
+const DisplayTime = new Lang.Class({
+    Name: 'DisplayTime',
+    
+    getDisplayTime: function(timeVal) {
+        let text = "";
+        let DAY = 86400000000;
+        let now = GLib.DateTime.new_now_local();
+        let mtime = GLib.DateTime.new_from_timeval_local(timeVal);
+        let difference = now.difference(mtime);
+        let days = Math.floor(difference / DAY);
+        let weeks = Math.floor(difference / (7 * DAY));
+        let months = Math.floor(difference / (30 * DAY));
+        let years = Math.floor(difference / (365 * DAY));
+
+        if (difference < DAY) {
+            text = mtime.format('%X');
+        } else if (difference < 2 * DAY) {
+            text = _("Yesterday");
+        } else if (difference < 7 * DAY) {
+            text = Gettext.ngettext("%d day ago",
+                                                 "%d days ago",
+                                                 days).format(days);
+        } else if (difference < 14 * DAY) {
+            text = _("Last week");
+        } else if (difference < 28 * DAY) {
+            text = Gettext.ngettext("%d week ago",
+                                                 "%d weeks ago",
+                                                 weeks).format(weeks);
+        } else if (difference < 60 * DAY) {
+            text = _("Last month");
+        } else if (difference < 360 * DAY) {
+            text = Gettext.ngettext("%d month ago",
+                                                 "%d months ago",
+                                                 months).format(months);
+        } else if (difference < 730 * DAY) {
+            text = _("Last year");
+        } else {
+            text = Gettext.ngettext("%d year ago",
+                                                 "%d years ago",
+                                                 years).format(years);
+        }
+        return text;
+    }
+});    
 
 
