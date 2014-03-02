@@ -40,6 +40,7 @@ let audioProfile = null;
 let displayTime = null;
 let grid = null;
 let groupGrid;
+let header;
 let list = null;
 let loadMoreButton = null;
 let offsetController = null;
@@ -98,8 +99,8 @@ const MainWindow = new Lang.Class({
                                        default_height: 480 });
         this.parent(params);
 
-        let header = new Gtk.HeaderBar({ hexpand: true,
-                                         show_close_button: true });
+        header = new Gtk.HeaderBar({ hexpand: true,
+                                     show_close_button: true });
         this.set_titlebar(header);
         header.get_style_context().add_class('titlebar');
 
@@ -315,7 +316,9 @@ const MainView = new Lang.Class({
                   
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
-        
+        let itemNumber = list.getItemCount();
+        let title = _("%d Recorded Sounds").format(itemNumber);
+        header.set_title(title);
         this.listBox = null;
         this._startIdx = 0;
         this._endIdx = offsetController.getEndIdx();
@@ -422,7 +425,7 @@ const MainView = new Lang.Class({
                 this._playLabelBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                                    name: "PlayLabelBox",
                                                    height_request: 45 });
-                this.rowGrid.attach(this._playLabelBox, 3, 1, 6, 1);
+                this.rowGrid.attach(this._playLabelBox, 3, 1, 5, 1);
                 this._playLabelBox.show();       
                 this.playDurationLabel = new Gtk.Label({ margin_left: rtl ? 0 : 15,
                                                          margin_right: rtl ? 15 : 0,

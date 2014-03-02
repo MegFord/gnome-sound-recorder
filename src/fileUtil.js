@@ -35,6 +35,7 @@ const Record = imports.record;
 
 const _OFFSET_STEP = 20;
 let CurrentEndIdx;
+let totItems;
 
 const OffsetController = new Lang.Class({
     Name: 'OffsetController',
@@ -51,11 +52,12 @@ const OffsetController = new Lang.Class({
     },
     
     getEndIdx: function() {
-        this.totItems = MainWindow.list.getItemCount();
-        if (CurrentEndIdx < this.totItems) {
+        totItems = MainWindow.list.getItemCount();
+        log(totItems);
+        if (CurrentEndIdx < totItems) {
             this.endIdx = CurrentEndIdx -1;
         } else {
-            this.endIdx = this.totItems - 1;
+            this.endIdx = totItems - 1;
         }
         
         return this.endIdx;
