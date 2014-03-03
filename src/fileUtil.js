@@ -53,7 +53,6 @@ const OffsetController = new Lang.Class({
     
     getEndIdx: function() {
         totItems = MainWindow.list.getItemCount();
-        log(totItems);
         if (CurrentEndIdx < totItems) {
             this.endIdx = CurrentEndIdx -1;
         } else {

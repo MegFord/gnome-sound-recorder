@@ -317,16 +317,15 @@ const MainView = new Lang.Class({
                   
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
-        let itemNumber = list.getItemCount();
-        let title;
+        let sounds = list.getItemCount();
         
         // Translators: This is the title in the headerbar
         if (sounds > 0) {
-            title = Gettext.ngettext("%d Recorded Sound",
+            sounds = Gettext.ngettext("%d Recorded Sound",
                                      "%d Recorded Sounds", 
                                       sounds).format(sounds);
         }
-        header.set_title(title);
+        header.set_title(sounds);
         this.listBox = null;
         this._startIdx = 0;
         this._endIdx = offsetController.getEndIdx();
