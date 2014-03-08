@@ -1,0 +1,300 @@
+# Punjabi translation for gnome-sound-recorder.
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+#
+# A S Alam <aalam@users.sf.net>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-07 20:35+0000\n"
+"PO-Revision-Date: 2014-03-07 21:18-0600\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "ਵਿੰਡੋ ਆਕਾਰ"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "ਵਿੰਡੋ ਆਕਾਰ (ਚੌੜਾਈ ਅਤੇ ਉਚਾਈ)"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "ਵਿੰਡੋ ਸਥਿਤੀ"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "ਵਿੰਡੋ ਸਥਿਤੀ (x ਅਤੇ y)"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "ਰਿਕਾਰਡ ਕਰਨ ਦੇ ਦੌਰਾਨ ਆਡੀਓ ਇੰਕੋਡਿੰਗ ਕਰਨ ਲਈ ਪਸੰਦੀਦਾ ਮੀਡਿਆ ਕਿਸਮ"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "ਮੀਡਿਆ ਕਿਸਮ ਨੂੰ ਆਡੀਓ ਇੰਕੋਡਰ ਪ੍ਰੀਸੈਟ ਨਾਂ ਨਾਲ ਮਿਲਾਉਂਦਾ ਹੈ।"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "ਵਾਲੀਅਮ ਪੱਧਰ"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "ਵਾਲੀਅਮ ਪੱਧਰ ਹੈ।"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
+msgid "Sound Recorder"
+msgstr "ਸਾਊਂਡ ਰਿਕਾਰਡ"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "ਮਾਈਕਰੋਫੋਨ ਰਾਹੀਂ ਆਵਾਜ਼ ਰਿਕਾਰਡ ਕਰੋ ਅਤੇ ਇਸ ਨੂੰ ਵਾਪਿਸ ਚਲਾਓ"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "ਆਡੀਓ;ਐਪਲੀਕੇਸ਼ਨ;ਰਿਕਾਰਡ;Audio;Application;Record;"
+
+#: ../src/application.js:39
+msgid "SoundRecorder"
+msgstr "ਸਾਊਂਡਰਿਕਾਰਡਰ"
+
+#: ../src/application.js:46 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "ਮੇਰੀ ਪਸੰਦ"
+
+#: ../src/application.js:49
+msgid "About"
+msgstr "ਇਸ ਬਾਰੇ"
+
+#: ../src/application.js:50
+msgid "Quit"
+msgstr "ਬਾਹਰ"
+
+#: ../src/application.js:79
+msgid "Sound Recorder started"
+msgstr "ਸਾਊਂਡ ਰਿਕਾਰਡ ਸ਼ੁਰੂ ਹੈ"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:85
+msgid "Recordings"
+msgstr "ਰਿਕਾਰਡਿੰਗ"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:124
+msgid "translator-credits"
+msgstr ""
+"ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ\n"
+"ਪੰਜਾਬੀ ਓਪਨਸੋਰਸ ਟੀਮ (POST)"
+
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "ਕੱਲ੍ਹ"
+
+#: ../src/fileUtil.js:93
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d ਦਿਨ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਦਿਨ ਪਹਿਲਾਂ"
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "ਪਿਛਲੇ ਹਫ਼ਤੇ"
+
+#: ../src/fileUtil.js:99
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d ਹਫ਼ਤਾ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਹਫ਼ਤੇ ਪਹਿਲਾਂ"
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "ਪਿਛਲੇ ਮਹੀਨੇ"
+
+#: ../src/fileUtil.js:105
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d ਮਹੀਨਾ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਮਹੀਨੇ ਪਹਿਲਾਂ"
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "ਪਿਛਲੇ ਸਾਲ"
+
+#: ../src/fileUtil.js:111
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d ਸਾਲ ਪਹਿਲਾਂ"
+msgstr[1] "%d ਸਾਲ ਪਹਿਲਾਂ"
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
+msgid "Info"
+msgstr "ਜਾਣਕਾਰੀ"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "ਰੱਦ ਕਰੋ"
+
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+msgid "Done"
+msgstr "ਮੁਕੰਮਲ"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "ਨਾਂ"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "ਸਰੋਤ"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "ਸੋਧ ਤਾਰੀਖ"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "ਬਣਾਉਣ ਮਿਤੀ"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "ਕਿਸਮ"
+
+#: ../src/listview.js:133 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d-%m-%Y- %H:%M:%S"
+
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+msgid "Record"
+msgstr "ਰਿਕਾਰਡ"
+
+#: ../src/mainWindow.js:144
+msgid "Add Recordings"
+msgstr "ਰਿਕਾਰਡਿੰਗ ਸ਼ਾਮਿਲ"
+
+#: ../src/mainWindow.js:149
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr ""
+
+#: ../src/mainWindow.js:270
+msgid "Recording…"
+msgstr "...ਰਿਕਾਰਡ ਕਰਨਾ ਜਾਰੀ"
+
+#: ../src/mainWindow.js:324
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/mainWindow.js:385
+msgid "Play"
+msgstr "ਚਲਾਓ"
+
+#: ../src/mainWindow.js:406
+msgid "Pause"
+msgstr "ਵਿਰਾਮ"
+
+#: ../src/mainWindow.js:513
+msgid "Delete"
+msgstr "ਹਟਾਓ"
+
+#: ../src/mainWindow.js:807
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:807
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:807
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:807
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:807
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:829
+msgid "Load More"
+msgstr "ਹੋਰ ਲੋਡ"
+
+#: ../src/play.js:81
+msgid "Unable to play recording"
+msgstr "ਰਿਕਾਰਡਿੰਗ ਚਲਾਉਣ ਲਈ ਅਸਮਰੱਥ"
+
+#: ../src/preferences.js:75
+msgid "Preferred format"
+msgstr "ਪਸੰਦੀਦਾ ਫਾਰਮੈਟ"
+
+#: ../src/preferences.js:83
+msgid "Volume"
+msgstr "ਵਾਲੀਅਮ"
+
+#: ../src/preferences.js:98
+msgid "Microphone"
+msgstr "ਮਾਈਕਰੋਫੋਨ"
+
+#: ../src/record.js:59
+msgid "Unable to create Recordings directory."
+msgstr "ਰਿਕਾਰਡਿੰਗ ਡਾਇਰੈਕਟਰੀ ਬਣਾਉਣ ਲਈ ਅਸਮਰੱਥ।"
+
+#: ../src/record.js:67
+msgid "Your audio capture settings are invalid."
+msgstr "ਤੁਹਾਡੀ ਆਡੀਓ ਕੈਪਚਰ ਸੈਟਿੰਗ ਗਲਤ ਹੈ।"
+
+#: ../src/record.js:114
+msgid "Not all elements could be created."
+msgstr ""
+
+#: ../src/record.js:124
+msgid "Not all of the elements were linked"
+msgstr ""
+
+#: ../src/record.js:148
+msgid "No Media Profile was set."
+msgstr ""
+
+#: ../src/record.js:158
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+#, javascript-format
+msgid "Clip %d"
+msgstr "ਕਲਿੱਪ %d"
+
