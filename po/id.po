@@ -1,0 +1,299 @@
+# Indonesian translation for gnome-sound-recorder.
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Andika Triwidada <andika@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-08 08:33+0000\n"
+"PO-Revision-Date: 2014-03-09 17:56+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Ukuran jendela"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Ukuran jendela (lebar dan tinggi)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Posisi jendela"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Posisi jendela (x dan y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Tipe media yang disukai untuk enkoding audio saat merekam"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Tipe media yang disukai untuk enkoding audio saat merekam. 'audio/x-vorbis' "
+"untuk Ogg Vorbis, atau 'audio/mpeg' untuk MP3, sebagai contoh. Ini bukan "
+"tipe MIME."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "Memetakan tipe media ke nama pratata enkoder audio."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Memetakan tipe media ke nama pratata enkoder audio. Bila tidak ada pemetaan "
+"bagi suatu tipe media, pengaturan enkoder baku akan dipakai."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Tingkat volume"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Tingkat volume."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
+msgid "Sound Recorder"
+msgstr "Perekam Suara"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Rekam suara melalui mikrofon dan putar ulang"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audio;Aplikasi;Rekam;"
+
+#: ../src/application.js:39
+msgid "SoundRecorder"
+msgstr "SoundRecorder"
+
+#: ../src/application.js:46 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Preferensi"
+
+#: ../src/application.js:49
+msgid "About"
+msgstr "Tentang"
+
+#: ../src/application.js:50
+msgid "Quit"
+msgstr "Keluar"
+
+#: ../src/application.js:79
+msgid "Sound Recorder started"
+msgstr "Perekam Suara dimulai"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:85
+msgid "Recordings"
+msgstr "Rekaman"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:124
+msgid "translator-credits"
+msgstr "Andika Triwidada <andika@gmail.com>, 2014"
+
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "Kemarin"
+
+#: ../src/fileUtil.js:93
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d hari yang lalu"
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "Minggu lalu"
+
+#: ../src/fileUtil.js:99
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d minggu yang lalu"
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "Bulan lalu"
+
+#: ../src/fileUtil.js:105
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d bulan yang lalu"
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "Tahun lalu"
+
+#: ../src/fileUtil.js:111
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d tahun yang lalu"
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
+msgid "Info"
+msgstr "Info"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "Batal"
+
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+msgid "Done"
+msgstr "Selesai"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nama"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "Sumber"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "Tanggal Diubah"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "Tanggal Dibuat"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tipe"
+
+#: ../src/listview.js:133 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+msgid "Record"
+msgstr "Rekam"
+
+#: ../src/mainWindow.js:144
+msgid "Add Recordings"
+msgstr "Tambah Rekaman"
+
+#: ../src/mainWindow.js:149
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Pakai tombol <b>Rekam</b> untuk membuat rekaman suara"
+
+#: ../src/mainWindow.js:270
+msgid "Recording…"
+msgstr "Merekam…"
+
+#: ../src/mainWindow.js:324
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d Rekaman Suara"
+
+#: ../src/mainWindow.js:385
+msgid "Play"
+msgstr "Putar"
+
+#: ../src/mainWindow.js:406
+msgid "Pause"
+msgstr "Jeda"
+
+#: ../src/mainWindow.js:513
+msgid "Delete"
+msgstr "Hapus"
+
+#: ../src/mainWindow.js:807
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:807
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:807
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:807
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:807
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:829
+msgid "Load More"
+msgstr "Muat Lebih Banyak"
+
+#: ../src/play.js:81
+msgid "Unable to play recording"
+msgstr "Tak bisa memutar rekaman"
+
+#: ../src/preferences.js:75
+msgid "Preferred format"
+msgstr "Format yang disukai"
+
+#: ../src/preferences.js:83
+msgid "Volume"
+msgstr "Volume"
+
+#: ../src/preferences.js:98
+msgid "Microphone"
+msgstr "Mikrofon"
+
+#: ../src/record.js:59
+msgid "Unable to create Recordings directory."
+msgstr "Tak bisa membuat direktori Rekaman."
+
+#: ../src/record.js:67
+msgid "Your audio capture settings are invalid."
+msgstr "Pengaturan penangkapan audio Anda tak valid."
+
+#: ../src/record.js:114
+msgid "Not all elements could be created."
+msgstr "Tak semua elemen dapat dibuat."
+
+#: ../src/record.js:124
+msgid "Not all of the elements were linked"
+msgstr "Tak semua elemen ditaut"
+
+#: ../src/record.js:148
+msgid "No Media Profile was set."
+msgstr "Tak ada Profil Media yang ditata."
+
+#: ../src/record.js:158
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"Tak bisa menata jalur pipa \n"
+" ke keadaan perekaman"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+#, javascript-format
+msgid "Clip %d"
+msgstr "Klip %d"
