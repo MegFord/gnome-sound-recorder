@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-02 18:46+0000\n"
-"PO-Revision-Date: 2014-03-07 17:50+0100\n"
+"POT-Creation-Date: 2014-03-07 17:15+0000\n"
+"PO-Revision-Date: 2014-03-10 11:46+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -115,47 +115,47 @@ msgstr "Grabaciones"
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013"
 
-#: ../src/fileUtil.js:92
+#: ../src/fileUtil.js:91
 msgid "Yesterday"
 msgstr "Ayer"
 
-#: ../src/fileUtil.js:94
+#: ../src/fileUtil.js:93
 msgid "%d day ago"
 msgid_plural "%d days ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hace %d día"
+msgstr[1] "Hace %d días"
 
-#: ../src/fileUtil.js:98
+#: ../src/fileUtil.js:97
 msgid "Last week"
-msgstr ""
+msgstr "Última semana"
 
-#: ../src/fileUtil.js:100
+#: ../src/fileUtil.js:99
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hace %d semana"
+msgstr[1] "Hace %d semanas"
 
-#: ../src/fileUtil.js:104
+#: ../src/fileUtil.js:103
 msgid "Last month"
 msgstr "Último mes"
 
-#: ../src/fileUtil.js:106
+#: ../src/fileUtil.js:105
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Hace %d mes"
 msgstr[1] "Hace %d meses"
 
-#: ../src/fileUtil.js:110
+#: ../src/fileUtil.js:109
 msgid "Last year"
 msgstr "Último año"
 
-#: ../src/fileUtil.js:112
+#: ../src/fileUtil.js:111
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "hace %d año"
 msgstr[1] "hace %d años"
 
-#: ../src/info.js:40 ../src/mainWindow.js:499
+#: ../src/info.js:40 ../src/mainWindow.js:500
 msgid "Info"
 msgstr "Información"
 
@@ -193,7 +193,7 @@ msgstr "Tipo"
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d/%m/%Y %H:%M:%S"
 
-#: ../src/mainWindow.js:108 ../src/mainWindow.js:771
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
 msgid "Record"
 msgstr "Grabar"
 
@@ -215,44 +215,43 @@ msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d sonido grabado"
 msgstr[1] "%d sonidos grabados"
 
-#: ../src/mainWindow.js:384
+#: ../src/mainWindow.js:385
 msgid "Play"
 msgstr "Reproducir"
 
-#: ../src/mainWindow.js:405
+#: ../src/mainWindow.js:406
 msgid "Pause"
 msgstr "Pausar"
 
-#: ../src/mainWindow.js:512
+#: ../src/mainWindow.js:513
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:807
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:807
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:807
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:807
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:807
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:828
+#: ../src/mainWindow.js:829
 msgid "Load More"
 msgstr "Cargar más"
 
 #: ../src/play.js:81
-#| msgid "Unable to create Recordings directory."
 msgid "Unable to play recording"
 msgstr "No se puede reproducir la grabación"
 
@@ -289,7 +288,6 @@ msgid "No Media Profile was set."
 msgstr "No se ha establecido un perfil multimedia."
 
 #: ../src/record.js:158
-#| msgid "Unable to set the pipeline to the recording state."
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state"
