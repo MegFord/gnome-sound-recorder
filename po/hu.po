@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-13 04:49+0000\n"
-"PO-Revision-Date: 2014-02-28 21:14+0100\n"
+"POT-Creation-Date: 2014-03-02 18:46+0000\n"
+"PO-Revision-Date: 2014-03-16 11:41+0100\n"
 "Last-Translator: Balázs Úr <urbalazs at gmail dot com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -70,7 +70,7 @@ msgid "Volume level."
 msgstr "Hangerő."
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
-#: ../src/record.js:94
+#: ../src/record.js:95
 msgid "Sound Recorder"
 msgstr "Hangrögzítő"
 
@@ -112,7 +112,51 @@ msgstr "Felvételek"
 msgid "translator-credits"
 msgstr "Kelemen Gábor <kelemeng at gnome dot hu>"
 
-#: ../src/info.js:44 ../src/mainWindow.js:468
+#: ../src/fileUtil.js:92
+msgid "Yesterday"
+msgstr "Tegnap"
+
+#: ../src/fileUtil.js:94
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d napja"
+msgstr[1] "%d napja"
+
+#: ../src/fileUtil.js:98
+msgid "Last week"
+msgstr "Múlt héten"
+
+#: ../src/fileUtil.js:100
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d hete"
+msgstr[1] "%d hete"
+
+#: ../src/fileUtil.js:104
+msgid "Last month"
+msgstr "Múlt hónapban"
+
+#: ../src/fileUtil.js:106
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d hónapja"
+msgstr[1] "%d hónapja"
+
+#: ../src/fileUtil.js:110
+msgid "Last year"
+msgstr "Múlt évben"
+
+#: ../src/fileUtil.js:112
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d éve"
+msgstr[1] "%d éve"
+
+#: ../src/info.js:40 ../src/mainWindow.js:499
 msgid "Info"
 msgstr "Információ"
 
@@ -120,7 +164,7 @@ msgstr "Információ"
 msgid "Cancel"
 msgstr "Mégse"
 
-#: ../src/info.js:70 ../src/preferences.js:47
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
 msgid "Done"
 msgstr "Kész"
 
@@ -146,11 +190,11 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Típus"
 
-#: ../src/listview.js:127 ../src/listview.js:132 ../src/listview.js:231
+#: ../src/listview.js:133 ../src/listview.js:235
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y. %m. %d. %H.%M.%S"
 
-#: ../src/mainWindow.js:103 ../src/mainWindow.js:716
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:771
 msgid "Record"
 msgstr "Felvétel"
 
@@ -162,89 +206,90 @@ msgstr "Felvételek hozzáadása"
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "A <b>Felvétel</b> gombbal készíthet hangfelvételeket"
 
-#: ../src/mainWindow.js:271
+#: ../src/mainWindow.js:270
 msgid "Recording…"
 msgstr "Felvétel…"
 
-#: ../src/mainWindow.js:285
-msgid "Finish"
-msgstr "Befejezés"
+#: ../src/mainWindow.js:324
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d felvett hang"
+msgstr[1] "%d felvett hang"
 
-#: ../src/mainWindow.js:366
+#: ../src/mainWindow.js:384
 msgid "Play"
 msgstr "Lejátszás"
 
-#: ../src/mainWindow.js:386
+#: ../src/mainWindow.js:405
 msgid "Pause"
 msgstr "Szünet"
 
-#: ../src/mainWindow.js:481
+#: ../src/mainWindow.js:512
 msgid "Delete"
 msgstr "Törlés"
 
-#: ../src/mainWindow.js:751
+#: ../src/mainWindow.js:806
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:751
+#: ../src/mainWindow.js:806
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:751
+#: ../src/mainWindow.js:806
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:751
+#: ../src/mainWindow.js:806
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:751
+#: ../src/mainWindow.js:806
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:774
+#: ../src/mainWindow.js:828
 msgid "Load More"
 msgstr "Több betöltése"
 
 #: ../src/play.js:81
-#| msgid "Unable to create Recordings directory."
 msgid "Unable to play recording"
 msgstr "Nem játszható le a felvétel"
 
-#: ../src/preferences.js:68
+#: ../src/preferences.js:75
 msgid "Preferred format"
 msgstr "Előnyben részesített formátum"
 
-#: ../src/preferences.js:76
+#: ../src/preferences.js:83
 msgid "Volume"
 msgstr "Hangerő"
 
-#: ../src/preferences.js:91
+#: ../src/preferences.js:98
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:58
+#: ../src/record.js:59
 msgid "Unable to create Recordings directory."
 msgstr "Nem hozható létre a Felvételek könyvtár."
 
-#: ../src/record.js:66
+#: ../src/record.js:67
 msgid "Your audio capture settings are invalid."
 msgstr "A hangfelvételi beállítások érvénytelenek."
 
-#: ../src/record.js:109
+#: ../src/record.js:114
 msgid "Not all elements could be created."
 msgstr "Nem minden elem hozható létre."
 
-#: ../src/record.js:119
+#: ../src/record.js:124
 msgid "Not all of the elements were linked"
 msgstr "Nem minden elem volt összekapcsolva"
 
-#: ../src/record.js:143
+#: ../src/record.js:148
 msgid "No Media Profile was set."
 msgstr "Nincs beállítva médiaprofil."
 
-#: ../src/record.js:153
-#| msgid "Unable to set the pipeline to the recording state."
+#: ../src/record.js:158
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state"
@@ -252,11 +297,18 @@ msgstr ""
 "Az adatcsatorna nem állítható\n"
 " felvételi állapotba"
 
-#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
-#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
-#: ../src/record.js:282
-msgid "Audio from %Y-%m-%d %H:%M:%S"
-msgstr "Hangfelvétel – %Y. %m. %d. %H.%M.%S"
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+#, javascript-format
+msgid "Clip %d"
+msgstr "%d. kivágás"
+
+#~ msgid "Finish"
+#~ msgstr "Befejezés"
+
+#~ msgid "Audio from %Y-%m-%d %H:%M:%S"
+#~ msgstr "Hangfelvétel – %Y. %m. %d. %H.%M.%S"
 
 #~| msgid "Unable to set the pipeline to the recording state."
 #~ msgid "Unable to set the playbin to the playing state."
