@@ -1,0 +1,325 @@
+# Portuguese translation for gnome-sound-recorder.
+# Copyright © 2014 gnome-sound-recorder
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Tiagosdot <almosthumane@portugalmail.pt>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-16 10:42+0000\n"
+"PO-Revision-Date: 2014-03-17 23:15+0100\n"
+"Last-Translator: Tiago S. <almosthumane@portugalmail.pt>\n"
+"Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Tamanho da janela"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Tamanho da janela (largura e altura)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Posição da janela"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Posição da janela (x e y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Tipo de média preferido para codificação de áudio quando gravar"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Tipo de média preferida para codificação de áudio quando gravar. \"audio/x-"
+"vorbis\" para Ogg Vorbis ou \"audio/mpeg\" para MP3, por exemplo. Isso não é "
+"um tipo MIME."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "Mapeia tipos de média para nomes predefinidos de codificador de áudio."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Mapeia tipos de média de nomes predefinidos de codificação de áudio. Se não "
+"houver mapeamento algum para um tipo de média, as configurações por omissão "
+"de codificação serão utilizadas."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Nível de volume"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Nível de volume."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
+msgid "Sound Recorder"
+msgstr "Gravador de Som"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Grave som com o microfone e reproduza-o"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Áudio;Aplicativo;Gravador;Sons;Som;"
+
+#: ../src/application.js:39
+msgid "SoundRecorder"
+msgstr "GravadorDeSom"
+
+#: ../src/application.js:46 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Preferências"
+
+#: ../src/application.js:49
+msgid "About"
+msgstr "Sobre"
+
+#: ../src/application.js:50
+msgid "Quit"
+msgstr "Sair"
+
+#: ../src/application.js:79
+msgid "Sound Recorder started"
+msgstr "O gravador de som foi iniciado"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:85
+msgid "Recordings"
+msgstr "Gravações"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:124
+msgid "translator-credits"
+msgstr "Tiago S., 2014."
+
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "Ontem"
+
+#: ../src/fileUtil.js:93
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "há %d dia"
+msgstr[1] "há %d dias"
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "Última semana"
+
+#: ../src/fileUtil.js:99
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "há %d semana"
+msgstr[1] "há %d semanas"
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "Último mês"
+
+#: ../src/fileUtil.js:105
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "há %d mês"
+msgstr[1] "há %d meses"
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "Último ano"
+
+#: ../src/fileUtil.js:111
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "há %d ano"
+msgstr[1] "há %d anos"
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
+msgid "Info"
+msgstr "Info"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+msgid "Done"
+msgstr "Terminado"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nome"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "Fonte"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "Última Alteração"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "Data de Criação"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tipo"
+
+#: ../src/listview.js:133 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+msgid "Record"
+msgstr "Gravar"
+
+#: ../src/mainWindow.js:144
+msgid "Add Recordings"
+msgstr "Adicionar Gravações"
+
+#: ../src/mainWindow.js:149
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Utilize o botão <b>Gravar</b> para efetuar gravações de sons"
+
+#: ../src/mainWindow.js:270
+msgid "Recording…"
+msgstr "A gravar…"
+
+#: ../src/mainWindow.js:324
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d Som Gravado"
+msgstr[1] "%d Sons Gravados"
+
+#: ../src/mainWindow.js:385
+msgid "Play"
+msgstr "Reproduzir"
+
+#: ../src/mainWindow.js:406
+msgid "Pause"
+msgstr "Pausar"
+
+#: ../src/mainWindow.js:513
+msgid "Delete"
+msgstr "Apagar"
+
+#: ../src/mainWindow.js:807
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:807
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:807
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:807
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:807
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:829
+msgid "Load More"
+msgstr "Ler Mais"
+
+#: ../src/play.js:81
+msgid "Unable to play recording"
+msgstr "Não foi possível reproduzir a gravação"
+
+#: ../src/preferences.js:75
+msgid "Preferred format"
+msgstr "Formato preferido"
+
+#: ../src/preferences.js:83
+msgid "Volume"
+msgstr "Volume"
+
+#: ../src/preferences.js:98
+msgid "Microphone"
+msgstr "Microfone"
+
+#: ../src/record.js:59
+msgid "Unable to create Recordings directory."
+msgstr "Não foi possível criar o diretório de Gravações."
+
+#: ../src/record.js:67
+msgid "Your audio capture settings are invalid."
+msgstr "As suas configurações de captura de áudio são inválidas."
+
+#: ../src/record.js:114
+msgid "Not all elements could be created."
+msgstr "Nem todos os elementos puderam ser criados."
+
+#: ../src/record.js:124
+msgid "Not all of the elements were linked"
+msgstr "Nem todos os elementos foram associados"
+
+#: ../src/record.js:148
+msgid "No Media Profile was set."
+msgstr "Nenhum Perfil de Média foi definido."
+
+#: ../src/record.js:158
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"Não foi possível definir o pipeline \n"
+" para o estado de gravação"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+#, javascript-format
+msgid "Clip %d"
+msgstr "Excerto %d"
+
+#~ msgid "Finish"
+#~ msgstr "Concluir"
+
+#~ msgid "Audio from %Y-%m-%d %H:%M:%S"
+#~ msgstr "Áudio de %d-%m-%Y %H:%M:%S"
+
+#~ msgid "Unable to set the playbin to the playing state."
+#~ msgstr ""
+#~ "Não foi possível definir o executável de reprodução para o estado de em "
+#~ "reprodução."
+
+#~ msgid "Audio from"
+#~ msgstr "Áudio de"
+
+#~ msgid "Error: "
+#~ msgstr "Erro: "
+
+#~ msgid "Recording "
+#~ msgstr "Gravação"
