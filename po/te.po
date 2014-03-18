@@ -1,0 +1,303 @@
+# Telugu translation for gnome-sound-recorder.
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Praveen Illa <mail2ipn@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-18 08:33+0000\n"
+"PO-Revision-Date: 2014-03-18 20:02+0530\n"
+"Last-Translator: Praveen Illa <mail2ipn@gmail.com>\n"
+"Language-Team: Telugu <indlinux-telugu@lists.sourceforge.net>\n"
+"Language: te\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "కిటికీ పరిమాణం"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "కిటికీ పరిమాణం (వెడల్పు మరియు ఎత్తు)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "కిటికీ స్థానం"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "కిటికీ స్థానం (x మరియు y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "నమోదించేప్పుడు ఎన్కోడింగు కోసం సూచించే మాధ్యమ రకం "
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"నమోదించేప్పుడు ఆడియో ఎన్కోడింగు కొరకు ప్రాధాన్య మాధ్యమ రకం. ఉదాహరణకు Ogg Vorbis కొరకు 'audio/x-"
+"vorbis', లేదా MP3 కొరకు 'audio/mpeg', ఇది MIME రకము కాదు."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "మాధ్యమ రకాలను ఆడియో ఎన్కోడరు ప్రీసెట్ పేర్లకు మ్యాప్ చేస్తుంది."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"మాధ్యమ రకాలను ఆడియో ఎన్కోడరు ప్రీసెట్ పేర్లకు మ్యాప్ చేస్తుంది. ఒకవేళ మాధ్యమ రకానికి మ్యాపింగు "
+"లేకపోయినట్లయితే, అప్రమేయ ఎన్కోడరు అమరికలు వాడబడతాయి."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "శబ్ద స్థాయి"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "శబ్ద స్థాయి."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
+msgid "Sound Recorder"
+msgstr "శబ్ద నమోదకం"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "మైక్రోఫోను ద్వారా శబ్దాన్ని నమోదించి, ఆడించండి"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "శబ్దం;అనువర్తనం;నమోదించు;"
+
+#: ../src/application.js:39
+msgid "SoundRecorder"
+msgstr "శబ్దనమోదకం"
+
+#: ../src/application.js:46 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "అభిరుచులు"
+
+#: ../src/application.js:49
+msgid "About"
+msgstr "గురించి"
+
+#: ../src/application.js:50
+msgid "Quit"
+msgstr "నిష్క్రమించు"
+
+#: ../src/application.js:79
+msgid "Sound Recorder started"
+msgstr "శబ్ద నమోదకం ప్రారంభమైంది"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:85
+msgid "Recordings"
+msgstr "నమోదకాలు"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:124
+msgid "translator-credits"
+msgstr "Praveen Illa <mail2ipn@gmail.com>, 2014"
+
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "నిన్న"
+
+#: ../src/fileUtil.js:93
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d రోజు క్రితం"
+msgstr[1] "%d రోజుల క్రితం"
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "గత వారం"
+
+#: ../src/fileUtil.js:99
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d వారం క్రితం"
+msgstr[1] "%d వారాల క్రితం"
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "గత నెల"
+
+#: ../src/fileUtil.js:105
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d నెల క్రితం"
+msgstr[1] "%d నెలల క్రితం"
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "గత ఏడాది"
+
+#: ../src/fileUtil.js:111
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d ఏడాది క్రితం"
+msgstr[1] "%d ఏళ్ళ క్రితం"
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
+msgid "Info"
+msgstr "సమాచారం"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "రద్దుచేయి"
+
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+msgid "Done"
+msgstr "అయినది"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "పేరు"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "మూలం"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "సవరించిన తేదీ"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "సృష్టించిన తేదీ"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "రకం"
+
+#: ../src/listview.js:133 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+msgid "Record"
+msgstr "నమోదించు"
+
+#: ../src/mainWindow.js:144
+msgid "Add Recordings"
+msgstr "నమోదనలను జతచేయి"
+
+#: ../src/mainWindow.js:149
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "శబ్ద నమోదనల కోసం <b>నమోదించు</b> బొత్తాన్ని వాడండి"
+
+#: ../src/mainWindow.js:270
+msgid "Recording…"
+msgstr "నమోదిస్తూంది..."
+
+#: ../src/mainWindow.js:324
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d నమోదయిన శబ్దం"
+msgstr[1] "%d నమోదయిన శబ్దాలు"
+
+#: ../src/mainWindow.js:385
+msgid "Play"
+msgstr "ఆడించు"
+
+#: ../src/mainWindow.js:406
+msgid "Pause"
+msgstr "నిలిపివేయి"
+
+#: ../src/mainWindow.js:513
+msgid "Delete"
+msgstr "తొలగించు"
+
+#: ../src/mainWindow.js:807
+msgid "Ogg Vorbis"
+msgstr "Ogg వోర్బిస్"
+
+#: ../src/mainWindow.js:807
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:807
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:807
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:807
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:829
+msgid "Load More"
+msgstr "మరిన్ని నింపు"
+
+#: ../src/play.js:81
+msgid "Unable to play recording"
+msgstr "నమోదనను ఆడించలేకపోతూంది"
+
+#: ../src/preferences.js:75
+msgid "Preferred format"
+msgstr "అభీష్ట ఆకృతి"
+
+#: ../src/preferences.js:83
+msgid "Volume"
+msgstr "శబ్దస్థాయి"
+
+#: ../src/preferences.js:98
+msgid "Microphone"
+msgstr "మైక్రోఫోను"
+
+#: ../src/record.js:59
+msgid "Unable to create Recordings directory."
+msgstr "నమోదనల సంచయాన్ని సృష్టించలేకపోతూంది."
+
+#: ../src/record.js:67
+msgid "Your audio capture settings are invalid."
+msgstr "మీ ఆడియో బంధన అమరికలు చెల్లవు."
+
+#: ../src/record.js:114
+msgid "Not all elements could be created."
+msgstr "అన్ని మూలకాలు సృష్టించుట వీలుగాదు."
+
+#: ../src/record.js:124
+msgid "Not all of the elements were linked"
+msgstr "అన్ని మూలకాలు లంకె వేయబడవు"
+
+#: ../src/record.js:148
+msgid "No Media Profile was set."
+msgstr "ఏ మాధ్యమ ప్రవర అమర్చబడలేదు."
+
+#: ../src/record.js:158
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"నమోదన స్థితికై \n"
+"పైపులైను అమర్చలేకపోతూంది"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+#, javascript-format
+msgid "Clip %d"
+msgstr "ముక్క %d"
