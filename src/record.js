@@ -103,8 +103,8 @@ const Record = new Lang.Class({
                     }
                 }
             }));
-        this.pipeline.add(this.ebin);
         let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
+        this.pipeline.add(this.ebin);
         let srcpad = this.ebin.get_static_pad("src");
         this.giosink = Gst.ElementFactory.make("giosink", "giosink");
         this.giosink.set_property("file", this.initialFileName);
@@ -155,6 +155,7 @@ const Record = new Lang.Class({
         this.pipeState = PipelineStates.PLAYING;
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
+            this._showErrorDialog(_('Unable to set the pipeline \n to the recording state')); 
             this.initialFileName.delete_async(GLib.PRIORITY_DEFAULT, null, null);
         } else {        
             MainWindow.view.setVolume(); 
@@ -195,7 +196,8 @@ const Record = new Lang.Class({
                 let errorTwo = null; 
                 let detail = GstPbutils.missing_plugin_message_get_installer_detail(this.localMsg);
                        
-                errorOne = _("You are missing plugins:");
+                if (detail != null)
+                    errorOne = detail;
                                                    
                 let description = GstPbutils.missing_plugin_message_get_description(this.localMsg);
                    
