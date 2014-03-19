@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-07 20:35+0000\n"
-"PO-Revision-Date: 2014-03-07 21:18-0600\n"
+"POT-Creation-Date: 2014-03-08 03:20+0000\n"
+"PO-Revision-Date: 2014-03-18 18:31-0500\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
@@ -44,6 +44,8 @@ msgid ""
 "Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
 "Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
 msgstr ""
+"ਰਿਕਾਰਡ ਕਰਨ ਦੇ ਦੌਰਾਨ ਆਡੀਓ ਇੰਕੋਡਿੰਗ ਕਰਨ ਲਈ ਪਸੰਦੀਦਾ ਮੀਡਿਆ ਕਿਸਮ। ਉਦਾਹਰਨ ਲਈ "
+"Ogg Vorbis ਲਈ 'audio/x-vorbis', MP3 ਲਈ 'audio/mpeg'। ਇਹ MIME ਕਿਸਮ ਨਹੀਂ ਹੈ।"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
@@ -54,6 +56,9 @@ msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping for a "
 "media type, the default encoder settings will be used."
 msgstr ""
+"ਮੀਡਿਆ ਕਿਸਮ ਨੂੰ ਆਡੀਓ ਇੰਕੋਡਰ ਪ੍ਰੀਸੈਟ ਨਾਂ ਨਾਲ ਮਿਲਾਉਂਦਾ ਹੈ। ਜੇ ਮੀਡਿਆ ਕਿਸਮ ਲਈ ਕੋਈ "
+"ਮਿਲਾਨ "
+"ਨਹੀਂ ਹੈ ਤਾਂ ਡਿਫਾਲਟ ਇੰਕੋਡਰ ਸੈਟਿੰਗ ਨੂੰ ਵਰਤਿਆ ਜਾਵੇਗਾ।"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Volume level"
@@ -200,7 +205,7 @@ msgstr "ਰਿਕਾਰਡਿੰਗ ਸ਼ਾਮਿਲ"
 
 #: ../src/mainWindow.js:149
 msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr ""
+msgstr "ਸਾਊਂਡ ਰਿਕਾਰਡਿੰਗ ਕਰਨ ਲਈ <b>ਰਿਕਾਰਡ</b> ਬਟਨ ਨੂੰ ਵਰਤੋਂ"
 
 #: ../src/mainWindow.js:270
 msgid "Recording…"
@@ -210,8 +215,8 @@ msgstr "...ਰਿਕਾਰਡ ਕਰਨਾ ਜਾਰੀ"
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d ਰਿਕਾਰਡ ਕੀਤੀ ਸਾਊਂਡ"
+msgstr[1] "%d ਰਿਕਾਰਡ ਕੀਤੀ ਸਾਊਂਡ"
 
 #: ../src/mainWindow.js:385
 msgid "Play"
@@ -275,21 +280,23 @@ msgstr "ਤੁਹਾਡੀ ਆਡੀਓ ਕੈਪਚਰ ਸੈਟਿੰਗ ਗ�
 
 #: ../src/record.js:114
 msgid "Not all elements could be created."
-msgstr ""
+msgstr "ਸਭ ਭਾਗਾਂ ਨੂੰ ਬਣਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।"
 
 #: ../src/record.js:124
 msgid "Not all of the elements were linked"
-msgstr ""
+msgstr "ਸਭ ਭਾਗਾਂ ਨੂੰ ਲਿੰਕ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
 
 #: ../src/record.js:148
 msgid "No Media Profile was set."
-msgstr ""
+msgstr "ਕੋਈ ਮੀਡਿਆ ਪ੍ਰੋਫਾਇਲ ਸੈੱਟ ਨਹੀਂ ਸੀ।"
 
 #: ../src/record.js:158
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state"
 msgstr ""
+"ਰਿਕਾਰਡਿੰਗ ਸਥਇਤੀ ਲਈ \n"
+"ਪਾਈਪਲਾਈਨ ਸੈੱਟ ਕਰਨ ਲਈ ਅਸਮਰੱਥ"
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
