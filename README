@@ -1,5 +1,7 @@
 About 
 =======================
+You will need gjs, gobject-introspection, GTK+ 3.10 and GStreamer 1.0. 
+You must also install GStreamer-plugins-bad if you wish to record using MP4.
 run $ ./autogen.sh, make, and make install. 
 
 

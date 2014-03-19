@@ -1,10 +1,47 @@
-3.11.1
-======
+ 3.11.92
+ =======
+ 
+ Include COPYING and AUTHORS files
+ Improve README and NEWS files according to suggestions by David King
 
-- Initial preview release
+ 3.11.91
+ =======
+ 
+ Theming improvements
+ Add a title to the header bar
+ Add a label for recording date and filename
+ Trash the file, rather than deleting it
+ 
+ 3.11.9
+ ======
+ 
+ Initial preview release
+ Theming improvements
+ Improve the preferences dialog layout
+ Delete the empty file if the recording fails
+ 
+ 3.11.5
+ ======
 
-3.11.5
-======
-
--New icons by Sam Hewitt
--right to left improvements by Yosef Or Boczko
+ Theming improvements
+ Show buttons in the main window when the recording stops
+ Add a logo to the about dialog by Yosef Or Boczko
+ Fix main window UI packing by Cosimo Cecchi
+ Simplify filename building logic by Cosimo Cecchi
+ Fix the application name in the desktop file by Andres Nilsson
+ Show a useful message if there are no files
+ Fix a timing bug when pausing
+ New icons by Sam Hewitt
+ Right to left improvements by Yosef Or Boczko
+ Translation install fix by Doninique Leuenberger
+ 
+ 3.11.3
+ ======
+ 
+ Improve default filename
+ Add some translator comments and improve translatable strings
+ 
+ 3.11.1
+ ======
+ 
+ Initial preview release
