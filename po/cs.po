@@ -72,7 +72,7 @@ msgstr "Úroveň hlasitosti."
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
 #: ../src/record.js:95
 msgid "Sound Recorder"
-msgstr "Záznamník zvuků"
+msgstr "Nahrávání zvuků"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -100,7 +100,7 @@ msgstr "Ukončit"
 
 #: ../src/application.js:79
 msgid "Sound Recorder started"
-msgstr "Záznamník zvuků byl spuštěn"
+msgstr "Nahrávání zvuků bylo spuštěno"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
 #: ../src/application.js:85
@@ -210,7 +210,7 @@ msgstr "Přidání nahrávek"
 
 #: ../src/mainWindow.js:149
 msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "Použijte tlačítko <b>Nahrát</b> k vytvoření zvukového záznamu"
+msgstr "Použijte tlačítko <b>Nahrát</b> k vytvoření zvukové nahrávky"
 
 #: ../src/mainWindow.js:270
 msgid "Recording…"
