@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-23 13:10+0100\n"
-"PO-Revision-Date: 2014-03-23 13:21+0100\n"
+"POT-Creation-Date: 2014-03-23 12:24+0000\n"
+"PO-Revision-Date: 2014-03-23 14:53+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
 "Language: eu\n"
@@ -46,8 +46,7 @@ msgid ""
 msgstr ""
 "Multimedia mota hobetsia audioa grabatzean kodetzeko.  'audio/x-vorbis' Ogg "
 "Vorbis formatuarentzako, edo  'audio/mpeg' MP3 formatuarentzako , for "
-"example. "
-"Hau ez da MIME mota bat."
+"example. Hau ez da MIME mota bat."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
@@ -103,12 +102,12 @@ msgstr "Irten"
 msgid "Sound Recorder started"
 msgstr "Soinu-grabatzailea hasita"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
 #: ../src/application.js:85
 msgid "Recordings"
 msgstr "Grabazioak"
 
-#. Translators: Replace "translator-credits" with your names, one name per line
+#. Translators: Replace "translator-credits" with your names, one name per line */
 #: ../src/application.js:124
 msgid "translator-credits"
 msgstr "Iñaki Larrañaga Murgoitio <dooteo@zundan.com>"
@@ -118,7 +117,7 @@ msgid "Yesterday"
 msgstr "Atzo"
 
 #: ../src/fileUtil.js:93
-#, c-format
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Duela egun %d"
@@ -129,7 +128,7 @@ msgid "Last week"
 msgstr "Azken astea"
 
 #: ../src/fileUtil.js:99
-#, c-format
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Duela aste %d"
@@ -140,7 +139,7 @@ msgid "Last month"
 msgstr "Azken hilabetea"
 
 #: ../src/fileUtil.js:105
-#, c-format
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Duela hilabete %d"
@@ -151,7 +150,7 @@ msgid "Last year"
 msgstr "Azken urtea"
 
 #: ../src/fileUtil.js:111
-#, c-format
+#, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "Duela urte %d"
@@ -165,37 +164,27 @@ msgstr "Informazioa"
 msgid "Cancel"
 msgstr "Utzi"
 
-#. finish button (stop recording)
 #: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
 msgid "Done"
 msgstr "Eginda"
 
-#. File Name item
-#. Translators: "File Name" is the label next to the file name
-#. in the info dialog
 #: ../src/info.js:96
 msgctxt "File Name"
 msgid "Name"
 msgstr "Izena"
 
-#. Source item
 #: ../src/info.js:103
 msgid "Source"
 msgstr "Iturburua"
 
-#. Date Modified item
 #: ../src/info.js:112
 msgid "Date Modified"
 msgstr "Aldatze-data"
 
-#. Date Created item
 #: ../src/info.js:118
 msgid "Date Created"
 msgstr "Sortze-data"
 
-#. Media type item
-#. Translators: "Type" is the label next to the media type
-#. (Ogg Vorbis, AAC, ...) in the info dialog
 #: ../src/info.js:129
 msgctxt "Media Type"
 msgid "Type"
@@ -222,7 +211,7 @@ msgid "Recording…"
 msgstr "Grabatzen…"
 
 #: ../src/mainWindow.js:324
-#, c-format
+#, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "Soinu %d grabatuta"
@@ -264,6 +253,10 @@ msgstr "MOV"
 msgid "Load More"
 msgstr "Kargatu gehiago"
 
+#: ../src/play.js:81
+msgid "Unable to play recording"
+msgstr "Ezin da grabazioa erreproduzitu"
+
 #: ../src/preferences.js:75
 msgid "Preferred format"
 msgstr "Formatu hobetsia"
@@ -276,10 +269,38 @@ msgstr "Bolumena"
 msgid "Microphone"
 msgstr "Mikrofonoa"
 
+#: ../src/record.js:59
+msgid "Unable to create Recordings directory."
+msgstr "Ezin da Grabazioak direktorioa sortu."
+
+#: ../src/record.js:67
+msgid "Your audio capture settings are invalid."
+msgstr "Zure audio-kapturaren ezarpenak baliogabeak dira."
+
+#: ../src/record.js:114
+msgid "Not all elements could be created."
+msgstr "Ezin dira elementu guztiak sortu."
+
+#: ../src/record.js:124
+msgid "Not all of the elements were linked"
+msgstr "Ez dira elementu guztiak estekatu"
+
+#: ../src/record.js:148
+msgid "No Media Profile was set."
+msgstr "Ez da multimediaren profilarik ezarri."
+
+#: ../src/record.js:158
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"Ez da kanalizazioa ezarri\n"
+"grabazioaren egoerarentzako"
+
 #. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1").
+#. by the application (for example, "Clip 1"). */
 #: ../src/record.js:291
-#, c-format
+#, javascript-format
 msgid "Clip %d"
 msgstr "%d. klipa"
 
