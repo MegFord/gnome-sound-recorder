@@ -1,0 +1,285 @@
+# Basque translation for gnome-sound-recorder.
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-23 13:10+0100\n"
+"PO-Revision-Date: 2014-03-23 13:21+0100\n"
+"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
+"Language-Team: Basque <librezale@librezale.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.4\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Leihoaren tamaina"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Leihoaren tamaina (zabalera eta altuera)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Leihoaren posizioa"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Leihoaren posizioa (x eta y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Multimedia mota hobetsia audioa grabatzean kodetzeko"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Multimedia mota hobetsia audioa grabatzean kodetzeko.  'audio/x-vorbis' Ogg "
+"Vorbis formatuarentzako, edo  'audio/mpeg' MP3 formatuarentzako , for "
+"example. "
+"Hau ez da MIME mota bat."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "Multimedia motak kodetzaileak aurrezarritako izenetara mapatzen ditu."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Multimedia motak kodetzaileak aurrezarritako izenetara mapatzen ditu. "
+"Multimedia mota batentzako ez badago mapatzerik, kodetzaile lehenetsiaren "
+"ezarpenak erabiliko dira."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Bolumen-maila"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Bolumen-maila."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
+msgid "Sound Recorder"
+msgstr "Soinu grabatzailea"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Grabatu soinua mikrofonoarekin eta erreproduzitu."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audioa;Aplikazioa;Grabaketa;"
+
+#: ../src/application.js:39
+msgid "SoundRecorder"
+msgstr "Soinu-grabatzailea"
+
+#: ../src/application.js:46 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Hobespenak"
+
+#: ../src/application.js:49
+msgid "About"
+msgstr "Honi buruz"
+
+#: ../src/application.js:50
+msgid "Quit"
+msgstr "Irten"
+
+#: ../src/application.js:79
+msgid "Sound Recorder started"
+msgstr "Soinu-grabatzailea hasita"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/application.js:85
+msgid "Recordings"
+msgstr "Grabazioak"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/application.js:124
+msgid "translator-credits"
+msgstr "Iñaki Larrañaga Murgoitio <dooteo@zundan.com>"
+
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "Atzo"
+
+#: ../src/fileUtil.js:93
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Duela egun %d"
+msgstr[1] "Duela %d egun"
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "Azken astea"
+
+#: ../src/fileUtil.js:99
+#, c-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Duela aste %d"
+msgstr[1] "Duela %d aste"
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "Azken hilabetea"
+
+#: ../src/fileUtil.js:105
+#, c-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Duela hilabete %d"
+msgstr[1] "Duela %d hilabete"
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "Azken urtea"
+
+#: ../src/fileUtil.js:111
+#, c-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "Duela urte %d"
+msgstr[1] "Duela %d urte"
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
+msgid "Info"
+msgstr "Informazioa"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "Utzi"
+
+#. finish button (stop recording)
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+msgid "Done"
+msgstr "Eginda"
+
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "Izena"
+
+#. Source item
+#: ../src/info.js:103
+msgid "Source"
+msgstr "Iturburua"
+
+#. Date Modified item
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "Aldatze-data"
+
+#. Date Created item
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "Sortze-data"
+
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Mota"
+
+#: ../src/listview.js:133 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+msgid "Record"
+msgstr "Grabatu"
+
+#: ../src/mainWindow.js:144
+msgid "Add Recordings"
+msgstr "Gehitu grabazioak"
+
+#: ../src/mainWindow.js:149
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Erabili <b>Grabatu</b> botoia soinuak grabatzeko"
+
+#: ../src/mainWindow.js:270
+msgid "Recording…"
+msgstr "Grabatzen…"
+
+#: ../src/mainWindow.js:324
+#, c-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "Soinu %d grabatuta"
+msgstr[1] "%d soinu grabatuta"
+
+#: ../src/mainWindow.js:385
+msgid "Play"
+msgstr "Erreproduzitu"
+
+#: ../src/mainWindow.js:406
+msgid "Pause"
+msgstr "Pausarazi"
+
+#: ../src/mainWindow.js:513
+msgid "Delete"
+msgstr "Ezabatu"
+
+#: ../src/mainWindow.js:807
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:807
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:807
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:807
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:807
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:829
+msgid "Load More"
+msgstr "Kargatu gehiago"
+
+#: ../src/preferences.js:75
+msgid "Preferred format"
+msgstr "Formatu hobetsia"
+
+#: ../src/preferences.js:83
+msgid "Volume"
+msgstr "Bolumena"
+
+#: ../src/preferences.js:98
+msgid "Microphone"
+msgstr "Mikrofonoa"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1").
+#: ../src/record.js:291
+#, c-format
+msgid "Clip %d"
+msgstr "%d. klipa"
+
