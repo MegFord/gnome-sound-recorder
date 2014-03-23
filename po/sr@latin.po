@@ -125,7 +125,7 @@ msgid_plural "%d days ago"
 msgstr[0] "Pre %d dan"
 msgstr[1] "Pre %d dana"
 msgstr[2] "Pre %d dana"
-msgstr[3] "Pre jednog dana"
+msgstr[3] "Pre %d dana"
 
 #: ../src/fileUtil.js:97
 msgid "Last week"
@@ -138,7 +138,7 @@ msgid_plural "%d weeks ago"
 msgstr[0] "Pre %d nedelje"
 msgstr[1] "Pre %d nedelje"
 msgstr[2] "Pre %d nedelja"
-msgstr[3] "Pre jedne nedelje"
+msgstr[3] "Pre %d nedelje"
 
 #: ../src/fileUtil.js:103
 msgid "Last month"
@@ -151,7 +151,7 @@ msgid_plural "%d months ago"
 msgstr[0] "Pre %d meseca"
 msgstr[1] "Pre %d meseca"
 msgstr[2] "Pre %d meseci"
-msgstr[3] "Pre jednog meseca"
+msgstr[3] "Pre %d meseca"
 
 #: ../src/fileUtil.js:109
 msgid "Last year"
@@ -164,7 +164,7 @@ msgid_plural "%d years ago"
 msgstr[0] "Pre %d godine"
 msgstr[1] "Pre %d godine"
 msgstr[2] "Pre %d godina"
-msgstr[3] "Pre jedne godine"
+msgstr[3] "Pre %d godine"
 
 #: ../src/info.js:40 ../src/mainWindow.js:500
 msgid "Info"
@@ -227,7 +227,7 @@ msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d snimljeni zvuk"
 msgstr[1] "%d snimljena zvuka"
 msgstr[2] "%d snimljenih zvuka"
-msgstr[3] "Jedan snimljeni zvuk"
+msgstr[3] "%d snimljeni zvuk"
 
 #: ../src/mainWindow.js:385
 msgid "Play"
