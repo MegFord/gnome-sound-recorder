@@ -1,5 +1,5 @@
 # Serbian translation of gnome-sound-recorder
-# Courtesy of Prevod.org team (http://prevod.org/) -- 2013.
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2013—2014.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2013—2014.
@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sounds-recorder\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-02-02 08:20+0000\n"
-"PO-Revision-Date: 2014-02-04 21:55+0200\n"
+"POT-Creation-Date: 2014-03-19 15:21+0000\n"
+"PO-Revision-Date: 2014-03-23 08:53+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -68,8 +68,8 @@ msgstr "Jačina zvuka"
 msgid "Volume level."
 msgstr "Jačina zvuka."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:115
-#: ../src/record.js:92
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
 msgid "Sound Recorder"
 msgstr "Snimač zvuka"
 
@@ -81,40 +81,92 @@ msgstr "Snimajte zvuk putem mikrofona i puštajte ga nakon toga"
 msgid "Audio;Application;Record;"
 msgstr "zvuk;program;snimanje;"
 
-#: ../src/application.js:36
+#: ../src/application.js:39
 msgid "SoundRecorder"
 msgstr "Snimač zvuka"
 
-#: ../src/application.js:43 ../src/preferences.js:38
+#: ../src/application.js:46 ../src/preferences.js:38
 msgid "Preferences"
 msgstr "Postavke"
 
-#: ../src/application.js:46
+#: ../src/application.js:49
 msgid "About"
 msgstr "O programu"
 
-#: ../src/application.js:47
+#: ../src/application.js:50
 msgid "Quit"
 msgstr "Izađi"
 
-#: ../src/application.js:76
+#: ../src/application.js:79
 msgid "Sound Recorder started"
 msgstr "Snimač zvuka je pokrenut"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:82
+#: ../src/application.js:85
 msgid "Recordings"
 msgstr "Snimci"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:114
+#: ../src/application.js:124
 msgid "translator-credits"
 msgstr ""
 "  Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "\n"
 "http://prevod.org — prevod na srpski jezik"
 
-#: ../src/info.js:44 ../src/mainWindow.js:466
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "Juče"
+
+#: ../src/fileUtil.js:93
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Pre %d dan"
+msgstr[1] "Pre %d dana"
+msgstr[2] "Pre %d dana"
+msgstr[3] ""
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "Prošle nedelje"
+
+#: ../src/fileUtil.js:99
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Pre %d nedelje"
+msgstr[1] "Pre %d nedelje"
+msgstr[2] "Pre %d nedelja"
+msgstr[3] ""
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "Prošlog meseca"
+
+#: ../src/fileUtil.js:105
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Pre %d meseca"
+msgstr[1] "Pre %d meseca"
+msgstr[2] "Pre %d meseci"
+msgstr[3] ""
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "Prošle godine"
+
+#: ../src/fileUtil.js:111
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "Pre %d godine"
+msgstr[1] "Pre %d godine"
+msgstr[2] "Pre %d godina"
+msgstr[3] ""
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
 msgid "Info"
 msgstr "Podaci"
 
@@ -122,7 +174,7 @@ msgstr "Podaci"
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: ../src/info.js:70 ../src/preferences.js:47
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
 msgid "Done"
 msgstr "Gotovo"
 
@@ -148,108 +200,129 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../src/listview.js:127 ../src/listview.js:132 ../src/listview.js:231
+#: ../src/listview.js:133 ../src/listview.js:235
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d. %m. %Y. u %H:%M:%S"
 
-#: ../src/mainWindow.js:102 ../src/mainWindow.js:714
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
 msgid "Record"
 msgstr "Snimaj"
 
-#: ../src/mainWindow.js:143
+#: ../src/mainWindow.js:144
 msgid "Add Recordings"
 msgstr "Dodaj snimanja"
 
-#: ../src/mainWindow.js:148
+#: ../src/mainWindow.js:149
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Koristite dugme <b>Snimaj</b> da snimite zvuk"
 
-#: ../src/mainWindow.js:269
+#: ../src/mainWindow.js:270
 msgid "Recording…"
 msgstr "Snimam…"
 
-#: ../src/mainWindow.js:283
-msgid "Finish"
-msgstr "Završi"
+#: ../src/mainWindow.js:324
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d snimljeni zvuk"
+msgstr[1] "%d snimljena zvuka"
+msgstr[2] "%d snimljenih zvuka"
+msgstr[3] ""
 
-#: ../src/mainWindow.js:364
+#: ../src/mainWindow.js:385
 msgid "Play"
 msgstr "Pusti"
 
-#: ../src/mainWindow.js:384
+#: ../src/mainWindow.js:406
 msgid "Pause"
 msgstr "Zastani"
 
-#: ../src/mainWindow.js:479
+#: ../src/mainWindow.js:513
 msgid "Delete"
 msgstr "Obriši"
 
-#: ../src/mainWindow.js:749
+#: ../src/mainWindow.js:807
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:749
+#: ../src/mainWindow.js:807
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:749
+#: ../src/mainWindow.js:807
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:749
+#: ../src/mainWindow.js:807
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:749
+#: ../src/mainWindow.js:807
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:772
+#: ../src/mainWindow.js:829
 msgid "Load More"
 msgstr "Učitaj još"
 
-#: ../src/play.js:80
-msgid "Unable to set the playbin to the playing state."
-msgstr "Ne mogu da podesim izvršnog puštanja na stanje snimanja."
+#: ../src/play.js:81
+#| msgid "Unable to create Recordings directory."
+msgid "Unable to play recording"
+msgstr "Ne mogu da pustim snimanja"
 
-#: ../src/preferences.js:68
+#: ../src/preferences.js:75
 msgid "Preferred format"
 msgstr "Željeni zapis:"
 
-#: ../src/preferences.js:76
+#: ../src/preferences.js:83
 msgid "Volume"
 msgstr "Jačina zvuka"
 
-#: ../src/preferences.js:91
+#: ../src/preferences.js:98
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:56
+#: ../src/record.js:59
 msgid "Unable to create Recordings directory."
 msgstr "Ne mogu da napravim direktorijum „Snimanja“."
 
-#: ../src/record.js:64
+#: ../src/record.js:67
 msgid "Your audio capture settings are invalid."
 msgstr "Vaša podešavanja za snimanje zvuka nisu ispravna."
 
-#: ../src/record.js:107
+#: ../src/record.js:114
 msgid "Not all elements could be created."
 msgstr "Ne mogu svi elementi biti napravljeni."
 
-#: ../src/record.js:117
+#: ../src/record.js:124
 msgid "Not all of the elements were linked"
 msgstr "Nisu svi elementi povezani"
 
-#: ../src/record.js:138
+#: ../src/record.js:148
 msgid "No Media Profile was set."
 msgstr "Nije podešen profil medija."
 
-#: ../src/record.js:148
-msgid "Unable to set the pipeline to the recording state."
-msgstr "Ne mogu da podesim spojku na stanje snimanja."
+#: ../src/record.js:158
+#| msgid "Unable to set the pipeline to the recording state."
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"Ne mogu da podesim spojku \n"
+" na stanje snimanja."
 
-#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
-#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
-#: ../src/record.js:271
-msgid "Audio from %Y-%m-%d %H:%M:%S"
-msgstr "Zvuk snimljen %d. %m. %Y. u %H:%M:%S"
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+#, javascript-format
+msgid "Clip %d"
+msgstr "Snimak br. %d"
+
+#~ msgid "Finish"
+#~ msgstr "Završi"
+
+#~ msgid "Unable to set the playbin to the playing state."
+#~ msgstr "Ne mogu da podesim izvršnog puštanja na stanje snimanja."
+
+#~ msgid "Audio from %Y-%m-%d %H:%M:%S"
+#~ msgstr "Zvuk snimljen %d. %m. %Y. u %H:%M:%S"
