@@ -1,4 +1,4 @@
-AC_INIT([gnome-sound-recorder],[3.11.92],[gnome-sound-recorder])
+AC_INIT([gnome-sound-recorder],[3.12.0],[gnome-sound-recorder])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
