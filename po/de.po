@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2014-03-19 15:21+0000\n"
-"PO-Revision-Date: 2014-03-23 16:25+0100\n"
+"PO-Revision-Date: 2014-03-25 23:14+0100\n"
 "Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -72,7 +72,7 @@ msgstr "Lautstärke."
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
 #: ../src/record.js:95
 msgid "Sound Recorder"
-msgstr "Audio-Rekorder"
+msgstr "Tonaufzeichner"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -80,7 +80,7 @@ msgstr "Ton mit dem Mikrofon aufnehmen und wiedergeben"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
-msgstr "Audio;Anwendung;Aufnahme;"
+msgstr "Audio;Anwendung;Aufnahme;Ton;Aufzeichnung;"
 
 #: ../src/application.js:39
 msgid "SoundRecorder"
