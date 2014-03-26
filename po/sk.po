@@ -1,0 +1,312 @@
+# Slovak translation for gnome-sound-recorder.
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+#
+# Peter Vágner <pvdeejay@gmail.com>, 2014.
+# Dušan Kazik <prescott66@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-25 08:55+0000\n"
+"PO-Revision-Date: 2014-03-26 20:28+0100\n"
+"Last-Translator: Peter Mráz <etkinator@gmail.com>\n"
+"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Veľkosť okna"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Veľkosť okna (šírka a výška)"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Pozícia okna"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Pozícia okna (súradnice X a Y)"
+
+# summary
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Uprednostňovaný typ kódovania zvuku počas nahrávania"
+
+# description
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Uprednostňovaný typ kódovania zvuku počas nahrávania. Napríklad 'audio/x-"
+"vorbis' pre Ogg Vorbis alebo 'audio/mpeg' pre MP3. Toto nie je typ MIME."
+
+# summary
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "Mapuje multimediálne typy s názvami predvolieb kodéra."
+
+# description
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Mapuje multimediálne typy s názvami predvolieb kodéra. Ak pre multimediálny "
+"typ neexistuje mapovanie, použijú sa predvolené nastavenia kodéra."
+
+# summary
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Úroveň hlasitosti"
+
+# description
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Úroveň hlasitosti."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
+msgid "Sound Recorder"
+msgstr "Nahrávanie zvuku"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Nahráva zvuk z mikrofónu a prehráva cez reproduktor"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audio;Zvuk;Application;Aplikácia;Record;Nahrávanie;"
+
+#: ../src/application.js:39
+msgid "SoundRecorder"
+msgstr "Nahrávanie zvuku"
+
+# DK: Nastavenia
+# vid slovnik: https://docs.google.com/spreadsheet/pub?key=0AhpwCovmYk15dDdnVzhRVlpkTjZtRzFEcllLZXhDWUE&output=html&widget=true
+#: ../src/application.js:46 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Nastavenia"
+
+#: ../src/application.js:49
+msgid "About"
+msgstr "O programe"
+
+#: ../src/application.js:50
+msgid "Quit"
+msgstr "Ukončiť"
+
+#: ../src/application.js:79
+msgid "Sound Recorder started"
+msgstr "Nahrávanie zvuku spustené"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:85
+msgid "Recordings"
+msgstr "Nahrávky"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:124
+msgid "translator-credits"
+msgstr "Peter Vágner <pvdeejay@gmail.com>"
+
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "Včera"
+
+#: ../src/fileUtil.js:93
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Pred %d dňami"
+msgstr[1] "Pred %d dňom"
+msgstr[2] "Pred %d dňami"
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "Posledný týždeň"
+
+#: ../src/fileUtil.js:99
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Pred %d týždňami"
+msgstr[1] "Pred %d týždňom"
+msgstr[2] "Pred %d týždňami"
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "Posledný mesiac"
+
+#: ../src/fileUtil.js:105
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Pred %d mesiacmi"
+msgstr[1] "Pred %d mesiacom"
+msgstr[2] "Pred %d mesiacmi"
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "Posledný rok"
+
+#: ../src/fileUtil.js:111
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "Pred %d rokmi"
+msgstr[1] "Pred %d rokom"
+msgstr[2] "Pred %d rokmi"
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
+msgid "Info"
+msgstr "Informácie"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "Zrušiť"
+
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+msgid "Done"
+msgstr "Hotovo"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "Názov"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "Zdroj"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "Dátum poslednej zmeny"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "Dátum vytvorenia"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Typ"
+
+#: ../src/listview.js:133 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+msgid "Record"
+msgstr "Nahrať"
+
+#: ../src/mainWindow.js:144
+msgid "Add Recordings"
+msgstr "Pridať nahrávky"
+
+#: ../src/mainWindow.js:149
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Zvukové nahrávky vytvoríte stlačením tlačidla <b>Nahrať</b>"
+
+#: ../src/mainWindow.js:270
+msgid "Recording…"
+msgstr "Nahráva sa…"
+
+#: ../src/mainWindow.js:324
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d nahrávok"
+msgstr[1] "%d nahrávka"
+msgstr[2] "%d nahrávky"
+
+#: ../src/mainWindow.js:385
+msgid "Play"
+msgstr "Prehrať"
+
+#: ../src/mainWindow.js:406
+msgid "Pause"
+msgstr "Pozastaviť"
+
+#: ../src/mainWindow.js:513
+msgid "Delete"
+msgstr "Odstrániť"
+
+#: ../src/mainWindow.js:807
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:807
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:807
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:807
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:807
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:829
+msgid "Load More"
+msgstr "Načítať viac"
+
+#: ../src/play.js:81
+msgid "Unable to play recording"
+msgstr "Nepodarilo sa prehrať nahrávku"
+
+#: ../src/preferences.js:75
+msgid "Preferred format"
+msgstr "Uprednostňovaný formát"
+
+#: ../src/preferences.js:83
+msgid "Volume"
+msgstr "Hlasitosť"
+
+#: ../src/preferences.js:98
+msgid "Microphone"
+msgstr "Mikrofón"
+
+#: ../src/record.js:59
+msgid "Unable to create Recordings directory."
+msgstr "Nepodarilo sa vytvoriť priečinok Nahrávky."
+
+#: ../src/record.js:67
+msgid "Your audio capture settings are invalid."
+msgstr "Vaše nastavenia zachytávania zvuku sú neplatné."
+
+#: ../src/record.js:114
+msgid "Not all elements could be created."
+msgstr "Nebolo možné vytvoriť všetky prvky."
+
+#: ../src/record.js:124
+msgid "Not all of the elements were linked"
+msgstr "Neboli prepojené všetky prvky"
+
+#: ../src/record.js:148
+msgid "No Media Profile was set."
+msgstr "Nebol nastavený žiadny multimediálny profil."
+
+# PM: myslim že teraz to pochopí aj lajk, aj ked to nie je celkom technicky presné
+#: ../src/record.js:158
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"Nepodarilo sa nastaviť zreťazenie\n"
+"podsystémov do stavu nahrávania"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+msgid "Clip %d"
+msgstr "Nahrávka %d"
