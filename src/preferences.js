@@ -41,23 +41,10 @@ const Preferences = new Lang.Class({
                                         destroy_with_parent: true,
                                         default_width: 400,
                                         margin_top: 5,
+                                        use_header_bar: 1,
                                         hexpand: true }); 
                                         
         this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
-        let header = new Gtk.HeaderBar({ hexpand: true });
-        header.set_show_close_button(false);
-        this.widget.set_titlebar(header);
-        
-        let buttonToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                          spacing: 0 });
-        buttonToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        header.pack_end(buttonToolbar);
-        
-        let button = new Gtk.Button({ label: _("Done") });
-        button.connect("clicked", Lang.bind(this, this.onDoneClicked));
-        buttonToolbar.pack_end(button, false, true, 0);
-        button.show();
-        buttonToolbar.show();                                     
         
         let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
                                    row_homogeneous: true,
