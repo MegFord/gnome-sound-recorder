@@ -70,6 +70,7 @@ const Application = new Lang.Class({
                 this.quit();
             }));
          this.add_action(quitAction);
+         this.add_accelerator('<Primary>q', 'app.quit', null);
     },
 
     vfunc_startup: function() {
