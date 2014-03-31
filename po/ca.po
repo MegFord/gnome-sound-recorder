@@ -1,0 +1,305 @@
+# Catalan translation for gnome-sound-recorder.
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Pau Iranzo <paugnu@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-19 15:21+0000\n"
+"PO-Revision-Date: 2014-03-09 17:45+0100\n"
+"Last-Translator: Pau Iranzo <paugnu@gmail.com>\n"
+"Language-Team: Catalan <gnome@llistes.softcatala.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Mida de la finestra"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Mida de la finestra (amplada i alçada)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Posició de la finestra"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Posició de la finestra (x i y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr "Tipus de format de codificació preferit per a l'enregistrament d'àudio"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Tipus de format de codificació preferit per a l'enregistrament d'àudio. Per "
+"exemple: «audio/x-vorbis» per Ogg Vorbis o «audio/mpeg» per MP3. Això no és "
+"un tipus MIME."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+"Mapa els tipus de format als noms predeterminats del codificador d'àudio."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Mapa els tipus de format als noms predeterminats del codificador d'àudio. Si "
+"no hi ha mapat per a cap tipus de format, s'utilitzaran els paràmetres per "
+"defecte del codificador."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Nivell de volum"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Nivell de volum."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
+msgid "Sound Recorder"
+msgstr "Enregistradora de so"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Enregistra un so mitjançant el micròfon i reprodueix-lo"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "àudio;aplicació;enregistrament;"
+
+#: ../src/application.js:39
+msgid "SoundRecorder"
+msgstr "Enregistradora de so"
+
+#: ../src/application.js:46 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Preferències"
+
+#: ../src/application.js:49
+msgid "About"
+msgstr "Quant a"
+
+#: ../src/application.js:50
+msgid "Quit"
+msgstr "Surt"
+
+#: ../src/application.js:79
+msgid "Sound Recorder started"
+msgstr "S'ha iniciat l'enregistradora de so"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:85
+msgid "Recordings"
+msgstr "Enregistraments"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:124
+msgid "translator-credits"
+msgstr "Pau Iranzo <pau.iranzo@softcatala.org>"
+
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "Ahir"
+
+#: ../src/fileUtil.js:93
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "fa %d dia"
+msgstr[1] "fa %d dies"
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "Darrera setmana"
+
+#: ../src/fileUtil.js:99
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "fa %d setmana"
+msgstr[1] "fa %d setmanes"
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "Darrer mes"
+
+#: ../src/fileUtil.js:105
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "fa %d mes"
+msgstr[1] "fa %d mesos"
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "Darrer any"
+
+#: ../src/fileUtil.js:111
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "fa %d any"
+msgstr[1] "fa %d anys"
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
+msgid "Info"
+msgstr "Informació"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+msgid "Done"
+msgstr "Fet"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nom"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "Font"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "Data de modificació"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "Data de creació"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tipus"
+
+#: ../src/listview.js:133 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d-%m-%Y %H:%M:%S"
+
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+msgid "Record"
+msgstr "Enregistra"
+
+#: ../src/mainWindow.js:144
+msgid "Add Recordings"
+msgstr "Afegeix enregistraments"
+
+#: ../src/mainWindow.js:149
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Utilitzeu el botó <b>Enregistra</b> per crear enregistraments d'àudio"
+
+#: ../src/mainWindow.js:270
+msgid "Recording…"
+msgstr "S'està enregistrant…"
+
+#: ../src/mainWindow.js:324
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d àudio enregistrat"
+msgstr[1] "%d àudios enregistrats"
+
+#: ../src/mainWindow.js:385
+msgid "Play"
+msgstr "Reprodueix"
+
+#: ../src/mainWindow.js:406
+msgid "Pause"
+msgstr "Fes una pausa"
+
+#: ../src/mainWindow.js:513
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: ../src/mainWindow.js:807
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:807
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:807
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:807
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:807
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:829
+msgid "Load More"
+msgstr "Carrega'n més"
+
+#: ../src/play.js:81
+msgid "Unable to play recording"
+msgstr "No es pot reproduir l'enregistrament"
+
+#: ../src/preferences.js:75
+msgid "Preferred format"
+msgstr "Format preferit"
+
+#: ../src/preferences.js:83
+msgid "Volume"
+msgstr "Volum"
+
+#: ../src/preferences.js:98
+msgid "Microphone"
+msgstr "Micròfon"
+
+#: ../src/record.js:59
+msgid "Unable to create Recordings directory."
+msgstr "No s'ha pogut crear el directori «Enregistraments»."
+
+#: ../src/record.js:67
+msgid "Your audio capture settings are invalid."
+msgstr "Els paràmetres de captura d'àudio no són vàlids."
+
+#: ../src/record.js:114
+msgid "Not all elements could be created."
+msgstr "No s'han pogut crear tots els elements."
+
+#: ../src/record.js:124
+msgid "Not all of the elements were linked"
+msgstr "No s'han pogut enllaçar tots els elements"
+
+#: ../src/record.js:148
+msgid "No Media Profile was set."
+msgstr "No s'ha establert cap perfil de format."
+
+#: ../src/record.js:158
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"No s'ha pogut establir la canonada \n"
+"a l'estat d'enregistrament"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+#, javascript-format
+msgid "Clip %d"
+msgstr "Retall %d"
