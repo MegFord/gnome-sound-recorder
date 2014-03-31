@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-01-20 07:35+0000\n"
-"PO-Revision-Date: 2014-01-20 21:27+0100\n"
+"POT-Creation-Date: 2014-03-31 07:59+0000\n"
+"PO-Revision-Date: 2014-03-31 22:32+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -70,8 +71,8 @@ msgstr "Raven glasnosti"
 msgid "Volume level."
 msgstr "Raven glasnosti."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/main.js:126
-#: ../src/record.js:94
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
 msgid "Sound Recorder"
 msgstr "Snemalnik zvoka"
 
@@ -83,63 +84,131 @@ msgstr "Snemanje zvoka z mikrofonom in predvajanje posnetkov"
 msgid "Audio;Application;Record;"
 msgstr "Zvok;Program;Snemaj;"
 
-#: ../src/info.js:46 ../src/mainWindow.js:495
-msgid "Info"
-msgstr "Podrobnosti"
-
-#: ../src/info.js:58
-msgid "Cancel"
-msgstr "Prekliči"
-
-#: ../src/info.js:72 ../src/preferences.js:47
-msgid "Done"
-msgstr "Dokončano"
-
-#: ../src/info.js:98
-msgctxt "File Name"
-msgid "Name"
-msgstr "Ime"
-
-#: ../src/info.js:105
-msgid "Source"
-msgstr "Vir"
-
-#: ../src/info.js:114
-msgid "Date Modified"
-msgstr "Datum spremembe"
-
-#: ../src/info.js:120
-msgid "Date Created"
-msgstr "Datum nastanka"
-
-#: ../src/info.js:131
-msgctxt "Media Type"
-msgid "Type"
-msgstr "Vrsta"
-
-#: ../src/listview.js:129 ../src/listview.js:134 ../src/listview.js:233
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d-%m-%Y %H:%M:%S"
-
-#: ../src/main.js:57
+#: ../src/application.js:39
 msgid "SoundRecorder"
 msgstr "Snemalnik zvoka"
 
-#: ../src/main.js:93
+#: ../src/application.js:46 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Možnosti"
+
+#: ../src/application.js:49
+msgid "About"
+msgstr "O programu"
+
+#: ../src/application.js:50
+msgid "Quit"
+msgstr "Končaj"
+
+#: ../src/application.js:79
 msgid "Sound Recorder started"
 msgstr "Snemalnik zvoka je zagnan"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/main.js:98
+#: ../src/application.js:85
 msgid "Recordings"
 msgstr "Posnetki"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/main.js:125
+#: ../src/application.js:124
 msgid "translator-credits"
 msgstr "Matej Urbančič"
 
-#: ../src/mainWindow.js:146
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "Včeraj"
+
+#: ../src/fileUtil.js:93
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Pred %d dnevi"
+msgstr[1] "Pred %d dnem"
+msgstr[2] "Pred %d dnevoma"
+msgstr[3] "Pred %d dnevi"
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "Prejšnji teden"
+
+#: ../src/fileUtil.js:99
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Pred %d tedni"
+msgstr[1] "Pred %d tednom"
+msgstr[2] "Pred %d tednoma"
+msgstr[3] "Pred %d tedni"
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "Prejšnji mesec"
+
+#: ../src/fileUtil.js:105
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Pred %d meseci"
+msgstr[1] "Pred %d mesecem"
+msgstr[2] "Pred %d mesecema"
+msgstr[3] "Pred %d meseci"
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "Lansko leto"
+
+#: ../src/fileUtil.js:111
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "Pred %d leti"
+msgstr[1] "Pred %d letom"
+msgstr[2] "Pred %d letoma"
+msgstr[3] "Pred %d leti"
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
+msgid "Info"
+msgstr "Podrobnosti"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+msgid "Done"
+msgstr "Dokončano"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "Ime"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "Vir"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "Datum spremembe"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "Datum nastanka"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Vrsta"
+
+#: ../src/listview.js:133 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d-%m-%Y %H:%M:%S"
+
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+msgid "Record"
+msgstr "Snemaj"
+
+#: ../src/mainWindow.js:144
 msgid "Add Recordings"
 msgstr "Dodaj posnetke"
 
@@ -151,79 +220,107 @@ msgstr "Uporabite gumb <b>Posnemi</b> za snemanje posnetkov"
 msgid "Recording…"
 msgstr "Poteka snemanje ..."
 
-#: ../src/mainWindow.js:520
+#: ../src/mainWindow.js:324
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d posnetih zvokov"
+msgstr[1] "%d posnet zvok"
+msgstr[2] "%d posneta zvoka"
+msgstr[3] "%d posneti zvoki"
+
+#: ../src/mainWindow.js:385
+msgid "Play"
+msgstr "Predvajaj"
+
+#: ../src/mainWindow.js:406
+msgid "Pause"
+msgstr "Premor"
+
+#: ../src/mainWindow.js:513
 msgid "Delete"
 msgstr "Izbriši"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:807
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:807
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:807
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:807
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:783
+#: ../src/mainWindow.js:807
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:829
 msgid "Load More"
 msgstr "Naloži več"
 
-#: ../src/play.js:82
-msgid "Unable to set the playbin to the playing state."
-msgstr "Predvajalnika ni mogoče nastaviti za predvajanje."
+#: ../src/play.js:81
+msgid "Unable to play recording"
+msgstr "Glasbe ni mogoče predvajati"
 
-#: ../src/preferences.js:68
+#: ../src/preferences.js:75
 msgid "Preferred format"
 msgstr "Prednostni zapis"
 
-#: ../src/preferences.js:76
+#: ../src/preferences.js:83
 msgid "Volume"
 msgstr "Glasnost"
 
-#: ../src/preferences.js:91
+#: ../src/preferences.js:98
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:58
+#: ../src/record.js:59
 msgid "Unable to create Recordings directory."
 msgstr "Mape Posnetki ni mogoče ustvariti!"
 
-#: ../src/record.js:66
+#: ../src/record.js:67
 msgid "Your audio capture settings are invalid."
 msgstr "Določene so neveljavne nastavitve zajemanja zvoka."
 
-#: ../src/record.js:109
+#: ../src/record.js:114
 msgid "Not all elements could be created."
 msgstr "Vseh predmetov ni mogoče ustvariti."
 
-#: ../src/record.js:119
+#: ../src/record.js:124
 msgid "Not all of the elements were linked"
 msgstr "Vsi predmeti niso povezani"
 
-#: ../src/record.js:140
+#: ../src/record.js:148
 msgid "No Media Profile was set."
 msgstr "Ni nastavljenega profila posnetkov."
 
-#: ../src/record.js:150
-msgid "Unable to set the pipeline to the recording state."
-msgstr "Cevovoda ni mogoče nastaviti na stanje snemanja."
+#: ../src/record.js:158
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"Cevovoda ni mogoče nastaviti\n"
+"na stanje snemanja."
 
-#. Translators: "Audio from %Y-%m-%d %H:%M:%S" is the default name assigned to a file created
-#. by the application (for example, "Audio from 2013-10-05 13:25:21.ogg"). */
-#: ../src/record.js:273
-msgid "Audio from %Y-%m-%d %H:%M:%S"
-msgstr "Posnetek %d-%m-%Y %H:%M:%S"
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+#, javascript-format
+msgid "Clip %d"
+msgstr "Izrez %d"
+
+#~ msgid "Unable to set the playbin to the playing state."
+#~ msgstr "Predvajalnika ni mogoče nastaviti za predvajanje."
+
+#~ msgid "Audio from %Y-%m-%d %H:%M:%S"
+#~ msgstr "Posnetek %d-%m-%Y %H:%M:%S"
 
 #~ msgid "Error: "
 #~ msgstr "Napaka: "
