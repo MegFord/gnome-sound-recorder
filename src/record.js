@@ -66,6 +66,7 @@ const Record = new Lang.Class({
         if(this.srcElement == null) {
           this._showErrorDialog(_('Your audio capture settings are invalid.'));
           this.onEndOfStream();
+          return;
         }
         
         this.pipeline.add(this.srcElement);
@@ -181,7 +182,9 @@ const Record = new Lang.Class({
     onEndOfStream: function() { 
         this.pipeline.set_state(Gst.State.NULL);
         this.pipeState = PipelineStates.STOPPED;
-        this.recordBus.remove_signal_watch();
+        if (this.recordBus) {
+	        this.recordBus.remove_signal_watch();
+        }
         this._updateTime(); 
     },
         
@@ -251,7 +254,9 @@ const Record = new Lang.Class({
     },
     
     setVolume: function(value) {
-        this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
+        if (this.volume) {
+            this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
+        }
     },
     
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
