@@ -1,0 +1,469 @@
+# Dutch translation for gnome-music.
+# Copyright (C) 2013 gnome-music's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-music package.
+#
+# Erwin Poeze <donnut@outlook.com>, 2013.
+# Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-music 3.10\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-03-19 15:21+0000\n"
+"PO-Revision-Date: 2014-04-13 09:05+0200\n"
+"Last-Translator: Hannie Dumoleyn <hannie@ubuntu-nl.org>\n"
+"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Venstergrootte"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Venstergrootte (breedte en hoogte)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Vensterpositie"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Vensterpositie (x en y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Preferred media type for encoding audio when recording"
+msgstr ""
+"Voorkeursmediatype voor het coderen van geluid wanneer er opgenomen wordt"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+msgstr ""
+"Voorkeursmediatype voor het coderen van geluid wanneer er opgenomen wordt. "
+"bijvoorbeeld ‘audio/x-vorbis’ voor Ogg Vorbis, of ‘audio/mpeg’ voor MP3. Dit "
+"is geen MIME-type."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Maps media types to audio encoder preset names."
+msgstr "Verbindt mediatypes met vooraf ingestelde namen van audio-codeerder."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping for a "
+"media type, the default encoder settings will be used."
+msgstr ""
+"Verbindt mediatypes met vooraf ingestelde namen van audio-codeerder. Als een "
+"mediatype niet verbonden kan worden, zullen de standaard codeerinstellingen "
+"worden gebruikt."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Volume level"
+msgstr "Geluidsniveau"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Volume level."
+msgstr "Geluidsniveau."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
+#: ../src/record.js:95
+msgid "Sound Recorder"
+msgstr "Geluidsrecorder"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Geluid opnemen via de microfoon en het afspelen"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audio;Application;Toepassing;Record;Opnemen;"
+
+#: ../src/application.js:39
+msgid "SoundRecorder"
+msgstr "Geluidsrecorder"
+
+#: ../src/application.js:46 ../src/preferences.js:38
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: ../src/application.js:49
+msgid "About"
+msgstr "Info"
+
+#: ../src/application.js:50
+#| msgid "_Quit"
+msgid "Quit"
+msgstr "Afsluiten"
+
+#: ../src/application.js:79
+msgid "Sound Recorder started"
+msgstr "Geluidsopname gestart"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:85
+msgid "Recordings"
+msgstr "Recordings"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:124
+msgid "translator-credits"
+msgstr "vertaald door"
+
+#: ../src/fileUtil.js:91
+msgid "Yesterday"
+msgstr "Gisteren"
+
+#: ../src/fileUtil.js:93
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d dag geleden"
+msgstr[1] "%d dagen geleden"
+
+#: ../src/fileUtil.js:97
+msgid "Last week"
+msgstr "Vorige week"
+
+#: ../src/fileUtil.js:99
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d week geleden"
+msgstr[1] "%d weken geleden"
+
+#: ../src/fileUtil.js:103
+msgid "Last month"
+msgstr "Vorige maand"
+
+#: ../src/fileUtil.js:105
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d maand geleden"
+msgstr[1] "%d maanden geleden"
+
+#: ../src/fileUtil.js:109
+msgid "Last year"
+msgstr "Vorig jaar"
+
+#: ../src/fileUtil.js:111
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d jaar geleden"
+msgstr[1] "%d jaar geleden"
+
+#: ../src/info.js:40 ../src/mainWindow.js:500
+msgid "Info"
+msgstr "Info"
+
+#: ../src/info.js:56
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+msgid "Done"
+msgstr "Klaar"
+
+#: ../src/info.js:96
+msgctxt "File Name"
+msgid "Name"
+msgstr "Naam"
+
+#: ../src/info.js:103
+msgid "Source"
+msgstr "Bron"
+
+#: ../src/info.js:112
+msgid "Date Modified"
+msgstr "Datum gewijzigd"
+
+#: ../src/info.js:118
+msgid "Date Created"
+msgstr "Aanmaakdatum"
+
+#: ../src/info.js:129
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Type"
+
+#: ../src/listview.js:133 ../src/listview.js:235
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d-%m-%Y %H:%M:%S"
+
+#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+msgid "Record"
+msgstr "Opnemen"
+
+#: ../src/mainWindow.js:144
+msgid "Add Recordings"
+msgstr "Opnames toevoegen"
+
+#: ../src/mainWindow.js:149
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "De knop <b>Opnemen</b> gebruiken om geluidsopnames te maken"
+
+#: ../src/mainWindow.js:270
+msgid "Recording…"
+msgstr "Opnemen…"
+
+#: ../src/mainWindow.js:324
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d geluidsopname"
+msgstr[1] "%d geluidsopnames"
+
+#: ../src/mainWindow.js:385
+#| msgid "Playlists"
+msgid "Play"
+msgstr "Afspelen"
+
+#: ../src/mainWindow.js:406
+msgid "Pause"
+msgstr "Pauzeren"
+
+#: ../src/mainWindow.js:513
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: ../src/mainWindow.js:807
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:807
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:807
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:807
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:807
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:829
+msgid "Load More"
+msgstr "Meer laden"
+
+#: ../src/play.js:81
+msgid "Unable to play recording"
+msgstr "Afspelen van opname niet mogelijk"
+
+#: ../src/preferences.js:75
+msgid "Preferred format"
+msgstr "Voorkeursformaat"
+
+#: ../src/preferences.js:83
+msgid "Volume"
+msgstr "Volume"
+
+#: ../src/preferences.js:98
+msgid "Microphone"
+msgstr "Microfoon"
+
+#: ../src/record.js:59
+msgid "Unable to create Recordings directory."
+msgstr "Map voor opnames kan niet worden aangemaakt."
+
+#: ../src/record.js:67
+msgid "Your audio capture settings are invalid."
+msgstr "Uw audio-opname-instellingen zijn ongeldig."
+
+#: ../src/record.js:114
+msgid "Not all elements could be created."
+msgstr "Niet alle onderdelen konden worden aangemaakt."
+
+#: ../src/record.js:124
+msgid "Not all of the elements were linked"
+msgstr "Niet alle onderdelen zijn gekoppeld"
+
+#: ../src/record.js:148
+msgid "No Media Profile was set."
+msgstr "Er is geen mediaprofiel ingesteld."
+
+#: ../src/record.js:158
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"Opzetten van pijpleiding naar de \n"
+"opnamestand is niet mogelijk"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:291
+#, javascript-format
+msgid "Clip %d"
+msgstr "Clip %d"
+
+#~ msgid "Window maximized"
+#~ msgstr "Venster gemaximaliseerd"
+
+#~ msgid "Window maximized state."
+#~ msgstr "Venstermaximalisatiestaat"
+
+#~ msgid "Playback repeat mode"
+#~ msgstr "Modus herhaald afspelen"
+
+#~ msgid ""
+#~ "Value identifies whether to repeat or randomize playback through the "
+#~ "collection. Allowed values are: \"none\", \"song\", \"all\", \"shuffle\"."
+#~ msgstr ""
+#~ "Waarde bepaalt of de verzameling herhaald of gehusseld afgespeeld moet "
+#~ "worden. Toegestaan zijn: \"niets\",\"nummer\",\"alles\",\"hussel\"."
+
+#~ msgid "Search mode"
+#~ msgstr "Zoekmodus"
+
+#~ msgid "If true, the search bar is shown."
+#~ msgstr "Bij 'true' wordt de zoekbalk getoond."
+
+#~ msgid "Music"
+#~ msgstr "Muziek"
+
+#~ msgid "Music Player"
+#~ msgstr "Muziekspeler"
+
+#~ msgid "Play and organize your music collection"
+#~ msgstr "Beluister en beheer uw muziekverzameling"
+
+#~ msgid "Untitled"
+#~ msgstr "Naamloos"
+
+#~ msgid "Unknown Artist"
+#~ msgstr "Onbekende artiest"
+
+#~ msgid ""
+#~ "No Music found!\n"
+#~ " Put some files into the folder %s"
+#~ msgstr ""
+#~ "Geen muziek gevonden!\n"
+#~ " Kopieer muziekbestanden naar map %s"
+
+#~ msgid "Albums"
+#~ msgstr "Muziekalbum"
+
+#~ msgid "Songs"
+#~ msgstr "Nummers"
+
+#~ msgid "Artists"
+#~ msgstr "Artiesten"
+
+#~ msgid "All Artists"
+#~ msgstr "Alle artiesten"
+
+#~ msgid "Loading..."
+#~ msgstr "Bezig met laden…"
+
+#~ msgid "Empty"
+#~ msgstr "Leeg"
+
+#~ msgid "Copyright © 2013 GNOME Music Developers"
+#~ msgstr "Copyright © 2013 Gnome Music ontwikkelaars"
+
+#~ msgid "A music player and management application for GNOME."
+#~ msgstr "Een muziekspeler en beheertoepassing voor Gnome."
+
+#~ msgid "Visit GNOME Music website"
+#~ msgstr "Bezoek de Gnome Music-website"
+
+#~ msgid ""
+#~ "GNOME Music is free software; you can redistribute it and/or modify it "
+#~ "under the terms of the GNU General Public License as published by the "
+#~ "Free Software Foundation; either version 2 of the License, or (at your "
+#~ "option) any later version.\n"
+#~ "\n"
+#~ "GNOME Music is distributed in the hope that it will be useful, but "
+#~ "WITHOUT ANY WARRANTY; without even the implied warranty of "
+#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
+#~ "Public License for more details.\n"
+#~ "\n"
+#~ "You should have received a copy of the GNU General Public License along "
+#~ "with GNOME Music; if not, write to the Free Software Foundation, Inc., 51 "
+#~ "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.\n"
+#~ "\n"
+#~ "The GNOME Music authors hereby grant permission for non-GPL compatible "
+#~ "GStreamer plugins to be used and distributed together with GStreamer and "
+#~ "GNOME Music.  This permission is above and beyond the permissions granted "
+#~ "by the GPL license by which GNOME Music is covered.  If you modify this "
+#~ "code, you may extend this exception to your version of the code, but you "
+#~ "are not obligated to do so.  If you do not wish to do so, delete this "
+#~ "exception statement from your version."
+#~ msgstr ""
+#~ "Gnome Music is vrije software; u mag het verder verspreiden en/of "
+#~ "wijzigen onder de voorwaarden van de GNU General Public License zoals "
+#~ "gepubliceerd door de Free Software Foundation, naar keuze ofwel onder "
+#~ "versie 3 ofwel onder een nieuwere versie van die licentie.\n"
+#~ "\n"
+#~ "Gnome Music wordt uitgegeven in de hoop dat het nuttig is, maar ZONDER "
+#~ "ENIGE GARANTIE; zelfs zonder de impliciete garantie van VERKOOPBAARHEID "
+#~ "of GESCHIKTHEID VOOR EEN BEPAALD DOEL. Zie de GNU General Public License "
+#~ "voor meer details.\n"
+#~ "\n"
+#~ "Bij dit programma hoort u een kopie van de GNU General Public "
+#~ "License ontvangen te hebben; mocht dit niet het geval zijn, schrijf dan "
+#~ "naar Free Software Foundation, Inc.,  51 Franklin Street, Fifth Floor, "
+#~ "Boston, MA 02110-1301,  USA.\n"
+#~ "\n"
+#~ "De makers van Gnome Music verlenen hierbij toestemming om niet-GPL "
+#~ "overeenkomende plugins te gebruiken en te distribueren samen met "
+#~ "GStreamer en Gnome Music. Deze toestemming overstijgt en gaat verder dan "
+#~ "de toestemming verleend door de GPL-licentie waaronder Gnome Music "
+#~ "ressorteert. Als u deze code bewerkt kunt u deze uitzondering van "
+#~ "toepassing verklaren op uw versie van de code, maar u bent hiertoe niet "
+#~ "verplicht. Als u besluit de uitzondering niet van toepassing te "
+#~ "verklaring, verwijder dan deze verklaring uit uw versie."
+
+#~ msgid "Released"
+#~ msgstr "Uitgegeven"
+
+#~ msgid "Running Length"
+#~ msgstr "Speelduur"
+
+#~ msgid "_New Playlist"
+#~ msgstr "_Nieuwe afspeellijst"
+
+#~ msgid "_Now Playing"
+#~ msgstr "_Nu afspelen"
+
+#~ msgid "_About Music"
+#~ msgstr "_Over Muziek"
+
+#~ msgid "Shuffle"
+#~ msgstr "Husselen"
+
+#~ msgid "Repeat All"
+#~ msgstr "Alles herhalen"
+
+#~ msgid "Repeat Song"
+#~ msgstr "Nummer herhalen"
+
+#~ msgid "Shuffle/Repeat Off"
+#~ msgstr "Herhalen/husselen uit"
+
+#~ msgid "No Music Found"
+#~ msgstr "Geen muziek gevonden"
+
+#~ msgid "Select All"
+#~ msgstr "Alles selecteren"
+
+#~ msgid "Select None"
+#~ msgstr "Niets selecteren"
+
+#~ msgid "Click on items to select them"
+#~ msgstr "Klik op items om deze te selecteren"
+
+#~ msgid "Add to Playlist"
+#~ msgstr "Aan afspeellijst toevoegen"
