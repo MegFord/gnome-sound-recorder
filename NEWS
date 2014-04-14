@@ -1,3 +1,17 @@
+ 3.12.1
+ =======
+ 
+ Change Done button in Preferences dialog to close by Yosef Or Boczko
+ Add title to header bar in Info dialog
+ Add accelerator for quit action by David King
+ Avoid calls to undefined vars in case of invalid audio settings by Felipe Borges
+
+
+ 3.12.0
+ =======
+
+ Preview Release
+
  3.11.92
  =======
  
@@ -15,7 +29,6 @@
  3.11.9
  ======
  
- Initial preview release
  Theming improvements
  Improve the preferences dialog layout
  Delete the empty file if the recording fails
