@@ -27,8 +27,6 @@ const C_ = imports.gettext.pgettext;
 
 const MainWindow = imports.mainWindow;
 
-const _FILE_NAME_ENTRY_TIMEOUT = 600;
-
 const InfoDialog = new Lang.Class({
     Name: 'InfoDialog',
 
@@ -37,14 +35,14 @@ const InfoDialog = new Lang.Class({
 
         this._file = Gio.File.new_for_uri(fileNav.uri);
 
-        this.widget = new Gtk.Dialog ({ title: _("Info"),
-                                        resizable: false,
+        this.widget = new Gtk.Dialog ({ resizable: false,
                                         modal: true,
                                         destroy_with_parent: true,
                                         default_width: 400,
                                         hexpand: true });
         this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
-        let header = new Gtk.HeaderBar({ hexpand: true });
+        let header = new Gtk.HeaderBar({ hexpand: true,
+					 title: _("Info") });
         header.set_show_close_button(false);
         this.widget.set_titlebar(header);
         
