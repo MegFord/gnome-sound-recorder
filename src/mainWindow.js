@@ -324,8 +324,11 @@ const MainView = new Lang.Class({
             title = Gettext.ngettext("%d Recorded Sound",
                                      "%d Recorded Sounds", 
                                       sounds).format(sounds);
-            header.set_title(title);
+        } else {
+            title = "";
         }
+        header.set_title(title);
+
         this.listBox = null;
         this._startIdx = 0;
         this._endIdx = offsetController.getEndIdx();
