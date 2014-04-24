@@ -40,7 +40,8 @@ const comboBoxMap = {
 const containerProfileMap = {
     OGG: "application/ogg", 
     ID3: "application/x-id3",
-    MP4: "video/quicktime,variant=(string)iso"
+    MP4: "video/quicktime,variant=(string)iso",
+    AUDIO_OGG: "application/ogg;audio/ogg;video/ogg"
 };
 
 

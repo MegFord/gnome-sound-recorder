@@ -46,17 +46,6 @@ const mediaTypeMap = {
     MP4: "MP4"
 };
 
-const codecDescription = {
-    OGG: "Ogg",
-    VORBIS: "Vorbis",
-    OPUS: "Opus",
-    ID3: "ID3 tag",
-    MP3: "MPEG-1 Layer 3 (MP3)",
-    QT: "Quicktime",
-    MP4: "MPEG-4 AAC",
-    FLAC: "Free Lossless Audio Codec (FLAC)"
-};
-
 const ListType = {
     NEW: 0,
     REFRESH: 1
@@ -292,41 +281,45 @@ const Listview = new Lang.Class({
     _getCapsForList: function(info) {
         let discovererStreamInfo = null;
         discovererStreamInfo = info.get_stream_info();
-        let s = discovererStreamInfo.get_stream_type_nick();
         let containerStreams = info.get_container_streams()[0];
         let containerCaps = discovererStreamInfo.get_caps();
         let audioStreams = info.get_audio_streams()[0];
         let audioCaps =  audioStreams.get_caps();
 
-     
-        if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.OGG) { 
-                  
-            if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.VORBIS) 
+        if (containerCaps.can_intersect(this.capTypes(AudioProfile.containerProfileMap.AUDIO_OGG))) {
+   
+            if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.VORBIS)))
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.OGG_VORBIS;
-            else if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.OPUS) 
+            else if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.OPUS)))
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.OPUS;
 
-        } else if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.ID3) {
+        } else if (containerCaps.can_intersect(this.capTypes(AudioProfile.containerProfileMap.ID3))) {
         
-            if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.MP3) 
+            if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.MP3)))
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.MP3;
 
-        } else if (GstPbutils.pb_utils_get_codec_description(containerCaps) == codecDescription.QT) {
+        } else if (containerCaps.can_intersect(this.capTypes(AudioProfile.containerProfileMap.MP4))) {
         
-            if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.MP4) 
+            if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.MP4)))
                 allFilesInfo[this.idx].mediaType = mediaTypeMap.MP4;              
 
-        } else if (GstPbutils.pb_utils_get_codec_description(audioCaps) == codecDescription.FLAC) {
-            allFilesInfo[this.idx].mediaType = mediaTypeMap.FLAC; 
+        } else if (audioCaps.can_intersect(this.capTypes(AudioProfile.audioCodecMap.FLAC))) {
+            allFilesInfo[this.idx].mediaType = mediaTypeMap.FLAC;
                       
         } else {
         
             if (allFilesInfo[this.idx].mediaType == null) {
-                // Remove the file from the array if we don't recognize it
-                allFilesInfo.splice(this.idx, 1); 
+                // Remove the file from the array if we don't recognize it    
+                allFilesInfo.splice(this.idx, 1);
+        	this.endIdx = this.endIdx - 1;
             }       
         }        
-    }, 
+    },
+
+    capTypes: function(capString) {
+    	let caps = Gst.Caps.from_string(capString);
+    	return caps;
+    },
         
     getFilesInfoForList: function() {
         return allFilesInfo;
