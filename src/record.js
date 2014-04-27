@@ -107,11 +107,11 @@ const Record = new Lang.Class({
         let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
         this.pipeline.add(this.ebin);
         let srcpad = this.ebin.get_static_pad("src");
-        this.giosink = Gst.ElementFactory.make("giosink", "giosink");
-        this.giosink.set_property("file", this.initialFileName);
-        this.pipeline.add(this.giosink);
+        this.filesink = Gst.ElementFactory.make("filesink", "filesink");
+        this.filesink.set_property("location", this.initialFileName);
+        this.pipeline.add(this.filesink);
         
-        if (!this.pipeline || !this.giosink) {
+        if (!this.pipeline || !this.filesink) {
             this._showErrorDialog(_('Not all elements could be created.'));
             this.onEndOfStream();
         }
@@ -119,7 +119,7 @@ const Record = new Lang.Class({
         let srcLink = this.srcElement.link(this.level);
         let levelLink = this.level.link(this.volume);
         let volLink = this.volume.link(this.ebin);
-        let ebinLink = this.ebin.link(this.giosink);
+        let ebinLink = this.ebin.link(this.filesink);
         
         if (!srcLink || !levelLink || !ebinLink) {
             this._showErrorDialog(_('Not all of the elements were linked'));
@@ -294,13 +294,9 @@ const BuildFileName = new Lang.Class({
         /* Translators: ""Clip %d"" is the default name assigned to a file created
             by the application (for example, "Clip 1"). */
         let clipName = _("Clip %d").format(this.clipNumberString);
-        let file = dir.get_child_for_display_name(clipName);
-
+        let clip = dir.get_child_for_display_name(clipName);
+        let file = clip.get_parse_name();
         return file;
-    },
-    
-    getTitle: function() {
-        return this.title;
     },
     
     getOrigin: function() {
