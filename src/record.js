@@ -295,7 +295,7 @@ const BuildFileName = new Lang.Class({
             by the application (for example, "Clip 1"). */
         let clipName = _("Clip %d").format(this.clipNumberString);
         let clip = dir.get_child_for_display_name(clipName);
-        let file = clip.get_parse_name();
+        let file = clip.get_path();
         return file;
     },
     
