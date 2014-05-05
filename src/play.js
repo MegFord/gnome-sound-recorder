@@ -190,7 +190,10 @@ const _TENTH_SEC = 100000000;
  
         this.runTime = absoluteTime- this.baseTime;
         let approxTime = Math.round(this.runTime/_TENTH_SEC);
-        MainWindow.wave._drawEvent(approxTime);
+        
+        if (MainWindow.wave != null) {
+            MainWindow.wave._drawEvent(approxTime);
+        }
         
         return true;
     },
