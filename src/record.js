@@ -95,9 +95,7 @@ const Record = new Lang.Class({
                             this.taglist = Gst.TagList.new_empty();
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_APPLICATION_NAME, _("Sound Recorder"));
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
-                            let trackNumber = Listview.trackNumber + 1;
-                            let trackNumberString = trackNumber.toString();
-                            this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, trackNumberString);
+                            this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_TITLE, this.initialFileName);
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
                             this.taglist.add_value(Gst.TagMergeMode.APPEND, Gst.TAG_DATE_TIME, this.gstreamerDateTime);
                             element.merge_tags(this.taglist, Gst.TagMergeMode.REPLACE);
@@ -157,7 +155,7 @@ const Record = new Lang.Class({
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
             this._showErrorDialog(_('Unable to set the pipeline \n to the recording state')); 
-            this.initialFileName.delete_async(GLib.PRIORITY_DEFAULT, null, null);
+            this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null);
         } else {        
             MainWindow.view.setVolume(); 
         }
@@ -289,14 +287,18 @@ const BuildFileName = new Lang.Class({
         let fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
         let dir = Gio.Application.get_default().saveDir;
         this.dateTime = GLib.DateTime.new_now_local();
-        this.clipNumber = Listview.trackNumber + 1;
+        this.clipNumber = Listview.allFilesInfo.length + 1;
         this.clipNumberString = this.clipNumber.toString();
         /* Translators: ""Clip %d"" is the default name assigned to a file created
             by the application (for example, "Clip 1"). */
         let clipName = _("Clip %d").format(this.clipNumberString);
-        let clip = dir.get_child_for_display_name(clipName);
-        let file = clip.get_path();
+        this.clip = dir.get_child_for_display_name(clipName);
+        let file = this.clip.get_path();
         return file;
+    },
+    
+    getTitle: function() {
+        return this.clip;
     },
     
     getOrigin: function() {

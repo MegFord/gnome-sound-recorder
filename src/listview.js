@@ -206,14 +206,7 @@ const Listview = new Lang.Class({
             let dateTimeTag = this.tagInfo.get_date_time('datetime')[1]; 
             let title = this.tagInfo.get_string('title')[1];
             let durationInfo = info.get_duration();
-            allFilesInfo[this.idx].duration = durationInfo;
-            
-            if (title != null) {
-                allFilesInfo[this.idx].title = title;
-                if (parseInt(title) > trackNumber)
-                    trackNumber = parseInt(title);
-            }
-            
+            allFilesInfo[this.idx].duration = durationInfo;           
              
             /* this.file.dateCreated will usually be null since time::created it doesn't usually exist. 
                Therefore, we prefer to set it with tags */
