@@ -24,10 +24,12 @@ const GLib = imports.gi.GLib;
 
 const MainWindow = imports.mainWindow;
 const Preferences = imports.preferences;
+
 const SIGINT = 2;
 const SIGTERM = 15;
 
 let application = null;
+let settings = null;
 
 
 const Application = new Lang.Class({
@@ -49,7 +51,6 @@ const Application = new Lang.Class({
         section.append(_("About"), 'app.about');
         section.append(_("Quit"),'app.quit');
         this.set_app_menu(menu);
-        
         let preferences = new Gio.SimpleAction({ name: 'preferences' });
         preferences.connect('activate', Lang.bind(this,
             function() {
@@ -81,7 +82,7 @@ const Application = new Lang.Class({
         Gst.init(null, 0);
         this._initAppMenu();
         application = this;
-
+        settings = new Gio.Settings({ schema: 'org.gnome.gnome-sound-recorder' });
         /* Translators: "Recordings" here refers to the name of the directory where the application places files */
         let path = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
 
@@ -97,7 +98,7 @@ const Application = new Lang.Class({
     onWindowDestroy: function() {
         if (MainWindow.wave.pipeline)
             MainWindow.wave.pipeline.set_state(Gst.State.NULL);
-            
+            media-type-preset
         if (MainWindow._record.pipeline) 
             MainWindow._record.pipeline.set_state(Gst.State.NULL);
         
@@ -112,6 +113,33 @@ const Application = new Lang.Class({
             function(widget, response) {
                 preferencesDialog.widget.destroy();
             }));
+    },   
+        
+    getPreferences: function() {
+        let set = settings.get_int("media-type-preset");
+        return set;
+     },
+    
+    setPreferences: function(profileName) {
+        settings.set_int("media-type-preset", profileName);
+    },
+     
+    getMicVolume: function(level) {
+        let micVolLevel = settings.get_double("mic-volume");
+        return micVolLevel;
+    },
+     
+    setMicVolume: function(level) {
+         settings.set_double("mic-volume", level);
+    },
+    
+    getSpeakerVolume: function(level) {
+        let speakerVolLevel = settings.get_double("speaker-volume");
+        return speakerVolLevel;
+    },
+     
+    setSpeakerVolume: function(level) {
+         settings.set_double("speaker-volume", level);
     },
     
     _showAbout: function() {

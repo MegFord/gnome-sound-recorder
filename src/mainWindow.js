@@ -27,6 +27,7 @@ const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
 const Pango = imports.gi.Pango;
 
+const Application = imports.application;
 const AudioProfile = imports.audioProfile;
 const FileUtil = imports.fileUtil;
 const Info = imports.info;
@@ -218,10 +219,13 @@ const MainView = new Lang.Class({
     },
     
     presetVolume: function(source, vol) {
-        if (source == ActiveArea.PLAY)
+        if (source == ActiveArea.PLAY) {
             volumeValue[0].play = vol;
-        else
-            volumeValue[0].record = vol;               
+            Application.application.setSpeakerVolume(vol);            
+        } else {
+            volumeValue[0].record = vol;
+            Application.application.setMicVolume(vol); 
+        }              
     },
     
     setVolume: function() {
@@ -241,7 +245,9 @@ const MainView = new Lang.Class({
     listBoxAdd: function() {
         selectable = true;
         this.groupGrid = groupGrid;
-        volumeValue.push({ record: 0.5, play: 0.5 });
+        let playVolume = Application.application.getSpeakerVolume();
+        let micVolume = Application.application.getMicVolume();
+        volumeValue.push({ record: micVolume, play: playVolume });
         activeProfile = AudioProfile.comboBoxMap.OGG_VORBIS;
                 
         this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
@@ -813,12 +819,14 @@ const EncoderComboBox = new Lang.Class({
             this.append_text(combo[i]);
         this.set_property('valign', Gtk.Align.CENTER);  
         this.set_sensitive(true);
+        activeProfile = Application.application.getPreferences();
         this.set_active(activeProfile);
         this.connect("changed", Lang.bind(this, this._onComboBoxTextChanged));
     },
    
     _onComboBoxTextChanged: function() {
         activeProfile = this.get_active();
+        Application.application.setPreferences(activeProfile);
     }
 });
 
