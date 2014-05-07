@@ -300,13 +300,12 @@ const Listview = new Lang.Class({
             allFilesInfo[this.idx].mediaType = mediaTypeMap.FLAC;
                       
         } else {
-        
             if (allFilesInfo[this.idx].mediaType == null) {
                 // Remove the file from the array if we don't recognize it    
                 allFilesInfo.splice(this.idx, 1);
-        	this.endIdx = this.endIdx - 1;
+        	    this.endIdx = this.endIdx;
             }       
-        }        
+        }       
     },
 
     capTypes: function(capString) {

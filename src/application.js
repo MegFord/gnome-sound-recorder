@@ -98,7 +98,6 @@ const Application = new Lang.Class({
     onWindowDestroy: function() {
         if (MainWindow.wave.pipeline)
             MainWindow.wave.pipeline.set_state(Gst.State.NULL);
-            media-type-preset
         if (MainWindow._record.pipeline) 
             MainWindow._record.pipeline.set_state(Gst.State.NULL);
         
@@ -124,7 +123,7 @@ const Application = new Lang.Class({
         settings.set_int("media-type-preset", profileName);
     },
      
-    getMicVolume: function(level) {
+    getMicVolume: function() {
         let micVolLevel = settings.get_double("mic-volume");
         return micVolLevel;
     },
@@ -133,7 +132,7 @@ const Application = new Lang.Class({
          settings.set_double("mic-volume", level);
     },
     
-    getSpeakerVolume: function(level) {
+    getSpeakerVolume: function() {
         let speakerVolLevel = settings.get_double("speaker-volume");
         return speakerVolLevel;
     },
