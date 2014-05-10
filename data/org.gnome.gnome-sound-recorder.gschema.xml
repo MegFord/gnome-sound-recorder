@@ -17,8 +17,8 @@
     </key>
     <key name="mic-volume" type="d">
       <default>0.75</default>
-      <summary>Micophone volume level</summary>
-      <description>Micophone volume level.</description>
+      <summary>Microphone volume level</summary>
+      <description>Microphone volume level.</description>
     </key>
     <key name="speaker-volume" type="d">
       <default>0.75</default>
