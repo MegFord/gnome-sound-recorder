@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-05-07 01:00+0000\n"
-"PO-Revision-Date: 2014-05-07 10:37-0300\n"
+"POT-Creation-Date: 2014-05-10 16:45+0000\n"
+"PO-Revision-Date: 2014-05-10 17:21-0300\n"
 "Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -43,9 +43,6 @@ msgstr ""
 "Mapeia tipos de mídia de nomes de predefinições de codificador de áudio."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
-#| msgid ""
-#| "Maps media types to audio encoder preset names. If there is no mapping "
-#| "for a media type, the default encoder settings will be used."
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -55,26 +52,24 @@ msgstr ""
 "serão usadas."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
-#| msgid "Volume level"
-msgid "Micophone volume level"
+#| msgid "Micophone volume level"
+msgid "Microphone volume level"
 msgstr "Nível de volume do microfone"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
-#| msgid "Volume level."
-msgid "Micophone volume level."
+#| msgid "Micophone volume level."
+msgid "Microphone volume level."
 msgstr "Nível de volume do microfone."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-#| msgid "Volume level"
 msgid "Speaker volume level"
 msgstr "Nível de volume do auto-faltante"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-#| msgid "Volume level."
 msgid "Speaker volume level."
 msgstr "Nível de volume do auto-faltante."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:154
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:153
 #: ../src/record.js:96
 msgid "Sound Recorder"
 msgstr "Gravador de som"
@@ -113,7 +108,7 @@ msgid "Recordings"
 msgstr "Gravações"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:153
+#: ../src/application.js:152
 msgid "translator-credits"
 msgstr ""
 "Rafael Ferreira <rafael.f.f1@gmail.com>, 2013.\n"
