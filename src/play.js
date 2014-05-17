@@ -129,29 +129,23 @@ const _TENTH_SEC = 100000000;
         case Gst.MessageType.EOS:               
             this.onEndOfStream(); 
             break;
+            
+        case Gst.MessageType.WARNING:               
+            let warningMessage = message.parse_warning()[0];
+            log(warningMessage.toString()); 
+            break;
                 
         case Gst.MessageType.ERROR:
-            let errorMessage = message.parse_error();
-            this._showErrorDialog(errorMessage);              
-            this.play.set_state(Gst.State.NULL);
-            this.playState = PipelineStates.STOPPED;
-            this.playBus.remove_signal_watch();
-            this._updateTime();
-                                    
-            if (this.timeout) {
-                GLib.source_remove(this.timeout);
-                this.timeout = null;
-            }
-                
-            MainWindow.wave.endDrawing();           
+            let errorMessage = message.parse_error()[0];
+            this._showErrorDialog(errorMessage.toString());              
+            this.play.set_state(Gst.State.NULL);       
             break;
             
         case Gst.MessageType.ASYNC_DONE:
             if (this.sought) {
                 this.play.set_state(this._lastState);                    
                 MainWindow.view.setProgressScaleSensitive();
-            }
-                    
+            }       
             this.updatePosition();
             break; 
                 
@@ -229,9 +223,8 @@ const _TENTH_SEC = 100000000;
                                                    buttons: Gtk.ButtonsType.OK,
                                                    message_type: Gtk.MessageType.WARNING });
 
-        if (errorStrOne != null) {
+        if (errorStrOne != null)
             errorDialog.set_property('text', errorStrOne);
-        }
          
         if (errorStrTwo != null)
             errorDialog.set_property('secondary-text', errorStrTwo);
@@ -240,6 +233,7 @@ const _TENTH_SEC = 100000000;
         errorDialog.connect ('response', Lang.bind(this,
             function() {
                 errorDialog.destroy();
+                this.onEndOfStream();
             }));
         errorDialog.show();
     }

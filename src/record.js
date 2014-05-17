@@ -102,8 +102,8 @@ const Record = new Lang.Class({
                     }
                 }
             }));
-        let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
         this.pipeline.add(this.ebin);
+        let ebinProfile = this.ebin.set_property("profile", this._mediaProfile);
         let srcpad = this.ebin.get_static_pad("src");
         this.filesink = Gst.ElementFactory.make("filesink", "filesink");
         this.filesink.set_property("location", this.initialFileName);
@@ -243,10 +243,16 @@ const Record = new Lang.Class({
         case Gst.MessageType.EOS:                  
             this.onEndOfStream(); 
             break;
+            
+        case Gst.MessageType.WARNING:               
+            let warningMessage = message.parse_warning()[0];
+            log(warningMessage.toString()); 
+            break;
                                         
         case Gst.MessageType.ERROR:
             let errorMessage = message.parse_error();
-            this._showErrorDialog(errorMessage);              
+            this._showErrorDialog(errorMessage.toString()); 
+            this.pipeline.set_state(Gst.State.NULL);               
             break;
         }
     },
