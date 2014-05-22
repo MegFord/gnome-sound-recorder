@@ -10,16 +10,39 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-05-10 16:45+0000\n"
-"PO-Revision-Date: 2014-05-10 17:21-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2014-05-22 09:06+0000\n"
+"PO-Revision-Date: 2014-05-22 09:00-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.5\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "Um gravador de som moderno e simples para o GNOME"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr ""
+"O Gravador de som possui uma interface simples e moderna que oferece uma "
+"forma expressa de gravar e reproduzir áudio. Ele lhe permite realizar edição "
+"básica e criar memorandos de voz."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"O Gravador de som lida automaticamente com o processo de salvamento, desta "
+"forma você não precisa ficar com receio de descartar acidentalmente a "
+"gravação anterior."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -52,12 +75,10 @@ msgstr ""
 "serão usadas."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
-#| msgid "Micophone volume level"
 msgid "Microphone volume level"
 msgstr "Nível de volume do microfone"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
-#| msgid "Micophone volume level."
 msgid "Microphone volume level."
 msgstr "Nível de volume do microfone."
 
