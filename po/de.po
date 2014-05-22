@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-19 15:21+0000\n"
-"PO-Revision-Date: 2014-03-25 23:14+0100\n"
+"POT-Creation-Date: 2014-05-07 01:00+0000\n"
+"PO-Revision-Date: 2014-05-09 17:15+0100\n"
 "Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -36,41 +36,44 @@ msgid "Window position (x and y)."
 msgstr "Fensterposition (x und y)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
-msgid "Preferred media type for encoding audio when recording"
-msgstr "Bevorzugte Medienart zum Codieren des Tons bei Aufnahme"
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
-msgid ""
-"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
-"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
-msgstr ""
-"Bevorzugter Medientyp zur Kodierung der Tonaufzeichnung. Zum Beispiel »audio/"
-"x-vorbis« für Ogg Vorbis oder »audio/mpeg« für MP3. Dies ist kein MIME-Typ."
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
 msgstr ""
 "Leitet auf Medientypen die voreingestellten Namen des Audio-Kodierers ab."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+#| msgid ""
+#| "Maps media types to audio encoder preset names. If there is no mapping "
+#| "for a media type, the default encoder settings will be used."
 msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping for a "
-"media type, the default encoder settings will be used."
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
 msgstr ""
-"Leitet auf Medientypen die voreingestellten Namen des Audio-Kodierers ab. "
-"Wenn es keine Vorgabe für einen Medientypen gibt, so wird der Standard-"
+"Leitet aus Medientypen die Namen von Voreinstellungen des Audio-Kodierers "
+"ab. Wenn es keine Vorgabe für einen Medientypen gibt, so wird der Standard-"
 "Kodierer verwendet."
 
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+#| msgid "Volume level"
+msgid "Micophone volume level"
+msgstr "Mikrofonlautstärke"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#| msgid "Volume level."
+msgid "Micophone volume level."
+msgstr "Mikrofonlautstärke."
+
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-msgid "Volume level"
-msgstr "Lautstärke"
+#| msgid "Volume level"
+msgid "Speaker volume level"
+msgstr "Lautsprecher-Lautstärke"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-msgid "Volume level."
-msgstr "Lautstärke."
+#| msgid "Volume level."
+msgid "Speaker volume level."
+msgstr "Lautsprecher-Lautstärke."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
-#: ../src/record.js:95
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:154
+#: ../src/record.js:96
 msgid "Sound Recorder"
 msgstr "Tonaufzeichner"
 
@@ -82,33 +85,33 @@ msgstr "Ton mit dem Mikrofon aufnehmen und wiedergeben"
 msgid "Audio;Application;Record;"
 msgstr "Audio;Anwendung;Aufnahme;Ton;Aufzeichnung;"
 
-#: ../src/application.js:39
+#: ../src/application.js:41
 msgid "SoundRecorder"
 msgstr "Tonaufzeichner"
 
-#: ../src/application.js:46 ../src/preferences.js:38
+#: ../src/application.js:48 ../src/preferences.js:38
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: ../src/application.js:49
+#: ../src/application.js:51
 msgid "About"
 msgstr "Info"
 
-#: ../src/application.js:50
+#: ../src/application.js:52
 msgid "Quit"
 msgstr "Beenden"
 
-#: ../src/application.js:79
+#: ../src/application.js:81
 msgid "Sound Recorder started"
 msgstr "Tonaufzeichner gestartet"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:85
+#: ../src/application.js:87
 msgid "Recordings"
 msgstr "Aufnahmen"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:124
+#: ../src/application.js:153
 msgid "translator-credits"
 msgstr "Christian Kirbach <christian.kirbach@gmail.com>, 2014"
 
@@ -117,6 +120,7 @@ msgid "Yesterday"
 msgstr "Gestern"
 
 #: ../src/fileUtil.js:93
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Vor %d Tag"
@@ -127,6 +131,7 @@ msgid "Last week"
 msgstr "Letzte Woche"
 
 #: ../src/fileUtil.js:99
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Vor %d Woche"
@@ -137,6 +142,7 @@ msgid "Last month"
 msgstr "Letzter Monat"
 
 #: ../src/fileUtil.js:105
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Vor %d Monat"
@@ -147,106 +153,106 @@ msgid "Last year"
 msgstr "Letztes Jahr"
 
 #: ../src/fileUtil.js:111
+#, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "Vor %d Jahr"
 msgstr[1] "Vor %d Jahren"
 
-#: ../src/info.js:40 ../src/mainWindow.js:500
+#: ../src/info.js:45 ../src/mainWindow.js:509
 msgid "Info"
 msgstr "Info"
 
-#: ../src/info.js:56
+#: ../src/info.js:54
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+#: ../src/info.js:68 ../src/mainWindow.js:290
 msgid "Done"
 msgstr "Fertig"
 
-#: ../src/info.js:96
+#: ../src/info.js:94
 msgctxt "File Name"
 msgid "Name"
 msgstr "Name"
 
-#: ../src/info.js:103
+#: ../src/info.js:101
 msgid "Source"
 msgstr "Quelle"
 
-#: ../src/info.js:112
+#: ../src/info.js:110
 msgid "Date Modified"
 msgstr "Änderungsdatum"
 
-#: ../src/info.js:118
+#: ../src/info.js:116
 msgid "Date Created"
 msgstr "Erstellungsdatum"
 
-#: ../src/info.js:129
+#: ../src/info.js:127
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Typ"
 
-#: ../src/listview.js:133 ../src/listview.js:235
+#: ../src/listview.js:122 ../src/listview.js:217
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d.%m.%Y - %H:%M:%S"
 
-#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
-#| msgid "Recordings"
+#: ../src/mainWindow.js:109 ../src/mainWindow.js:781
 msgid "Record"
 msgstr "Aufnehmen"
 
-#: ../src/mainWindow.js:144
-#| msgid "Recordings"
+#: ../src/mainWindow.js:145
 msgid "Add Recordings"
 msgstr "Aufnahmen hinzufügen"
 
-#: ../src/mainWindow.js:149
+#: ../src/mainWindow.js:150
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Verwenden Sie den Knopf <b>Aufnehmen</b> zur Tonaufzeichnung"
 
-#: ../src/mainWindow.js:270
+#: ../src/mainWindow.js:276
 msgid "Recording…"
 msgstr "Aufnehmen …"
 
-#: ../src/mainWindow.js:324
+#: ../src/mainWindow.js:330
+#, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d Tonaufzeichnung"
 msgstr[1] "%d Tonaufzeichnungen"
 
-#: ../src/mainWindow.js:385
+#: ../src/mainWindow.js:394
 msgid "Play"
 msgstr "Wiedergabe"
 
-#: ../src/mainWindow.js:406
+#: ../src/mainWindow.js:415
 msgid "Pause"
 msgstr "Pause"
 
-#: ../src/mainWindow.js:513
+#: ../src/mainWindow.js:522
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:840
 msgid "Load More"
 msgstr "Weitere laden"
 
@@ -254,15 +260,15 @@ msgstr "Weitere laden"
 msgid "Unable to play recording"
 msgstr "Die Aufnahme kann nicht iwdergegeben werden"
 
-#: ../src/preferences.js:75
+#: ../src/preferences.js:62
 msgid "Preferred format"
 msgstr "Bevorzugtes Format"
 
-#: ../src/preferences.js:83
+#: ../src/preferences.js:70
 msgid "Volume"
 msgstr "Lautstärke"
 
-#: ../src/preferences.js:98
+#: ../src/preferences.js:85
 msgid "Microphone"
 msgstr "Mikrofon"
 
@@ -274,19 +280,19 @@ msgstr "Der Ordner für die Aufzeichnungen kann nicht angelegt werden."
 msgid "Your audio capture settings are invalid."
 msgstr "Ihre Einstelungen zur Tonaufnahme sind ungültig."
 
-#: ../src/record.js:114
+#: ../src/record.js:113
 msgid "Not all elements could be created."
 msgstr "Es konnten nicht alle Elemente erstellt werden."
 
-#: ../src/record.js:124
+#: ../src/record.js:123
 msgid "Not all of the elements were linked"
 msgstr "Es wurden nicht alle Elemente verknüpft"
 
-#: ../src/record.js:148
+#: ../src/record.js:147
 msgid "No Media Profile was set."
 msgstr "Es wurde kein Medienprofil festgelegt."
 
-#: ../src/record.js:158
+#: ../src/record.js:157
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state"
@@ -296,9 +302,22 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
-#: ../src/record.js:291
+#: ../src/record.js:294
+#, javascript-format
 msgid "Clip %d"
 msgstr "Clip %d"
+
+#~ msgid "Preferred media type for encoding audio when recording"
+#~ msgstr "Bevorzugte Medienart zum Codieren des Tons bei Aufnahme"
+
+#~ msgid ""
+#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
+#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
+#~ "type."
+#~ msgstr ""
+#~ "Bevorzugter Medientyp zur Kodierung der Tonaufzeichnung. Zum Beispiel "
+#~ "»audio/x-vorbis« für Ogg Vorbis oder »audio/mpeg« für MP3. Dies ist kein "
+#~ "MIME-Typ."
 
 #~ msgid "Error: "
 #~ msgstr "Fehler: "
