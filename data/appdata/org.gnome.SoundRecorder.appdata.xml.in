@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 Richard Hughes <richard@hughsie.com> -->
+<application>
+  <id type="desktop">org.gnome.SoundRecorder.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <_summary>A simple, modern sound recorder for GNOME</_summary>
+  <description>
+    <_p>
+      Sound Recorder provides a simple and modern interface that provides a
+      straight-forward way to record and play audio.
+      It allows you to do basic editing, and create voice memos.
+    </_p>
+    <_p>
+      Sound Recorder automatically handles the saving process so that you
+      do not need to worry about accidentally discarding the previous recording.
+    </_p>
+  </description>
+  <screenshots>
+    <screenshot type="default">https://git.gnome.org/browse/gnome-sound-recorder/plain/data/appdata/gsr-main.png</screenshot>
+  </screenshots>
+  <url type="homepage">https://wiki.gnome.org/Design/Apps/SoundRecorder</url>
+  <updatecontact>meg387_at_gmail.com</updatecontact>
+  <project_group>GNOME</project_group>
+</application>

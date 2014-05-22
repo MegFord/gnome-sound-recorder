@@ -1,4 +1,4 @@
-SUBDIRS = icons
+SUBDIRS = appdata icons
 
 resourcedir = $(pkgdatadir)
 resource_DATA = application.css
