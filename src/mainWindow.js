@@ -248,7 +248,7 @@ const MainView = new Lang.Class({
         let playVolume = Application.application.getSpeakerVolume();
         let micVolume = Application.application.getMicVolume();
         volumeValue.push({ record: micVolume, play: playVolume });
-        activeProfile = AudioProfile.comboBoxMap.OGG_VORBIS;
+        activeProfile = Application.application.getPreferences();
                 
         this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                          height_request: 36,
