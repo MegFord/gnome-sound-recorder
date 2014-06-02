@@ -78,8 +78,8 @@ const _TENTH_SEC = 100000000;
         this.playState = PipelineStates.PLAYING;
                 
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
-            this._showErrorDialog(_('Unable to play recording')); 
-            this.onEndOfStream();
+            this._showErrorDialog(_('Unable to play recording'));
+            this.play.set_state(Gst.State.NULL); 
         } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {        
             MainWindow.view.setVolume(); 
         }
