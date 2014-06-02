@@ -154,7 +154,6 @@ const Record = new Lang.Class({
         this.pipeState = PipelineStates.PLAYING;
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
-            this._showErrorDialog(_('Unable to set the pipeline \n to the recording state'));
             this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null); 
         } else {        
             MainWindow.view.setVolume(); 
@@ -205,7 +204,7 @@ const Record = new Lang.Class({
                 if (description != null)
                     errorTwo = description; 
                 this.pipeline.set_state(Gst.State.NULL);      
-                log(errorOne, errorTwo);                       
+                this._showErrorDialog(errorOne, errorTwo);                       
             }
                 
             let s = message.get_structure();
