@@ -114,7 +114,8 @@ const _TENTH_SEC = 100000000;
             this.timeout = null;
         }
         
-        MainWindow.wave.endDrawing();
+        if (MainWindow.wave != null)
+            MainWindow.wave.endDrawing();
     },
     
     onEndOfStream: function() {
@@ -207,7 +208,6 @@ const _TENTH_SEC = 100000000;
                 this._updateTime));    
         }
     },
-
     
     setVolume: function(value) {
         this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);

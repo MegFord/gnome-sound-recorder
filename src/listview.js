@@ -198,7 +198,7 @@ const Listview = new Lang.Class({
                         
     _onDiscovererFinished: function(res, info, err) {
         this.result = res;
-        if (this.result == GstPbutils.DiscovererResult.OK) { 
+        if (this.result == GstPbutils.DiscovererResult.OK && allFilesInfo[this.idx]) { 
             this.tagInfo = info.get_tags(info);
             let appString = "";
             let dateTimeCreatedString = ""; 
@@ -227,6 +227,7 @@ const Listview = new Lang.Class({
             this._getCapsForList(info);
         } else {
             // don't index files we can't play
+            allFilesInfo.splice(this.idx, 1);
             log("File cannot be played");
         }
         
@@ -255,7 +256,8 @@ const Listview = new Lang.Class({
         
     _onDirChanged: function(dirMonitor, file1, file2, eventType) {
         if (eventType == Gio.FileMonitorEvent.DELETED || 
-            (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
+            (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT 
+                && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
             stopVal = EnumeratorState.ACTIVE;
             allFilesInfo.length = 0;
             fileInfo.length = 0;
