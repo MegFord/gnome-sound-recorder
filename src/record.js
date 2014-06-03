@@ -42,12 +42,20 @@ const PipelineStates = {
     STOPPED: 2
 };
 
+const ErrState = {
+    OFF: 0,
+    ON: 1
+}
+
 const _TENTH_SEC = 100000000;
+
+let errorDialogState;
    
 const Record = new Lang.Class({
     Name: "Record",
     
     _recordPipeline: function() {
+        errorDialogState = ErrState.OFF;
         this.baseTime = 0;
         this._view = MainWindow.view; 
         this._buildFileName = new BuildFileName();
@@ -57,6 +65,7 @@ const Record = new Lang.Class({
         
         if (this.initialFileName == -1) {
             this._showErrorDialog(_('Unable to create Recordings directory.'));
+            errorDialogState = ErrState.ON;
             this.onEndOfStream();
         }
                       
@@ -65,6 +74,7 @@ const Record = new Lang.Class({
         
         if(this.srcElement == null) {
           this._showErrorDialog(_('Your audio capture settings are invalid.'));
+          errorDialogState = ErrState.ON;
           this.onEndOfStream();
           return;
         }
@@ -111,6 +121,7 @@ const Record = new Lang.Class({
         
         if (!this.pipeline || !this.filesink) {
             this._showErrorDialog(_('Not all elements could be created.'));
+            errorDialogState = ErrState.ON;
             this.onEndOfStream();
         }
             
@@ -121,6 +132,7 @@ const Record = new Lang.Class({
         
         if (!srcLink || !levelLink || !ebinLink) {
             this._showErrorDialog(_('Not all of the elements were linked'));
+            errorDialogState = ErrState.ON;
             this.onEndOfStream();
         }
         
@@ -145,6 +157,7 @@ const Record = new Lang.Class({
         
         if (this._mediaProfile == -1) {
             this._showErrorDialog(_('No Media Profile was set.'));
+            errorDialogState = ErrState.ON;
         }
         
         if (!this.pipeline || this.pipeState == PipelineStates.STOPPED )
@@ -154,6 +167,8 @@ const Record = new Lang.Class({
         this.pipeState = PipelineStates.PLAYING;
         
         if (ret == Gst.StateChangeReturn.FAILURE) {
+            this._showErrorDialog(_('Unable to set the pipeline \n to the recording state'));
+            errorDialogState = ErrState.ON;
             this._buildFileName.getTitle().delete_async(GLib.PRIORITY_DEFAULT, null, null); 
         } else {        
             MainWindow.view.setVolume(); 
@@ -179,10 +194,12 @@ const Record = new Lang.Class({
     onEndOfStream: function() { 
         this.pipeline.set_state(Gst.State.NULL);
         this.pipeState = PipelineStates.STOPPED;
-        if (this.recordBus) {
+        
+        if (this.recordBus) 
 	        this.recordBus.remove_signal_watch();
-        }
+	        
         this._updateTime(); 
+        errorDialogState = ErrState.OFF;
     },
         
     _onMessageReceived: function(message) {
@@ -203,8 +220,9 @@ const Record = new Lang.Class({
                    
                 if (description != null)
                     errorTwo = description; 
-                this.pipeline.set_state(Gst.State.NULL);      
-                this._showErrorDialog(errorOne, errorTwo);                       
+    
+                this._showErrorDialog(errorOne, errorTwo); 
+                errorDialogState = ErrState.ON;                          
             }
                 
             let s = message.get_structure();
@@ -251,7 +269,7 @@ const Record = new Lang.Class({
         case Gst.MessageType.ERROR:
             let errorMessage = message.parse_error();
             this._showErrorDialog(errorMessage.toString()); 
-            this.pipeline.set_state(Gst.State.NULL);               
+            errorDialogState = ErrState.ON;               
             break;
         }
     },
@@ -263,25 +281,27 @@ const Record = new Lang.Class({
     },
     
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
-        let errorDialog = new Gtk.MessageDialog ({ modal: true,
-                                                   destroy_with_parent: true,
-                                                   buttons: Gtk.ButtonsType.OK,
-                                                   message_type: Gtk.MessageType.WARNING });
-        if (errorStrOne != null) {
-            errorDialog.set_property('text', errorStrOne);
-        }
-         
-        if (errorStrTwo != null)
-            errorDialog.set_property('secondary-text', errorStrTwo);
-            
-        errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
-        errorDialog.connect('response', Lang.bind(this,
-            function() {
-                errorDialog.destroy();
-                MainWindow.view.onRecordStopClicked();
-                this.onEndOfStream();
-            }));
-        errorDialog.show();
+        if (errorDialogState == ErrState.OFF) {
+            let errorDialog = new Gtk.MessageDialog ({ modal: true,
+                                                       destroy_with_parent: true,
+                                                       buttons: Gtk.ButtonsType.OK,
+                                                       message_type: Gtk.MessageType.WARNING });
+            if (errorStrOne != null) {
+                errorDialog.set_property('text', errorStrOne);
+            }
+             
+            if (errorStrTwo != null)
+                errorDialog.set_property('secondary-text', errorStrTwo);
+                
+            errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
+            errorDialog.connect('response', Lang.bind(this,
+                function() {
+                    errorDialog.destroy();
+                    MainWindow.view.onRecordStopClicked();
+                    this.onEndOfStream();
+                }));
+            errorDialog.show();
+        } 
     } 
 });
 

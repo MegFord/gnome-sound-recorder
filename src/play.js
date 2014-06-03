@@ -38,12 +38,20 @@ const PipelineStates = {
     NULL: 3
 }; 
 
+const ErrState = {
+    OFF: 0,
+    ON: 1
+}
+
+let errorDialogState;
+
 const _TENTH_SEC = 100000000;
  
  const Play = new Lang.Class({
     Name: "Play",
 
     _playPipeline: function() {
+        errorDialogState = ErrState.OFF;
         let uri = this._fileToPlay.get_uri();
         this.play = Gst.ElementFactory.make("playbin", "play");
         this.play.set_property("uri", uri);
@@ -79,7 +87,7 @@ const _TENTH_SEC = 100000000;
                 
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
             this._showErrorDialog(_('Unable to play recording'));
-            this.play.set_state(Gst.State.NULL); 
+            errorDialogState = ErrState.ON;
         } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {        
             MainWindow.view.setVolume(); 
         }
@@ -116,6 +124,8 @@ const _TENTH_SEC = 100000000;
         
         if (MainWindow.wave != null)
             MainWindow.wave.endDrawing();
+            
+        errorDialogState = ErrState.OFF;
     },
     
     onEndOfStream: function() {
@@ -139,7 +149,7 @@ const _TENTH_SEC = 100000000;
         case Gst.MessageType.ERROR:
             let errorMessage = message.parse_error()[0];
             this._showErrorDialog(errorMessage.toString());              
-            this.play.set_state(Gst.State.NULL);       
+            errorDialogState = ErrState.ON;       
             break;
             
         case Gst.MessageType.ASYNC_DONE:
@@ -219,23 +229,25 @@ const _TENTH_SEC = 100000000;
     },
     
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
-        let errorDialog = new Gtk.MessageDialog ({ destroy_with_parent: true,
-                                                   buttons: Gtk.ButtonsType.OK,
-                                                   message_type: Gtk.MessageType.WARNING });
+        if (errorDialogState == ErrState.OFF) {
+            let errorDialog = new Gtk.MessageDialog ({ destroy_with_parent: true,
+                                                       buttons: Gtk.ButtonsType.OK,
+                                                       message_type: Gtk.MessageType.WARNING });
 
-        if (errorStrOne != null)
-            errorDialog.set_property('text', errorStrOne);
-         
-        if (errorStrTwo != null)
-            errorDialog.set_property('secondary-text', errorStrTwo);
+            if (errorStrOne != null)
+                errorDialog.set_property('text', errorStrOne);
+             
+            if (errorStrTwo != null)
+                errorDialog.set_property('secondary-text', errorStrTwo);
 
-        errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
-        errorDialog.connect ('response', Lang.bind(this,
-            function() {
-                errorDialog.destroy();
-                this.onEndOfStream();
-            }));
-        errorDialog.show();
+            errorDialog.set_transient_for(Gio.Application.get_default().get_active_window());
+            errorDialog.connect ('response', Lang.bind(this,
+                function() {
+                    errorDialog.destroy();
+                    this.onEndOfStream();
+                }));
+            errorDialog.show();
+        }
     }
 });
    
