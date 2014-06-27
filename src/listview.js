@@ -17,8 +17,6 @@
  * Author: Meg Ford <megford@gnome.org>
  *
  */
- 
-imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
@@ -26,7 +24,7 @@ const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject; 
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
-
+const Lang = imports.lang;
 const Signals = imports.signals;
 
 const AudioProfile = imports.audioProfile;

@@ -16,15 +16,16 @@
 * Author: Meg Ford <megford@gnome.org>
 *
 */
- 
-imports.gi.versions.Gst = '1.0';
 
 const Gettext = imports.gettext;
 const _ = imports.gettext.gettext;
 const Gdk = imports.gi.Gdk;
 const GdkPixbuf = imports.gi.GdkPixbuf;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
+const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
 const Pango = imports.gi.Pango;
 
 const Application = imports.application;
@@ -32,6 +33,7 @@ const AudioProfile = imports.audioProfile;
 const FileUtil = imports.fileUtil;
 const Info = imports.info;
 const Listview = imports.listview;
+const Params = imports.params;
 const Play = imports.play;
 const Preferences = imports.preferences;
 const Record = imports.record;

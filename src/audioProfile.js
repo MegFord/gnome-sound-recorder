@@ -16,14 +16,12 @@
  *  Author: Meg Ford <megford@gnome.org>
  *
  */
- 
-imports.gi.versions.Gst = '1.0';
 
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
-
+const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 
 const MainWindow = imports.mainWindow;

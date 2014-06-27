@@ -17,13 +17,15 @@
 *
 */
 
-const Util = imports.util;
 const Gio = imports.gi.Gio;
-const Gst = imports.gi.Gst;
 const GLib = imports.gi.GLib;
+const Gst = imports.gi.Gst;
+const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
 
 const MainWindow = imports.mainWindow;
 const Preferences = imports.preferences;
+const Util = imports.util;
 
 const SIGINT = 2;
 const SIGTERM = 15;
@@ -37,7 +39,7 @@ const Application = new Lang.Class({
     Extends: Gtk.Application,
 
     _init: function() {
-        this.parent({ application_id: "org.gnome.SoundRecorder"}); 
+        this.parent({ application_id: pkg.name }); 
         GLib.set_application_name(_("SoundRecorder"));         
     },
     
@@ -154,7 +156,7 @@ const Application = new Lang.Class({
         aboutDialog.copyright = 'Copyright ' + String.fromCharCode(0x00A9) + ' 2013' + String.fromCharCode(0x2013) + 'Meg Ford';
         aboutDialog.license_type = Gtk.License.GPL_2_0;
         aboutDialog.logo_icon_name = 'audio-input-microphone';
-        aboutDialog.version = '3.12.1';
+        aboutDialog.version = pkg.version;
         aboutDialog.website = 'http://live.gnome.org/GnomeSoundRecorder';
         aboutDialog.wrap_license = true;
         aboutDialog.modal = true;

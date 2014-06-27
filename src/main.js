@@ -30,15 +30,14 @@ pkg.initGettext();
 pkg.initFormat();
 pkg.require({ 'Gd': '1.0',
               'Gdk': '3.0',
+              'GdkPixbuf': '2.0',
               'GLib': '2.0',
               'GObject': '2.0',
               'Gtk': '3.0',
-              'Lang': '',
-              'Mainloop': '',
-              'Params': '1.0',
-              'System': '' });
-              
-imports.gi.versions.Gst = '1.0';
+              'Gst': '1.0',
+              'GstAudio': '1.0',
+              'GstPbutils': '1.0' });
+
 const Application = imports.application;
 
 function main(argv) {

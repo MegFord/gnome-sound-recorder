@@ -17,14 +17,14 @@
  *
  */
 
-imports.gi.versions.Gst = '1.0';
-
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const Gst = imports.gi.Gst;
 const GstAudio = imports.gi.GstAudio;
 const GstPbutils = imports.gi.GstPbutils;
-
+const Gtk = imports.gi.Gtk;
+const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 
 const Application = imports.application;

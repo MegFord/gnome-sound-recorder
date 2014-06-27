@@ -25,6 +25,10 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+const Gdk = imports.gi.Gdk;
+const GLib = imports.gi.GLib;
+const Gtk = imports.gi.Gtk;
+
 function loadStyleSheet() {
     let file = 'application.css';
     let provider = new Gtk.CssProvider();
