@@ -13,8 +13,6 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
                    [The prefix for our gettext translation domains.])
 IT_PROG_INTLTOOL([0.26])
 
-LIBGD_INIT([ notification tagged-entry gir])
-
 GLIB_GSETTINGS
 GOBJECT_INTROSPECTION_REQUIRE([1.0])
 PKG_CHECK_MODULES([DEPS], [gdk-3.0
@@ -35,7 +33,6 @@ Makefile
 data/Makefile
 data/appdata/Makefile
 data/icons/Makefile
-libgd/Makefile
 src/Makefile
 po/Makefile.in
 ])

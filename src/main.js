@@ -25,11 +25,9 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-pkg.initSubmodule('libgd');
 pkg.initGettext();
 pkg.initFormat();
-pkg.require({ 'Gd': '1.0',
-              'Gdk': '3.0',
+pkg.require({ 'Gdk': '3.0',
               'GdkPixbuf': '2.0',
               'GLib': '2.0',
               'GObject': '2.0',
