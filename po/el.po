@@ -8,17 +8,39 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-20 20:36+0000\n"
-"PO-Revision-Date: 2014-03-21 09:31+0300\n"
-"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
+"POT-Creation-Date: 2014-06-29 19:33+0000\n"
+"PO-Revision-Date: 2014-07-04 22:10+0200\n"
+"Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: team@lists.gnome.gr\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.0\n"
+"X-Generator: Poedit 1.6.5\n"
 "X-Project-Style: gnome\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "Ένας απλός, σύγχρονος εγγραφέας ήχου για το GNOME"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr ""
+"Η εγγραφή ήχου είναι μια απλή και σύγχρονη διεπαφή που παρέχει έναν εύκολο "
+"τρόπο εγγραφής και αναπαραγωγής ήχου. Σας επιτρέπει να κάνετε βασική "
+"επεξεργασία και δημιουργία φωνητικών υπενθυμίσεων."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"Η εγγραφή ήχου χειρίζεται αυτόματα τη διαδικασία αποθήκευσης, έτσι ώστε να "
+"μην χρειάζεται να ανησυχείτε για κατά λάθος απόρριψη προηγούμενης εγγραφής."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -37,42 +59,37 @@ msgid "Window position (x and y)."
 msgstr "Θέση παραθύρου (x και y)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
-msgid "Preferred media type for encoding audio when recording"
-msgstr "Προτιμώμενος τύπος πολυμέσων για κωδικοποίηση ήχου κατά την εγγραφή"
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
-msgid ""
-"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
-"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
-msgstr ""
-"Ο προτιμώμενος τύπος πολυμέσων για κωδικοποίηση ήχου κατά την εγγραφή. Για "
-"παράδειγμα, 'audio/x-vorbis' για Ogg Vorbis, ή 'audio/mpeg' για MP3. Αυτός "
-"δεν είναι τύπος MIME."
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
 msgstr ""
 "Χαρτογραφεί τύπους πολυμέσων στα προκαθορισμένα ονόματα κωδικοποιητή ήχου."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
 msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping for a "
-"media type, the default encoder settings will be used."
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
 msgstr ""
-"Απεικονίζει τύπους πολυμέσων στα προκαθορισμένα ονόματα κωδικοποιητή ήχου. "
-"Αν δεν υπάρχει χαρτογράφηση για ένα τύπο πολυμέσου, θα χρησιμοποιηθούν οι "
-"προεπιλεγμένες ρυθμίσεις κωδικοποιητή."
+"Χαρτογραφεί τύπους πολυμέσων στα προκαθορισμένα ονόματα κωδικοποιητή ήχου. "
+"Αν δεν υπάρχει ρυθμισμένη χαρτογράφηση, θα χρησιμοποιηθούν οι προεπιλεγμένες "
+"ρυθμίσεις κωδικοποιητή."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "Ένταση ήχου μικροφώνου"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "Ένταση ήχου μικροφώνου."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-msgid "Volume level"
-msgstr "Επίπεδο έντασης"
+msgid "Speaker volume level"
+msgstr "Ένταση ήχου ηχείων"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-msgid "Volume level."
-msgstr "Επίπεδο έντασης."
+msgid "Speaker volume level."
+msgstr "Ένταση ήχου ηχείων."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
-#: ../src/record.js:95
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:153
+#: ../src/record.js:106
 msgid "Sound Recorder"
 msgstr "Εγγραφή ήχου"
 
@@ -82,39 +99,42 @@ msgstr "Εγγραφή ήχου μέσα από το μικρόφωνο και �
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
-msgstr "Ήχος;εφαρμογή;καταγραφή;"
+msgstr "Ήχος;Εφαρμογή;Εγγραφή;Audio;Application;Record;"
 
-#: ../src/application.js:39
+#: ../src/application.js:41
 msgid "SoundRecorder"
 msgstr "Εγγραφή ήχου"
 
-#: ../src/application.js:46 ../src/preferences.js:38
+#: ../src/application.js:48 ../src/preferences.js:38
 msgid "Preferences"
 msgstr "Προτιμήσεις"
 
-#: ../src/application.js:49
+#: ../src/application.js:51
 msgid "About"
 msgstr "Περί"
 
-#: ../src/application.js:50
+#: ../src/application.js:52
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: ../src/application.js:79
+#: ../src/application.js:81
 msgid "Sound Recorder started"
-msgstr "Ξεκίνησε η εγγραφή του ήχου"
+msgstr "Ξεκίνησε η εγγραφή ήχου"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:85
+#: ../src/application.js:87
 msgid "Recordings"
 msgstr "Ηχογραφήσεις"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:124
+#: ../src/application.js:152
 msgid "translator-credits"
 msgstr ""
-"Δημήτρης Σπίγγος <dmtrs32@gmail.com>\n"
-"Μαρία Θουκυδίδου <marablack3@gmail.com>"
+"Ελληνική μεταφραστική ομάδα GNOME\n"
+" Δημήτρης Σπίγγος <dmtrs32@gmail.com>\n"
+" Μαρία Θουκυδίδου <marablack3@gmail.com>\n"
+" Μαρία Μαυρίδου <mavridou@gmail.com>\n"
+"Για περισσότερα δείτε http://gnome.gr/."
 
 #: ../src/fileUtil.js:91
 msgid "Yesterday"
@@ -160,140 +180,140 @@ msgid_plural "%d years ago"
 msgstr[0] "Πριν %d χρόνο"
 msgstr[1] "Πριν %d χρόνια"
 
-#: ../src/info.js:40 ../src/mainWindow.js:500
+#: ../src/info.js:45 ../src/mainWindow.js:509
 msgid "Info"
 msgstr "Πληροφορίες"
 
-#: ../src/info.js:56
+#: ../src/info.js:54
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+#: ../src/info.js:68 ../src/mainWindow.js:290
 msgid "Done"
 msgstr "Έτοιμο"
 
-#: ../src/info.js:96
+#: ../src/info.js:94
 msgctxt "File Name"
 msgid "Name"
 msgstr "Όνομα"
 
-#: ../src/info.js:103
+#: ../src/info.js:101
 msgid "Source"
 msgstr "Πηγή"
 
-#: ../src/info.js:112
+#: ../src/info.js:110
 msgid "Date Modified"
 msgstr "Ημερομηνία τροποποίησης"
 
-#: ../src/info.js:118
+#: ../src/info.js:116
 msgid "Date Created"
 msgstr "Ημερομηνία δημιουργίας"
 
-#: ../src/info.js:129
+#: ../src/info.js:127
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Τύπος"
 
-#: ../src/listview.js:133 ../src/listview.js:235
+#: ../src/listview.js:122 ../src/listview.js:217
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d-%m-%Y %H:%M:%S"
 
-#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+#: ../src/mainWindow.js:109 ../src/mainWindow.js:781
 msgid "Record"
 msgstr "Ηχογράφηση"
 
-#: ../src/mainWindow.js:144
+#: ../src/mainWindow.js:145
 msgid "Add Recordings"
 msgstr "Προσθήκη εγγραφών"
 
-#: ../src/mainWindow.js:149
+#: ../src/mainWindow.js:150
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Χρησιμοποιήστε το πλήκτρο <b>Εγγραφή</b> για εγγραφή ήχου"
 
-#: ../src/mainWindow.js:270
+#: ../src/mainWindow.js:276
 msgid "Recording…"
 msgstr "Ηχογράφηση…"
 
-#: ../src/mainWindow.js:324
+#: ../src/mainWindow.js:330
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
-msgstr[0] "%d ηχογραφημενος ήχος"
+msgstr[0] "%d ηχογραφημένος ήχος"
 msgstr[1] "%d ηχογραφημένοι ήχοι"
 
-#: ../src/mainWindow.js:385
+#: ../src/mainWindow.js:394
 msgid "Play"
 msgstr "Αναπαραγωγή"
 
-#: ../src/mainWindow.js:406
+#: ../src/mainWindow.js:415
 msgid "Pause"
 msgstr "Παύση"
 
-#: ../src/mainWindow.js:513
+#: ../src/mainWindow.js:522
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:840
 msgid "Load More"
 msgstr "Φόρτωση περισσοτέρων"
 
-#: ../src/play.js:81
+#: ../src/play.js:89
 msgid "Unable to play recording"
 msgstr "Αδύνατη η αναπαραγωγή της ηχογράφησης"
 
-#: ../src/preferences.js:75
+#: ../src/preferences.js:62
 msgid "Preferred format"
 msgstr "Προτιμώμενη μορφή"
 
-#: ../src/preferences.js:83
+#: ../src/preferences.js:70
 msgid "Volume"
 msgstr "Ένταση ήχου"
 
-#: ../src/preferences.js:98
+#: ../src/preferences.js:85
 msgid "Microphone"
 msgstr "Μικρόφωνο"
 
-#: ../src/record.js:59
+#: ../src/record.js:67
 msgid "Unable to create Recordings directory."
 msgstr "Αδύνατη η δημιουργία καταλόγου ηχογραφήσεων."
 
-#: ../src/record.js:67
+#: ../src/record.js:76
 msgid "Your audio capture settings are invalid."
 msgstr "Οι ρυθμίσεις σύλληψης ήχου είναι άκυρες."
 
-#: ../src/record.js:114
+#: ../src/record.js:123
 msgid "Not all elements could be created."
 msgstr "Δεν μπόρεσαν να δημιουργηθούν όλα τα στοιχεία."
 
-#: ../src/record.js:124
+#: ../src/record.js:134
 msgid "Not all of the elements were linked"
 msgstr "Δεν συνδέθηκαν όλα τα στοιχεία"
 
-#: ../src/record.js:148
+#: ../src/record.js:159
 msgid "No Media Profile was set."
-msgstr "Δεν ορίστηκε κατατομή πολυμέσων."
+msgstr "Δεν ορίστηκε προφίλ πολυμέσων."
 
-#: ../src/record.js:158
+#: ../src/record.js:170
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state"
@@ -303,10 +323,22 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
-#: ../src/record.js:291
+#: ../src/record.js:319
 #, javascript-format
 msgid "Clip %d"
 msgstr "Κομμάτι %d"
+
+#~ msgid "Preferred media type for encoding audio when recording"
+#~ msgstr "Προτιμώμενος τύπος πολυμέσων για κωδικοποίηση ήχου κατά την εγγραφή"
+
+#~ msgid ""
+#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
+#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
+#~ "type."
+#~ msgstr ""
+#~ "Ο προτιμώμενος τύπος πολυμέσων για κωδικοποίηση ήχου κατά την εγγραφή. "
+#~ "Για παράδειγμα, 'audio/x-vorbis' για Ogg Vorbis, ή 'audio/mpeg' για MP3. "
+#~ "Αυτός δεν είναι τύπος MIME."
 
 #~ msgid "Unable to set the playbin to the playing state."
 #~ msgstr ""
