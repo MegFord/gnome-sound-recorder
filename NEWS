@@ -1,3 +1,10 @@
+ 3.13.4
+ =======
+ 
+ Adapt for the package.js which is shipped by gjs by Giovanni Campagna
+ Improve error handling
+ Add AppData file by Richard Hughes
+ 
  3.12.1
  =======
  
