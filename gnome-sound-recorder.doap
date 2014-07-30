@@ -9,7 +9,7 @@
   <download-page rdf:resource="http://download.gnome.org/sources/gnome-sound-recorder/" />
   <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=gnome-sound-recorder" />
 
-  <category rdf:resource="http://api.gnome.org/doap-extensions#desktop" />
+  <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
 
   <maintainer>
     <foaf:Person>
