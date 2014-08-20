@@ -1,0 +1,326 @@
+# Assamese translation for gnome-sound-recorder.
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+#
+# ngoswami <ngoswami@redhat.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-08-20 07:37+0000\n"
+"PO-Revision-Date: 2014-08-20 18:47+0530\n"
+"Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
+"Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
+"Language: as\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "GNOME ৰ বাবে এটা সাধাৰণ, আধুনিক শব্দ ৰেকৰ্ডাৰ"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr ""
+"শব্দ ৰেকৰ্ডাৰে এটা সাধাৰণ আৰু আধুনিক আন্তঃপৃষ্ঠ প্ৰদান কৰে যি অডিঅ' ৰেকৰ্ড "
+"কৰাৰ আৰু "
+"বজোৱাৰ এটা প্ৰত্যক্ষ পদ্ধতি প্ৰদান কৰে। ই আপোনাক মৌলিক সম্পাদন কৰাৰ, আৰু ভয়েচ "
+"মেমোসমূহ "
+"সৃষ্টি কৰাৰ অনুমতি দিয়ে।"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"শব্দ ৰেকৰ্ডাৰে সংৰক্ষণ প্ৰক্ৰিয়াক স্বচালিতভাৱে নিয়ন্ত্ৰণ কৰে যাতে আপুনি আগৰ "
+"ৰেকৰ্ডিং ভুলতে বাদ দিয়াৰ "
+"বিষয়ে ভাৱিব নালাগে।"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "উইন্ডোৰ আকাৰ"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "উইন্ডোৰ আকাৰ (প্ৰস্থ আৰু উচ্চতা)।"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "উইন্ডোৰ অৱস্থান"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "উইন্ডোৰ অৱস্থান (x আৰু y)।"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Maps media types to audio encoder preset names."
+msgstr "মাধ্যমৰ ধৰণসমূহক অডিঅ' এনক'ডাৰ প্ৰিচেট নামসমূহৰ সৈতে মেপ কৰে।"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
+msgstr ""
+"মাধ্যমৰ ধৰণসমূহক অডিঅ' এনক'ডাৰ প্ৰিচেট নামসমূহৰ সৈতে মেপ কৰে। যদি কোনো মেপিং "
+"সংহিত নাই, "
+"অবিকল্পিত এনক'ডাৰ সংহতিসমূহক ব্যৱহাৰ কৰা হব।"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "মাইক্ৰফোন ভলিউম স্তৰ"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "মাইক্ৰফোন ভলিউম স্তৰ।"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Speaker volume level"
+msgstr "স্পিকাৰ ভলিউম স্তৰ"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Speaker volume level."
+msgstr "স্পিকাৰ ভলিউম স্তৰ।"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
+#: ../src/record.js:105
+msgid "Sound Recorder"
+msgstr "শব্দ ৰেকৰ্ডাৰ"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "মাইক্ৰফোনৰ সহায়ত শব্দ ৰেকৰ্ড কৰক আৰু ইয়াক পুনৰ চলাওক"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "অডিঅ';এপ্লিকেচন;ৰেকৰ্ড;"
+
+#: ../src/application.js:43
+msgid "SoundRecorder"
+msgstr "শব্দৰেকৰ্ডাৰ"
+
+#: ../src/application.js:50 ../src/preferences.js:39
+msgid "Preferences"
+msgstr "পছন্দসমূহ"
+
+#: ../src/application.js:53
+msgid "About"
+msgstr "বিষয়ে"
+
+#: ../src/application.js:54
+msgid "Quit"
+msgstr "প্ৰস্থান কৰক"
+
+#: ../src/application.js:83
+msgid "Sound Recorder started"
+msgstr "শব্দ ৰেকৰ্ডাৰ আৰম্ভ হৈছে"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:89
+msgid "Recordings"
+msgstr "ৰেকৰ্ডিংসমূহ"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:154
+msgid "translator-credits"
+msgstr "নীলমদ্যুতি গোস্বামী (ngoswami@redhat.com)"
+
+#: ../src/fileUtil.js:89
+msgid "Yesterday"
+msgstr "যোৱাকালি"
+
+#: ../src/fileUtil.js:91
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d দিন আগত"
+msgstr[1] "%d দিন আগত"
+
+#: ../src/fileUtil.js:95
+msgid "Last week"
+msgstr "যোৱা সপ্তাহ"
+
+#: ../src/fileUtil.js:97
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d সপ্তাহ আগত"
+msgstr[1] "%d সপ্তাহ আগত"
+
+#: ../src/fileUtil.js:101
+msgid "Last month"
+msgstr "যোৱা মাহ"
+
+#: ../src/fileUtil.js:103
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d মাহ আগত"
+msgstr[1] "%d মাহ আগত"
+
+#: ../src/fileUtil.js:107
+msgid "Last year"
+msgstr "যোৱা বছৰ"
+
+#: ../src/fileUtil.js:109
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d বছৰ আগত"
+msgstr[1] "%d বছৰ আগত"
+
+#: ../src/info.js:46 ../src/mainWindow.js:511
+msgid "Info"
+msgstr "তথ্য"
+
+#: ../src/info.js:55
+msgid "Cancel"
+msgstr "বাতিল কৰক"
+
+#: ../src/info.js:69 ../src/mainWindow.js:292
+msgid "Done"
+msgstr "কৰা হল"
+
+#: ../src/info.js:95
+msgctxt "File Name"
+msgid "Name"
+msgstr "নাম"
+
+#: ../src/info.js:102
+msgid "Source"
+msgstr "উৎস"
+
+#: ../src/info.js:111
+msgid "Date Modified"
+msgstr "পৰিবৰ্তনৰ তাৰিখ"
+
+#: ../src/info.js:117
+msgid "Date Created"
+msgstr "সৃষ্টি কৰাৰ তাৰিখ"
+
+#: ../src/info.js:128
+msgctxt "Media Type"
+msgid "Type"
+msgstr "ধৰণ"
+
+#: ../src/listview.js:120 ../src/listview.js:215
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:111 ../src/mainWindow.js:783
+msgid "Record"
+msgstr "ৰেকৰ্ড কৰক"
+
+#: ../src/mainWindow.js:147
+msgid "Add Recordings"
+msgstr "ৰেকৰ্ডিংসমূহ যোগ কৰক"
+
+#: ../src/mainWindow.js:152
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "শব্দ ৰেকৰ্ডিংসমূহ কৰিবলে <b>ৰেকৰ্ড</b> বুটাম ব্যৱহাৰ কৰক"
+
+#: ../src/mainWindow.js:278
+msgid "Recording…"
+msgstr "ৰেকৰ্ড কৰা হৈছে…"
+
+#: ../src/mainWindow.js:332
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d ৰেকৰ্ড কৰা শব্দ"
+msgstr[1] "%d ৰেকৰ্ড কৰা শব্দবোৰ"
+
+#: ../src/mainWindow.js:396
+msgid "Play"
+msgstr "বজাওক"
+
+#: ../src/mainWindow.js:417
+msgid "Pause"
+msgstr "বিৰাম দিয়ক"
+
+#: ../src/mainWindow.js:524
+msgid "Delete"
+msgstr "মচি পেলাওক"
+
+#: ../src/mainWindow.js:818
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:818
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:818
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:818
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:818
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:842
+msgid "Load More"
+msgstr "অধিক ল'ড কৰক"
+
+#: ../src/play.js:89
+msgid "Unable to play recording"
+msgstr "ৰেকৰ্ডিং চলাবলে অক্ষম"
+
+#: ../src/preferences.js:63
+msgid "Preferred format"
+msgstr "পছন্দৰ বিন্যাস"
+
+#: ../src/preferences.js:71
+msgid "Volume"
+msgstr "ভলিউম"
+
+#: ../src/preferences.js:86
+msgid "Microphone"
+msgstr "মাইক্ৰফোন"
+
+#: ../src/record.js:66
+msgid "Unable to create Recordings directory."
+msgstr "ৰেকৰ্ডিংসমূহ ডাইৰেকটৰি সৃষ্টি কৰিবলে অক্ষম।"
+
+#: ../src/record.js:75
+msgid "Your audio capture settings are invalid."
+msgstr "আপোনাৰ অডিঅ' গ্ৰহণ সংহতিসমূহ অবৈধ।"
+
+#: ../src/record.js:122
+msgid "Not all elements could be created."
+msgstr "সকলো উপাদান সৃষ্টি কৰিব পৰা নগল।"
+
+#: ../src/record.js:133
+msgid "Not all of the elements were linked"
+msgstr "সকলো উপাদান সংযুক্ত নাছিল"
+
+#: ../src/record.js:158
+msgid "No Media Profile was set."
+msgstr "কোনো মাধ্যম আলেখ্য সংহতি নাছিল।"
+
+#: ../src/record.js:169
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"পাইপলাইনক ৰেকৰ্ডিং অৱস্থালৈ সংহতি \n"
+"কৰিবলে অক্ষম"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:318
+#, javascript-format
+msgid "Clip %d"
+msgstr "ক্লিপ %d"
+
