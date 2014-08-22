@@ -307,6 +307,7 @@ const MainView = new Lang.Class({
                                                      width_request: 775,
                                                      vexpand: true });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+        this._scrolledWin.get_style_context().add_class('view');
         this.scrollbar = this._scrolledWin.get_vadjustment();
         
         this.scrollbar.connect("value_changed", Lang.bind(this, 
