@@ -1,43 +1,6 @@
-.view .button {
-  background-color: rgba(255,255,255,0.20);
-  border-left: rgba(255,255,255,1.0) 0.5px solid;
-  border-right: rgba(255,255,255,1.0) 0.5px solid;
-  background-image: none;
-  border: none;
+.button {
   border-radius: 0px; 
-  margin: 0; 
-}
-
-.view .button:hover {
-  background-color: rgba(255,255,255,0.30);
-  transition: 200ms linear;
-}
-
-.view .toolbar { 
-  border-right: rgba(255,255,255,1.0) 0.5px solid; 
-  border-radius: 0px;
-}
-
-.view .toolbarEnd {
-  color: rgba(255,255,255, 1.0); 
-}
-
-.view .toolbarEnd:hover {
-  color: rgba(255,255,255, 1.0);
-  transition: 200ms linear; 
-}
-
-.view .toolbarSecond {
-  border-left: rgba(255,255,255,1.0) 0.5px solid;
-  border-right: rgba(255,255,255,1.0) 0.5px solid;
-  color: rgba(255,255,255, 1.0);
-}
-
-.view .toolbarSecond:hover {
-  border-left: rgba(255,255,255,1.0) 0.5px solid;
-  border-right: rgba(255,255,255,1.0) 0.5px solid;
-  color: rgba(255,255,255, 1.0);
-  transition: 200ms linear; 
+  border: rgba(255,255,255,1.0) 0.5px solid;
 }
 
 .emptyGrid {

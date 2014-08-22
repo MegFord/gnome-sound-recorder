@@ -264,7 +264,6 @@ const MainView = new Lang.Class({
                                               valign: Gtk.Align.FILL,
                                               icon_size: Gtk.IconSize.BUTTON,
                                               opacity: 1 });
-        this.widgetRecord.get_style_context().add_class('toolbarEnd');
         this.recordGrid.attach(this.widgetRecord, 0, 0, 2, 2);
             
         this._boxRecord = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
@@ -308,7 +307,6 @@ const MainView = new Lang.Class({
                                                      width_request: 775,
                                                      vexpand: true });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
-        this._scrolledWin.get_style_context().add_class('view');
         this.scrollbar = this._scrolledWin.get_vadjustment();
         
         this.scrollbar.connect("value_changed", Lang.bind(this, 
@@ -385,7 +383,7 @@ const MainView = new Lang.Class({
                 this._placeholderButton.get_style_context().add_class("dim-label");
                 
                 // play button
-                this.playImage = Gtk.Image.new();
+                this.playImage = Gtk.Image.new({ name: "PlayImage" });
                 this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
                                                         'media-playback-start-symbolic',
                                                   Gtk.IconSize.BUTTON);
@@ -394,7 +392,6 @@ const MainView = new Lang.Class({
                                                         name: "PlayButton" });
                 this._playListButton.set_image(this.playImage);
                 this._playListButton.set_tooltip_text(_("Play"));
-                this._playListButton.get_style_context().add_class("toolbar");
                 this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
                 this._playListButton.hide();
                 this._playListButton.connect('clicked', Lang.bind(this,
@@ -416,7 +413,6 @@ const MainView = new Lang.Class({
                 this._pauseListButton.set_image(this.pauseImage);
                 this._pauseListButton.set_tooltip_text(_("Pause"));
                 this.rowGrid.attach(this._pauseListButton, 0, 0, 2, 2);
-                this._pauseListButton.get_style_context().add_class("toolbar");
                 this._pauseListButton.hide();
                 this._pauseListButton.connect('clicked', Lang.bind(this,
                     function(){
@@ -509,7 +505,6 @@ const MainView = new Lang.Class({
                         this._onInfoButton(file);
                     }));
                 this._info.set_tooltip_text(_("Info"));
-                this._info.get_style_context().add_class(rtl ? "toolbarEnd" : "toolbarSecond");
                 this.rowGrid.attach(this._info, 27, 0, 1, 2);
                 this._info.hide();
 
@@ -523,7 +518,6 @@ const MainView = new Lang.Class({
                     }));
                 this._delete.set_tooltip_text(_("Delete"));
                 this.rowGrid.attach(this._delete, 28, 0, 1, 2);
-                this._delete.get_style_context().add_class(rtl ? "toolbarSecond" : "toolbarEnd");
                 this._delete.hide();
                 
                 this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
@@ -592,7 +586,11 @@ const MainView = new Lang.Class({
                         child.hide();
                         child.sensitive = false;
                     } 
-                        
+                    
+                    if (child.name == "PlaceholderButton") {
+                        child.show();
+                    }
+                       
                     if (child.name == "PlayLabelBox") {
                         child.show();
                         child.foreach(Lang.bind(this, 
@@ -734,7 +732,8 @@ const MainView = new Lang.Class({
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
                            
-                    if (child.name == "InfoButton" || child.name == "DeleteButton" || child.name == "PlayButton" ) {
+                    if (child.name == "InfoButton" || child.name == "DeleteButton" || 
+                        child.name == "PlayButton" || child.name == "PlaceholderButton" ) {
                         child.hide();
                         child.sensitive = false;
                     }
