@@ -6,11 +6,20 @@ nobase_icon_DATA = \
 	hicolor/24x24/apps/gnome-sound-recorder.png \
 	hicolor/32x32/apps/gnome-sound-recorder.png \
 	hicolor/48x48/apps/gnome-sound-recorder.png \
-	hicolor/256x256/apps/gnome-sound-recorder.png
+	hicolor/256x256/apps/gnome-sound-recorder.png \
+	HighContrast/16x16/apps/gnome-sound-recorder.png \
+	HighContrast/22x22/apps/gnome-sound-recorder.png \
+	HighContrast/24x24/apps/gnome-sound-recorder.png \
+	HighContrast/32x32/apps/gnome-sound-recorder.png \
+	HighContrast/48x48/apps/gnome-sound-recorder.png \
+	HighContrast/256x256/apps/gnome-sound-recorder.png
 
-EXTRA_DIST = $(nobase_icon_DATA) hicolor/gnome-sound-recorder.svg
+EXTRA_DIST = $(nobase_icon_DATA) \
+	hicolor/gnome-sound-recorder.svg \
+	HighContrast/gnome-sound-recorder.svg
 
-gtk_update_icon_cache = gtk-update-icon-cache -f $(datadir)/icons/hicolor; 
+gtk_update_icon_cache = gtk-update-icon-cache -f $(datadir)/icons/hicolor; \
+		        gtk-update-icon-cache -f $(datadir)/icons/HighContrast;
 
 install-data-hook: update-icon-cache
 uninstall-hook: update-icon-cache
@@ -24,7 +33,3 @@ update-icon-cache:
 	fi
 
 -include $(top_srcdir)/git.mk
-
-
-
-
