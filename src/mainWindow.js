@@ -307,7 +307,6 @@ const MainView = new Lang.Class({
                                                      width_request: 775,
                                                      vexpand: true });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
-        this._scrolledWin.get_style_context().add_class('view');
         this.scrollbar = this._scrolledWin.get_vadjustment();
         
         this.scrollbar.connect("value_changed", Lang.bind(this, 
@@ -381,7 +380,7 @@ const MainView = new Lang.Class({
                 this._placeholderButton.set_no_show_all(true);
                 this.placeholderImage.show();
                 this._placeholderButton.show();
-                this._placeholderButton.get_style_context().add_class("dim-label");
+                //this._placeholderButton.get_style_context().add_class("dim-label");
                 
                 // play button
                 this.playImage = Gtk.Image.new({ name: "PlayImage" });
@@ -393,7 +392,6 @@ const MainView = new Lang.Class({
                                                         name: "PlayButton" });
                 this._playListButton.set_image(this.playImage);
                 this._playListButton.set_tooltip_text(_("Play"));
-                this._playListButton.get_style_context().add_class('row');
                 this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
                 this._playListButton.hide();
                 this._playListButton.connect('clicked', Lang.bind(this,
@@ -414,7 +412,6 @@ const MainView = new Lang.Class({
                                                          name: "PauseButton" });
                 this._pauseListButton.set_image(this.pauseImage);
                 this._pauseListButton.set_tooltip_text(_("Pause"));
-                this._pauseListButton.get_style_context().add_class('row');
                 this.rowGrid.attach(this._pauseListButton, 0, 0, 2, 2);
                 this._pauseListButton.hide();
                 this._pauseListButton.connect('clicked', Lang.bind(this,
@@ -497,6 +494,7 @@ const MainView = new Lang.Class({
                 // info button
                 this._info = new Gtk.Button({ hexpand: false,
                                               vexpand: true,
+                                              margin_right: 2,
                                               name: "InfoButton" });
                 this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
                 this._info.connect("clicked", Lang.bind(this,
@@ -508,12 +506,12 @@ const MainView = new Lang.Class({
                         this._onInfoButton(file);
                     }));
                 this._info.set_tooltip_text(_("Info"));
-                this._info.get_style_context().add_class('row');
                 this.rowGrid.attach(this._info, 27, 0, 1, 2);
                 this._info.hide();
 
                 // delete button
                 this._delete = new Gtk.Button({ hexpand: false,
+                                                margin_left: 2,
                                                 name: "DeleteButton" });
                 this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
                 this._delete.connect("clicked", Lang.bind(this,
@@ -521,16 +519,8 @@ const MainView = new Lang.Class({
                         this._deleteFile(this.listBox.get_selected_row());
                     }));
                 this._delete.set_tooltip_text(_("Delete"));
-                this._delete.get_style_context().add_class('row');
                 this.rowGrid.attach(this._delete, 28, 0, 1, 2);
                 this._delete.hide();
-                
-                this._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
-                this._separator.set_sensitive(false);
-                this.listBox.add(this._separator);
-                this.selectionRow = this._separator.get_parent();
-                this.selectionRow.set_sensitive(false);
-                this._separator.show();
             }
         }
         list.monitorListview();
@@ -591,7 +581,7 @@ const MainView = new Lang.Class({
                         child.hide();
                         child.sensitive = false;
                     } 
-                    
+
                     if (child.name == "PlaceholderButton") {
                         child.show();
                     }
@@ -641,7 +631,7 @@ const MainView = new Lang.Class({
                     if (child.name == "PauseButton") {
                         child.hide();
                         child.sensitive = false;
-                    } 
+                    }
                         
                     if (child.name == "WaveFormGrid")
                         child.sensitive = true;

@@ -1,16 +1,10 @@
-.view .button {
-  border-radius: 0px; 
-}
-
-.row {
-  border: rgba(255,255,255,1.0) 0.5px solid;
-}
 
 .emptyGrid {
    background-color: @theme_bg_color;
 }
 
-.list-row {
-  -GtkWidget-focus-padding: 0;
-  -GtkWidget-focus-line-width: 0;
+.list-row { 
+  padding: 6px; 
+  box-shadow: inset 0 -1px alpha(black, 0.1); 
 }
+
