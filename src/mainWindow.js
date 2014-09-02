@@ -393,6 +393,7 @@ const MainView = new Lang.Class({
                                                         name: "PlayButton" });
                 this._playListButton.set_image(this.playImage);
                 this._playListButton.set_tooltip_text(_("Play"));
+                this._playListButton.get_style_context().add_class('row');
                 this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
                 this._playListButton.hide();
                 this._playListButton.connect('clicked', Lang.bind(this,
@@ -413,6 +414,7 @@ const MainView = new Lang.Class({
                                                          name: "PauseButton" });
                 this._pauseListButton.set_image(this.pauseImage);
                 this._pauseListButton.set_tooltip_text(_("Pause"));
+                this._pauseListButton.get_style_context().add_class('row');
                 this.rowGrid.attach(this._pauseListButton, 0, 0, 2, 2);
                 this._pauseListButton.hide();
                 this._pauseListButton.connect('clicked', Lang.bind(this,
@@ -506,6 +508,7 @@ const MainView = new Lang.Class({
                         this._onInfoButton(file);
                     }));
                 this._info.set_tooltip_text(_("Info"));
+                this._info.get_style_context().add_class('row');
                 this.rowGrid.attach(this._info, 27, 0, 1, 2);
                 this._info.hide();
 
@@ -518,6 +521,7 @@ const MainView = new Lang.Class({
                         this._deleteFile(this.listBox.get_selected_row());
                     }));
                 this._delete.set_tooltip_text(_("Delete"));
+                this._delete.get_style_context().add_class('row');
                 this.rowGrid.attach(this._delete, 28, 0, 1, 2);
                 this._delete.hide();
                 

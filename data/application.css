@@ -1,5 +1,8 @@
 .view .button {
   border-radius: 0px; 
+}
+
+.row {
   border: rgba(255,255,255,1.0) 0.5px solid;
 }
 
