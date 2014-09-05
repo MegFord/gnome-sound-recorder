@@ -10,9 +10,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-07 17:15+0000\n"
-"PO-Revision-Date: 2014-07-09 08:54+0900\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-07-08 23:59+0000\n"
+"PO-Revision-Date: 2014-09-06 06:46+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -21,13 +22,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "간단하면서 현대적인 그놈 데스크톱 녹음기"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr "녹음기의 인터페이스는 간단하면서 현대적이고, 직관적으로 오디오를 녹음하고 재생할 수 있습니다. 간단한 편집을 할 수도 있고, 음성 메모를 만들 수 있습니다."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr "녹음기는 저장을 자동으로 처리하므로 이전 녹음을 실수로 잃어버릴 걱정을 하지 않아도 됩니다."
+
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
 msgstr "창 크기"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
 msgid "Window size (width and height)."
-msgstr "창 크기(너비 및 높이)"
+msgstr "창 크기(너비 및 높이)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
 msgid "Window position"
@@ -35,38 +53,36 @@ msgstr "창 위치"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
 msgid "Window position (x and y)."
-msgstr "창 위치(가로 및 세로)"
+msgstr "창 위치(가로 및 세로)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
-msgid "Preferred media type for encoding audio when recording"
-msgstr "녹음할 때 오디오를 인코딩할 미디어 종류"
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
-msgid ""
-"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
-"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
-msgstr "녹음할 때 오디오를 인코딩할 미디어 종류. 예를 들어 Ogg Vorbis는 'audio/x-vorbis', MP3는 'audio/mpeg'. MIME 타입이 아닙니다."
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
 msgstr "미디어 종류를 오디오 인코딩 이름에 매핑합니다."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
 msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping for a "
-"media type, the default encoder settings will be used."
-msgstr "미디어 종류를 오디오 인코딩 이름에 매핑합니다. 미디어 종류에 대한 매핑이 없으면 기본 인코더 설정을 사용합니다."
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
+msgstr "미디어 종류를 오디오 인코딩 이름에 매핑합니다. 매핑 설정이 없으면 기본 인코더 설정을 사용합니다."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "마이크 볼륨 단계"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "마이크 볼륨 단계."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-msgid "Volume level"
-msgstr "볼륨 단계"
+msgid "Speaker volume level"
+msgstr "스피커 볼륨 단계"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-msgid "Volume level."
-msgstr "볼륨 단계."
+msgid "Speaker volume level."
+msgstr "스피커 볼륨 단계."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
-#: ../src/record.js:95
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:153
+#: ../src/record.js:106
 msgid "Sound Recorder"
 msgstr "녹음기"
 
@@ -78,33 +94,33 @@ msgstr "마이크로 소리를 녹음하고 재생합니다"
 msgid "Audio;Application;Record;"
 msgstr "Audio;오디오;음성;Application;프로그램;Record;녹음;레코딩;"
 
-#: ../src/application.js:39
+#: ../src/application.js:41
 msgid "SoundRecorder"
 msgstr "SoundRecorder"
 
-#: ../src/application.js:46 ../src/preferences.js:38
+#: ../src/application.js:48 ../src/preferences.js:38
 msgid "Preferences"
 msgstr "기본 설정"
 
-#: ../src/application.js:49
+#: ../src/application.js:51
 msgid "About"
 msgstr "정보"
 
-#: ../src/application.js:50
+#: ../src/application.js:52
 msgid "Quit"
 msgstr "끝내기"
 
-#: ../src/application.js:79
+#: ../src/application.js:81
 msgid "Sound Recorder started"
 msgstr "녹음기 시작"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:85
+#: ../src/application.js:87
 msgid "Recordings"
 msgstr "녹음"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:124
+#: ../src/application.js:152
 msgid "translator-credits"
 msgstr "류창우"
 
@@ -148,139 +164,139 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d년 전"
 
-#: ../src/info.js:40 ../src/mainWindow.js:500
+#: ../src/info.js:45 ../src/mainWindow.js:509
 msgid "Info"
 msgstr "정보"
 
-#: ../src/info.js:56
+#: ../src/info.js:54
 msgid "Cancel"
 msgstr "취소"
 
-#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+#: ../src/info.js:68 ../src/mainWindow.js:290
 msgid "Done"
 msgstr "완료"
 
-#: ../src/info.js:96
+#: ../src/info.js:94
 msgctxt "File Name"
 msgid "Name"
 msgstr "이름"
 
-#: ../src/info.js:103
+#: ../src/info.js:101
 msgid "Source"
 msgstr "입력"
 
-#: ../src/info.js:112
+#: ../src/info.js:110
 msgid "Date Modified"
 msgstr "수정 시각"
 
-#: ../src/info.js:118
+#: ../src/info.js:116
 msgid "Date Created"
 msgstr "만든 시각"
 
-#: ../src/info.js:129
+#: ../src/info.js:127
 msgctxt "Media Type"
 msgid "Type"
 msgstr "종류"
 
-#: ../src/listview.js:133 ../src/listview.js:235
+#: ../src/listview.js:122 ../src/listview.js:217
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/mainWindow.js:108 ../src/mainWindow.js:772
+#: ../src/mainWindow.js:109 ../src/mainWindow.js:781
 msgid "Record"
 msgstr "녹음"
 
-#: ../src/mainWindow.js:144
+#: ../src/mainWindow.js:145
 msgid "Add Recordings"
 msgstr "녹음 추가"
 
-#: ../src/mainWindow.js:149
+#: ../src/mainWindow.js:150
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "녹음을 새로 만드려면 <b>녹음</b> 단추를 누르십시오"
 
-#: ../src/mainWindow.js:270
+#: ../src/mainWindow.js:276
 msgid "Recording…"
 msgstr "녹음 중…"
 
-#: ../src/mainWindow.js:324
+#: ../src/mainWindow.js:330
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "녹음 %d개"
 
-#: ../src/mainWindow.js:385
+#: ../src/mainWindow.js:394
 msgid "Play"
 msgstr "재생"
 
-#: ../src/mainWindow.js:406
+#: ../src/mainWindow.js:415
 msgid "Pause"
 msgstr "일시 중지"
 
-#: ../src/mainWindow.js:513
+#: ../src/mainWindow.js:522
 msgid "Delete"
 msgstr "삭제"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:807
+#: ../src/mainWindow.js:816
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:829
+#: ../src/mainWindow.js:840
 msgid "Load More"
 msgstr "더 읽어들이기"
 
-#: ../src/play.js:81
+#: ../src/play.js:89
 msgid "Unable to play recording"
 msgstr "녹음을 재생할 수 없습니다"
 
-#: ../src/preferences.js:75
+#: ../src/preferences.js:62
 msgid "Preferred format"
 msgstr "선호 형식"
 
-#: ../src/preferences.js:83
+#: ../src/preferences.js:70
 msgid "Volume"
 msgstr "볼륨"
 
-#: ../src/preferences.js:98
+#: ../src/preferences.js:85
 msgid "Microphone"
 msgstr "마이크"
 
-#: ../src/record.js:59
+#: ../src/record.js:67
 msgid "Unable to create Recordings directory."
 msgstr "녹음 디렉터리를 만들 수 없습니다."
 
-#: ../src/record.js:67
+#: ../src/record.js:76
 msgid "Your audio capture settings are invalid."
 msgstr "오디오 캡쳐 설정이 올바르지 않습니다."
 
-#: ../src/record.js:114
+#: ../src/record.js:123
 msgid "Not all elements could be created."
 msgstr "만들 수 없는 엘리먼트가 있습니다."
 
-#: ../src/record.js:124
+#: ../src/record.js:134
 msgid "Not all of the elements were linked"
 msgstr "연결되지 않은 엘리먼트가 있습니다."
 
-#: ../src/record.js:148
+#: ../src/record.js:159
 msgid "No Media Profile was set."
 msgstr "미디어 프로파일을 설정하지 않았습니다."
 
-#: ../src/record.js:158
+#: ../src/record.js:170
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state"
@@ -290,7 +306,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
-#: ../src/record.js:291
+#: ../src/record.js:319
 #, javascript-format
 msgid "Clip %d"
 msgstr "클립 %d"
