@@ -1,17 +1,17 @@
 # Finnish translation for gnome-sound-recorder.
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013, 2014.
 # Juhani Numminen <juhaninumminen0@gmail.com>, 2014.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-03-02 18:46+0000\n"
-"PO-Revision-Date: 2014-03-14 18:28+0200\n"
-"Last-Translator: Juhani Numminen <juhaninumminen0@gmail.com>\n"
+"POT-Creation-Date: 2014-06-03 02:41+0000\n"
+"PO-Revision-Date: 2014-09-06 16:00+0300\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 2.91.6\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "Yksinkertainen ja nykyaikainen ääninauhuri Gnomelle."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr ""
+"Ääninauhuri tarjoaa pelkistetyn ja nykyaikaisen käyttöliittymän, jonka "
+"avulla äänen tallentaminen ja toistaminen käy ketterästi. Sovelluksen avulla "
+"voit tehdä pieniä muokkauksia ja nauhoittaa äänimuistioita."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"Ääninauhuri käsittelee tallennuksen automaattisesti, joten et vahingossakaan "
+"hävitä aiempaa nauhoitustasi."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -37,40 +59,42 @@ msgid "Window position (x and y)."
 msgstr "Ikkunan sijainti (x ja y)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
-msgid "Preferred media type for encoding audio when recording"
-msgstr "Ensisijainen äänikoodauksen tyyppi nauhoittaessa"
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
-msgid ""
-"Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
-"Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
-msgstr ""
-"Ensisijainen äänikoodauksen tyyppi nauhoittaessa. Esimerkiksi ’audio/x-"
-"vorbis’ Ogg Vorbikselle tai ’audio/mpeg’ MP3:lle. Kyseessä ei ole MIME-"
-"tyyppi."
-
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Maps media types to audio encoder preset names."
 msgstr "Liittää mediatyypit äänikoodausesiasetusten nimiin."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+#| msgid ""
+#| "Maps media types to audio encoder preset names. If there is no mapping "
+#| "for a media type, the default encoder settings will be used."
 msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping for a "
-"media type, the default encoder settings will be used."
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
 msgstr ""
-"Liittää mediatyypit äänikoodausesiasetusten nimiin. Jos mediatyypille ei ole "
-"liitosta, käytetään oletuskoodausasetuksia."
+"Liittää mediatyypit äänikoodausesiasetusten nimiin. Jos liitosta ei ole "
+"tehty, käytetään oletuskoodausasetuksia."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+#| msgid "Volume level"
+msgid "Microphone volume level"
+msgstr "Mikrofonin äänentaso"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#| msgid "Volume level."
+msgid "Microphone volume level."
+msgstr "Mikrofonin äänenvoimakkuuden taso."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-msgid "Volume level"
-msgstr "Äänentaso"
+#| msgid "Volume level"
+msgid "Speaker volume level"
+msgstr "Kaiuttimen äänentaso"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-msgid "Volume level."
-msgstr "Äänenvoimakkuuden taso."
+#| msgid "Volume level."
+msgid "Speaker volume level."
+msgstr "Kaiuttimen äänenvoimakkuuden taso."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:125
-#: ../src/record.js:95
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:153
+#: ../src/record.js:106
 msgid "Sound Recorder"
 msgstr "Ääninauhuri"
 
@@ -82,212 +106,216 @@ msgstr "Tallenna ääntä mikrofonilta ja toista tallenteita"
 msgid "Audio;Application;Record;"
 msgstr "Audio;Application;Record;ääni;sovellus;nauhuri;nauhoitin;"
 
-#: ../src/application.js:39
+#: ../src/application.js:41
 msgid "SoundRecorder"
 msgstr "Ääninauhuri"
 
-#: ../src/application.js:46 ../src/preferences.js:38
+#: ../src/application.js:48 ../src/preferences.js:38
 msgid "Preferences"
 msgstr "Asetukset"
 
-#: ../src/application.js:49
+#: ../src/application.js:51
 msgid "About"
 msgstr "Tietoja"
 
-#: ../src/application.js:50
+#: ../src/application.js:52
 msgid "Quit"
 msgstr "Lopeta"
 
-#: ../src/application.js:79
+#: ../src/application.js:81
 msgid "Sound Recorder started"
 msgstr "Ääninauhuri käynnistyi"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:85
+#: ../src/application.js:87
 msgid "Recordings"
 msgstr "Nauhoitukset"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:124
+#: ../src/application.js:152
 msgid "translator-credits"
 msgstr ""
 "Juhani Numminen, 2014\n"
 "Jiri Grönroos, 2013, 2014"
 
-#: ../src/fileUtil.js:92
+#: ../src/fileUtil.js:91
 msgid "Yesterday"
 msgstr "Eilen"
 
-#: ../src/fileUtil.js:94
+#: ../src/fileUtil.js:93
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d päivä sitten"
 msgstr[1] "%d päivää sitten"
 
-#: ../src/fileUtil.js:98
+#: ../src/fileUtil.js:97
 msgid "Last week"
 msgstr "Viime viikolla"
 
-#: ../src/fileUtil.js:100
+#: ../src/fileUtil.js:99
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d viikko sitten"
 msgstr[1] "%d viikkoa sitten"
 
-#: ../src/fileUtil.js:104
+#: ../src/fileUtil.js:103
 msgid "Last month"
 msgstr "Viime kuussa"
 
-#: ../src/fileUtil.js:106
+#: ../src/fileUtil.js:105
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d kuukausi sitten"
 msgstr[1] "%d kuukautta sitten"
 
-#: ../src/fileUtil.js:110
+#: ../src/fileUtil.js:109
 msgid "Last year"
 msgstr "Viime vuonna"
 
-#: ../src/fileUtil.js:112
+#: ../src/fileUtil.js:111
+#, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d vuosi sitten"
 msgstr[1] "%d vuotta sitten"
 
-#: ../src/info.js:40 ../src/mainWindow.js:499
+#: ../src/info.js:45 ../src/mainWindow.js:509
 msgid "Info"
 msgstr "Info"
 
-#: ../src/info.js:56
+#: ../src/info.js:54
 msgid "Cancel"
 msgstr "Peru"
 
-#: ../src/info.js:70 ../src/mainWindow.js:284 ../src/preferences.js:56
+#: ../src/info.js:68 ../src/mainWindow.js:290
 msgid "Done"
 msgstr "Valmis"
 
-#: ../src/info.js:96
+#: ../src/info.js:94
 msgctxt "File Name"
 msgid "Name"
 msgstr "Nimi"
 
-#: ../src/info.js:103
+#: ../src/info.js:101
 msgid "Source"
 msgstr "Lähde"
 
-#: ../src/info.js:112
+#: ../src/info.js:110
 msgid "Date Modified"
 msgstr "Muokkauspäivä"
 
-#: ../src/info.js:118
+#: ../src/info.js:116
 msgid "Date Created"
 msgstr "Luontipäivä"
 
-#: ../src/info.js:129
+#: ../src/info.js:127
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tyyppi"
 
-#: ../src/listview.js:133 ../src/listview.js:235
+#: ../src/listview.js:122 ../src/listview.js:217
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d.%m.%Y %H:%M:%S"
 
-#: ../src/mainWindow.js:108 ../src/mainWindow.js:771
+#: ../src/mainWindow.js:109 ../src/mainWindow.js:781
 msgid "Record"
 msgstr "Nauhoita"
 
-#: ../src/mainWindow.js:144
+#: ../src/mainWindow.js:145
 msgid "Add Recordings"
 msgstr "Lisää nauhoitteita"
 
-#: ../src/mainWindow.js:149
+#: ../src/mainWindow.js:150
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Napsauta <b>Nauhoita</b> tallentaaksesi ääntä"
 
-#: ../src/mainWindow.js:270
+#: ../src/mainWindow.js:276
 msgid "Recording…"
 msgstr "Nauhoitetaan…"
 
-#: ../src/mainWindow.js:324
+#: ../src/mainWindow.js:330
+#, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d nauhoitettu ääni"
 msgstr[1] "%d nauhoitettua ääntä"
 
-#: ../src/mainWindow.js:384
+#: ../src/mainWindow.js:394
 msgid "Play"
 msgstr "Toista"
 
-#: ../src/mainWindow.js:405
+#: ../src/mainWindow.js:415
 msgid "Pause"
 msgstr "Tauko"
 
-#: ../src/mainWindow.js:512
+#: ../src/mainWindow.js:522
 msgid "Delete"
 msgstr "Poista"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:816
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:816
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:816
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:816
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:806
+#: ../src/mainWindow.js:816
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:828
+#: ../src/mainWindow.js:840
 msgid "Load More"
 msgstr "Lataa lisää"
 
-#: ../src/play.js:81
-#| msgid "Unable to create Recordings directory."
+#: ../src/play.js:89
 msgid "Unable to play recording"
 msgstr "Nauhoituksen toistaminen epäonnistui"
 
-#: ../src/preferences.js:75
+#: ../src/preferences.js:62
 msgid "Preferred format"
 msgstr "Ensisijainen muoto"
 
-#: ../src/preferences.js:83
+#: ../src/preferences.js:70
 msgid "Volume"
 msgstr "Äänenvoimakkuus"
 
-#: ../src/preferences.js:98
+#: ../src/preferences.js:85
 msgid "Microphone"
 msgstr "Mikrofoni"
 
-#: ../src/record.js:59
+#: ../src/record.js:67
 msgid "Unable to create Recordings directory."
 msgstr "Nauhoitekansion luominen epäonnistui."
 
-#: ../src/record.js:67
+#: ../src/record.js:76
 msgid "Your audio capture settings are invalid."
 msgstr "Äänen tallennusasetukset ovat virheelliset."
 
-#: ../src/record.js:114
+#: ../src/record.js:123
 msgid "Not all elements could be created."
 msgstr "Joidenkin elementtien luominen epäonnistui."
 
-#: ../src/record.js:124
+#: ../src/record.js:134
 msgid "Not all of the elements were linked"
 msgstr "Kaikki elementit eivät olleet linkitettyjä"
 
-#: ../src/record.js:148
+#: ../src/record.js:159
 msgid "No Media Profile was set."
 msgstr "Mediaprofiilia ei ole asetettu."
 
-#: ../src/record.js:158
+#: ../src/record.js:170
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state"
@@ -297,9 +325,22 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
-#: ../src/record.js:291
+#: ../src/record.js:319
+#, javascript-format
 msgid "Clip %d"
 msgstr "Nauhoitus %d"
+
+#~ msgid "Preferred media type for encoding audio when recording"
+#~ msgstr "Ensisijainen äänikoodauksen tyyppi nauhoittaessa"
+
+#~ msgid ""
+#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
+#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
+#~ "type."
+#~ msgstr ""
+#~ "Ensisijainen äänikoodauksen tyyppi nauhoittaessa. Esimerkiksi ’audio/x-"
+#~ "vorbis’ Ogg Vorbikselle tai ’audio/mpeg’ MP3:lle. Kyseessä ei ole MIME-"
+#~ "tyyppi."
 
 #~ msgid "Finish"
 #~ msgstr "Valmis"
