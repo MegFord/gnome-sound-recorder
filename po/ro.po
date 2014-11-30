@@ -1,0 +1,328 @@
+# Romanian translation for gnome-sound-recorder.
+# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Bogdan Mințoi <mintoi.bogdan@gmail.com>, 2014.
+# Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-09-03 00:14+0000\n"
+"PO-Revision-Date: 2014-11-30 11:50+0200\n"
+"Last-Translator: Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>\n"
+"Language-Team: Gnome Romanian Translation Team\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2);;\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "Un înregistrator de sunet simplu și modern, pentru GNOME"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr ""
+"Înregistrator de sunet pune la dispoziție o interfață simplă și modernă ce "
+"oferă o cale simplă de a înregistra și reda clipuri audio. Vă permite să "
+"efectuați editări de bază și să creeați memorii vocale."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"Înregistrator de sunet se ocupă automat de procesul de salvare astfel încât "
+"nu trebuie să vă faceți griji despre ștergerea accidentală a înregistrărilor "
+"precedente."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Dimensiunea ferestrei"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Dimensiunea ferestrei (lățime și înălțime)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Poziția ferestrei"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Poziția ferestrei (x și y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "Nivelul volumului microfonului"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "Nivelul volumului microfonului."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Speaker volume level"
+msgstr "Nivelul volumului difuzorului"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Speaker volume level."
+msgstr "Nivelul volumului difuzorului."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
+#: ../src/record.js:105
+msgid "Sound Recorder"
+msgstr "Înregistrator de sunet"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Înregistrează sunet prin intermediul microfonului și îl redă"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audio;Application;Record;Înregistrare;"
+
+#: ../src/application.js:43
+msgid "SoundRecorder"
+msgstr "Înregistrator de sunet"
+
+#: ../src/application.js:50 ../src/preferences.js:39
+msgid "Preferences"
+msgstr "Preferințe"
+
+#: ../src/application.js:53
+msgid "About"
+msgstr "Despre"
+
+#: ../src/application.js:54
+msgid "Quit"
+msgstr "Ieșire"
+
+#: ../src/application.js:83
+msgid "Sound Recorder started"
+msgstr "Înregistrator de sunet pornit"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:89
+msgid "Recordings"
+msgstr "Înregistrări"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:154
+msgid "translator-credits"
+msgstr "Bogdan Mințoi <mintoi.bogdan@gmail.com> 2014"
+
+#: ../src/fileUtil.js:89
+msgid "Yesterday"
+msgstr "Ieri"
+
+#: ../src/fileUtil.js:91
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Acum %d zi"
+msgstr[1] "Acum %d zile"
+msgstr[2] "Acum %d de zile"
+
+#: ../src/fileUtil.js:95
+msgid "Last week"
+msgstr "Săptămâna trecută"
+
+#: ../src/fileUtil.js:97
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Acum %d săptămână"
+msgstr[1] "Acum %d săptămâni"
+msgstr[2] "Acum %d de săptămâni"
+
+#: ../src/fileUtil.js:101
+msgid "Last month"
+msgstr "Luna trecută"
+
+#: ../src/fileUtil.js:103
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Acum %d lună"
+msgstr[1] "Acum %d luni"
+msgstr[2] "Acum %d de luni"
+
+#: ../src/fileUtil.js:107
+msgid "Last year"
+msgstr "Anul trecut"
+
+#: ../src/fileUtil.js:109
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "Acum %d an"
+msgstr[1] "Acum %d ani"
+msgstr[2] "Acum %d de ani"
+
+#: ../src/info.js:46 ../src/mainWindow.js:508
+msgid "Info"
+msgstr "Info"
+
+#: ../src/info.js:55
+msgid "Cancel"
+msgstr "Anulează"
+
+#: ../src/info.js:69 ../src/mainWindow.js:291
+msgid "Done"
+msgstr "Realizat"
+
+#: ../src/info.js:95
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nume"
+
+#: ../src/info.js:102
+msgid "Source"
+msgstr "Sursă"
+
+#: ../src/info.js:111
+msgid "Date Modified"
+msgstr "Data modificării"
+
+#: ../src/info.js:117
+msgid "Date Created"
+msgstr "Data creării"
+
+#: ../src/info.js:128
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tip"
+
+#: ../src/listview.js:120 ../src/listview.js:215
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:111 ../src/mainWindow.js:777
+msgid "Record"
+msgstr "Înregistrare"
+
+#: ../src/mainWindow.js:147
+msgid "Add Recordings"
+msgstr "Adaugă înregistrări"
+
+#: ../src/mainWindow.js:152
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Folosiți butonul <b>Înregistrare</b> pentru a înregistra clipuri audio"
+
+#: ../src/mainWindow.js:277
+msgid "Recording…"
+msgstr "Se înregistrează…"
+
+#: ../src/mainWindow.js:330
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d clip audio înregistrat"
+msgstr[1] "%d clipuri audio înregistrate"
+msgstr[2] "%d de clipuri audio înregistrate"
+
+#: ../src/mainWindow.js:394
+msgid "Play"
+msgstr "Redă"
+
+#: ../src/mainWindow.js:414
+msgid "Pause"
+msgstr "Pauză"
+
+#: ../src/mainWindow.js:521
+msgid "Delete"
+msgstr "Șterge"
+
+#: ../src/mainWindow.js:812
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:812
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:812
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:812
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:812
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:836
+msgid "Load More"
+msgstr "Mai mult"
+
+#: ../src/play.js:89
+msgid "Unable to play recording"
+msgstr "Înregistrarea nu poate fi redată"
+
+#: ../src/preferences.js:63
+msgid "Preferred format"
+msgstr "Format preferat"
+
+#: ../src/preferences.js:71
+msgid "Volume"
+msgstr "Volum"
+
+#: ../src/preferences.js:86
+msgid "Microphone"
+msgstr "Microfon"
+
+#: ../src/record.js:66
+msgid "Unable to create Recordings directory."
+msgstr "Dosarul de înregistrări nu poate fi creat."
+
+#: ../src/record.js:75
+msgid "Your audio capture settings are invalid."
+msgstr "Setările de captură audio sunt nevalide."
+
+#: ../src/record.js:122
+msgid "Not all elements could be created."
+msgstr "Nu au putut fi create toate elementele."
+
+#: ../src/record.js:133
+msgid "Not all of the elements were linked"
+msgstr ""
+
+#: ../src/record.js:158
+msgid "No Media Profile was set."
+msgstr "Nu a fost setat un profil media."
+
+#: ../src/record.js:169
+#, fuzzy
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state"
+msgstr ""
+"Imposibil de stabilit pipeline\n"
+" la starea de înregistrare"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:318
+#, javascript-format
+msgid "Clip %d"
+msgstr "Clip %d"
