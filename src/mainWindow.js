@@ -95,10 +95,10 @@ const MainWindow = new Lang.Class({
         displayTime = new FileUtil.DisplayTime;
         view = new MainView();
         play = new Play.Play();
-        
+
         params = Params.fill(params, { title: GLib.get_application_name(),
                                        hexpand: true,
-                                       vexpand: true, 
+                                       vexpand: true,
                                        default_width: 800,
                                        default_height: 480 });
         this.parent(params);
@@ -131,7 +131,7 @@ const MainView = new Lang.Class({
         this._addListviewPage('listviewPage');
         this.labelID = null;
     },
-    
+
     _addEmptyPage: function() {
         this.emptyGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                         hexpand: true,
@@ -157,8 +157,8 @@ const MainView = new Lang.Class({
         emptyPageDirections.get_style_context().add_class('dim-label');
         this.emptyGrid.add(emptyPageDirections);
         this.emptyGrid.show_all();
-    },        
-    
+    },
+
     _addListviewPage: function(name) {
         list = new Listview.Listview();
         list.setListTypeNew();
@@ -170,17 +170,17 @@ const MainView = new Lang.Class({
                                    vexpand: true });
         this.add_titled(groupGrid, name, "View");
     },
-    
+
     onPlayStopClicked: function() {
         this.activeState = play.getPipeStates();
         let listRow = this.listBox.get_selected_row();
-        
+
         if (this.activeState == PipelineStates.PLAYING) {
             play.stopPlaying();
             let rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
-                
+
                     if (child.name == "PauseButton") {
                         child.hide();
                         child.sensitive = false;
@@ -191,45 +191,51 @@ const MainView = new Lang.Class({
                 }));
         }
     },
-    
+
     onRecordStopClicked: function() {
         this._record.stopRecording();
         this.recordGrid.hide();
         recordPipeline = RecordPipelineStates.STOPPED;
         recordButton.set_sensitive(true);
         if (this.listBox != null)
-            this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);  
+            this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
     },
-     
+
     _formatTime: function(unformattedTime) {
         this.unformattedTime = unformattedTime;
         let seconds = Math.floor(this.unformattedTime);
+        let hoursString = parseInt( seconds / Math.pow(_TIME_DIVISOR, 2));
         let minuteString = parseInt( seconds / _TIME_DIVISOR ) % _TIME_DIVISOR;
         let secondString = seconds % _TIME_DIVISOR;
-        let timeString = minuteString + ":" + (secondString < 10 ? "0" + secondString : secondString);
-        
+        let timeString =
+            hoursString +
+            ":" +
+            (minuteString < 10 ? "0" + minuteString : minuteString)+
+            ":" +
+            (secondString < 10 ? "0" + secondString : secondString);
+
         return timeString;
     },
 
     _updatePositionCallback: function() {
         let position = MainWindow.play.queryPosition();
-        
+
         if (position >= 0) {
             this.progressScale.set_value(position);
         }
         return true;
     },
-    
+
     presetVolume: function(source, vol) {
         if (source == ActiveArea.PLAY) {
             volumeValue[0].play = vol;
-            Application.application.setSpeakerVolume(vol);            
+            Application.application.setSpeakerVolume(vol);
         } else {
             volumeValue[0].record = vol;
-            Application.application.setMicVolume(vol); 
-        }              
+            Application.application.setMicVolume(vol);
+        }
     },
-    
+
     setVolume: function() {
         if (setVisibleID == ActiveArea.PLAY) {
             play.setVolume(volumeValue[0].play);
@@ -237,13 +243,13 @@ const MainView = new Lang.Class({
            this._record.setVolume(volumeValue[0].record);
         }
     },
-    
+
     getVolume: function() {
         let volumeValue = this.playVolume.get_value();
 
         return volumeValue;
     },
-    
+
     listBoxAdd: function() {
         selectable = true;
         this.groupGrid = groupGrid;
@@ -251,39 +257,39 @@ const MainView = new Lang.Class({
         let micVolume = Application.application.getMicVolume();
         volumeValue.push({ record: micVolume, play: playVolume });
         activeProfile = Application.application.getPreferences();
-                
+
         this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
                                          height_request: 36,
                                          width_request: 775,
                                          hexpand: true,
                                          name: "recordGrid" });
         this.groupGrid.add(this.recordGrid);
-        
+
         this.widgetRecord = new Gtk.Toolbar({ show_arrow: false,
                                               halign: Gtk.Align.END,
                                               valign: Gtk.Align.FILL,
                                               icon_size: Gtk.IconSize.BUTTON,
                                               opacity: 1 });
         this.recordGrid.attach(this.widgetRecord, 0, 0, 2, 2);
-            
+
         this._boxRecord = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         this._groupRecord = new Gtk.ToolItem({ child: this._boxRecord });
         this.widgetRecord.insert(this._groupRecord, -1);
-        
+
         this.recordTextLabel = new Gtk.Label({ margin_bottom: 4,
                                                margin_top: 6,
                                                margin_left: 6,
                                                margin_right: 6 });
         this.recordTextLabel.label = _("Recording…");
         this._boxRecord.pack_start(this.recordTextLabel, false, true, 0);
-        
+
         this.recordTimeLabel = new Gtk.Label({ margin_bottom: 4,
                                                margin_top: 6,
                                                margin_left: 6,
                                                margin_right: 6 });
-        
+
         this._boxRecord.pack_start(this.recordTimeLabel, false, true, 0);
-        
+
         this.toolbarStart = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL, expand: false });
         this.toolbarStart.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
 
@@ -301,15 +307,15 @@ const MainView = new Lang.Class({
         this.toolbarStart.pack_start(stopRecord, true, true, 0);
         this.recordGrid.attach(this.toolbarStart, 5, 1, 2, 2);
     },
-     
-    scrolledWinAdd: function() {    
+
+    scrolledWinAdd: function() {
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
                                                      width_request: 775,
                                                      vexpand: true });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this.scrollbar = this._scrolledWin.get_vadjustment();
-        
-        this.scrollbar.connect("value_changed", Lang.bind(this, 
+
+        this.scrollbar.connect("value_changed", Lang.bind(this,
             function() {
                 this.currentBound = this.scrollbar.get_value();
                 UpperBoundVal = this.scrollbar.upper - this.scrollbar.page_size;
@@ -320,7 +326,7 @@ const MainView = new Lang.Class({
                     loadMoreButton = null;
                 }
             }));
-                  
+
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
         let sounds = list.getItemCount();
@@ -328,7 +334,7 @@ const MainView = new Lang.Class({
         // Translators: This is the title in the headerbar
         if (sounds > 0) {
             title = Gettext.ngettext("%d Recorded Sound",
-                                     "%d Recorded Sounds", 
+                                     "%d Recorded Sounds",
                                       sounds).format(sounds);
         } else {
             title = "";
@@ -338,11 +344,11 @@ const MainView = new Lang.Class({
         this.listBox = null;
         this._startIdx = 0;
         this._endIdx = offsetController.getEndIdx();
-        
+
         if (this._endIdx == -1) {
             this._scrolledWin.get_style_context().add_class('emptyGrid');
             this._addEmptyPage();
-        } else {       
+        } else {
             this.listBox = Gtk.ListBox.new({ vexpand: true });
             this._scrolledWin.add(this.listBox);
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
@@ -353,10 +359,10 @@ const MainView = new Lang.Class({
                     this.rowGridCallback(this.listBox.get_selected_row())
                 }));
             this.listBox.show();
-                
+
             this._files = [];
             this._files = list.getFilesInfoForList();
-            
+
             for (let i = this._startIdx; i <= this._endIdx; i++) {
                 this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                               height_request: 45,
@@ -365,9 +371,9 @@ const MainView = new Lang.Class({
                                               name: i.toString() });
                 this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
                 this.listBox.add(this.rowGrid);
-                this.rowGrid.show();                
+                this.rowGrid.show();
                 let rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
-                
+
                 this.placeholderImage = Gtk.Image.new();
                 this.placeholderImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
                                                             'media-playback-start-symbolic',
@@ -381,7 +387,7 @@ const MainView = new Lang.Class({
                 this.placeholderImage.show();
                 this._placeholderButton.show();
                 //this._placeholderButton.get_style_context().add_class("dim-label");
-                
+
                 // play button
                 this.playImage = Gtk.Image.new({ name: "PlayImage" });
                 this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
@@ -397,13 +403,13 @@ const MainView = new Lang.Class({
                 this._playListButton.connect('clicked', Lang.bind(this,
                     function(){
                         let row = this.listBox.get_selected_row();
-                        play.passSelected(row); 
+                        play.passSelected(row);
                         let gridForName = row.get_child();
-                        let idx = parseInt(gridForName.name);                   
+                        let idx = parseInt(gridForName.name);
                         let file = this._files[idx];
                         this.onPlayPauseToggled(row, file);
                     }));
-                
+
                 // pause button
                 this.pauseImage = Gtk.Image.new();
                 this.pauseImage.set_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
@@ -419,7 +425,7 @@ const MainView = new Lang.Class({
                         let row = this.listBox.get_selected_row();
                         this.onPause(row);
                     }));
-                
+
                 this._fileName = new Gtk.Label({ use_markup: true,
                                                  halign: Gtk.Align.START,
                                                  valign: Gtk.Align.START,
@@ -435,12 +441,12 @@ const MainView = new Lang.Class({
                 this._fileName.set_no_show_all(true);
                 this.rowGrid.attach(this._fileName, 3, 0, 10, 3);
                 this._fileName.show();
-                
+
                 this._playLabelBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
                                                    name: "PlayLabelBox",
                                                    height_request: 45 });
                 this.rowGrid.attach(this._playLabelBox, 3, 1, 5, 1);
-                this._playLabelBox.show();       
+                this._playLabelBox.show();
                 this.playDurationLabel = new Gtk.Label({ margin_left: rtl ? 0 : 15,
                                                          margin_right: rtl ? 15 : 0,
                                                          halign: Gtk.Align.END,
@@ -451,7 +457,7 @@ const MainView = new Lang.Class({
                 this.playDurationLabel.label = this.fileDuration;
                 this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
                 this.playDurationLabel.show();
-                
+
                 this.dividerLabel = new Gtk.Label({ halign: Gtk.Align.START,
                                                     name: "DividerLabel",
                                                     valign: Gtk.Align.END,
@@ -459,7 +465,7 @@ const MainView = new Lang.Class({
                 this.dividerLabel.label = "/";
                 this._playLabelBox.pack_start(this.dividerLabel, false, true, 0);
                 this.dividerLabel.hide();
-                
+
                 this.playTimeLabel = new Gtk.Label({ halign: Gtk.Align.START,
                                                      name: "PlayTimeLabel",
                                                      valign: Gtk.Align.END,
@@ -467,7 +473,7 @@ const MainView = new Lang.Class({
                 this.playTimeLabel.label = "0:00";
                 this._playLabelBox.pack_start(this.playTimeLabel, false, true, 0);
                 this.playTimeLabel.hide();
-                
+
                 //Date Modified label
                 this.dateModifiedLabel = new Gtk.Label({ margin_left: 15,
                                                          margin_right: 15,
@@ -479,7 +485,7 @@ const MainView = new Lang.Class({
                 this.dateModifiedLabel.get_style_context().add_class('dim-label');
                 this.rowGrid.attach(this.dateModifiedLabel, 3, 1, 6, 1);
                 this.dateModifiedLabel.show();
-                
+
                 this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
                                                    height_request: 45,
                                                    width_request: 300,
@@ -490,7 +496,7 @@ const MainView = new Lang.Class({
                 this.waveFormGrid.set_no_show_all(true);
                 this.rowGrid.attach(this.waveFormGrid, 12, 1, 17, 2);
                 this.waveFormGrid.show();
-                
+
                 // info button
                 this._info = new Gtk.Button({ hexpand: false,
                                               vexpand: true,
@@ -501,7 +507,7 @@ const MainView = new Lang.Class({
                     function() {
                         let row = this.listBox.get_selected_row();
                         let gridForName = row.get_child();
-                        let idx = parseInt(gridForName.name);                    
+                        let idx = parseInt(gridForName.name);
                         let file = this._files[idx];
                         this._onInfoButton(file);
                     }));
@@ -525,33 +531,33 @@ const MainView = new Lang.Class({
         }
         list.monitorListview();
     },
-    
+
     addLoadMoreButton: function() {
        loadMoreButton = new LoadMoreButton();
-       loadMoreButton.connect('clicked', Lang.bind(this, loadMoreButton.onLoadMore)); 
+       loadMoreButton.connect('clicked', Lang.bind(this, loadMoreButton.onLoadMore));
        this.groupGrid.add(loadMoreButton);
-       loadMoreButton.show();      
+       loadMoreButton.show();
     },
-    
+
     destroyLoadMoreButton: function() {
         if (loadMoreButton != null) {
             loadMoreButton.destroy();
             loadMoreButton = null;
         }
     },
-    
+
     listBoxRefresh: function() {
-        this.destroyLoadMoreButton();        
+        this.destroyLoadMoreButton();
         previousSelRow = null;
-        
+
         if (this.listBox) {
             this.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
         }
 
-        list.setListTypeRefresh();  
-        list.enumerateDirectory();         
+        list.setListTypeRefresh();
+        list.enumerateDirectory();
     },
-    
+
     listBoxLoadMore: function() {
        this.destroyLoadMoreButton();
        previousSelRow = null;
@@ -560,12 +566,12 @@ const MainView = new Lang.Class({
        list.setListTypeRefresh();
        list._setDiscover();
     },
-    
+
     scrolledWinDelete: function() {
         this._scrolledWin.destroy();
-        this.scrolledWinAdd(); 
+        this.scrolledWinAdd();
     },
-    
+
     hasPreviousSelRow: function() {
        this.destroyLoadMoreButton();
            if (previousSelRow != null) {
@@ -573,66 +579,66 @@ const MainView = new Lang.Class({
               rowWidget.foreach(Lang.bind(this,
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
-                    
+
                     if (!alwaysShow)
                         child.hide();
-                    
+
                     if (child.name == "PauseButton") {
                         child.hide();
                         child.sensitive = false;
-                    } 
+                    }
 
                     if (child.name == "PlaceholderButton") {
                         child.show();
                     }
-                       
+
                     if (child.name == "PlayLabelBox") {
                         child.show();
-                        child.foreach(Lang.bind(this, 
+                        child.foreach(Lang.bind(this,
                             function(grandchild) {
-                                
+
                                 if (grandchild.name == "PlayTimeLabel") {
                                     grandchild.hide();
                                 }
-                                    
+
                                 if (grandchild.name == "DividerLabel" )
                                     grandchild.hide();
                              }));
                     }
                 }));
                 this.activeState = play.getPipeStates();
-                
+
                 if (this.activeState == PipelineStates.PLAYING || this.activeState == PipelineStates.PAUSED) {
                     play.stopPlaying();
                 }
-            } 
+            }
         previousSelRow = null;
-    }, 
-    
+    },
+
     rowGridCallback: function(selectedRow) {
         this.destroyLoadMoreButton();
-        
+
         if (selectedRow) {
-        
+
             if (previousSelRow != null) {
                 this.hasPreviousSelRow();
-            }  
-                          
+            }
+
             previousSelRow = selectedRow;
             let selectedRowWidget = previousSelRow.get_child(this.widget);
             selectedRowWidget.show_all();
             selectedRowWidget.foreach(Lang.bind(this,
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
-                    
+
                     if (!alwaysShow)
                         child.sensitive = true;
-                        
+
                     if (child.name == "PauseButton") {
                         child.hide();
                         child.sensitive = false;
                     }
-                        
+
                     if (child.name == "WaveFormGrid")
                         child.sensitive = true;
                 }));
@@ -645,30 +651,30 @@ const MainView = new Lang.Class({
         let rowWidget = this._selected.get_child(this.fileName);
         rowWidget.foreach(Lang.bind(this,
             function(child) {
-            
+
                 if (child.name == "FileNameLabel") {
                     let name = child.get_text();
                     let application = Gio.Application.get_default();
                     fileForAction = application.saveDir.get_child_for_display_name(name);
                 }
              }));
-             
+
         return fileForAction;
     },
-    
+
     _deleteFile: function(selected) {
         this._selected = selected;
         let fileToDelete = this._getFileFromRow(this._selected);
         fileToDelete.trash_async(GLib.PRIORITY_DEFAULT, null, null);
     },
-    
+
     loadPlay: function(selected) {
         this._selected = selected;
         let fileToPlay = this._getFileFromRow(this._selected);
 
         return fileToPlay;
-    }, 
-    
+    },
+
     _onInfoButton: function(selected) {
         this._selected = selected;
         let infoDialog = new Info.InfoDialog(selected);
@@ -677,14 +683,14 @@ const MainView = new Lang.Class({
             function(widget, response) {
                 infoDialog.widget.destroy();
             }));
-    },   
-        
+    },
+
     setLabel: function(time) {
         this.time = time
         this.playPipeState = play.getPipeStates();
-        
+
         this.timeLabelString = this._formatTime(time);
-        
+
         if (setVisibleID == ActiveArea.RECORD) {
             this.recordTimeLabel.label = this.timeLabelString;
             this.recordTimeLabel.get_style_context().add_class('dim-label');
@@ -692,21 +698,21 @@ const MainView = new Lang.Class({
             this.playTimeLabel.label = this.timeLabelString;
         }
     },
-    
+
     onPause: function(listRow) {
         this.activeState = play.getPipeStates();
-        
+
         if (this.activeState == PipelineStates.PLAYING) {
             play.pausePlaying();
             let rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
-                
+
                     if (child.name == "PauseButton") {
                         child.hide();
                         child.sensitive = false;
-                    }  
-                           
+                    }
+
                     if (child.name == "PlayButton" ) {
                         child.show();
                         child.sensitive = true;
@@ -714,50 +720,50 @@ const MainView = new Lang.Class({
                 }));
         }
     },
-    
+
     onPlayPauseToggled: function(listRow, selFile) {
         this.activeState = play.getPipeStates();
         setVisibleID = ActiveArea.PLAY;
         let width = listRow.get_allocated_width();
-        
+
         if (this.activeState != PipelineStates.PLAYING) {
             play.startPlaying();
-            
+
             let rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
-                           
-                    if (child.name == "InfoButton" || child.name == "DeleteButton" || 
+
+                    if (child.name == "InfoButton" || child.name == "DeleteButton" ||
                         child.name == "PlayButton" || child.name == "PlaceholderButton" ) {
                         child.hide();
                         child.sensitive = false;
                     }
-                    
+
                     if (child.name == "PauseButton") {
                         child.show();
                         child.sensitive = true;
-                    }    
-                   
+                    }
+
                     if (child.name == "PlayLabelBox") {
-                        child.foreach(Lang.bind(this, 
+                        child.foreach(Lang.bind(this,
                             function(grandchild) {
-                                
+
                                 if (grandchild.name == "PlayTimeLabel") {
                                     view.playTimeLabel = grandchild;
                                 }
-                                    
+
                                 if (grandchild.name == "DividerLabel" )
                                     grandchild.show();
                              }));
                     }
-                                                     
+
                     if (child.name == "WaveFormGrid") {
                         this.wFGrid = child;
                         child.sensitive = true;
                     }
                 }));
             listRow.set_property("width-request", width);
-            
+
             if (this.activeState != PipelineStates.PAUSED) {
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
             }
@@ -768,7 +774,7 @@ const MainView = new Lang.Class({
 const RecordButton = new Lang.Class({
     Name: "RecordButton",
     Extends: Gtk.Button,
-    
+
     _init: function(activeProfile) {
         this.parent();
         this.image = Gtk.Image.new_from_icon_name('media-record-symbolic', Gtk.IconSize.BUTTON);
@@ -778,24 +784,24 @@ const RecordButton = new Lang.Class({
         this.get_style_context().add_class('text-button');
         this.connect("clicked", Lang.bind(this, this._onRecord));
     },
-    
+
     _onRecord: function() {
         view.destroyLoadMoreButton();
         view.hasPreviousSelRow();
-        
+
         if (view.listBox) {
             view.listBox.set_selection_mode(Gtk.SelectionMode.NONE);
         } else {
             view.emptyGrid.destroy();
         }
-            
+
         this.set_sensitive(false);
         setVisibleID = ActiveArea.RECORD;
         view.recordGrid.show_all();
-        
+
         if (activeProfile == null)
-            activeProfile = 0; 
-            
+            activeProfile = 0;
+
         audioProfile.profile(activeProfile);
         view._record.startRecording(activeProfile);
         wave = new Waveform.WaveForm(view.recordGrid);
@@ -805,21 +811,21 @@ const RecordButton = new Lang.Class({
 const EncoderComboBox = new Lang.Class({
     Name: "EncoderComboBox",
     Extends: Gtk.ComboBoxText,
-       
+
     // encoding setting labels in combobox
     _init: function() {
         this.parent();
         let combo = [_("Ogg Vorbis"), _("Opus"), _("FLAC"), _("MP3"), _("MOV")];
-        
+
         for (let i = 0; i < combo.length; i++)
             this.append_text(combo[i]);
-        this.set_property('valign', Gtk.Align.CENTER);  
+        this.set_property('valign', Gtk.Align.CENTER);
         this.set_sensitive(true);
         activeProfile = Application.application.getPreferences();
         this.set_active(activeProfile);
         this.connect("changed", Lang.bind(this, this._onComboBoxTextChanged));
     },
-   
+
     _onComboBoxTextChanged: function() {
         activeProfile = this.get_active();
         Application.application.setPreferences(activeProfile);
@@ -833,11 +839,11 @@ const LoadMoreButton = new Lang.Class({
     _init: function() {
         this.parent();
         this._block = false;
-        this.label = _("Load More");                                       
+        this.label = _("Load More");
         this.get_style_context().add_class('documents-load-more');
     },
-     
-    onLoadMore: function() {   
-        view.listBoxLoadMore();        
+
+    onLoadMore: function() {
+        view.listBoxLoadMore();
     }
-}); 
+});

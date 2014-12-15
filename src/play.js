@@ -36,7 +36,7 @@ const PipelineStates = {
     PAUSED: 1,
     STOPPED: 2,
     NULL: 3
-}; 
+};
 
 const ErrState = {
     OFF: 0,
@@ -46,8 +46,8 @@ const ErrState = {
 let errorDialogState;
 
 const _TENTH_SEC = 100000000;
- 
- const Play = new Lang.Class({
+
+const Play = new Lang.Class({
     Name: "Play",
 
     _playPipeline: function() {
@@ -57,12 +57,12 @@ const _TENTH_SEC = 100000000;
         this.play.set_property("uri", uri);
         this.sink = Gst.ElementFactory.make("pulsesink", "sink");
         this.play.set_property("audio-sink", this.sink);
-        this.clock = this.play.get_clock();               
+        this.clock = this.play.get_clock();
         this.playBus = this.play.get_bus();
         this.playBus.add_signal_watch();
         this.playBus.connect("message", Lang.bind(this,
             function(playBus, message) {
-            
+
                 if (message != null) {
                     this._onMessageReceived(message);
                 }
@@ -236,7 +236,7 @@ const _TENTH_SEC = 100000000;
 
             if (errorStrOne != null)
                 errorDialog.set_property('text', errorStrOne);
-             
+
             if (errorStrTwo != null)
                 errorDialog.set_property('secondary-text', errorStrTwo);
 
@@ -250,4 +250,4 @@ const _TENTH_SEC = 100000000;
         }
     }
 });
-   
+
