@@ -204,7 +204,14 @@ const MainView = new Lang.Class({
     _formatTime: function(unformattedTime) {
         this.unformattedTime = unformattedTime;
         let seconds = Math.floor(this.unformattedTime);
-        let hoursString = parseInt( seconds / Math.pow(_TIME_DIVISOR, 2));
+        let hours = parseInt( seconds / Math.pow(_TIME_DIVISOR, 2));
+        let hoursString = "00"
+
+        if (hours > 10)
+            hoursString = hours
+        else if (hours < 10 && hours > 0)
+
+            hoursString = "0" + hours
         let minuteString = parseInt( seconds / _TIME_DIVISOR ) % _TIME_DIVISOR;
         let secondString = seconds % _TIME_DIVISOR;
         let timeString =
