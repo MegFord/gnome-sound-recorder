@@ -485,7 +485,7 @@ const MainView = new Lang.Class({
                 this.dateModifiedLabel = new Gtk.Label({ margin_left: 15,
                                                          margin_right: 15,
                                                          halign: Gtk.Align.END,
-                                                         valign: Gtk.Align.CENTER,
+                                                         valign: Gtk.Align.END,
                                                          margin_top: 5,
                                                          name: "dateModifiedLabel" });
                 this.dateModifiedLabel.label = this._files[i].dateModified;
