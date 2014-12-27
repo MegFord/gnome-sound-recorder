@@ -265,11 +265,11 @@ const MainView = new Lang.Class({
         volumeValue.push({ record: micVolume, play: playVolume });
         activeProfile = Application.application.getPreferences();
 
-        this.recordGrid = new Gtk.Grid({ orientation: Gtk.Orientation.HORIZONTAL,
+        this.recordGrid = new Gtk.Grid({ name: "recordGrid",
                                          height_request: 36,
                                          width_request: 775,
                                          hexpand: true,
-                                         name: "recordGrid" });
+                                         orientation: Gtk.Orientation.HORIZONTAL });
         this.groupGrid.add(this.recordGrid);
 
         this.widgetRecord = new Gtk.Toolbar({ show_arrow: false,
@@ -302,13 +302,13 @@ const MainView = new Lang.Class({
 
         // finish button (stop recording)
         let stopRecord = new Gtk.Button({ label: _("Done"),
+                                          halign: Gtk.Align.FILL,
+                                          valign: Gtk.Align.CENTER,
+                                          hexpand: true,
                                           margin_bottom: 4,
                                           margin_top: 6,
                                           margin_left: 6,
-                                          margin_right: 6,
-                                          valign: Gtk.Align.CENTER,
-                                          halign: Gtk.Align.FILL,
-                                          hexpand: true });
+                                          margin_right: 6 });
         stopRecord.get_style_context().add_class('text-button');
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
         this.toolbarStart.pack_start(stopRecord, true, true, 0);
@@ -317,8 +317,8 @@ const MainView = new Lang.Class({
 
     scrolledWinAdd: function() {
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
-                                                     width_request: 775,
-                                                     vexpand: true });
+                                                     vexpand: true,
+                                                     width_request: 775 });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this.scrollbar = this._scrolledWin.get_vadjustment();
 
@@ -371,11 +371,11 @@ const MainView = new Lang.Class({
             this._files = list.getFilesInfoForList();
 
             for (let i = this._startIdx; i <= this._endIdx; i++) {
-                this.rowGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                this.rowGrid = new Gtk.Grid({ name: i.toString()
                                               height_request: 45,
                                               width_request: 775,
-                                              vexpand: true,
-                                              name: i.toString() });
+                                              orientation: Gtk.Orientation.VERTICAL,
+                                              vexpand: true });
                 this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
                 this.listBox.add(this.rowGrid);
                 this.rowGrid.show();
@@ -385,9 +385,9 @@ const MainView = new Lang.Class({
                 this.placeholderImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
                                                             'media-playback-start-symbolic',
                                                          Gtk.IconSize.BUTTON);
-                this._placeholderButton = new Gtk.Button({ hexpand: true,
-                                                           vexpand: true,
-                                                           name: "PlaceholderButton" });
+                this._placeholderButton = new Gtk.Button({ name: "PlaceholderButton",
+                                                           hexpand: true,
+                                                           vexpand: true });
                 this._placeholderButton.set_image(this.placeholderImage);
                 this.rowGrid.attach(this._placeholderButton, 0, 0, 2, 2);
                 this._placeholderButton.set_no_show_all(true);
@@ -400,9 +400,9 @@ const MainView = new Lang.Class({
                 this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
                                                         'media-playback-start-symbolic',
                                                   Gtk.IconSize.BUTTON);
-                this._playListButton = new Gtk.Button({ hexpand: true,
-                                                        vexpand: true,
-                                                        name: "PlayButton" });
+                this._playListButton = new Gtk.Button({ name: "PlayButton",
+                                                        hexpand: true,
+                                                        vexpand: true });
                 this._playListButton.set_image(this.playImage);
                 this._playListButton.set_tooltip_text(_("Play"));
                 this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
@@ -420,9 +420,9 @@ const MainView = new Lang.Class({
                 // pause button
                 this.pauseImage = Gtk.Image.new();
                 this.pauseImage.set_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
-                this._pauseListButton = new Gtk.Button({ hexpand: true,
-                                                         vexpand: true,
-                                                         name: "PauseButton" });
+                this._pauseListButton = new Gtk.Button({ name: "PauseButton",
+                                                         hexpand: true,
+                                                         vexpand: true });
                 this._pauseListButton.set_image(this.pauseImage);
                 this._pauseListButton.set_tooltip_text(_("Pause"));
                 this.rowGrid.attach(this._pauseListButton, 0, 0, 2, 2);
@@ -433,48 +433,48 @@ const MainView = new Lang.Class({
                         this.onPause(row);
                     }));
 
-                this._fileName = new Gtk.Label({ use_markup: true,
+                this._fileName = new Gtk.Label({ name: "FileNameLabel",
+                                                 ellipsize: rtl ? Pango.EllipsizeMode.START : Pango.EllipsizeMode.END,
                                                  halign: Gtk.Align.START,
                                                  valign: Gtk.Align.START,
-                                                 ellipsize: rtl ? Pango.EllipsizeMode.START : Pango.EllipsizeMode.END,
-                                                 xalign: 0,
-                                                 width_chars: 35,
-                                                 margin_top: 5,
                                                  margin_left: rtl ? 0 : 15,
                                                  margin_right: rtl ? 15 : 0,
-                                                 name: "FileNameLabel" });
+                                                 margin_top: 5,
+                                                 use_markup: true,
+                                                 width_chars: 35,
+                                                 xalign: 0 });
                 let markup = ('<b>'+ this._files[i].fileName + '</b>');
                 this._fileName.label = markup;
                 this._fileName.set_no_show_all(true);
                 this.rowGrid.attach(this._fileName, 3, 0, 10, 3);
                 this._fileName.show();
 
-                this._playLabelBox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                                   name: "PlayLabelBox",
+                this._playLabelBox = new Gtk.Box({ name: "PlayLabelBox",
+                                                   orientation: Gtk.Orientation.HORIZONTAL,
                                                    height_request: 45 });
                 this.rowGrid.attach(this._playLabelBox, 3, 1, 5, 1);
                 this._playLabelBox.show();
-                this.playDurationLabel = new Gtk.Label({ margin_left: rtl ? 0 : 15,
-                                                         margin_right: rtl ? 15 : 0,
+                this.playDurationLabel = new Gtk.Label({ name: "PlayDurationLabel"
                                                          halign: Gtk.Align.END,
                                                          valign: Gtk.Align.END,
-                                                         margin_top: 5,
-                                                         name: "PlayDurationLabel" });
+                                                         margin_left: rtl ? 0 : 15,
+                                                         margin_right: rtl ? 15 : 0,
+                                                         margin_top: 5 });
                 this.fileDuration = this._formatTime(this._files[i].duration/Gst.SECOND);
                 this.playDurationLabel.label = this.fileDuration;
                 this._playLabelBox.pack_start(this.playDurationLabel, false, true, 0);
                 this.playDurationLabel.show();
 
-                this.dividerLabel = new Gtk.Label({ halign: Gtk.Align.START,
-                                                    name: "DividerLabel",
+                this.dividerLabel = new Gtk.Label({ name: "DividerLabel",
+                                                    halign: Gtk.Align.START,
                                                     valign: Gtk.Align.END,
                                                     margin_top: 5 });
                 this.dividerLabel.label = "/";
                 this._playLabelBox.pack_start(this.dividerLabel, false, true, 0);
                 this.dividerLabel.hide();
 
-                this.playTimeLabel = new Gtk.Label({ halign: Gtk.Align.START,
-                                                     name: "PlayTimeLabel",
+                this.playTimeLabel = new Gtk.Label({ name: "PlayTimeLabel",
+                                                     halign: Gtk.Align.START,
                                                      valign: Gtk.Align.END,
                                                      margin_top: 5 });
                 this.playTimeLabel.label = "0:00";
@@ -482,33 +482,33 @@ const MainView = new Lang.Class({
                 this.playTimeLabel.hide();
 
                 //Date Modified label
-                this.dateModifiedLabel = new Gtk.Label({ margin_left: 15,
-                                                         margin_right: 15,
+                this.dateModifiedLabel = new Gtk.Label({ name: "dateModifiedLabel",
                                                          halign: Gtk.Align.END,
                                                          valign: Gtk.Align.END,
-                                                         margin_top: 5,
-                                                         name: "dateModifiedLabel" });
+                                                         margin_left: 15,
+                                                         margin_right: 15,
+                                                         margin_top: 5 });
                 this.dateModifiedLabel.label = this._files[i].dateModified;
                 this.dateModifiedLabel.get_style_context().add_class('dim-label');
                 this.rowGrid.attach(this.dateModifiedLabel, 3, 1, 6, 1);
                 this.dateModifiedLabel.show();
 
-                this.waveFormGrid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                this.waveFormGrid = new Gtk.Grid({ name: "WaveFormGrid",
                                                    height_request: 45,
                                                    width_request: 300,
-                                                   valign: Gtk.Align.FILL,
                                                    hexpand: true,
                                                    vexpand: true,
-                                                   name: "WaveFormGrid" });
+                                                   orientation: Gtk.Orientation.VERTICAL,
+                                                   valign: Gtk.Align.FILL });
                 this.waveFormGrid.set_no_show_all(true);
                 this.rowGrid.attach(this.waveFormGrid, 12, 1, 17, 2);
                 this.waveFormGrid.show();
 
                 // info button
-                this._info = new Gtk.Button({ hexpand: false,
+                this._info = new Gtk.Button({ name: "InfoButton",
+                                              hexpand: false,
                                               vexpand: true,
-                                              margin_right: 2,
-                                              name: "InfoButton" });
+                                              margin_right: 2 });
                 this._info.image = Gtk.Image.new_from_icon_name("dialog-information-symbolic", Gtk.IconSize.BUTTON);
                 this._info.connect("clicked", Lang.bind(this,
                     function() {
@@ -523,9 +523,9 @@ const MainView = new Lang.Class({
                 this._info.hide();
 
                 // delete button
-                this._delete = new Gtk.Button({ hexpand: false,
-                                                margin_left: 2,
-                                                name: "DeleteButton" });
+                this._delete = new Gtk.Button({ name: "DeleteButton",
+                                                hexpand: false,
+                                                margin_left: 2 });
                 this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
                 this._delete.connect("clicked", Lang.bind(this,
                     function() {
