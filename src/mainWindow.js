@@ -371,7 +371,7 @@ const MainView = new Lang.Class({
             this._files = list.getFilesInfoForList();
 
             for (let i = this._startIdx; i <= this._endIdx; i++) {
-                this.rowGrid = new Gtk.Grid({ name: i.toString()
+                this.rowGrid = new Gtk.Grid({ name: i.toString(),
                                               height_request: 45,
                                               width_request: 775,
                                               orientation: Gtk.Orientation.VERTICAL,
@@ -393,7 +393,6 @@ const MainView = new Lang.Class({
                 this._placeholderButton.set_no_show_all(true);
                 this.placeholderImage.show();
                 this._placeholderButton.show();
-                //this._placeholderButton.get_style_context().add_class("dim-label");
 
                 // play button
                 this.playImage = Gtk.Image.new({ name: "PlayImage" });
@@ -454,7 +453,7 @@ const MainView = new Lang.Class({
                                                    height_request: 45 });
                 this.rowGrid.attach(this._playLabelBox, 3, 1, 5, 1);
                 this._playLabelBox.show();
-                this.playDurationLabel = new Gtk.Label({ name: "PlayDurationLabel"
+                this.playDurationLabel = new Gtk.Label({ name: "PlayDurationLabel",
                                                          halign: Gtk.Align.END,
                                                          valign: Gtk.Align.END,
                                                          margin_left: rtl ? 0 : 15,
