@@ -475,6 +475,7 @@ const MainView = new Lang.Class({
                 this.playTimeLabel = new Gtk.Label({ name: "PlayTimeLabel",
                                                      halign: Gtk.Align.START,
                                                      valign: Gtk.Align.END,
+                                                     margin_right: 15,
                                                      margin_top: 5 });
                 this.playTimeLabel.label = "0:00";
                 this._playLabelBox.pack_start(this.playTimeLabel, false, true, 0);
@@ -489,6 +490,7 @@ const MainView = new Lang.Class({
                                                          margin_top: 5 });
                 this.dateModifiedLabel.label = this._files[i].dateModified;
                 this.dateModifiedLabel.get_style_context().add_class('dim-label');
+                this.dateModifiedLabel.set_no_show_all(true);
                 this.rowGrid.attach(this.dateModifiedLabel, 3, 1, 6, 1);
                 this.dateModifiedLabel.show();
 
