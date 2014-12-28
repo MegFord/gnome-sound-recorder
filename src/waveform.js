@@ -164,105 +164,103 @@ const WaveForm = new Lang.Class({
     stopGeneration: function() {
         this.pipeline.set_state(Gst.State.NULL);
     },
-                
+
     fillSurface: function(drawing, cr) {
         let start = 0;
-        
-        if (this.waveType == WaveType.PLAY) { 
-                   
-            if (peaks.length != this.playTime) { 
+
+        if (this.waveType == WaveType.PLAY) {
+
+            if (peaks.length != this.playTime) {
                 this.pipeline.set_state(Gst.State.PLAYING);
             }
             start = Math.floor(this.playTime);
         } else {
-        
+
             if (this.recordTime >= 0)
             start = this.recordTime;
         }
-        
+
         let i = 0;
         let xAxis = 0;
         let end = start + 40;
         let width = this.drawing.get_allocated_width();
         let waveheight = this.drawing.get_allocated_height();
         let length = this.nSamples;
-        let pixelsPerSample = width/waveSamples;   
+        let pixelsPerSample = width/waveSamples;
         let gradient = new Cairo.LinearGradient(0, 0, width , waveheight);
-        if (this.waveType == WaveType.PLAY) { 
-              gradient.addColorStopRGBA(0.75, 0.94, 1.0, 0.94, 0.75);       
+        if (this.waveType == WaveType.PLAY) {
+              gradient.addColorStopRGBA(0.75, 0.94, 1.0, 0.94, 0.75);
               gradient.addColorStopRGBA(0.0, 0.94, 1.0, 0.94, 0.22);
               cr.setLineWidth(1);
               cr.setSourceRGBA(0.0, 255, 255, 255);
         } else {
-            gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);       
+            gradient.addColorStopRGBA(0.75, 0.0, 0.72, 0.64, 0.35);
             gradient.addColorStopRGBA(0.0, 0.2, 0.54, 0.47, 0.22);
             cr.setLineWidth(1);
             cr.setSourceRGBA(0.0, 185, 161, 255);
         }
-                  
+
         for(i = start; i <= end; i++) {
-        
+
             // Keep moving until we get to a non-null array member
-            if (peaks[i] < 0) {            
+            if (peaks[i] < 0) {
                 cr.moveTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)))
             }
-      
-            // Start drawing when we reach the first non-null array member  
+
+            // Start drawing when we reach the first non-null array member
             if (peaks[i] != null && peaks[i] >= 0) {
                 let idx = i - 1;
-                
-                if (start >= 40 && xAxis == 0) { 
+
+                if (start >= 40 && xAxis == 0) {
                      cr.moveTo((xAxis * pixelsPerSample), waveheight);
                 }
-                
+
                 cr.lineTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)));
             }
-                                
+
             xAxis += 1;
         }
         cr.lineTo(xAxis * pixelsPerSample, waveheight);
         cr.closePath();
-        cr.strokePreserve();       
+        cr.strokePreserve();
         cr.setSource(gradient);
 	    cr.fillPreserve();
-	    cr.$dispose(); 
+	    cr.$dispose();
     },
-    
+
     _drawEvent: function(playTime, recPeaks) {
         let lastTime;
-        
+
         if (this.waveType == WaveType.PLAY) {
             lastTime = this.playTime;
             this.playTime = playTime;
-                  
+
             if (peaks.length < this.playTime) {
                 this.pipeline.set_state(Gst.State.PLAYING);
-            } 
-                    
+            }
+
             if (lastTime != this.playTime) {
                 this.drawing.queue_draw();
             }
-            
+
         } else {
             peaks.push(recPeaks);
             lastTime = this.recordTime;
             this.recordTime = playTime;
-                  
+
             if (peaks.length < this.recordTime) {
                 log("error");
             }
-                      
+
             this.drawing.queue_draw();
         }
         return true;
     },
-    
+
     endDrawing: function() {
-        let width = 380;
-        
         if(this.pipeline)
             this.stopGeneration();
-            
+
         this.count = 0;
         peaks.length = 0;
         this.drawing.destroy();

@@ -98,8 +98,6 @@ const MainWindow = new Lang.Class({
         play = new Play.Play();
 
         params = Params.fill(params, { title: GLib.get_application_name(),
-                                       hexpand: true,
-                                       vexpand: true,
                                        default_width: 800,
                                        default_height: 480 });
         this.parent(params);
@@ -266,9 +264,6 @@ const MainView = new Lang.Class({
         activeProfile = Application.application.getPreferences();
 
         this.recordGrid = new Gtk.Grid({ name: "recordGrid",
-                                         height_request: 36,
-                                         width_request: 775,
-                                         hexpand: true,
                                          orientation: Gtk.Orientation.HORIZONTAL });
         this.groupGrid.add(this.recordGrid);
 
@@ -317,8 +312,7 @@ const MainView = new Lang.Class({
 
     scrolledWinAdd: function() {
         this._scrolledWin = new Gtk.ScrolledWindow({ shadow_type: Gtk.ShadowType.IN,
-                                                     vexpand: true,
-                                                     width_request: 775 });
+                                                     vexpand: true });
         this._scrolledWin.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this.scrollbar = this._scrolledWin.get_vadjustment();
 
@@ -361,7 +355,7 @@ const MainView = new Lang.Class({
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
             this.listBox.set_header_func(null);
             this.listBox.set_activate_on_single_click(true);
-            this.listBox.connect("row-selected", Lang.bind(this,
+            this.listBox.connect("activated", Lang.bind(this,
                 function(){
                     this.rowGridCallback(this.listBox.get_selected_row())
                 }));
@@ -373,13 +367,12 @@ const MainView = new Lang.Class({
             for (let i = this._startIdx; i <= this._endIdx; i++) {
                 this.rowGrid = new Gtk.Grid({ name: i.toString(),
                                               height_request: 45,
-                                              width_request: 775,
                                               orientation: Gtk.Orientation.VERTICAL,
+                                              hexpand: true,
                                               vexpand: true });
                 this.rowGrid.set_orientation(Gtk.Orientation.HORIZONTAL);
                 this.listBox.add(this.rowGrid);
                 this.rowGrid.show();
-                let rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
 
                 this.placeholderImage = Gtk.Image.new();
                 this.placeholderImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
@@ -495,8 +488,6 @@ const MainView = new Lang.Class({
                 this.dateModifiedLabel.show();
 
                 this.waveFormGrid = new Gtk.Grid({ name: "WaveFormGrid",
-                                                   height_request: 45,
-                                                   width_request: 300,
                                                    hexpand: true,
                                                    vexpand: true,
                                                    orientation: Gtk.Orientation.VERTICAL,
