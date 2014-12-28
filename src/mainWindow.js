@@ -59,6 +59,7 @@ let view = null;
 let volumeValue = [];
 let wave = null;
 
+const rtl = Gtk.Widget.get_default_direction() == Gtk.TextDirection.RTL;
 
 const ActiveArea = {
     RECORD: 0,
@@ -284,15 +285,15 @@ const MainView = new Lang.Class({
 
         this.recordTextLabel = new Gtk.Label({ margin_bottom: 4,
                                                margin_top: 6,
-                                               margin_left: 6,
-                                               margin_right: 6 });
+                                               margin_left: rtl ? 0 : 6,
+                                               margin_right: rtl ? 6 : 0 });
         this.recordTextLabel.label = _("Recording…");
         this._boxRecord.pack_start(this.recordTextLabel, false, true, 0);
 
         this.recordTimeLabel = new Gtk.Label({ margin_bottom: 4,
                                                margin_top: 6,
-                                               margin_left: 6,
-                                               margin_right: 6 });
+                                               margin_left: rtl ? 0 : 6,
+                                               margin_right: rtl ? 6 : 0 });
 
         this._boxRecord.pack_start(this.recordTimeLabel, false, true, 0);
 
@@ -306,8 +307,8 @@ const MainView = new Lang.Class({
                                           hexpand: true,
                                           margin_bottom: 4,
                                           margin_top: 6,
-                                          margin_left: 6,
-                                          margin_right: 6 });
+                                          margin_left: rtl ? 0 : 6,
+                                          margin_right: rtl ? 6 : 0 });
         stopRecord.get_style_context().add_class('text-button');
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
         this.toolbarStart.pack_start(stopRecord, true, true, 0);
@@ -474,7 +475,7 @@ const MainView = new Lang.Class({
                 this.playTimeLabel = new Gtk.Label({ name: "PlayTimeLabel",
                                                      halign: Gtk.Align.START,
                                                      valign: Gtk.Align.END,
-                                                     margin_right: 15,
+                                                     margin_right: rtl ? 15 : 0,
                                                      margin_top: 5 });
                 this.playTimeLabel.label = "0:00";
                 this._playLabelBox.pack_start(this.playTimeLabel, false, true, 0);
@@ -484,8 +485,8 @@ const MainView = new Lang.Class({
                 this.dateModifiedLabel = new Gtk.Label({ name: "dateModifiedLabel",
                                                          halign: Gtk.Align.END,
                                                          valign: Gtk.Align.END,
-                                                         margin_left: 15,
-                                                         margin_right: 15,
+                                                         margin_left: rtl ? 0 : 15,
+                                                         margin_right: rtl ? 15 : 0,
                                                          margin_top: 5 });
                 this.dateModifiedLabel.label = this._files[i].dateModified;
                 this.dateModifiedLabel.get_style_context().add_class('dim-label');
@@ -525,7 +526,7 @@ const MainView = new Lang.Class({
                 // delete button
                 this._delete = new Gtk.Button({ name: "DeleteButton",
                                                 hexpand: false,
-                                                margin_left: 2 });
+                                                margin_left: rtl ? 0 : 2, });
                 this._delete.image = Gtk.Image.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON);
                 this._delete.connect("clicked", Lang.bind(this,
                     function() {
