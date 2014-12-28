@@ -71,163 +71,163 @@ const Play = new Lang.Class({
 
     startPlaying: function() {
         this.baseTime = 0;
-        
+
         if (!this.play || this.playState == PipelineStates.STOPPED ) {
             this._playPipeline();
         }
-            
+
         if (this.playState == PipelineStates.PAUSED) {
-            this.updatePosition(); 
-            this.play.set_base_time(this.clock.get_time()); 
-            this.baseTime = this.play.get_base_time() - this.runTime;  
+            this.updatePosition();
+            this.play.set_base_time(this.clock.get_time());
+            this.baseTime = this.play.get_base_time() - this.runTime;
         }
-            
+
         this.ret = this.play.set_state(Gst.State.PLAYING);
         this.playState = PipelineStates.PLAYING;
-                
+
         if (this.ret == Gst.StateChangeReturn.FAILURE) {
             this._showErrorDialog(_('Unable to play recording'));
             errorDialogState = ErrState.ON;
-        } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {        
-            MainWindow.view.setVolume(); 
+        } else if (this.ret == Gst.StateChangeReturn.SUCCESS) {
+            MainWindow.view.setVolume();
         }
         GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGINT, Application.application.onWindowDestroy, this.play);
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy, this.play); 
+        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT, Application.SIGTERM, Application.application.onWindowDestroy, this.play);
     },
-    
+
     pausePlaying: function() {
         this.play.set_state(Gst.State.PAUSED);
         this.playState = PipelineStates.PAUSED;
-        
+
         if (this.timeout) {
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
     },
-    
+
     stopPlaying: function() {
         if (this.playState != PipelineStates.STOPPED) {
             this.onEnd();
         }
     },
-    
+
     onEnd: function() {
         this.play.set_state(Gst.State.NULL);
         this.playState = PipelineStates.STOPPED;
         this.playBus.remove_signal_watch();
         this._updateTime();
-                                    
+
         if (this.timeout) {
             GLib.source_remove(this.timeout);
             this.timeout = null;
         }
-        
+
         if (MainWindow.wave != null)
             MainWindow.wave.endDrawing();
-            
+
         errorDialogState = ErrState.OFF;
     },
-    
+
     onEndOfStream: function() {
         MainWindow.view.onPlayStopClicked();
     },
-        
+
     _onMessageReceived: function(message) {
         this.localMsg = message;
         let msg = message.type;
         switch(msg) {
-                                                       
-        case Gst.MessageType.EOS:               
-            this.onEndOfStream(); 
+
+        case Gst.MessageType.EOS:
+            this.onEndOfStream();
             break;
-            
-        case Gst.MessageType.WARNING:               
+
+        case Gst.MessageType.WARNING:
             let warningMessage = message.parse_warning()[0];
-            log(warningMessage.toString()); 
+            log(warningMessage.toString());
             break;
-                
+
         case Gst.MessageType.ERROR:
             let errorMessage = message.parse_error()[0];
-            this._showErrorDialog(errorMessage.toString());              
-            errorDialogState = ErrState.ON;       
+            this._showErrorDialog(errorMessage.toString());
+            errorDialogState = ErrState.ON;
             break;
-            
+
         case Gst.MessageType.ASYNC_DONE:
             if (this.sought) {
-                this.play.set_state(this._lastState);                    
+                this.play.set_state(this._lastState);
                 MainWindow.view.setProgressScaleSensitive();
-            }       
+            }
             this.updatePosition();
-            break; 
-                
+            break;
+
         case Gst.MessageType.CLOCK_LOST:
             this.pausePlaying();
             break;
-           
+
         case Gst.MessageType.NEW_CLOCK:
             if (this.playState == PipelineStates.PAUSED) {
                 this.clock = this.play.get_clock();
                 this.startPlaying();
-            }              
-            break;    
+            }
+            break;
         }
-    }, 
-    
+    },
+
     getPipeStates: function() {
         return this.playState;
-    },  
-                       
-    _updateTime: function() {          
-        let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND; 
+    },
+
+    _updateTime: function() {
+        let time = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
         this.trackDuration = this.play.query_duration(Gst.Format.TIME, null)[1];
-        this.trackDurationSecs = this.trackDuration/Gst.SECOND;        
-        
+        this.trackDurationSecs = this.trackDuration/Gst.SECOND;
+
         if (time >= 0 && this.playState != PipelineStates.STOPPED) {
-            MainWindow.view.setLabel(time);           
+            MainWindow.view.setLabel(time);
         } else if (time >= 0 && this.playState == PipelineStates.STOPPED) {
-            MainWindow.view.setLabel(0); 
+            MainWindow.view.setLabel(0);
         }
-        
+
         let absoluteTime = this.clock.get_time();
-        
+
         if (this.baseTime == 0)
             this.baseTime = absoluteTime;
- 
+
         this.runTime = absoluteTime- this.baseTime;
         let approxTime = Math.round(this.runTime/_TENTH_SEC);
-        
+
         if (MainWindow.wave != null) {
             MainWindow.wave._drawEvent(approxTime);
         }
-        
+
         return true;
     },
-    
-    queryPosition: function() { 
+
+    queryPosition: function() {
         let position = 0;
         while (position == 0) {
             position = this.play.query_position(Gst.Format.TIME, null)[1]/Gst.SECOND;
         }
-        
+
         return position;
     },
-    
-    updatePosition: function() {         
+
+    updatePosition: function() {
         if (!this.timeout) {
-            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, Lang.bind(this, 
-                this._updateTime));    
+            this.timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, Lang.bind(this,
+                this._updateTime));
         }
     },
-    
+
     setVolume: function(value) {
         this.play.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
     },
-    
-    passSelected: function(selected) { 
+
+    passSelected: function(selected) {
         this._selected = selected;
         this._fileToPlay = MainWindow.view.loadPlay(this._selected);
     },
-    
+
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
         if (errorDialogState == ErrState.OFF) {
             let errorDialog = new Gtk.MessageDialog ({ destroy_with_parent: true,

@@ -50,7 +50,7 @@ const WaveForm = new Lang.Class({
 
     _init: function(grid, file) {
         this._grid = grid;
-        
+
         let placeHolder = -100;
         for (let i = 0; i < 40; i++)
             peaks.push(placeHolder);
@@ -102,7 +102,7 @@ const WaveForm = new Lang.Class({
 
         bus.connect("message", Lang.bind(this,
             function(bus, message) {
-            
+
                 if (message != null) {
                     this._messageCb(message);
                 }
@@ -111,41 +111,41 @@ const WaveForm = new Lang.Class({
 
     _messageCb: function(message) {
         let msg = message.type;
-        
+
         switch(msg) {
         case Gst.MessageType.ELEMENT:
             let s = message.get_structure();
-            
+
             if (s) {
-                
+
                 if (s.has_name("level")) {
                     let peaknumber = 0;
                     let st = s.get_value("timestamp");
                     let dur = s.get_value("duration");
                     let runTime = s.get_value("running-time");
                     let peakVal = s.get_value("peak");
-                
+
                     if (peakVal) {
                         let val = peakVal.get_nth(0);
-                            
+
                         if (val > 0)
                             val = 0;
-                                    
+
                         let value = Math.pow(10, val/20);
                         peaks.push(value);
-                    }                            
+                    }
                 }
             }
 
             if (peaks.length == this.playTime) {
-                this.pipeline.set_state(Gst.State.PAUSED);                    
+                this.pipeline.set_state(Gst.State.PAUSED);
             }
-                
+
             if (peaks.length == pauseVal) {
                 this.pipeline.set_state(Gst.State.PAUSED);
-            }                                      
+            }
             break;
-                       
+
         case Gst.MessageType.EOS:
             this.stopGeneration();
             break;
