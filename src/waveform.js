@@ -61,34 +61,29 @@ const WaveForm = new Lang.Class({
             this._uri = this.file.uri;
         } else {
           this.waveType = WaveType.RECORD;
-        }  
-        
+        }
+
         let gridWidth = 0;
         let drawingWidth = 0;
         let drawingHeight = 0;
-        this.drawing = Gtk.DrawingArea.new({ height_request: 45,
-                                             width_request: 300,
-                                             valign: Gtk.Align.FILL });
+        this.drawing = Gtk.DrawingArea.new();
         if (this.waveType == WaveType.RECORD) {
-            gridWidth = MainWindow.groupGrid.get_allocated_width();
-            drawingWidth = gridWidth * 0.75;
-            this.drawing.set_size_request(drawingWidth, 36);
+            this.drawing.set_property("valign", Gtk.Align.FILL);
             this.drawing.set_property("hexpand",true);
             this._grid.attach(this.drawing, 2, 0, 3, 2);
         } else {
-            gridWidth = this._grid.get_allocated_width();
-            gridWidth = gridWidth * 0.70;
-            this.drawing.set_size_request(gridWidth, 45);
+            this.drawing.set_property("valign", Gtk.Align.FILL);
             this.drawing.set_property("hexpand",true);
+            this.drawing.set_property("vexpand",true);
             this._grid.add(this.drawing);
         }
 
         this.drawing.connect("draw", Lang.bind(this, this.fillSurface));
         this.drawing.show_all();
         this._grid.show_all();
-        
-        if (this.waveType == WaveType.PLAY) { 
-            this._launchPipeline();            
+
+        if (this.waveType == WaveType.PLAY) {
+            this._launchPipeline();
             this.startGeneration();
         }
     },
