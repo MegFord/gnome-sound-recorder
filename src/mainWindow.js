@@ -98,8 +98,10 @@ const MainWindow = new Lang.Class({
         play = new Play.Play();
 
         params = Params.fill(params, { title: GLib.get_application_name(),
-                                       default_width: 800,
-                                       default_height: 480 });
+                                       default_height: 480,
+                                       default_width: 780,
+                                       hexpand: true,
+                                       vexpand:true });
         this.parent(params);
 
         header = new Gtk.HeaderBar({ hexpand: true,
@@ -355,7 +357,7 @@ const MainView = new Lang.Class({
             this.listBox.set_selection_mode(Gtk.SelectionMode.SINGLE);
             this.listBox.set_header_func(null);
             this.listBox.set_activate_on_single_click(true);
-            this.listBox.connect("activated", Lang.bind(this,
+            this.listBox.connect("row-activated", Lang.bind(this,
                 function(){
                     this.rowGridCallback(this.listBox.get_selected_row())
                 }));
@@ -723,7 +725,6 @@ const MainView = new Lang.Class({
     onPlayPauseToggled: function(listRow, selFile) {
         this.activeState = play.getPipeStates();
         setVisibleID = ActiveArea.PLAY;
-        let width = listRow.get_allocated_width();
 
         if (this.activeState != PipelineStates.PLAYING) {
             play.startPlaying();
@@ -761,7 +762,6 @@ const MainView = new Lang.Class({
                         child.sensitive = true;
                     }
                 }));
-            listRow.set_property("width-request", width);
 
             if (this.activeState != PipelineStates.PAUSED) {
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);

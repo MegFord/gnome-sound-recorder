@@ -1,7 +1,7 @@
 <schemalist>
   <schema id="org.gnome.gnome-sound-recorder" path="/org/gnome/gnome-sound-recorder/">
     <key name="window-size" type="ai">
-      <default>[800, 480]</default>
+      <default>[780, 480]</default>
       <summary>Window size</summary>
       <description>Window size (width and height).</description>
     </key>
