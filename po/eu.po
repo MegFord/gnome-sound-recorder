@@ -2,15 +2,15 @@
 # Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2014.
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-07 13:14+0200\n"
-"PO-Revision-Date: 2014-07-29 19:47+0200\n"
+"POT-Creation-Date: 2015-01-07 21:30+0100\n"
+"PO-Revision-Date: 2015-01-07 21:31+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
 "Language: eu\n"
@@ -174,7 +174,7 @@ msgid_plural "%d years ago"
 msgstr[0] "Duela urte %d"
 msgstr[1] "Duela %d urte"
 
-#: ../src/info.js:46 ../src/mainWindow.js:511
+#: ../src/info.js:46 ../src/mainWindow.js:515
 msgid "Info"
 msgstr "Informazioa"
 
@@ -183,7 +183,7 @@ msgid "Cancel"
 msgstr "Utzi"
 
 #. finish button (stop recording)
-#: ../src/info.js:69 ../src/mainWindow.js:292
+#: ../src/info.js:69 ../src/mainWindow.js:301
 msgid "Done"
 msgstr "Eginda"
 
@@ -222,62 +222,62 @@ msgstr "Mota"
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/mainWindow.js:111 ../src/mainWindow.js:783
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:782
 msgid "Record"
 msgstr "Grabatu"
 
-#: ../src/mainWindow.js:147
+#: ../src/mainWindow.js:148
 msgid "Add Recordings"
 msgstr "Gehitu grabazioak"
 
-#: ../src/mainWindow.js:152
+#: ../src/mainWindow.js:153
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Erabili <b>Grabatu</b> botoia soinuak grabatzeko"
 
-#: ../src/mainWindow.js:278
+#: ../src/mainWindow.js:287
 msgid "Recording…"
 msgstr "Grabatzen…"
 
-#: ../src/mainWindow.js:332
+#: ../src/mainWindow.js:339
 #, c-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "Soinu %d grabatuta"
 msgstr[1] "%d soinu grabatuta"
 
-#: ../src/mainWindow.js:396
+#: ../src/mainWindow.js:401
 msgid "Play"
 msgstr "Erreproduzitu"
 
-#: ../src/mainWindow.js:417
+#: ../src/mainWindow.js:421
 msgid "Pause"
 msgstr "Pausarazi"
 
-#: ../src/mainWindow.js:524
+#: ../src/mainWindow.js:528
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:817
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:817
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:817
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:817
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:817
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:842
+#: ../src/mainWindow.js:841
 msgid "Load More"
 msgstr "Kargatu gehiago"
 
@@ -293,6 +293,34 @@ msgstr "Bolumena"
 msgid "Microphone"
 msgstr "Mikrofonoa"
 
+#: ../src/record.js:66
+msgid "Unable to create Recordings directory."
+msgstr "Ezin da Grabazioak direktorioa sortu."
+
+#: ../src/record.js:75
+msgid "Your audio capture settings are invalid."
+msgstr "Zure audio-kapturaren ezarpenak baliogabeak dira."
+
+#: ../src/record.js:122
+msgid "Not all elements could be created."
+msgstr "Ezin dira elementu guztiak sortu."
+
+#: ../src/record.js:133
+msgid "Not all of the elements were linked."
+msgstr "Ez dira elementu guztiak estekatu."
+
+#: ../src/record.js:158
+msgid "No Media Profile was set."
+msgstr "Ez da multimediaren profilarik ezarri."
+
+#: ../src/record.js:169
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state."
+msgstr ""
+"Ez da kanalizazioa ezarri\n"
+" grabazioaren egoerarentzako."
+
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
 #: ../src/record.js:318
@@ -302,28 +330,6 @@ msgstr "%d. klipa"
 
 #~ msgid "Unable to play recording"
 #~ msgstr "Ezin da grabazioa erreproduzitu"
-
-#~ msgid "Unable to create Recordings directory."
-#~ msgstr "Ezin da Grabazioak direktorioa sortu."
-
-#~ msgid "Your audio capture settings are invalid."
-#~ msgstr "Zure audio-kapturaren ezarpenak baliogabeak dira."
-
-#~ msgid "Not all elements could be created."
-#~ msgstr "Ezin dira elementu guztiak sortu."
-
-#~ msgid "Not all of the elements were linked"
-#~ msgstr "Ez dira elementu guztiak estekatu"
-
-#~ msgid "No Media Profile was set."
-#~ msgstr "Ez da multimediaren profilarik ezarri."
-
-#~ msgid ""
-#~ "Unable to set the pipeline \n"
-#~ " to the recording state"
-#~ msgstr ""
-#~ "Ez da kanalizazioa ezarri\n"
-#~ "grabazioaren egoerarentzako"
 
 #~ msgid "Preferred media type for encoding audio when recording"
 #~ msgstr "Multimedia mota hobetsia audioa grabatzean kodetzeko"
