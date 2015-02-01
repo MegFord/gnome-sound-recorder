@@ -53,10 +53,10 @@ const Preferences = new Lang.Class({
                                    halign: Gtk.Align.CENTER,
                                    row_spacing: 6,
                                    column_spacing: 24,
-                                   margin_top: 12,
-                                   margin_left: 24,
-                                   margin_right: 24,
-                                   margin_bottom: 12 });
+                                   margin_bottom: 12,
+                                   margin_end: 24,
+                                   margin_start: 24,
+                                   margin_top: 12 });
         let contentArea = this.widget.get_content_area();
         contentArea.pack_start(grid, true, true, 2);
         
