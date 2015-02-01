@@ -106,6 +106,13 @@ const Listview = new Lang.Class({
                         files.forEach(Lang.bind(this,
                             function(file) {
                                 let returnedName = file.get_attribute_as_string("standard::display-name");
+                                try {
+                                    let returnedNumber = parseInt(returnedName.split(" ")[1]);
+                                    if (returnedNumber > trackNumber)
+                                        trackNumber = returnedNumber;
+                                }  catch (e if e instanceof TypeError) {
+                                    // Don't handle the error
+                                }
                                 let finalFileName = GLib.build_filenamev([this._saveDir.get_path(),
                                                                           returnedName]);
                                 let fileUri = GLib.filename_to_uri(finalFileName, null);

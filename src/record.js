@@ -311,7 +311,7 @@ const BuildFileName = new Lang.Class({
         let fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
         let dir = Gio.Application.get_default().saveDir;
         this.dateTime = GLib.DateTime.new_now_local();
-        this.clipNumber = Listview.allFilesInfo.length + 1;
+        this.clipNumber = Listview.trackNumber + 1;
         this.clipNumberString = this.clipNumber.toString();
         /* Translators: ""Clip %d"" is the default name assigned to a file created
             by the application (for example, "Clip 1"). */
