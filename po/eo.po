@@ -1,0 +1,321 @@
+# Esperanto translation for gnome-sound-recorder.
+# Copyright (C) 2015 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Daniel PUENTES <blatberk@openmailbox.org>, 2015.
+# Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-02-03 08:45+0000\n"
+"PO-Revision-Date: 2015-02-08 00:26+0100\n"
+"Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
+"Language-Team: Esperanto <gnome-l10n-eo@lists.launchpad.net>\n"
+"Language: eo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "Simpla, moderna sonregistrilo por GNOME"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr ""
+"Sonregistrilo provizas simplan kaj modernan fasadon kiu provizas rektan "
+"vojon por registri kaj ludi sonon. Ĝi permesas al vi fari bazan redaktadon "
+"kaj krei voĉo-notojn."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"Solidregistrilo aŭtomate traktas la konservo-procezon por ke vi ne "
+"maltrankviliĝu pri akcidenta forĵeto de la antaŭa registraĵo."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Fenestra grando"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Fenestra grando (larĝo kaj alto)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Fenestra pozicio"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Fenestra pozicio (x kaj y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "Mikrofona sonforteco"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "Mikrofona sonforteco."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Speaker volume level"
+msgstr "Laŭtparolila sonforteco"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Speaker volume level."
+msgstr "Laŭtparolila sonforteco."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
+#: ../src/record.js:105
+msgid "Sound Recorder"
+msgstr "Sonregistrilo"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Registri per la mikrofono kaj legi la sonregistradon"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Sono;Aplikaĵo;Registri;"
+
+#: ../src/application.js:43
+msgid "SoundRecorder"
+msgstr "Sonregistrilo"
+
+#: ../src/application.js:50 ../src/preferences.js:39
+msgid "Preferences"
+msgstr "Agordoj"
+
+#: ../src/application.js:53
+msgid "About"
+msgstr "Pri"
+
+#: ../src/application.js:54
+msgid "Quit"
+msgstr "Forlasi"
+
+#: ../src/application.js:83
+msgid "Sound Recorder started"
+msgstr "Sonregistrilo startis"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:89
+msgid "Recordings"
+msgstr "Registradoj"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:154
+msgid "translator-credits"
+msgstr ""
+"Daniel PUENTES\n"
+"Kristjan SCHMIDT"
+
+#: ../src/fileUtil.js:89
+msgid "Yesterday"
+msgstr "Hieraŭ"
+
+#: ../src/fileUtil.js:91
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d tago antaŭe"
+msgstr[1] "%d tagoj antaŭe"
+
+#: ../src/fileUtil.js:95
+msgid "Last week"
+msgstr "Lastsemajne"
+
+#: ../src/fileUtil.js:97
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d semajno antaŭe"
+msgstr[1] "%d semajnoj antaŭe"
+
+#: ../src/fileUtil.js:101
+msgid "Last month"
+msgstr "Lastmonate"
+
+#: ../src/fileUtil.js:103
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d monato antaŭe"
+msgstr[1] "%d monatoj antaŭe"
+
+#: ../src/fileUtil.js:107
+msgid "Last year"
+msgstr "Lastjare"
+
+#: ../src/fileUtil.js:109
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d jaro antaŭe"
+msgstr[1] "%d jaroj antaŭe"
+
+#: ../src/info.js:46 ../src/mainWindow.js:512
+msgid "Info"
+msgstr "Informo"
+
+#: ../src/info.js:55
+msgid "Cancel"
+msgstr "Rezigni"
+
+#: ../src/info.js:69 ../src/mainWindow.js:301
+msgid "Done"
+msgstr "Farite"
+
+#: ../src/info.js:95
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nomo"
+
+#: ../src/info.js:102
+msgid "Source"
+msgstr "Fonto"
+
+#: ../src/info.js:111
+msgid "Date Modified"
+msgstr "Modifita je dato"
+
+#: ../src/info.js:117
+msgid "Date Created"
+msgstr "Kreita je dato"
+
+#: ../src/info.js:128
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tipo"
+
+#: ../src/listview.js:127 ../src/listview.js:222
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+msgid "Record"
+msgstr "Registri"
+
+#: ../src/mainWindow.js:148
+msgid "Add Recordings"
+msgstr "Aldoni registradojn"
+
+#: ../src/mainWindow.js:153
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Uzu la <b>Registri</b> butonon por sonregistri"
+
+#: ../src/mainWindow.js:287
+msgid "Recording…"
+msgstr "Registrante…"
+
+#: ../src/mainWindow.js:339
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d registrita sono"
+msgstr[1] "%d registritaj sonoj"
+
+#: ../src/mainWindow.js:401
+msgid "Play"
+msgstr "Legi"
+
+#: ../src/mainWindow.js:421
+msgid "Pause"
+msgstr "Paŭzigi"
+
+#: ../src/mainWindow.js:525
+msgid "Delete"
+msgstr "Forigi"
+
+#: ../src/mainWindow.js:814
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:814
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:814
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:814
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:814
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:838
+msgid "Load More"
+msgstr "Ŝarĝi pli"
+
+#: ../src/play.js:89
+msgid "Unable to play recording"
+msgstr "Ne kapablas legi registradon"
+
+#: ../src/preferences.js:63
+msgid "Preferred format"
+msgstr "Preferata formato"
+
+#: ../src/preferences.js:71
+msgid "Volume"
+msgstr "Sonforteco"
+
+#: ../src/preferences.js:86
+msgid "Microphone"
+msgstr "Mikrofono"
+
+#: ../src/record.js:66
+#, fuzzy
+msgid "Unable to create Recordings directory."
+msgstr "Ne eblas krei la dosierujo por registraĵoj."
+
+#: ../src/record.js:75
+msgid "Your audio capture settings are invalid."
+msgstr "Viaj sonkaptaj agordoj estas nevalidaj."
+
+#: ../src/record.js:122
+msgid "Not all elements could be created."
+msgstr "Ne eblis krei ĉiujn elementojn."
+
+#: ../src/record.js:133
+msgid "Not all of the elements were linked."
+msgstr "Ne ĉiuj elementoj estis ligitaj."
+
+#: ../src/record.js:158
+msgid "No Media Profile was set."
+msgstr "Neniu aŭdvidea profilo estis agordita."
+
+#: ../src/record.js:169
+#, fuzzy
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state."
+msgstr ""
+"Ne kapablas agordi la ĉenstablon \n"
+"al la registra stato."
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:318
+#, fuzzy
+#| msgid "Clip %d"
+msgid "Clip %d"
+msgstr "Eltondaĵo %d"
