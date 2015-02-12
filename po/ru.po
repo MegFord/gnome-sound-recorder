@@ -1,24 +1,25 @@
 # Russian translation for gnome-sound-recorder.
 # Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
-# Stas Solovey <whats_up@tut.by>, 2014.
+# vantu5z <vantu5z@mail.ru>, 2015.
+# Stas Solovey <whats_up@tut.by>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-06-03 02:41+0000\n"
-"PO-Revision-Date: 2014-06-28 18:11+0400\n"
-"Last-Translator: Yuri Myasoedov <ymyasoedov@yandex.ru>\n"
+"POT-Creation-Date: 2015-02-11 08:43+0000\n"
+"PO-Revision-Date: 2015-02-12 22:18+0300\n"
+"Last-Translator: Stas Solovey <whats_up@tut.by>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.6.5\n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 msgid "A simple, modern sound recorder for GNOME"
@@ -64,9 +65,6 @@ msgid "Maps media types to audio encoder preset names."
 msgstr "Соответствие типа данных названию предустановки для кодировщика звука."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
-#| msgid ""
-#| "Maps media types to audio encoder preset names. If there is no mapping "
-#| "for a media type, the default encoder settings will be used."
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -76,28 +74,24 @@ msgstr ""
 "параметры по умолчанию."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
-#| msgid "Volume level"
 msgid "Microphone volume level"
 msgstr "Уровень громкости микрофона"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
-#| msgid "Volume level."
 msgid "Microphone volume level."
 msgstr "Уровень громкости микрофона."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-#| msgid "Volume level"
 msgid "Speaker volume level"
 msgstr "Уровень громкости звука"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-#| msgid "Volume level."
 msgid "Speaker volume level."
 msgstr "Уровень громкости звука."
 
 # или "Запись звука" или "Звукозапись"
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:153
-#: ../src/record.js:106
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
+#: ../src/record.js:105
 msgid "Sound Recorder"
 msgstr "Диктофон"
 
@@ -109,43 +103,43 @@ msgstr "Запись звука с помощью микрофона и посл
 msgid "Audio;Application;Record;"
 msgstr "Аудио;Звук;Приложение;Запись;"
 
-#: ../src/application.js:41
+#: ../src/application.js:43
 msgid "SoundRecorder"
 msgstr "Диктофон"
 
-#: ../src/application.js:48 ../src/preferences.js:38
+#: ../src/application.js:50 ../src/preferences.js:39
 msgid "Preferences"
 msgstr "Параметры"
 
-#: ../src/application.js:51
+#: ../src/application.js:53
 msgid "About"
 msgstr "О программе"
 
-#: ../src/application.js:52
+#: ../src/application.js:54
 msgid "Quit"
 msgstr "Завершить"
 
-#: ../src/application.js:81
+#: ../src/application.js:83
 msgid "Sound Recorder started"
 msgstr "Приложение для записи звука запущено"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:87
+#: ../src/application.js:89
 msgid "Recordings"
 msgstr "Записи"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:152
+#: ../src/application.js:154
 msgid "translator-credits"
 msgstr ""
-"Стас Соловей <whats_up@tut.by>, 2014\n"
+"Станислав Соловей <whats_up@tut.by>, 2014\n"
 "Юрий Мясоедов <ymyasoedov@yandex.ru>, 2014"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:89
 msgid "Yesterday"
 msgstr "Вчера"
 
-#: ../src/fileUtil.js:93
+#: ../src/fileUtil.js:91
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -153,11 +147,11 @@ msgstr[0] "%d день назад"
 msgstr[1] "%d дня назад"
 msgstr[2] "%d дней назад"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:95
 msgid "Last week"
 msgstr "На прошлой неделе"
 
-#: ../src/fileUtil.js:99
+#: ../src/fileUtil.js:97
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -165,11 +159,11 @@ msgstr[0] "%d неделю назад"
 msgstr[1] "%d недели назад"
 msgstr[2] "%d недель назад"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:101
 msgid "Last month"
 msgstr "В прошлом месяце"
 
-#: ../src/fileUtil.js:105
+#: ../src/fileUtil.js:103
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -177,11 +171,11 @@ msgstr[0] "%d месяц назад"
 msgstr[1] "%d месяца назад"
 msgstr[2] "%d месяцев назад"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:107
 msgid "Last year"
 msgstr "В прошлом году"
 
-#: ../src/fileUtil.js:111
+#: ../src/fileUtil.js:109
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -189,61 +183,61 @@ msgstr[0] "%d год назад"
 msgstr[1] "%d года назад"
 msgstr[2] "%d лет назад"
 
-#: ../src/info.js:45 ../src/mainWindow.js:509
+#: ../src/info.js:46 ../src/mainWindow.js:512
 msgid "Info"
 msgstr "Информация"
 
-#: ../src/info.js:54
+#: ../src/info.js:55
 msgid "Cancel"
-msgstr "Отменить"
+msgstr "Отмена"
 
-#: ../src/info.js:68 ../src/mainWindow.js:290
+#: ../src/info.js:69 ../src/mainWindow.js:301
 msgid "Done"
 msgstr "Выполнено"
 
-#: ../src/info.js:94
+#: ../src/info.js:95
 msgctxt "File Name"
 msgid "Name"
 msgstr "Имя"
 
-#: ../src/info.js:101
+#: ../src/info.js:102
 msgid "Source"
 msgstr "Источник"
 
-#: ../src/info.js:110
+#: ../src/info.js:111
 msgid "Date Modified"
 msgstr "Последнее изменение"
 
-#: ../src/info.js:116
+#: ../src/info.js:117
 msgid "Date Created"
 msgstr "Дата создания"
 
-#: ../src/info.js:127
+#: ../src/info.js:128
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Тип"
 
-#: ../src/listview.js:122 ../src/listview.js:217
+#: ../src/listview.js:127 ../src/listview.js:222
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d.%m.%Y %H:%M:%S"
 
-#: ../src/mainWindow.js:109 ../src/mainWindow.js:781
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "Запись"
 
-#: ../src/mainWindow.js:145
+#: ../src/mainWindow.js:148
 msgid "Add Recordings"
 msgstr "Добавить записи"
 
-#: ../src/mainWindow.js:150
+#: ../src/mainWindow.js:153
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Используйте кнопку <b>Запись</b> для создания звуковых записей"
 
-#: ../src/mainWindow.js:276
+#: ../src/mainWindow.js:287
 msgid "Recording…"
 msgstr "Запись…"
 
-#: ../src/mainWindow.js:330
+#: ../src/mainWindow.js:339
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -251,39 +245,39 @@ msgstr[0] "%d звуковая запись"
 msgstr[1] "%d звуковые записи"
 msgstr[2] "%d звуковых записей"
 
-#: ../src/mainWindow.js:394
+#: ../src/mainWindow.js:401
 msgid "Play"
 msgstr "Воспроизвести"
 
-#: ../src/mainWindow.js:415
+#: ../src/mainWindow.js:421
 msgid "Pause"
 msgstr "Приостановить"
 
-#: ../src/mainWindow.js:522
+#: ../src/mainWindow.js:525
 msgid "Delete"
 msgstr "Удалить"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:840
+#: ../src/mainWindow.js:838
 msgid "Load More"
 msgstr "Загрузить ещё"
 
@@ -291,49 +285,49 @@ msgstr "Загрузить ещё"
 msgid "Unable to play recording"
 msgstr "Не удалось воспроизвести запись"
 
-#: ../src/preferences.js:62
+#: ../src/preferences.js:63
 msgid "Preferred format"
 msgstr "Предпочитаемый формат"
 
-#: ../src/preferences.js:70
+#: ../src/preferences.js:71
 msgid "Volume"
 msgstr "Громкость"
 
-#: ../src/preferences.js:85
+#: ../src/preferences.js:86
 msgid "Microphone"
 msgstr "Микрофон"
 
-#: ../src/record.js:67
+#: ../src/record.js:66
 msgid "Unable to create Recordings directory."
 msgstr "Не удалось создать каталог для записей."
 
-#: ../src/record.js:76
+#: ../src/record.js:75
 msgid "Your audio capture settings are invalid."
 msgstr "Неверный параметры захвата звука."
 
-#: ../src/record.js:123
+#: ../src/record.js:122
 msgid "Not all elements could be created."
 msgstr "Не все элементы могу быть созданы."
 
-#: ../src/record.js:134
-msgid "Not all of the elements were linked"
-msgstr "Не все элементы были связаны"
+#: ../src/record.js:133
+msgid "Not all of the elements were linked."
+msgstr "Не все элементы были связаны."
 
-#: ../src/record.js:159
+#: ../src/record.js:158
 msgid "No Media Profile was set."
 msgstr "Медиапрофиль не был установлен."
 
-#: ../src/record.js:170
+#: ../src/record.js:169
 msgid ""
 "Unable to set the pipeline \n"
-" to the recording state"
+" to the recording state."
 msgstr ""
 "Не удалось создать конвейер \n"
-" до состояния записи"
+" до состояния записи."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
-#: ../src/record.js:319
+#: ../src/record.js:318
 #, javascript-format
 msgid "Clip %d"
 msgstr "Клип %d"
