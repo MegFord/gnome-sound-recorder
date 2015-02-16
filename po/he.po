@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder 3.9.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 17:19+0300\n"
-"PO-Revision-Date: 2014-08-28 17:24+0300\n"
-"Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
+"POT-Creation-Date: 2015-02-17 00:07+0200\n"
+"PO-Revision-Date: 2015-02-17 00:08+0200\n"
+"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
@@ -175,7 +175,7 @@ msgstr[0] "לפני שנה"
 msgstr[1] "לפני %d שנים"
 msgstr[2] "לפני שנתיים"
 
-#: ../src/info.js:46 ../src/mainWindow.js:508
+#: ../src/info.js:46 ../src/mainWindow.js:512
 msgid "Info"
 msgstr "מידע"
 
@@ -184,7 +184,7 @@ msgid "Cancel"
 msgstr "ביטול"
 
 #. finish button (stop recording)
-#: ../src/info.js:69 ../src/mainWindow.js:291
+#: ../src/info.js:69 ../src/mainWindow.js:301
 msgid "Done"
 msgstr "בוצע"
 
@@ -219,27 +219,27 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "סוג"
 
-#: ../src/listview.js:120 ../src/listview.js:215
+#: ../src/listview.js:127 ../src/listview.js:222
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/mainWindow.js:111 ../src/mainWindow.js:783
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "הקלטה"
 
-#: ../src/mainWindow.js:147
+#: ../src/mainWindow.js:148
 msgid "Add Recordings"
 msgstr "הוספת הקלטות"
 
-#: ../src/mainWindow.js:152
+#: ../src/mainWindow.js:153
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "יש להשתמש בכפתור <b>הקלטה</b> כדי להקליט צלילים"
 
-#: ../src/mainWindow.js:277
+#: ../src/mainWindow.js:287
 msgid "Recording…"
 msgstr "מקליט…"
 
-#: ../src/mainWindow.js:331
+#: ../src/mainWindow.js:339
 #, c-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -247,39 +247,39 @@ msgstr[0] "הקלטת שמע אחת"
 msgstr[1] "%d הקלטות שמע"
 msgstr[2] "שתי הקלטות שמע"
 
-#: ../src/mainWindow.js:395
+#: ../src/mainWindow.js:401
 msgid "Play"
 msgstr "ניגון"
 
-#: ../src/mainWindow.js:415
+#: ../src/mainWindow.js:421
 msgid "Pause"
 msgstr "עצירה"
 
-#: ../src/mainWindow.js:520
+#: ../src/mainWindow.js:525
 msgid "Delete"
 msgstr "מחיקה"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:814
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:814
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:814
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:814
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:818
+#: ../src/mainWindow.js:814
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:842
+#: ../src/mainWindow.js:838
 msgid "Load More"
 msgstr "טעינת עוד"
 
@@ -312,8 +312,8 @@ msgid "Not all elements could be created."
 msgstr "לא כל הרכיבים ניתנים ליצירה."
 
 #: ../src/record.js:133
-msgid "Not all of the elements were linked"
-msgstr "לא כל הרכיבים קושרו"
+msgid "Not all of the elements were linked."
+msgstr "לא כל הרכיבים קושרו."
 
 #: ../src/record.js:158
 msgid "No Media Profile was set."
@@ -322,8 +322,8 @@ msgstr "לא הוגדר פרופיל מדיה."
 #: ../src/record.js:169
 msgid ""
 "Unable to set the pipeline \n"
-" to the recording state"
-msgstr "לא ניתן להגדיר את הצינור למצב הקלטה"
+" to the recording state."
+msgstr "לא ניתן להגדיר את הצינור למצב הקלטה."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
