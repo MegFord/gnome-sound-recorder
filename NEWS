@@ -1,4 +1,12 @@
+  3.15.90
+ =======
 
+ Translation updates
+ Correct overlapping of long titles and the date in main view.
+ Improve window size.
+ Improve file name assignment.
+ Replace margin_right and margin_left with margin_start and margin_end.
+ 
   3.15.3
  =======
 

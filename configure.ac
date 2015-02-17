@@ -1,4 +1,4 @@
-AC_INIT([gnome-sound-recorder],[3.15.3],[gnome-sound-recorder])
+AC_INIT([gnome-sound-recorder],[3.15.90],[gnome-sound-recorder])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
@@ -20,7 +20,7 @@ PKG_CHECK_MODULES([DEPS], [gdk-3.0
                            gio-2.0
                            glib-2.0
                            gobject-2.0
-                           gtk+-3.0 >= 3.9.4])
+                           gtk+-3.0 >= 3.12])
 
 AC_PATH_PROG(GJS, [gjs])
 
