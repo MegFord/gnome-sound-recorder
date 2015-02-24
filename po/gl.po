@@ -1,13 +1,13 @@
 # English translations for PACKAGE package.
 # Copyright (C) 2013 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Fran Dieguez <frandieguez@gnome.org>, 2013, 2014.
+# Fran Dieguez <frandieguez@gnome.org>, 2013, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-04 22:32+0200\n"
-"PO-Revision-Date: 2014-09-04 22:35+0200\n"
+"POT-Creation-Date: 2015-02-24 22:10+0100\n"
+"PO-Revision-Date: 2015-02-24 22:14+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -119,12 +119,12 @@ msgstr "Saír"
 msgid "Sound Recorder started"
 msgstr "Gravadora de son iniciada"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
 #: ../src/application.js:89
 msgid "Recordings"
 msgstr "Gravacións"
 
-#. Translators: Replace "translator-credits" with your names, one name per line */
+#. Translators: Replace "translator-credits" with your names, one name per line
 #: ../src/application.js:154
 msgid "translator-credits"
 msgstr "Fran Dieguez <frandieguez@gnome.org>, 2013-2014"
@@ -173,7 +173,7 @@ msgid_plural "%d years ago"
 msgstr[0] "fai %d ano"
 msgstr[1] "fai %d anos"
 
-#: ../src/info.js:46 ../src/mainWindow.js:508
+#: ../src/info.js:46 ../src/mainWindow.js:512
 msgid "Info"
 msgstr "Información"
 
@@ -181,92 +181,102 @@ msgstr "Información"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../src/info.js:69 ../src/mainWindow.js:291
+#. finish button (stop recording)
+#: ../src/info.js:69 ../src/mainWindow.js:301
 msgid "Done"
 msgstr "Feito"
 
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
 #: ../src/info.js:95
 msgctxt "File Name"
 msgid "Name"
 msgstr "Nome"
 
+#. Source item
 #: ../src/info.js:102
 msgid "Source"
 msgstr "Fonte"
 
+#. Date Modified item
 #: ../src/info.js:111
 msgid "Date Modified"
 msgstr "Data de modificación"
 
+#. Date Created item
 #: ../src/info.js:117
 msgid "Date Created"
 msgstr "Data de creación"
 
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
 #: ../src/info.js:128
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../src/listview.js:120 ../src/listview.js:215
+#: ../src/listview.js:127 ../src/listview.js:222
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d/%m/%Y %H:%M:%S"
 
-#: ../src/mainWindow.js:111 ../src/mainWindow.js:777
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "Gravar"
 
-#: ../src/mainWindow.js:147
+#: ../src/mainWindow.js:148
 msgid "Add Recordings"
 msgstr "Engadir gravacións"
 
-#: ../src/mainWindow.js:152
+#: ../src/mainWindow.js:153
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Use o botón <b>Gravar</b> para facer novas gravacións de son"
 
-#: ../src/mainWindow.js:277
+#: ../src/mainWindow.js:287
 msgid "Recording…"
 msgstr "Gravando…"
 
-#: ../src/mainWindow.js:330
+#: ../src/mainWindow.js:339
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d son gravado"
 msgstr[1] "%d sons gravados"
 
-#: ../src/mainWindow.js:394
+#: ../src/mainWindow.js:401
 msgid "Play"
 msgstr "Reproducir"
 
-#: ../src/mainWindow.js:414
+#: ../src/mainWindow.js:421
 msgid "Pause"
 msgstr "Pausar"
 
-#: ../src/mainWindow.js:521
+#: ../src/mainWindow.js:525
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:836
+#: ../src/mainWindow.js:838
 msgid "Load More"
 msgstr "Cargar máis"
 
@@ -299,23 +309,23 @@ msgid "Not all elements could be created."
 msgstr "Non foi posíbel crear todos os elementos."
 
 #: ../src/record.js:133
-msgid "Not all of the elements were linked"
-msgstr "Non foi posíbel ligar todos os elementos"
+msgid "Not all of the elements were linked."
+msgstr "Non están todos os elementos foron ligados."
 
 #: ../src/record.js:158
 msgid "No Media Profile was set."
-msgstr "Non se estabelecer ningún perfíl multimedia."
+msgstr "Non se estabeleceu ningún perfil multimedia."
 
 #: ../src/record.js:169
 msgid ""
 "Unable to set the pipeline \n"
-" to the recording state"
+" to the recording state."
 msgstr ""
 "Non foi posíbel estabelecer o pipeline \n"
-" ao estado da gravación"
+" ao estado da gravación."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1"). */
+#. by the application (for example, "Clip 1").
 #: ../src/record.js:318
 #, javascript-format
 msgid "Clip %d"
