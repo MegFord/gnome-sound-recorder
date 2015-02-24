@@ -33,7 +33,7 @@ CLEANFILES = \
 
 install-exec-hook:
 	$(MKDIR_P) $(DESTDIR)$(bindir)
-	$(LN_S) $(appdir)/org.gnome.SoundRecorder $(DESTDIR)$(bindir)/$(PACKAGE_TARNAME)
+	ln -sf $(appdir)/org.gnome.SoundRecorder $(DESTDIR)$(bindir)/$(PACKAGE_TARNAME)
 uninstall-hook:
 	-rm -f $(DESTDIR)$(bindir)/$(PACKAGE_TARNAME)
 
