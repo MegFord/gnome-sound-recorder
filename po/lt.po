@@ -1,17 +1,17 @@
 # Lithuanian translation for gnome-sound-recorder.
 # Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
-# Aurimas Černius <aurisc4@gmail.com>, 2014.
 # FULL NAME <EMAIL@ADDRESS>, 2014.
+# Aurimas Černius <aurisc4@gmail.com>, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-06-03 02:41+0000\n"
-"PO-Revision-Date: 2014-07-25 23:38+0300\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-03-08 08:48+0000\n"
+"PO-Revision-Date: 2015-03-08 19:27+0200\n"
+"Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -64,9 +64,6 @@ msgid "Maps media types to audio encoder preset names."
 msgstr "Susieja daugialypės terpės tipus su garso koduotojų vardais."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
-#| msgid ""
-#| "Maps media types to audio encoder preset names. If there is no mapping "
-#| "for a media type, the default encoder settings will be used."
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -75,27 +72,23 @@ msgstr ""
 "atitinkančio daugialypės terpės tipo, bus naudojamas numatytasis koduotojas."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
-#| msgid "Volume level"
 msgid "Microphone volume level"
 msgstr "Mikrofono garsumo lygis"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
-#| msgid "Volume level."
 msgid "Microphone volume level."
 msgstr "Mikrofono garsumo lygis."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-#| msgid "Volume level"
 msgid "Speaker volume level"
 msgstr "Garsiakalbių garsumo lygis"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-#| msgid "Volume level."
 msgid "Speaker volume level."
 msgstr "Garsiakalbių garsumo lygis."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:153
-#: ../src/record.js:106
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
+#: ../src/record.js:105
 msgid "Sound Recorder"
 msgstr "Garso įrašymas"
 
@@ -107,43 +100,43 @@ msgstr "Įrašykite garsą mikrofonu ir jį grokite"
 msgid "Audio;Application;Record;"
 msgstr "Garsas;Programa;Įrašyti;"
 
-#: ../src/application.js:41
+#: ../src/application.js:43
 msgid "SoundRecorder"
 msgstr "SoundRecorder"
 
-#: ../src/application.js:48 ../src/preferences.js:38
+#: ../src/application.js:50 ../src/preferences.js:39
 msgid "Preferences"
 msgstr "Nustatymai"
 
-#: ../src/application.js:51
+#: ../src/application.js:53
 msgid "About"
 msgstr "Apie"
 
-#: ../src/application.js:52
+#: ../src/application.js:54
 msgid "Quit"
 msgstr "Išeiti"
 
-#: ../src/application.js:81
+#: ../src/application.js:83
 msgid "Sound Recorder started"
 msgstr "Garso įrašymas paleistas"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:87
+#: ../src/application.js:89
 msgid "Recordings"
 msgstr "Įrašai"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:152
+#: ../src/application.js:154
 msgid "translator-credits"
 msgstr ""
 "Išvertė:\n"
 "Aurimas Černius <aurisc4@gmail.com>"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:89
 msgid "Yesterday"
 msgstr "Vakar"
 
-#: ../src/fileUtil.js:93
+#: ../src/fileUtil.js:91
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -151,11 +144,11 @@ msgstr[0] "Prieš %d dieną"
 msgstr[1] "Prieš %d dienas"
 msgstr[2] "Prieš %d dienų"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:95
 msgid "Last week"
 msgstr "Praeitą savaitę"
 
-#: ../src/fileUtil.js:99
+#: ../src/fileUtil.js:97
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -163,11 +156,11 @@ msgstr[0] "Prieš %d savaitę"
 msgstr[1] "Prieš %d savaites"
 msgstr[2] "Prieš %d savaičių"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:101
 msgid "Last month"
 msgstr "Praeitą mėnesį"
 
-#: ../src/fileUtil.js:105
+#: ../src/fileUtil.js:103
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -175,11 +168,11 @@ msgstr[0] "Prieš %d mėnesį"
 msgstr[1] "Prieš %d mėnesius"
 msgstr[2] "Prieš %d mėnesių"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:107
 msgid "Last year"
 msgstr "Praeitais metais"
 
-#: ../src/fileUtil.js:111
+#: ../src/fileUtil.js:109
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -187,61 +180,61 @@ msgstr[0] "Prieš %d metus"
 msgstr[1] "Prieš %d metus"
 msgstr[2] "Prieš %d metų"
 
-#: ../src/info.js:45 ../src/mainWindow.js:509
+#: ../src/info.js:46 ../src/mainWindow.js:512
 msgid "Info"
 msgstr "Informacija"
 
-#: ../src/info.js:54
+#: ../src/info.js:55
 msgid "Cancel"
 msgstr "Atsisakyti"
 
-#: ../src/info.js:68 ../src/mainWindow.js:290
+#: ../src/info.js:69 ../src/mainWindow.js:301
 msgid "Done"
 msgstr "Atlikta"
 
-#: ../src/info.js:94
+#: ../src/info.js:95
 msgctxt "File Name"
 msgid "Name"
 msgstr "Pavadinimas"
 
-#: ../src/info.js:101
+#: ../src/info.js:102
 msgid "Source"
 msgstr "Šaltinis"
 
-#: ../src/info.js:110
+#: ../src/info.js:111
 msgid "Date Modified"
 msgstr "Keitimo data"
 
-#: ../src/info.js:116
+#: ../src/info.js:117
 msgid "Date Created"
 msgstr "Sukūrimo data"
 
-#: ../src/info.js:127
+#: ../src/info.js:128
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipas"
 
-#: ../src/listview.js:122 ../src/listview.js:217
+#: ../src/listview.js:127 ../src/listview.js:222
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/mainWindow.js:109 ../src/mainWindow.js:781
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "Įrašyti"
 
-#: ../src/mainWindow.js:145
+#: ../src/mainWindow.js:148
 msgid "Add Recordings"
 msgstr "Pridėti įrašus"
 
-#: ../src/mainWindow.js:150
+#: ../src/mainWindow.js:153
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Naudokite mygtuką <b>Įrašyti</b> garso įrašams padaryti"
 
-#: ../src/mainWindow.js:276
+#: ../src/mainWindow.js:287
 msgid "Recording…"
 msgstr "Įrašoma…"
 
-#: ../src/mainWindow.js:330
+#: ../src/mainWindow.js:339
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -249,39 +242,39 @@ msgstr[0] "%d įrašytas garsas"
 msgstr[1] "%d įrašyti garsai"
 msgstr[2] "%d įrašytų garsų"
 
-#: ../src/mainWindow.js:394
+#: ../src/mainWindow.js:401
 msgid "Play"
 msgstr "Groti"
 
-#: ../src/mainWindow.js:415
+#: ../src/mainWindow.js:421
 msgid "Pause"
 msgstr "Pristabdyti"
 
-#: ../src/mainWindow.js:522
+#: ../src/mainWindow.js:525
 msgid "Delete"
 msgstr "Ištrinti"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:840
+#: ../src/mainWindow.js:838
 msgid "Load More"
 msgstr "Įkelti daugiau"
 
@@ -289,50 +282,53 @@ msgstr "Įkelti daugiau"
 msgid "Unable to play recording"
 msgstr "Nepavyksta groti įrašo"
 
-#: ../src/preferences.js:62
+#: ../src/preferences.js:63
 msgid "Preferred format"
 msgstr "Pageidaujamas formatas"
 
-#: ../src/preferences.js:70
+#: ../src/preferences.js:71
 msgid "Volume"
 msgstr "Garsas"
 
-#: ../src/preferences.js:85
+#: ../src/preferences.js:86
 msgid "Microphone"
 msgstr "Mikrofonas"
 
-#: ../src/record.js:67
+#: ../src/record.js:66
 msgid "Unable to create Recordings directory."
 msgstr "Nepavyksta sukurti įrašų aplanko."
 
-#: ../src/record.js:76
+#: ../src/record.js:75
 msgid "Your audio capture settings are invalid."
 msgstr "Jūsų garso įrašymo nustatymai yra neteisingi."
 
-#: ../src/record.js:123
+#: ../src/record.js:122
 msgid "Not all elements could be created."
 msgstr "Ne visus elementus pavyko sukurti."
 
-#: ../src/record.js:134
-msgid "Not all of the elements were linked"
-msgstr "Ne visi elementai buvo susieti"
+#: ../src/record.js:133
+#| msgid "Not all of the elements were linked"
+msgid "Not all of the elements were linked."
+msgstr "Ne visi elementai buvo susieti."
 
-#: ../src/record.js:159
+#: ../src/record.js:158
 msgid "No Media Profile was set."
 msgstr "Nenustatytas daugialypės terpės profilis."
 
-#: ../src/record.js:170
+#: ../src/record.js:169
+#| msgid ""
+#| "Unable to set the pipeline \n"
+#| " to the recording state"
 msgid ""
 "Unable to set the pipeline \n"
-" to the recording state"
+" to the recording state."
 msgstr ""
 "Nepavyksta nustatyti konvejerio \n"
-" į įrašymo būseną"
+" į įrašymo būseną."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
-#: ../src/record.js:319
+#: ../src/record.js:318
 #, javascript-format
 msgid "Clip %d"
 msgstr "Įrašas %d"
-
