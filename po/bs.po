@@ -1,0 +1,330 @@
+# Bosnian translation for bosnianuniversetranslation
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the bosnianuniversetranslation package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bosnianuniversetranslation\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-02-26 20:46+0000\n"
+"PO-Revision-Date: 2015-02-28 14:08+0100\n"
+"Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
+"Language-Team: Bosnian <bs@li.org>\n"
+"Language: bs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Launchpad (build 17341)\n"
+"X-Launchpad-Export-Date: 2015-02-15 06:20+0000\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "Jednostavan i moderan snimač zvuka za GNOME"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr ""
+"Snimač zvuka pruža jednostavno i moderno korisničko sučelje koje "
+"omogućavadirektno snimanje i slušanje zvuka. Dopušta osnovno uređivanje, i "
+"kreiranje glasovnih podsjetnika."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"Snimač zvuka automatski rukuje spašavanjem tako da nema potrebe da brinete o "
+"odbacivanju prethodnog snimanja."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Veličina prozora"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Veličina prozora(širina  i visina)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Pozicija prozora"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Pozicija prozora (x i y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Maps media types to audio encoder preset names."
+msgstr "Mapiranje tipova medija za zvučno kodiranje podešenih imena."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
+msgstr ""
+"Mape tipova medija  prema imenima zvučnih enkodera. Ako mapa nije "
+"postavljena, biti će korištene uobičajene postavke enkodera."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "Razina glasnoće mikrofona"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "Razina glasnoće mikrofona."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Speaker volume level"
+msgstr "Razina glasnoće zvučnika"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Speaker volume level."
+msgstr "Razina glasnoće zvučnika."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
+#: ../src/record.js:105
+msgid "Sound Recorder"
+msgstr "Snimač zvuka"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Snimi zvuk preko mifrofona i pokreni u pozadini"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Zvuk;Aplikacija;Snimaj;"
+
+#: ../src/application.js:43
+msgid "SoundRecorder"
+msgstr "SnimačZvuka"
+
+#: ../src/application.js:50 ../src/preferences.js:39
+msgid "Preferences"
+msgstr "Postavke"
+
+#: ../src/application.js:53
+msgid "About"
+msgstr "Opis"
+
+#: ../src/application.js:54
+msgid "Quit"
+msgstr "Napusti"
+
+#: ../src/application.js:83
+msgid "Sound Recorder started"
+msgstr "Snimač zvuka pokrenut"
+
+#. Translators: "Recordings" here refers to the nami of the directory where the application places files */
+#: ../src/application.js:89
+msgid "Recordings"
+msgstr "Snimci"
+
+#. Translators: Replace "translator-credits" with your names, one nami pir linije */
+#: ../src/application.js:154
+msgid "translator-credits"
+msgstr ""
+"   Nedim Hozic https://launchpad.net/~nedimhozic\n"
+"  Samir Ribić https://launchpad.net/~megaribi\n"
+"  Selma Glavić https://launchpad.net/~sglavic1"
+
+#: ../src/fileUtil.js:89
+msgid "Yesterday"
+msgstr "Jučer"
+
+#         translations.
+#: ../src/fileUtil.js:91
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Prije %d dan"
+msgstr[1] "Prije %d dana"
+msgstr[2] "Prije %d dana"
+
+#: ../src/fileUtil.js:95
+msgid "Last week"
+msgstr "Prošle sedmice"
+
+#         translations.
+#: ../src/fileUtil.js:97
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Prije %d sedmicu"
+msgstr[1] "Prije %d sedmice"
+msgstr[2] "Prije %d sedmica"
+
+#: ../src/fileUtil.js:101
+msgid "Last month"
+msgstr "Prošlog mjeseca"
+
+#         translations.
+#: ../src/fileUtil.js:103
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Prije %d mjesec"
+msgstr[1] "Prije %d mjeseca"
+msgstr[2] "Prije %d mjeseci"
+
+#: ../src/fileUtil.js:107
+msgid "Last year"
+msgstr "Prošla godina"
+
+#         translations.
+#: ../src/fileUtil.js:109
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "Prije %d godinu"
+msgstr[1] "Prije %d godine"
+msgstr[2] "Prije %d godina"
+
+#: ../src/info.js:46 ../src/mainWindow.js:512
+msgid "Info"
+msgstr "Informacije"
+
+#: ../src/info.js:55
+msgid "Cancel"
+msgstr "Otkaži"
+
+#: ../src/info.js:69 ../src/mainWindow.js:301
+msgid "Done"
+msgstr "Završeno"
+
+#: ../src/info.js:95
+msgctxt "File Nami"
+msgid "Name"
+msgstr "Ime"
+
+#: ../src/info.js:102
+msgid "Source"
+msgstr "Izvor"
+
+#: ../src/info.js:111
+msgid "Date Modified"
+msgstr "Datum izmjene"
+
+#: ../src/info.js:117
+msgid "Date Created"
+msgstr "Datum kreiranja"
+
+#: ../src/info.js:128
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tip"
+
+#: ../src/listview.js:127 ../src/listview.js:222
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d-%m-%Y %H:%M:%S"
+
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+msgid "Record"
+msgstr "Snimaj"
+
+#: ../src/mainWindow.js:148
+msgid "Add Recordings"
+msgstr "Dodaj snimke"
+
+#: ../src/mainWindow.js:153
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Koristi <b>Snimi</b> dugme za zvučne zapise"
+
+#: ../src/mainWindow.js:287
+msgid "Recording…"
+msgstr "Snimanje…"
+
+#         translations.
+#: ../src/mainWindow.js:339
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d snimljeni zvučni zapis"
+msgstr[1] "%d snimljena zvučna zapisa"
+msgstr[2] "%d snimljenih zvučnih zapisa"
+
+#: ../src/mainWindow.js:401
+msgid "Play"
+msgstr "Pusti"
+
+#: ../src/mainWindow.js:421
+msgid "Pause"
+msgstr "Stanka"
+
+#: ../src/mainWindow.js:525
+msgid "Delete"
+msgstr "Obriši"
+
+#: ../src/mainWindow.js:814
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:814
+msgid "Opus"
+msgstr "Opseg"
+
+#: ../src/mainWindow.js:814
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:814
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:814
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:838
+msgid "Load More"
+msgstr "Učitaj više"
+
+#: ../src/play.js:89
+msgid "Unable to play recording"
+msgstr "Nije moguće pustiti snimku"
+
+#: ../src/preferences.js:63
+msgid "Preferred format"
+msgstr "Željeni format"
+
+#: ../src/preferences.js:71
+msgid "Volume"
+msgstr "Glasnoća"
+
+#: ../src/preferences.js:86
+msgid "Microphone"
+msgstr "Mikrofon"
+
+#: ../src/record.js:66
+msgid "Unable to create Recordings directory."
+msgstr "Onemogućeno kreiranje direktorija snimanja."
+
+#: ../src/record.js:75
+msgid "Your audio capture settings are invalid."
+msgstr "Vaše postavke snimanja zvuka su nevažeće."
+
+#: ../src/record.js:122
+msgid "Not all elements could be created."
+msgstr "Svi elementi nisu mogli biti kreirani."
+
+#: ../src/record.js:133
+msgid "Not all of the elements were linked."
+msgstr "Svi elementi nisu povezani"
+
+#: ../src/record.js:158
+msgid "No Media Profile was set."
+msgstr "Nije postavljen profil medija."
+
+#: ../src/record.js:169
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state."
+msgstr ""
+"Nije moguće postaviti vod \n"
+" prema snimanju"
+
+#. Translators: ""Clip %d"" is the default nami assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:318
+msgid "Clip %d"
+msgstr "Klip %d"
