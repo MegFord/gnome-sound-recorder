@@ -1,12 +1,17 @@
- 3.15.90
+ 3.15.92
  =======
-Translation updates.
-Force symbolic link creation during installation by Guido Trentalancia.
+ Translation updates.
+ Waveform bugfixes.
+ 
+ 3.15.91
+ =======
+ Translation updates.
+ Force symbolic link creation during installation by Guido Trentalancia.
 
  3.15.90
  =======
 
- Translation updates
+ Translation updates.
  Correct overlapping of long titles and the date in main view.
  Improve window size.
  Improve file name assignment.
@@ -15,13 +20,13 @@ Force symbolic link creation during installation by Guido Trentalancia.
  3.15.3
  =======
 
- Translation updates
+ Translation updates.
  Add hours to the time label for recordings
 
  3.14.0.1
  =======
 
- Translation updates
+ Translation updates.
 
  3.14.0
  =======
