@@ -90,8 +90,8 @@ const WaveForm = new Lang.Class({
 
     _launchPipeline: function() {
         this.pipeline =
-            Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=1 !level name=level interval=100000000 post-messages=true ! fakesink qos=false");
-        this._level = this.pipeline.get_by_name("wavelevel");
+            Gst.parse_launch("uridecodebin name=decode uri=" + this._uri + " ! audioconvert ! audio/x-raw,channels=2 ! level name=level interval=100000000 post-messages=true ! fakesink qos=false");
+        this._level = this.pipeline.get_by_name("level");
         let decode = this.pipeline.get_by_name("decode");
         let bus = this.pipeline.get_bus();
         bus.add_signal_watch();
@@ -253,7 +253,7 @@ const WaveForm = new Lang.Class({
     },
 
     endDrawing: function() {
-        if(this.pipeline)
+        if (this.pipeline)
             this.stopGeneration();
 
         this.count = 0;

@@ -79,6 +79,9 @@ const Record = new Lang.Class({
         }
 
         this.pipeline.add(this.srcElement);
+        this.audioConvert = Gst.ElementFactory.make("audioconvert", "audioConvert");
+        this.pipeline.add(this.audioConvert);
+        this.caps = Gst.Caps.from_string("audio/x-raw, channels=2");
         this.clock = this.pipeline.get_clock();
         this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();
@@ -124,12 +127,13 @@ const Record = new Lang.Class({
             this.onEndOfStream();
         }
 
-        let srcLink = this.srcElement.link(this.level);
+        let srcLink = this.srcElement.link(this.audioConvert);
+        let audioConvertLink = this.audioConvert.link_filtered(this.level, this.caps);
         let levelLink = this.level.link(this.volume);
         let volLink = this.volume.link(this.ebin);
         let ebinLink = this.ebin.link(this.filesink);
 
-        if (!srcLink || !levelLink || !ebinLink) {
+        if (!srcLink || !audioConvertLink || !levelLink || !ebinLink) {
             this._showErrorDialog(_("Not all of the elements were linked."));
             errorDialogState = ErrState.ON;
             this.onEndOfStream();
