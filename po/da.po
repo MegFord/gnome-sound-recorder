@@ -1,15 +1,15 @@
 # Danish translation for gnome-sound-recorder.
-# Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
+# Copyright (C) 2014, 2015 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2014.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2014, 2015.
 # Kris Thomsen <mail@kristhomsen.dk>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-16 20:53+0200\n"
-"PO-Revision-Date: 2014-09-15 20:21+0200\n"
+"POT-Creation-Date: 2015-03-15 14:42+0100\n"
+"PO-Revision-Date: 2015-03-14 03:32+0100\n"
 "Last-Translator: Kris Thomsen <mail@kristhomsen.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -85,7 +85,7 @@ msgid "Speaker volume level."
 msgstr "Højtalerlydstyrke."
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
-#: ../src/record.js:105
+#: ../src/record.js:108
 msgid "Sound Recorder"
 msgstr "Lydoptagelse"
 
@@ -117,12 +117,12 @@ msgstr "Afslut"
 msgid "Sound Recorder started"
 msgstr "Lydoptager startet"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
 #: ../src/application.js:89
 msgid "Recordings"
 msgstr "Lydoptagelser"
 
-#. Translators: Replace "translator-credits" with your names, one name per line */
+#. Translators: Replace "translator-credits" with your names, one name per line
 #: ../src/application.js:154
 msgid "translator-credits"
 msgstr ""
@@ -176,7 +176,7 @@ msgid_plural "%d years ago"
 msgstr[0] "%d år siden"
 msgstr[1] "%d år siden"
 
-#: ../src/info.js:46 ../src/mainWindow.js:508
+#: ../src/info.js:46 ../src/mainWindow.js:512
 msgid "Info"
 msgstr "Info"
 
@@ -184,92 +184,102 @@ msgstr "Info"
 msgid "Cancel"
 msgstr "Annullér"
 
-#: ../src/info.js:69 ../src/mainWindow.js:291
+#. finish button (stop recording)
+#: ../src/info.js:69 ../src/mainWindow.js:301
 msgid "Done"
 msgstr "Færdig"
 
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
 #: ../src/info.js:95
 msgctxt "File Name"
 msgid "Name"
 msgstr "Navn"
 
+#. Source item
 #: ../src/info.js:102
 msgid "Source"
 msgstr "Kilde"
 
+#. Date Modified item
 #: ../src/info.js:111
 msgid "Date Modified"
 msgstr "Ændringsdato"
 
+#. Date Created item
 #: ../src/info.js:117
 msgid "Date Created"
 msgstr "Oprettelsesdato"
 
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
 #: ../src/info.js:128
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Type"
 
-#: ../src/listview.js:120 ../src/listview.js:215
+#: ../src/listview.js:127 ../src/listview.js:222
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/mainWindow.js:111 ../src/mainWindow.js:777
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "Optag"
 
-#: ../src/mainWindow.js:147
+#: ../src/mainWindow.js:148
 msgid "Add Recordings"
 msgstr "Tilføj optagelser"
 
-#: ../src/mainWindow.js:152
+#: ../src/mainWindow.js:153
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Brug <b>Optag</b>-knappen til at optage lyd"
 
-#: ../src/mainWindow.js:277
+#: ../src/mainWindow.js:287
 msgid "Recording…"
 msgstr "Optager…"
 
-#: ../src/mainWindow.js:330
+#: ../src/mainWindow.js:339
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d optaget lyd"
 msgstr[1] "%d optagede lyde"
 
-#: ../src/mainWindow.js:394
+#: ../src/mainWindow.js:401
 msgid "Play"
 msgstr "Afspil"
 
-#: ../src/mainWindow.js:414
+#: ../src/mainWindow.js:421
 msgid "Pause"
 msgstr "Pause"
 
-#: ../src/mainWindow.js:521
+#: ../src/mainWindow.js:525
 msgid "Delete"
 msgstr "Slet"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:836
+#: ../src/mainWindow.js:838
 msgid "Load More"
 msgstr "Indlæs flere"
 
@@ -297,29 +307,29 @@ msgstr "Kan ikke oprette katalog til optagelser."
 msgid "Your audio capture settings are invalid."
 msgstr "Dine lydoptagelsesindstillinger er ugyldige."
 
-#: ../src/record.js:122
+#: ../src/record.js:125
 msgid "Not all elements could be created."
 msgstr "Ikke alle elementer kunne oprettes."
 
-#: ../src/record.js:133
-msgid "Not all of the elements were linked"
-msgstr "Ikke alle elementer blev lænket"
+#: ../src/record.js:137
+msgid "Not all of the elements were linked."
+msgstr "Ikke alle elementer blev lænket."
 
-#: ../src/record.js:158
+#: ../src/record.js:162
 msgid "No Media Profile was set."
 msgstr "Ingen medieprofil blev angivet."
 
-#: ../src/record.js:169
+#: ../src/record.js:173
 msgid ""
 "Unable to set the pipeline \n"
-" to the recording state"
+" to the recording state."
 msgstr ""
 "Kan ikke sætte rørledning \n"
-" til optagetilstand"
+" til optagetilstand."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1"). */
-#: ../src/record.js:318
+#. by the application (for example, "Clip 1").
+#: ../src/record.js:322
 #, javascript-format
 msgid "Clip %d"
 msgstr "Klip %d"
