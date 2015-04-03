@@ -1,14 +1,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2014.
+# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-06-03 02:41+0000\n"
-"PO-Revision-Date: 2014-10-07 21:26+0300\n"
+"POT-Creation-Date: 2015-04-03 08:00+0000\n"
+"PO-Revision-Date: 2015-04-03 19:58+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -62,9 +62,6 @@ msgid "Maps media types to audio encoder preset names."
 msgstr "Attēlo mediju tipus uz audio iekodētāja priekšiestatījumu nosaukuma."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
-#| msgid ""
-#| "Maps media types to audio encoder preset names. If there is no mapping "
-#| "for a media type, the default encoder settings will be used."
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
@@ -73,27 +70,23 @@ msgstr ""
 "iestatīa attēlojuma, tiks izmantots noklusējuma iekodēšanas iestatījumi."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
-#| msgid "Volume level"
 msgid "Microphone volume level"
 msgstr "Mikrofona skaņas līmenis"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
-#| msgid "Volume level."
 msgid "Microphone volume level."
 msgstr "Mikrofona skaņas līmenis."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
-#| msgid "Volume level"
 msgid "Speaker volume level"
 msgstr "Skaļruņa skaņas līmenis"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
-#| msgid "Volume level."
 msgid "Speaker volume level."
 msgstr "Skaļruņa skaņas līmenis."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:153
-#: ../src/record.js:106
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
+#: ../src/record.js:108
 msgid "Sound Recorder"
 msgstr "Skaņu ierakstītājs"
 
@@ -105,41 +98,41 @@ msgstr "Ierakstiet skaņu caur mikrofonu un to atskaņojiet"
 msgid "Audio;Application;Record;"
 msgstr "Audio;Lietotne;Ierakstīšana;"
 
-#: ../src/application.js:41
+#: ../src/application.js:43
 msgid "SoundRecorder"
 msgstr "SoundRecorder"
 
-#: ../src/application.js:48 ../src/preferences.js:38
+#: ../src/application.js:50 ../src/preferences.js:39
 msgid "Preferences"
 msgstr "Iestatījumi"
 
-#: ../src/application.js:51
+#: ../src/application.js:53
 msgid "About"
 msgstr "Par"
 
-#: ../src/application.js:52
+#: ../src/application.js:54
 msgid "Quit"
 msgstr "Iziet"
 
-#: ../src/application.js:81
+#: ../src/application.js:83
 msgid "Sound Recorder started"
 msgstr "Skaņu ierakstīšana ir palaista"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:87
+#: ../src/application.js:89
 msgid "Recordings"
 msgstr "Ieraksti"
 
 #. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:152
+#: ../src/application.js:154
 msgid "translator-credits"
 msgstr "Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:89
 msgid "Yesterday"
 msgstr "Vakar"
 
-#: ../src/fileUtil.js:93
+#: ../src/fileUtil.js:91
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -147,11 +140,11 @@ msgstr[0] "Pirms %d dienas"
 msgstr[1] "Pirms %d dienām"
 msgstr[2] "Pirms %d dienām"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:95
 msgid "Last week"
 msgstr "Pagājušajā nedēļā"
 
-#: ../src/fileUtil.js:99
+#: ../src/fileUtil.js:97
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -159,11 +152,11 @@ msgstr[0] "Pirms %d nedēļas"
 msgstr[1] "Pirms %d nedēļām"
 msgstr[2] "Pirms %d nedēļām"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:101
 msgid "Last month"
 msgstr "Pagājušajā mēnesī"
 
-#: ../src/fileUtil.js:105
+#: ../src/fileUtil.js:103
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -171,11 +164,11 @@ msgstr[0] "Pirms %d mēneša"
 msgstr[1] "Pirms %d mēnešiem"
 msgstr[2] "Pirms %d mēnešiem"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:107
 msgid "Last year"
 msgstr "Pagājušajā gadā"
 
-#: ../src/fileUtil.js:111
+#: ../src/fileUtil.js:109
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -183,61 +176,61 @@ msgstr[0] "Pirms %d gada"
 msgstr[1] "Pirms %d gadiem"
 msgstr[2] "Pirms %d gadiem"
 
-#: ../src/info.js:45 ../src/mainWindow.js:509
+#: ../src/info.js:46 ../src/mainWindow.js:512
 msgid "Info"
 msgstr "Informācija"
 
-#: ../src/info.js:54
+#: ../src/info.js:55
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: ../src/info.js:68 ../src/mainWindow.js:290
+#: ../src/info.js:69 ../src/mainWindow.js:301
 msgid "Done"
 msgstr "Pabeigts"
 
-#: ../src/info.js:94
+#: ../src/info.js:95
 msgctxt "File Name"
 msgid "Name"
 msgstr "Nosaukums"
 
-#: ../src/info.js:101
+#: ../src/info.js:102
 msgid "Source"
 msgstr "Avots"
 
-#: ../src/info.js:110
+#: ../src/info.js:111
 msgid "Date Modified"
 msgstr "Izmaiņu datums"
 
-#: ../src/info.js:116
+#: ../src/info.js:117
 msgid "Date Created"
 msgstr "Izveidošanas datums"
 
-#: ../src/info.js:127
+#: ../src/info.js:128
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tips"
 
-#: ../src/listview.js:122 ../src/listview.js:217
+#: ../src/listview.js:127 ../src/listview.js:222
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H.%M.%S"
 
-#: ../src/mainWindow.js:109 ../src/mainWindow.js:781
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "Ieraksts"
 
-#: ../src/mainWindow.js:145
+#: ../src/mainWindow.js:148
 msgid "Add Recordings"
 msgstr "Pievienot ierakstus"
 
-#: ../src/mainWindow.js:150
+#: ../src/mainWindow.js:153
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Izmantojiet pogu <b>Ierakstīt</b>, lai veiktu skaņas ierakstīšanu"
 
-#: ../src/mainWindow.js:276
+#: ../src/mainWindow.js:287
 msgid "Recording…"
 msgstr "Ieraksta…"
 
-#: ../src/mainWindow.js:330
+#: ../src/mainWindow.js:339
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -245,39 +238,39 @@ msgstr[0] "%d ierakstīta skaņa"
 msgstr[1] "%d ierakstītas skaņas"
 msgstr[2] "%d ierakstītu skaņu"
 
-#: ../src/mainWindow.js:394
+#: ../src/mainWindow.js:401
 msgid "Play"
 msgstr "Atskaņot"
 
-#: ../src/mainWindow.js:415
+#: ../src/mainWindow.js:421
 msgid "Pause"
 msgstr "Pauzēt"
 
-#: ../src/mainWindow.js:522
+#: ../src/mainWindow.js:525
 msgid "Delete"
 msgstr "Dzēst"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:816
+#: ../src/mainWindow.js:814
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:840
+#: ../src/mainWindow.js:838
 msgid "Load More"
 msgstr "Ielādēt vairāk"
 
@@ -285,49 +278,53 @@ msgstr "Ielādēt vairāk"
 msgid "Unable to play recording"
 msgstr "Nevar atskaņot ierakstu"
 
-#: ../src/preferences.js:62
+#: ../src/preferences.js:63
 msgid "Preferred format"
 msgstr "Vēlamais formāts"
 
-#: ../src/preferences.js:70
+#: ../src/preferences.js:71
 msgid "Volume"
 msgstr "Skaļums"
 
-#: ../src/preferences.js:85
+#: ../src/preferences.js:86
 msgid "Microphone"
 msgstr "Mikrofons"
 
-#: ../src/record.js:67
+#: ../src/record.js:66
 msgid "Unable to create Recordings directory."
 msgstr "Nevar izveidot ierakstu direktoriju."
 
-#: ../src/record.js:76
+#: ../src/record.js:75
 msgid "Your audio capture settings are invalid."
 msgstr "Jūsu audio tveršanas iestatījumi ir nederīgi."
 
-#: ../src/record.js:123
+#: ../src/record.js:125
 msgid "Not all elements could be created."
 msgstr "Nevarēja izveidot visus elementus."
 
-#: ../src/record.js:134
-msgid "Not all of the elements were linked"
+#: ../src/record.js:137
+#| msgid "Not all of the elements were linked"
+msgid "Not all of the elements were linked."
 msgstr "Nevarēja sasaistīt visus elementus."
 
-#: ../src/record.js:159
+#: ../src/record.js:162
 msgid "No Media Profile was set."
 msgstr "Netika iestatīts mediju profils."
 
-#: ../src/record.js:170
+#: ../src/record.js:173
+#| msgid ""
+#| "Unable to set the pipeline \n"
+#| " to the recording state"
 msgid ""
 "Unable to set the pipeline \n"
-" to the recording state"
+" to the recording state."
 msgstr ""
 "Nevar iestatīt konveijeru,\n"
-" uz ierakstīšanas stāvokli"
+" uz ierakstīšanas stāvokli."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1"). */
-#: ../src/record.js:319
+#: ../src/record.js:322
 #, javascript-format
 msgid "Clip %d"
 msgstr "Klips %d"
