@@ -1,0 +1,324 @@
+# Aragonese translation for gnome-sound-recorder.
+# Copyright (C) 2015 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-05-04 07:53+0000\n"
+"PO-Revision-Date: 2015-05-04 15:55+0200\n"
+"Last-Translator: Daniel <entaltoaragon@gmail.com>\n"
+"Language-Team: Aragonese <softaragones@googlegroups.com>\n"
+"Language: an\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1430751319.000000\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "Una gravadora de sons sencilla y moderna ta GNOME"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr ""
+"A Gravadora de sons proporciona una interficie sencilla y moderna que ofreix "
+"una traza facil de gravar y reproducir sons. Permite fer una edición basica "
+"y creyar notas de voz."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"A Gravadora de sons chestiona automaticament o proceso d'alzau, por o que no "
+"ha de preocupar-se que a gravación se pierda accidentalment."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Grandaria d'a finestra"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Grandaria d'a finestra (amplaria y altura)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Posición d'a finestra"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Posición d'a finestra (X y Y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+"Mapea os tipos de meyos a nombres de codificadors de son preestablecidos."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
+msgstr ""
+"Mapea os tipos de meyos a nombres de codificadors de son preestablecidos. Si "
+"no existe o mapeo ta un tipo de meyo, s'usará a configuración d'o "
+"codificador predeterminau."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "Libel de volumen d'o microfono"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "Libel de volumen d'o microfono."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Speaker volume level"
+msgstr "Libel de volumen de l'altavoz"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Speaker volume level."
+msgstr "Libel de volumen de l'altavoz."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
+#: ../src/record.js:108
+msgid "Sound Recorder"
+msgstr "Gravadora de sons"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Gravar son con o microfono y reproducir-lo"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "son;aplicación;gravar;"
+
+#: ../src/application.js:43
+msgid "SoundRecorder"
+msgstr "Gravadora de sons"
+
+#: ../src/application.js:50 ../src/preferences.js:39
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: ../src/application.js:53
+msgid "About"
+msgstr "Arredol"
+
+#: ../src/application.js:54
+msgid "Quit"
+msgstr "Salir"
+
+#: ../src/application.js:83
+msgid "Sound Recorder started"
+msgstr "Gravadora de sons encetada"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:89
+msgid "Recordings"
+msgstr "Gravacions"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:154
+msgid "translator-credits"
+msgstr "Daniel Martinez <entaltoaragon@gmail.com>, 2015"
+
+#: ../src/fileUtil.js:89
+msgid "Yesterday"
+msgstr "Ahiere"
+
+#: ../src/fileUtil.js:91
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "Fa %d día"
+msgstr[1] "Fa %d días"
+
+#: ../src/fileUtil.js:95
+msgid "Last week"
+msgstr "Zaguera semana"
+
+#: ../src/fileUtil.js:97
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "Fa %d semana"
+msgstr[1] "Fa %d semanas"
+
+#: ../src/fileUtil.js:101
+msgid "Last month"
+msgstr "Zaguer mes"
+
+#: ../src/fileUtil.js:103
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "Fa %d mes"
+msgstr[1] "Fa %d meses"
+
+#: ../src/fileUtil.js:107
+msgid "Last year"
+msgstr "Zaguer anyo"
+
+#: ../src/fileUtil.js:109
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "fa %d anyo"
+msgstr[1] "fa %d anyos"
+
+#: ../src/info.js:46 ../src/mainWindow.js:512
+msgid "Info"
+msgstr "Información"
+
+#: ../src/info.js:55
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../src/info.js:69 ../src/mainWindow.js:301
+msgid "Done"
+msgstr "Feito"
+
+#: ../src/info.js:95
+msgctxt "File Name"
+msgid "Name"
+msgstr "Nombre"
+
+#: ../src/info.js:102
+msgid "Source"
+msgstr "Fuent"
+
+#: ../src/info.js:111
+msgid "Date Modified"
+msgstr "Calendata de modificación"
+
+#: ../src/info.js:117
+msgid "Date Created"
+msgstr "Calendata de creyación"
+
+#: ../src/info.js:128
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Tipo"
+
+#: ../src/listview.js:127 ../src/listview.js:222
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%d/%m/%Y %H:%M:%S"
+
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+msgid "Record"
+msgstr "Gravar"
+
+#: ../src/mainWindow.js:148
+msgid "Add Recordings"
+msgstr "Adhibir gravacions"
+
+#: ../src/mainWindow.js:153
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Use o botón <b>Gravar</b> ta fer gravacions de son"
+
+#: ../src/mainWindow.js:287
+msgid "Recording…"
+msgstr "Gravando…"
+
+#: ../src/mainWindow.js:339
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d son gravau"
+msgstr[1] "%d sons gravaus"
+
+#: ../src/mainWindow.js:401
+msgid "Play"
+msgstr "Reproducir"
+
+#: ../src/mainWindow.js:421
+msgid "Pause"
+msgstr "Pausar"
+
+#: ../src/mainWindow.js:525
+msgid "Delete"
+msgstr "Eliminar"
+
+#: ../src/mainWindow.js:814
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:814
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:814
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:814
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:814
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:838
+msgid "Load More"
+msgstr "Cargar más"
+
+#: ../src/play.js:89
+msgid "Unable to play recording"
+msgstr "No se puede reproducir a gravación"
+
+#: ../src/preferences.js:63
+msgid "Preferred format"
+msgstr "Formato preferiu"
+
+#: ../src/preferences.js:71
+msgid "Volume"
+msgstr "Volumen"
+
+#: ../src/preferences.js:86
+msgid "Microphone"
+msgstr "Microfono"
+
+#: ../src/record.js:66
+msgid "Unable to create Recordings directory."
+msgstr "No se puede creyar o directorio Gravacions."
+
+#: ../src/record.js:75
+msgid "Your audio capture settings are invalid."
+msgstr "A configuración ta la captura de son no ye valida."
+
+#: ../src/record.js:125
+msgid "Not all elements could be created."
+msgstr "No se podioron creyar totz os elementos."
+
+#: ../src/record.js:137
+msgid "Not all of the elements were linked."
+msgstr "No s'han enlazau totz os elementos."
+
+#: ../src/record.js:162
+msgid "No Media Profile was set."
+msgstr "No s'ha establiu un perfil multimedia."
+
+#: ../src/record.js:173
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state."
+msgstr ""
+"No se podió establir a canyería \n"
+" a o estau d'a gravación."
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:322
+#, javascript-format
+msgid "Clip %d"
+msgstr "Clip %d"
