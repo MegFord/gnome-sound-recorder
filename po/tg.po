@@ -1,0 +1,314 @@
+# Tajik translation for gnome-sound-recorder.
+# Copyright (C) 2015 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Victor Ibragimov <victor.ibragimov@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-"
+"recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-05-15 20:10+0000\n"
+"PO-Revision-Date: 2015-05-16 09:27+0500\n"
+"Language-Team: Tajik <tg@li.org>\n"
+"Language: tg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
+"X-Generator: Poedit 1.7.5\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "Сабткунандаи овози осон ва ҳозиразамон барои GNOME"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a straight-"
+"forward way to record and play audio. It allows you to do basic editing, and create "
+"voice memos."
+msgstr ""
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not need to "
+"worry about accidentally discarding the previous recording."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Андозаи равзана"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Андозаи равзана (бар ва баландӣ)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Мавқеи равзана"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Мавқеи равзана (x ва y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, the "
+"default encoder settings will be used."
+msgstr ""
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "Дараҷаи баландии садои микрофон"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "Дараҷаи баландии садои микрофон."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Speaker volume level"
+msgstr "Дараҷаи баландии садои баландгӯяк"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Speaker volume level."
+msgstr "Дараҷаи баландии садои баландгӯяк"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
+#: ../src/record.js:108
+msgid "Sound Recorder"
+msgstr "Сабткунандаи овоз"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr ""
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Аудио;Барнома;Сабт;"
+
+#: ../src/application.js:43
+msgid "SoundRecorder"
+msgstr "Сабткунандаи овоз"
+
+#: ../src/application.js:50 ../src/preferences.js:39
+msgid "Preferences"
+msgstr "Хусусиятҳо"
+
+#: ../src/application.js:53
+msgid "About"
+msgstr "Дар бораи барнома"
+
+#: ../src/application.js:54
+msgid "Quit"
+msgstr "Баромадан"
+
+#: ../src/application.js:83
+msgid "Sound Recorder started"
+msgstr "Сабткунандаи овоз оғоз ёфт"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:89
+msgid "Recordings"
+msgstr "Сабтҳо"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:154
+msgid "translator-credits"
+msgstr "Victor Ibragimov"
+
+#: ../src/fileUtil.js:89
+msgid "Yesterday"
+msgstr "Дирӯз"
+
+#: ../src/fileUtil.js:91
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d рӯз пеш"
+msgstr[1] "%d рӯз пеш"
+
+#: ../src/fileUtil.js:95
+msgid "Last week"
+msgstr "Ҳафтаи охирин"
+
+#: ../src/fileUtil.js:97
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d ҳафта пеш"
+msgstr[1] "%d ҳафта пеш"
+
+#: ../src/fileUtil.js:101
+msgid "Last month"
+msgstr "Моҳи охирин"
+
+#: ../src/fileUtil.js:103
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d моҳ пеш"
+msgstr[1] "%d моҳ пеш"
+
+#: ../src/fileUtil.js:107
+msgid "Last year"
+msgstr "Соли охирин"
+
+#: ../src/fileUtil.js:109
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d сол пеш"
+msgstr[1] "%d сол пеш"
+
+#: ../src/info.js:46 ../src/mainWindow.js:512
+msgid "Info"
+msgstr "Маълумот"
+
+#: ../src/info.js:55
+msgid "Cancel"
+msgstr "Бекор кардан"
+
+#: ../src/info.js:69 ../src/mainWindow.js:301
+msgid "Done"
+msgstr "Тайёр"
+
+#: ../src/info.js:95
+msgctxt "File Name"
+msgid "Name"
+msgstr "Ном"
+
+#: ../src/info.js:102
+msgid "Source"
+msgstr "Манбаъ"
+
+#: ../src/info.js:111
+msgid "Date Modified"
+msgstr "Санаи тағйирот"
+
+#: ../src/info.js:117
+msgid "Date Created"
+msgstr "Санаи эҷод"
+
+#: ../src/info.js:128
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Навъ"
+
+#: ../src/listview.js:127 ../src/listview.js:222
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%Y-%m-%d %H:%M:%S"
+
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+msgid "Record"
+msgstr "Сабт"
+
+#: ../src/mainWindow.js:148
+msgid "Add Recordings"
+msgstr "Илова кардани сабтҳо"
+
+#: ../src/mainWindow.js:153
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Барои сабт кардани садо, тугмаи <b>Сабт</b>-ро истифода баред"
+
+#: ../src/mainWindow.js:287
+msgid "Recording…"
+msgstr "Дар ҳоли сабт…"
+
+#: ../src/mainWindow.js:339
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%d овоз сабт шуд"
+msgstr[1] "%d овоз сабт шуданд"
+
+#: ../src/mainWindow.js:401
+msgid "Play"
+msgstr "Пахш"
+
+#: ../src/mainWindow.js:421
+msgid "Pause"
+msgstr "Таваққуф"
+
+#: ../src/mainWindow.js:525
+msgid "Delete"
+msgstr "Нест кардан"
+
+#: ../src/mainWindow.js:814
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:814
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:814
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:814
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:814
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:838
+msgid "Load More"
+msgstr "Бештар бор кардан"
+
+#: ../src/play.js:89
+msgid "Unable to play recording"
+msgstr "Сабт пахш намешавад"
+
+#: ../src/preferences.js:63
+msgid "Preferred format"
+msgstr "Формати пазируфта"
+
+#: ../src/preferences.js:71
+msgid "Volume"
+msgstr "Баландии садо"
+
+#: ../src/preferences.js:86
+msgid "Microphone"
+msgstr "Микрофон"
+
+#: ../src/record.js:66
+msgid "Unable to create Recordings directory."
+msgstr "Феҳристи сабтҳо эҷод карда намешавад."
+
+#: ../src/record.js:75
+msgid "Your audio capture settings are invalid."
+msgstr "Танзимоти сабти аудиои шумо нодурустанд."
+
+#: ../src/record.js:125
+msgid "Not all elements could be created."
+msgstr "На ҳамаи унсурҳо метавонанд эҷод карда шаванд."
+
+#: ../src/record.js:137
+msgid "Not all of the elements were linked."
+msgstr "На ҳамаи унсурҳо пайваст шудаанд."
+
+#: ../src/record.js:162
+msgid "No Media Profile was set."
+msgstr "Ягон профили медиа ёфт нашуд."
+
+#: ../src/record.js:173
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state."
+msgstr ""
+"Лӯламаҷро барои вазъияти\n"
+"сабт танзим нашудааст."
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:322
+#, javascript-format
+msgid "Clip %d"
+msgstr "Клипи %d"
