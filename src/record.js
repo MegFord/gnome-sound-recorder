@@ -316,7 +316,7 @@ const BuildFileName = new Lang.Class({
         let dir = Gio.Application.get_default().saveDir;
         if (dir == null) {
             Application.ensure_directory();
-            let dir = Gio.Application.get_default().saveDir;
+            dir = Gio.Application.get_default().saveDir;
         }
         this.dateTime = GLib.DateTime.new_now_local();
         this.clipNumber = Listview.trackNumber + 1;
