@@ -85,6 +85,10 @@ const Application = new Lang.Class({
         this._initAppMenu();
         application = this;
         settings = new Gio.Settings({ schema: 'org.gnome.gnome-sound-recorder' });
+        this.ensure_directory()
+    },
+    
+    ensure_directory: function() {
         /* Translators: "Recordings" here refers to the name of the directory where the application places files */
         let path = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
 

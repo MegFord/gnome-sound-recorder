@@ -314,6 +314,10 @@ const BuildFileName = new Lang.Class({
     buildInitialFilename: function() {
         let fileExtensionName = MainWindow.audioProfile.fileExtensionReturner();
         let dir = Gio.Application.get_default().saveDir;
+        if (dir == null) {
+            Application.ensure_directory();
+            let dir = Gio.Application.get_default().saveDir;
+        }
         this.dateTime = GLib.DateTime.new_now_local();
         this.clipNumber = Listview.trackNumber + 1;
         this.clipNumberString = this.clipNumber.toString();
