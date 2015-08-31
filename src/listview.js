@@ -260,7 +260,7 @@ const Listview = new Lang.Class({
     },
         
     _onDirChanged: function(dirMonitor, file1, file2, eventType) {
-        if (eventType == Gio.FileMonitorEvent.DELETED || 
+        if ((eventType == Gio.FileMonitorEvent.DELETED && !Gio.Application.get_default().saveDir.equal(file1)) || 
             (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT 
                 && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
             stopVal = EnumeratorState.ACTIVE;
@@ -274,8 +274,14 @@ const Listview = new Lang.Class({
             }
         }
         
-        if (eventType == Gio.FileMonitorEvent.CREATED)
-            startRecording = true;    
+        else if (eventType == Gio.FileMonitorEvent.CREATED) {
+            startRecording = true;
+        }
+          
+        else if (eventType == Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
+            Gio.Application.get_default().ensure_directory(); 
+            this._saveDir = Gio.Application.get_default().saveDir; 
+        }  
     },
     
     _getCapsForList: function(info) {
