@@ -1,0 +1,315 @@
+# Persian translation for gnome-sound-recorder.
+# Copyright (C) 2015 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Arash Mousavi <mousavi.arash@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-"
+"recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-09-11 08:20+0000\n"
+"PO-Revision-Date: 2015-09-15 21:59+0430\n"
+"Language-Team: Persian <fa@li.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "یک ضبط صوت مدرن و ساده برای گنوم"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a straight-"
+"forward way to record and play audio. It allows you to do basic editing, and create "
+"voice memos."
+msgstr ""
+"«ضبط صدا» یک واسط ساده و مدرن را برای ضبط و پخش آسان صدا فراهم می‌کند. همچنین به شما "
+"اجازه‌ی ویرایش ساده و ساخت یادگاری‌های صوتی را می‌دهد."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not need to "
+"worry about accidentally discarding the previous recording."
+msgstr ""
+"«ضبط صدا» بصورت خودکار روند ذخیره را انجام می‌دهد تا شما نگران دورانداختن اتفاقی "
+"پرونده پیشین نباشید."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "اندازه پنجره"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "اندازه پنجره (عرض و ارتفاع)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "مکان پنجره"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "مکان پنجره (x و y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Maps media types to audio encoder preset names."
+msgstr "نوع رسانه را به نام‌های پیش تنظیم شده‌ی رمزنگار صوتی تطبیق می‌دهد."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, the "
+"default encoder settings will be used."
+msgstr ""
+"نوع رسانه را به نام‌های پیش تنظیم شده‌ی رمزنگار صوتی تطبیق می‌دهد. اگر هیچ مورد منطبقی "
+"نباشد، رمزنگار پیش‌فرض مورد استفاده قرار می‌گیرد."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "سطح بلندی صدا میکروفن"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "سطح بلندی صدا میکروفن."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Speaker volume level"
+msgstr "سطح بلندی صدا بلندگو"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Speaker volume level."
+msgstr "سطح بلندی صدا بلندگو."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:159
+#: ../src/record.js:107
+msgid "Sound Recorder"
+msgstr "ضبط صدا"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "صدا را از طریق میکروفن ضبط و دوباره پخش کن"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audio;Application;Record;صوت;برنامه;ضبط;"
+
+#: ../src/application.js:43
+msgid "SoundRecorder"
+msgstr "ضبط صدا"
+
+#: ../src/application.js:50 ../src/preferences.js:39
+msgid "Preferences"
+msgstr "ترجیحات"
+
+#: ../src/application.js:53
+msgid "About"
+msgstr "درباره"
+
+#: ../src/application.js:54
+msgid "Quit"
+msgstr "خروج"
+
+#: ../src/application.js:83
+msgid "Sound Recorder started"
+msgstr "ضبط صدا شروع شد"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#: ../src/application.js:93
+msgid "Recordings"
+msgstr "ضبط شده‌ها"
+
+#. Translators: Replace "translator-credits" with your names, one name per line */
+#: ../src/application.js:158
+msgid "translator-credits"
+msgstr "آرش موسوی <mousavi.arash@gmail.com>"
+
+#: ../src/fileUtil.js:89
+msgid "Yesterday"
+msgstr "دیروز"
+
+#: ../src/fileUtil.js:91
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%Id روز پیش"
+
+#: ../src/fileUtil.js:95
+msgid "Last week"
+msgstr "هفته پیش"
+
+#: ../src/fileUtil.js:97
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%Id هفته پیش"
+
+#: ../src/fileUtil.js:101
+msgid "Last month"
+msgstr "ماه پیش"
+
+#: ../src/fileUtil.js:103
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%Id ماه قبل"
+
+#: ../src/fileUtil.js:107
+msgid "Last year"
+msgstr "سال پیش"
+
+#: ../src/fileUtil.js:109
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%Id سال قبل"
+
+#: ../src/info.js:46 ../src/mainWindow.js:512
+msgid "Info"
+msgstr "اطلاعات"
+
+#: ../src/info.js:55
+msgid "Cancel"
+msgstr "لغو"
+
+#: ../src/info.js:69 ../src/mainWindow.js:301
+msgid "Done"
+msgstr "اعمال"
+
+#: ../src/info.js:95
+msgctxt "File Name"
+msgid "Name"
+msgstr "نام"
+
+#: ../src/info.js:102
+msgid "Source"
+msgstr "منبع"
+
+#: ../src/info.js:111
+msgid "Date Modified"
+msgstr "تاریخ تغییر"
+
+#: ../src/info.js:117
+msgid "Date Created"
+msgstr "تاریخ ساخت"
+
+#: ../src/info.js:128
+msgctxt "Media Type"
+msgid "Type"
+msgstr "نوع"
+
+#: ../src/listview.js:127 ../src/listview.js:222
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%OY-%Om-%Od %OH:%OM:%OS"
+
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+msgid "Record"
+msgstr "ضبط"
+
+#: ../src/mainWindow.js:148
+msgid "Add Recordings"
+msgstr "اضافه کردن ضبط شده‌ها"
+
+#: ../src/mainWindow.js:153
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "از دکمه <b>ضبط</b> برای شروع ضبط استفاده کنید"
+
+#: ../src/mainWindow.js:287
+msgid "Recording…"
+msgstr "درحال ضبط..."
+
+#: ../src/mainWindow.js:339
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "%Id صدای ضبط شده"
+
+#: ../src/mainWindow.js:401
+msgid "Play"
+msgstr "پخش"
+
+#: ../src/mainWindow.js:421
+msgid "Pause"
+msgstr "مکث"
+
+#: ../src/mainWindow.js:525
+msgid "Delete"
+msgstr "حذف"
+
+#: ../src/mainWindow.js:814
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:814
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:814
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:814
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:814
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:838
+msgid "Load More"
+msgstr "بارکردن بیشتر"
+
+#: ../src/play.js:89
+msgid "Unable to play recording"
+msgstr "نمی‌توان صدا را پخش کرد"
+
+#: ../src/preferences.js:63
+msgid "Preferred format"
+msgstr "قالب پیش‌فرض"
+
+#: ../src/preferences.js:71
+msgid "Volume"
+msgstr "بلندی صدا"
+
+#: ../src/preferences.js:86
+msgid "Microphone"
+msgstr "میکروفن"
+
+#: ../src/record.js:65
+msgid "Unable to create Recordings directory."
+msgstr "امکان ایجاد شاخه صداها نبود."
+
+#: ../src/record.js:74
+msgid "Your audio capture settings are invalid."
+msgstr "تنظیمات مربوط به گرفتن صوت نامعتبر است."
+
+#: ../src/record.js:124
+msgid "Not all elements could be created."
+msgstr "امکان ساخت تمام عناصر نبود."
+
+#: ../src/record.js:136
+msgid "Not all of the elements were linked."
+msgstr "امکان پیوند کردن تمام عناصر نبود."
+
+#: ../src/record.js:161
+msgid "No Media Profile was set."
+msgstr "هیچ مجموعه‌تنظیماتی برای رسانه‌ها تنظیم نشده است."
+
+#: ../src/record.js:172
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state."
+msgstr ""
+"امکان تنظیم pipeline\n"
+" بر روی وضعیت ضبط نبود"
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1"). */
+#: ../src/record.js:321
+#, javascript-format
+msgid "Clip %d"
+msgstr "قطعه %Id"
