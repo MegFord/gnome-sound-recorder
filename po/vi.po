@@ -1,0 +1,328 @@
+# Vietnamese translations for gnome-sound-recorder package
+# Bản dịch Tiếng Việt dành cho gói gnome-sound-recorder.
+# Copyright © 2015 GNOME i18n Project for Vietnamese.
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-sound-recorder master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-09-29 20:41+0000\n"
+"PO-Revision-Date: 2015-09-30 14:26+0700\n"
+"Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
+"Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "Một ứng dụng thu âm hiện đại mà đơn giản dành cho môi trường GNOME"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid ""
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
+msgstr ""
+"Thu âm đưa ra một giao diện đơn giản và hiện đại cái mà đưa ra cách dễ dàng "
+"để mà ghi âm và phát lại. Nó cho phép bạn thực hiện các thao tác sửa cơ bản, "
+"và tạo ghi chú bằng giọng nói."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"Úng dụng thu âm tự động xử lý quá trình ghi lại do đó bạn không cần phải lo "
+"lắng về các tai nạn loại bỏ bản ghi trước đó."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
+msgid "Window size"
+msgstr "Kích cỡ cửa sổ"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
+msgid "Window size (width and height)."
+msgstr "Kích thước cửa sổ (rộng và cao)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
+msgid "Window position"
+msgstr "Vị trí cửa sổ"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
+msgid "Window position (x and y)."
+msgstr "Vị trí cửa sổ (x và y)."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
+msgid "Maps media types to audio encoder preset names."
+msgstr ""
+"Ánh xạ các kiểu đa phương tiện thành các tên bộ giải mã âm thanh đặt trước."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
+msgid ""
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
+msgstr ""
+"Ánh xạ các kiểu đa phương tiện thành các tên bộ giải mã âm thanh đặt trước. "
+"Nếu không có tập hợp ánh xạ nào, các cài đặt giải mã mặc định sẽ được dùng."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Microphone volume level"
+msgstr "Mức âm lượng của micrô"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid "Microphone volume level."
+msgstr "Mức âm lượng của micrô."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+msgid "Speaker volume level"
+msgstr "Âm lượng loa"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+msgid "Speaker volume level."
+msgstr "Âm lượng loa."
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:159
+#: ../src/record.js:107
+msgid "Sound Recorder"
+msgstr "Thu âm"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
+msgid "Record sound via the microphone and play it back"
+msgstr "Thu âm thông qua micrô rồi phát lại nó"
+
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
+msgid "Audio;Application;Record;"
+msgstr "Audio;Âm;thanh;am;Application;Record;ghi;thu;"
+
+#: ../src/application.js:43
+msgid "SoundRecorder"
+msgstr "BộThuÂm"
+
+#: ../src/application.js:50 ../src/preferences.js:39
+msgid "Preferences"
+msgstr "Tùy thích"
+
+#: ../src/application.js:53
+msgid "About"
+msgstr "Giới thiệu"
+
+#: ../src/application.js:54
+msgid "Quit"
+msgstr "Thoát"
+
+#: ../src/application.js:83
+msgid "Sound Recorder started"
+msgstr "Bộ thu âm đã khởi chạy"
+
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/application.js:93
+msgid "Recordings"
+msgstr "Bản thu"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/application.js:158
+msgid "translator-credits"
+msgstr "Nhóm Việt hóa GNOME <gnome-vi-list@gnome.org>"
+
+#: ../src/fileUtil.js:89
+msgid "Yesterday"
+msgstr "Hôm qua"
+
+#: ../src/fileUtil.js:91
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] "%d ngày trước"
+
+#: ../src/fileUtil.js:95
+msgid "Last week"
+msgstr "Tuần trước"
+
+#: ../src/fileUtil.js:97
+#, javascript-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] "%d tuần trước"
+
+#: ../src/fileUtil.js:101
+msgid "Last month"
+msgstr "Tháng trước"
+
+#: ../src/fileUtil.js:103
+#, javascript-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] "%d tháng trước"
+
+#: ../src/fileUtil.js:107
+msgid "Last year"
+msgstr "Năm trước"
+
+#: ../src/fileUtil.js:109
+#, javascript-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] "%d năm trước"
+
+#: ../src/info.js:46 ../src/mainWindow.js:512
+msgid "Info"
+msgstr "Thông tin"
+
+#: ../src/info.js:55
+msgid "Cancel"
+msgstr "Thôi"
+
+#. finish button (stop recording)
+#: ../src/info.js:69 ../src/mainWindow.js:301
+msgid "Done"
+msgstr "Xong"
+
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:95
+msgctxt "File Name"
+msgid "Name"
+msgstr "Tên"
+
+#. Source item
+#: ../src/info.js:102
+msgid "Source"
+msgstr "Nguồn"
+
+#. Date Modified item
+#: ../src/info.js:111
+msgid "Date Modified"
+msgstr "Ngày sửa đổi"
+
+#. Date Created item
+#: ../src/info.js:117
+msgid "Date Created"
+msgstr "Ngày tạo"
+
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:128
+msgctxt "Media Type"
+msgid "Type"
+msgstr "Kiểu"
+
+#: ../src/listview.js:127 ../src/listview.js:222
+msgid "%Y-%m-%d %H:%M:%S"
+msgstr "%H:%M:%S %d-%m-%Y"
+
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+msgid "Record"
+msgstr "Thu"
+
+#: ../src/mainWindow.js:148
+msgid "Add Recordings"
+msgstr "Thêm bản thu"
+
+#: ../src/mainWindow.js:153
+msgid "Use the <b>Record</b> button to make sound recordings"
+msgstr "Dùng nút <b>Thu</b> để có thể tạo bản thu âm"
+
+#: ../src/mainWindow.js:287
+msgid "Recording…"
+msgstr "Đang thu…"
+
+#: ../src/mainWindow.js:339
+#, javascript-format
+msgid "%d Recorded Sound"
+msgid_plural "%d Recorded Sounds"
+msgstr[0] "Đã thu %d bản thu âm"
+
+#: ../src/mainWindow.js:401
+msgid "Play"
+msgstr "Phát"
+
+#: ../src/mainWindow.js:421
+msgid "Pause"
+msgstr "Tạm dừng"
+
+#: ../src/mainWindow.js:525
+msgid "Delete"
+msgstr "Xóa"
+
+#: ../src/mainWindow.js:814
+msgid "Ogg Vorbis"
+msgstr "Ogg Vorbis"
+
+#: ../src/mainWindow.js:814
+msgid "Opus"
+msgstr "Opus"
+
+#: ../src/mainWindow.js:814
+msgid "FLAC"
+msgstr "FLAC"
+
+#: ../src/mainWindow.js:814
+msgid "MP3"
+msgstr "MP3"
+
+#: ../src/mainWindow.js:814
+msgid "MOV"
+msgstr "MOV"
+
+#: ../src/mainWindow.js:838
+msgid "Load More"
+msgstr "Tải thêm"
+
+#: ../src/play.js:89
+msgid "Unable to play recording"
+msgstr "Không thể phát lại bản thu"
+
+#: ../src/preferences.js:63
+msgid "Preferred format"
+msgstr "Định dạng ưa dùng"
+
+#: ../src/preferences.js:71
+msgid "Volume"
+msgstr "Âm lượng"
+
+#: ../src/preferences.js:86
+msgid "Microphone"
+msgstr "Micrô"
+
+#: ../src/record.js:65
+msgid "Unable to create Recordings directory."
+msgstr "Không thể tạo thư mục thu."
+
+#: ../src/record.js:74
+msgid "Your audio capture settings are invalid."
+msgstr "Các cài đặt thu âm không hợp lệ."
+
+#: ../src/record.js:124
+msgid "Not all elements could be created."
+msgstr "Không phải tất cả các phần tử được tạo."
+
+#: ../src/record.js:136
+msgid "Not all of the elements were linked."
+msgstr "Không phải tất cả các phần tử được liên kết."
+
+#: ../src/record.js:161
+msgid "No Media Profile was set."
+msgstr "Không hồ sơ đa phương tiện nào được đặt."
+
+#: ../src/record.js:172
+msgid ""
+"Unable to set the pipeline \n"
+" to the recording state."
+msgstr ""
+"Không thể đặt đường ống dẫn \n"
+" đến trạng thái thu."
+
+#. Translators: ""Clip %d"" is the default name assigned to a file created
+#. by the application (for example, "Clip 1").
+#: ../src/record.js:321
+#, javascript-format
+msgid "Clip %d"
+msgstr "Clíp %d"
