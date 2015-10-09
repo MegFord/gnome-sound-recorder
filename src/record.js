@@ -30,6 +30,7 @@ const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 
+const Application = imports.application;
 const AudioProfile = imports.audioProfile;
 const MainWindow = imports.mainWindow;
 const Listview = imports.listview;
