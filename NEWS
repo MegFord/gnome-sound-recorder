@@ -1,31 +1,35 @@
+ 3.18.1
+ ======
+ Translation updates.
+
  3.17.92
  =======
- 
+
  3.17.91
  =======
  Translation updates.
- 
+
  3.17.90
  =======
- Translation updates. 
- 
+ Translation updates.
+
  3.17.2
  =======
- Fix Bug 744989 
-  
+ Fix Bug 744989
+
  3.17.1
  =======
- Translation updates.  
-  
+ Translation updates.
+
  3.16.0
  =======
  Translation updates.
- 
+
  3.15.92
  =======
  Translation updates.
  Waveform bugfixes.
- 
+
  3.15.91
  =======
  Translation updates.
@@ -39,7 +43,7 @@
  Improve window size.
  Improve file name assignment.
  Replace margin_right and margin_left with margin_start and margin_end.
- 
+
  3.15.3
  =======
 
