@@ -247,7 +247,16 @@ const Record = new Lang.Class({
                             let value = Math.pow(10, val/20);
                             this.peak = value;
 
-                            this.absoluteTime = this.clock.get_time();
+
+                            if  (this.clock == null) {
+                                this.clock = this.pipeline.get_clock();
+                            }
+                            try {
+                                this.absoluteTime = this.clock.get_time();
+                            } catch(error) {
+                                this.absoluteTime = 0;
+                            }
+
 
                             if (this.baseTime == 0)
                                 this.baseTime = this.absoluteTime;

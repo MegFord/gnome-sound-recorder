@@ -188,7 +188,16 @@ const Play = new Lang.Class({
             MainWindow.view.setLabel(0);
         }
 
-        let absoluteTime = this.clock.get_time();
+        let absoluteTime = 0;
+
+        if  (this.clock == null) {
+            this.clock = this.play.get_clock();
+        }
+        try {
+            absoluteTime = this.clock.get_time();
+        } catch(error) {
+            // no-op
+        }
 
         if (this.baseTime == 0)
             this.baseTime = absoluteTime;
