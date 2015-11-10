@@ -1,14 +1,15 @@
 # Occitan translation for gnome-sound-recorder.
 # Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
+# Cédric Valmary <cvalmary@yahoo.fr>, 2015.
 # Cédric Valmary (Tot en òc) <cvalmary@yahoo.fr>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-05-23 20:06+0000\n"
-"PO-Revision-Date: 2015-05-23 22:30+0200\n"
+"POT-Creation-Date: 2015-05-24 08:09+0000\n"
+"PO-Revision-Date: 2015-10-31 08:43+0200\n"
 "Last-Translator: Cédric Valmary (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Tot en òc (totenoc.eu)\n"
 "Language: oc\n"
@@ -130,7 +131,7 @@ msgstr "Enregistraments"
 #. Translators: Replace "translator-credits" with your names, one name per line */
 #: ../src/application.js:158
 msgid "translator-credits"
-msgstr "Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>, 2015."
+msgstr "Cédric Valmary (totenoc.eu) <cvalmary@yahoo.fr>."
 
 #: ../src/fileUtil.js:89
 msgid "Yesterday"
