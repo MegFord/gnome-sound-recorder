@@ -39,52 +39,37 @@ const InfoDialog = new Lang.Class({
         this.widget = new Gtk.Dialog ({ resizable: false,
                                         modal: true,
                                         destroy_with_parent: true,
-                                        default_width: 400,
-                                        hexpand: true });
+                                        default_width: 400 });
         this.widget.set_transient_for(Gio.Application.get_default().get_active_window());
-        let header = new Gtk.HeaderBar({ hexpand: true,
-					 title: _("Info") });
+        let header = new Gtk.HeaderBar({ title: _("Info") });
         header.set_show_close_button(false);
         this.widget.set_titlebar(header);
-        
-        let cancelToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                          spacing: 0 });
-        cancelToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        header.pack_start(cancelToolbar);
-        
-        let cancelButton = new Gtk.Button({ label: _("Cancel"),
-                                            margin_bottom: 4,
-                                            margin_top: 6,
-                                            margin_start: 6 });
+
+        let cancelButton = new Gtk.Button({ label: _("Cancel") });
         cancelButton.connect("clicked", Lang.bind(this, this.onCancelClicked));
-        cancelToolbar.pack_end(cancelButton, false, true, 0);
-        cancelButton.show();
-        cancelToolbar.show();
-        
-        let buttonToolbar = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL,
-                                          spacing: 0 });
-        buttonToolbar.get_style_context().add_class(Gtk.STYLE_CLASS_LINKED);
-        header.pack_end(buttonToolbar);
-        
-        let button = new Gtk.Button({ label: _("Done"),
-                                      margin_bottom: 4,
-                                      margin_end: 6,
-                                      margin_top: 6 });
-        button.connect("clicked", Lang.bind(this, this.onDoneClicked));
-        buttonToolbar.pack_end(button, false, true, 0);
-        button.show();
-        buttonToolbar.show();      
+
+        header.pack_start(cancelButton);
+
+        let doneButton = new Gtk.Button({ label: _("Done") });
+        doneButton.connect("clicked", Lang.bind(this, this.onDoneClicked));
+
+        header.pack_end(doneButton);
+
+        let headerBarSizeGroup = new Gtk.SizeGroup({ mode: Gtk.SizeGroupMode.HORIZONTAL });
+
+        headerBarSizeGroup.add_widget(cancelButton);
+        headerBarSizeGroup.add_widget(doneButton);
 
         let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.VERTICAL,
                                    row_homogeneous: true,
                                    column_homogeneous: true,
                                    halign: Gtk.Align.CENTER,
                                    row_spacing: 6,
-                                   column_spacing: 24,
-                                   margin_bottom: 12,
-                                   margin_end: 24,
-                                   margin_start: 24,
-                                   margin_top: 12 });
+                                   column_spacing: 12,
+                                   margin_bottom: 18,
+                                   margin_end: 18,
+                                   margin_start: 18,
+                                   margin_top: 18 });
 
         let contentArea = this.widget.get_content_area();
         contentArea.pack_start(grid, true, true, 2);
@@ -102,7 +87,7 @@ const InfoDialog = new Lang.Class({
         this._source = new Gtk.Label({ label: _("Source"),
                                        halign: Gtk.Align.END });
         this._source.get_style_context ().add_class('dim-label');
-            
+
         if (fileName.appName != null) {
             grid.add(this._source);
         }
@@ -117,7 +102,7 @@ const InfoDialog = new Lang.Class({
         this._dateCreatedLabel = new Gtk.Label({ label: _("Date Created"),
                                                  halign: Gtk.Align.END });
         this._dateCreatedLabel.get_style_context ().add_class('dim-label');
-        
+
         if (fileName.dateCreated != null) {
             grid.add(this._dateCreatedLabel);
         }
@@ -170,14 +155,14 @@ const InfoDialog = new Lang.Class({
 
         this.widget.show_all();
     },
-    
+
     onDoneClicked: function() {
         let newFileName = this._fileNameEntry.get_text();
         this._file.set_display_name_async(newFileName, GLib.PRIORITY_DEFAULT, null, null);
         this.widget.destroy();
     },
-    
+
     onCancelClicked: function() {
-        this.widget.destroy();    
-    }  
+        this.widget.destroy();
+    }
 });
