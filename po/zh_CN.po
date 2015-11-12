@@ -9,20 +9,19 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-09-03 00:14+0000\n"
-"PO-Revision-Date: 2014-09-23 19:18+0800\n"
-"Last-Translator: Yunqiang Su <wzssyqa@gmail.com>\n"
-"Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
+"POT-Creation-Date: 2015-11-09 22:20+0000\n"
+"PO-Revision-Date: 2015-11-12 18:16+0800\n"
+"Last-Translator: liushuyu <liushuyu_011@126.com>\n"
+"Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.9\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 msgid "A simple, modern sound recorder for GNOME"
-msgstr "GNOME 的一个简单，现代的录音机。"
+msgstr "用于 GNOME 的一个简单，现代的录音机。"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid ""
@@ -83,8 +82,8 @@ msgstr "扬声器音量级别"
 msgid "Speaker volume level."
 msgstr "扬声器音量级别。"
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
-#: ../src/record.js:105
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:159
+#: ../src/record.js:108
 msgid "Sound Recorder"
 msgstr "录音机"
 
@@ -116,18 +115,19 @@ msgstr "退出"
 msgid "Sound Recorder started"
 msgstr "录音机已经开启"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:89
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/application.js:93
 msgid "Recordings"
 msgstr "录音"
 
-#. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:154
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/application.js:158
 msgid "translator-credits"
 msgstr ""
 "tuhaihe <1132321739qq@gmail.com>, 2013.\n"
 "YunQiang Su <wzssyqa@gmail.com>, 2014.\n"
-"Sphinx Jiang <yishanj13@gmail.com>, 2014."
+"Sphinx Jiang <yishanj13@gmail.com>, 2014.\n"
+"liushuyu <liushuyu_011@126.com>, 2015."
 
 #: ../src/fileUtil.js:89
 msgid "Yesterday"
@@ -169,7 +169,7 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d 年前"
 
-#: ../src/info.js:46 ../src/mainWindow.js:508
+#: ../src/info.js:46 ../src/mainWindow.js:512
 msgid "Info"
 msgstr "信息"
 
@@ -177,91 +177,101 @@ msgstr "信息"
 msgid "Cancel"
 msgstr "取消"
 
-#: ../src/info.js:69 ../src/mainWindow.js:291
+#. finish button (stop recording)
+#: ../src/info.js:69 ../src/mainWindow.js:301
 msgid "Done"
 msgstr "完成"
 
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
 #: ../src/info.js:95
 msgctxt "File Name"
 msgid "Name"
 msgstr "名称"
 
+#. Source item
 #: ../src/info.js:102
 msgid "Source"
 msgstr "来源"
 
+#. Date Modified item
 #: ../src/info.js:111
 msgid "Date Modified"
 msgstr "修改日期"
 
+#. Date Created item
 #: ../src/info.js:117
 msgid "Date Created"
 msgstr "创建日期"
 
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
 #: ../src/info.js:128
 msgctxt "Media Type"
 msgid "Type"
 msgstr "类型"
 
-#: ../src/listview.js:120 ../src/listview.js:215
+#: ../src/listview.js:127 ../src/listview.js:222
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/mainWindow.js:111 ../src/mainWindow.js:777
+#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "录音"
 
-#: ../src/mainWindow.js:147
+#: ../src/mainWindow.js:148
 msgid "Add Recordings"
 msgstr "添加录音"
 
-#: ../src/mainWindow.js:152
+#: ../src/mainWindow.js:153
 msgid "Use the <b>Record</b> button to make sound recordings"
-msgstr "使用 <b>录音</b> 键创建录音"
+msgstr "使用 <b>录音</b> 按钮创建录音"
 
-#: ../src/mainWindow.js:277
+#: ../src/mainWindow.js:287
 msgid "Recording…"
 msgstr "正在录音..."
 
-#: ../src/mainWindow.js:330
+#: ../src/mainWindow.js:339
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "%d 段录音"
 
-#: ../src/mainWindow.js:394
+#: ../src/mainWindow.js:401
 msgid "Play"
 msgstr "播放"
 
-#: ../src/mainWindow.js:414
+#: ../src/mainWindow.js:421
 msgid "Pause"
 msgstr "暂停"
 
-#: ../src/mainWindow.js:521
+#: ../src/mainWindow.js:525
 msgid "Delete"
 msgstr "删除"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:812
+#: ../src/mainWindow.js:814
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:836
+#: ../src/mainWindow.js:838
 msgid "Load More"
 msgstr "加载更多"
 
@@ -289,29 +299,29 @@ msgstr "无法创建录音目录。"
 msgid "Your audio capture settings are invalid."
 msgstr "您的音频捕捉设置无效。"
 
-#: ../src/record.js:122
+#: ../src/record.js:125
 msgid "Not all elements could be created."
-msgstr "并非全部的元素皆可创建。"
+msgstr "并非所有元素皆可创建。"
 
-#: ../src/record.js:133
-msgid "Not all of the elements were linked"
-msgstr "并非全部的元素皆已链接"
+#: ../src/record.js:137
+msgid "Not all of the elements were linked."
+msgstr "并非所有元素皆已链接"
 
-#: ../src/record.js:158
+#: ../src/record.js:162
 msgid "No Media Profile was set."
 msgstr "未设置媒体配置文件。"
 
-#: ../src/record.js:169
+#: ../src/record.js:173
 msgid ""
 "Unable to set the pipeline \n"
-" to the recording state"
+" to the recording state."
 msgstr ""
-"无法将管道线\n"
+"无法将流水线\n"
 "设为录音状态。"
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1"). */
-#: ../src/record.js:318
+#. by the application (for example, "Clip 1").
+#: ../src/record.js:331
 #, javascript-format
 msgid "Clip %d"
 msgstr "片段 %d"
