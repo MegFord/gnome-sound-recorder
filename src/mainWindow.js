@@ -172,11 +172,12 @@ const MainView = new Lang.Class({
         this.add_titled(groupGrid, name, "View");
     },
 
-    onPlayStopClicked: function() {
-        this.activeState = play.getPipeStates();
-        let listRow = this.listBox.get_selected_row();
+    onPlayStopClicked: function(button) {
+        let row = button.get_parent().get_parent();
+        this.listBox.select_row(row);
 
-        if (this.activeState == PipelineStates.PLAYING) {
+
+        if (play.getPipeStates() == PipelineStates.PLAYING) {
             play.stopPlaying();
             let rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this,
@@ -282,14 +283,14 @@ const MainView = new Lang.Class({
 
         this.recordTextLabel = new Gtk.Label({ margin_bottom: 4,
                                                margin_end: 6,
-                                               margin_start: 6, 
+                                               margin_start: 6,
                                                margin_top: 6 });
         this.recordTextLabel.label = _("Recording…");
         this._boxRecord.pack_start(this.recordTextLabel, false, true, 0);
 
         this.recordTimeLabel = new Gtk.Label({ margin_bottom: 4,
                                                margin_end: 6,
-                                               margin_start: 6, 
+                                               margin_start: 6,
                                                margin_top: 6});
 
         this._boxRecord.pack_start(this.recordTimeLabel, false, true, 0);
@@ -304,7 +305,7 @@ const MainView = new Lang.Class({
                                           hexpand: true,
                                           margin_bottom: 4,
                                           margin_end: 6,
-                                          margin_start: 6, 
+                                          margin_start: 6,
                                           margin_top: 6 });
         stopRecord.get_style_context().add_class('text-button');
         stopRecord.connect("clicked", Lang.bind(this, this.onRecordStopClicked));
@@ -604,9 +605,8 @@ const MainView = new Lang.Class({
                              }));
                     }
                 }));
-                this.activeState = play.getPipeStates();
 
-                if (this.activeState == PipelineStates.PLAYING || this.activeState == PipelineStates.PAUSED) {
+                if (play.getPipeStates() == PipelineStates.PLAYING || play.getPipeStates()== PipelineStates.PAUSED) {
                     play.stopPlaying();
                 }
             }
@@ -685,7 +685,6 @@ const MainView = new Lang.Class({
 
     setLabel: function(time) {
         this.time = time
-        this.playPipeState = play.getPipeStates();
 
         this.timeLabelString = this._formatTime(time);
 
@@ -698,9 +697,8 @@ const MainView = new Lang.Class({
     },
 
     onPause: function(listRow) {
-        this.activeState = play.getPipeStates();
 
-        if (this.activeState == PipelineStates.PLAYING) {
+        if (play.getPipeStates() == PipelineStates.PLAYING) {
             play.pausePlaying();
             let rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this,
@@ -720,10 +718,9 @@ const MainView = new Lang.Class({
     },
 
     onPlayPauseToggled: function(listRow, selFile) {
-        this.activeState = play.getPipeStates();
         setVisibleID = ActiveArea.PLAY;
 
-        if (this.activeState != PipelineStates.PLAYING) {
+        if (play.getPipeStates() != PipelineStates.PLAYING) {
             play.startPlaying();
 
             let rowWidget = listRow.get_child(this.widget);
@@ -760,7 +757,7 @@ const MainView = new Lang.Class({
                     }
                 }));
 
-            if (this.activeState != PipelineStates.PAUSED) {
+            if (play.getPipeStates() != PipelineStates.PAUSED) {
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
             }
         }
