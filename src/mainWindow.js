@@ -172,13 +172,10 @@ const MainView = new Lang.Class({
         this.add_titled(groupGrid, name, "View");
     },
 
-    onPlayStopClicked: function(button) {
-        let row = button.get_parent().get_parent();
-        this.listBox.select_row(row);
-
-
+    onPlayStopClicked: function() {
         if (play.getPipeStates() == PipelineStates.PLAYING) {
             play.stopPlaying();
+            let listRow = this.listBox.get_selected_row();
             let rowWidget = listRow.get_child(this.widget);
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
@@ -403,8 +400,9 @@ const MainView = new Lang.Class({
                 this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
                 this._playListButton.hide();
                 this._playListButton.connect('clicked', Lang.bind(this,
-                    function(){
-                        let row = this.listBox.get_selected_row();
+                    function(button){
+                        let row = button.get_parent().get_parent();
+                        this.listBox.select_row(row);
                         play.passSelected(row);
                         let gridForName = row.get_child();
                         let idx = parseInt(gridForName.name);
