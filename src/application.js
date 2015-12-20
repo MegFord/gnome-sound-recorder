@@ -93,7 +93,7 @@ const Application = new Lang.Class({
         let path = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
 
         // Ensure Recordings directory
-        GLib.mkdir_with_parents(path, 0755);
+        GLib.mkdir_with_parents(path, parseInt("0755", 8));
         this.saveDir = Gio.file_new_for_path(path);
     },
 
