@@ -15,6 +15,11 @@
       <summary>Maps media types to audio encoder preset names.</summary>
       <description>Maps media types to audio encoder preset names. If there is no mapping set, the default encoder settings will be used.</description>
     </key>
+    <key name="channel" type="i">
+      <default>1</default>
+      <summary>Available channels</summary>
+      <description>Maps available channels. If there is not no mapping set, stereo channel will be used by default.</description>
+    </key>
     <key name="mic-volume" type="d">
       <default>0.75</default>
       <summary>Microphone volume level</summary>

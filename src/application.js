@@ -128,6 +128,15 @@ const Application = new Lang.Class({
     setPreferences: function(profileName) {
         settings.set_int("media-type-preset", profileName);
     },
+
+    getChannelsPreferences: function() {
+        let set = settings.get_int("channel");
+        return set;
+    },
+
+    setChannelsPreferences: function(channel) {
+        settings.set_int("channel", channel);
+    },
      
     getMicVolume: function() {
         let micVolLevel = settings.get_double("mic-volume");

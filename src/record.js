@@ -46,6 +46,11 @@ const ErrState = {
     ON: 1
 }
 
+const Channels = {
+    MONO: 0,
+    STEREO: 1
+}
+
 const _TENTH_SEC = 100000000;
 
 let errorDialogState;
@@ -81,7 +86,7 @@ const Record = new Lang.Class({
         this.pipeline.add(this.srcElement);
         this.audioConvert = Gst.ElementFactory.make("audioconvert", "audioConvert");
         this.pipeline.add(this.audioConvert);
-        this.caps = Gst.Caps.from_string("audio/x-raw, channels=2");
+        this.caps = Gst.Caps.from_string("audio/x-raw, channels=" + this._getChannels());
         this.clock = this.pipeline.get_clock();
         this.recordBus = this.pipeline.get_bus();
         this.recordBus.add_signal_watch();
@@ -290,6 +295,27 @@ const Record = new Lang.Class({
         if (this.volume) {
             this.volume.set_volume(GstAudio.StreamVolumeFormat.CUBIC, value);
         }
+    },
+
+    _getChannels: function() {
+
+        let channels = null;
+        let channelsPref = Application.application.getChannelsPreferences();
+
+        switch(channelsPref) {
+        case Channels.MONO:
+            channels = 1;
+            break;
+
+        case Channels.STEREO:
+            channels = 2;
+            break;
+
+        default:
+            channels = 2;
+        }
+
+        return channels;
     },
 
     _showErrorDialog: function(errorStrOne, errorStrTwo) {
