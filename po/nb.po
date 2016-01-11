@@ -1,14 +1,14 @@
 # Norwegian bokmål translation of gnome-sound-recorder.
 # Copyright (C) 2002-2005 Free Software Foundation, Inc.
-# Kjartan Maraas  <kmaraas@gnome.org>, 2014-2015.
+# Kjartan Maraas  <kmaraas@gnome.org>, 2014-2016.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-sound-recorder 3.15.x\n"
+"Project-Id-Version: gnome-sound-recorder 3.19.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-09 19:01+0100\n"
-"PO-Revision-Date: 2015-02-09 19:02+0100\n"
+"POT-Creation-Date: 2016-01-11 07:39+0100\n"
+"PO-Revision-Date: 2016-01-11 07:39+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -68,23 +68,33 @@ msgstr ""
 "kobling er satt vil forvalgte innstillinger for koding bli brukt."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Available channels"
+msgstr "Tilgjengelige kanaler"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr "Sjekker tilgjengelige kanaler. Hvis ingen ting annet er satt vil stereo brukes som forvalg."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
 msgstr "Volumnivå for mikrofon"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
 msgid "Microphone volume level."
 msgstr "Volumnivå for mikrofon."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
 msgid "Speaker volume level"
 msgstr "Volumnivå for høyttaler"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Volumnivå for høyttaler."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
-#: ../src/record.js:105
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
 msgid "Sound Recorder"
 msgstr "Lydopptaker"
 
@@ -100,7 +110,7 @@ msgstr "Lyd;Program;Opptak;"
 msgid "SoundRecorder"
 msgstr "Lydopptak"
 
-#: ../src/application.js:50 ../src/preferences.js:39
+#: ../src/application.js:50 ../src/preferences.js:40
 msgid "Preferences"
 msgstr "Brukervalg"
 
@@ -117,12 +127,12 @@ msgid "Sound Recorder started"
 msgstr "Lydopptak startet"
 
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
-#: ../src/application.js:89
+#: ../src/application.js:93
 msgid "Recordings"
 msgstr "Opptak"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: ../src/application.js:154
+#: ../src/application.js:167
 msgid "translator-credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
@@ -170,46 +180,46 @@ msgid_plural "%d years ago"
 msgstr[0] "%d år siden"
 msgstr[1] "%d år siden"
 
-#: ../src/info.js:46 ../src/mainWindow.js:512
+#: ../src/info.js:44 ../src/mainWindow.js:515
 msgid "Info"
 msgstr "Informasjon"
 
-#: ../src/info.js:55
+#: ../src/info.js:48
 msgid "Cancel"
 msgstr "Avbryt"
 
 #. finish button (stop recording)
-#: ../src/info.js:69 ../src/mainWindow.js:301
+#: ../src/info.js:53 ../src/mainWindow.js:314
 msgid "Done"
 msgstr "Ferdig"
 
 #. File Name item
 #. Translators: "File Name" is the label next to the file name
 #. in the info dialog
-#: ../src/info.js:95
+#: ../src/info.js:80
 msgctxt "File Name"
 msgid "Name"
 msgstr "Navn"
 
 #. Source item
-#: ../src/info.js:102
+#: ../src/info.js:87
 msgid "Source"
 msgstr "Kilde"
 
 #. Date Modified item
-#: ../src/info.js:111
+#: ../src/info.js:96
 msgid "Date Modified"
 msgstr "Endringsdato"
 
 #. Date Created item
-#: ../src/info.js:117
+#: ../src/info.js:102
 msgid "Date Created"
 msgstr "Dato laget"
 
 #. Media type item
 #. Translators: "Type" is the label next to the media type
 #. (Ogg Vorbis, AAC, ...) in the info dialog
-#: ../src/info.js:128
+#: ../src/info.js:113
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Type"
@@ -218,23 +228,23 @@ msgstr "Type"
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d-%m-%Y %H.%M.%S"
 
-#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "Ta opp"
 
-#: ../src/mainWindow.js:148
+#: ../src/mainWindow.js:149
 msgid "Add Recordings"
 msgstr "Legg til opptak"
 
-#: ../src/mainWindow.js:153
+#: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Bruk <b>Ta opp</b>-knappen for å lage lydopptak"
 
-#: ../src/mainWindow.js:287
+#: ../src/mainWindow.js:300
 msgid "Recording…"
 msgstr "Tar opp …"
 
-#: ../src/mainWindow.js:339
+#: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -245,11 +255,11 @@ msgstr[1] "%d innspilte lyder"
 msgid "Play"
 msgstr "Spill av"
 
-#: ../src/mainWindow.js:421
+#: ../src/mainWindow.js:422
 msgid "Pause"
 msgstr "Pause"
 
-#: ../src/mainWindow.js:525
+#: ../src/mainWindow.js:530
 msgid "Delete"
 msgstr "Slett"
 
@@ -274,6 +284,14 @@ msgid "MOV"
 msgstr "MOV"
 
 #: ../src/mainWindow.js:838
+msgid "Mono"
+msgstr "Mono"
+
+#: ../src/mainWindow.js:838
+msgid "Stereo"
+msgstr "Stereo"
+
+#: ../src/mainWindow.js:862
 msgid "Load More"
 msgstr "Last flere"
 
@@ -281,39 +299,43 @@ msgstr "Last flere"
 msgid "Unable to play recording"
 msgstr "Kan ikke spille av opptak"
 
-#: ../src/preferences.js:63
+#: ../src/preferences.js:64
 msgid "Preferred format"
 msgstr "Foretrukket format"
 
-#: ../src/preferences.js:71
+#: ../src/preferences.js:72
+msgid "Default mode"
+msgstr "Forvalgt modus"
+
+#: ../src/preferences.js:80
 msgid "Volume"
 msgstr "Volum"
 
-#: ../src/preferences.js:86
+#: ../src/preferences.js:95
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:66
+#: ../src/record.js:71
 msgid "Unable to create Recordings directory."
 msgstr "Kan ikke lage katalog for opptak."
 
-#: ../src/record.js:75
+#: ../src/record.js:80
 msgid "Your audio capture settings are invalid."
 msgstr "Innstillingene for opptak av lyd er ikke gyldige."
 
-#: ../src/record.js:122
+#: ../src/record.js:130
 msgid "Not all elements could be created."
 msgstr "Ikke alle elementer ble laget."
 
-#: ../src/record.js:133
+#: ../src/record.js:142
 msgid "Not all of the elements were linked."
 msgstr "Ikke alle elementer var lenket."
 
-#: ../src/record.js:158
+#: ../src/record.js:167
 msgid "No Media Profile was set."
 msgstr "Ingen medieprofil var satt."
 
-#: ../src/record.js:169
+#: ../src/record.js:178
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -323,7 +345,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:318
+#: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
 msgstr "Klipp %d"
