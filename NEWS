@@ -1,3 +1,12 @@
+ 3.19.4
+ ======
+ Assign an icon to the application window by Ernestas Kulik.
+ Enable recodings in mono by Miguel Vaello Martínez.
+ Set the correct application icon in the 'About' dialog by Miguel Vaello Martínez.
+ Fix deprecated file creation mask by Miguel Vaello Martínez.
+ Play when button is pressed even if row is not selected.
+ Translation updates.
+
  3.18.2
  ======
  Fix for Bug 756993.
