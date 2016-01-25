@@ -22,4 +22,5 @@
   <url type="homepage">https://wiki.gnome.org/Design/Apps/SoundRecorder</url>
   <updatecontact>meg387_at_gmail.com</updatecontact>
   <project_group>GNOME</project_group>
+  <translation type="gettext">gnome-sound-recorder</translation>
 </application>
