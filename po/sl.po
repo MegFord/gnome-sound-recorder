@@ -2,15 +2,15 @@
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 #
-# Martin Srebotnjak <<miles@filmsi.net>, 2013-2015.
+# Martin Srebotnjak <<miles@filmsi.net>, 2013-2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-28 08:45+0000\n"
-"PO-Revision-Date: 2015-02-28 21:18+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-"
+"recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-02-01 22:29+0100\n"
+"PO-Revision-Date: 2016-02-01 22:30+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
 "Language: sl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
@@ -28,21 +28,20 @@ msgstr "Snemalnik zvoka za GNOME"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid ""
-"Sound Recorder provides a simple and modern interface that provides a "
-"straight-forward way to record and play audio. It allows you to do basic "
-"editing, and create voice memos."
+"Sound Recorder provides a simple and modern interface that provides a straight-"
+"forward way to record and play audio. It allows you to do basic editing, and create "
+"voice memos."
 msgstr ""
-"Snemalnik zvoka je enostaven in sodoben program, ki omogoča hitro snemanje "
-"in predvajanje  zvoka. Omogoča enostavnejše urejanje in ustvarjanje zvočnih "
-"opomnikov."
+"Snemalnik zvoka je enostaven in sodoben program, ki omogoča hitro snemanje in "
+"predvajanje  zvoka. Omogoča enostavnejše urejanje in ustvarjanje zvočnih opomnikov."
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
-"Sound Recorder automatically handles the saving process so that you do not "
-"need to worry about accidentally discarding the previous recording."
+"Sound Recorder automatically handles the saving process so that you do not need to "
+"worry about accidentally discarding the previous recording."
 msgstr ""
-"Snemalnik zvoka samodejno upravlja shranjevanje, zato ni treba skrbeti, da "
-"bi posnetek izgubili."
+"Snemalnik zvoka samodejno upravlja shranjevanje, zato ni treba skrbeti, da bi "
+"posnetek izgubili."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -66,31 +65,42 @@ msgstr "Preslika vrste zapisa na nastavljena imena zvočnega kodirnika."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
 msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping set, "
-"the default encoder settings will be used."
+"Maps media types to audio encoder preset names. If there is no mapping set, the "
+"default encoder settings will be used."
 msgstr ""
-"Preslika vrste zapisa na nastavljena imena zvočnega kodirnika. Če za vrsto "
-"posnetka preslikava ni določena, bodo uporabljene privzete nastavitve "
-"kodirnika."
+"Preslika vrste zapisa na nastavljena imena zvočnega kodirnika. Če za vrsto posnetka "
+"preslikava ni določena, bodo uporabljene privzete nastavitve kodirnika."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Available channels"
+msgstr "Razpoložljivi kanali"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will be "
+"used by default."
+msgstr ""
+"Izpis razpoložljivih kanalov. Če nabor ni določen, bo privzeto uporabljen stereo "
+"kanal."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
 msgstr "Raven glasnosti mikrofona"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
 msgid "Microphone volume level."
 msgstr "Raven glasnosti mikrofona."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
 msgid "Speaker volume level"
 msgstr "Raven glasnosti zvočnikov"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Raven glasnosti zvočnikov."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
-#: ../src/record.js:105
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
 msgid "Sound Recorder"
 msgstr "Snemalnik zvoka"
 
@@ -106,7 +116,7 @@ msgstr "Zvok;Program;Snemaj;"
 msgid "SoundRecorder"
 msgstr "Snemalnik zvoka"
 
-#: ../src/application.js:50 ../src/preferences.js:39
+#: ../src/application.js:50 ../src/preferences.js:40
 msgid "Preferences"
 msgstr "Možnosti"
 
@@ -122,13 +132,13 @@ msgstr "Končaj"
 msgid "Sound Recorder started"
 msgstr "Snemalnik zvoka je zagnan"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:89
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/application.js:93
 msgid "Recordings"
 msgstr "Posnetki"
 
-#. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:154
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/application.js:167
 msgid "translator-credits"
 msgstr "Matej Urbančič"
 
@@ -184,36 +194,46 @@ msgstr[1] "Pred %d letom"
 msgstr[2] "Pred %d letoma"
 msgstr[3] "Pred %d leti"
 
-#: ../src/info.js:46 ../src/mainWindow.js:512
+#: ../src/info.js:44 ../src/mainWindow.js:515
 msgid "Info"
 msgstr "Podrobnosti"
 
-#: ../src/info.js:55
+#: ../src/info.js:48
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: ../src/info.js:69 ../src/mainWindow.js:301
+#. finish button (stop recording)
+#: ../src/info.js:53 ../src/mainWindow.js:314
 msgid "Done"
 msgstr "Dokončano"
 
-#: ../src/info.js:95
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:80
 msgctxt "File Name"
 msgid "Name"
 msgstr "Ime"
 
-#: ../src/info.js:102
+#. Source item
+#: ../src/info.js:87
 msgid "Source"
 msgstr "Vir"
 
-#: ../src/info.js:111
+#. Date Modified item
+#: ../src/info.js:96
 msgid "Date Modified"
 msgstr "Datum spremembe"
 
-#: ../src/info.js:117
+#. Date Created item
+#: ../src/info.js:102
 msgid "Date Created"
 msgstr "Datum nastanka"
 
-#: ../src/info.js:128
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:113
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Vrsta"
@@ -222,23 +242,23 @@ msgstr "Vrsta"
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%d-%m-%Y %H:%M:%S"
 
-#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "Snemaj"
 
-#: ../src/mainWindow.js:148
+#: ../src/mainWindow.js:149
 msgid "Add Recordings"
 msgstr "Dodaj posnetke"
 
-#: ../src/mainWindow.js:153
+#: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Uporabite gumb <b>Posnemi</b> za snemanje posnetkov"
 
-#: ../src/mainWindow.js:287
+#: ../src/mainWindow.js:300
 msgid "Recording…"
 msgstr "Poteka snemanje ..."
 
-#: ../src/mainWindow.js:339
+#: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -251,11 +271,11 @@ msgstr[3] "%d posneti zvoki"
 msgid "Play"
 msgstr "Predvajaj"
 
-#: ../src/mainWindow.js:421
+#: ../src/mainWindow.js:422
 msgid "Pause"
 msgstr "Premor"
 
-#: ../src/mainWindow.js:525
+#: ../src/mainWindow.js:530
 msgid "Delete"
 msgstr "Izbriši"
 
@@ -280,6 +300,14 @@ msgid "MOV"
 msgstr "MOV"
 
 #: ../src/mainWindow.js:838
+msgid "Mono"
+msgstr "Mono"
+
+#: ../src/mainWindow.js:838
+msgid "Stereo"
+msgstr "Stereo"
+
+#: ../src/mainWindow.js:862
 msgid "Load More"
 msgstr "Naloži več"
 
@@ -287,39 +315,43 @@ msgstr "Naloži več"
 msgid "Unable to play recording"
 msgstr "Glasbe ni mogoče predvajati"
 
-#: ../src/preferences.js:63
+#: ../src/preferences.js:64
 msgid "Preferred format"
 msgstr "Prednostni zapis"
 
-#: ../src/preferences.js:71
+#: ../src/preferences.js:72
+msgid "Default mode"
+msgstr "Privzeti način"
+
+#: ../src/preferences.js:80
 msgid "Volume"
 msgstr "Glasnost"
 
-#: ../src/preferences.js:86
+#: ../src/preferences.js:95
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:66
+#: ../src/record.js:71
 msgid "Unable to create Recordings directory."
 msgstr "Mape Posnetki ni mogoče ustvariti!"
 
-#: ../src/record.js:75
+#: ../src/record.js:80
 msgid "Your audio capture settings are invalid."
 msgstr "Določene so neveljavne nastavitve zajemanja zvoka."
 
-#: ../src/record.js:122
+#: ../src/record.js:130
 msgid "Not all elements could be created."
 msgstr "Vseh predmetov ni mogoče ustvariti."
 
-#: ../src/record.js:133
+#: ../src/record.js:142
 msgid "Not all of the elements were linked."
 msgstr "Vsi predmeti niso povezani."
 
-#: ../src/record.js:158
+#: ../src/record.js:167
 msgid "No Media Profile was set."
 msgstr "Ni nastavljenega profila posnetkov."
 
-#: ../src/record.js:169
+#: ../src/record.js:178
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -328,8 +360,8 @@ msgstr ""
 " na stanje snemanja."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1"). */
-#: ../src/record.js:318
+#. by the application (for example, "Clip 1").
+#: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
 msgstr "Izrez %d"
@@ -338,12 +370,11 @@ msgstr "Izrez %d"
 #~ msgstr "Priljubljena vrsta zapisa za kodiranje zvoka ob snemanju"
 
 #~ msgid ""
-#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
-#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
-#~ "type."
+#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' for Ogg "
+#~ "Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
 #~ msgstr ""
-#~ "Priljubljena vrsta zapisa za kodiranje zvoka ob snemanju. Primer: 'audio/"
-#~ "x-vorbis' za Ogg Vorbis ali 'audio/mpeg' za MP3. To ni vrsta MIME."
+#~ "Priljubljena vrsta zapisa za kodiranje zvoka ob snemanju. Primer: 'audio/x-"
+#~ "vorbis' za Ogg Vorbis ali 'audio/mpeg' za MP3. To ni vrsta MIME."
 
 #~ msgid "Unable to set the playbin to the playing state."
 #~ msgstr "Predvajalnika ni mogoče nastaviti za predvajanje."
