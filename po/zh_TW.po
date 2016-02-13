@@ -6,17 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-"
-"recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-20 08:41+0000\n"
-"PO-Revision-Date: 2015-02-21 12:12+0800\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-02-09 10:24+0000\n"
+"PO-Revision-Date: 2016-02-10 10:48+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.8.6\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
@@ -25,17 +25,17 @@ msgstr "簡易且現代的 GNOME 錄音機"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid ""
-"Sound Recorder provides a simple and modern interface that provides a straight-"
-"forward way to record and play audio. It allows you to do basic editing, and create "
-"voice memos."
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
 msgstr ""
-"錄音機提供簡易且現代的介面，讓使用者可以直覺的錄音、播放。它有基本的編輯功能，也能建"
-"立錄音備忘錄。"
+"錄音機提供簡易且現代的介面，讓使用者可以直覺的錄音、播放。它有基本的編輯功"
+"能，也能建立錄音備忘錄。"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
-"Sound Recorder automatically handles the saving process so that you do not need to "
-"worry about accidentally discarding the previous recording."
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
 msgstr "錄音機會自動處理儲存過程，因此您無需擔憂意外丟失先前的錄製項目。"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
@@ -60,29 +60,40 @@ msgstr "將媒體類型對應至音訊編碼器預置名稱。"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
 msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping set, the "
-"default encoder settings will be used."
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
 msgstr ""
-"將媒體類型對應至音訊編碼器預置名稱。若沒有對應的設定，則使用預設的編碼器設定值。"
+"將媒體類型對應至音訊編碼器預置名稱。若沒有對應的設定，則使用預設的編碼器設定"
+"值。"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Available channels"
+msgstr "可用的聲道"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr "對映可用的聲道。如果不是無對映組，預設會使用立體聲。"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
 msgstr "麥克風音量等級"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
 msgid "Microphone volume level."
 msgstr "麥克風音量等級。"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
 msgid "Speaker volume level"
 msgstr "喇叭音量等級"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "喇叭音量等級。"
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
-#: ../src/record.js:105
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
 msgid "Sound Recorder"
 msgstr "錄音機"
 
@@ -98,7 +109,7 @@ msgstr "Audio;Application;Record;音訊;錄音;錄製;應用程式;"
 msgid "SoundRecorder"
 msgstr "錄音機"
 
-#: ../src/application.js:50 ../src/preferences.js:39
+#: ../src/application.js:50 ../src/preferences.js:40
 msgid "Preferences"
 msgstr "偏好設定"
 
@@ -114,13 +125,13 @@ msgstr "退出"
 msgid "Sound Recorder started"
 msgstr "錄音機已啟動"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files */
-#: ../src/application.js:89
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/application.js:93
 msgid "Recordings"
 msgstr "錄製品"
 
-#. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:154
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/application.js:167
 msgid "translator-credits"
 msgstr "Cheng-Chia Tseng <pswo10680@gmail.com>, 2014."
 
@@ -164,36 +175,46 @@ msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d 年前"
 
-#: ../src/info.js:46 ../src/mainWindow.js:512
+#: ../src/info.js:44 ../src/mainWindow.js:515
 msgid "Info"
 msgstr "資訊"
 
-#: ../src/info.js:55
+#: ../src/info.js:48
 msgid "Cancel"
 msgstr "取消"
 
-#: ../src/info.js:69 ../src/mainWindow.js:301
+#. finish button (stop recording)
+#: ../src/info.js:53 ../src/mainWindow.js:314
 msgid "Done"
 msgstr "完成"
 
-#: ../src/info.js:95
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:80
 msgctxt "File Name"
 msgid "Name"
 msgstr "名稱"
 
-#: ../src/info.js:102
+#. Source item
+#: ../src/info.js:87
 msgid "Source"
 msgstr "來源"
 
-#: ../src/info.js:111
+#. Date Modified item
+#: ../src/info.js:96
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: ../src/info.js:117
+#. Date Created item
+#: ../src/info.js:102
 msgid "Date Created"
 msgstr "建立日期"
 
-#: ../src/info.js:128
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:113
 msgctxt "Media Type"
 msgid "Type"
 msgstr "類型"
@@ -202,23 +223,23 @@ msgstr "類型"
 msgid "%Y-%m-%d %H:%M:%S"
 msgstr "%Y-%m-%d %H:%M:%S"
 
-#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:779
 msgid "Record"
 msgstr "錄製"
 
-#: ../src/mainWindow.js:148
+#: ../src/mainWindow.js:149
 msgid "Add Recordings"
 msgstr "加入錄製品"
 
-#: ../src/mainWindow.js:153
+#: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "使用 <b>錄製</b> 按鈕錄音"
 
-#: ../src/mainWindow.js:287
+#: ../src/mainWindow.js:300
 msgid "Recording…"
 msgstr "錄製中…"
 
-#: ../src/mainWindow.js:339
+#: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -228,11 +249,11 @@ msgstr[0] "%d 份錄音"
 msgid "Play"
 msgstr "播放"
 
-#: ../src/mainWindow.js:421
+#: ../src/mainWindow.js:422
 msgid "Pause"
 msgstr "暫停"
 
-#: ../src/mainWindow.js:525
+#: ../src/mainWindow.js:530
 msgid "Delete"
 msgstr "刪除"
 
@@ -257,6 +278,14 @@ msgid "MOV"
 msgstr "MOV"
 
 #: ../src/mainWindow.js:838
+msgid "Mono"
+msgstr "單聲道"
+
+#: ../src/mainWindow.js:838
+msgid "Stereo"
+msgstr "立體聲"
+
+#: ../src/mainWindow.js:862
 msgid "Load More"
 msgstr "載入更多"
 
@@ -264,39 +293,43 @@ msgstr "載入更多"
 msgid "Unable to play recording"
 msgstr "無法播放錄製品"
 
-#: ../src/preferences.js:63
+#: ../src/preferences.js:64
 msgid "Preferred format"
 msgstr "偏好格式"
 
-#: ../src/preferences.js:71
+#: ../src/preferences.js:72
+msgid "Default mode"
+msgstr "預設模式"
+
+#: ../src/preferences.js:80
 msgid "Volume"
 msgstr "音量"
 
-#: ../src/preferences.js:86
+#: ../src/preferences.js:95
 msgid "Microphone"
 msgstr "麥克風"
 
-#: ../src/record.js:66
+#: ../src/record.js:71
 msgid "Unable to create Recordings directory."
 msgstr "無法建立錄製品目錄。"
 
-#: ../src/record.js:75
+#: ../src/record.js:80
 msgid "Your audio capture settings are invalid."
 msgstr "您的音訊捕捉設定無效。"
 
-#: ../src/record.js:122
+#: ../src/record.js:130
 msgid "Not all elements could be created."
 msgstr "並非所有元素都可建立。"
 
-#: ../src/record.js:133
+#: ../src/record.js:142
 msgid "Not all of the elements were linked."
 msgstr "並非所有元素都可連結。"
 
-#: ../src/record.js:158
+#: ../src/record.js:167
 msgid "No Media Profile was set."
 msgstr "並未設定 Media Profile。"
 
-#: ../src/record.js:169
+#: ../src/record.js:178
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -305,8 +338,8 @@ msgstr ""
 " 錄製狀態。"
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1"). */
-#: ../src/record.js:318
+#. by the application (for example, "Clip 1").
+#: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
 msgstr "剪輯 %d"
@@ -315,11 +348,12 @@ msgstr "剪輯 %d"
 #~ msgstr "錄音時所偏好的音訊編碼媒體類型"
 
 #~ msgid ""
-#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' for Ogg "
-#~ "Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
+#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
+#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
+#~ "type."
 #~ msgstr ""
-#~ "錄音時所偏好的音訊編碼媒體類型。舉例來說，「audio/x-vorbis」為 Ogg Vorbis，或"
-#~ "「audio/mpeg」為 MP3。這不是 MIME 類型。"
+#~ "錄音時所偏好的音訊編碼媒體類型。舉例來說，「audio/x-vorbis」為 Ogg "
+#~ "Vorbis，或「audio/mpeg」為 MP3。這不是 MIME 類型。"
 
 #~ msgid "Finish"
 #~ msgstr "完成"
