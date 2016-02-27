@@ -12,7 +12,7 @@ nobase_icon_DATA = \
 EXTRA_DIST = $(nobase_icon_DATA) \
 	hicolor/gnome-sound-recorder.svg
 
-gtk_update_icon_cache = gtk-update-icon-cache -f $(datadir)/icons/hicolor; 
+gtk_update_icon_cache = gtk-update-icon-cache -f $(datadir)/icons/hicolor
 
 install-data-hook: update-icon-cache
 uninstall-hook: update-icon-cache
