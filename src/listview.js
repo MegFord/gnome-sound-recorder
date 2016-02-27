@@ -121,17 +121,19 @@ const Listview = new Lang.Class({
                                 let timeVal = file.get_modification_time();
                                 let date = GLib.DateTime.new_from_timeval_local(timeVal);
                                 let dateModifiedSortString = date.format("%Y%m%d%H%M%S");
-                                let dateModifiedDisplayString = MainWindow.displayTime.getDisplayTime(timeVal);
+                                let dateTime = GLib.DateTime.new_from_timeval_local(timeVal);
+                                let dateModifiedDisplayString = MainWindow.displayTime.getDisplayTime(dateTime);
                                 let dateCreatedYes = file.has_attribute("time::created");
+                                let dateCreatedString = null;
                                 if (this.dateCreatedYes) {
                                     let dateCreatedVal = file.get_attribute_uint64("time::created");
                                     let dateCreated = GLib.DateTime.new_from_timeval_local(dateCreatedVal);
-                                    this.dateCreatedString = dateCreated.format(_("%Y-%m-%d %H:%M:%S"));
+                                    dateCreatedString = MainWindow.displayTime.getDisplayTime(dateCreated);
                                 }
 
                                 fileInfo =
                                     fileInfo.concat({ appName: null,
-                                                      dateCreated: null,
+                                                      dateCreated: dateCreatedString,
                                                       dateForSort: dateModifiedSortString,
                                                       dateModified: dateModifiedDisplayString,
                                                       duration: null,
@@ -219,9 +221,8 @@ const Listview = new Lang.Class({
                 let dateTimeCreatedString = dateTimeTag.to_g_date_time();
 
                 if (dateTimeCreatedString) {
-                    this.dateCreatedString = dateTimeCreatedString.format(_("%Y-%m-%d %H:%M:%S"));
+                    allFilesInfo[this.idx].dateCreated = MainWindow.displayTime.getDisplayTime(dateTimeCreatedString);
                 }
-                allFilesInfo[this.idx].dateCreated = this.dateCreatedString;
             }
 
             if (appString == GLib.get_application_name()) {
