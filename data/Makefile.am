@@ -33,7 +33,6 @@ CLEANFILES = \
 	$(apps_DATA) \
 	*.valid \
 	gschemas.compiled \
-	application.css \
 	$(NULL)
 
 # For uninstalled use
