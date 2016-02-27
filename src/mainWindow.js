@@ -696,6 +696,21 @@ const MainView = new Lang.Class({
         }
     },
 
+    setNameLabel: function(newName, oldName, index) {
+        let selected = this.listBox.get_row_at_index(index);
+        let rowWidget = selected.get_child(oldName);
+        rowWidget.foreach(Lang.bind(this,
+            function(child) {
+
+                if (child.name == "FileNameLabel") {
+                    let name = child.get_text();
+                    let markup = ('<b>'+ newName + '</b>');
+                    child.label = markup;
+                }
+             }));
+        rowWidget.set_name(newName);
+    },
+
     onPause: function(listRow) {
         let activeState = play.getPipeStates();
 
