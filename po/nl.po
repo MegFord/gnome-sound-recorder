@@ -3,26 +3,27 @@
 # This file is distributed under the same license as the gnome-music package.
 #
 # Erwin Poeze <donnut@outlook.com>, 2013.
-# Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2014.
+# Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2014, 2016.
+# Nathan Follens <nthn@unseen.is>, 2015-2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-music 3.10\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-10-09 20:01+0000\n"
-"PO-Revision-Date: 2015-04-03 12:27+0100\n"
-"Last-Translator: Nathan Follens <nthn@unseen.is>\n"
-"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"POT-Creation-Date: 2016-02-28 00:46+0000\n"
+"PO-Revision-Date: 2016-03-03 10:02+0100\n"
+"Last-Translator: Hannie Dumoleyn <hannie@ubuntu-nl.org>\n"
+"Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 msgid "A simple, modern sound recorder for GNOME"
-msgstr "Een eenvoudige, moderne geluidsrecorder voor GNOME"
+msgstr "Een eenvoudige, moderne geluidsrecorder voor Gnome"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid ""
@@ -39,7 +40,7 @@ msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
-"Geluidsrecorder zorgt automatisch voor het proces van opslaan zodat u zich "
+"Geluidsrecorder zorgt automatisch voor het proces van opslaan, zodat u zich "
 "geen zorgen hoeft te maken over het per ongeluk verwijderen van de vorige "
 "opname."
 
@@ -73,29 +74,41 @@ msgstr ""
 "worden gebruikt."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Available channels"
+msgstr "Beschikbare kanalen"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr ""
+"Wijst beschikbare kanalen toe. Indien geen toewijzing is ingesteld wordt "
+"standaard het stereokanaal gebruikt."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
 msgstr "Geluidsniveau microfoon"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
 msgid "Microphone volume level."
 msgstr "Geluidsniveau microfoon."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
 msgid "Speaker volume level"
 msgstr "Geluidsniveau speaker"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Geluidsniveau speaker."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:159
-#: ../src/record.js:108
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
 msgid "Sound Recorder"
 msgstr "Geluidsrecorder"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
-msgstr "Geluid opnemen via de microfoon en het afspelen"
+msgstr "Geluid via de microfoon opnemen en het afspelen"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
@@ -105,7 +118,7 @@ msgstr "Audio;Application;Toepassing;Record;Opnemen;"
 msgid "SoundRecorder"
 msgstr "Geluidsrecorder"
 
-#: ../src/application.js:50 ../src/preferences.js:39
+#: ../src/application.js:50 ../src/preferences.js:40
 msgid "Preferences"
 msgstr "Voorkeuren"
 
@@ -124,125 +137,123 @@ msgstr "Geluidsopname gestart"
 #. Translators: "Recordings" here refers to the name of the directory where the application places files
 #: ../src/application.js:93
 msgid "Recordings"
-msgstr "Recordings"
+msgstr "Opnames"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: ../src/application.js:158
+#: ../src/application.js:167
 msgid "translator-credits"
 msgstr ""
 "Erwin Poeze\n"
 "Hannie Dumoleyn\n"
-"Nathan Follens"
+"Nathan Follens\n"
+"\n"
+"Kijk voor meer info op http://nl.gnome.org/"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Gisteren"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag geleden"
 msgstr[1] "%d dagen geleden"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Vorige week"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d week geleden"
 msgstr[1] "%d weken geleden"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Vorige maand"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d maand geleden"
 msgstr[1] "%d maanden geleden"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Vorig jaar"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d jaar geleden"
 msgstr[1] "%d jaar geleden"
 
-#: ../src/info.js:46 ../src/mainWindow.js:512
+#: ../src/info.js:44 ../src/mainWindow.js:515
 msgid "Info"
 msgstr "Info"
 
-#: ../src/info.js:55
+#: ../src/info.js:48
 msgid "Cancel"
 msgstr "Annuleren"
 
 #. finish button (stop recording)
-#: ../src/info.js:69 ../src/mainWindow.js:301
+#: ../src/info.js:53 ../src/mainWindow.js:314
 msgid "Done"
 msgstr "Klaar"
 
 #. File Name item
 #. Translators: "File Name" is the label next to the file name
 #. in the info dialog
-#: ../src/info.js:95
+#: ../src/info.js:80
 msgctxt "File Name"
 msgid "Name"
 msgstr "Naam"
 
 #. Source item
-#: ../src/info.js:102
+#: ../src/info.js:87
 msgid "Source"
 msgstr "Bron"
 
 #. Date Modified item
-#: ../src/info.js:111
+#: ../src/info.js:96
 msgid "Date Modified"
 msgstr "Datum gewijzigd"
 
 #. Date Created item
-#: ../src/info.js:117
+#: ../src/info.js:102
 msgid "Date Created"
 msgstr "Aanmaakdatum"
 
 #. Media type item
 #. Translators: "Type" is the label next to the media type
 #. (Ogg Vorbis, AAC, ...) in the info dialog
-#: ../src/info.js:128
+#: ../src/info.js:113
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Type"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d-%m-%Y %H:%M:%S"
-
-#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Opnemen"
 
-#: ../src/mainWindow.js:148
+#: ../src/mainWindow.js:149
 msgid "Add Recordings"
 msgstr "Opnames toevoegen"
 
-#: ../src/mainWindow.js:153
+#: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "De knop <b>Opnemen</b> gebruiken om geluidsopnames te maken"
 
-#: ../src/mainWindow.js:287
+#: ../src/mainWindow.js:300
 msgid "Recording…"
 msgstr "Opnemen…"
 
-#: ../src/mainWindow.js:339
+#: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -253,35 +264,43 @@ msgstr[1] "%d geluidsopnames"
 msgid "Play"
 msgstr "Afspelen"
 
-#: ../src/mainWindow.js:421
+#: ../src/mainWindow.js:422
 msgid "Pause"
 msgstr "Pauzeren"
 
-#: ../src/mainWindow.js:525
+#: ../src/mainWindow.js:530
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
+msgid "Mono"
+msgstr "Mono"
+
+#: ../src/mainWindow.js:853
+msgid "Stereo"
+msgstr "Stereo"
+
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Meer laden"
 
@@ -289,39 +308,43 @@ msgstr "Meer laden"
 msgid "Unable to play recording"
 msgstr "Afspelen van opname niet mogelijk"
 
-#: ../src/preferences.js:63
+#: ../src/preferences.js:64
 msgid "Preferred format"
 msgstr "Voorkeursformaat"
 
-#: ../src/preferences.js:71
+#: ../src/preferences.js:72
+msgid "Default mode"
+msgstr "Standaardmodus"
+
+#: ../src/preferences.js:80
 msgid "Volume"
 msgstr "Volume"
 
-#: ../src/preferences.js:86
+#: ../src/preferences.js:95
 msgid "Microphone"
 msgstr "Microfoon"
 
-#: ../src/record.js:66
+#: ../src/record.js:71
 msgid "Unable to create Recordings directory."
 msgstr "Map voor opnames kan niet worden aangemaakt."
 
-#: ../src/record.js:75
+#: ../src/record.js:80
 msgid "Your audio capture settings are invalid."
-msgstr "Uw audio-opname-instellingen zijn ongeldig."
+msgstr "Uw instellingen voor audio-opname zijn ongeldig."
 
-#: ../src/record.js:125
+#: ../src/record.js:130
 msgid "Not all elements could be created."
 msgstr "Niet alle onderdelen konden worden aangemaakt."
 
-#: ../src/record.js:137
+#: ../src/record.js:142
 msgid "Not all of the elements were linked."
 msgstr "Niet alle onderdelen zijn gekoppeld."
 
-#: ../src/record.js:162
+#: ../src/record.js:167
 msgid "No Media Profile was set."
 msgstr "Er is geen mediaprofiel ingesteld."
 
-#: ../src/record.js:173
+#: ../src/record.js:178
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -331,10 +354,13 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:322
+#: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
 msgstr "Clip %d"
+
+#~ msgid "%Y-%m-%d %H:%M:%S"
+#~ msgstr "%d-%m-%Y %H:%M:%S"
 
 #~ msgid "Preferred media type for encoding audio when recording"
 #~ msgstr ""
@@ -364,9 +390,6 @@ msgstr "Clip %d"
 #~ msgstr ""
 #~ "Waarde bepaalt of de verzameling herhaald of gehusseld afgespeeld moet "
 #~ "worden. Toegestaan zijn: \"niets\",\"nummer\",\"alles\",\"hussel\"."
-
-#~ msgid "Search mode"
-#~ msgstr "Zoekmodus"
 
 #~ msgid "If true, the search bar is shown."
 #~ msgstr "Bij 'true' wordt de zoekbalk getoond."
