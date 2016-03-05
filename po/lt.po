@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-05 10:25+0000\n"
-"PO-Revision-Date: 2016-01-05 14:30+0200\n"
+"POT-Creation-Date: 2016-02-28 00:46+0000\n"
+"PO-Revision-Date: 2016-02-10 01:36+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -72,23 +72,35 @@ msgstr ""
 "atitinkančio daugialypės terpės tipo, bus naudojamas numatytasis koduotojas."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Available channels"
+msgstr "Prieinami kanalai"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr ""
+"Susieja prieinamus kanalus. Jei nustatyto susiejimo nėra, pagal numatymą bus "
+"naudojamas stereo kanalas."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
 msgstr "Mikrofono garsumo lygis"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
 msgid "Microphone volume level."
 msgstr "Mikrofono garsumo lygis."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
 msgid "Speaker volume level"
 msgstr "Garsiakalbių garsumo lygis"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Garsiakalbių garsumo lygis."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:159
-#: ../src/record.js:108
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
 msgid "Sound Recorder"
 msgstr "Garso įrašymas"
 
@@ -104,7 +116,7 @@ msgstr "Garsas;Programa;Įrašyti;"
 msgid "SoundRecorder"
 msgstr "SoundRecorder"
 
-#: ../src/application.js:50 ../src/preferences.js:39
+#: ../src/application.js:50 ../src/preferences.js:40
 msgid "Preferences"
 msgstr "Nuostatos"
 
@@ -126,17 +138,17 @@ msgid "Recordings"
 msgstr "Įrašai"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: ../src/application.js:158
+#: ../src/application.js:167
 msgid "translator-credits"
 msgstr ""
 "Išvertė:\n"
 "Aurimas Černius <aurisc4@gmail.com>"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Vakar"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -144,11 +156,11 @@ msgstr[0] "Prieš %d dieną"
 msgstr[1] "Prieš %d dienas"
 msgstr[2] "Prieš %d dienų"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Praeitą savaitę"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -156,11 +168,11 @@ msgstr[0] "Prieš %d savaitę"
 msgstr[1] "Prieš %d savaites"
 msgstr[2] "Prieš %d savaičių"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Praeitą mėnesį"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -168,11 +180,11 @@ msgstr[0] "Prieš %d mėnesį"
 msgstr[1] "Prieš %d mėnesius"
 msgstr[2] "Prieš %d mėnesių"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Praeitais metais"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -180,7 +192,7 @@ msgstr[0] "Prieš %d metus"
 msgstr[1] "Prieš %d metus"
 msgstr[2] "Prieš %d metų"
 
-#: ../src/info.js:44 ../src/mainWindow.js:514
+#: ../src/info.js:44 ../src/mainWindow.js:515
 msgid "Info"
 msgstr "Informacija"
 
@@ -189,7 +201,7 @@ msgid "Cancel"
 msgstr "Atsisakyti"
 
 #. finish button (stop recording)
-#: ../src/info.js:53 ../src/mainWindow.js:313
+#: ../src/info.js:53 ../src/mainWindow.js:314
 msgid "Done"
 msgstr "Atlikta"
 
@@ -224,27 +236,23 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipas"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%Y-%m-%d %H:%M:%S"
-
-#: ../src/mainWindow.js:112 ../src/mainWindow.js:778
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Įrašyti"
 
-#: ../src/mainWindow.js:148
+#: ../src/mainWindow.js:149
 msgid "Add Recordings"
 msgstr "Pridėti įrašus"
 
-#: ../src/mainWindow.js:153
+#: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Naudokite mygtuką <b>Įrašyti</b> garso įrašams padaryti"
 
-#: ../src/mainWindow.js:299
+#: ../src/mainWindow.js:300
 msgid "Recording…"
 msgstr "Įrašoma…"
 
-#: ../src/mainWindow.js:351
+#: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -252,39 +260,47 @@ msgstr[0] "%d įrašytas garsas"
 msgstr[1] "%d įrašyti garsai"
 msgstr[2] "%d įrašytų garsų"
 
-#: ../src/mainWindow.js:400
+#: ../src/mainWindow.js:401
 msgid "Play"
 msgstr "Groti"
 
-#: ../src/mainWindow.js:421
+#: ../src/mainWindow.js:422
 msgid "Pause"
 msgstr "Pristabdyti"
 
-#: ../src/mainWindow.js:529
+#: ../src/mainWindow.js:530
 msgid "Delete"
 msgstr "Ištrinti"
 
-#: ../src/mainWindow.js:813
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:813
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:813
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:813
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:813
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:837
+#: ../src/mainWindow.js:853
+msgid "Mono"
+msgstr "Mono"
+
+#: ../src/mainWindow.js:853
+msgid "Stereo"
+msgstr "Stereo"
+
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Įkelti daugiau"
 
@@ -292,39 +308,43 @@ msgstr "Įkelti daugiau"
 msgid "Unable to play recording"
 msgstr "Nepavyksta groti įrašo"
 
-#: ../src/preferences.js:63
+#: ../src/preferences.js:64
 msgid "Preferred format"
 msgstr "Pageidaujamas formatas"
 
-#: ../src/preferences.js:71
+#: ../src/preferences.js:72
+msgid "Default mode"
+msgstr "Numatytoji veiksena"
+
+#: ../src/preferences.js:80
 msgid "Volume"
 msgstr "Garsas"
 
-#: ../src/preferences.js:86
+#: ../src/preferences.js:95
 msgid "Microphone"
 msgstr "Mikrofonas"
 
-#: ../src/record.js:66
+#: ../src/record.js:71
 msgid "Unable to create Recordings directory."
 msgstr "Nepavyksta sukurti įrašų aplanko."
 
-#: ../src/record.js:75
+#: ../src/record.js:80
 msgid "Your audio capture settings are invalid."
 msgstr "Jūsų garso įrašymo nustatymai yra neteisingi."
 
-#: ../src/record.js:125
+#: ../src/record.js:130
 msgid "Not all elements could be created."
 msgstr "Ne visus elementus pavyko sukurti."
 
-#: ../src/record.js:137
+#: ../src/record.js:142
 msgid "Not all of the elements were linked."
 msgstr "Ne visi elementai buvo susieti."
 
-#: ../src/record.js:162
+#: ../src/record.js:167
 msgid "No Media Profile was set."
 msgstr "Nenustatytas daugialypės terpės profilis."
 
-#: ../src/record.js:173
+#: ../src/record.js:178
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -334,7 +354,10 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:331
+#: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
 msgstr "Įrašas %d"
+
+#~ msgid "%Y-%m-%d %H:%M:%S"
+#~ msgstr "%Y-%m-%d %H:%M:%S"
