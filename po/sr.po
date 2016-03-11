@@ -1,23 +1,24 @@
 # Serbian translation of gnome-sound-recorder
-# Courtesy of Prevod.org team (http://prevod.org/) -- 2013—2016.
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2013—2015.
 # This file is distributed under the same license as the gnome-sound-recorder package.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2013—2016.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2013—2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sounds-recorder\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-19 12:38+0000\n"
-"PO-Revision-Date: 2016-02-19 20:29+0200\n"
-"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-"
+"recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-01-17 10:24+0000\n"
+"PO-Revision-Date: 2016-01-17 16:53+0100\n"
+"Last-Translator: Марко М. Костић (Marko M. Kostić) <marko.m.kostic@gmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
+"X-Generator: Poedit 1.8.5\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 msgid "A simple, modern sound recorder for GNOME"
@@ -25,21 +26,21 @@ msgstr "Једноставан, савремен снимач звука за Г
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid ""
-"Sound Recorder provides a simple and modern interface that provides a "
-"straight-forward way to record and play audio. It allows you to do basic "
-"editing, and create voice memos."
+"Sound Recorder provides a simple and modern interface that provides a straight-"
+"forward way to record and play audio. It allows you to do basic editing, and create "
+"voice memos."
 msgstr ""
-"Снимач звука обезбеђује једноставно и савремено сучеље које обезбеђује "
-"непосредан начин за снимање и пуштање звука. Допушта вам да обавите основно "
-"уређивање, и да направите гласовне белешке."
+"Снимач звука обезбеђује једноставно и савремено сучеље које обезбеђује непосредан "
+"начин за снимање и пуштање звука. Допушта вам да обавите основно уређивање, и да "
+"направите гласовне белешке."
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
-"Sound Recorder automatically handles the saving process so that you do not "
-"need to worry about accidentally discarding the previous recording."
+"Sound Recorder automatically handles the saving process so that you do not need to "
+"worry about accidentally discarding the previous recording."
 msgstr ""
-"Снимач звука самостално рукује процесом чувања тако да не морате да се "
-"бринете о случајном брисању претходног снимка."
+"Снимач звука самостално рукује процесом чувања тако да не морате да се бринете о "
+"случајном брисању претходног снимка."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -63,11 +64,11 @@ msgstr "Мапира врсте медија до назива претподе�
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
 msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping set, "
-"the default encoder settings will be used."
+"Maps media types to audio encoder preset names. If there is no mapping set, the "
+"default encoder settings will be used."
 msgstr ""
-"Мапира врсте медија до назива претподешавања кодера звука. Ако нема "
-"подешеног мапирања, биће коришћена основна подешавања кодера."
+"Мапира врсте медија до назива претподешавања кодера звука. Ако нема подешеног "
+"мапирања, биће коришћена основна подешавања кодера."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Available channels"
@@ -75,11 +76,11 @@ msgstr "Доступни канали"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
 msgid ""
-"Maps available channels. If there is not no mapping set, stereo channel will "
-"be used by default."
+"Maps available channels. If there is not no mapping set, stereo channel will be "
+"used by default."
 msgstr ""
-"Мапира доступне канале. Ако нема подешеног мапирања, биће коришћен стерео "
-"канал по основи."
+"Мапира доступне канале. Ако нема подешеног мапирања, стерео канал ће се "
+"подразумевано користити."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
@@ -140,6 +141,7 @@ msgstr "Снимци"
 msgid "translator-credits"
 msgstr ""
 "  Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"  Марко М. Костић <marko.m.kostic@gmail.com>\n"
 "\n"
 "http://prevod.org — превод на српски језик"
 
@@ -322,7 +324,7 @@ msgstr "Жељени запис"
 
 #: ../src/preferences.js:72
 msgid "Default mode"
-msgstr "Основни режим"
+msgstr "Подразумевани режим"
 
 #: ../src/preferences.js:80
 msgid "Volume"
@@ -371,12 +373,11 @@ msgstr "Снимак бр. %d"
 #~ msgstr "Жељена врста медија за кодирање звука приликом снимања"
 
 #~ msgid ""
-#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
-#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
-#~ "type."
+#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' for Ogg "
+#~ "Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
 #~ msgstr ""
-#~ "Жељена врста медија за кодирање звука приликом снимања. „audio/x-vorbis“ "
-#~ "за Огг ворбис, или „audio/mpeg“ за МП3, на пример. Ово није МИМЕ врста."
+#~ "Жељена врста медија за кодирање звука приликом снимања. „audio/x-vorbis“ за Огг "
+#~ "ворбис, или „audio/mpeg“ за МП3, на пример. Ово није МИМЕ врста."
 
 #~ msgid "Finish"
 #~ msgstr "Заврши"
