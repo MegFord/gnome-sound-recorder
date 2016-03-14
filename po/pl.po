@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-06 15:54+0100\n"
-"PO-Revision-Date: 2016-02-06 15:55+0100\n"
+"POT-Creation-Date: 2016-03-14 04:30+0100\n"
+"PO-Revision-Date: 2016-03-14 04:32+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -104,7 +104,7 @@ msgstr "Poziom głośności głośnika."
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
 #: ../src/record.js:113
 msgid "Sound Recorder"
-msgstr "Nagrywanie dźwięku"
+msgstr "Nagrywanie"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -146,11 +146,11 @@ msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013-2016\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2013-2016"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Wczoraj"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -158,11 +158,11 @@ msgstr[0] "%d dzień temu"
 msgstr[1] "%d dni temu"
 msgstr[2] "%d dni temu"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Ostatni tydzień"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -170,11 +170,11 @@ msgstr[0] "%d tydzień temu"
 msgstr[1] "%d tygodnie temu"
 msgstr[2] "%d tygodni temu"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Ostatni miesiąc"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -182,11 +182,11 @@ msgstr[0] "%d miesiąc temu"
 msgstr[1] "%d miesiące temu"
 msgstr[2] "%d miesięcy temu"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Ostatni rok"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -218,7 +218,7 @@ msgstr "Nazwa"
 #. Source item
 #: ../src/info.js:87
 msgid "Source"
-msgstr "Źródło"
+msgstr "Położenie"
 
 #. Date Modified item
 #: ../src/info.js:96
@@ -238,17 +238,13 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Typ"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d-%m-%Y, %H∶%M∶%S"
-
-#: ../src/mainWindow.js:113 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Nagraj"
 
 #: ../src/mainWindow.js:149
 msgid "Add Recordings"
-msgstr "Dodaj nagrania"
+msgstr "Brak nagrań"
 
 #: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
@@ -278,35 +274,35 @@ msgstr "Wstrzymaj"
 msgid "Delete"
 msgstr "Usuń"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Mono"
 msgstr "Mono"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Stereo"
 msgstr "Stereo"
 
-#: ../src/mainWindow.js:862
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Wczytaj więcej"
 
@@ -363,4 +359,4 @@ msgstr ""
 #: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
-msgstr "Klip %d"
+msgstr "%d. klip"
