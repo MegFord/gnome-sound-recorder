@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-"
 "recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-26 22:24+0000\n"
-"PO-Revision-Date: 2016-01-27 10:35+0100\n"
+"POT-Creation-Date: 2016-04-05 09:42+0000\n"
+"PO-Revision-Date: 2016-04-05 22:12+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -29,8 +29,8 @@ msgid ""
 "forward way to record and play audio. It allows you to do basic editing, and create "
 "voice memos."
 msgstr ""
-"Regjistradôr di suns a je une semplice e moderne interface che a furnìs un mût "
-"trasparent e clâr di regjistrâ e riprodusi audio. A permet di fâ modifichis "
+"Regjistradôr di suns e je une semplice e moderne interface che a furnìs un mût "
+"trasparent e clâr di regjistrâ e riprodusi audio. E permet di fâ modifichis "
 "basilârs e di creâ pro memorie vocâi."
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
@@ -142,44 +142,44 @@ msgstr "Regjistrazions"
 msgid "translator-credits"
 msgstr "Fabio Tomat <f.t.public@gmail.com>"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Îr"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d zornade indaûr"
 msgstr[1] "%d zornadis indûr"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Ultime setemane"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d setemane indaûr"
 msgstr[1] "%d setemanis indaûr"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Ultin mês"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d mês indaûr"
 msgstr[1] "%d mês indaûr"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Ultin àn"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -230,11 +230,7 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Gjenar"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d/%m/%Y-%H.%M.%S"
-
-#: ../src/mainWindow.js:113 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Regjistre"
 
@@ -269,35 +265,35 @@ msgstr "Pause"
 msgid "Delete"
 msgstr "Elimine"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Mono"
 msgstr "Mono"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Stereo"
 msgstr "Stereo"
 
-#: ../src/mainWindow.js:862
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Cjame ancjemò"
 
@@ -346,7 +342,7 @@ msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
 msgstr ""
-"Impussibil impostâ la pipeline \n"
+"Impussibil impuestâ la pipeline \n"
 " tal stât di regjistrazion."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
@@ -355,3 +351,6 @@ msgstr ""
 #, javascript-format
 msgid "Clip %d"
 msgstr "Clip %d"
+
+#~ msgid "%Y-%m-%d %H:%M:%S"
+#~ msgstr "%d/%m/%Y-%H.%M.%S"
