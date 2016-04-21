@@ -260,7 +260,7 @@ const Listview = new Lang.Class({
     },
 
     _onDirChanged: function(dirMonitor, file1, file2, eventType) {
-        if ((eventType == Gio.FileMonitorEvent.DELETED && !Gio.Application.get_default().saveDir.equal(file1)) ||
+        if ((eventType == Gio.FileMonitorEvent.MOVED_OUT && !Gio.Application.get_default().saveDir.equal(file1)) ||
             (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT
                 && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
             stopVal = EnumeratorState.ACTIVE;
