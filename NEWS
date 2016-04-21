@@ -6,7 +6,7 @@
  Icon: provide a symbolic variant by Jakub Steiner.
  Translation updates.
  Format date created.
- Create lookup table for files so retrieval for renaming is n(1) operation.
+ Create lookup table for files so retrieval for renaming is o(1) operation.
 
  3.19.4
  ======
