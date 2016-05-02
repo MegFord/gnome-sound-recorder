@@ -30,6 +30,7 @@ const Pango = imports.gi.Pango;
 
 const Application = imports.application;
 const AudioProfile = imports.audioProfile;
+const Delete = imports.undoDelete;
 const FileUtil = imports.fileUtil;
 const Info = imports.info;
 const Listview = imports.listview;
@@ -230,7 +231,7 @@ const MainView = new Lang.Class({
         let secondString = parseInt(seconds % _TIME_DIVISOR);
         let timeString =
             hoursString +
-            (minuteString < 10 ? "0" + minuteString : minuteString)+
+            (minuteString < 10 ? "0" + minuteString : minuteString) +
             ":" +
             (secondString < 10 ? "0" + secondString : secondString);
 
@@ -650,23 +651,23 @@ const MainView = new Lang.Class({
 
     _getFileFromRow: function(selected) {
         let fileForAction = null;
-        let rowWidget = selected.get_child(this.fileName);
-        rowWidget.foreach(Lang.bind(this,
-            function(child) {
 
-                if (child.name == "FileNameLabel") {
-                    let name = child.get_text();
-                    let application = Gio.Application.get_default();
-                    fileForAction = application.saveDir.get_child_for_display_name(name);
-                }
-             }));
+        let gridForName = selected.get_child();
+        let idx = parseInt(gridForName.name);
+        let file = this._files[idx];
+        let application = Gio.Application.get_default();
+        fileForAction = application.saveDir.get_child_for_display_name(file.fileName);
 
         return fileForAction;
     },
 
     _deleteFile: function(selected) {
         let fileToDelete = this._getFileFromRow(selected);
-        fileToDelete.trash_async(GLib.PRIORITY_DEFAULT, null, null);
+        let gridForName = selected.get_child();
+        let idx = parseInt(gridForName.name);
+        let file = this._files[idx];
+        let undoDeleteDialog = new Delete.UndoDeleteDialog(file);
+        // fileToDelete.trash_async(GLib.PRIORITY_DEFAULT, null, null);
     },
 
     loadPlay: function(selected) {
