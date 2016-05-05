@@ -85,7 +85,7 @@ const Application = new Lang.Class({
         this._initAppMenu();
         application = this;
         settings = new Gio.Settings({ schema: 'org.gnome.gnome-sound-recorder' });
-        this.ensure_directory()
+        this.ensure_directory();
     },
     
     ensure_directory: function() {
