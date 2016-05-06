@@ -1,6 +1,7 @@
 # Arabic translation for gnome-sound-recorder.
 # Copyright (C) 2016 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
+# Khaled Hosny <khaledhosny@eglug.org>, 2016.
 # Muhannad_Alrusayni <muhannad.alrusayni@gmail.com>, 2016.
 #
 msgid ""
@@ -22,7 +23,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 msgid "A simple, modern sound recorder for GNOME"
-msgstr "مسجل صوت سهل وحديث لجنوم"
+msgstr "مسجل أصوات بسيط و حديث لجنوم"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid ""
@@ -263,9 +264,9 @@ msgstr "يسجّل…"
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
-msgstr[0] "لا يوجد أصوات مسجلة"
+msgstr[0] "لا أصوات مسجلة"
 msgstr[1] "صوت مسجل"
-msgstr[2] "صوتين مسجلان"
+msgstr[2] "صوتين مسجلين"
 msgstr[3] "%d أصوات مسجلة"
 msgstr[4] "%d صوتًا مسجلًا"
 msgstr[5] "%d صوت مسجل"
@@ -328,7 +329,7 @@ msgstr "الوضع المبدئي"
 
 #: ../src/preferences.js:80
 msgid "Volume"
-msgstr "الصوت"
+msgstr "شدة الصوت"
 
 #: ../src/preferences.js:95
 msgid "Microphone"
@@ -367,4 +368,4 @@ msgstr ""
 #: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
-msgstr "المقطع %d"
+msgstr "مقطع %d"
