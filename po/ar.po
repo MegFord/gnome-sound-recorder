@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Khaled Hosny <khaledhosny@eglug.org>, 2016.
+# Arabic translation for gnome-sound-recorder.
+# Copyright (C) 2016 gnome-sound-recorder's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-sound-recorder package.
+# Muhannad_Alrusayni <muhannad.alrusayni@gmail.com>, 2016.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-10 19:51+0200\n"
-"PO-Revision-Date: 2016-04-10 19:51+0200\n"
-"Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
+"Project-Id-Version: gnome-sound-recorder gnome-3-20\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-05-01 21:49+0000\n"
+"PO-Revision-Date: 2016-05-06 04:07+0300\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -16,76 +17,82 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Virtaal 1.0.0-beta1\n"
+"Last-Translator: Muhannad Alrusayni <muhannad.alrusayni@gmail.com>\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 msgid "A simple, modern sound recorder for GNOME"
-msgstr "مسجل أصوات بسيط و حديث لجنوم"
+msgstr "مسجل صوت سهل وحديث لجنوم"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
 "editing, and create voice memos."
-msgstr ""
+msgstr "مسجل الصوت يقدم لك واجهة سهلة وحديثة توفر لك "
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
+"مسجل الصوت يقوم تلقائياً بحفظ التسجيلات لذلك لا داعي للقلق إذا لم تحفظ "
+"التسيجل السابق ."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
-msgstr ""
+msgstr "حجم النافذة"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
 msgid "Window size (width and height)."
-msgstr ""
+msgstr "حجم النافذة (عرض و طول)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
 msgid "Window position"
-msgstr ""
+msgstr "مكان النافذة"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
 msgid "Window position (x and y)."
-msgstr ""
+msgstr "مكان النافذة (س و ص)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
 msgid "Maps media types to audio encoder preset names."
-msgstr ""
+msgstr "خرائط أتواع الوسائط لمجموعة اسماء التشفير الصوتي."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
 msgstr ""
+"خرائط أتواع الوسائط لمجموعة اسماء التشفير الصوتي. إذا لم يكن هناك مجموعة "
+"خرائط, سيتم إستعمال إعدادات التشفير الإفتراضي إذا لم يكن هناك مجموعة خرائط."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Available channels"
-msgstr ""
+msgstr "القنوات المتاحة"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
 msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
 msgstr ""
+"خرائط القنوات المتاحة, سيتم إستعمال قناة ستيريو إذا لم يكن هناك مجموعة خرائط."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
-msgstr ""
+msgstr "مستوى صوت الميكروفون"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
 msgid "Microphone volume level."
-msgstr ""
+msgstr "مستوى صوت الميكروفون."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
 msgid "Speaker volume level"
-msgstr ""
+msgstr "مستوى صوت السماعات"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
-msgstr ""
+msgstr "مستوى صوت السماعات."
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
 #: ../src/record.js:113
@@ -128,7 +135,9 @@ msgstr "التسجيلات"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: ../src/application.js:167
 msgid "translator-credits"
-msgstr "خالد حسني <khaledhosny@eglug.org>"
+msgstr ""
+"مهند الرسيني <muhannad.alrusayni@gmail.com>\n"
+"خالد حسني <khaledhosny@eglug.org>"
 
 #: ../src/fileUtil.js:88
 msgid "Yesterday"
@@ -254,9 +263,9 @@ msgstr "يسجّل…"
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
-msgstr[0] "لا أصوات مسجلة"
+msgstr[0] "لا يوجد أصوات مسجلة"
 msgstr[1] "صوت مسجل"
-msgstr[2] "صوتين مسجل"
+msgstr[2] "صوتين مسجلان"
 msgstr[3] "%d أصوات مسجلة"
 msgstr[4] "%d صوتًا مسجلًا"
 msgstr[5] "%d صوت مسجل"
@@ -275,31 +284,31 @@ msgstr "احذف"
 
 #: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
-msgstr ""
+msgstr "Ogg Vorbis"
 
 #: ../src/mainWindow.js:829
 msgid "Opus"
-msgstr ""
+msgstr "Opus"
 
 #: ../src/mainWindow.js:829
 msgid "FLAC"
-msgstr ""
+msgstr "FLAC"
 
 #: ../src/mainWindow.js:829
 msgid "MP3"
-msgstr ""
+msgstr "MP3"
 
 #: ../src/mainWindow.js:829
 msgid "MOV"
-msgstr ""
+msgstr "MOV"
 
 #: ../src/mainWindow.js:853
 msgid "Mono"
-msgstr ""
+msgstr "مايكروفون"
 
 #: ../src/mainWindow.js:853
 msgid "Stereo"
-msgstr ""
+msgstr "متعدد الميكروفونات"
 
 #: ../src/mainWindow.js:877
 msgid "Load More"
@@ -319,7 +328,7 @@ msgstr "الوضع المبدئي"
 
 #: ../src/preferences.js:80
 msgid "Volume"
-msgstr "شدة الصوت"
+msgstr "الصوت"
 
 #: ../src/preferences.js:95
 msgid "Microphone"
@@ -331,29 +340,31 @@ msgstr "تعذّر إنشاء مجلد التسجيلات."
 
 #: ../src/record.js:80
 msgid "Your audio capture settings are invalid."
-msgstr ""
+msgstr "إعدادات التسجيل الخاصة بك غير صالحة."
 
 #: ../src/record.js:130
 msgid "Not all elements could be created."
-msgstr ""
+msgstr "لم يتمكن من إنشاء كل العناصر"
 
 #: ../src/record.js:142
 msgid "Not all of the elements were linked."
-msgstr ""
+msgstr "لم يتم ربط كل العناصر"
 
 #: ../src/record.js:167
 msgid "No Media Profile was set."
-msgstr ""
+msgstr "لم يتم تحديد ملف الوسائط."
 
 #: ../src/record.js:178
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
 msgstr ""
+"تعذّر تعيين خط القناة\n"
+"إلى حالة التسجيل"
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
 #: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
-msgstr "مقطع %d"
+msgstr "المقطع %d"
