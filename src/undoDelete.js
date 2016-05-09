@@ -1,4 +1,5 @@
   /*
+   * Modified version of notifications.js from GNOME Documents
    * Copyright 2016 Meg Ford
    * This library is free software; you can redistribute it and/or
    * modify it under the terms of the GNU Library General Public
@@ -18,6 +19,7 @@
    *
    */
 
+const Gd = imports.gi.Gd;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
@@ -31,15 +33,22 @@ const MainWindow = imports.mainWindow;
 
 const DELETE_TIMEOUT = 10;
 
-const UndoDeleteDialog = new Lang.Class({
-  Name: 'UndoDeleteDialog',
+const UndoDeleteNotification = new Lang.Class({
+  Name: 'UndoDeleteNotification',
+  Extends: Gd.Notification,
 
       _init: function(fileNav) {
-        this.widget = new Gtk.MessageDialog ({
-            transient_for: Gio.Application.get_default().get_active_window(),
-            window_position: Gtk.WindowPosition.CENTER_ON_PARENT,
-            valign: Gtk.Align.START,
-            modal: false });
+
+        // NEED TO USE libgd notifications for this.
+        this.parent({ timeout: -1,
+                      show_close_button: true,
+                      halign: Gtk.Align.CENTER,
+                      valign: Gtk.Align.START });
+
+        this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                                    row_spacing: 6 });
+
+        this.add(this._grid);
 
         let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.HORIZONTAL,
                                    column_spacing: 12 });
@@ -64,7 +73,8 @@ const UndoDeleteDialog = new Lang.Class({
         // doneButton.connect("clicked", Lang.bind(this, this.onDoneClicked));
 
         grid.attach_next_to(doneButton, cancelButton, Gtk.PositionType.RIGHT, 3, 1);
-        this.widget.show_all();
+        this._grid.add(grid)
+        this.show_all();
 
         this._timeoutId = Mainloop.timeout_add_seconds(DELETE_TIMEOUT, Lang.bind(this,
             function() {
