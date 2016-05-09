@@ -1,3 +1,11 @@
+ 3.20.2
+ ======
+ Translation updates.
+
+ 3.19.92
+ =========
+ Fix for bug 765348 Deleting files did not refresh listview.
+
  3.19.91
  =======
  Fix syntax error in icons Makefile by Miguel Vaello Martínez.
