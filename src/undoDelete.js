@@ -25,78 +25,111 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const Signals = imports.signals;
 
 const _ = imports.gettext.gettext;
 const C_ = imports.gettext.pgettext;
 
+const Application = imports.application;
 const MainWindow = imports.mainWindow;
 
 const DELETE_TIMEOUT = 10;
 
-const UndoDeleteNotification = new Lang.Class({
-  Name: 'UndoDeleteNotification',
-  Extends: Gd.Notification,
+const UndoNotification = new Lang.Class({
+  Name: 'UndoNotification',
 
       _init: function(fileNav) {
 
-        // NEED TO USE libgd notifications for this.
-        this.parent({ timeout: -1,
-                      show_close_button: true,
-                      halign: Gtk.Align.CENTER,
-                      valign: Gtk.Align.START });
-
-        this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
-                                    row_spacing: 6 });
-
-        this.add(this._grid);
-
-        let grid = new Gtk.Grid ({ orientation: Gtk.Orientation.HORIZONTAL,
-                                   column_spacing: 12 });
-
-        let contentArea = this.widget.get_content_area();
-        contentArea.pack_start(grid, true, true, 2);
+        this.widget = new Gtk.Grid ({ name: "BLAMAAA",
+                                      orientation: Gtk.Orientation.HORIZONTAL,
+                                      column_spacing: 12 });
 
         let message = (_("“%s” deleted")).format(fileNav.fileName);
         this._name = new Gtk.Label({ label: message,
                                      halign: Gtk.Align.START });
-        grid.add(this._name);
+        this._name.show();
+        this.widget.add(this._name);
+        this.widget.show_all();
 
-        let cancelButton = new Gtk.Button({ label: _("Undo") });
-        // cancelButton.connect("clicked", Lang.bind(this, this.onCancelClicked));
+      //   let cancelButton = new Gtk.Button({ label: _("Undo") });
+      //   // cancelButton.connect("clicked", Lang.bind(this, this.onCancelClicked));
 
-        grid.attach_next_to(cancelButton, this._name, Gtk.PositionType.RIGHT, 2, 1);
+      //   grid.attach_next_to(cancelButton, this._name, Gtk.PositionType.RIGHT, 2, 1);
 
-        let closeImage = Gtk.Image.new({ name: "closeImage" });
-        closeImage.set_from_icon_name('window-close-symbolic', Gtk.IconSize.BUTTON);
-        let doneButton = new Gtk.Button();
-        doneButton.set_image(closeImage);
-        // doneButton.connect("clicked", Lang.bind(this, this.onDoneClicked));
+      //   let closeImage = Gtk.Image.new({ name: "closeImage" });
+      //   closeImage.set_from_icon_name('window-close-symbolic', Gtk.IconSize.BUTTON);
+      //   let doneButton = new Gtk.Button();
+      //   doneButton.set_image(closeImage);
+      // // doneButton.connect("clicked", Lang.bind(this, this.onDoneClicked));
 
-        grid.attach_next_to(doneButton, cancelButton, Gtk.PositionType.RIGHT, 3, 1);
-        this._grid.add(grid)
-        this.show_all();
-
+      //   grid.attach_next_to(doneButton, cancelButton, Gtk.PositionType.RIGHT, 3, 1);
+        Application.notificationManager.addNotification(this);
         this._timeoutId = Mainloop.timeout_add_seconds(DELETE_TIMEOUT, Lang.bind(this,
             function() {
                 this._timeoutId = 0;
-                this.onDoneClicked();
                 return false;
             }));
-    },
 
-    onDoneClicked: function() {
-        this.onDestroy();
-        this.widget.destroy();
-    },
 
-    onCancelClicked: function() {
-        this.widget.destroy();
-    },
+    //     this._timeoutId = Mainloop.timeout_add_seconds(DELETE_TIMEOUT, Lang.bind(this,
+    //         function() {
+    //             this._timeoutId = 0;
+    //             this.onDoneClicked();
+    //             return false;
+    //         }));
+    // },
 
-    onDestroy: function(){
-        if (this._timeoutId != 0) {
-            Mainloop.source_remove(this._timeoutId);
-            this._timeoutId = 0;
-        }
+    // onDoneClicked: function() {
+    //     this.onDestroy();
+    //     this.widget.destroy();
+    // },
+
+    // onCancelClicked: function() {
+    //     this.widget.destroy();
+    // },
+
+    // onDestroy: function(){
+    //     if (this._timeoutId != 0) {
+    //         Mainloop.source_remove(this._timeoutId);
+    //         this._timeoutId = 0;
+    //     }
     }
 });
+
+const NotificationManager = new Lang.Class({
+    Name: 'NotificationManager',
+    Extends: Gd.Notification,
+
+    _init: function() {
+        this.parent({ timeout: 30000,
+                      show_close_button: true,
+                      halign: Gtk.Align.CENTER,
+                      valign: Gtk.Align.START });
+        this._grid = new Gtk.Grid({ orientation: Gtk.Orientation.VERTICAL,
+                                    row_spacing: 6 });
+
+        this.add(this._grid);
+        this.show_all();
+    },
+
+    addNotification: function(notification) {
+        this._grid.add(notification.widget);
+        log(this.parent.timeout);
+        this._grid.foreach(Lang.bind(this,
+                function(child) {
+                  child.show();
+                }));
+        notification.widget.connect('destroy', Lang.bind(this, this._onWidgetDestroy));
+
+        this.show_all();
+    },
+
+    _onWidgetDestroy: function() {
+        let children = this._grid.get_children();
+
+        if (children.length == 0)
+            this.hide();
+    }
+});
+// Signals.addSignalMethods(NotificationManager.prototype);
+

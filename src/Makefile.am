@@ -10,6 +10,16 @@ org.gnome.SoundRecorder.src.gresource: org.gnome.SoundRecorder.src.gresource.xml
 resourcedir = $(pkgdatadir)
 resource_DATA = org.gnome.SoundRecorder.src.gresource
 
+org.gnome.SoundRecorder: org.gnome.SoundRecorder.in
+	$(AM_V_GEN) sed \
+		-e "s|[@]GJS@|$(GJS)|g" \
+		-e "s|[@]PACKAGE_VERSION@|$(PACKAGE_VERSION)|g" \
+		-e "s|[@]prefix@|$(prefix)|g" \
+		-e "s|[@]libdir@|$(libdir)|g" \
+		-e "s|[@]pkgdatadir@|$(pkgdatadir)|g" \
+		$< > $@
+	@chmod +x $@
+
 EXTRA_DIST = \
 	org.gnome.SoundRecorder.in \
 	org.gnome.SoundRecorder.src.gresource.xml \
@@ -23,7 +33,7 @@ CLEANFILES = \
 
 install-exec-hook:
 	$(MKDIR_P) $(DESTDIR)$(bindir)
-	ln -sf $(appdir)/org.gnome.SoundRecorder $(DESTDIR)$(bindir)/$(PACKAGE_TARNAME)
+	$(LN_S) -f $(appdir)/org.gnome.SoundRecorder $(DESTDIR)$(bindir)/$(PACKAGE_TARNAME)
 uninstall-hook:
 	-rm -f $(DESTDIR)$(bindir)/$(PACKAGE_TARNAME)
 

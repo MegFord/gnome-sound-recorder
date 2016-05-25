@@ -25,11 +25,13 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-pkg.initSubmodule('libgd');
+// for libgd
+// pkg.initSubmodule('libgd');
+// for gdprivate
+pkg.initSubmodule('src');
 pkg.initGettext();
 pkg.initFormat();
-pkg.require({
-              'Gdk': '3.0',
+pkg.require({ 'Gdk': '3.0',
               'GdkPixbuf': '2.0',
               'GLib': '2.0',
               'GObject': '2.0',

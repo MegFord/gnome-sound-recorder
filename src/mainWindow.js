@@ -16,7 +16,7 @@
 * Author: Meg Ford <megford@gnome.org>
 *
 */
-
+const Gd = imports.gi.Gd;
 const Gettext = imports.gettext;
 const _ = imports.gettext.gettext;
 const Gdk = imports.gi.Gdk;
@@ -116,6 +116,11 @@ const MainWindow = new Lang.Class({
         header.pack_start(recordButton);
 
         this.add(view);
+        let w = new Gd.Notification({ timeout: 30000,
+                      show_close_button: true,
+                      halign: Gtk.Align.CENTER,
+                      valign: Gtk.Align.START });
+        view.add(w);
         this.show_all();
     }
 });
@@ -666,7 +671,7 @@ const MainView = new Lang.Class({
         let gridForName = selected.get_child();
         let idx = parseInt(gridForName.name);
         let file = this._files[idx];
-        let undoDeleteDialog = new Delete.UndoDeleteDialog(file);
+        let undoDeleteNotification = new Delete.UndoNotification(file);
         // fileToDelete.trash_async(GLib.PRIORITY_DEFAULT, null, null);
     },
 

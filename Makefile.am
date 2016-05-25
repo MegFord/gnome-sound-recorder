@@ -3,6 +3,7 @@ ACLOCAL_AMFLAGS = -I m4 -I libgd ${ACLOCAL_FLAGS}
 SUBDIRS = libgd po data src
 
 MAINTAINERCLEANFILES = \
+    $(top_builddir)/libgd/libgd.la \
 	$(srcdir)/INSTALL \
 	$(srcdir)/aclocal.m4 \
 	$(srcdir)/autoscan.log \
