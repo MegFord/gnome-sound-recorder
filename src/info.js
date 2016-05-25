@@ -148,8 +148,8 @@ const InfoDialog = new Lang.Class({
             grid.attach_next_to(this._dateCreatedData, this._dateCreatedLabel, Gtk.PositionType.RIGHT, 2, 1);
         }
 
-        // Document type value
-        this._mediaTypeData = new Gtk.Label({ label: fileName.mediaType,
+        // Media type data
+        this._mediaTypeData = new Gtk.Label({ label: fileName.mediaType || _("Unknown"),
                                               halign: Gtk.Align.START });
         grid.attach_next_to(this._mediaTypeData, this._mediaType, Gtk.PositionType.RIGHT, 2, 1);
 
