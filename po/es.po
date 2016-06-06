@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-13 10:21+0000\n"
-"PO-Revision-Date: 2016-01-13 11:50+0100\n"
+"POT-Creation-Date: 2016-06-02 03:00+0000\n"
+"PO-Revision-Date: 2016-06-02 09:21+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -21,10 +21,6 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
-msgid "A simple, modern sound recorder for GNOME"
-msgstr "Una grabadora de sonidos sencilla y moderna para GNOME"
-
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -34,7 +30,7 @@ msgstr ""
 "ofrece una manera fácil de grabar y reproducir sonidos. Permite hacer una "
 "edición básica y crear notas de voz."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
@@ -42,6 +38,14 @@ msgstr ""
 "La Grabadora de sonidos gestiona automáticamente el proceso de guardado, por "
 "lo que no tiene que preocuparse de que la grabación se pierda "
 "accidentalmente."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+msgid "Supported audio formats:"
+msgstr "Formatos de sonido soportados:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 y MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -145,44 +149,44 @@ msgstr "Grabaciones"
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.mustieles@gmail.com>, 2013 - 2015"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Ayer"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Hace %d día"
 msgstr[1] "Hace %d días"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Última semana"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Hace %d semana"
 msgstr[1] "Hace %d semanas"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Último mes"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Hace %d mes"
 msgstr[1] "Hace %d meses"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Último año"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -233,11 +237,12 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d/%m/%Y %H:%M:%S"
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Desconocido"
 
-#: ../src/mainWindow.js:113 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Grabar"
 
@@ -272,35 +277,35 @@ msgstr "Pausar"
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Mono"
 msgstr "Mono"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Stereo"
 msgstr "Estéreo"
 
-#: ../src/mainWindow.js:862
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Cargar más"
 
@@ -358,6 +363,12 @@ msgstr ""
 #, javascript-format
 msgid "Clip %d"
 msgstr "Clip %d"
+
+#~ msgid "A simple, modern sound recorder for GNOME"
+#~ msgstr "Una grabadora de sonidos sencilla y moderna para GNOME"
+
+#~ msgid "%Y-%m-%d %H:%M:%S"
+#~ msgstr "%d/%m/%Y %H:%M:%S"
 
 #~ msgid "Preferred media type for encoding audio when recording"
 #~ msgstr "Tipo de medio preferido para codificar el sonido al grabar"
