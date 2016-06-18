@@ -1,8 +1,7 @@
 # Portuguese translation for gnome-sound-recorder.
 # Copyright © 2014 gnome-sound-recorder
 # This file is distributed under the same license as the gnome-sound-recorder package.
-# Tiagosdot <almosthumane@portugalmail.pt>, 2014.
-# Tiago S. <almosthumane@portugalmail.pt>, 2015.
+# Tiago Santos <tiagofsantos81@sapo.pt>, 2014 - 2016.
 # Sérgio Cardeira <cardeira dot sergio at gmail dot com>, 2016.
 #
 msgid ""
@@ -10,22 +9,28 @@ msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-28 00:46+0000\n"
-"PO-Revision-Date: 2016-02-20 19:48-0100\n"
-"Last-Translator: Sérgio Cardeira <cardeira dot sergio at gmail dot com>\n"
+"POT-Creation-Date: 2016-06-02 13:45+0000\n"
+"PO-Revision-Date: 2016-06-04 12:42+0100\n"
+"Last-Translator: Tiago Santos <tiagofsantos81@sapo.pt>\n"
 "Language-Team: Português <>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Gravador de som"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "Um simples e moderno gravador de som para o GNOME"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -35,13 +40,21 @@ msgstr ""
 "de gravar e reproduzir áudio. Permite-lhe fazer edição básica e criar "
 "memorandos de voz."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
 "O Gravador de som gere automaticamente o processo de gravação para que não "
 "necessite de se preocupar com acidentes com gravações anteriores."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Formatos de áudio suportados:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 e MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -101,11 +114,6 @@ msgstr "Nível de volume das colunas"
 msgid "Speaker volume level."
 msgstr "Nível de volume das colunas."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "Gravador de som"
-
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
 msgstr "Grave som com o microfone e reproduza-o"
@@ -143,7 +151,7 @@ msgstr "Gravações"
 #: ../src/application.js:167
 msgid "translator-credits"
 msgstr ""
-"Tiago S., 2014.\n"
+"Tiago Santos <tiagofsantos81@sapo.pt>\n"
 "Pedro Albuquerque <palbuquerque73@gmail.com>"
 
 #: ../src/fileUtil.js:88
@@ -233,6 +241,11 @@ msgstr "Data de criação"
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipo"
+
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Desconhecido"
 
 #: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
