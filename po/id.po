@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-sound-recorder master\n"
+"Project-Id-Version: gnome-sound-recorder gnome-3-20\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-08-29 20:14+0000\n"
-"PO-Revision-Date: 2015-08-30 12:32+0700\n"
+"POT-Creation-Date: 2016-05-05 10:01+0000\n"
+"PO-Revision-Date: 2016-06-19 16:53+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 msgid "A simple, modern sound recorder for GNOME"
@@ -70,23 +70,35 @@ msgstr ""
 "yang ditata, pengaturan enkoder baku akan dipakai."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Available channels"
+msgstr "Kanal yang tersedia"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr ""
+"Petakan kanal yang tersedia. Bila tidak ada pemetaan yang ditata, secara "
+"baku akan dipakai kanal stereo."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
 msgstr "Tingkat volume mikrofon"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
 msgid "Microphone volume level."
 msgstr "Tingkat volume mikrofon."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
 msgid "Speaker volume level"
 msgstr "Tingkat volume speaker"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Tingkat volume speaker."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:159
-#: ../src/record.js:108
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
 msgid "Sound Recorder"
 msgstr "Perekam Suara"
 
@@ -102,7 +114,7 @@ msgstr "Audio;Aplikasi;Rekam;"
 msgid "SoundRecorder"
 msgstr "SoundRecorder"
 
-#: ../src/application.js:50 ../src/preferences.js:39
+#: ../src/application.js:50 ../src/preferences.js:40
 msgid "Preferences"
 msgstr "Preferensi"
 
@@ -118,111 +130,117 @@ msgstr "Keluar"
 msgid "Sound Recorder started"
 msgstr "Perekam Suara dimulai"
 
-#. Translators: "Recordings" here refers to the name of the directory where the application places files */
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
 #: ../src/application.js:93
 msgid "Recordings"
 msgstr "Rekaman"
 
-#. Translators: Replace "translator-credits" with your names, one name per line */
-#: ../src/application.js:158
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/application.js:167
 msgid "translator-credits"
-msgstr "Andika Triwidada <andika@gmail.com>, 2014"
+msgstr "Andika Triwidada <andika@gmail.com>, 2014, 2016"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Kemarin"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d hari yang lalu"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Minggu lalu"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d minggu yang lalu"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Bulan lalu"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d bulan yang lalu"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Tahun lalu"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d tahun yang lalu"
 
-#: ../src/info.js:46 ../src/mainWindow.js:512
+#: ../src/info.js:44 ../src/mainWindow.js:515
 msgid "Info"
 msgstr "Info"
 
-#: ../src/info.js:55
+#: ../src/info.js:48
 msgid "Cancel"
 msgstr "Batal"
 
-#: ../src/info.js:69 ../src/mainWindow.js:301
+#. finish button (stop recording)
+#: ../src/info.js:53 ../src/mainWindow.js:314
 msgid "Done"
 msgstr "Selesai"
 
-#: ../src/info.js:95
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:80
 msgctxt "File Name"
 msgid "Name"
 msgstr "Nama"
 
-#: ../src/info.js:102
+#. Source item
+#: ../src/info.js:87
 msgid "Source"
 msgstr "Sumber"
 
-#: ../src/info.js:111
+#. Date Modified item
+#: ../src/info.js:96
 msgid "Date Modified"
 msgstr "Tanggal Diubah"
 
-#: ../src/info.js:117
+#. Date Created item
+#: ../src/info.js:102
 msgid "Date Created"
 msgstr "Tanggal Dibuat"
 
-#: ../src/info.js:128
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:113
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipe"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%Y-%m-%d %H:%M:%S"
-
-#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Rekam"
 
-#: ../src/mainWindow.js:148
+#: ../src/mainWindow.js:149
 msgid "Add Recordings"
 msgstr "Tambah Rekaman"
 
-#: ../src/mainWindow.js:153
+#: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Pakai tombol <b>Rekam</b> untuk membuat rekaman suara"
 
-#: ../src/mainWindow.js:287
+#: ../src/mainWindow.js:300
 msgid "Recording…"
 msgstr "Merekam…"
 
-#: ../src/mainWindow.js:339
+#: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -232,35 +250,43 @@ msgstr[0] "%d Rekaman Suara"
 msgid "Play"
 msgstr "Putar"
 
-#: ../src/mainWindow.js:421
+#: ../src/mainWindow.js:422
 msgid "Pause"
 msgstr "Jeda"
 
-#: ../src/mainWindow.js:525
+#: ../src/mainWindow.js:530
 msgid "Delete"
 msgstr "Hapus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
+msgid "Mono"
+msgstr "Mono"
+
+#: ../src/mainWindow.js:853
+msgid "Stereo"
+msgstr "Stereo"
+
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Muat Lebih Banyak"
 
@@ -268,39 +294,43 @@ msgstr "Muat Lebih Banyak"
 msgid "Unable to play recording"
 msgstr "Tak bisa memutar rekaman"
 
-#: ../src/preferences.js:63
+#: ../src/preferences.js:64
 msgid "Preferred format"
 msgstr "Format yang disukai"
 
-#: ../src/preferences.js:71
+#: ../src/preferences.js:72
+msgid "Default mode"
+msgstr "Mode baku"
+
+#: ../src/preferences.js:80
 msgid "Volume"
 msgstr "Volume"
 
-#: ../src/preferences.js:86
+#: ../src/preferences.js:95
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:66
+#: ../src/record.js:71
 msgid "Unable to create Recordings directory."
 msgstr "Tak bisa membuat direktori Rekaman."
 
-#: ../src/record.js:75
+#: ../src/record.js:80
 msgid "Your audio capture settings are invalid."
 msgstr "Pengaturan penangkapan audio Anda tak valid."
 
-#: ../src/record.js:125
+#: ../src/record.js:130
 msgid "Not all elements could be created."
 msgstr "Tak semua elemen dapat dibuat."
 
-#: ../src/record.js:137
+#: ../src/record.js:142
 msgid "Not all of the elements were linked."
 msgstr "Tak semua elemen ditaut."
 
-#: ../src/record.js:162
+#: ../src/record.js:167
 msgid "No Media Profile was set."
 msgstr "Tak ada Profil Media yang ditata."
 
-#: ../src/record.js:173
+#: ../src/record.js:178
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -309,8 +339,8 @@ msgstr ""
 " ke keadaan perekaman."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1"). */
-#: ../src/record.js:326
+#. by the application (for example, "Clip 1").
+#: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
 msgstr "Klip %d"
