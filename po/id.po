@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-sound-recorder gnome-3-20\n"
+"Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-05-05 10:01+0000\n"
-"PO-Revision-Date: 2016-06-19 16:53+0700\n"
+"POT-Creation-Date: 2016-06-19 09:55+0000\n"
+"PO-Revision-Date: 2016-06-19 16:59+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -20,10 +20,16 @@ msgstr ""
 "X-Generator: Poedit 1.8.8\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Perekam Suara"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "Suatu perekam suara modern yang sederhana bagi GNOME"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -33,13 +39,21 @@ msgstr ""
 "cara singkat untuk merekam dan memutar audio. Itu memungkinkan Anda "
 "melakukan penyuntingan dasar dan membuat memo suara."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
 "Perekam Suara secara otomatis menangani proses penyimpanan sehingga Anda tak "
 "perlu khawatir secara tak sengaja membuang rekaman sebelumnya."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Format audio yang didukung:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3, dan MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -96,11 +110,6 @@ msgstr "Tingkat volume speaker"
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Tingkat volume speaker."
-
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "Perekam Suara"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -223,6 +232,11 @@ msgstr "Tanggal Dibuat"
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Tipe"
+
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Tak dikenal"
 
 #: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
