@@ -4,28 +4,35 @@
 # Christian Kirbach <christian.kirbach@gmail.com>, 2014.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2014-2015.
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2016.
+# Fabian Schölzel <fabian.schoelzel@googlemail.com>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-10 21:11+0000\n"
-"PO-Revision-Date: 2016-01-10 22:37+0100\n"
-"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
-"Language-Team: German <gnome-de@gnome.org>\n"
+"POT-Creation-Date: 2016-06-02 13:45+0000\n"
+"PO-Revision-Date: 2016-06-22 12:48+0200\n"
+"Last-Translator: Fabian Schölzel <fabian.schoelzel@googlemail.com>\n"
+"Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Tonaufzeichner"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "Ein einfacher, moderner Tonaufzeichner für GNOME"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -36,13 +43,21 @@ msgstr ""
 "Grundlegende Bearbeitungsfunktionen und das Aufzeichnen von Gesprächsnotizen "
 "werden unterstützt."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
 "Der Tonaufzeichner handhabt den Speicherungsprozess automatisch, so dass man "
 "sich keine Sorgen machen muss, vorherige Aufzeichnungen zu verlieren."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Unterstützte Tonformate:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 und MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -102,11 +117,6 @@ msgstr "Lautsprecher-Lautstärke"
 msgid "Speaker volume level."
 msgstr "Lautsprecher-Lautstärke."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "Tonaufzeichner"
-
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
 msgstr "Ton mit dem Mikrofon aufnehmen und wiedergeben"
@@ -145,44 +155,44 @@ msgstr "Aufnahmen"
 msgid "translator-credits"
 msgstr "Christian Kirbach <christian.kirbach@gmail.com>, 2014"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Gestern"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "Vor %d Tag"
 msgstr[1] "Vor %d Tagen"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Letzte Woche"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "Vor %d Woche"
 msgstr[1] "Vor %d Wochen"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Letzter Monat"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "Vor %d Monat"
 msgstr[1] "Vor %d Monaten"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Letztes Jahr"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -233,11 +243,12 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Typ"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d.%m.%Y - %H:%M:%S"
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Unbekannt"
 
-#: ../src/mainWindow.js:113 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Aufnehmen"
 
@@ -272,35 +283,35 @@ msgstr "Pause"
 msgid "Delete"
 msgstr "Löschen"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Mono"
 msgstr "Mono"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Stereo"
 msgstr "Stereo"
 
-#: ../src/mainWindow.js:862
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Weitere laden"
 
@@ -358,6 +369,9 @@ msgstr ""
 #, javascript-format
 msgid "Clip %d"
 msgstr "Clip %d"
+
+#~ msgid "%Y-%m-%d %H:%M:%S"
+#~ msgstr "%d.%m.%Y - %H:%M:%S"
 
 #~ msgid "Preferred media type for encoding audio when recording"
 #~ msgstr "Bevorzugte Medienart zum Codieren des Tons bei Aufnahme"
