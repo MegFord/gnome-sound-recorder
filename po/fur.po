@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-"
-"recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-04-07 21:50+0000\n"
-"PO-Revision-Date: 2016-04-08 10:51+0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2016-06-20 16:52+0000\n"
+"PO-Revision-Date: 2016-07-11 16:27+0200\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
 "Language: fur\n"
@@ -17,29 +17,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Regjistradôr di suns"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "Un sempliç, moderni regjistradôr di suns par GNOME"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
-msgid ""
-"Sound Recorder provides a simple and modern interface that provides a straight-"
-"forward way to record and play audio. It allows you to do basic editing, and create "
-"voice memos."
-msgstr ""
-"Regjistradôr di suns e je une semplice e moderne interface che a furnìs un mût "
-"trasparent e clâr di regjistrâ e riprodusi audio. E permet di fâ modifichis "
-"basilârs e di creâ pro memorie vocâi."
-
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
-"Sound Recorder automatically handles the saving process so that you do not need to "
-"worry about accidentally discarding the previous recording."
+"Sound Recorder provides a simple and modern interface that provides a "
+"straight-forward way to record and play audio. It allows you to do basic "
+"editing, and create voice memos."
 msgstr ""
-"Regjistradôr di sun al ministre in maniere automatiche il procès di salvament cussì "
-"che no si à di vê pôre di vê scartât cence volê la regjistrazion precedent."
+"Regjistradôr di suns e je une semplice e moderne interface che a furnìs un "
+"mût trasparent e clâr di regjistrâ e riprodusi audio. E permet di fâ "
+"modifichis basilârs e di creâ pro memorie vocâi."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
+msgid ""
+"Sound Recorder automatically handles the saving process so that you do not "
+"need to worry about accidentally discarding the previous recording."
+msgstr ""
+"Regjistradôr di sun al ministre in maniere automatiche il procès di "
+"salvament cussì che no si à di vê pôre di vê scartât cence volê la "
+"regjistrazion precedent."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Formâts audio supuartâts:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 e MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -60,16 +75,17 @@ msgstr "Posizion barcon (x e y)."
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
 msgid "Maps media types to audio encoder preset names."
 msgstr ""
-"Fâ une mape dai gjenars di file multimediâi par i nons predefinîts dal codificadôr."
+"Fâ une mape dai gjenars di file multimediâi par i nons predefinîts dal "
+"codificadôr."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
 msgid ""
-"Maps media types to audio encoder preset names. If there is no mapping set, the "
-"default encoder settings will be used."
+"Maps media types to audio encoder preset names. If there is no mapping set, "
+"the default encoder settings will be used."
 msgstr ""
-"Fâ une mape dai gjenars di file multimediâi par i nons predefinîts dal codificadôr. "
-"Se no son mapis impuestadis, a vegnaran dopradis lis impostazions predefinidis dal "
-"codificadôr."
+"Fâ une mape dai gjenars di file multimediâi par i nons predefinîts dal "
+"codificadôr. Se no son mapis impuestadis, a vegnaran dopradis lis "
+"impostazions predefinidis dal codificadôr."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Available channels"
@@ -77,11 +93,11 @@ msgstr "Canâi disponibii"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
 msgid ""
-"Maps available channels. If there is not no mapping set, stereo channel will be "
-"used by default."
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
 msgstr ""
-"Mapis canâi disponibii. Se no son impostazions di mape, il canâl stereo al ven "
-"doprât come predefinît."
+"Mapis canâi disponibii. Se no son impostazions di mape, il canâl stereo al "
+"ven doprât come predefinît."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
@@ -98,11 +114,6 @@ msgstr "Nivel volum cassis sonoris"
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Nivel volum cassis sonoris."
-
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "Regjistradôr di suns"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -229,6 +240,11 @@ msgstr "Date di creazion"
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Gjenar"
+
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "No cognossût"
 
 #: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
