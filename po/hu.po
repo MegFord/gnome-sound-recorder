@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the gnome-sound-recorder package.
 #
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2013, 2014.
-# Balázs Úr <urbalazs at gmail dot com>, 2014.
+# Balázs Úr <urbalazs at gmail dot com>, 2014, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-01-19 22:25+0000\n"
-"PO-Revision-Date: 2016-01-19 23:42+0100\n"
+"POT-Creation-Date: 2016-06-02 13:45+0000\n"
+"PO-Revision-Date: 2016-08-04 23:55+0200\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -18,13 +18,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Hangrögzítő"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "Egy egyszerű, modern hangrögzítő a GNOME-hoz"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -34,13 +40,21 @@ msgstr ""
 "nyújt a hang rögzítéséhez és lejátszásához. Lehetővé teszi az alap "
 "szerkesztések elvégzését és hangfeljegyzések létrehozását."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
 "A Hangrögzítő automatikusan kezeli a mentési folyamatot, ezért nem kell "
 "aggódnia a korábbi felvétel véletlen eldobása miatt."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Támogatott hangformátumok:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 és MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -99,11 +113,6 @@ msgstr "Hangszóró hangerőszintje"
 msgid "Speaker volume level."
 msgstr "Hangszóró hangerőszintje."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "Hangrögzítő"
-
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
 msgstr "Hangfelvétel a mikrofonból és lejátszás"
@@ -142,44 +151,44 @@ msgstr "Felvételek"
 msgid "translator-credits"
 msgstr "Kelemen Gábor <kelemeng at gnome dot hu>"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Tegnap"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d napja"
 msgstr[1] "%d napja"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Múlt héten"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d hete"
 msgstr[1] "%d hete"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Múlt hónapban"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d hónapja"
 msgstr[1] "%d hónapja"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Múlt évben"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -230,11 +239,12 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Típus"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%Y. %m. %d. %H.%M.%S"
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Ismeretlen"
 
-#: ../src/mainWindow.js:113 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Felvétel"
 
@@ -269,35 +279,35 @@ msgstr "Szünet"
 msgid "Delete"
 msgstr "Törlés"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Mono"
 msgstr "Mono"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Stereo"
 msgstr "Sztereó"
 
-#: ../src/mainWindow.js:862
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Több betöltése"
 
@@ -355,6 +365,9 @@ msgstr ""
 #, javascript-format
 msgid "Clip %d"
 msgstr "%d. kivágás"
+
+#~ msgid "%Y-%m-%d %H:%M:%S"
+#~ msgstr "%Y. %m. %d. %H.%M.%S"
 
 #~ msgid "Preferred media type for encoding audio when recording"
 #~ msgstr "Előnyben részesített médiatípus a hangkódoláshoz felvételkor"
