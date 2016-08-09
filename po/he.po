@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder 3.9.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-02 13:37+0200\n"
-"PO-Revision-Date: 2016-03-02 13:40+0200\n"
+"POT-Creation-Date: 2016-08-09 18:33+0300\n"
+"PO-Revision-Date: 2016-08-09 18:33+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: עברית <>\n"
 "Language: he\n"
@@ -20,10 +20,16 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "רשמקול"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "רשמקול פשוט וחדיש עבור GNOME"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -32,13 +38,21 @@ msgstr ""
 "רשמקול מספק ממשק פשוט וחדיש המספק דרך פשוטה להקלטת ולהאזנה לשמע. הוא מאפשר "
 "לך עריכה בסיסית ויצירת תזכירים קוליים."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
 "רשמקול מטפל באופן אוטומטי בתהליך השמירה כך שלא נדרש לדאוג על השלכה בטעות של "
 "הקלטה קודמת."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Supported audio formats:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -96,11 +110,6 @@ msgstr "Speaker volume level"
 msgid "Speaker volume level."
 msgstr "Speaker volume level."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "רשמקול"
-
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
 msgstr "להקליט קול באמצעות המיקרופון ולנגן שוב"
@@ -144,7 +153,7 @@ msgid "Yesterday"
 msgstr "אתמול"
 
 #: ../src/fileUtil.js:90
-#, c-format
+#, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "אתמול"
@@ -156,7 +165,7 @@ msgid "Last week"
 msgstr "לפני שבוע"
 
 #: ../src/fileUtil.js:96
-#, c-format
+#, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "לפני שבוע"
@@ -168,7 +177,7 @@ msgid "Last month"
 msgstr "לפני חודש"
 
 #: ../src/fileUtil.js:102
-#, c-format
+#, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "לפני חודש"
@@ -180,7 +189,7 @@ msgid "Last year"
 msgstr "לפני שנה"
 
 #: ../src/fileUtil.js:108
-#, c-format
+#, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "לפני שנה"
@@ -231,6 +240,11 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "סוג"
 
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "לא ידוע"
+
 #: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "הקלטה"
@@ -248,7 +262,7 @@ msgid "Recording…"
 msgstr "מקליט…"
 
 #: ../src/mainWindow.js:352
-#, c-format
+#, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
 msgstr[0] "הקלטת שמע אחת"
