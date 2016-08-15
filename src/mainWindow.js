@@ -342,6 +342,7 @@ const MainView = new Lang.Class({
                     loadMoreButton = null;
                 }
             }));
+        this.pauseImage = Gtk.Image.new_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
 
         this.groupGrid.add(this._scrolledWin);
         this._scrolledWin.show();
@@ -372,7 +373,7 @@ const MainView = new Lang.Class({
             this.listBox.set_activate_on_single_click(true);
             this.listBox.connect("row-selected", Lang.bind(this,
                 function(){
-                    this.rowGridCallback()
+                    this.rowGridCallback();
                 }));
             this.listBox.show();
 
@@ -389,17 +390,22 @@ const MainView = new Lang.Class({
                 this.listBox.add(this.rowGrid);
                 this.rowGrid.show();
 
-                // play button
-                this.playImage = Gtk.Image.new({ name: "PlayImage" });
-                this.playImage.set_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
+                this._playBox = new Gtk.Box({ name: "PlayBox",
+                                   orientation: Gtk.Orientation.VERTICAL,
+                                   height_request: 45 });
+
+                this.playImage = Gtk.Image.new_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
                                                         'media-playback-start-symbolic',
-                                                  Gtk.IconSize.BUTTON);
+                                                    Gtk.IconSize.BUTTON);
                 this._playListButton = new Gtk.Button({ name: "PlayButton",
-                                                        hexpand: true,
+                                                        hexpand: false,
                                                         vexpand: true });
                 this._playListButton.set_image(this.playImage);
                 this._playListButton.set_tooltip_text(_("Play"));
-                this.rowGrid.attach(this._playListButton, 0, 0, 2, 2);
+                this.rowGrid.attach(this._playListButton, 0, 0, 10, 2);
+                // this._playBox.pack_start(this._playListButton, false, true, 0);
+                // this.rowGrid.attach(this._playBox, 0, 0, 10, 2);
+                this._playBox.show();
                 this._playListButton.show();
                 this._playListButton.connect('clicked', Lang.bind(this,
                     function(button){
@@ -410,23 +416,6 @@ const MainView = new Lang.Class({
                         let idx = parseInt(gridForName.name);
                         let file = this._files[idx];
                         this.onPlayPauseToggled(row, file);
-                    }));
-
-                // pause button
-                this.pauseImage = Gtk.Image.new();
-                this.pauseImage.set_from_icon_name('media-playback-pause-symbolic', Gtk.IconSize.BUTTON);
-                this._pauseListButton = new Gtk.Button({ name: "PauseButton",
-                                                         hexpand: true,
-                                                         vexpand: true });
-                this._pauseListButton.set_image(this.pauseImage);
-                this._pauseListButton.set_tooltip_text(_("Pause"));
-                this.rowGrid.attach(this._pauseListButton, 0, 0, 2, 2);
-                this._pauseListButton.hide();
-                this._pauseListButton.connect('clicked', Lang.bind(this,
-                    function(button){
-                        let row = button.get_parent().get_parent();
-                        this.listBox.select_row(row);
-                        this.onPause(row);
                     }));
 
                 this._fileName = new Gtk.Label({ name: "FileNameLabel",
@@ -586,13 +575,15 @@ const MainView = new Lang.Class({
                     if (!alwaysShow)
                         child.hide();
 
-                    if (child.name == "PauseButton") {
-                        child.hide();
-                        child.sensitive = false;
-                    }
                     if (child.name == "PlayButton") {
+                        /* The playImage in the instance can only be assigned once,
+                           so make a local image to use here. */
+                        let playImage = Gtk.Image.new_from_icon_name(rtl ? 'media-playback-start-rtl-symbolic' :
+                                                        'media-playback-start-symbolic',
+                                                        Gtk.IconSize.BUTTON);
+                        child.set_image(playImage);
+                        child.set_tooltip_text(_("Play"));
                         child.show();
-                        child.sensitive = true;
                     }
 
                     if (child.name == "PlayLabelBox") {
@@ -637,9 +628,9 @@ const MainView = new Lang.Class({
                     if (!alwaysShow)
                         child.sensitive = true;
 
-                    if (child.name == "PauseButton") {
-                        child.hide();
-                        child.sensitive = false;
+                    if (child.name == "PlayButton") {
+                        child.set_image(this.playImage);
+                        child.set_tooltip_text(_("Play"));
                     }
 
                     if (child.name == "WaveFormGrid")
@@ -721,14 +712,9 @@ const MainView = new Lang.Class({
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
-                    if (child.name == "PauseButton") {
-                        child.hide();
-                        child.sensitive = false;
-                    }
-
-                    if (child.name == "PlayButton" ) {
-                        child.show();
-                        child.sensitive = true;
+                    if (child.name == "PlayBox" ) {
+                        child.get_child().set_image(this.playImage);
+                        child.get_child().set_tooltip_text(_("Play"));
                     }
                 }));
         }
@@ -745,15 +731,14 @@ const MainView = new Lang.Class({
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
-                    if (child.name == "InfoButton" || child.name == "DeleteButton" ||
-                        child.name == "PlayButton" ) {
+                    if (child.name == "InfoButton" || child.name == "DeleteButton") {
                         child.hide();
                         child.sensitive = false;
                     }
 
-                    if (child.name == "PauseButton") {
-                        child.show();
-                        child.sensitive = true;
+                    if (child.name == "PlayBox") {
+                        child.get_child().set_image(this.pauseImage);
+                        child.get_child().set_tooltip_text(_("Pause"));
                     }
 
                     if (child.name == "PlayLabelBox") {
@@ -778,6 +763,8 @@ const MainView = new Lang.Class({
             if (activeState != PipelineStates.PAUSED) {
                 wave = new Waveform.WaveForm(this.wFGrid, selFile);
             }
+        } else {
+            this.onPause(listRow);
         }
     }
 });
