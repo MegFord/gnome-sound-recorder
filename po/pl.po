@@ -1,43 +1,45 @@
-# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-# Aviary.pl
-# Jeśli masz jakiekolwiek uwagi odnoszące się do tłumaczenia lub chcesz
-# pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
-# gnomepl@aviary.pl
-# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Polish translation for gnome-sound-recorder.
+# Copyright © 2013-2016 the gnome-sound-recorder authors.
+# This file is distributed under the same license as the gnome-sound-recorder package.
 # Piotr Drąg <piotrdrag@gmail.com>, 2013-2016.
-# Aviary.pl <gnomepl@aviary.pl>, 2013-2016.
+# Aviary.pl <community-poland@mozilla.org>, 2013-2016.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-14 04:30+0100\n"
-"PO-Revision-Date: 2016-03-14 04:32+0100\n"
+"POT-Creation-Date: 2016-08-22 17:23+0200\n"
+"PO-Revision-Date: 2016-08-22 17:24+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Polish <gnomepl@aviary.pl>\n"
+"Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-Language: Polish\n"
-"X-Poedit-Country: Poland\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Nagrywanie"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "Prosty, nowoczesny program do nagrywania dźwięku dla GNOME"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
 "editing, and create voice memos."
 msgstr ""
-"Program do nagrywania dźwięku dostarcza prosty i nowoczesny interfejs, "
-"umożliwiający nagrywanie i odtwarzanie dźwięku w prosty sposób. Można także "
-"przeprowadzać podstawową edycję i tworzyć notatki głosowe."
+"Program do nagrywania dźwięku dostarcza prosty i nowoczesny interfejs, "
+"umożliwiający nagrywanie i odtwarzanie dźwięku w prosty sposób. Można także "
+"przeprowadzać podstawową edycję i tworzyć notatki głosowe."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
@@ -45,13 +47,21 @@ msgstr ""
 "Program do nagrywania dźwięku automatycznie zajmuje się procesem "
 "zapisywania, więc nie ma obawy utraty poprzednich nagrań."
 
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Obsługiwane formaty dźwięku:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 i MOV"
+
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
 msgstr "Rozmiar okna"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:2
 msgid "Window size (width and height)."
-msgstr "Rozmiar okna (szerokość i wysokość)."
+msgstr "Rozmiar okna (szerokość i wysokość)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:3
 msgid "Window position"
@@ -59,7 +69,7 @@ msgstr "Położenie okna"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:4
 msgid "Window position (x and y)."
-msgstr "Położenie okna (na osi X i Y)."
+msgstr "Położenie okna (na osi X i Y)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
 msgid "Maps media types to audio encoder preset names."
@@ -101,14 +111,9 @@ msgstr "Poziom głośności głośnika"
 msgid "Speaker volume level."
 msgstr "Poziom głośności głośnika."
 
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "Nagrywanie"
-
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
-msgstr "Nagrywanie dźwięku przez mikrofon i jego odtwarzanie"
+msgstr "Nagrywanie dźwięku przez mikrofon i jego odtwarzanie"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:3
 msgid "Audio;Application;Record;"
@@ -124,7 +129,7 @@ msgstr "Preferencje"
 
 #: ../src/application.js:53
 msgid "About"
-msgstr "O programie"
+msgstr "O programie"
 
 #: ../src/application.js:54
 msgid "Quit"
@@ -144,7 +149,7 @@ msgstr "Nagrania"
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2013-2016\n"
-"Aviary.pl <gnomepl@aviary.pl>, 2013-2016"
+"Aviary.pl <community-poland@mozilla.org>, 2013-2016"
 
 #: ../src/fileUtil.js:88
 msgid "Yesterday"
@@ -237,6 +242,11 @@ msgstr "Data utworzenia"
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Typ"
+
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Nieznany"
 
 #: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
