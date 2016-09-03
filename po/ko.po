@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-12 10:24+0000\n"
-"PO-Revision-Date: 2016-03-13 03:46+0900\n"
+"sound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2016-08-22 15:25+0000\n"
+"PO-Revision-Date: 2016-09-03 22:45+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -21,10 +21,16 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "녹음기"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "간단하면서 현대적인 그놈 데스크톱 녹음기"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -33,13 +39,21 @@ msgstr ""
 "녹음기의 인터페이스는 간단하면서 현대적이고, 직관적으로 오디오를 녹음하고 재"
 "생할 수 있습니다. 간단한 편집을 할 수도 있고, 음성 메모를 만들 수 있습니다."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
 "녹음기는 저장을 자동으로 처리하므로 이전 녹음을 실수로 잃어버릴 걱정을 하지 "
 "않아도 됩니다."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "지원하는 오디오 형식:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3, MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -77,7 +91,9 @@ msgstr "사용 가능한 채널"
 msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
-msgstr "사용 가능한 채널을 매핑합니다. 매핑 모음이 없을 경우, 스테레오 채널을 기본값으로 사용합니다."
+msgstr ""
+"사용 가능한 채널을 매핑합니다. 매핑 모음이 없을 경우, 스테레오 채널을 기본값"
+"으로 사용합니다."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
@@ -94,11 +110,6 @@ msgstr "스피커 볼륨 단계"
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "스피커 볼륨 단계."
-
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "녹음기"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -221,6 +232,11 @@ msgstr "만든 시각"
 msgctxt "Media Type"
 msgid "Type"
 msgstr "종류"
+
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "알 수 없음"
 
 #: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
