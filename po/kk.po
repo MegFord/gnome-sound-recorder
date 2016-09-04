@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-05 10:25+0000\n"
-"PO-Revision-Date: 2016-03-05 16:02+0500\n"
+"sound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2016-08-22 15:25+0000\n"
+"PO-Revision-Date: 2016-09-04 09:17+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -17,13 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Дыбыстарды жазу қолданбасы"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "GNOME үшін жеңіл әрі заманауи дыбыстарды жазу қолданбасы"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -33,13 +39,21 @@ msgstr ""
 "заманауи әрі түсінікті интерфейсті ұсынады. Ол қарапайым түзетуді, әрі "
 "дыбыстық жазбаларды жасауды мүмкін етеді."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
 "Дыбыстарды жазу қолданбасы сақтауды өзі орындайды, сол себептен, жасалған "
 "дыбыстық жазбалар жоғала ма деп уайымдау керек емес."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Қолдауы бар аудио пішімдері:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 және MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -96,11 +110,6 @@ msgstr "Динамик дыбысының деңгейі"
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Динамик дыбысының деңгейі."
-
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "Дыбыстарды жазу қолданбасы"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -223,6 +232,11 @@ msgstr "Жасалған күні"
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Түрі"
+
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Белгісіз"
 
 #: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
