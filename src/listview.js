@@ -21,7 +21,7 @@
 const _ = imports.gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const GObject = imports.gi.GObject; 
+const GObject = imports.gi.GObject;
 const Gst = imports.gi.Gst;
 const GstPbutils = imports.gi.GstPbutils;
 const Lang = imports.lang;
@@ -146,7 +146,7 @@ const Listview = new Lang.Class({
                     } else {
                         stopVal = EnumeratorState.CLOSED;
                         this._enumerator.close(null);
-                        
+
                         if (MainWindow.offsetController.getEndIdx() == -1) {
                              if (listType == ListType.NEW) {
                                 MainWindow.view.listBoxAdd();
@@ -262,7 +262,7 @@ const Listview = new Lang.Class({
     _onDirChanged: function(dirMonitor, file1, file2, eventType) {
         if ((eventType == Gio.FileMonitorEvent.MOVED_OUT && !Gio.Application.get_default().saveDir.equal(file1)) ||
             (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT
-                && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
+                && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED) || (eventType == Gio.FileMonitorEvent.RENAMED)) {
             stopVal = EnumeratorState.ACTIVE;
             allFilesInfo.length = 0;
             fileInfo.length = 0;
@@ -279,20 +279,20 @@ const Listview = new Lang.Class({
             startRecording = true;
         }
 
-        else if (eventType == Gio.FileMonitorEvent.RENAMED) {
-            let index = fileLookup[file1.get_uri()];
+        // else if (eventType == Gio.FileMonitorEvent.RENAMED) {
+        //     let index = fileLookup[file1.get_uri()];
 
-            // Delete the old lookup for the file and make a new one
-            delete fileLookup[file1.get_uri()];
-            fileLookup[file2.get_uri()] = index;
+        //     // Delete the old lookup for the file and make a new one
+        //     delete fileLookup[file1.get_uri()];
+        //     fileLookup[file2.get_uri()] = index;
 
-            // Update the file info array
-            allFilesInfo[index].uri = file2.get_uri();
-            allFilesInfo[index].fileName = file2.get_parse_name().split('/').pop();
+        //     // Update the file info array
+        //     allFilesInfo[index].uri = file2.get_uri();
+        //     allFilesInfo[index].fileName = file2.get_parse_name().split('/').pop();
 
-            let file1Name = file1.get_parse_name().split('/').pop();
-            MainWindow.view.setNameLabel(allFilesInfo[index].fileName, file1Name, index);
-        }
+        //     let file1Name = file1.get_parse_name().split('/').pop();
+        //     MainWindow.view.setNameLabel(allFilesInfo[index].fileName, file1Name, index);
+        // }
 
         else if (eventType == Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
             Gio.Application.get_default().ensure_directory();
