@@ -1,5 +1,5 @@
 # Danish translation for gnome-sound-recorder.
-# Copyright (C) 2014, 2015 gnome-sound-recorder's COPYRIGHT HOLDER
+# Copyright (C) 2014-2016 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # Ask Hjorth Larsen <asklarsen@gmail.com>, 2014, 2015.
 # Kris Thomsen <mail@kristhomsen.dk>, 2014, 2016.
@@ -7,10 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-22 10:24+0000\n"
-"PO-Revision-Date: 2016-03-14 20:57+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-13 01:58+0200\n"
+"PO-Revision-Date: 2016-09-08 23:55+0200\n"
 "Last-Translator: Kris Thomsen <mail@kristhomsen.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -20,10 +19,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Lydoptagelse"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "En simpel, moderne lydoptager til GNOME"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -33,13 +38,21 @@ msgstr ""
 "optage og afspille lyd. Den giver dig mulighed for at lave basal redigering "
 "og oprette lyd-memo'er."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
 "Lydoptager gemmer automatisk, så du ikke behøver være bange for at komme til "
 "at slette den tidligere optagelse ved et uheld."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Understøttede lydformater:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 og MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -66,8 +79,8 @@ msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
 msgstr ""
-"Tildeler forudbestemte lydkodernavne til medietyper. Hvis ingen indstilling er "
-"givet, vil standardkoderindstillingerne blive benyttet."
+"Tildeler forudbestemte lydkodernavne til medietyper. Hvis ingen indstilling "
+"er givet, vil standardkoderindstillingerne blive benyttet."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
 msgid "Available channels"
@@ -78,8 +91,8 @@ msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
 msgstr ""
-"Tildeler tilgængelige kanaler. Hvis ingen indstilling er givet, vil "
-"stereo-kanalen blive brugt som standard."
+"Tildeler tilgængelige kanaler. Hvis ingen indstilling er givet, vil stereo-"
+"kanalen blive brugt som standard."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
@@ -96,11 +109,6 @@ msgstr "Højtalerlydstyrke"
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Højtalerlydstyrke."
-
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "Lydoptagelse"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -145,44 +153,44 @@ msgstr ""
 "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Mere info: http://www.dansk-gruppen.dk"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "I går"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d dag siden"
 msgstr[1] "%d dage siden"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Sidste uge"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d uge siden"
 msgstr[1] "%d uger siden"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Sidste måned"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d måned siden"
 msgstr[1] "%d måneder siden"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Sidste år"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -233,11 +241,12 @@ msgctxt "Media Type"
 msgid "Type"
 msgstr "Type"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%Y-%m-%d %H:%M:%S"
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Ukendt"
 
-#: ../src/mainWindow.js:113 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Optag"
 
@@ -272,35 +281,35 @@ msgstr "Pause"
 msgid "Delete"
 msgstr "Slet"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Mono"
 msgstr "Mono"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
 msgid "Stereo"
 msgstr "Stereo"
 
-#: ../src/mainWindow.js:862
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Indlæs flere"
 
@@ -358,6 +367,9 @@ msgstr ""
 #, javascript-format
 msgid "Clip %d"
 msgstr "Klip %d"
+
+#~ msgid "%Y-%m-%d %H:%M:%S"
+#~ msgstr "%Y-%m-%d %H:%M:%S"
 
 #~ msgid "Preferred media type for encoding audio when recording"
 #~ msgstr "Foretrukken medietype til lydkodning ved optagelse"
