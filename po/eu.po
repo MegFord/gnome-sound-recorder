@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-15 16:50+0100\n"
-"PO-Revision-Date: 2016-03-15 16:51+0100\n"
+"POT-Creation-Date: 2016-09-16 09:29+0200\n"
+"PO-Revision-Date: 2016-09-15 21:33+0100\n"
 "Last-Translator: dooteo <dooteo@zundan.com>\n"
-"Language-Team: Basque <librezale@librezale.org>\n"
+"Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,10 +20,16 @@ msgstr ""
 "X-Generator: Lokalize 2.0\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Soinu grabatzailea"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "GNOMEren interfaze xume eta modernoa duen soinu-grabatzailea"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -33,13 +39,21 @@ msgstr ""
 "grabatzeko eta erreproduzitzeko zuzeneko moduarekin. Oinarrizko edizioa "
 "baimentzen du, baita ahotsezko zirkularrak sortzea ere."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr ""
 "Soinu grabatzaileak automatikoki gordetzeko prozesua kudeatzen duenez, ez "
 "duzu kezkatu beharrik aurreko grabazioa ezuste batean baztertuz gero."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Onartutako audio-formatuak:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 eta MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -79,8 +93,8 @@ msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
 msgstr ""
-"Mapatu kanal erabilgarriak. Maparik ez balego ezarrita, "
-"kanal estereoa erabiliko litzateke."
+"Mapatu kanal erabilgarriak. Maparik ez balego ezarrita, kanal estereoa "
+"erabiliko litzateke."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
@@ -97,11 +111,6 @@ msgstr "Bozgorailuen bolumen-maila"
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Bozgorailuen bolumen-maila."
-
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "Soinu grabatzailea"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -228,6 +237,11 @@ msgstr "Sortze-data"
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Mota"
+
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Ezezaguna"
 
 #: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
