@@ -1,16 +1,16 @@
 # Turkish translation for gnome-sound-recorder.
 # Copyright (C) 2014 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
-#
 # Gökhan Gurbetoğlu <ggurbet@gmail.com>, 2014.
-# Muhammet Kara <muhammetk@gmail.com>, 2014, 2015.
-#
+# Muhammet Kara <muhammetk@gmail.com>, 2014, 2015, 2016.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-13 08:52+0000\n"
-"PO-Revision-Date: 2015-01-06 07:13+0000\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2016-09-09 12:52+0000\n"
+"PO-Revision-Date: 2016-10-19 00:36+0300\n"
 "Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -18,23 +18,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
-msgid "A simple, modern sound recorder for GNOME"
-msgstr "GNOME için basit, modern bir ses kaydedici"
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "Ses Kaydedici"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+msgid "A simple, modern sound recorder for GNOME"
+msgstr "GNOME için sade, çağdaş bir ses kaydedici"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
 "editing, and create voice memos."
-msgstr "Ses Kaydedicisi, ses kaydetmeniz ve oynatmanız için basit bir yol sunan sade ve modern bir arayüz sağlar. Temel düzenlemeler yapmanıza ve sesli notlar oluşturmanıza olanak tanır."
+msgstr ""
+"Ses Kaydedicisi, ses kaydetmeniz ve oynatmanız için kolay bir yol sunan sade "
+"ve çağdaş bir arayüz sağlar. Temel düzenlemeler yapmanıza ve sesli notlar "
+"oluşturmanıza olanak tanır."
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
-msgstr "Ses Kaydedicisi, kaydetme sürecini otomatik olarak yönetir; böylece, bir önceki kaydı yanlışlıkla silmekten korkmanıza gerek kalmaz."
+msgstr ""
+"Ses Kaydedicisi, kaydetme sürecini kendi kendine yönetir; böylece, bir "
+"önceki kaydı yanlışlıkla silmekten korkmanıza gerek kalmaz."
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "Desteklenen ses biçimleri:"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis, Opus, FLAC, MP3 ve MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -54,34 +75,44 @@ msgstr "Pencere konumu (x ve y)."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:5
 msgid "Maps media types to audio encoder preset names."
-msgstr "Ortam türlerini önceden tanımlanmış ses kodlayıcı adlarıyla eşleştirir."
+msgstr ""
+"Ortam türlerini önceden tanımlanmış ses kodlayıcı adlarıyla eşleştirir."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:6
 msgid ""
 "Maps media types to audio encoder preset names. If there is no mapping set, "
 "the default encoder settings will be used."
-msgstr "Ortam türlerini önceden tanımlanmış ses kodlayıcı adlarıyla eşleştirir. Eğer herhangi bir eşleşme yapılmamışsa, öntanımlı kodlayıcı ayarları kullanılır."
+msgstr ""
+"Ortam türlerini önceden tanımlanmış ses kodlayıcı adlarıyla eşleştirir. Eğer "
+"herhangi bir eşleşme yapılmamışsa, öntanımlı kodlayıcı ayarları kullanılır."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:7
+msgid "Available channels"
+msgstr "Uygun kanallar"
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+msgid ""
+"Maps available channels. If there is not no mapping set, stereo channel will "
+"be used by default."
+msgstr ""
+"Uygun kanalları haritalar. Eğer bir haritalama kümesi yoksa, çiftli kanal "
+"öntanımlı olarak kullanılır."
+
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
 msgstr "Mikrofon ses düzeyi"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:8
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
 msgid "Microphone volume level."
 msgstr "Mikrofon ses düzeyi."
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:11
 msgid "Speaker volume level"
 msgstr "Hoparlör ses düzeyi"
 
-#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:10
+#: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "Hoparlör ses düzeyi."
-
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:155
-#: ../src/record.js:105
-msgid "Sound Recorder"
-msgstr "Ses Kaydedici"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -95,7 +126,7 @@ msgstr "Ses;Uygulama;Kayıt;"
 msgid "SoundRecorder"
 msgstr "SoundRecorder"
 
-#: ../src/application.js:50 ../src/preferences.js:39
+#: ../src/application.js:50 ../src/preferences.js:40
 msgid "Preferences"
 msgstr "Tercihler"
 
@@ -111,113 +142,122 @@ msgstr "Çıkış"
 msgid "Sound Recorder started"
 msgstr "Ses Kaydedici başladı"
 
-#. Translators: "Recordings" here refers to the name of the directory where
-#. the application places files */
-#: ../src/application.js:89
+#. Translators: "Recordings" here refers to the name of the directory where the application places files
+#: ../src/application.js:93
 msgid "Recordings"
 msgstr "Kayıtlar"
 
-#. Translators: Replace "translator-credits" with your names, one name per
-#. line */
-#: ../src/application.js:154
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/application.js:167
 msgid "translator-credits"
 msgstr "Muhammet Kara <muhammetk@gmail.com>"
 
-#: ../src/fileUtil.js:89
+#: ../src/fileUtil.js:88
 msgid "Yesterday"
 msgstr "Dün"
 
-#: ../src/fileUtil.js:91
+#: ../src/fileUtil.js:90
 #, javascript-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "%d gün önce"
 
-#: ../src/fileUtil.js:95
+#: ../src/fileUtil.js:94
 msgid "Last week"
 msgstr "Geçen hafta"
 
-#: ../src/fileUtil.js:97
+#: ../src/fileUtil.js:96
 #, javascript-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "%d hafta önce"
 
-#: ../src/fileUtil.js:101
+#: ../src/fileUtil.js:100
 msgid "Last month"
 msgstr "Geçen ay"
 
-#: ../src/fileUtil.js:103
+#: ../src/fileUtil.js:102
 #, javascript-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] "%d ay önce"
 
-#: ../src/fileUtil.js:107
+#: ../src/fileUtil.js:106
 msgid "Last year"
 msgstr "Geçen yıl"
 
-#: ../src/fileUtil.js:109
+#: ../src/fileUtil.js:108
 #, javascript-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
 msgstr[0] "%d yıl önce"
 
-#: ../src/info.js:46 ../src/mainWindow.js:512
+#: ../src/info.js:44 ../src/mainWindow.js:515
 msgid "Info"
 msgstr "Bilgi"
 
-#: ../src/info.js:55
+#: ../src/info.js:48
 msgid "Cancel"
 msgstr "İptal"
 
-#: ../src/info.js:69 ../src/mainWindow.js:301
+#. finish button (stop recording)
+#: ../src/info.js:53 ../src/mainWindow.js:314
 msgid "Done"
 msgstr "Tamam"
 
-#: ../src/info.js:95
+#. File Name item
+#. Translators: "File Name" is the label next to the file name
+#. in the info dialog
+#: ../src/info.js:80
 msgctxt "File Name"
 msgid "Name"
 msgstr "İsim"
 
-#: ../src/info.js:102
+#. Source item
+#: ../src/info.js:87
 msgid "Source"
 msgstr "Kaynak"
 
-#: ../src/info.js:111
+#. Date Modified item
+#: ../src/info.js:96
 msgid "Date Modified"
 msgstr "Değiştirme Tarihi"
 
-#: ../src/info.js:117
+#. Date Created item
+#: ../src/info.js:102
 msgid "Date Created"
 msgstr "Oluşturma Tarihi"
 
-#: ../src/info.js:128
+#. Media type item
+#. Translators: "Type" is the label next to the media type
+#. (Ogg Vorbis, AAC, ...) in the info dialog
+#: ../src/info.js:113
 msgctxt "Media Type"
 msgid "Type"
 msgstr "Türü"
 
-#: ../src/listview.js:127 ../src/listview.js:222
-msgid "%Y-%m-%d %H:%M:%S"
-msgstr "%d-%m-%Y %H:%M:%S"
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "Bilinmiyor"
 
-#: ../src/mainWindow.js:112 ../src/mainWindow.js:779
+#: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
 msgstr "Kaydet"
 
-#: ../src/mainWindow.js:148
+#: ../src/mainWindow.js:149
 msgid "Add Recordings"
 msgstr "Kayıt Ekle"
 
-#: ../src/mainWindow.js:153
+#: ../src/mainWindow.js:154
 msgid "Use the <b>Record</b> button to make sound recordings"
 msgstr "Ses kaydı yapmak için <b>Kaydet</b> düğmesini kullanın"
 
-#: ../src/mainWindow.js:287
+#: ../src/mainWindow.js:300
 msgid "Recording…"
 msgstr "Kaydediliyor..."
 
-#: ../src/mainWindow.js:339
+#: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
 msgid_plural "%d Recorded Sounds"
@@ -227,35 +267,43 @@ msgstr[0] "%d Ses Kaydedildi"
 msgid "Play"
 msgstr "Oynat"
 
-#: ../src/mainWindow.js:421
+#: ../src/mainWindow.js:422
 msgid "Pause"
 msgstr "Duraklat"
 
-#: ../src/mainWindow.js:525
+#: ../src/mainWindow.js:530
 msgid "Delete"
 msgstr "Sil"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "Opus"
 msgstr "Opus"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MP3"
 msgstr "MP3"
 
-#: ../src/mainWindow.js:814
+#: ../src/mainWindow.js:829
 msgid "MOV"
 msgstr "MOV"
 
-#: ../src/mainWindow.js:838
+#: ../src/mainWindow.js:853
+msgid "Mono"
+msgstr "Tekli"
+
+#: ../src/mainWindow.js:853
+msgid "Stereo"
+msgstr "Çiftli"
+
+#: ../src/mainWindow.js:877
 msgid "Load More"
 msgstr "Daha Fazlasını Yükle"
 
@@ -263,47 +311,56 @@ msgstr "Daha Fazlasını Yükle"
 msgid "Unable to play recording"
 msgstr "Kayıt oynatılamadı"
 
-#: ../src/preferences.js:63
+#: ../src/preferences.js:64
 msgid "Preferred format"
-msgstr "Tercih edilen biçim"
+msgstr "Yeğlenen biçim"
 
-#: ../src/preferences.js:71
+#: ../src/preferences.js:72
+msgid "Default mode"
+msgstr "Öntanımlı kip"
+
+#: ../src/preferences.js:80
 msgid "Volume"
-msgstr "Ses Düzeyi"
+msgstr "Ses düzeyi"
 
-#: ../src/preferences.js:86
+#: ../src/preferences.js:95
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: ../src/record.js:66
+#: ../src/record.js:71
 msgid "Unable to create Recordings directory."
 msgstr "Kayıtlar dizini oluşturulamıyor."
 
-#: ../src/record.js:75
+#: ../src/record.js:80
 msgid "Your audio capture settings are invalid."
 msgstr "Ses yakalama ayarlarınız geçersiz."
 
-#: ../src/record.js:122
+#: ../src/record.js:130
 msgid "Not all elements could be created."
 msgstr "Tüm ögeler oluşturulamadı."
 
-#: ../src/record.js:133
+#: ../src/record.js:142
 msgid "Not all of the elements were linked."
 msgstr "Tüm ögeler bağlanamadı."
 
-#: ../src/record.js:158
+#: ../src/record.js:167
 msgid "No Media Profile was set."
 msgstr "Ortam Profili ayarlanmadı."
 
-#: ../src/record.js:169
+#: ../src/record.js:178
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
-msgstr "Veri yolu kayıt durumuna \ngetirilemedi."
+msgstr ""
+"Veri yolu kayıt durumuna \n"
+"getirilemedi."
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
-#. by the application (for example, "Clip 1"). */
-#: ../src/record.js:318
+#. by the application (for example, "Clip 1").
+#: ../src/record.js:357
 #, javascript-format
 msgid "Clip %d"
 msgstr "Klip %d"
+
+#~ msgid "%Y-%m-%d %H:%M:%S"
+#~ msgstr "%d-%m-%Y %H:%M:%S"
