@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-02-29 22:26+0000\n"
-"PO-Revision-Date: 2016-02-25 12:29-0700\n"
+"sound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2016-10-18 21:38+0000\n"
+"PO-Revision-Date: 2016-10-29 23:20+0800\n"
 "Last-Translator: Jeff Bai <jeffbai@aosc.xyz>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -20,13 +20,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
+#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
+#: ../src/record.js:113
+msgid "Sound Recorder"
+msgstr "录音机"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
 msgid "A simple, modern sound recorder for GNOME"
 msgstr "用于 GNOME 的一个简单，现代的录音机。"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:2
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
 msgid ""
 "Sound Recorder provides a simple and modern interface that provides a "
 "straight-forward way to record and play audio. It allows you to do basic "
@@ -35,11 +41,19 @@ msgstr ""
 "录音机采用了一个简单并且现代的交互方式来提供直接的方式来记录和播放音频。可以"
 "让你做一些基本的编辑，还可以制作声音记录。"
 
-#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:3
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:4
 msgid ""
 "Sound Recorder automatically handles the saving process so that you do not "
 "need to worry about accidentally discarding the previous recording."
 msgstr "录音机会自动处理保存过程，所以你不用担心不小心丢失以前的录音。"
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:5
+msgid "Supported audio formats:"
+msgstr "支持的音频格式："
+
+#: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:6
+msgid "Ogg Vorbis, Opus, FLAC, MP3 and MOV"
+msgstr "Ogg Vorbis、Opus、FLAC、MP3 和 MOV"
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:1
 msgid "Window size"
@@ -94,11 +108,6 @@ msgstr "扬声器音量级别"
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:12
 msgid "Speaker volume level."
 msgstr "扬声器音量级别。"
-
-#: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
-msgid "Sound Recorder"
-msgstr "录音机"
 
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:2
 msgid "Record sound via the microphone and play it back"
@@ -226,6 +235,11 @@ msgstr "创建日期"
 msgctxt "Media Type"
 msgid "Type"
 msgstr "类型"
+
+#. Media type data
+#: ../src/info.js:152
+msgid "Unknown"
+msgstr "未知"
 
 #: ../src/mainWindow.js:113 ../src/mainWindow.js:794
 msgid "Record"
