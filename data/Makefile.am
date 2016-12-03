@@ -10,7 +10,7 @@ apps_DATA = org.gnome.SoundRecorder.desktop
 
 gsettings_SCHEMAS = org.gnome.gnome-sound-recorder.gschema.xml
 
-@INTLTOOL_XML_NOMERGE_RULE@ 
+@INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
 
 

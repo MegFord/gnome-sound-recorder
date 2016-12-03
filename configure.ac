@@ -12,7 +12,6 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
                    [The prefix for our gettext translation domains.])
 IT_PROG_INTLTOOL([0.26])
-
 GLIB_GSETTINGS
 GOBJECT_INTROSPECTION_REQUIRE([1.0])
 PKG_CHECK_MODULES([DEPS], [gdk-3.0
@@ -27,6 +26,8 @@ AC_PATH_PROG(GJS, [gjs])
 GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable glib_compile_resources gio-2.0`
 AC_SUBST(GLIB_COMPILE_RESOURCES)
 
+dnl Installed tests
+BEHAVE_INSTALLED_TESTS
 
 AC_OUTPUT([
 Makefile
@@ -35,4 +36,7 @@ data/appdata/Makefile
 data/icons/Makefile
 src/Makefile
 po/Makefile.in
+])
+AC_MSG_NOTICE([
+       Installed tests:          $enable_installed_tests
 ])

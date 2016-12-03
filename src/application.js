@@ -19,6 +19,7 @@
 
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const GMenu = imports.gi.GMenu;
 const Gst = imports.gi.Gst;
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
@@ -39,41 +40,58 @@ const Application = new Lang.Class({
     Extends: Gtk.Application,
 
     _init: function() {
-        this.parent({ application_id: pkg.name }); 
-        GLib.set_application_name(_("SoundRecorder"));         
+        this.parent({ application_id: pkg.name });
+        GLib.set_application_name(_("SoundRecorder"));
     },
-    
+
+    /* Callback functions for Application Menu ActionEntries */
+
+    _onPreferencesAction: function() {
+            this._showPreferences();
+    },
+
+    _onAboutAction: function() {
+            this._showAbout();
+    },
+
+    _onQuitAction: function() {
+            this.quit();
+    },
+
+    /* End Callback functions for Application Menu ActionEntries */
+
     _initAppMenu: function() {
         let menu = new Gio.Menu();
         let section = new Gio.Menu();
         menu.append_section(null, section);
         section.append(_("Preferences"), 'app.preferences');
-        section = new Gio.Menu();
-        menu.append_section(null, section);
-        section.append(_("About"), 'app.about');
-        section.append(_("Quit"),'app.quit');
+        let sectionTwo = new Gio.Menu();
+        menu.append_section(null, sectionTwo);
+        sectionTwo.append(_("About"), 'app.about');
+        sectionTwo.append(_("Quit"),'app.quit');
         this.set_app_menu(menu);
-        let preferences = new Gio.SimpleAction({ name: 'preferences' });
-        preferences.connect('activate', Lang.bind(this,
-            function() {
-                this._showPreferences();
-            }));
-        this.add_action(preferences);
-        
+
         let aboutAction = new Gio.SimpleAction({ name: 'about' });
-        aboutAction.connect('activate', Lang.bind(this, 
+        aboutAction.connect('activate', Lang.bind(this,
             function() {
-                this._showAbout();
+                this._onAboutAction();
             }));
         this.add_action(aboutAction);
-        
+
+        let preferencesAction = new Gio.SimpleAction({ name: 'preferences' });
+        preferencesAction.connect('activate', Lang.bind(this,
+            function() {
+                this._onPreferencesAction();
+            }));
+        this.add_action(preferencesAction);
+
         let quitAction = new Gio.SimpleAction({ name: 'quit' });
         quitAction.connect('activate', Lang.bind(this,
             function() {
-                this.quit();
+                this._onQuitAction();
             }));
-         this.add_action(quitAction);
-         this.add_accelerator('<Primary>q', 'app.quit', null);
+        this.add_action(quitAction);
+        this.add_accelerator('<Primary>q', 'app.quit', null);
     },
 
     vfunc_startup: function() {
@@ -87,7 +105,21 @@ const Application = new Lang.Class({
         settings = new Gio.Settings({ schema: 'org.gnome.gnome-sound-recorder' });
         this.ensure_directory();
     },
-    
+
+    vfunc_activate: function() {
+        (this.window = new MainWindow.MainWindow({ application: this })).show();
+    },
+
+    onWindowDestroy: function() {
+        if (MainWindow.wave.pipeline)
+            MainWindow.wave.pipeline.set_state(Gst.State.NULL);
+        if (MainWindow._record.pipeline)
+            MainWindow._record.pipeline.set_state(Gst.State.NULL);
+
+        if (MainWindow.play.play)
+            MainWindow.play.play.set_state(Gst.State.NULL);
+    },
+
     ensure_directory: function() {
         /* Translators: "Recordings" here refers to the name of the directory where the application places files */
         let path = GLib.build_filenamev([GLib.get_home_dir(), _("Recordings")]);
@@ -97,20 +129,7 @@ const Application = new Lang.Class({
         this.saveDir = Gio.file_new_for_path(path);
     },
 
-    vfunc_activate: function() {
-        (this.window = new MainWindow.MainWindow({ application: this })).show();
-    },
-    
-    onWindowDestroy: function() {
-        if (MainWindow.wave.pipeline)
-            MainWindow.wave.pipeline.set_state(Gst.State.NULL);
-        if (MainWindow._record.pipeline) 
-            MainWindow._record.pipeline.set_state(Gst.State.NULL);
-        
-        if (MainWindow.play.play) 
-            MainWindow.play.play.set_state(Gst.State.NULL);        
-    },
-    
+    /* Functions for showing the Preferences Dialog and setting preferences */
     _showPreferences: function() {
         let preferencesDialog = new Preferences.Preferences();
 
@@ -118,13 +137,13 @@ const Application = new Lang.Class({
             function(widget, response) {
                 preferencesDialog.widget.destroy();
             }));
-    },   
-        
+    },
+
     getPreferences: function() {
         let set = settings.get_int("media-type-preset");
         return set;
      },
-    
+
     setPreferences: function(profileName) {
         settings.set_int("media-type-preset", profileName);
     },
@@ -137,27 +156,30 @@ const Application = new Lang.Class({
     setChannelsPreferences: function(channel) {
         settings.set_int("channel", channel);
     },
-     
+
     getMicVolume: function() {
         let micVolLevel = settings.get_double("mic-volume");
         return micVolLevel;
     },
-     
+
     setMicVolume: function(level) {
          settings.set_double("mic-volume", level);
     },
-    
+
     getSpeakerVolume: function() {
         let speakerVolLevel = settings.get_double("speaker-volume");
         return speakerVolLevel;
     },
-     
+
     setSpeakerVolume: function(level) {
          settings.set_double("speaker-volume", level);
     },
-    
+
+    /* End functions for showing the Preferences Dialog and setting preferences */
+
     _showAbout: function() {
         let aboutDialog = new Gtk.AboutDialog();
+
         aboutDialog.artists = [ 'Reda Lazri <the.red.shortcut@gmail.com>',
                                 'Garrett LeSage <garrettl@gmail.com>',
                                 'Hylke Bons <hylkebons@gmail.com>',

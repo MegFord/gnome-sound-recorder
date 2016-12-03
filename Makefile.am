@@ -21,4 +21,9 @@ GITIGNOREFILES = .anjuta .anjuta_sym_db.db m4/
 
 distdir = $(PACKAGE_NAME)-$(VERSION)
 
-include $(top_srcdir)/git.mk
+@BEHAVE_INSTALLED_TESTS_RULE@
+INSTALLED_TESTS = \
+	test_app.feature \
+	$(NULL)
+INSTALLED_TESTS_TYPE = session-exclusive
+-include $(top_srcdir)/git.mk
