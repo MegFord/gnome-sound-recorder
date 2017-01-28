@@ -347,8 +347,8 @@ const MainView = new Lang.Class({
         this._scrolledWin.show();
         let sounds = list.getItemCount();
         let title;
-        // Translators: This is the title in the headerbar
         if (sounds > 0) {
+            // Translators: This is the title in the headerbar
             title = Gettext.ngettext("%d Recorded Sound",
                                      "%d Recorded Sounds",
                                       sounds).format(sounds);
