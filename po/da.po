@@ -7,8 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-13 01:58+0200\n"
+"Report-Msgid-Bugs-To: "
+"http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-sound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2017-01-28 01:02+0000\n"
 "PO-Revision-Date: 2016-09-08 23:55+0200\n"
 "Last-Translator: Kris Thomsen <mail@kristhomsen.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -91,8 +92,8 @@ msgid ""
 "Maps available channels. If there is not no mapping set, stereo channel will "
 "be used by default."
 msgstr ""
-"Tildeler tilgængelige kanaler. Hvis ingen indstilling er givet, vil stereo-"
-"kanalen blive brugt som standard."
+"Tildeler tilgængelige kanaler. Hvis ingen indstilling er givet, vil "
+"stereo-kanalen blive brugt som standard."
 
 #: ../data/org.gnome.gnome-sound-recorder.gschema.xml.h:9
 msgid "Microphone volume level"
@@ -260,8 +261,9 @@ msgstr "Brug <b>Optag</b>-knappen til at optage lyd"
 
 #: ../src/mainWindow.js:300
 msgid "Recording…"
-msgstr "Optager…"
+msgstr "Optager …"
 
+#. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
@@ -375,10 +377,9 @@ msgstr "Klip %d"
 #~ msgstr "Foretrukken medietype til lydkodning ved optagelse"
 
 #~ msgid ""
-#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
-#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
-#~ "type."
+#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' for "
+#~ "Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME type."
 #~ msgstr ""
-#~ "Foretrukken medietype til lydkodning ved optagelse. 'audio/x-vorbis' for "
-#~ "Ogg Vorbis, eller 'audio/mpeg' for MP3, for eksempel. Dette er ikke en "
-#~ "MIME-type."
+#~ "Foretrukken medietype til lydkodning ved optagelse. 'audio/x-vorbis' for Ogg "
+#~ "Vorbis, eller 'audio/mpeg' for MP3, for eksempel. Dette er ikke en MIME-type."
+
