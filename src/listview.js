@@ -61,7 +61,6 @@ let listType = null;
 let startRecording = false;
 let stopVal = null;
 let trackNumber = 0;
-let fileLookup = null;
 
 const Listview = new Lang.Class({
     Name: "Listview",
@@ -69,15 +68,21 @@ const Listview = new Lang.Class({
     _init: function() {
         stopVal = EnumeratorState.ACTIVE;
         allFilesInfo = [];
-        fileLookup = {};
 
         // Save a reference to the savedir to quickly access it
         this._saveDir = Gio.Application.get_default().saveDir;
     },
 
     monitorListview: function() {
+        try {
         this.dirMonitor = this._saveDir.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, null);
         this.dirMonitor.connect('changed', this._onDirChanged);
+        } catch(e) {
+            log(e);
+            /* Workaround for Debian and Tails not recognizing Gio.FileMointor.WATCH_MOVES */
+            this.dirMonitor = this._saveDir.monitor_directory(Gio.FileMonitorFlags.NONE, null);
+            this.dirMonitor.connect('changed', this._onDirChangedDeb);
+        }
     },
 
     enumerateDirectory: function() {
@@ -191,7 +196,6 @@ const Listview = new Lang.Class({
         for (let i = 0; i <= this.endIdx; i++) {
             let file = allFilesInfo[i];
             let uri = file.uri;
-            fileLookup[uri] = i;
             this._discoverer.discover_uri_async(uri);
         }
         this._runDiscover();
@@ -260,7 +264,11 @@ const Listview = new Lang.Class({
     },
 
     _onDirChanged: function(dirMonitor, file1, file2, eventType) {
-        if ((eventType == Gio.FileMonitorEvent.MOVED_OUT && !Gio.Application.get_default().saveDir.equal(file1)) ||
+        if (eventType == Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
+            Gio.Application.get_default().ensure_directory();
+            this._saveDir = Gio.Application.get_default().saveDir;
+        }
+        if ((eventType == Gio.FileMonitorEvent.MOVED_OUT) ||
             (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT
                 && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED) || (eventType == Gio.FileMonitorEvent.RENAMED)) {
             stopVal = EnumeratorState.ACTIVE;
@@ -278,25 +286,30 @@ const Listview = new Lang.Class({
         else if (eventType == Gio.FileMonitorEvent.CREATED) {
             startRecording = true;
         }
+    },
 
-        // else if (eventType == Gio.FileMonitorEvent.RENAMED) {
-        //     let index = fileLookup[file1.get_uri()];
-
-        //     // Delete the old lookup for the file and make a new one
-        //     delete fileLookup[file1.get_uri()];
-        //     fileLookup[file2.get_uri()] = index;
-
-        //     // Update the file info array
-        //     allFilesInfo[index].uri = file2.get_uri();
-        //     allFilesInfo[index].fileName = file2.get_parse_name().split('/').pop();
-
-        //     let file1Name = file1.get_parse_name().split('/').pop();
-        //     MainWindow.view.setNameLabel(allFilesInfo[index].fileName, file1Name, index);
-        // }
-
-        else if (eventType == Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
+    _onDirChangedDeb: function(dirMonitor, file1, file2, eventType) {
+        /* Workaround for Debian and Tails not recognizing Gio.FileMointor.WATCH_MOVES */
+        if (eventType == Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
             Gio.Application.get_default().ensure_directory();
             this._saveDir = Gio.Application.get_default().saveDir;
+        }
+        if ((eventType == Gio.FileMonitorEvent.DELETED) ||
+            (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
+            stopVal = EnumeratorState.ACTIVE;
+            allFilesInfo.length = 0;
+            fileInfo.length = 0;
+            this.idx = 0;
+            listType = ListType.REFRESH;
+
+            if (currentlyEnumerating == CurrentlyEnumerating.FALSE) {
+                currentlyEnumerating = CurrentlyEnumerating.TRUE;
+                MainWindow.view.listBoxRefresh();
+            }
+        }
+
+        else if (eventType == Gio.FileMonitorEvent.CREATED) {
+            startRecording = true;
         }
     },
 
