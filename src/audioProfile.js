@@ -36,7 +36,7 @@ const comboBoxMap = {
 };
 
 const containerProfileMap = {
-    OGG: "application/ogg", 
+    OGG: "application/ogg",
     ID3: "application/x-id3",
     MP4: "video/quicktime,variant=(string)iso",
     AUDIO_OGG: "application/ogg;audio/ogg;video/ogg"
@@ -98,7 +98,7 @@ const AudioProfile = new Lang.Class({
             this.encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             this._containerProfile.add_profile(this.encodingProfile);
             return this._containerProfile;
-        } else if (!this._values[idx].container && this._values.audio) {
+        } else if (!this._values.container && this._values.audio) {
             audioCaps = Gst.Caps.from_string(this._values.audio);
             this.encodingProfile = GstPbutils.EncodingAudioProfile.new(audioCaps, null, null, 1);
             return this.encodingProfile;
@@ -108,7 +108,6 @@ const AudioProfile = new Lang.Class({
     },
 
     fileExtensionReturner: function() {
-        let idx = 0;
         let suffixName;
 
         if (this._values.audio) {
