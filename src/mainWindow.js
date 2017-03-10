@@ -847,7 +847,7 @@ const ChannelsComboBox = new Lang.Class({
     Name: "ChannelsComboBox",
     Extends: Gtk.ComboBoxText,
 
-    // encoding setting labels in combobox
+    // channel setting labels in combobox
     _init: function() {
         this.parent();
         let combo = [_("Mono"), _("Stereo")];
@@ -856,14 +856,14 @@ const ChannelsComboBox = new Lang.Class({
             this.append_text(combo[i]);
         this.set_property('valign', Gtk.Align.CENTER);
         this.set_sensitive(true);
-        activeProfile = Application.application.getChannelsPreferences();
-        this.set_active(activeProfile);
-        this.connect("changed", Lang.bind(this, this._onComboBoxTextChanged));
+        let chanProfile = Application.application.getChannelsPreferences();
+        this.set_active(chanProfile);
+        this.connect("changed", Lang.bind(this, this._onChannelComboBoxTextChanged));
     },
 
-    _onComboBoxTextChanged: function() {
-        activeProfile = this.get_active();
-        Application.application.setChannelsPreferences(activeProfile);
+    _onChannelComboBoxTextChanged: function() {
+        let channelProfile = this.get_active();
+        Application.application.setChannelsPreferences(channelProfile);
     }
 });
 
