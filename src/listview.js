@@ -74,15 +74,8 @@ const Listview = new Lang.Class({
     },
 
     monitorListview: function() {
-        try {
         this.dirMonitor = this._saveDir.monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, null);
         this.dirMonitor.connect('changed', this._onDirChanged);
-        } catch(e) {
-            log(e);
-            /* Workaround for Debian and Tails not recognizing Gio.FileMointor.WATCH_MOVES */
-            this.dirMonitor = this._saveDir.monitor_directory(Gio.FileMonitorFlags.NONE, null);
-            this.dirMonitor.connect('changed', this._onDirChangedDeb);
-        }
     },
 
     enumerateDirectory: function() {
@@ -271,31 +264,6 @@ const Listview = new Lang.Class({
         if ((eventType == Gio.FileMonitorEvent.MOVED_OUT) ||
             (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT
                 && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED) || (eventType == Gio.FileMonitorEvent.RENAMED)) {
-            stopVal = EnumeratorState.ACTIVE;
-            allFilesInfo.length = 0;
-            fileInfo.length = 0;
-            this.idx = 0;
-            listType = ListType.REFRESH;
-
-            if (currentlyEnumerating == CurrentlyEnumerating.FALSE) {
-                currentlyEnumerating = CurrentlyEnumerating.TRUE;
-                MainWindow.view.listBoxRefresh();
-            }
-        }
-
-        else if (eventType == Gio.FileMonitorEvent.CREATED) {
-            startRecording = true;
-        }
-    },
-
-    _onDirChangedDeb: function(dirMonitor, file1, file2, eventType) {
-        /* Workaround for Debian and Tails not recognizing Gio.FileMointor.WATCH_MOVES */
-        if (eventType == Gio.FileMonitorEvent.DELETED && Gio.Application.get_default().saveDir.equal(file1)) {
-            Gio.Application.get_default().ensure_directory();
-            this._saveDir = Gio.Application.get_default().saveDir;
-        }
-        if ((eventType == Gio.FileMonitorEvent.DELETED) ||
-            (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT && MainWindow.recordPipeline == MainWindow.RecordPipelineStates.STOPPED)) {
             stopVal = EnumeratorState.ACTIVE;
             allFilesInfo.length = 0;
             fileInfo.length = 0;
