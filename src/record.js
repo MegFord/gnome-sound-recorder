@@ -76,11 +76,18 @@ const Record = new Lang.Class({
         this.pipeline = new Gst.Pipeline({ name: "pipe" });
         this.srcElement = Gst.ElementFactory.make("pulsesrc", "srcElement");
 
-        if(this.srcElement == null) {
-          this._showErrorDialog(_("Your audio capture settings are invalid."));
-          errorDialogState = ErrState.ON;
-          this.onEndOfStream();
-          return;
+        if (this.srcElement == null) {
+            let inspect = "gst-inspect-1.0 pulseaudio";
+            let [res, out, err, status] =  GLib.spawn_command_line_sync(inspect);
+            let err_str = String(err)
+            if (err_str.replace(/\W/g, ''))
+                this._showErrorDialog(_("Please install the GStreamer1.0 PulseAudio plugin."));
+            else
+                this._showErrorDialog(_("Your audio capture settings are invalid."));
+
+            errorDialogState = ErrState.ON;
+            this.onEndOfStream();
+            return;
         }
 
         this.pipeline.add(this.srcElement);
