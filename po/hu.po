@@ -1,16 +1,16 @@
-# Hungarian translation of gnome-sound-recorder
-# Copyright (C) 2013, 2014. Free Software Foundation, Inc.
+# Hungarian translation for gnome-sound-recorder.
+# Copyright (C) 2013, 2014, 2016, 2017. Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-sound-recorder package.
 #
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2013, 2014.
-# Balázs Úr <urbalazs at gmail dot com>, 2014, 2016.
+# Balázs Úr <urbalazs at gmail dot com>, 2014, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-02 13:45+0000\n"
-"PO-Revision-Date: 2016-08-04 23:55+0200\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2017-03-18 20:24+0000\n"
+"PO-Revision-Date: 2017-03-18 23:10+0100\n"
 "Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
+#: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "Hangrögzítő"
 
@@ -260,6 +260,7 @@ msgstr "A <b>Felvétel</b> gombbal készíthet hangfelvételeket"
 msgid "Recording…"
 msgstr "Felvétel…"
 
+#. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
@@ -335,23 +336,27 @@ msgstr "Mikrofon"
 msgid "Unable to create Recordings directory."
 msgstr "Nem hozható létre a Felvételek könyvtár."
 
-#: ../src/record.js:80
+#: ../src/record.js:84
+msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+msgstr "Telepítse a GStreamer 1.0 PulseAudio bővítményt."
+
+#: ../src/record.js:86
 msgid "Your audio capture settings are invalid."
 msgstr "A hangfelvételi beállítások érvénytelenek."
 
-#: ../src/record.js:130
+#: ../src/record.js:137
 msgid "Not all elements could be created."
 msgstr "Nem minden elem hozható létre."
 
-#: ../src/record.js:142
+#: ../src/record.js:149
 msgid "Not all of the elements were linked."
 msgstr "Nem minden elem volt összekapcsolva."
 
-#: ../src/record.js:167
+#: ../src/record.js:174
 msgid "No Media Profile was set."
 msgstr "Nincs beállítva médiaprofil."
 
-#: ../src/record.js:178
+#: ../src/record.js:185
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -361,38 +366,8 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:357
+#: ../src/record.js:364
 #, javascript-format
 msgid "Clip %d"
 msgstr "%d. kivágás"
 
-#~ msgid "%Y-%m-%d %H:%M:%S"
-#~ msgstr "%Y. %m. %d. %H.%M.%S"
-
-#~ msgid "Preferred media type for encoding audio when recording"
-#~ msgstr "Előnyben részesített médiatípus a hangkódoláshoz felvételkor"
-
-#~ msgid ""
-#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
-#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
-#~ "type."
-#~ msgstr ""
-#~ "Előnyben részesített médiatípus a hangkódoláshoz felvételkor. Például "
-#~ "„audio/x-vorbis” Ogg Vorbishoz, vagy „audio/mpeg” MP3-hoz. Ez nem egy "
-#~ "MIME-típus."
-
-#~ msgid "Finish"
-#~ msgstr "Befejezés"
-
-#~ msgid "Audio from %Y-%m-%d %H:%M:%S"
-#~ msgstr "Hangfelvétel – %Y. %m. %d. %H.%M.%S"
-
-#~| msgid "Unable to set the pipeline to the recording state."
-#~ msgid "Unable to set the playbin to the playing state."
-#~ msgstr "A lejátszó nem állítható lejátszási állapotba."
-
-#~ msgid "Error: "
-#~ msgstr "Hiba: "
-
-#~ msgid "Recording "
-#~ msgstr "Felvétel "
