@@ -1,15 +1,15 @@
 # Polish translation for gnome-sound-recorder.
-# Copyright © 2013-2016 the gnome-sound-recorder authors.
+# Copyright © 2013-2017 the gnome-sound-recorder authors.
 # This file is distributed under the same license as the gnome-sound-recorder package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2013-2016.
-# Aviary.pl <community-poland@mozilla.org>, 2013-2016.
+# Piotr Drąg <piotrdrag@gmail.com>, 2013-2017.
+# Aviary.pl <community-poland@mozilla.org>, 2013-2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-22 17:23+0200\n"
-"PO-Revision-Date: 2016-08-22 17:24+0200\n"
+"POT-Creation-Date: 2017-03-18 21:24+0100\n"
+"PO-Revision-Date: 2017-03-18 21:25+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
+#: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "Nagrywanie"
 
@@ -148,8 +148,8 @@ msgstr "Nagrania"
 #: ../src/application.js:167
 msgid "translator-credits"
 msgstr ""
-"Piotr Drąg <piotrdrag@gmail.com>, 2013-2016\n"
-"Aviary.pl <community-poland@mozilla.org>, 2013-2016"
+"Piotr Drąg <piotrdrag@gmail.com>, 2013-2017\n"
+"Aviary.pl <community-poland@mozilla.org>, 2013-2017"
 
 #: ../src/fileUtil.js:88
 msgid "Yesterday"
@@ -264,6 +264,7 @@ msgstr "Aby nagrywać dźwięk, należy użyć przycisku <b>Nagraj</b>"
 msgid "Recording…"
 msgstr "Nagrywanie…"
 
+#. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
@@ -340,23 +341,27 @@ msgstr "Mikrofon"
 msgid "Unable to create Recordings directory."
 msgstr "Nie można utworzyć katalogu Nagrania."
 
-#: ../src/record.js:80
+#: ../src/record.js:84
+msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+msgstr "Proszę zainstalować wtyczkę PulseAudio biblioteki GStreamer 1.0."
+
+#: ../src/record.js:86
 msgid "Your audio capture settings are invalid."
 msgstr "Ustawienia przechwytywania dźwięku są nieprawidłowe."
 
-#: ../src/record.js:130
+#: ../src/record.js:137
 msgid "Not all elements could be created."
 msgstr "Nie można utworzyć wszystkich elementów."
 
-#: ../src/record.js:142
+#: ../src/record.js:149
 msgid "Not all of the elements were linked."
 msgstr "Nie można dowiązać wszystkich elementów."
 
-#: ../src/record.js:167
+#: ../src/record.js:174
 msgid "No Media Profile was set."
 msgstr "Nie ustawiono żadnego profilu multimediów."
 
-#: ../src/record.js:178
+#: ../src/record.js:185
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -366,7 +371,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:357
+#: ../src/record.js:364
 #, javascript-format
 msgid "Clip %d"
 msgstr "%d. klip"
