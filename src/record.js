@@ -81,7 +81,7 @@ const Record = new Lang.Class({
             let [res, out, err, status] =  GLib.spawn_command_line_sync(inspect);
             let err_str = String(err)
             if (err_str.replace(/\W/g, ''))
-                this._showErrorDialog(_("Please install the GStreamer1.0 PulseAudio plugin."));
+                this._showErrorDialog(_("Please install the GStreamer 1.0 PulseAudio plugin."));
             else
                 this._showErrorDialog(_("Your audio capture settings are invalid."));
 
