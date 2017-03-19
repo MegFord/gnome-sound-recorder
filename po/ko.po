@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the gnome-sound-recorder package.
 #
 #
-# Changwoo Ryu <cwryu@debian.org>, 2014-2016.
+# Changwoo Ryu <cwryu@debian.org>, 2014-2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "sound-recorder&keywords=I18N+L10N&component=General\n"
-"POT-Creation-Date: 2016-08-22 15:25+0000\n"
-"PO-Revision-Date: 2016-09-03 22:45+0900\n"
+"POT-Creation-Date: 2017-03-18 20:24+0000\n"
+"PO-Revision-Date: 2017-03-19 15:32+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
+#: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "녹음기"
 
@@ -254,6 +254,7 @@ msgstr "녹음을 새로 만드려면 <b>녹음</b> 단추를 누르십시오"
 msgid "Recording…"
 msgstr "녹음 중…"
 
+#. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
@@ -328,23 +329,27 @@ msgstr "마이크"
 msgid "Unable to create Recordings directory."
 msgstr "녹음 디렉터리를 만들 수 없습니다."
 
-#: ../src/record.js:80
+#: ../src/record.js:84
+msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+msgstr "지스트리머 1.0 펄스오디오 플러그인을 설치하십시오."
+
+#: ../src/record.js:86
 msgid "Your audio capture settings are invalid."
 msgstr "오디오 캡쳐 설정이 올바르지 않습니다."
 
-#: ../src/record.js:130
+#: ../src/record.js:137
 msgid "Not all elements could be created."
 msgstr "만들 수 없는 엘리먼트가 있습니다."
 
-#: ../src/record.js:142
+#: ../src/record.js:149
 msgid "Not all of the elements were linked."
 msgstr "연결되지 않은 엘리먼트가 있습니다."
 
-#: ../src/record.js:167
+#: ../src/record.js:174
 msgid "No Media Profile was set."
 msgstr "미디어 프로파일을 설정하지 않았습니다."
 
-#: ../src/record.js:178
+#: ../src/record.js:185
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -354,7 +359,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:357
+#: ../src/record.js:364
 #, javascript-format
 msgid "Clip %d"
 msgstr "클립 %d"
