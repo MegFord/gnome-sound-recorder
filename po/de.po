@@ -3,28 +3,28 @@
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # Christian Kirbach <christian.kirbach@gmail.com>, 2014.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2014-2015.
-# Mario Blättermann <mario.blaettermann@gmail.com>, 2016.
+# Mario Blättermann <mario.blaettermann@gmail.com>, 2016-2017.
 # Fabian Schölzel <fabian.schoelzel@googlemail.com>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-02 13:45+0000\n"
-"PO-Revision-Date: 2016-06-22 12:48+0200\n"
-"Last-Translator: Fabian Schölzel <fabian.schoelzel@googlemail.com>\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2017-03-18 20:24+0000\n"
+"PO-Revision-Date: 2017-03-19 11:16+0100\n"
+"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.7\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
+#: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "Tonaufzeichner"
 
@@ -264,6 +264,7 @@ msgstr "Verwenden Sie den Knopf <b>Aufnehmen</b> zur Tonaufzeichnung"
 msgid "Recording…"
 msgstr "Aufnehmen …"
 
+#. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
@@ -339,23 +340,27 @@ msgstr "Mikrofon"
 msgid "Unable to create Recordings directory."
 msgstr "Der Ordner für die Aufzeichnungen kann nicht angelegt werden."
 
-#: ../src/record.js:80
+#: ../src/record.js:84
+msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+msgstr "Bitte installieren Sie die PulseAudio-Erweiterung für GStreamer 1.0."
+
+#: ../src/record.js:86
 msgid "Your audio capture settings are invalid."
 msgstr "Ihre Einstellungen zur Tonaufnahme sind ungültig."
 
-#: ../src/record.js:130
+#: ../src/record.js:137
 msgid "Not all elements could be created."
 msgstr "Es konnten nicht alle Elemente erstellt werden."
 
-#: ../src/record.js:142
+#: ../src/record.js:149
 msgid "Not all of the elements were linked."
 msgstr "Es wurden nicht alle Elemente verknüpft."
 
-#: ../src/record.js:167
+#: ../src/record.js:174
 msgid "No Media Profile was set."
 msgstr "Es wurde kein Medienprofil festgelegt."
 
-#: ../src/record.js:178
+#: ../src/record.js:185
 msgid ""
 "Unable to set the pipeline \n"
 " to the recording state."
@@ -365,28 +370,8 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:357
+#: ../src/record.js:364
 #, javascript-format
 msgid "Clip %d"
 msgstr "Clip %d"
 
-#~ msgid "%Y-%m-%d %H:%M:%S"
-#~ msgstr "%d.%m.%Y - %H:%M:%S"
-
-#~ msgid "Preferred media type for encoding audio when recording"
-#~ msgstr "Bevorzugte Medienart zum Codieren des Tons bei Aufnahme"
-
-#~ msgid ""
-#~ "Preferred media type for encoding audio when recording. 'audio/x-vorbis' "
-#~ "for Ogg Vorbis, or 'audio/mpeg' for MP3, for example. This is not a MIME "
-#~ "type."
-#~ msgstr ""
-#~ "Bevorzugter Medientyp zur Kodierung der Tonaufzeichnung. Zum Beispiel "
-#~ "»audio/x-vorbis« für Ogg Vorbis oder »audio/mpeg« für MP3. Dies ist kein "
-#~ "MIME-Typ."
-
-#~ msgid "Error: "
-#~ msgstr "Fehler: "
-
-#~ msgid "Recording "
-#~ msgstr "Aufnahme"
