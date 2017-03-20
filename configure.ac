@@ -93,7 +93,7 @@ fi
 # Check for elements from gst-plugins-bad
 # but don't exit if they aren't installed. Just print error.
 # Set plugins which contain below elements
-for bad_element in playbin id3mux
+for bad_element in id3mux
 do
 	AC_MSG_CHECKING([GStreamer 1.0 $bad_element element])
 	if $gst10_inspect $bad_element >/dev/null 2>/dev/null; then
