@@ -100,7 +100,7 @@ do
 		AC_MSG_RESULT([yes])
 	else
 		AC_MSG_RESULT([no])
-		AC_MSG_ERROR([
+		AC_MSG_WARN([
 			Cannot find required GStreamer-1.0 plugin '$1'.
 			It should be part of gst-plugins-bad. Please install it.
 		])
