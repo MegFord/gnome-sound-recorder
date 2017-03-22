@@ -1,5 +1,9 @@
  3.24.00
  =======
+configure: Drop id3mux check failure to a warning by David King
+ 
+ 3.24.00
+ =======
  Fix codec errors caused by mono/stereo combobox
  Fix for Debian/Tails Bug 777862
 
