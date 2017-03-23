@@ -177,7 +177,7 @@ const MainView = new Lang.Class({
         if (play.getPipeStates() == PipelineStates.PLAYING) {
             play.stopPlaying();
             let listRow = this.listBox.get_selected_row();
-            let rowWidget = listRow.get_child(this.widget);
+            let rowWidget = listRow.get_child();
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -578,7 +578,7 @@ const MainView = new Lang.Class({
     hasPreviousSelRow: function() {
        this.destroyLoadMoreButton();
            if (previousSelRow != null) {
-              let rowWidget = previousSelRow.get_child(this.widget);
+              let rowWidget = previousSelRow.get_child();
               rowWidget.foreach(Lang.bind(this,
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
@@ -628,7 +628,7 @@ const MainView = new Lang.Class({
             }
 
             previousSelRow = selectedRow;
-            let selectedRowWidget = previousSelRow.get_child(this.widget);
+            let selectedRowWidget = previousSelRow.get_child();
             selectedRowWidget.show_all();
             selectedRowWidget.foreach(Lang.bind(this,
                 function(child) {
@@ -717,7 +717,7 @@ const MainView = new Lang.Class({
 
         if (activeState == PipelineStates.PLAYING) {
             play.pausePlaying();
-            let rowWidget = listRow.get_child(this.widget);
+            let rowWidget = listRow.get_child();
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -741,7 +741,7 @@ const MainView = new Lang.Class({
         if (activeState != PipelineStates.PLAYING) {
             play.startPlaying();
 
-            let rowWidget = listRow.get_child(this.widget);
+            let rowWidget = listRow.get_child();
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
