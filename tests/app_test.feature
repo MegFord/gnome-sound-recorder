@@ -13,7 +13,7 @@ Feature: Smoke tests
   Scenario: Preferences dialog
     * Open Preferences dialog
     Then Preferences UI is displayed
-    Then set the volume
+    Then the h
 
   @quit_via_app_menu
   Scenario: Quit via app menu
@@ -25,7 +25,7 @@ Feature: Smoke tests
      * Press the quit shortcut
      Then gnome-sound-recorder is not running
 
-  @no_recordings
-  Scenario: No recordings in the Recordings folder
-     Then the main window is shown
-     Then the Recordings folder is present
+#  @no_recordings
+#  Scenario: No recordings in the Recordings folder
+#     Then the main window is shown
+#     Then the Recordings folder is present

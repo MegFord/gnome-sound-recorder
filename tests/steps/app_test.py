@@ -16,10 +16,15 @@ from common_steps import *
 def display_err(err_str):
     return '{} is not displayed'.format(err_str)
 
+def is_displayed(ui, role, ui_string):
+    if role == 'radio button':
+        return ui(translate(ui_string), role).checked
+
+    return ui(translate(ui_string), role).showing
+
 
 @step(u'Open About dialog')
 def open_about_dialog(context):
-    print(context.app)
     context.execute_steps(u'* Select "About" in GApplication menu')
     dialog_name = 'About Sound Recorder'
     context.about_dialog = context.app.dialog(translate(dialog_name))
@@ -65,10 +70,16 @@ def open_pref_dialog(context):
 def pref_ui_is_displayed(context):
     ui = context.pref_dialog.child
 
-    assert is_displayed(ui, 'ComboBoxText', 'Ogg Vorbis'), display_err('Correct codec')
+    assert is_displayed(ui, 'label', 'Ogg Vorbis'), display_err('Correct codec')
     assert is_displayed(ui, 'label', 'Stereo'), display_err('Stereo label')
     assert is_displayed(ui, '0.7'), display_err('Volume level')
     assert is_displayed(ui, '0.7'), display_err('Mic volume level')
+
+@then(u'Changing codecs and channels works')
+def pref_ui_is_displayed(context):
+    ui = context.pref_dialog.child
+    pressKey('Down')
+
 
 @step(u'Select "Quit" from the app menu')
 def quit_is(context):
