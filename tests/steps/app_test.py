@@ -15,7 +15,6 @@ from common_steps import *
 
 def display_err(err_str):
     return '{} is not displayed'.format(err_str)
-# channel_err = 'incorrect channels displayed'
 
 
 @step(u'Open About dialog')
@@ -66,10 +65,10 @@ def open_pref_dialog(context):
 def pref_ui_is_displayed(context):
     ui = context.pref_dialog.child
 
-    assert is_displayed(ui, 'ComboBoxText', 'Ogg Vorbis'), codec_err
-    assert is_displayed(ui, 'label', 'Stereo'), channel_err
-    assert is_displayed(ui, '0.7'), volume_err
-    assert is_displayed(ui, '0.7'), mic_err
+    assert is_displayed(ui, 'ComboBoxText', 'Ogg Vorbis'), display_err('Correct codec')
+    assert is_displayed(ui, 'label', 'Stereo'), display_err('Stereo label')
+    assert is_displayed(ui, '0.7'), display_err('Volume level')
+    assert is_displayed(ui, '0.7'), display_err('Mic volume level')
 
 @step(u'Select "Quit" from the app menu')
 def quit_is(context):
