@@ -174,7 +174,6 @@ const Application = new Lang.Class({
     setSpeakerVolume: function(level) {
          settings.set_double("speaker-volume", level);
     },
-
     /* End functions for showing the Preferences Dialog and setting preferences */
 
     _showAbout: function() {

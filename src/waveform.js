@@ -50,6 +50,7 @@ const WaveForm = new Lang.Class({
 
     _init: function(grid, file) {
         this._grid = grid;
+        this.recordTime = null;
 
         let placeHolder = -100;
         for (let i = 0; i < 40; i++)
@@ -175,7 +176,6 @@ const WaveForm = new Lang.Class({
             start = this.recordTime;
         }
 
-        let i = 0;
         let xAxis = 0;
         let end = start + 40;
         let width = this.drawing.get_allocated_width();
@@ -195,9 +195,8 @@ const WaveForm = new Lang.Class({
             cr.setSourceRGBA(0.0, 185, 161, 255);
         }
 
-        for(i = start; i <= end; i++) {
-
-            // Keep moving until we get to a non-null array member
+        for(let i = start; i <= end; i++) {
+            // Keep moving until we get to a non-negative array member
             if (peaks[i] < 0) {
                 cr.moveTo((xAxis * pixelsPerSample), (waveheight - (peaks[i] * waveheight)))
             }

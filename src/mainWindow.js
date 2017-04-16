@@ -177,7 +177,7 @@ const MainView = new Lang.Class({
         if (play.getPipeStates() == PipelineStates.PLAYING) {
             play.stopPlaying();
             let listRow = this.listBox.get_selected_row();
-            let rowWidget = listRow.get_child(this.widget);
+            let rowWidget = listRow.get_child();
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -347,8 +347,8 @@ const MainView = new Lang.Class({
         this._scrolledWin.show();
         let sounds = list.getItemCount();
         let title;
-        // Translators: This is the title in the headerbar
         if (sounds > 0) {
+            // Translators: This is the title in the headerbar
             title = Gettext.ngettext("%d Recorded Sound",
                                      "%d Recorded Sounds",
                                       sounds).format(sounds);
@@ -578,7 +578,7 @@ const MainView = new Lang.Class({
     hasPreviousSelRow: function() {
        this.destroyLoadMoreButton();
            if (previousSelRow != null) {
-              let rowWidget = previousSelRow.get_child(this.widget);
+              let rowWidget = previousSelRow.get_child();
               rowWidget.foreach(Lang.bind(this,
                 function(child) {
                     let alwaysShow = child.get_no_show_all();
@@ -628,7 +628,7 @@ const MainView = new Lang.Class({
             }
 
             previousSelRow = selectedRow;
-            let selectedRowWidget = previousSelRow.get_child(this.widget);
+            let selectedRowWidget = previousSelRow.get_child();
             selectedRowWidget.show_all();
             selectedRowWidget.foreach(Lang.bind(this,
                 function(child) {
@@ -717,7 +717,7 @@ const MainView = new Lang.Class({
 
         if (activeState == PipelineStates.PLAYING) {
             play.pausePlaying();
-            let rowWidget = listRow.get_child(this.widget);
+            let rowWidget = listRow.get_child();
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -741,7 +741,7 @@ const MainView = new Lang.Class({
         if (activeState != PipelineStates.PLAYING) {
             play.startPlaying();
 
-            let rowWidget = listRow.get_child(this.widget);
+            let rowWidget = listRow.get_child();
             rowWidget.foreach(Lang.bind(this,
                 function(child) {
 
@@ -847,7 +847,7 @@ const ChannelsComboBox = new Lang.Class({
     Name: "ChannelsComboBox",
     Extends: Gtk.ComboBoxText,
 
-    // encoding setting labels in combobox
+    // channel setting labels in combobox
     _init: function() {
         this.parent();
         let combo = [_("Mono"), _("Stereo")];
@@ -856,14 +856,14 @@ const ChannelsComboBox = new Lang.Class({
             this.append_text(combo[i]);
         this.set_property('valign', Gtk.Align.CENTER);
         this.set_sensitive(true);
-        activeProfile = Application.application.getChannelsPreferences();
-        this.set_active(activeProfile);
-        this.connect("changed", Lang.bind(this, this._onComboBoxTextChanged));
+        let chanProfile = Application.application.getChannelsPreferences();
+        this.set_active(chanProfile);
+        this.connect("changed", Lang.bind(this, this._onChannelComboBoxTextChanged));
     },
 
-    _onComboBoxTextChanged: function() {
-        activeProfile = this.get_active();
-        Application.application.setChannelsPreferences(activeProfile);
+    _onChannelComboBoxTextChanged: function() {
+        let channelProfile = this.get_active();
+        Application.application.setChannelsPreferences(channelProfile);
     }
 });
 

@@ -2,15 +2,15 @@
 # Copyright (C) 2013 gnome-sound-recorder's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-sound-recorder package.
 # Juhani Numminen <juhaninumminen0@gmail.com>, 2014.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013, 2014, 2016.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2013, 2014, 2016, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-sound-recorder master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"sound-recorder&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-02 13:45+0000\n"
-"PO-Revision-Date: 2016-08-12 15:12+0300\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"sound-recorder&keywords=I18N+L10N&component=General\n"
+"POT-Creation-Date: 2017-03-18 20:24+0000\n"
+"PO-Revision-Date: 2017-03-19 15:29+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../data/appdata/org.gnome.SoundRecorder.appdata.xml.in.h:1
 #: ../data/org.gnome.SoundRecorder.desktop.in.in.h:1 ../src/application.js:168
-#: ../src/record.js:113
+#: ../src/record.js:120
 msgid "Sound Recorder"
 msgstr "Ääninauhuri"
 
@@ -259,6 +259,7 @@ msgstr "Napsauta <b>Nauhoita</b> tallentaaksesi ääntä"
 msgid "Recording…"
 msgstr "Nauhoitetaan…"
 
+#. Translators: This is the title in the headerbar
 #: ../src/mainWindow.js:352
 #, javascript-format
 msgid "%d Recorded Sound"
@@ -334,25 +335,29 @@ msgstr "Mikrofoni"
 msgid "Unable to create Recordings directory."
 msgstr "Nauhoitekansion luominen epäonnistui."
 
-#: ../src/record.js:80
+#: ../src/record.js:84
+msgid "Please install the GStreamer 1.0 PulseAudio plugin."
+msgstr "Asenna GStreamer 1.0 PulseAudio -liitännäinen."
+
+#: ../src/record.js:86
 msgid "Your audio capture settings are invalid."
 msgstr "Äänen tallennusasetukset ovat virheelliset."
 
-#: ../src/record.js:130
+#: ../src/record.js:137
 msgid "Not all elements could be created."
 msgstr "Joidenkin elementtien luominen epäonnistui."
 
-#: ../src/record.js:142
+#: ../src/record.js:149
 #, fuzzy
 #| msgid "Not all of the elements were linked"
 msgid "Not all of the elements were linked."
 msgstr "Kaikki elementit eivät olleet linkitettyjä"
 
-#: ../src/record.js:167
+#: ../src/record.js:174
 msgid "No Media Profile was set."
 msgstr "Mediaprofiilia ei ole asetettu."
 
-#: ../src/record.js:178
+#: ../src/record.js:185
 #, fuzzy
 #| msgid ""
 #| "Unable to set the pipeline \n"
@@ -366,7 +371,7 @@ msgstr ""
 
 #. Translators: ""Clip %d"" is the default name assigned to a file created
 #. by the application (for example, "Clip 1").
-#: ../src/record.js:357
+#: ../src/record.js:364
 #, javascript-format
 msgid "Clip %d"
 msgstr "Nauhoitus %d"
