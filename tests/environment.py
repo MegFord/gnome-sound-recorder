@@ -1,12 +1,14 @@
-from time import sleep
-from dogtail.utils import isA11yEnabled, enableA11y
-if not isA11yEnabled():
-    enableA11y(True)
-
-from common_steps import App
-from dogtail.config import config
 from os import system, makedirs
 from shutil import copyfile
+from time import sleep
+
+from dogtail.config import config
+from dogtail.utils import isA11yEnabled, enableA11y
+
+from common_steps import App
+
+if not isA11yEnabled():
+    enableA11y(True)
 
 
 def before_all(context):

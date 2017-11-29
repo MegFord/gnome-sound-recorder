@@ -1,9 +1,10 @@
 # ! /usr/bin/python
 import os
 import sys
+
 from subprocess import Popen, PIPE
+
 from gi.repository import GLib, Gio
-from dogtail.utils import *
 
 from behave import step
 from dogtail import i18n
@@ -11,6 +12,7 @@ from dogtail.predicate import *
 from dogtail.procedural import *
 from dogtail.rawinput import keyCombo, absoluteMotion, pressKey
 from dogtail.tree import *
+from dogtail.utils import *
 from unittest import TestCase
 
 
